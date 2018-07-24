@@ -2,9 +2,9 @@
 
 Overview
 --------
-This repository contains the gslab_tools Python library.
+This repository contains the gslab_make Python library.
 
-Information about this packages is available in its internal documentation. 
+Information about this package is available in its internal documentation. 
 
 Requirements
 ------------
