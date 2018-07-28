@@ -42,212 +42,15 @@ platform darwin -- Python 2.7.15, pytest-3.6.3, py-1.5.4, pluggy-0.6.0
 rootdir: /Users/jacob/Documents/JACOB'S FOLDER/SCHOOL/Stanford/RA/Gentzkow/gslab_make, inifile:
 collected 12 items
 
-gslab_make/tests/test_tablefill.py FFFF                                  [ 33%]
-gslab_make/tests/test_textfill.py FFFFFFFF                               [100%]
+gslab_make/tests/test_tablefill.py ....                                  [ 33%]
+gslab_make/tests/test_textfill.py ........                               [100%]
 
-=================================== FAILURES ===================================
-_______________________ testTablefill.testArgumentOrder ________________________
-
-self = <gslab_make.tests.test_tablefill.testTablefill testMethod=testArgumentOrder>
-
-    def testArgumentOrder(self):
-        for ext in ['lyx', 'tex']:
-            with nostderrout():
-                message = tablefill(input    = '../../gslab_make/tests/input/tables_appendix.txt ' + \
-                                               '../../gslab_make/tests/input/tables_appendix_two.txt',
-                                    output   = './build/tablefill_template_filled.%s' % ext,
-                                    template = '../../gslab_make/tests/input/tablefill_template.%s' % ext)
->           self.assertIn('filled successfully', message)
-E           AssertionError: 'filled successfully' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 15, in tablefill\n    tables = parse_tables(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 44, in parse_tables\n    data   = read_data(args[\'input\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 55, in read_data\n    data += open(file, \'rU\').readlines()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/tables_appendix.txt\'\n'
-
-gslab_make/tests/test_tablefill.py:122: AssertionError
-____________________ testTablefill.testBreaksRoundingString ____________________
-
-self = <gslab_make.tests.test_tablefill.testTablefill testMethod=testBreaksRoundingString>
-
-    def testBreaksRoundingString(self):
-        for ext in ['lyx', 'tex']:
-            with nostderrout():
-                error = tablefill(input    =  '../../gslab_make/tests/input/tables_appendix.txt ' +
-                                              '../../gslab_make/tests/input/tables_appendix_two.txt',
-                                  template =  '../../gslab_make/tests/input/tablefill_template_breaks.%s' % ext,
-                                  output   =  './build/tablefill_template_filled.%s' % ext)
->           self.assertIn('InvalidOperation', error)
-E           AssertionError: 'InvalidOperation' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 15, in tablefill\n    tables = parse_tables(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 44, in parse_tables\n    data   = read_data(args[\'input\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 55, in read_data\n    data += open(file, \'rU\').readlines()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/tables_appendix.txt\'\n'
-
-gslab_make/tests/test_tablefill.py:86: AssertionError
-_______________________ testTablefill.testIllegalSyntax ________________________
-
-self = <gslab_make.tests.test_tablefill.testTablefill testMethod=testIllegalSyntax>
-
-    def testIllegalSyntax(self):
-        # missing arguments
-        for ext in ['lyx', 'tex']:
-            with nostderrout():
-                error = tablefill(input   = '../../gslab_make/tests/input/tables_appendix.txt ' + \
-                                            '../../gslab_make/tests/input/tables_appendix_two.txt',
-                                  template = '../../gslab_make/tests/input/tablefill_template.%s' % ext)
->           self.assertIn('KeyError', error)
-E           AssertionError: 'KeyError' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 15, in tablefill\n    tables = parse_tables(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 44, in parse_tables\n    data   = read_data(args[\'input\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 55, in read_data\n    data += open(file, \'rU\').readlines()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/tables_appendix.txt\'\n'
-
-gslab_make/tests/test_tablefill.py:95: AssertionError
-___________________________ testTablefill.testInput ____________________________
-
-self = <gslab_make.tests.test_tablefill.testTablefill testMethod=testInput>
-
-    def testInput(self):
-        for ext in ['lyx', 'tex']:
-            with nostderrout():
-                message = tablefill(input    = '../../gslab_make/tests/input/tables_appendix.txt ' + \
-                                               '../../gslab_make/tests/input/tables_appendix_two.txt',
-                                    template = '../../gslab_make/tests/input/tablefill_template.%s' % ext,
-                                    output   = './build/tablefill_template_filled.%s' % ext)
->           self.assertIn('filled successfully', message)
-E           AssertionError: 'filled successfully' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 15, in tablefill\n    tables = parse_tables(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 44, in parse_tables\n    data   = read_data(args[\'input\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/tablefill.py", line 55, in read_data\n    data += open(file, \'rU\').readlines()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/tables_appendix.txt\'\n'
-
-gslab_make/tests/test_tablefill.py:32: AssertionError
-_____________________ testTextfill.test_alternative_prefix _____________________
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_alternative_prefix>
-
-    def test_alternative_prefix(self):
-        with nostderrout():
-            message = textfill(input    = '../../gslab_make/tests/input/alternative_prefix.log',
-                               template = '../../gslab_make/tests/input/textfill_template.lyx',
-                               output   = './build/textfill_template_filled.lyx',
-                               prefix   = 'prefix')
->       self.assertIn('filled successfully', message)
-E       AssertionError: 'filled successfully' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 14, in textfill\n    text = parse_text(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 56, in parse_text\n    text = read_text(args[\'input\'], args[\'prefix\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 67, in read_text\n    data += open(file, \'rU\').read()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/alternative_prefix.log\'\n'
-
-gslab_make/tests/test_textfill.py:37: AssertionError
-_______________________ testTextfill.test_argument_order _______________________
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_argument_order>
-
-    def test_argument_order(self):
-    
-        with nostderrout():
-            message = textfill(input    = '../../gslab_make/tests/input/legal.log',
-                               output   = '../../gslab_make/tests/input/textfill_template_filled.lyx',
-                               template = '../../gslab_make/tests/input/textfill_template.lyx')
-    
->       self.assertIn('filled successfully', message)
-E       AssertionError: 'filled successfully' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 14, in textfill\n    text = parse_text(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 56, in parse_text\n    text = read_text(args[\'input\'], args[\'prefix\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 67, in read_text\n    data += open(file, \'rU\').read()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/legal.log\'\n'
-
-gslab_make/tests/test_textfill.py:124: AssertionError
-_______________________ testTextfill.test_illegal_syntax _______________________
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_illegal_syntax>
-
-    def test_illegal_syntax(self):
-        # missing arguments
-        with nostderrout():
-            error = textfill(input    = '../../gslab_make/tests/input/legal.log',
-                             template = '../../gslab_make/tests/input/textfill_template.lyx')
->       self.assertIn('KeyError', error)
-E       AssertionError: 'KeyError' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 14, in textfill\n    text = parse_text(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 56, in parse_text\n    text = read_text(args[\'input\'], args[\'prefix\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 67, in read_text\n    data += open(file, \'rU\').read()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/legal.log\'\n'
-
-gslab_make/tests/test_textfill.py:98: AssertionError
-___________________________ testTextfill.test_input ____________________________
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_input>
-
-    def test_input(self):
-        with nostderrout():
-            message = textfill(input    = '../../gslab_make/tests/input/legal.log',
-                               template = '../../gslab_make/tests/input/textfill_template.lyx',
-                               output   = './build/textfill_template_filled.lyx')
->       self.assertIn('filled successfully', message)
-E       AssertionError: 'filled successfully' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 14, in textfill\n    text = parse_text(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 56, in parse_text\n    text = read_text(args[\'input\'], args[\'prefix\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 67, in read_text\n    data += open(file, \'rU\').read()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/legal.log\'\n'
-
-gslab_make/tests/test_textfill.py:26: AssertionError
-_______________________ testTextfill.test_remove_echoes ________________________
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_remove_echoes>
-
-    def test_remove_echoes(self):
-        with nostderrout():
-            textfill(input    = '../../gslab_make/tests/input/legal.log',
-                     template = '../../gslab_make/tests/input/textfill_template.lyx',
-                     output   = './build/textfill_template_filled.lyx',
-                     remove_echoes = True)
-        log_remove_string = '. '
-        log = '../../gslab_make/tests/input/legal.log'
->       self.check_log_in_LyX(log, log_remove_string, "textfill_")
-
-gslab_make/tests/test_textfill.py:50: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_remove_echoes>
-log = '../../gslab_make/tests/input/legal.log', log_remove_string = '. '
-prefix = 'textfill_'
-
-    def check_log_in_LyX(self, log, log_remove_string, prefix):
->       raw_lyx = open("../../gslab_make/tests/input/textfill_template_filled.lyx", 'rU').readlines()
-E       IOError: [Errno 2] No such file or directory: '../../gslab_make/tests/input/textfill_template_filled.lyx'
-
-gslab_make/tests/test_textfill.py:53: IOError
-______________________ testTextfill.test_tags_dont_match _______________________
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_tags_dont_match>
-
-    def test_tags_dont_match(self):
-        with nostderrout():
-            error = textfill(input    = '../../gslab_make/tests/input/tags_dont_match.log',
-                             template = '../../gslab_make/tests/input/textfill_template.lyx',
-                             output   = './build/textfill_template_filled.lyx')
->       self.assertIn('ValueError', error)
-E       AssertionError: 'ValueError' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 14, in textfill\n    text = parse_text(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 56, in parse_text\n    text = read_text(args[\'input\'], args[\'prefix\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 67, in read_text\n    data += open(file, \'rU\').read()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/tags_dont_match.log\'\n'
-
-gslab_make/tests/test_textfill.py:72: AssertionError
-_________________ testTextfill.test_tags_incorrectly_specified _________________
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_tags_incorrectly_specified>
-
-    def test_tags_incorrectly_specified(self):
-        with nostderrout():
-            textfill(input    = '../../gslab_make/tests/input/tags_incorrectly_named.log',
-                     template = '../../gslab_make/tests/input/textfill_template.lyx',
-                     output   = './build/textfill_template_filled.lyx')
-    
-        log_remove_string = '. insert_tag'
-    
-        with self.assertRaises(AssertionError):
-            log = '../../gslab_make/tests/input/tags_incorrectly_named.log'
->           self.check_log_in_LyX(log, log_remove_string, "textfill_")
-
-gslab_make/tests/test_textfill.py:91: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_tags_incorrectly_specified>
-log = '../../gslab_make/tests/input/tags_incorrectly_named.log'
-log_remove_string = '. insert_tag', prefix = 'textfill_'
-
-    def check_log_in_LyX(self, log, log_remove_string, prefix):
->       raw_lyx = open("../../gslab_make/tests/input/textfill_template_filled.lyx", 'rU').readlines()
-E       IOError: [Errno 2] No such file or directory: '../../gslab_make/tests/input/textfill_template_filled.lyx'
-
-gslab_make/tests/test_textfill.py:53: IOError
-______________________ testTextfill.test_tags_not_closed _______________________
-
-self = <gslab_make.tests.test_textfill.testTextfill testMethod=test_tags_not_closed>
-
-    def test_tags_not_closed(self):
-        with nostderrout():
-            error = textfill(input    = '../../gslab_make/tests/input/tags_not_closed.log',
-                             template = '../../gslab_make/tests/input/textfill_template.lyx',
-                             output   = './build/textfill_template_filled.lyx')
->       self.assertIn('HTMLParseError', error)
-E       AssertionError: 'HTMLParseError' not found in 'Traceback (most recent call last):\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 14, in textfill\n    text = parse_text(args)\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 56, in parse_text\n    text = read_text(args[\'input\'], args[\'prefix\'])\n  File "/Users/jacob/Library/Python/2.7/lib/python/site-packages/gslab_fill/textfill.py", line 67, in read_text\n    data += open(file, \'rU\').read()\nIOError: [Errno 2] No such file or directory: \'../../gslab_make/tests/input/tags_not_closed.log\'\n'
-
-gslab_make/tests/test_textfill.py:79: AssertionError
-========================== 12 failed in 0.29 seconds ===========================
+========================== 12 passed in 0.28 seconds ===========================
 Name                                           Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------------------------------------
 gslab_make/dir_mod.py                            151    130     70      0    10%   28-31, 43-54, 69-145, 159-205, 216-220, 224-226, 230-237, 241-249
 gslab_make/get_externals.py                       22     16      2      0    25%   78-98
 gslab_make/get_externals_github.py                22     15      2      0    29%   57-79
-gslab_make/make_info.py                            0      0      0      0   100%
 gslab_make/make_link_logs.py                      36     28     16      0    15%   61-75, 86-106
 gslab_make/make_links.py                          18     12      4      0    27%   60-78
 gslab_make/make_log.py                           166    146     66      0     9%   35-63, 77-100, 113-128, 146-172, 191-217, 250-262, 279-297, 313-345
@@ -260,12 +63,12 @@ gslab_make/private/metadata.py                     9      0      0      0   100%
 gslab_make/private/preliminaries.py              107     88     40      0    13%   17-26, 29-38, 43-56, 60-64, 67-72, 81-90, 97-113, 120-141, 144-146, 151-160
 gslab_make/private/runprogramdirective.py        207    185    104      0     7%   16-93, 97-107, 111-116, 121-134, 138-145, 149-163, 167-220, 224-240, 244-264, 271-282, 285-289, 296-302
 gslab_make/run_program.py                        238    217     80      0     7%   129-162, 178-202, 208-225, 231-248, 254-275, 281-298, 304-321, 332-392, 398-423, 429-447, 453-488, 494-499
-gslab_make/tablefill.py                          141    122     68      0     9%   13-25, 31-40, 44-47, 51-57, 61-77, 81-84, 87-115, 118-149, 152-160, 164-176, 180-182
+gslab_make/tablefill.py                          141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
 gslab_make/tablefill_info.py                       0      0      0      0   100%
 gslab_make/tests/nostderrout.py                   12      0      2      0   100%
-gslab_make/tests/test_tablefill.py                97     57     42      7    34%   33-40, 43-60, 63-77, 98-113, 124-137, 145-146, 22->exit, 26->exit, 80->exit, 90->98, 116->exit, 140->exit, 144->145
-gslab_make/tests/test_textfill.py                 84     27     12      3    63%   27-29, 38-40, 54-65, 101-115, 126-131, 139-140, 18->exit, 134->exit, 138->139
-gslab_make/textfill.py                           135    114     60      0    11%   12-24, 31-52, 56-59, 63-72, 77-82, 85-89, 92-93, 96-101, 104-106, 110-119, 123-128, 132-162, 166-190
+gslab_make/tests/test_tablefill.py                97      2     42      6    94%   145-146, 22->exit, 39->36, 59->45, 76->exit, 140->exit, 144->145
+gslab_make/tests/test_textfill.py                 84      2     12      3    95%   139-140, 18->exit, 134->exit, 138->139
+gslab_make/textfill.py                           135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
 gslab_make/textfill_info.py                        0      0      0      0   100%
 ------------------------------------------------------------------------------------------
-TOTAL                                           1867   1464    740     10    16%
+TOTAL                                           1867   1155    740     24    33%

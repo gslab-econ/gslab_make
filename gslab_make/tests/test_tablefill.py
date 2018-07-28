@@ -12,7 +12,7 @@ from subprocess import check_call, CalledProcessError
 #os.chdir(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append('../..')
 
-from gslab_fill import tablefill
+from gslab_make import tablefill
 from gslab_make.tests import nostderrout
 
 
@@ -25,12 +25,12 @@ class testTablefill(unittest.TestCase):
     def testInput(self):
         for ext in ['lyx', 'tex']:
             with nostderrout():
-                message = tablefill(input    = '../../gslab_make/tests/input/tables_appendix.txt ' + \
-                                               '../../gslab_make/tests/input/tables_appendix_two.txt', 
-                                    template = '../../gslab_make/tests/input/tablefill_template.%s' % ext, 
+                message = tablefill(input    = 'gslab_make/tests/input/tables_appendix.txt ' + \
+                                               'gslab_make/tests/input/tables_appendix_two.txt', 
+                                    template = 'gslab_make/tests/input/tablefill_template.%s' % ext, 
                                     output   = './build/tablefill_template_filled.%s' % ext)
             self.assertIn('filled successfully', message)
-            tag_data = open('../../gslab_make/tests/input/tablefill_template.%s' % ext, 'rU').readlines()
+            tag_data = open('gslab_make/tests/input/tablefill_template.%s' % ext, 'rU').readlines()
             filled_data = open('./build/tablefill_template_filled.%s' % ext, 'rU').readlines()
             self.assertEqual(len(tag_data), len(filled_data))
             for n in range(len(tag_data)):
@@ -79,9 +79,9 @@ class testTablefill(unittest.TestCase):
     def testBreaksRoundingString(self):
         for ext in ['lyx', 'tex']:
             with nostderrout():
-                error = tablefill(input    =  '../../gslab_make/tests/input/tables_appendix.txt ' + 
-                                              '../../gslab_make/tests/input/tables_appendix_two.txt', 
-                                  template =  '../../gslab_make/tests/input/tablefill_template_breaks.%s' % ext, 
+                error = tablefill(input    =  'gslab_make/tests/input/tables_appendix.txt ' + 
+                                              'gslab_make/tests/input/tables_appendix_two.txt', 
+                                  template =  'gslab_make/tests/input/tablefill_template_breaks.%s' % ext, 
                                   output   =  './build/tablefill_template_filled.%s' % ext)
             self.assertIn('InvalidOperation', error)
 
@@ -89,36 +89,36 @@ class testTablefill(unittest.TestCase):
         # missing arguments
         for ext in ['lyx', 'tex']:
             with nostderrout():
-                error = tablefill(input   = '../../gslab_make/tests/input/tables_appendix.txt ' + \
-                                            '../../gslab_make/tests/input/tables_appendix_two.txt', 
-                                  template = '../../gslab_make/tests/input/tablefill_template.%s' % ext)
+                error = tablefill(input   = 'gslab_make/tests/input/tables_appendix.txt ' + \
+                                            'gslab_make/tests/input/tables_appendix_two.txt', 
+                                  template = 'gslab_make/tests/input/tablefill_template.%s' % ext)
             self.assertIn('KeyError', error)
 
         # non-existent input 1
         for ext in ['lyx', 'tex']:
             with nostderrout():
-                error = tablefill(input    = '../../gslab_make/tests/input/fake_file.txt ' + \
-                                             '../../gslab_make/tests/input/tables_appendix_two.txt', 
-                                  template = '../../gslab_make/tests/input/tablefill_template_breaks.%s' % ext, 
+                error = tablefill(input    = 'gslab_make/tests/input/fake_file.txt ' + \
+                                             'gslab_make/tests/input/tables_appendix_two.txt', 
+                                  template = 'gslab_make/tests/input/tablefill_template_breaks.%s' % ext, 
                                   output   = './build/tablefill_template_filled.%s' % ext)
             self.assertIn('IOError', error)
 
         # non-existent input 2
         for ext in ['lyx', 'tex']:
             with nostderrout():
-                error = tablefill(input    = '../../gslab_make/tests/input/tables_appendix.txt ' + \
-                                             '../../gslab_make/tests/input/fake_file.txt', 
-                                  template = '../../gslab_make/tests/input/tablefill_template_breaks.%s' % ext, 
+                error = tablefill(input    = 'gslab_make/tests/input/tables_appendix.txt ' + \
+                                             'gslab_make/tests/input/fake_file.txt', 
+                                  template = 'gslab_make/tests/input/tablefill_template_breaks.%s' % ext, 
                                   output   = './build/tablefill_template_filled.%s' % ext)
             self.assertIn('IOError', error)
 
     def testArgumentOrder(self):
         for ext in ['lyx', 'tex']:
             with nostderrout():
-                message = tablefill(input    = '../../gslab_make/tests/input/tables_appendix.txt ' + \
-                                               '../../gslab_make/tests/input/tables_appendix_two.txt', 
+                message = tablefill(input    = 'gslab_make/tests/input/tables_appendix.txt ' + \
+                                               'gslab_make/tests/input/tables_appendix_two.txt', 
                                     output   = './build/tablefill_template_filled.%s' % ext,
-                                    template = '../../gslab_make/tests/input/tablefill_template.%s' % ext)
+                                    template = 'gslab_make/tests/input/tablefill_template.%s' % ext)
             self.assertIn('filled successfully', message)
 
             with open('./build/tablefill_template_filled.%s' % ext, 'rU') as filled_file:
@@ -126,9 +126,9 @@ class testTablefill(unittest.TestCase):
 
             with nostderrout():
                 message = tablefill(output   = './build/tablefill_template_filled.%s' % ext, 
-                                    template = '../../gslab_make/tests/input/tablefill_template.%s' % ext, 
-                                    input    = '../../gslab_make/tests/input/tables_appendix.txt ' + \
-                                               '../../gslab_make/tests/input/tables_appendix_two.txt')
+                                    template = 'gslab_make/tests/input/tablefill_template.%s' % ext, 
+                                    input    = 'gslab_make/tests/input/tables_appendix.txt ' + \
+                                               'gslab_make/tests/input/tables_appendix_two.txt')
             self.assertIn('filled successfully', message)
 
             with open('./build/tablefill_template_filled.%s' % ext, 'rU') as filled_file:

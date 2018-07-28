@@ -60,8 +60,8 @@ class CleanRepo(build_py):
 # Requirements
 requirements = ['requests', 'scandir', 'mmh3']
 
-setup(name         = 'GSLab_Tools',
-      version      = '1.0.0',
+setup(name         = 'GSLab_Tools_Lite',
+      version      = '1.1.1',
       description  = 'Simplified Python tools for GSLab',
       url          = 'https://github.com/gentzkow/gslab_make',
       author       = 'Matthew Gentzkow, Jesse Shapiro',
