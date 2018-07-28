@@ -30,12 +30,12 @@ Processing atomicwrites-1.1.5-py2.7.egg
 
 Using /Users/jacob/Documents/JACOB'S FOLDER/SCHOOL/Stanford/RA/Gentzkow/gslab_make/.eggs/atomicwrites-1.1.5-py2.7.egg
 running egg_info
-writing requirements to GSLab_Tools.egg-info/requires.txt
-writing GSLab_Tools.egg-info/PKG-INFO
-writing top-level names to GSLab_Tools.egg-info/top_level.txt
-writing dependency_links to GSLab_Tools.egg-info/dependency_links.txt
-reading manifest file 'GSLab_Tools.egg-info/SOURCES.txt'
-writing manifest file 'GSLab_Tools.egg-info/SOURCES.txt'
+writing requirements to GSLab_Tools_Lite.egg-info/requires.txt
+writing GSLab_Tools_Lite.egg-info/PKG-INFO
+writing top-level names to GSLab_Tools_Lite.egg-info/top_level.txt
+writing dependency_links to GSLab_Tools_Lite.egg-info/dependency_links.txt
+reading manifest file 'GSLab_Tools_Lite.egg-info/SOURCES.txt'
+writing manifest file 'GSLab_Tools_Lite.egg-info/SOURCES.txt'
 running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.15, pytest-3.6.3, py-1.5.4, pluggy-0.6.0
@@ -45,7 +45,7 @@ collected 12 items
 gslab_make/tests/test_tablefill.py ....                                  [ 33%]
 gslab_make/tests/test_textfill.py ........                               [100%]
 
-========================== 12 passed in 0.28 seconds ===========================
+========================== 12 passed in 0.26 seconds ===========================
 Name                                           Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------------------------------------
 gslab_make/dir_mod.py                            151    130     70      0    10%   28-31, 43-54, 69-145, 159-205, 216-220, 224-226, 230-237, 241-249

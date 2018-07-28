@@ -9,6 +9,9 @@ Description:
 make.py is a Python script that facilitates running programs in batch mode. 
 It uses functions in this directory to provide efficient and easy-to-understand 
 commands, which are portable across different Unix/Windows systems.
+gslab_make also provides two functions for filling LyX template files with data. 
+These are `tablefill` and `textfill`. Please see their docstrings for informations
+on their use and functionalities.
 
 Prerequisites:
 *  Python 2.7 installed and executable path is added to system path
@@ -153,13 +156,6 @@ then printed to the logfile. If a line fails at execution, the error is again pr
 as well as the raw input line from links.txt. Instead of make_links providing the user a 
 detailed list of possible causes, the user should examine the raw input and correct so the desired
 file is exported.
-
-====================================================
-Information for tablefill.py and textfill.py
-====================================================
-gslab_make also provides two functions for filling LyX template files with data. 
-These are `tablefill` and `textfill`. Please see their docstrings for informations
-on their use and functionalities.
 '''
 
 #Import make tools
