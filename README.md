@@ -2,7 +2,7 @@
 
 Overview
 --------
-This repository contains the gslab_make Python library.
+This repository contains the `gslab_make` Python library.
 
 Information about this package is available in its internal documentation. 
 
@@ -23,9 +23,9 @@ or
 ```
 pip install git+https://git@github.com/gentzkow/gslab_make.git@master
 ```
-which are the SSH and HTTPS protocol versions.
+which are the SSH and HTTPS protocol versions, respectively.
 
-The package at any tagged release, branch, or commit can be installed with the same commands, just changing `master` to the desirved target e.g., 
+The package at any tagged release, branch, or commit can be installed with the same commands, just changing `master` to the desired target e.g., 
 ```
 pip install git+ssh://git@github.com/gentzkow/gslab_make.git@<tagg, branch name, or commit hash>
 ```
@@ -35,17 +35,17 @@ Note that this installation procedure may require obtaining machine privileges t
 say, a `sudo` command.
 
 
-Alternatively, one may install the local version of gslab_make by running (from the root of the repository)
+Alternatively, one may install the local version of `gslab_make` by running (from the root of the repository)
 
 ```
 pip install .
 ```
 
-We do not reccommend that these packages be installed by executing
+We do not recommend that these packages be installed by executing
 ```bash
 python setup.py install
 ```
-This method of installation uses egg files rather than Wheels, which can cause conflicts with previous versions of `gslab_tools`. If this method of installation is executed, some files need to be removed from the directory with a `clean` argument. `clean` removes `/build`,`/dist`, and `GSLab_Tools_Lite.egg-info`, which are built upon installation. This argument can be called by executing 
+This method of installation uses egg files rather than wheels, which can cause conflicts with previous versions of `gslab_tools`. If this method of installation is executed, some files need to be removed from the directory with a `clean` argument. `clean` removes `/build`,`/dist`, and `GSLab_Tools_Lite.egg-info`, which are built upon installation. This argument can be called by executing 
 
 ```bash
 python setup.py clean
@@ -77,6 +77,6 @@ See [here](https://github.com/gentzkow/gslab_make/blob/master/LICENSE.txt).
 FAQs
 -------
 
-Q: What if I want to install a different branch called `dev` of `gslab_make` rather than `master`?
+Q: What if I want to install a different branch called `dev` of `gslab_make` rather than `master`?&nbsp;
 A: Either `git checkout dev` that branch of the repo before installing, or change `@master` to `@dev` in the `pip install` instruction.
 
