@@ -25,9 +25,9 @@ pip install git+https://git@github.com/gentzkow/gslab_make.git@master
 ```
 which are the SSH and HTTPS protocol versions, respectively.
 
-The package at any tagged release, branch, or commit can be installed with the same commands, just changing `master` to the desired target e.g., 
+The package at any tagged release, branch, or commit can be installed with the same commands, just changing `master` to the desired target; e.g., 
 ```
-pip install git+ssh://git@github.com/gentzkow/gslab_make.git@<tagg, branch name, or commit hash>
+pip install git+ssh://git@github.com/gentzkow/gslab_make.git@<tag, branch name, or commit hash>
 ```
 
 
@@ -77,6 +77,7 @@ See [here](https://github.com/gentzkow/gslab_make/blob/master/LICENSE.txt).
 FAQs
 -------
 
-Q: What if I want to install a different branch called `dev` of `gslab_make` rather than `master`?&nbsp;
+Q: What if I want to install a different branch called `dev` of `gslab_make` rather than `master`?
+
 A: Either `git checkout dev` that branch of the repo before installing, or change `@master` to `@dev` in the `pip install` instruction.
 
