@@ -8,9 +8,9 @@ import HTMLParser
 import shutil
 
 sys.path.append('../..')
-from gslab_python_lite.textfill import (textfill, read_text, 
+from gslab_make_dev.textfill import (textfill, read_text, 
                                  remove_trailing_leading_blanklines)
-from gslab_python_lite.tests import nostderrout
+from gslab_make_dev.tests import nostderrout
 
 class testTextfill(unittest.TestCase):
 
@@ -20,37 +20,37 @@ class testTextfill(unittest.TestCase):
 
     def test_input(self):
         with nostderrout():
-            message = textfill(input    = 'gslab_python_lite/tests/input/legal.log', 
-                               template = 'gslab_python_lite/tests/input/textfill_template.lyx', 
+            message = textfill(input    = 'gslab_make_dev/tests/input/legal.log', 
+                               template = 'gslab_make_dev/tests/input/textfill_template.lyx', 
                                output   = './build/textfill_template_filled.lyx')
         self.assertIn('filled successfully', message)
         log_remove_string = '. insert_tag'
-        log = 'gslab_python_lite/tests/input/legal.log'
+        log = 'gslab_make_dev/tests/input/legal.log'
         self.check_log_in_LyX(log, log_remove_string, "textfill_")
         
     def test_alternative_prefix(self):
         with nostderrout():
-            message = textfill(input    = 'gslab_python_lite/tests/input/alternative_prefix.log', 
-                               template = 'gslab_python_lite/tests/input/textfill_template.lyx', 
+            message = textfill(input    = 'gslab_make_dev/tests/input/alternative_prefix.log', 
+                               template = 'gslab_make_dev/tests/input/textfill_template.lyx', 
                                output   = './build/textfill_template_filled.lyx', 
                                prefix   = 'prefix')
         self.assertIn('filled successfully', message)
         log_remove_string = '. insert_tag'
-        log = 'gslab_python_lite/tests/input/alternative_prefix.log'
+        log = 'gslab_make_dev/tests/input/alternative_prefix.log'
         self.check_log_in_LyX(log, log_remove_string, "prefix_")
         
     def test_remove_echoes(self):
         with nostderrout():
-            textfill(input    = 'gslab_python_lite/tests/input/legal.log',
-                     template = 'gslab_python_lite/tests/input/textfill_template.lyx',
+            textfill(input    = 'gslab_make_dev/tests/input/legal.log',
+                     template = 'gslab_make_dev/tests/input/textfill_template.lyx',
                      output   = './build/textfill_template_filled.lyx',
                      remove_echoes = True)
         log_remove_string = '. '
-        log = 'gslab_python_lite/tests/input/legal.log'
+        log = 'gslab_make_dev/tests/input/legal.log'
         self.check_log_in_LyX(log, log_remove_string, "textfill_")
     
     def check_log_in_LyX(self, log, log_remove_string, prefix):
-        raw_lyx = open("gslab_python_lite/tests/input/textfill_template_filled.lyx", 'rU').readlines()
+        raw_lyx = open("gslab_make_dev/tests/input/textfill_template_filled.lyx", 'rU').readlines()
         raw_lyx = [re.sub(r'\\end_layout\n$', '', x) for x in raw_lyx]
         
         text = read_text(log, prefix)
@@ -66,41 +66,41 @@ class testTextfill(unittest.TestCase):
     
     def test_tags_dont_match(self):
         with nostderrout():
-            error = textfill(input    = 'gslab_python_lite/tests/input/tags_dont_match.log', 
-                             template = 'gslab_python_lite/tests/input/textfill_template.lyx', 
+            error = textfill(input    = 'gslab_make_dev/tests/input/tags_dont_match.log', 
+                             template = 'gslab_make_dev/tests/input/textfill_template.lyx', 
                              output   = './build/textfill_template_filled.lyx')
         self.assertIn('ValueError', error)
         
     def test_tags_not_closed(self):
         with nostderrout():   
-            error = textfill(input    = 'gslab_python_lite/tests/input/tags_not_closed.log', 
-                             template = 'gslab_python_lite/tests/input/textfill_template.lyx', 
+            error = textfill(input    = 'gslab_make_dev/tests/input/tags_not_closed.log', 
+                             template = 'gslab_make_dev/tests/input/textfill_template.lyx', 
                              output   = './build/textfill_template_filled.lyx')
         self.assertIn('HTMLParseError', error)
         
     def test_tags_incorrectly_specified(self):
         with nostderrout():
-            textfill(input    = 'gslab_python_lite/tests/input/tags_incorrectly_named.log',
-                     template = 'gslab_python_lite/tests/input/textfill_template.lyx',
+            textfill(input    = 'gslab_make_dev/tests/input/tags_incorrectly_named.log',
+                     template = 'gslab_make_dev/tests/input/textfill_template.lyx',
                      output   = './build/textfill_template_filled.lyx')
         
         log_remove_string = '. insert_tag'
 
         with self.assertRaises(AssertionError):
-            log = 'gslab_python_lite/tests/input/tags_incorrectly_named.log'
+            log = 'gslab_make_dev/tests/input/tags_incorrectly_named.log'
             self.check_log_in_LyX(log, log_remove_string, "textfill_")
         
     def test_illegal_syntax(self):
         # missing arguments
         with nostderrout(): 
-            error = textfill(input    = 'gslab_python_lite/tests/input/legal.log', 
-                             template = 'gslab_python_lite/tests/input/textfill_template.lyx')
+            error = textfill(input    = 'gslab_make_dev/tests/input/legal.log', 
+                             template = 'gslab_make_dev/tests/input/textfill_template.lyx')
         self.assertIn('KeyError', error)                      
                           
         # non-existent input 1
         with nostderrout():
-            error = textfill(input    = 'gslab_python_lite/tests/input/fake_file.log', 
-                             template = 'gslab_python_lite/tests/input/textfill_template.lyx', 
+            error = textfill(input    = 'gslab_make_dev/tests/input/fake_file.log', 
+                             template = 'gslab_make_dev/tests/input/textfill_template.lyx', 
                              output   = './build/textfill_template_filled.lyx')
 
 
@@ -109,7 +109,7 @@ class testTextfill(unittest.TestCase):
         # non-existent input 2
         with nostderrout():
             error = textfill(input    = './log/stata.log ./input/fake_file.log', 
-                             template = 'gslab_python_lite/tests/input/textfill_template.lyx', 
+                             template = 'gslab_make_dev/tests/input/textfill_template.lyx', 
                              output   = './build/textfill_template_filled.lyx')
 
         self.assertIn('IOError', error)
@@ -117,16 +117,16 @@ class testTextfill(unittest.TestCase):
     def test_argument_order(self):
 
         with nostderrout():
-            message = textfill(input    = 'gslab_python_lite/tests/input/legal.log', 
-                               output   = 'gslab_python_lite/tests/input/textfill_template_filled.lyx', 
-                               template = 'gslab_python_lite/tests/input/textfill_template.lyx')
+            message = textfill(input    = 'gslab_make_dev/tests/input/legal.log', 
+                               output   = 'gslab_make_dev/tests/input/textfill_template_filled.lyx', 
+                               template = 'gslab_make_dev/tests/input/textfill_template.lyx')
 
         self.assertIn('filled successfully', message)                                
             
         with nostderrout():            
-            message = textfill(template = 'gslab_python_lite/tests/input/textfill_template.lyx',
+            message = textfill(template = 'gslab_make_dev/tests/input/textfill_template.lyx',
                                output   = './build/textfill_template_filled.lyx',
-                               input    = 'gslab_python_lite/tests/input/legal.log')
+                               input    = 'gslab_make_dev/tests/input/legal.log')
 
         self.assertIn('filled successfully', message)
         

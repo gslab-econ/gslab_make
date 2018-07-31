@@ -2,14 +2,14 @@
 # -*- coding: latin-1 -*-
 '''
 ==============================================================
-gslab_python_lite: a library of make.py and LyX filling tools
+gslab_make: a library of make.py and LyX filling tools
 ==============================================================
 
 Description:
 make.py is a Python script that facilitates running programs in batch mode. 
 It uses functions in this directory to provide efficient and easy-to-understand 
 commands, which are portable across different Unix/Windows systems.
-gslab_python_lite also provides two functions for filling LyX template files with data. 
+gslab_make also provides two functions for filling LyX template files with data. 
 These are `tablefill` and `textfill`. Please see their docstrings for informations
 on their use and functionalities.
 

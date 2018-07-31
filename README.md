@@ -1,8 +1,8 @@
-# GSLab Python Lite Library
+# GSLab Make Library
 
 Overview
 --------
-This repository contains the `gslab_python_lite` Python library. This combines edited versions of the `gslab_make` and `gslab_fill` modules of the full `gslab_python` library into a single module, while removing the `gslab_scons` and `gslab_misc` modules that are part of this larger library.
+This repository contains the `gslab_make` Python library. 
 
 Information about this package is available in its internal documentation. 
 
@@ -35,7 +35,7 @@ Note that this installation procedure may require obtaining machine privileges t
 say, a `sudo` command.
 
 
-Alternatively, one may install the local version of `gslab_python_lite` by running (from the root of the repository)
+Alternatively, one may install the local version of `gslab_make` by running (from the root of the repository)
 
 ```
 pip install .
@@ -45,7 +45,7 @@ We do not recommend that these packages be installed by executing
 ```bash
 python setup.py install
 ```
-This method of installation uses egg files rather than wheels, which can cause conflicts with previous versions of `gslab_tools`. If this method of installation is executed, some files need to be removed from the directory with a `clean` argument. `clean` removes `/build`,`/dist`, and `GSLab_Tools_Lite.egg-info`, which are built upon installation. This argument can be called by executing 
+This method of installation uses egg files rather than wheels, which can cause conflicts with previous versions of `gslab_tools`. If this method of installation is executed, some files need to be removed from the directory with a `clean` argument. `clean` removes `/build`,`/dist`, and `GSLab_Make.egg-info`, which are built upon installation. This argument can be called by executing 
 
 ```bash
 python setup.py clean
