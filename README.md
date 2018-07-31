@@ -1,8 +1,8 @@
-# GSLab Python Library
+# GSLab Python Lite Library
 
 Overview
 --------
-This repository contains the `gslab_make` Python library.
+This repository contains the `gslab_python_lite` Python library. This combines edited versions of the `gslab_make` and `gslab_fill` modules of the full `gslab_python` library into a single module, while removing the `gslab_scons` and `gslab_misc` modules that are part of this larger library.
 
 Information about this package is available in its internal documentation. 
 
