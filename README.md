@@ -35,7 +35,7 @@ Note that this installation procedure may require obtaining machine privileges t
 say, a `sudo` command.
 
 
-Alternatively, one may install the local version of `gslab_make` by running (from the root of the repository)
+Alternatively, one may install the local version of `gslab_python_lite` by running (from the root of the repository)
 
 ```
 pip install .

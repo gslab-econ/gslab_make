@@ -45,7 +45,7 @@ collected 12 items
 gslab_python_lite/tests/test_tablefill.py ....                           [ 33%]
 gslab_python_lite/tests/test_textfill.py ........                        [100%]
 
-========================== 12 passed in 0.40 seconds ===========================
+========================== 12 passed in 0.28 seconds ===========================
 Name                                                  Stmts   Miss Branch BrPart  Cover   Missing
 -------------------------------------------------------------------------------------------------
 gslab_python_lite/dir_mod.py                            151    130     70      0    10%   28-31, 43-54, 69-145, 159-205, 216-220, 224-226, 230-237, 241-249
