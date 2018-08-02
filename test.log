@@ -1,0 +1,74 @@
+running pytest
+Searching for pytest
+Best match: pytest 3.6.3
+Processing pytest-3.6.3-py2.7.egg
+
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pytest-3.6.3-py2.7.egg
+Searching for py>=1.5.0
+Best match: py 1.5.4
+Processing py-1.5.4-py2.7.egg
+
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/py-1.5.4-py2.7.egg
+Searching for pluggy<0.7,>=0.5
+Best match: pluggy 0.6.0
+Processing pluggy-0.6.0-py2.7.egg
+
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pluggy-0.6.0-py2.7.egg
+Searching for more-itertools>=4.0.0
+Best match: more-itertools 4.2.0
+Processing more_itertools-4.2.0-py2.7.egg
+
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/more_itertools-4.2.0-py2.7.egg
+Searching for attrs>=17.4.0
+Best match: attrs 18.1.0
+Processing attrs-18.1.0-py2.7.egg
+
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/attrs-18.1.0-py2.7.egg
+Searching for atomicwrites>=1.0
+Best match: atomicwrites 1.1.5
+Processing atomicwrites-1.1.5-py2.7.egg
+
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/atomicwrites-1.1.5-py2.7.egg
+running egg_info
+writing requirements to GSLab_Make.egg-info/requires.txt
+writing GSLab_Make.egg-info/PKG-INFO
+writing top-level names to GSLab_Make.egg-info/top_level.txt
+writing dependency_links to GSLab_Make.egg-info/dependency_links.txt
+reading manifest file 'GSLab_Make.egg-info/SOURCES.txt'
+writing manifest file 'GSLab_Make.egg-info/SOURCES.txt'
+running build_ext
+============================= test session starts ==============================
+platform darwin -- Python 2.7.15, pytest-3.6.3, py-1.5.4, pluggy-0.6.0
+rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
+collected 12 items
+
+gslab_make_dev/tests/test_tablefill.py ....                              [ 33%]
+gslab_make_dev/tests/test_textfill.py ........                           [100%]
+
+========================== 12 passed in 0.35 seconds ===========================
+Name                                               Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------------------
+gslab_make_dev/dir_mod.py                            151    130     70      0    10%   28-31, 43-54, 69-145, 159-205, 216-220, 224-226, 230-237, 241-249
+gslab_make_dev/get_externals.py                       22     16      2      0    25%   78-98
+gslab_make_dev/get_externals_github.py                22     15      2      0    29%   57-79
+gslab_make_dev/make_link_logs.py                      36     28     16      0    15%   61-75, 86-106
+gslab_make_dev/make_links.py                          18     12      4      0    27%   60-78
+gslab_make_dev/make_log.py                           166    146     66      0     9%   35-63, 77-100, 113-128, 146-172, 191-217, 250-262, 279-297, 313-345
+gslab_make_dev/private/exceptionclasses.py            11      2      0      0    82%   5, 7
+gslab_make_dev/private/getexternalsdirectives.py     200    167     86      0    12%   17-23, 26-44, 48-49, 53-55, 59-70, 74-75, 79-83, 87-108, 112-123, 127, 136-151, 155-204, 208, 213-217, 222-230, 239-253, 257-264, 269-278, 286-299, 303-307, 311-316
+gslab_make_dev/private/linkdirectives.py             108     92     56      0    10%   14-34, 39-44, 48-49, 53-62, 66-87, 90-102, 106-114, 117-140, 144-157
+gslab_make_dev/private/linkslist.py                   55     46     30      0    11%   13-42, 45-49, 52-70
+gslab_make_dev/private/messages.py                    48      0      0      0   100%
+gslab_make_dev/private/metadata.py                     9      0      0      0   100%
+gslab_make_dev/private/preliminaries.py              107     88     40      0    13%   17-26, 29-38, 43-56, 60-64, 67-72, 81-90, 97-113, 120-141, 144-146, 151-160
+gslab_make_dev/private/runprogramdirective.py        207    185    104      0     7%   16-93, 97-107, 111-116, 121-134, 138-145, 149-163, 167-220, 224-240, 244-264, 271-282, 285-289, 296-302
+gslab_make_dev/run_program.py                        238    217     80      0     7%   129-162, 178-202, 208-225, 231-248, 254-275, 281-298, 304-321, 332-392, 398-423, 429-447, 453-488, 494-499
+gslab_make_dev/tablefill.py                          141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
+gslab_make_dev/tablefill_info.py                       0      0      0      0   100%
+gslab_make_dev/tests/nostderrout.py                   12      0      2      0   100%
+gslab_make_dev/tests/test_tablefill.py                97      2     42      6    94%   145-146, 22->exit, 39->36, 59->45, 76->exit, 140->exit, 144->145
+gslab_make_dev/tests/test_textfill.py                 84      2     12      3    95%   139-140, 18->exit, 134->exit, 138->139
+gslab_make_dev/textfill.py                           135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
+gslab_make_dev/textfill_info.py                        0      0      0      0   100%
+----------------------------------------------------------------------------------------------
+TOTAL                                               1867   1155    740     24    33%
