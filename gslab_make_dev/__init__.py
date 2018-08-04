@@ -48,7 +48,7 @@ See the `make_links()` and `make_link_logs()` docstrings.
 Prequisites:
 (1) Python 2.7 installed and defined as an environment variable.
 
-As with get_externals.py, when make_links.py and make_link_logs.py are called, the .py
+When make_links.py and make_link_logs.py are called, the .py
 files in /private/ will be compiled into .pyc compiled files (which Python then reads).
  These are placed in the ./private/__pycache___ directory.
 

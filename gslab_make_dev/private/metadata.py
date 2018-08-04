@@ -88,8 +88,6 @@ file_loc = {
 settings = {
     'external_dir'      : '../external/',
     'links_dir'         : '../external_links/',
-    'externalslog_file' : './get_externals.log',
-    'githublog_file'    : './get_externals_github.log',
     'linkslog_file'     : './make_links.log',
     'output_dir'        : '../output/',
     'output_local_dir'  : '../output_local/',
