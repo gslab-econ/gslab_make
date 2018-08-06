@@ -50,7 +50,6 @@ note_makelogend = '\n make.py ended:'
 note_extfilename = 'Note: not using filename externals.txt.\n'
 note_extdir_nofound = 'Note: %s not found.\n' 
 note_input = '\n Input was: "%s".'
-note_svnfail = 'Svn Export unsuccessful on %s%s. Please check externals file.'
 note_array = '''Subset of folder, prefixed group of files, or entire folder if rev=COPY, to be exported.
 The array is: %s.'''
 note_nofile = '\n File %s does not exist.\n'
@@ -61,7 +60,6 @@ note_option_replaced = '\n Note: replacing command line option %s with option %s
 # 5) Successes 
 success_del_extdir = '%s successfully deleted.\n' 
 success_create_extdir = '%s successfully (re)created.\n' 
-success_svn = 'SVN command passed: %s%s @%s exported to %s%s.' 
 success_makelink = 'Symlink successfully created. Source: %s%s\tLocal location: %s%s.'
 success_copy = 'COPY command passed: %s%s copied to %s%s.'
 success_github = 'GitHub command passed: %s exported to %s%s.'

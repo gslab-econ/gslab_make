@@ -8,7 +8,6 @@ makelog_started = False
 
 # Commands
 commands = {
-    'svnexport'     : 'svn export --force -r%s \"%s%s@%s\" \"%s%s\"',
     'makelinkwin'   : 'mklink %s \"%s%s\" \"%s%s\"',
     'makelinkunix'  : 'ln -s \"%s%s\" \"%s%s\"',
     'rmdirwin'      : 'rmdir %s \"%s\"',
@@ -77,10 +76,6 @@ option_start_chars = ['-', '+']
 
 # Locals
 file_loc = {
-    'svn' : 'https://econ-gentzkow-svn.stanford.edu/repos/main/trunk',
-    'svnbranch' : 'https://econ-gentzkow-svn.stanford.edu/repos/main/branches',
-    'svn_retail2' : 'file:///data/svn/repository/retailer2/trunk',
-    'svnbranch_retail2' : 'file:///data/svn/repository/retailer2/branches',
     'gslab_l' : r'//Gentzkow-dt1/GSLAB_L'
 }
 
