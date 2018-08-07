@@ -81,7 +81,6 @@ file_loc = {
 
 # Settings (directory keys must end in 'dir' and file keys must end in 'file')
 settings = {
-    'external_dir'      : '../external/',
     'links_dir'         : '../external_links/',
     'linkslog_file'     : './make_links.log',
     'output_dir'        : '../output/',
