@@ -31,7 +31,6 @@ syn_error_noprogram = '''ERROR! This call must take an argument program = "progr
 syn_error_nopackage = '''ERROR! This call must take an argument package = "package_name"'''
 syn_error_nocommand = '''ERROR! An argument command = "" must be specified to run the Shell command'''
 syn_error_manifest = r'Error in %s! All lines that start with "File:" should have a valid file path'
-syn_error_url = 'ERROR! Incorrect url format. Please check externals_github and see associated readme.'
 
 # 3) Logical Errors
 logic_error_revdir = '''ERROR! At line %s%s - source path and revision number must both be defined 
@@ -52,7 +51,5 @@ note_no_txt_file = '\n Warning! TXT output file %s is not listed in the manifest
 note_option_replaced = '\n Note: replacing command line option %s with option %s.\n'
 
 # 5) Successes 
-success_del_extdir = '%s successfully deleted.\n' 
-success_create_extdir = '%s successfully (re)created.\n' 
 success_makelink = 'Symlink successfully created. Source: %s%s\tLocal location: %s%s.'
 success_copy = 'COPY command passed: %s%s copied to %s%s.'
