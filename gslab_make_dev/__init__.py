@@ -15,9 +15,8 @@ on their use and functionalities.
 
 Prerequisites:
 *  Python 2.7 installed and executable path is added to system path
-*  SVN Version 1.7 or higher. See ‘clear_dirs’ command.
 
-To use those commands in this library that call software other than Python or SVN, 
+To use those commands in this library that call software other than Python, 
 you must have this software installed with its executable path added to the
 system path or defined as an environment variable/symbolic link. 
 This remark applies to: Matlab, Stata, Perl, Mathematica 8.0 (the math kernel path
@@ -48,7 +47,7 @@ See the `make_links()` and `make_link_logs()` docstrings.
 Prequisites:
 (1) Python 2.7 installed and defined as an environment variable.
 
-As with get_externals.py, when make_links.py and make_link_logs.py are called, the .py
+When make_links.py and make_link_logs.py are called, the .py
 files in /private/ will be compiled into .pyc compiled files (which Python then reads).
  These are placed in the ./private/__pycache___ directory.
 
@@ -159,9 +158,6 @@ file is exported.
 '''
 
 #Import make tools
-from get_externals import get_externals
-from get_externals_github import get_externals_github
-
 from make_log import (set_option, start_make_logging, end_make_logging, 
                       add_log, del_log)
 from make_links import make_links

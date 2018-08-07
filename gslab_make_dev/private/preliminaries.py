@@ -144,18 +144,4 @@ def in_current_drive (dir):
     current_drive = os.path.splitdrive(os.getcwd())[0]
     other_drive = os.path.splitdrive(dir)[0]
     return current_drive == other_drive
- 
-#==========================================================
-
-def externals_preliminaries(makelog, externals_file, LOGFILE):
-    if makelog == '@DEFAULTVALUE@':
-        makelog = metadata.settings['makelog_file']
-    if externals_file!='externals.txt':
-        print >> LOGFILE, messages.note_extfilename        
-    externals = input_to_array(externals_file)
-
-    # Prepare last rev/dir variables
-    last_dir = ''
-    last_rev = ''    
-    return([makelog, externals, last_dir, last_rev])
         

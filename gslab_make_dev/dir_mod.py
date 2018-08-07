@@ -226,17 +226,6 @@ def unzip(file_name, output_dir):
     zip.close()
 
 
-def unzip_externals(external_dir='@DEFAULTVALUE@'):
-    if external_dir == '@DEFAULTVALUE@':
-        external_dir = metadata.settings['external_dir']
-        
-    for dirname, subdirs, files in os.walk(external_dir):
-        for filename in files:
-            absname = os.path.abspath(os.path.join(dirname, filename))
-            if zipfile.is_zipfile(absname): 
-                unzip(absname, dirname)
-
-
 def zip_dir(source_dir, dest):
     zf = zipfile.ZipFile('%s.zip' % (dest), 'w', zipfile.ZIP_DEFLATED, allowZip64=True)
     abs_src = os.path.abspath(source_dir)

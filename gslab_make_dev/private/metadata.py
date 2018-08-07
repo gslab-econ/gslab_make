@@ -8,7 +8,6 @@ makelog_started = False
 
 # Commands
 commands = {
-    'svnexport'     : 'svn export --force -r%s \"%s%s@%s\" \"%s%s\"',
     'makelinkwin'   : 'mklink %s \"%s%s\" \"%s%s\"',
     'makelinkunix'  : 'ln -s \"%s%s\" \"%s%s\"',
     'rmdirwin'      : 'rmdir %s \"%s\"',
@@ -77,19 +76,12 @@ option_start_chars = ['-', '+']
 
 # Locals
 file_loc = {
-    'svn' : 'https://econ-gentzkow-svn.stanford.edu/repos/main/trunk',
-    'svnbranch' : 'https://econ-gentzkow-svn.stanford.edu/repos/main/branches',
-    'svn_retail2' : 'file:///data/svn/repository/retailer2/trunk',
-    'svnbranch_retail2' : 'file:///data/svn/repository/retailer2/branches',
     'gslab_l' : r'//Gentzkow-dt1/GSLAB_L'
 }
 
 # Settings (directory keys must end in 'dir' and file keys must end in 'file')
 settings = {
-    'external_dir'      : '../external/',
     'links_dir'         : '../external_links/',
-    'externalslog_file' : './get_externals.log',
-    'githublog_file'    : './get_externals_github.log',
     'linkslog_file'     : './make_links.log',
     'output_dir'        : '../output/',
     'output_local_dir'  : '../output_local/',
