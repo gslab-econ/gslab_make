@@ -40,22 +40,23 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.15, pytest-3.6.3, py-1.5.4, pluggy-0.6.0
 rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 12 items
+collected 15 items
 
-gslab_make_dev/tests/test_tablefill.py ....                              [ 33%]
+gslab_make_dev/tests/test_clear_dirs.py ...                              [ 20%]
+gslab_make_dev/tests/test_tablefill.py ....                              [ 46%]
 gslab_make_dev/tests/test_textfill.py ........                           [100%]
 
-========================== 12 passed in 0.36 seconds ===========================
+========================== 15 passed in 0.39 seconds ===========================
 Name                                            Stmts   Miss Branch BrPart  Cover   Missing
 -------------------------------------------------------------------------------------------
-gslab_make_dev/dir_mod.py                         151    130     70      0    10%   28-31, 43-54, 69-145, 159-205, 216-220, 224-226, 230-237, 241-249
+gslab_make_dev/dir_mod.py                         143    110     62      3    20%   28-31, 48, 69-145, 159-205, 224-226, 230-238, 43->48, 45->50, 51->54
 gslab_make_dev/make_link_logs.py                   36     28     16      0    15%   61-75, 86-106
 gslab_make_dev/make_links.py                       18     12      4      0    27%   60-78
 gslab_make_dev/make_log.py                        166    146     66      0     9%   35-63, 77-100, 113-128, 146-172, 191-217, 250-262, 279-297, 313-345
 gslab_make_dev/private/exceptionclasses.py         11      2      0      0    82%   5, 7
 gslab_make_dev/private/linkdirectives.py          108     92     56      0    10%   14-34, 39-44, 48-49, 53-62, 66-87, 90-102, 106-114, 117-140, 144-157
 gslab_make_dev/private/linkslist.py                55     46     30      0    11%   13-42, 45-49, 52-70
-gslab_make_dev/private/messages.py                 46      0      0      0   100%
+gslab_make_dev/private/messages.py                 37      0      0      0   100%
 gslab_make_dev/private/metadata.py                  9      0      0      0   100%
 gslab_make_dev/private/preliminaries.py            98     80     36      0    13%   17-26, 29-38, 43-56, 60-64, 67-72, 81-90, 97-113, 120-141, 144-146
 gslab_make_dev/private/runprogramdirective.py     207    185    104      0     7%   16-93, 97-107, 111-116, 121-134, 138-145, 149-163, 167-220, 224-240, 244-264, 271-282, 285-289, 296-302
@@ -63,9 +64,10 @@ gslab_make_dev/run_program.py                     238    217     80      0     7
 gslab_make_dev/tablefill.py                       141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
 gslab_make_dev/tablefill_info.py                    0      0      0      0   100%
 gslab_make_dev/tests/nostderrout.py                12      0      2      0   100%
+gslab_make_dev/tests/test_clear_dirs.py            41      2      8      1    94%   55-56, 54->55
 gslab_make_dev/tests/test_tablefill.py             97      2     42      6    94%   145-146, 22->exit, 39->36, 59->45, 76->exit, 140->exit, 144->145
 gslab_make_dev/tests/test_textfill.py              84      2     12      3    95%   139-140, 18->exit, 134->exit, 138->139
 gslab_make_dev/textfill.py                        135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
 gslab_make_dev/textfill_info.py                     0      0      0      0   100%
 -------------------------------------------------------------------------------------------
-TOTAL                                            1612    949    646     24    36%
+TOTAL                                            1636    931    646     28    39%
