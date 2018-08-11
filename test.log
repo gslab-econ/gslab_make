@@ -1,24 +1,29 @@
 running pytest
 Searching for pytest
-Best match: pytest 3.6.3
-Processing pytest-3.6.3-py2.7.egg
+Best match: pytest 3.7.1
+Processing pytest-3.7.1-py2.7.egg
 
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pytest-3.6.3-py2.7.egg
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pytest-3.7.1-py2.7.egg
 Searching for py>=1.5.0
 Best match: py 1.5.4
 Processing py-1.5.4-py2.7.egg
 
 Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/py-1.5.4-py2.7.egg
-Searching for pluggy<0.7,>=0.5
-Best match: pluggy 0.6.0
-Processing pluggy-0.6.0-py2.7.egg
+Searching for pluggy>=0.7
+Best match: pluggy 0.7.1
+Processing pluggy-0.7.1-py2.7.egg
 
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pluggy-0.6.0-py2.7.egg
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pluggy-0.7.1-py2.7.egg
+Searching for pathlib2>=2.2.0
+Best match: pathlib2 2.3.2
+Processing pathlib2-2.3.2-py2.7.egg
+
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pathlib2-2.3.2-py2.7.egg
 Searching for more-itertools>=4.0.0
-Best match: more-itertools 4.2.0
-Processing more_itertools-4.2.0-py2.7.egg
+Best match: more-itertools 4.3.0
+Processing more_itertools-4.3.0-py2.7.egg
 
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/more_itertools-4.2.0-py2.7.egg
+Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/more_itertools-4.3.0-py2.7.egg
 Searching for attrs>=17.4.0
 Best match: attrs 18.1.0
 Processing attrs-18.1.0-py2.7.egg
@@ -38,19 +43,20 @@ reading manifest file 'GSLab_Make.egg-info/SOURCES.txt'
 writing manifest file 'GSLab_Make.egg-info/SOURCES.txt'
 running build_ext
 ============================= test session starts ==============================
-platform darwin -- Python 2.7.15, pytest-3.6.3, py-1.5.4, pluggy-0.6.0
+platform darwin -- Python 2.7.15, pytest-3.7.1, py-1.5.4, pluggy-0.7.1
 rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 18 items
+collected 20 items
 
-gslab_make_dev/tests/test_clear_dirs.py ...                              [ 16%]
-gslab_make_dev/tests/test_delete_files.py ...                            [ 33%]
-gslab_make_dev/tests/test_tablefill.py ....                              [ 55%]
-gslab_make_dev/tests/test_textfill.py ........                           [100%]
+gslab_make_dev/tests/test_clear_dirs.py ...                              [ 15%]
+gslab_make_dev/tests/test_delete_files.py ...                            [ 30%]
+gslab_make_dev/tests/test_tablefill.py ....                              [ 50%]
+gslab_make_dev/tests/test_textfill.py ........                           [ 90%]
+gslab_make_dev/tests/test_zip.py ..                                      [100%]
 
-========================== 18 passed in 0.29 seconds ===========================
+========================== 20 passed in 0.38 seconds ===========================
 Name                                            Stmts   Miss Branch BrPart  Cover   Missing
 -------------------------------------------------------------------------------------------
-gslab_make_dev/dir_mod.py                         143    107     62      3    22%   48, 69-145, 159-205, 224-226, 230-238, 43->48, 45->50, 51->54
+gslab_make_dev/dir_mod.py                         143     95     62      3    30%   48, 69-145, 159-205, 43->48, 45->50, 51->54
 gslab_make_dev/make_link_logs.py                   36     28     16      0    15%   61-75, 86-106
 gslab_make_dev/make_links.py                       18     12      4      0    27%   60-78
 gslab_make_dev/make_log.py                        166    146     66      0     9%   35-63, 77-100, 113-128, 146-172, 191-217, 250-262, 279-297, 313-345
@@ -69,7 +75,8 @@ gslab_make_dev/tests/test_clear_dirs.py            41      2      8      1    94
 gslab_make_dev/tests/test_delete_files.py          46      2      4      2    92%   55-56, 51->exit, 54->55
 gslab_make_dev/tests/test_tablefill.py             97      2     42      6    94%   145-146, 22->exit, 39->36, 59->45, 76->exit, 140->exit, 144->145
 gslab_make_dev/tests/test_textfill.py              84      2     12      3    95%   139-140, 18->exit, 134->exit, 138->139
+gslab_make_dev/tests/test_zip.py                   36      2      4      2    90%   46-47, 42->exit, 45->46
 gslab_make_dev/textfill.py                        135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
 gslab_make_dev/textfill_info.py                     0      0      0      0   100%
 -------------------------------------------------------------------------------------------
-TOTAL                                            1682    930    650     30    40%
+TOTAL                                            1718    920    654     32    41%
