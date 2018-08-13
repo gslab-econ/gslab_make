@@ -5,170 +5,115 @@ import fileinput
 def run_stata(**kwargs):
 
     try:
-        run = ProgramDirective(**kwargs)
-        run.check_os()
-        run.check_program('stata')
-
-        # Set option
-        option = run.option
-        if not option:
-            if run.osname == 'posix':
-                option = metadata.default_options['stataunix']
-            else if run.osname == 'nt':
-                option = metadata.default_options['statawin']
+        directive = ProgramDirective(**kwargs)
 
         # Get program output
-        program_log = os.path.join(run.program_path, run.program_name + '.log')
+        program_log = os.path.join(directive.program_path, directive.program_name + '.log')
 
         # Execute
-        command = metadata.commands['stata'] % (run.executable, option, run.program)
-        run.run_command(command)
-        run.move_program_output(program_log, run.log)
+        command = metadata.commands['stata'] % (directive.executable, directive.option, directive.program)
+        directive.run_command(command)
+        directive.move_program_output(program_log, directive.log)
+		
     except:
         ERROR
 
 
 def run_matlab(**kwargs)
-    try:
-        run = RunProgramDirective(kwargs)
-        run.check_os()
-        run.check_program('matlab')
 
-        # Get option
-        option = run.option
-        if not option:
-            if run.osname == 'posix':
-                option = metadata.default_options['matlabunix']
-            else if run.osname == 'nt':
-                option = metadata.default_options['matlabwin']
+    try:
+        directive = ProgramDirective(**kwargs)
         
-        # GEt program output
-        program_log = os.path.join(run.program_path, run.program_name + '.log')
+        # Get program output
+        program_log = os.path.join(directive.program_path, directive.program_name + '.log')
 
         # Execute
-        command = metadata.commands['matlab'] % (run.executable, run.program, run.program_name + '.log', option)
-        run.run_command(command)
-        run.move_program_output(program_log, run.log)
+        command = metadata.commands['matlab'] % (directive.executable, directive.program, directive.program_name + '.log', option)
+        directive.run_command(command)
+        directive.move_program_output(program_log, directive.log)
+		
     except:
         ERROR
 
 
 def run_perl(**kwargs):
-    """Execute a Perl script"""
 
     try:
-        run = RunProgramDirective(kwargs)
-        run.check_os()
-        run.check_program('perl')
+        directive = ProgramDirective(**kwargs)
         
         # Execute
-        command = metadata.commands['perl'] % (run.executable, run.option, run.program, run.args)
-        run.run_command(command)
+        command = metadata.commands['perl'] % (directive.executable, directive.option, directive.program, directive.args)
+        directive.run_command(command)
     except:
         ERROR
 
 
 def run_python(**kwargs):
-    """Execute a Python script."""
 
     try:
-        run = RunProgramDirective(kwargs)
-        run.check_os()
-        run.check_program('python')
+        directive = ProgramDirective(**kwargs)
 
         # Execute
-        command = metadata.commands['python'] % (run.executable, run.option, run.program, run.args)
-        run.run_command(command)
+        command = metadata.commands['python'] % (directive.executable, directive.option, directive.program, directive.args)
+        directive.run_command(command)
     except:
         ERROR
 
 
 def run_mathematica(**kwargs):
-    """Execute a Mathematica script"""
 
     try:
-        run = RunProgramDirective(kwargs)
-        run.check_os()
-        run.check_program('math')
-       
-        # Get option
-        option = run.option
-        if not option:
-            option = metadata.default_options['math']
+        directive = ProgramDirective(**kwargs)
 
         # Execute
-        command = metadata.commands['math'] % (run.executable, run.program, option)
-        run.run_command(command)
+        command = metadata.commands['math'] % (directive.executable, directive.program, option)
+        directive.run_command(command)
     except:
         ERROR
 
 
-def run_stc(**kwargs):
-    """Run StatTransfer .stc program"""
+def run_stat_transer(**kwargs):
 
     try:
-        run = RunProgramDirective(kwargs)
-        run.check_os()
-        run.check_program('stc')
+        directive = ProgramDirective(**kwargs)
 
         # Execute
-        command = metadata.commands['st'] % (run.executable, program)
-        run.run_command(command)
+        command = metadata.commands['st'] % (directive.executable, program)
+        directive.run_command(command)
     except:
         ERROR
 
 
-def run_stcmd(**kwargs):
-    """Run StatTransfer .stcmd program"""
+def run_lyx(**kwargs): # Check
+    """
+	Export a LyX file to PDF
 
-    try:
-        run = RunProgramDirective(kwargs)
-        run.check_os()
-        run.check_program('stcmd')
-
-        # Execute
-        command = metadata.commands['st'] % (run.executable, program)
-        run.run_command(command)
-    except:
-        ERROR
-
-
-def run_lyx(**kwargs):
-    """Export a LyX file to PDF
-
-    e.g. To create pdf file for 'draft.lyx' with the log file being './make.log',
-         use the command:
-        `run_lyx(program = 'draft', makelog = './make.log')`
+    Example: 
+	    To create PDF for 'draft.lyx', use command:
+        `run_lyx(program = 'draft.lyx')`
     """
 
     try:
-        run = RunProgramDirective(kwargs)
-        run.error_check('lyx')
-        program_name = run.program_name
-        if run.changedir:
-            program = '"' + run.program + '"'
-        else:
-            program = '"' + run.program_full + '"'
-        
-        # Get option
-        option = run.option
-        if not run.option:
-            option = metadata.default_options['lyx']
+        directive = ProgramDirective(**kwargs)
             
         # Make handout/commented LyX file
-        handout = run.handout
-        comments = run.comments
+        handout = directive.handout
+        comments = directive.comments
 
+		if handout:
+		    program_name_suffix = '_handout'
+		else if comments: 
+		    program_name_suffix = '_comments'		
+		
         if handout or comments:
-            program_name_suffix = '_handout' if handout else '_comments'
-            temp_program_name = program_name + program_name_suffix
-            temp_program_full = os.path.join(run.program_path, temp_program_name + '.lyx') 
+            temp_program_name = directive.program_name + program_name_suffix
+            temp_program_full = os.path.join(directive.program_path, temp_program_name + '.lyx') 
             
             program = program.replace(program_name, temp_program_name)
             program_name = temp_program_name
             
             beamer = False
-            shutil.copy2(run.program_full, temp_program_full)
+            shutil.copy2(directive.program_full, temp_program_full)  # ITEM: Replace program_full appropriately!!!
             for line in fileinput.input(temp_program_full, inplace = True):
                 if r'\textclass beamer' in line:
                     beamer = True
@@ -176,112 +121,72 @@ def run_lyx(**kwargs):
                     line = line.rstrip('\n') + ', handout\n'
                 elif comments and r'\begin_inset Note Note' in line:
                     line = line.replace('Note Note', 'Note Greyedout')
-                print line,
         
-        # Get executable
-        executable = run.executable
-        if not run.executable:
-            executable = metadata.default_executables['lyx']
-
-        command = metadata.commands['lyx'] % (executable, option, program)
-
-        run.execute_run(command)
+        # Execute
+        command = metadata.commands['lyx'] % (directive.executable, directive.option, directive.program)
+        directive.run_command(command)
 
         # Move PDF output
-        pdfname = os.path.join(run.program_path, program_name + '.pdf')
-        pdfout = run.pdfout
-        if not '.pdf' in pdfout:
-            pdfout = os.path.join(pdfout, program_name + '.pdf')
-        if os.path.abspath(pdfname) != os.path.abspath(pdfout):
-            shutil.copy2(pdfname, pdfout)
-            os.remove(pdfname)
+        pdf_name = os.path.join(directive.program_path, program_name + '.pdf')
+        pdf_out = directive.pdf_out
+		
+        if os.path.abspath(pdf_name) != os.path.abspath(pdf_out):
+            shutil.copy2(pdf_name, pdf_out)
+            os.remove(pdf_name)
             
         # Remove handout/commented LyX file
         if handout or comments:
             os.remove(temp_program_full)
 
     except:
-        add_error_to_log(run.makelog)
+        ERROR
 
 
-def run_rbatch(**kwargs):
-    """Run an R batch program with log file"""
+def run_r(**kwargs):
 
     try:
-        run = RunProgramDirective(kwargs)
-        run.error_check('rbatch')
+        directive = ProgramDirective(**kwargs)
 
-        # Get option
-        option = run.option
-        if not run.option:
-            option = metadata.default_options['rbatch']
-        if run.changedir:
-            program = '"' + run.program + '"'
-            default_log = os.path.join(run.program_path, run.program_name + '.Rout')
-        else:
-            program = '"' + os.path.join(run.program_path, run.program) + '"'
-            default_log = os.path.join(os.getcwd(), run.program_name + '.Rout')
+		# Get program output
+        program_log = os.path.join(directive.program_path, directive.program_name + '.Rout')
 
-        # Get executable
-        executable = run.executable
-        if not run.executable:
-            executable = metadata.default_executables['rbatch']
-
-        command = metadata.commands['rbatch'] % (executable, option, program, run.program_name + '.Rout')
-
-        run.execute_run(command)
-        run.move_log(default_log)
+        # Execute
+        command = metadata.commands['r'] % (directive.executable, directive.option, directive.program, directive.program_name + '.Rout')
+        directive.run_command(command)
+        directive.move_program_output(program_log, directive.log)
+		
     except:
         ERROR
 
 
 def run_sas(**kwargs):
-    """Run a SAS script"""
-
     try:
-        run = RunProgramDirective(kwargs)
-        run.error_check('sas')
+        directive = ProgramDirective(**kwargs)
 
-        # Get option
-        option = run.option
-        if not run.option:
-            if run.osname != 'posix':
-                option = metadata.default_options['saswin']
-
-        # Get executable
-        executable = run.executable
-        if not run.executable:
-            executable = metadata.default_executables['sas']
-
-        # Get log, lst, and program
-        if run.changedir:
-            program = '"' + run.program + '"' 
-            default_log = os.path.join(run.program_path, run.program_name + '.log')
-            default_lst = os.path.join(run.program_path, run.program_name + '.lst')
-        else:
-            program = '"' + os.path.join(run.program_path, run.program) + '"'
-            default_log = os.path.join(os.getcwd(), run.program_name + '.log')
-            default_lst = os.path.join(os.getcwd(), run.program_name + '.lst')
-
-
-        if run.osname == 'posix':
-            command = metadata.commands['sas'] % (executable, option, program)
-        else:
-            command = metadata.commands['sas'] % (executable, program, option)
-
-        run.execute_run(command)
-        run.move_log(default_log)
-        run.move_lst(default_lst)
+	    # Get program outputs
+        program_log = os.path.join(directive.program_path, directive.program_name + '.log')
+        program_lst = os.path.join(directive.program_path, directive.program_name + '.lst')
+		
+        # Execute
+        command = metadata.commands['sas'] % (directive.executable, directive.option, directive.program)       
+        directive.run_command(command)
+        directive.move_program_output(default_log)
+        directive.move_program_output(default_lst)
+		
     except:
         ERROR
 
 
-def run_command(**kwargs):
-    """Run a Shell command"""
-    
-    run = RunCommandDirective(kwargs)
+def run_command(command, **kwargs):
+    """
+	Run a shell command
+	"""
+
     try:
-        run.error_check('other')
-        run.execute_run(run.command)
+	    directive = RunDirective(**kwargs)
+		
+		# Execute
+		directive.execute_run(command)
+	
     except:
         ERROR

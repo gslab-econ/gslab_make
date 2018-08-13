@@ -16,9 +16,10 @@ class Directive(object):
         self.osname    = osname
         self.makelog   = makelog
         self.log       = log  
-        self.create_paths()
+        self.get_paths()
+		self.check_os()
 
-    def create_paths(self):    
+    def get_paths(self):    
         self.makelog   = os.path.abspath(self.makelog)
         self.log       = os.path.abspath(self.log) if log != '' else log
         
@@ -27,7 +28,6 @@ class Directive(object):
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def run_command(self, command):   
-        # Execute command
         output = 'Executing: "' + ' '.join(command) + "'"
         print(output)
             
@@ -43,7 +43,7 @@ class Directive(object):
 
         return(output)
 
-    def create_log(self, output)
+    def write_log(self, output)
         if self.log:
             with open(self.log, 'wb') as f:
                 f.write(output)
@@ -70,14 +70,19 @@ class ProgramDirective(Directive):
         self.option      = option
         self.program     = program
         self.args        = args      
-        self.get_default_executable()
-        self.get_default_options()
+        self.get_executable()
+        self.get_option()
         self.parse_program()
-
-    def get_default_executable(self):
+        self.check_program()
+		
+    def get_executable(self):
         if not self.executable:
             self.executable = metadata.default_executables[self.osname][self.application]
 
+	def get_option(self):
+        if not self.option:
+            self.option = metadata.default_options[self.osname][self.application]
+			
     def parse_program(self):
         self.program_path = os.path.dirname(program)
         self.program_base = os.path.basename(program)
@@ -86,14 +91,13 @@ class ProgramDirective(Directive):
         if self.program_path == '':
             self.program_path = './'
 
-    def check_program(self, application):
+    def check_program(self):
         if not os.path.isfile(self.program):
             raise CritError(messages.crit_error_no_file % self.program)
-        if self.program_ext != metadata.extensions[application]:
+        if self.program_ext != metadata.extensions[self.application]:
             raise CritError(messages.crit_error_extension % self.program)
 
     def move_program_output(self, program_output, log = ''): 
-
     '''
     Certain programs create outputs that need to be moved to appropriate logging files
     '''
@@ -110,10 +114,12 @@ class ProgramDirective(Directive):
             with open(self.makelog, 'wb') as f:
                 f.append(out)
 
-        if log: 
+        # THINK ABOUT IF LOG = PROGRAM_OUT MORE!!!
+        # DOUBLE-CHECK PATHS
+		log: 
             shutil.copy2(program_out, log)
-        
-        os.remove(program_out)
+            
+		os.remove(program_out)
 
 class SASDirective(ProgramDirective):    
 
@@ -124,26 +130,20 @@ class SASDirective(ProgramDirective):
         super(Directive, self).__init__(**kwargs)
         self.lst = lst  
 
-'''
-TBD
-'''
-
 class LyxDirective(ProgramDirective):    
 
     def __init__(self, 
                  handout = False, 
                  comments = False, 
-                 pdfout = BLAH, 
                  **kwargs):
 
         super(Directive, self).__init__(**kwargs)
         self.handout  = handout
         self.comments = comments
-        self.pdfout   = pdfout
-        self.get_pdfout_dir()
+        self.get_pdf_out()
 
     def get_pdf_out():
         if self.handout or self.comments:
-            pdfout_dir = metadata.settings['temp_dir']
+            self.pdf_out = metadata.settings['temp_dir']
          else:
-            pdfout_dir = metadata.settings['output_dir']
+            self.pdf_out = metadata.settings['output_dir']
