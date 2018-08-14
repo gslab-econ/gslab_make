@@ -96,17 +96,17 @@ class ProgramDirective(Directive):
         if self.program_ext != metadata.extensions[self.application]:
             raise CritError(messages.crit_error_extension % self.program)
 
-    def move_program_output(self, program_output, log = ''): 
+    def move_program_output(self, output, log = ''): 
     '''
     Certain programs create outputs that need to be moved to appropriate logging files
     '''
         try:
-            program_out = os.path.abspath(program_out)
-            with open(program_out, 'rb') as f:
+            output = os.path.abspath(output)
+            with open(output, 'rb') as f:
                 output = f.read()
         except Exception as errmsg:
             print(errmsg)
-            raise CritError(messages.crit_error_no_file % program_out)
+            raise CritError(messages.crit_error_no_file % output)
 
         # TODO: DOUBLE-CHECK PATHS
        if self.makelog: 
@@ -116,10 +116,10 @@ class ProgramDirective(Directive):
                 f.append(out)
 
         if self.log: 
-            if program_out != log:
-                shutil.copy2(program_out, log)
+            if output != log:
+                shutil.copy2(output, log)
     
-		os.remove(program_out)
+		os.remove(output)
 
 class SASDirective(ProgramDirective):    
 
@@ -133,19 +133,17 @@ class SASDirective(ProgramDirective):
 class LyxDirective(ProgramDirective):    
 
     def __init__(self, 
-                 handout = False, 
-                 comments = False, 
-                 pdf_out = metadata.settings['output_dir'],
+                 doctype = '',
+                 pdfout = metadata.settings['output_dir'],
                  **kwargs):
 
         super(Directive, self).__init__(**kwargs)
-        self.handout  = handout
-        self.comments = comments
-        self.pdf_out  = pdf_out
-        self.get_pdf_out()
+        self.doctype  = doctype
+        self.pdfout  = pdfout
+        self.get_pdfout()
 
-    def get_pdf_out():
-        if self.handout or self.comments:
-            self.pdf_out = metadata.settings['temp_dir']
+    def get_pdfout():
+        if not self.doctype:
+            self.pdfout = metadata.settings['temp_dir']
 
-        self.pdf_out = os.path.abspath(self.pdf_out)
+        self.pdfout = os.path.abspath(self.pdfout)

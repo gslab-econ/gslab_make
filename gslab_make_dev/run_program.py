@@ -96,30 +96,22 @@ def run_lyx(**kwargs): # Check
     try:
         run = ProgramDirective(**kwargs)
             
-        # Make handout/commented LyX file
-        handout = run.handout
-        comments = run.comments
-
-		if handout:
-		    suffix = '_handout'
-		else if comments: 
-		    suffix = '_comments'		
-		
-        if handout or comments:
-            temp_program_name = os.path.join(run.program_name + suffix)
-            temp_program  = os.path.join(run.program_path, temp_program_name + '.lyx') 
+        # Make handout/commented LyX file		
+        if not run.doctype
+            temp_name = os.path.join(run.program_name + '_' + run.doctype)
+            temp_program = os.path.join(run.program_path, temp_name + '.lyx') 
             
             beamer = False
             shutil.copy2(run.program, temp_program) 
             for line in fileinput.input(temp_program, inplace = True):
                 if r'\textclass beamer' in line:
                     beamer = True
-                elif handout and r'\options' in line and beamer:
+                else if run.doctype == 'handout' and r'\options' in line and beamer:
                     line = line.rstrip('\n') + ', handout\n'
-                elif comments and r'\begin_inset Note Note' in line:
+                else if run.doctype == 'comments' and r'\begin_inset Note Note' in line:
                     line = line.replace('Note Note', 'Note Greyedout')
         else:
-             temp_program_name = run.program_name
+             temp_name = run.program_name
              temp_program = run.program
 
         # Execute
@@ -127,15 +119,14 @@ def run_lyx(**kwargs): # Check
         run.execute_command(command)
 
         # Move PDF output
-        pdf_name = os.path.join(run.program_path, temp_program_name + '.pdf')
-        pdf_out = run.pdf_out
+        temp_pdf = os.path.join(run.program_path, temp_name + '.pdf')
 		
-        if pdf_name != pdf_out:
-            shutil.copy2(pdf_name, pdf_out)
-            os.remove(pdf_name)
+        if temp_pdf != run.pdf_out:
+            shutil.copy2(temp_pdf, run.pdf_out)
+            os.remove(temp_pdf)
             
         # Remove handout/commented LyX file
-        if handout or comments:
+        if not run.doctype
             os.remove(temp_program)
 
     except:
