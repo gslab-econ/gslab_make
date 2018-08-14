@@ -16,7 +16,7 @@ def run_stata(**kwargs):
         run.move_program_output(program_log, run.log)
 		
     except:
-        ERROR
+        print("ERROR")
 
 
 def run_matlab(**kwargs)
@@ -33,7 +33,7 @@ def run_matlab(**kwargs)
         run.move_program_output(program_log, run.log)
 		
     except:
-        ERROR
+        print("ERROR")
 
 
 def run_perl(**kwargs):
@@ -45,7 +45,7 @@ def run_perl(**kwargs):
         command = metadata.commands['perl'] % (run.executable, run.option, run.program, run.args)
         run.execute_command(command)
     except:
-        ERROR
+        print("ERROR")
 
 
 def run_python(**kwargs):
@@ -57,7 +57,7 @@ def run_python(**kwargs):
         command = metadata.commands['python'] % (run.executable, run.option, run.program, run.args)
         run.execute_command(command)
     except:
-        ERROR
+        print("ERROR")
 
 
 def run_mathematica(**kwargs):
@@ -69,7 +69,7 @@ def run_mathematica(**kwargs):
         command = metadata.commands['math'] % (run.executable, run.program, run.option)
         run.execute_command(command)
     except:
-        ERROR
+        print("ERROR")
 
 
 def run_stat_transer(**kwargs):
@@ -81,7 +81,7 @@ def run_stat_transer(**kwargs):
         command = metadata.commands['st'] % (run.executable, run.program)
         run.execute_command(command)
     except:
-        ERROR
+        print("ERROR")
 
 
 def run_lyx(**kwargs): # Check
@@ -130,7 +130,7 @@ def run_lyx(**kwargs): # Check
         pdf_name = os.path.join(run.program_path, temp_program_name + '.pdf')
         pdf_out = run.pdf_out
 		
-        if os.path.abspath(pdf_name) != os.path.abspath(pdf_out):
+        if pdf_name != pdf_out:
             shutil.copy2(pdf_name, pdf_out)
             os.remove(pdf_name)
             
@@ -139,7 +139,7 @@ def run_lyx(**kwargs): # Check
             os.remove(temp_program)
 
     except:
-        ERROR
+        print("ERROR")
 
 
 def run_r(**kwargs):
@@ -153,7 +153,7 @@ def run_r(**kwargs):
         run.move_program_output(program_log, run.log)
 		
     except:
-        ERROR
+        print("ERROR")
 
 
 def run_sas(**kwargs):
@@ -171,7 +171,7 @@ def run_sas(**kwargs):
         run.move_program_output(default_lst)
 		
     except:
-        ERROR
+        print("ERROR")
 
 
 def execute_command(command, **kwargs):
@@ -186,4 +186,4 @@ def execute_command(command, **kwargs):
 		run.execute_run(command)
 	
     except:
-        ERROR
+        print("ERROR")

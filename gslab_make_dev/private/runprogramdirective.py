@@ -44,15 +44,15 @@ class Directive(object):
         return(output)
 
     def write_log(self, output)
-        if self.log:
-            with open(self.log, 'wb') as f:
-                f.write(output)
-
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_nomakelog % self.makelog)
             with open(self.makelog, 'wb') as f:
-                f.write(log_text)
+                f.append(output)
+
+        if self.log:
+            with open(self.log, 'wb') as f:
+                f.write(output)
 
 class ProgramDirective(Directive):
 
@@ -101,23 +101,24 @@ class ProgramDirective(Directive):
     Certain programs create outputs that need to be moved to appropriate logging files
     '''
         try:
+            program_out = os.path.abspath(program_out)
             with open(program_out, 'rb') as f:
                 output = f.read()
         except Exception as errmsg:
             print(errmsg)
             raise CritError(messages.crit_error_no_file % program_out)
 
-        if self.makelog: 
+        # TODO: DOUBLE-CHECK PATHS
+       if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_nomakelog % self.makelog)
             with open(self.makelog, 'wb') as f:
                 f.append(out)
 
-        # TODO: HINK ABOUT IF LOG = PROGRAM_OUT
-        # TODO: DOUBLE-CHECK PATHS
-		log: 
-            shutil.copy2(program_out, log)
-            
+        if self.log: 
+            if program_out != log:
+                shutil.copy2(program_out, log)
+    
 		os.remove(program_out)
 
 class SASDirective(ProgramDirective):    
