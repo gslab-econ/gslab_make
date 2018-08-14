@@ -13,82 +13,72 @@ class Directive(object):
                  makelog = metadata.settings['makelog_file'], 
                  log = ''):
 
-        self.osname    = osname
-        self.makelog   = makelog
-        self.log       = log  
+        self.osname   = osname
+        self.makelog  = makelog
+        self.log      = log  
+        self.check_os()
         self.get_paths()
-		self.check_os()
 
-    def get_paths(self):    
-        self.makelog   = os.path.abspath(self.makelog)
-        self.log       = os.path.abspath(self.log) if log != '' else log
-        
     def check_os(self):
         if (self.osname != 'posix') & (self.osname != 'nt'):
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
+    def get_paths(self):    
+        self.makelog  = os.path.abspath(self.makelog)
+        self.log      = os.path.abspath(self.log) if self.log != '' else self.log        
+
     def execute_command(self, command):   
-        output = 'Executing: "' + ' '.join(command) + "'"
-        print(output)
+        command = command.split()
+        self.output = 'Executing: "' + ' '.join(command) + "'"
+        print(self.output)
             
         try:   
              p = subprocess.Popen(command, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
              out, err = p.communicate()
              print(err)
-             output += '\n' + out + '\n' + err
+             self.output += '\n' + out + '\n' + err
         except Exception as errmsg:
              error_message = messages.crit_error_bad_command % ' '.join(command), '\n', str(errmsg)
              print(error_message)
-             output += '\n' + error_message
+             self.output += '\n' + error_message
 
-        return(output)
-
-    def write_log(self, output)
+    def write_log(self):
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_nomakelog % self.makelog)
-            with open(self.makelog, 'wb') as f:
-                f.append(output)
+            with open(self.makelog, 'ab') as f:
+                f.write(self.output)
 
         if self.log:
             with open(self.log, 'wb') as f:
-                f.write(output)
+                f.write(self.output)
 
 class ProgramDirective(Directive):
 
     def __init__(self, 
                  application, 
+                 program,
                  executable = '', 
                  option = '',
-                 program,
                  args = '', 
                  **kwargs):
 
-        super(Directive, self).__init__(**kwargs)
+        super(ProgramDirective, self).__init__(**kwargs)
         self.application = application
+        self.program     = program
         self.executable  = executable
         self.option      = option
-        self.program     = program
         self.args        = args      
-        self.get_executable()
-        self.get_option()
         self.parse_program()
         self.check_program()
-		
-    def get_executable(self):
-        if not self.executable:
-            self.executable = metadata.default_executables[self.osname][self.application]
+        self.get_executable()
+        self.get_option()
 
-	def get_option(self):
-        if not self.option:
-            self.option = metadata.default_options[self.osname][self.application]
-			
     def parse_program(self):
         self.program      = os.path.abspath(self.program)
         self.program_path = os.path.dirname(self.program)
         self.program_base = os.path.basename(self.program)
         self.program_name, self.program_ext = os.path.splitext(self.program_base)
-
 
     def check_program(self):
         if not os.path.isfile(self.program):
@@ -96,30 +86,39 @@ class ProgramDirective(Directive):
         if self.program_ext != metadata.extensions[self.application]:
             raise CritError(messages.crit_error_extension % self.program)
 
-    def move_program_output(self, output, log = ''): 
-    '''
-    Certain programs create outputs that need to be moved to appropriate logging files
-    '''
+    def get_executable(self):
+        if not self.executable:
+            self.executable = metadata.default_executables[self.osname][self.application]
+
+    def get_option(self):
+        if not self.option:
+            self.option = metadata.default_options[self.osname][self.application]
+
+    def move_program_output(self, program_output, log = ''):
+        """
+        Certain programs create outputs that need to be moved to appropriate logging files
+        """
+    
         try:
-            output = os.path.abspath(output)
-            with open(output, 'rb') as f:
-                output = f.read()
+            program_output = os.path.abspath(program_output)
+            with open(program_output, 'rb') as f:
+                out = f.read()
         except Exception as errmsg:
             print(errmsg)
-            raise CritError(messages.crit_error_no_file % output)
+            raise CritError(messages.crit_error_no_file % program_output)
 
-        # TODO: DOUBLE-CHECK PATHS
-       if self.makelog: 
+        if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_nomakelog % self.makelog)
-            with open(self.makelog, 'wb') as f:
-                f.append(out)
+            with open(self.makelog, 'ab') as f:
+                f.write(out)
 
         if self.log: 
-            if output != log:
-                shutil.copy2(output, log)
-    
-		os.remove(output)
+            if program_output != log:
+                shutil.copy2(program_output, log)
+                os.remove(program_output)
+        else: 
+            os.remove(program_output)
 
 class SASDirective(ProgramDirective):    
 
@@ -127,7 +126,7 @@ class SASDirective(ProgramDirective):
                  lst = '', 
                  **kwargs):
 
-        super(Directive, self).__init__(**kwargs)
+        super(SASDirective, self).__init__(**kwargs)
         self.lst = lst  
 
 class LyxDirective(ProgramDirective):    
@@ -137,8 +136,8 @@ class LyxDirective(ProgramDirective):
                  pdfout = metadata.settings['output_dir'],
                  **kwargs):
 
-        super(Directive, self).__init__(**kwargs)
-        self.doctype  = doctype
+        super(LyxDirective, self).__init__(**kwargs)
+        self.doctype = doctype
         self.pdfout  = pdfout
         self.get_pdfout()
 

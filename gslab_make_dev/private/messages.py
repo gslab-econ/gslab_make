@@ -5,6 +5,14 @@
 ######################################################		
 	
 # 1) Critical Errors
+crit_error_nomakelog = 'ERROR! Makelog "%s" not found (either not started or deleted)'
+crit_error_unknown_system = 'ERROR! The program syntax for system "%s" is not defined'
+crit_error_bad_command = 'ERROR! Command "%s" executed with errors'
+crit_error_extension = 'ERROR! "%s" does not have the right program extension'
+crit_error_no_file = 'ERROR! File "%s" not found'
+
+"""
+# 1) Critical Errors
 crit_error_log = 'ERROR! Cannot open logfile %s'
 crit_error_nomakelog = 'ERROR! Makelog %s not found (either not started or deleted)'
 crit_error_log_header = 'ERROR! %s is not a log of %s (first line should be "%s")'
@@ -21,6 +29,7 @@ crit_error_no_dta_file = 'Error! DTA output file %s is not listed in the manifes
 crit_error_option_overlap = 'ERROR! Option %s and command line option %s overlap'
 crit_error_no_package = 'ERROR! R package %s not found'
 crit_error_assetid = 'ERROR! Unable to determine asset id for %s in release %s. Check url and token.'
+"""
 
 # 2) Syntax Errors
 syn_error_revnum =  'ERROR! Revision number %s for %s%s is not a valid number.'

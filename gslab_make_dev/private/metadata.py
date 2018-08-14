@@ -19,7 +19,7 @@ commands = {
          'st'        : '%s %s',
          'lyx'       : '%s %s %s',
          'r'         : '%s %s %s',
-         'sas'       : '%s %s -log -print %s'}
+         'sas'       : '%s %s -log -print %s'},
     'nt': 
         {'makelink'  : 'ln -s \"%s%s\" \"%s%s\"', 
          'rmdir'     : 'rm %s \"%s\"', 
@@ -45,7 +45,7 @@ default_options = {
          'st'        : '',
          'lyx'       : '-e pdf2',
          'r'         : '--no-save',
-         'sas'       : ''}
+         'sas'       : ''},
     'nt': 
         {'rmdir'     : '/s /q', 
          'stata'     : '/e',
@@ -69,7 +69,7 @@ default_executables = {
          'st'        : 'st',
          'lyx'       : 'lyx',
          'r'         : 'Rscript',
-         'sas'       : 'sas'}
+         'sas'       : 'sas'},
     'nt': 
         {'stata'     : '%STATAEXE%',
          'matlab'    : 'matlab',
@@ -88,8 +88,7 @@ extensions = {
     'perl'      : '.pl',
     'python'    : '.py',
     'math'      : '.m',
-    'stc'       : '.stc',
-    'stcmd'     : '.stcmd',
+    'st'        : ['.stc', '.stcmd'],
     'lyx'       : '.lyx',
     'r'         : '.R',
     'rinstall'  : '',
