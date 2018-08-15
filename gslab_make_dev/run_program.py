@@ -151,6 +151,7 @@ def run_r(**kwargs):
 
 
 def run_sas(**kwargs):
+    
     try:
         directive = ProgramDirective(application = 'sas', **kwargs)
 
@@ -168,9 +169,6 @@ def run_sas(**kwargs):
 
 
 def execute_command(command, **kwargs):
-    """
-    directive a shell command
-    """
 
     try:
         directive = Directive(**kwargs)
