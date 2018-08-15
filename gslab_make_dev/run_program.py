@@ -28,6 +28,7 @@ def run_stata(**kwargs):
         print("Error")
         print(e)
 
+
 def run_matlab(**kwargs):
 
     directive = ProgramDirective(application = 'matlab', **kwargs)

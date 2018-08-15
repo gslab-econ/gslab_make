@@ -53,6 +53,7 @@ class Directive(object):
             with open(self.log, 'wb') as f:
                 f.write(self.output)
 
+
 class ProgramDirective(Directive):
 
     def __init__(self, 
@@ -120,6 +121,7 @@ class ProgramDirective(Directive):
         else: 
             os.remove(program_output)
 
+
 class SASDirective(ProgramDirective):    
 
     def __init__(self, 
@@ -128,6 +130,7 @@ class SASDirective(ProgramDirective):
 
         super(SASDirective, self).__init__(**kwargs)
         self.lst = lst  
+
 
 class LyxDirective(ProgramDirective):    
 
