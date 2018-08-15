@@ -84,6 +84,7 @@ class ProgramDirective(Directive):
     def check_program(self):
         if not os.path.isfile(self.program):
             raise CritError(messages.crit_error_no_file % self.program)
+            
         if self.program_ext != metadata.extensions[self.application]:
             raise CritError(messages.crit_error_extension % self.program)
 

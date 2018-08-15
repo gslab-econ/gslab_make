@@ -22,16 +22,12 @@ def run_stata(**kwargs):
         command = metadata.commands[directive.osname]['stata'] % (directive.executable, directive.option, directive.program)
         directive.execute_command(command)
         directive.write_log()
-        directive.move_program_output(program_log, directive.log)
-        
+        directive.move_program_output(program_log, directive.log)       
     except Exception as e:
-        print("Error")
         print(e)
 
 
 def run_matlab(**kwargs):
-
-    directive = ProgramDirective(application = 'matlab', **kwargs)
 
     try:
         directive = ProgramDirective(application = 'matlab', **kwargs)
@@ -42,10 +38,8 @@ def run_matlab(**kwargs):
         # Execute
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.program_name + '.log')
         directive.execute_command(command)    
-        directive.move_program_output(program_log, directive.log)
-        
+        directive.move_program_output(program_log, directive.log)       
     except Exception as e:
-        print("Error")
         print(e)
 
 
@@ -59,7 +53,6 @@ def run_perl(**kwargs):
         directive.execute_command(command)
         directive.write_log()
     except Exception as e:
-        print("Error")
         print(e)
 
 
@@ -73,7 +66,6 @@ def run_python(**kwargs):
         directive.execute_command(command)
         directive.write_log()
     except Exception as e:
-        print("Error")
         print(e)
 
 
@@ -87,7 +79,6 @@ def run_mathematica(**kwargs):
         directive.execute_command(command)
         directive.write_log()
     except Exception as e:
-        print("Error")
         print(e)
 
 
@@ -101,18 +92,10 @@ def run_stat_transer(**kwargs):
         directive.execute_command(command)
         directive.write_log()
     except Exception as e:
-        print("Error")
         print(e)
 
 
 def run_lyx(**kwargs): # Check
-    """
-    Export a LyX file to PDF
-
-    Example: 
-        To create PDF for 'draft.lyx', use command:
-        `run_lyx(program = 'draft.lyx')`
-    """
 
     try:
         directive = ProgramDirective(application = 'lyx', **kwargs)
@@ -150,9 +133,7 @@ def run_lyx(**kwargs): # Check
         # Remove handout/commented LyX file
         if not directive.doctype:
             os.remove(temp_program)
-
     except Exception as e:
-        print("Error")
         print(e)
 
 
@@ -164,10 +145,8 @@ def run_r(**kwargs):
         # Execute
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program)
         directive.execute_command(command)
-        directive.write_log()
-        
+        directive.write_log()      
     except Exception as e:
-        print("Error")
         print(e)
 
 
@@ -183,10 +162,8 @@ def run_sas(**kwargs):
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program)       
         directive.execute_command(command)
         directive.move_program_output(program_log)
-        directive.move_program_output(program_lst)
-        
+        directive.move_program_output(program_lst)        
     except Exception as e:
-        print("Error")
         print(e)
 
 
@@ -200,8 +177,6 @@ def execute_command(command, **kwargs):
 
         # Execute
         directive.execute_command(command)
-        directive.write_log()
-    
+        directive.write_log()   
     except Exception as e:
-        print("Error")
         print(e)
