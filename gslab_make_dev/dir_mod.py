@@ -39,17 +39,14 @@ def remove_dir(pathname, options = '@DEFAULTVALUE@'):
     on Unix platforms. This is useful for removing symlinks without 
     deleting the source files or directory.
     """
+    if (os.name != 'posix') and (os.name != 'nt'):
+        raise CritError(messages.crit_error_unknown_system % os.name)
+    command = metadata.commands[os.name]['rmdir']
+    if os.name == 'posix' and pathname[-1] == '/':
+        pathname = pathname[0:-1]
 
-    if os.name == 'posix':
-        os_command = 'rmdirunix'
-        if pathname[-1] == '/':
-            pathname = pathname[0:-1]
-    else:
-        os_command = 'rmdirwin'
-
-    command = metadata.commands[os_command]
     if options == '@DEFAULTVALUE@':
-        options = metadata.default_options[os_command]
+        options = metadata.default_options[os.name]['rmdir']
 
     subprocess.check_call(command % (options, pathname), shell=True)
 
