@@ -82,7 +82,7 @@ def run_mathematica(**kwargs):
         print(e)
 
 
-def run_stat_transer(**kwargs):
+def run_stat_transfer(**kwargs):
 
     try:
         directive = ProgramDirective(application = 'st', **kwargs)

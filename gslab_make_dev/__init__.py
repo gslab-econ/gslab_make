@@ -167,8 +167,7 @@ from dir_mod import (clear_dirs, check_manifest, delete_files,
 
 
 from run_program import run_stata, run_matlab, run_perl, run_python, run_mathematica
-from run_program import run_stc, run_stcmd, run_lyx, run_rbatch
-from run_program import run_rinstall, run_sas, run_command
+from run_program import run_stat_transfer, run_lyx, run_r, run_sas, execute_command
 
 #Import tablefill and textfill tools
 from tablefill import tablefill
