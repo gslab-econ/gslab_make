@@ -10,7 +10,7 @@ makelog_started = False
 commands = {
     'posix': 
         {'makelink'  : 'mklink %s \"%s%s\" \"%s%s\"', 
-         'rmdir'     : 'rmdir %s \"%s\"', 
+         'rmdir'     : 'rm %s \"%s\"', 
          'stata'     : '%s %s do %s',
          'matlab'    : '%s %s -r run(\'%s\') -logfile %s',
          'perl'      : '%s %s %s %s',
@@ -22,7 +22,7 @@ commands = {
          'sas'       : '%s %s -log -print %s'},
     'nt': 
         {'makelink'  : 'ln -s \"%s%s\" \"%s%s\"', 
-         'rmdir'     : 'rm %s \"%s\"', 
+         'rmdir'     : 'rmdir %s \"%s\"', 
          'stata'     : '%s %s do %s',
          'matlab'    : '%s %s -r run(\'%s\') -logfile %s',
          'perl'      : '%s %s %s %s',
