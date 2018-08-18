@@ -6,7 +6,7 @@ from gslab_make_dev.make_log import start_make_logging
 from gslab_make_dev.dir_mod import clear_dirs
 from gslab_make_dev.run_program import run_stata
 from nostderrout import nostderrout
-import py.private.metadata as metadata
+import gslab_make_dev.private.metadata as metadata
     
 
 class testRunStata(unittest.TestCase):

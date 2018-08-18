@@ -45,101 +45,22 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.15, pytest-3.7.1, py-1.5.4, pluggy-0.7.1
 rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 20 items
+collected 89 items / 1 errors
 
-gslab_make_dev/tests/test_clear_dirs.py FF.                              [ 15%]
-gslab_make_dev/tests/test_delete_files.py ...                            [ 30%]
-gslab_make_dev/tests/test_tablefill.py ....                              [ 50%]
-gslab_make_dev/tests/test_textfill.py ........                           [ 90%]
-gslab_make_dev/tests/test_zip.py ..                                      [100%]
-
-=================================== FAILURES ===================================
-______________________ testClearDirs.test_already_exists _______________________
-
-self = <gslab_make_dev.tests.test_clear_dirs.testClearDirs testMethod=test_already_exists>
-
-    def test_already_exists(self):
-        os.makedirs('./output_local_empty/')
-    
-        with nostderrout():
->           clear_dirs('./output_local_empty/')
-
-gslab_make_dev/tests/test_clear_dirs.py:25: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-gslab_make_dev/dir_mod.py:218: in clear_dirs
-    remove_dir(dir)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-pathname = './output_local_empty', options = '@DEFAULTVALUE@'
-
-    def remove_dir(pathname, options = '@DEFAULTVALUE@'):
-        """Remove a directory
-    
-        This function completely removes the directory specified by `pathname`
-        using the 'rmdir' command on Windows platforms and the 'rm' command
-        on Unix platforms. This is useful for removing symlinks without
-        deleting the source files or directory.
-        """
-    
-        if os.name == 'posix':
-            os_command = 'rmdirunix'
-            if pathname[-1] == '/':
-                pathname = pathname[0:-1]
-        else:
-            os_command = 'rmdirwin'
-    
->       command = metadata.commands[os_command]
-E       KeyError: 'rmdirunix'
-
-gslab_make_dev/dir_mod.py:50: KeyError
-_________________ testClearDirs.test_already_exists_with_files _________________
-
-self = <gslab_make_dev.tests.test_clear_dirs.testClearDirs testMethod=test_already_exists_with_files>
-
-    def test_already_exists_with_files(self):
-        os.makedirs('./output_local_files/')
-        newfile = open('./output_local_files/text.txt', 'w+')
-        newfile.write('test')
-        newfile.close()
-        file_list = os.listdir('./output_local_files/')
-        self.assertEqual(len(file_list), 1)
-    
-        with nostderrout():
->           clear_dirs('./output_local_files/')
-
-gslab_make_dev/tests/test_clear_dirs.py:40: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-gslab_make_dev/dir_mod.py:218: in clear_dirs
-    remove_dir(dir)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-pathname = './output_local_files', options = '@DEFAULTVALUE@'
-
-    def remove_dir(pathname, options = '@DEFAULTVALUE@'):
-        """Remove a directory
-    
-        This function completely removes the directory specified by `pathname`
-        using the 'rmdir' command on Windows platforms and the 'rm' command
-        on Unix platforms. This is useful for removing symlinks without
-        deleting the source files or directory.
-        """
-    
-        if os.name == 'posix':
-            os_command = 'rmdirunix'
-            if pathname[-1] == '/':
-                pathname = pathname[0:-1]
-        else:
-            os_command = 'rmdirwin'
-    
->       command = metadata.commands[os_command]
-E       KeyError: 'rmdirunix'
-
-gslab_make_dev/dir_mod.py:50: KeyError
-===================== 2 failed, 18 passed in 0.62 seconds ======================
+==================================== ERRORS ====================================
+___________ ERROR collecting gslab_make_dev/tests/test_run_stata.py ____________
+ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_run_stata.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+gslab_make_dev/tests/test_run_stata.py:9: in <module>
+    import py.private.metadata as metadata
+E   ImportError: No module named private.metadata
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 errors during collection !!!!!!!!!!!!!!!!!!!!
+=========================== 1 error in 0.64 seconds ============================
 Name                                                Stmts   Miss Branch BrPart  Cover   Missing
 -----------------------------------------------------------------------------------------------
 gslab_make_dev/_tests.py                                9      9      0      0     0%   2-18
-gslab_make_dev/dir_mod.py                             143     98     62      2    28%   48, 51-54, 69-145, 159-205, 43->48, 45->50
+gslab_make_dev/dir_mod.py                             143    123     62      0    10%   28-31, 43-54, 69-145, 159-205, 216-220, 224-226, 230-238
 gslab_make_dev/make_link_logs.py                       36     28     16      0    15%   61-75, 86-106
 gslab_make_dev/make_links.py                           18     12      4      0    27%   60-78
 gslab_make_dev/make_log.py                            166    146     66      0     9%   35-63, 77-100, 113-128, 146-172, 191-217, 250-262, 279-297, 313-345
@@ -155,15 +76,23 @@ gslab_make_dev/private/preliminaries_refactor.py       43     43      8      0  
 gslab_make_dev/private/runprogramdirective.py         101     77     26      0    19%   18-22, 25-26, 29-30, 33-45, 48-56, 69-78, 81-84, 87-91, 94-95, 98-99, 106-125, 134-135, 145-148, 151-154
 gslab_make_dev/refactor_tests.py                        9      9      0      0     0%   2-18
 gslab_make_dev/run_program.py                         112     95     14      0    13%   15-27, 32-43, 48-56, 61-69, 74-82, 87-95, 100-137, 142-150, 155-168, 173-180
-gslab_make_dev/tablefill.py                           141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
+gslab_make_dev/tablefill.py                           141    122     68      0     9%   13-25, 31-40, 44-47, 51-57, 61-77, 81-84, 87-115, 118-149, 152-160, 164-176, 180-182
 gslab_make_dev/tablefill_info.py                        0      0      0      0   100%
-gslab_make_dev/tests/nostderrout.py                    12      0      2      0   100%
-gslab_make_dev/tests/test_clear_dirs.py                41      8      8      1    82%   27-29, 42-44, 55-56, 54->55
-gslab_make_dev/tests/test_delete_files.py              46      2      4      2    92%   55-56, 51->exit, 54->55
-gslab_make_dev/tests/test_tablefill.py                 97      2     42      6    94%   145-146, 22->exit, 39->36, 59->45, 76->exit, 140->exit, 144->145
-gslab_make_dev/tests/test_textfill.py                  84      2     12      3    95%   139-140, 18->exit, 134->exit, 138->139
-gslab_make_dev/tests/test_zip.py                       36      2      4      2    90%   46-47, 42->exit, 45->46
-gslab_make_dev/textfill.py                            135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
+gslab_make_dev/tests/nostderrout.py                    12      9      2      0    21%   6-14
+gslab_make_dev/tests/test_clear_dirs.py                41     31      8      1    22%   12-19, 22-29, 32-44, 47-52, 55-56, 54->55
+gslab_make_dev/tests/test_delete_files.py              46     35      4      1    24%   12-22, 25-33, 36-43, 46-48, 51-52, 55-56, 54->55
+gslab_make_dev/tests/test_execute_command.py           64     51      6      1    20%   14-18, 21-30, 33-47, 50-64, 67-70, 73-74, 72->73
+gslab_make_dev/tests/test_run_lyx.py                  119     96     10      1    19%   14-18, 21-25, 28-37, 40-48, 51-55, 58-62, 65-71, 74-77, 80-84, 87-91, 94-99, 102-109, 113-119, 122-129, 132-137, 140-141, 139->140
+gslab_make_dev/tests/test_run_mathematica.py           84     65     10      1    21%   14-18, 21-25, 28-37, 40-47, 50-54, 57-61, 64-70, 73-76, 79-82, 85-89, 92-97, 100-101, 99->100
+gslab_make_dev/tests/test_run_matlab.py                81     61      8      1    24%   14-18, 21-24, 27-35, 38-43, 46-49, 52-55, 58-64, 67-70, 73-79, 82-87, 90-92, 95-96, 99-100, 98->99
+gslab_make_dev/tests/test_run_perl.py                  92     71     14      1    21%   14-18, 21-24, 27-35, 38-43, 46-49, 52-55, 58-64, 67-70, 73-76, 79-82, 85-88, 91-99, 102-107, 110-111, 109->110
+gslab_make_dev/tests/test_run_python.py                92     71     14      1    21%   14-18, 21-24, 27-35, 38-43, 46-49, 52-55, 58-64, 67-70, 73-76, 79-82, 85-88, 91-99, 102-107, 110-111, 109->110
+gslab_make_dev/tests/test_run_r.py                    139    113     16      1    17%   14-18, 21-26, 29-31, 34-43, 46-53, 56-60, 63-67, 70-76, 79-82, 85-88, 91-97, 100-106, 109-115, 118-121, 124-129, 132-138, 141-149, 152-159, 162-163, 161->162
+gslab_make_dev/tests/test_run_stata.py                 81     74     14      0     7%   12-99
+gslab_make_dev/tests/test_tablefill.py                 97     77     42      1    15%   22-23, 26-40, 43-60, 63-77, 80-86, 90-113, 116-137, 140-141, 145-146, 144->145
+gslab_make_dev/tests/test_textfill.py                  84     61     12      1    25%   18-19, 22-29, 32-40, 43-50, 53-65, 68-72, 75-79, 82-91, 95-115, 119-131, 134-135, 139-140, 138->139
+gslab_make_dev/tests/test_zip.py                       36     26      4      1    28%   13-24, 28-32, 35-39, 42-43, 46-47, 45->46
+gslab_make_dev/textfill.py                            135    114     60      0    11%   12-24, 31-52, 56-59, 63-72, 77-82, 85-89, 92-93, 96-101, 104-106, 110-119, 123-128, 132-162, 166-190
 gslab_make_dev/textfill_info.py                         0      0      0      0   100%
 -----------------------------------------------------------------------------------------------
-TOTAL                                                1660    887    576     31    43%
+TOTAL                                                2412   1966    668     12    15%
