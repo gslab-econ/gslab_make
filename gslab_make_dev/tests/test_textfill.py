@@ -7,7 +7,6 @@ import types
 import HTMLParser
 import shutil
 
-sys.path.append('../..')
 from gslab_make_dev.textfill import (textfill, read_text, 
                                  remove_trailing_leading_blanklines)
 from gslab_make_dev.tests import nostderrout

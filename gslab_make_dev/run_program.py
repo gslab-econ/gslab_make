@@ -98,7 +98,7 @@ def run_stat_transfer(**kwargs):
 def run_lyx(**kwargs): # Check
 
     try:
-        directive = ProgramDirective(application = 'lyx', **kwargs)
+        directive = LyxDirective(application = 'lyx', **kwargs)
             
         # Make handout/commented LyX file        
         if not directive.doctype:
