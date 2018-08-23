@@ -1,12 +1,13 @@
 #! /usr/bin/env python
 
 import os
-import shutil
 import subprocess
+import shutil
 
-from exceptionclasses import CustomError, CritError, SyntaxError, LogicError
+from exceptionclasses import *
 import messages as messages
 import metadata as metadata
+from utility import *
 
 class Directive(object):
 
@@ -26,8 +27,8 @@ class Directive(object):
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):    
-        self.makelog  = os.path.abspath(self.makelog)
-        self.log      = os.path.abspath(self.log) if self.log != '' else self.log        
+        self.makelog  = utility.norm_path(self.makelog)
+        self.log      = utility.norm_path(self.log) if self.log != '' else self.log        
 
     def execute_command(self, command):   
         command = command.split()
@@ -47,7 +48,7 @@ class Directive(object):
     def write_log(self):
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
-                raise CritError(messages.crit_error_nomakelog % self.makelog)
+                raise CritError(messages.crit_error_no_makelog % self.makelog)
             with open(self.makelog, 'ab') as f:
                 f.write(self.output)
 
@@ -78,7 +79,7 @@ class ProgramDirective(Directive):
         self.get_option()
 
     def parse_program(self):
-        self.program      = os.path.abspath(self.program)
+        self.program      = utility.norm_path(self.program)
         self.program_path = os.path.dirname(self.program)
         self.program_base = os.path.basename(self.program)
         self.program_name, self.program_ext = os.path.splitext(self.program_base)
@@ -104,7 +105,7 @@ class ProgramDirective(Directive):
         """
     
         try:
-            program_output = os.path.abspath(program_output)
+            program_output = utility.norm_path(program_output)
             with open(program_output, 'rb') as f:
                 out = f.read()
         except Exception as errmsg:
@@ -113,7 +114,7 @@ class ProgramDirective(Directive):
 
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
-                raise CritError(messages.crit_error_nomakelog % self.makelog)
+                raise CritError(messages.crit_error_no_makelog % self.makelog)
             with open(self.makelog, 'ab') as f:
                 f.write(out)
 
@@ -151,4 +152,4 @@ class LyxDirective(ProgramDirective):
         if not self.doctype:
             self.pdfout = metadata.settings['temp_dir']
 
-        self.pdfout = os.path.abspath(self.pdfout)
+        self.pdfout = utility.norm_path(self.pdfout)
