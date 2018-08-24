@@ -1,7 +1,4 @@
 #! /usr/bin/env python
-import sys
-import subprocess
-import shutil
 import os
 import datetime
 import re
@@ -9,19 +6,17 @@ import string
 
 import private.messages as messages
 import private.metadata as metadata
-from private.preliminaries import print_error, files_list
-from dir_mod import delete_files, list_directory
-from private.exceptionclasses import CustomError, CritError, SyntaxError, LogicError
+from private.exceptionclasses import CritError, SyntaxError
+from private.utility import norm_path, glob_recur
 
-
-def set_option(**kwargs):\
+def set_option(**kwargs):
     kwargs = {re.sub('_file$|_dir$', '', k):v for k, v in kwargs.items()}
 
     if len(kwargs.keys()) != len(set(kwargs.keys())):
         raise SyntaxError(messages.syn_error_options)      
 
     for key in metadata.settings.keys():
-        root = re.sub('_file$|_dir$', '', k) 
+        root = re.sub('_file$|_dir$', '', key) 
         if root in kwargs.keys():
             metadata.settings[key] = kwargs[root]
 
@@ -54,7 +49,7 @@ def end_makelog(makelog = metadata.settings['makelog_file']):
 
     try:
         MAKELOG = open(makelog, 'ab')
-    except Exception as errmsg:
+    except Exception as error:
         raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
        
     time_end = datetime.datetime.now().replace(microsecond = 0)
@@ -81,24 +76,24 @@ def make_output_logs(output_dir = metadata.settings['output_file'],
         write_heads_log(headslog_file, output_files)
     
 
-def write_stats_log (stats_file, output_files):
+def write_stats_log (statslog_file, output_files):
     header = "file name\tlast modified\tfile size"
     
-    with open(stats_path, 'wb') as STATSLOG:
-        print >> STATSFILE, header        
+    with open(statslog_file, 'wb') as STATSLOG:
+        print >> STATSLOG, header        
 
         for file_name in output_files:
             stats = os.stat(file_name)
             last_mod = datetime.datetime.utcfromtimestamp(round(stats.st_mtime))
             file_size = stats.st_size
 
-            print >> STATSFILE, "%s\t%s\t%s" % (file_name, last_mod, file_size)
+            print >> STATSLOG, "%s\t%s\t%s" % (file_name, last_mod, file_size)
 
 
 def write_heads_log(headslog_file, output_files, num_lines = 10):
     header = "File headers"
 
-    with open(headslog_path, 'wb') as HEADSLOG:      
+    with open(headslog_file, 'wb') as HEADSLOG:      
         print >> HEADSLOG, header
         print >> HEADSLOG, '\n' + messages.note_dash_separator + '\n'
         
@@ -110,8 +105,8 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
                     for i in range(num_lines):
                         line = f.next().strip()
                         cleaned_line = filter(lambda x: x in string.printable, line)
-                        print >> HEADSFILE, cleaned_line
+                        print >> HEADSLOG, cleaned_line
             except:
                 print >> HEADSLOG, "Head not readable"
 
-            print >> HEADSFILE, '\n' + messages.note_dash_separator + '\n'
+            print >> HEADSLOG, '\n' + messages.note_dash_separator + '\n'

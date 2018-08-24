@@ -6,10 +6,10 @@ import glob
 from itertools import chain
 import subprocess
 
-from exceptionclasses import *
+from exceptionclasses import CritError, SyntaxError
 import messages as messages
 import metadata as metadata
-from utility import *
+from utility import norm_path, file_to_array
 
 class LinkDirective(object):
 
@@ -49,9 +49,10 @@ class LinkDirective(object):
                 raise CritError(messages.crit_error_no_file % self.target)   
 
     def get_link_list(self):
-    '''
-    Convert wildcard paths to list of absolute paths that meet wildcard criteria
-    '''
+        """
+        Convert wildcard paths to list of absolute paths that meet wildcard criteria
+        """
+    
         if re.match('\*', self.target):
             self.target_list  = glob.glob(self.target)
 
@@ -64,36 +65,37 @@ class LinkDirective(object):
 
         self.link_list = zip(self.target_list, self.symlink_list)
 
-    def parse_wildcards(self, f)     
+    def parse_wildcards(self, f):
         regex = self.target.split('*')
         regex = '(.*)'.join(regex) 
 
         wildcards = re.findall(regex, f)
-        wildcards = [w if isinstance(w, str) else *w for w in wildcards]
         wildcards = [(w, ) if isinstance(w, str) else w for w in wildcards]
         wildcards = chain(*wildcards)
 
         return(wildcards)
 
-    def fill_in_wildcards(self, wildcards)
+    def fill_in_wildcards(self, wildcards):
         f = self.symlink
         for wild in wildcards:
-            symlink = re.sub('\*', wild, symlink, 1)
+            f = re.sub('\*', wild, f, 1)
 
         return(f)
 
     def create_symlinks(self):
         if self.osname == 'posix':
             self.create_symlinks_posix()
-        else if self.osname = 'nt':
+        elif self.osname == 'nt':
             self.create_symlinks_nt()
 
+        return(self.link_list)
+   
     def create_symlinks_posix(self):   
         for target, symlink in self.link_list:
             command = metadata.commands[self.osname]['makelink'] % (target, symlink)
             subprocess.Popen(command.split())
 
-    def create_symlinks_posix(self):   
+    def create_symlinks_nt(self):   
         for target, symlink in self.link_list:
             if os.path.isdir(target):
                 directory = '/d'
@@ -111,14 +113,14 @@ class LinksList(object):
                  link_dir = metadata.settings['link_dir']):
         
         self.file_list
-        self.links_dir = links_dir
+        self.link_dir = link_dir
         self.parse_file_list()
         self.get_paths()
         self.get_link_directive_list()
         self.make_symlinks()
 
     def parse_file_list(self):    
-        if type(file_list) is list:
+        if type(self.file_list) is list:
             self.file_list = [f for file in self.file_list for f in glob.glob(file)]
         else:
             raise SyntaxError(messages.syn_error_file_list)
@@ -127,7 +129,7 @@ class LinksList(object):
         self.links_dir  = norm_path(self.links_dir)
         self.files_list = [norm_path(f) for f in self.files_list]
          
-    def get_link_directive_list(self)
+    def get_link_directive_list(self):
         self.link_directive_list = []
 
         for f in self.links_files:
@@ -137,10 +139,10 @@ class LinksList(object):
                 self.linkdirectives_list.append(directive)
 
     def make_symlinks(self):        
+        link_map = []
         for link in self.linkdirectives_list:
-            link.create_symlinks()
-
-
-## RETURN LIST OF STUFFFFFF =)
-
+            link_map.append(link.create_symlinks())
+            
+        return(link_map)
+        
         

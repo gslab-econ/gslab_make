@@ -25,7 +25,7 @@ def delete_files(pathname):
     `pathname` can be either absolute (like /usr/src/Python-1.5/Makefile) 
     or relative (like ../../Tools/*/*.gif). It can contain shell-style wildcards.
     """
-    print "\nDelete files", pathname
+    print("\nDelete files", pathname)
 
     for f in glob(pathname):
         os.remove(f)
@@ -69,7 +69,7 @@ def list_directory(top, makelog = '@DEFAULTVALUE@'):
     if makelog == '@DEFAULTVALUE@':
         makelog = metadata.settings['makelog_file']
 
-    print "\nList all files in directory", top
+    print("\nList all files in directory", top)
 
     # To print numbers (file sizes) with thousand separator
     locale.setlocale(locale.LC_ALL, '')
