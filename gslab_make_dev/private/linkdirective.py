@@ -110,7 +110,7 @@ class LinksList(object):
 
     def __init__(self, 
                  file_list, 
-                 link_dir = metadata.settings['link_dir']):
+                 link_dir):
         
         self.file_list
         self.link_dir = link_dir
@@ -126,22 +126,22 @@ class LinksList(object):
             raise SyntaxError(messages.syn_error_file_list)
     
     def get_paths(self):    
-        self.links_dir  = norm_path(self.links_dir)
+        self.link_dir  = norm_path(self.link_dir)
         self.files_list = [norm_path(f) for f in self.files_list]
          
     def get_link_directive_list(self):
         self.link_directive_list = []
 
-        for f in self.links_files:
+        for f in self.file_list:
             lines = file_to_array(f)
             for line in lines:
-                directive = LinkDirectives(line, self.links_dir)
+                directive = LinkDirective(line, self.link_dir)
                 self.linkdirectives_list.append(directive)
 
     def make_symlinks(self):        
         link_map = []
         for link in self.linkdirectives_list:
-            link_map.append(link.create_symlinks())
+            link_map.extend(link.create_symlinks())
             
         return(link_map)
         

@@ -11,7 +11,7 @@ crit_error_bad_command = 'ERROR! Command "%s" executed with errors'
 crit_error_extension = 'ERROR! "%s" does not have the right program extension'
 crit_error_no_file = 'ERROR! File "%s" not found'
 crit_error_no_file_wildcard = 'ERROR! Files matching "%s" not found'
-crit_error_bad_link = 'ERROR! Link "%s" incorrectly specified'
+crit_error_bad_link = 'ERROR! Link "%s" incorrectly specified' 
 crit_error_log = 'ERROR! Cannot open log file %s'
 
 # 2) Syntax Errors
@@ -22,5 +22,7 @@ syn_error_options = 'ERROR! Duplicate options specified'
 # 3) Notes & Warnings
 note_makelog_start = 'Makelog started: '
 note_makelog_end = 'Makelog ended: '
+note_log_start = '%s started: '
+note_log_end = '%s ended: '
 note_working_dir = 'Working directory: '
 note_dash_separator = '-' * 50

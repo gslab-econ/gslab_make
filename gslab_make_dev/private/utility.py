@@ -8,34 +8,42 @@ import re
 import messages as messages
 import metadata as metadata
 
-from exceptionclasses import *
 
-#== Logging ===============================================
-def start_logging(log, logtype):
+def start_log(log, log_type):
     try:
-        LOGFILE = open(log, 'wb') 
+        LOG = open(log, 'wb') 
     except:
         raise CustomError.crit(messages.crit_error_log % log)
 
     time_begin = datetime.datetime.now().replace(microsecond = 0)
-    orig_stderr = sys.stderr
-    sys.stderr = LOGFILE
     working_dir = os.getcwd()
-    print >> LOGFILE, messages.note_logstart % logtype, time_begin, working_dir
+    print >> LOG, messages.note_dash_separator + '\n'
+    print >> LOG, (messages.note_log_start %s), time_start, '\n'
+    print >> LOG, messages.note_working_directory, working_dir, '\n'
+    print >> LOG, messages.note_dash_separator + '\n'
+
     return LOGFILE
 
 
-def end_logging(LOGFILE, makelog, logtype):
-    time_end = datetime.datetime.now().replace(microsecond=0)
-    print >> LOGFILE, messages.note_logend % logtype,time_end
-    LOGFILE.close()
-    if not makelog: return
-    if not (metadata.makelog_started and os.path.isfile(makelog)):
-        raise CritError(messages.crit_error_nomakelog % makelog)
-    MAKE_LOGFILE = open(makelog, 'ab')
-    MAKE_LOGFILE.write( open(LOGFILE.name, 'rU').read() )
-    MAKE_LOGFILE.close()
-    os.remove(LOGFILE.name)
+def end_log(LOG, logtype, makelog = ''):    
+    time_begin = datetime.datetime.now().replace(microsecond = 0)
+    working_dir = os.getcwd()
+    print >> LOG, messages.note_dash_separator + '\n'
+    print >> LOG, (messages.note_log_start %s), time_start, '\n'
+    print >> LOG, messages.note_working_directory, working_dir, '\n'
+    print >> LOG, messages.note_dash_separator + '\n'
+    
+    LOG.close()
+    
+    if makelog: 
+        if not (metadata.makelog_started and os.path.isfile(makelog)):
+            raise CritError(messages.crit_error_nomakelog % makelog)
+
+        with open(makelog, 'ab') as MAKELOG:
+            with open(LOG.name, 'rb') as LOG:
+                MAKELOG.write(LOG.read())
+        
+        os.remove(LOGFILE.name)
 
 
 def norm_path(path):
@@ -62,6 +70,7 @@ def glob_recursive(path, recur):
 
     return(path_files)
 
+ 
 def file_to_array(file_name):
     # Import file
     if not os.path.isfile(file_name)

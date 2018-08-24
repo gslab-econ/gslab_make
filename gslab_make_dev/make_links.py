@@ -12,7 +12,7 @@ def make_links(file_list,
                makelog = metadata.settings['makelog_file']):
 
     try:         
-        LOGFILE = start_logging(metadata.settings['linkslog_file'], 'make_links.py')
+        LINKLOG = start_log(metadata.settings['linkslog_file'], 'Linklog')
 
         if os.path.exists(list.link_dir):
             remove_dir(list.link_dir)
@@ -21,7 +21,7 @@ def make_links(file_list,
         link_list = LinksList(file_list, link_dir)
         link_list = link_list.make_symlinks()
         
-        end_logging(LOGFILE, makelog, 'make_links.py')
+        end_logging(LINKLOG, makelog, 'Linklog')
         
         return(link_list)
         
