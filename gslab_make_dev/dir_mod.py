@@ -54,96 +54,6 @@ def remove_dir(pathname, options = '@DEFAULTVALUE@'):
     subprocess.check_call(command % (options, pathname), shell=True)
 
 
-def check_manifest(manifestlog = '@DEFAULTVALUE@',
-                   output_dir  = '@DEFAULTVALUE@',
-                   makelog     = '@DEFAULTVALUE@'):
-    """
-    Produce an error if there are any .dta files in "output_dir" and all 
-    non-hidden sub-directories that are not in the manifest file "manifestlog", 
-    and produce a warning if there are .txt or .csv files not in the manifest 
-    along with a list of these files. All log is printed to "makelog" log file.
-    """
-
-    # metadata.settings should not be part of argument defaults so that they can be
-    # overwritten by make_log.set_option
-    if manifestlog == '@DEFAULTVALUE@':
-        manifestlog = metadata.settings['manifest_file']
-    if output_dir == '@DEFAULTVALUE@':
-        output_dir = metadata.settings['output_dir']
-    if makelog == '@DEFAULTVALUE@':
-        makelog = metadata.settings['makelog_file']
-
-    print "\nCheck manifest log file", manifestlog
-
-    # Open main log file
-    try:
-        LOGFILE = open(makelog, 'ab')
-    except Exception as errmsg:
-        print errmsg
-        raise CritError(messages.crit_error_log % makelog)
-
-    try:
-        # Open manifest log file
-        try:
-            MANIFESTFILE = open(manifestlog, 'rU')
-        except Exception as errmsg:
-            print errmsg
-            raise CritError(messages.crit_error_log % manifestlog)
-        manifest_lines = MANIFESTFILE.readlines()
-        MANIFESTFILE.close()
-
-        # Get file list
-        try:
-            file_list = [];
-            for i in range(len(manifest_lines)):
-                if manifest_lines[i].startswith('File: '):
-                    filepath = os.path.abspath(manifest_lines[i][6:].rstrip())
-                    ext = os.path.splitext(filepath)[1]
-                    if ext == '':
-                        filepath = filepath + '.dta'
-                    file_list.append( filepath )
-        except Exception as errmsg:
-            print errmsg
-            raise SyntaxError(messages.syn_error_manifest % manifestlog)
-
-        if not os.path.isdir(output_dir):
-            raise CritError(messages.crit_error_no_directory % (output_dir))
-
-        # Loop over all levels of sub-directories of output_dir
-        for root, dirs, files in os.walk(output_dir, topdown = True):
-            # Ignore non-hidden sub-directories
-            dirs_to_keep = []
-            for dirname in dirs:
-                if not dirname.startswith('.'):
-                    dirs_to_keep.append(dirname)
-            dirs[:] = dirs_to_keep
-
-            # Check each file
-            for filename in files:
-                ext = os.path.splitext(filename)[1]
-                fullpath = os.path.abspath( os.path.join(root, filename) )
-                # non-hidden .dta file: error
-                if (not filename.startswith('.')) and (ext == '.dta'):
-                    print 'Checking: ', fullpath
-                    if not (fullpath in file_list):
-                        raise CritError(messages.crit_error_no_dta_file % (filename, manifestlog))
-                # non-hidden .csv file: warning
-                if (not filename.startswith('.')) and (ext == '.csv'):
-                    print 'Checking: ', fullpath
-                    if not (fullpath in file_list):
-                        print messages.note_no_csv_file % (filename, manifestlog)
-                        print >> LOGFILE, messages.note_no_csv_file % (filename, manifestlog)
-                # non-hidden .txt file: warning
-                if (not filename.startswith('.')) and (ext == '.txt'):
-                    print 'Checking: ', fullpath
-                    if not (fullpath in file_list):
-                        print messages.note_no_txt_file % (filename, manifestlog)
-                        print >> LOGFILE, messages.note_no_txt_file % (filename, manifestlog)
-    except:
-        print_error(LOGFILE)
-
-    LOGFILE.close()
-
 
 def list_directory(top, makelog = '@DEFAULTVALUE@'):
     """List directories
@@ -203,6 +113,7 @@ def list_directory(top, makelog = '@DEFAULTVALUE@'):
 
     print >> LOGFILE, '\n'
     LOGFILE.close()
+
 
 def clear_dirs(*args):
     """Create fresh directories
