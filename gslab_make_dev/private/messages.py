@@ -12,7 +12,8 @@ crit_error_extension = 'ERROR! "%s" does not have the right program extension'
 crit_error_no_file = 'ERROR! File "%s" not found'
 crit_error_no_file_wildcard = 'ERROR! Files matching "%s" not found'
 crit_error_bad_link = 'ERROR! Link "%s" incorrectly specified' 
-crit_error_log = 'ERROR! Cannot open log file %s'
+crit_error_not_dir = 'ERROR! Path "%s" is not a directory' 
+crit_error_log = 'ERROR! Cannot open log file "%s"'
 
 # 2) Syntax Errors
 syn_error_file_list = 'ERROR! Files must be specified in a list'

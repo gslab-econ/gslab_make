@@ -3,11 +3,12 @@
 import os
 import private.metadata as metadata
 
-from make_logs import make_stats_log, make_heads_log
-from private.linkslist import LinksList
+from make_logs import write_stats_log, write_heads_log
+from private.linkdirective import LinksList
+from private.utility import glob_recursive
 
 def make_link_logs(link_map,
-                   link_statslog = metadata.settings['link_statslog'],, 
+                   link_statslog = metadata.settings['link_statslog'],
                    link_headslog = metadata.settings['link_headslog'],
                    link_maplog = metadata.settings['link_maplog'],
                    recursive = float('inf')):     

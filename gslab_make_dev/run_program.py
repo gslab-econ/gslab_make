@@ -4,7 +4,7 @@ import shutil
 import fileinput
 
 import private.metadata as metadata
-from private.runprogramdirective import Directive, ProgramDirective, SASDirective, LyxDirective
+from private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
 
 def run_stata(**kwargs):
 

@@ -48,6 +48,7 @@ def end_log(LOG, logtype, makelog = ''):
 
 def norm_path(path):
     path = re.split('[/\\\\]+', path)
+    path = [p if p else os.path.sep for p in path]
     path = os.path.join(*path)
     path = os.path.abspath(path)
 
@@ -73,7 +74,7 @@ def glob_recursive(path, recur):
  
 def file_to_array(file_name):
     # Import file
-    if not os.path.isfile(file_name)
+    if not os.path.isfile(file_name):
         raise CritError(messages.crit_error_file % file_name)        
 
     with open(file_name, 'rb') as f:

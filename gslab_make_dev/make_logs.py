@@ -7,7 +7,7 @@ import string
 import private.messages as messages
 import private.metadata as metadata
 from private.exceptionclasses import CritError, SyntaxError
-from private.utility import norm_path, glob_recur
+from private.utility import norm_path, glob_recursive
 
 def set_option(**kwargs):
     kwargs = {re.sub('_file$|_dir$', '', k):v for k, v in kwargs.items()}
@@ -21,7 +21,7 @@ def set_option(**kwargs):
             metadata.settings[key] = kwargs[root]
 
 
-def start_makelog(makelog = metadata.settings['makelog_file']):
+def start_makelog(makelog = metadata.settings['makelog']):
     metadata.makelog_started = True
     makelog = norm_path(makelog)
     print('Starting makelog file at: "%s"' % makelog)
@@ -40,7 +40,7 @@ def start_makelog(makelog = metadata.settings['makelog_file']):
     MAKELOG.close()
 
 
-def end_makelog(makelog = metadata.settings['makelog_file']):
+def end_makelog(makelog = metadata.settings['makelog']):
     makelog = norm_path(makelog)
     print('Ending makelog file at: "%s"' % makelog)
 
@@ -60,20 +60,20 @@ def end_makelog(makelog = metadata.settings['makelog_file']):
     print >> MAKELOG, messages.note_dash_separator + '\n'
     MAKELOG.close()
 
-def make_output_logs(output_dir = metadata.settings['output_file'],
-                     statslog_file = metadata.settings['statslog_file'], 
-                     headslog_file = metadata.settings['headslog_file'],
+def make_output_logs(output_dir = metadata.settings['output_dir'],
+                     output_statslog = metadata.settings['output_statslog'], 
+                     output_headslog = metadata.settings['output_headslog'],
                      recur = float('inf')):
 
-    output_files = glob_recur(output_dir, recur)
+    output_files = glob_recursive(output_dir, recur)
 
-    if statslog_file:
-        statslog_file = norm_path(statslog_file)
-        write_stats_log(statslog_file, output_files)
+    if output_statslog:
+        output_statslog = norm_path(output_statslog)
+        write_stats_log(output_statslog, output_files)
     
-    if headslog_file:
-        headslog_file = norm_path(headslog_file)
-        write_heads_log(headslog_file, output_files)
+    if output_headslog:
+        output_headslog = norm_path(output_headslog)
+        write_heads_log(output_headslog, output_files)
     
 
 def write_stats_log (statslog_file, output_files):

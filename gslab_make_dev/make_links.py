@@ -4,12 +4,12 @@ import os
 
 from dir_mod import remove_dir
 from private.linkdirective import LinksList
-from private.preliminaries import start_logging, end_logging
+from private.utility import start_log, end_log
 import private.metadata as metadata
 
 def make_links(file_list,
                link_dir = metadata.settings['link_dir'],
-               makelog = metadata.settings['makelog_file']):
+               makelog = metadata.settings['makelog']):
 
     try:         
         LINKLOG = start_log(metadata.settings['linkslog_file'], 'Linklog')

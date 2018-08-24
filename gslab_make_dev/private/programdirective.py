@@ -13,7 +13,7 @@ class Directive(object):
 
     def __init__(self, 
                  osname = os.name,
-                 makelog = metadata.settings['makelog_file'], 
+                 makelog = metadata.settings['makelog'], 
                  log = ''):
 
         self.osname   = osname
