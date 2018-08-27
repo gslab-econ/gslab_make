@@ -1,18 +1,3 @@
-Executing: "ls'
-__init__.py
-_tests.py
-dir_mod.py
-make_link_logs.py
-make_links.py
-make_log.py
-private
-refactor_tests
-refactor_tests.py
-run_program.py
-run_program.pyc
-tablefill.py
-tablefill_info.py
-tests
-textfill.py
-textfill_info.py
-
+Executing: "1+1'
+ERROR! Command "1+1" executed with errors
+must be str, not bytes

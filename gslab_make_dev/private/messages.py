@@ -1,4 +1,7 @@
 #! /usr/bin/env python
+from __future__ import absolute_import, division, print_function
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
 		
 ######################################################
 # Define Messages
@@ -25,5 +28,5 @@ note_makelog_start = 'Makelog started: '
 note_makelog_end = 'Makelog ended: '
 note_log_start = '%s started: '
 note_log_end = '%s ended: '
-note_working_dir = 'Working directory: '
-note_dash_separator = '-' * 50
+note_working_directory = 'Working directory: '
+note_dash_separator = '-' * 80

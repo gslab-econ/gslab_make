@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------- 
+
+Makelog started:  2018-08-27 00:16:10 
+
+Working directory:  C:\Users\zong\gslab_make\gslab_make_dev 
+
+-------------------------------------------------------------------------------- 
+
+Executing: "1+1'
+ERROR! Command "1+1" executed with errors
+must be str, not bytes

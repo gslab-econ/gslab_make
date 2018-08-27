@@ -1,4 +1,7 @@
 #! /usr/bin/env python
+from __future__ import absolute_import, division, print_function
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
 
 import os
 import re
@@ -6,10 +9,10 @@ import glob
 from itertools import chain
 import subprocess
 
-from exceptionclasses import CritError, SyntaxError
-import messages as messages
-import metadata as metadata
-from utility import norm_path, file_to_array
+from private.exceptionclasses import CritError, SyntaxError
+import private.messages as messages
+import private.metadata as metadata
+from private.utility import norm_path, file_to_array
 
 class LinkDirective(object):
 
@@ -73,14 +76,14 @@ class LinkDirective(object):
         wildcards = [(w, ) if isinstance(w, str) else w for w in wildcards]
         wildcards = chain(*wildcards)
 
-        return(wildcards)
+        return wildcards
 
     def fill_in_wildcards(self, wildcards):
         f = self.symlink
         for wild in wildcards:
             f = re.sub('\*', wild, f, 1)
 
-        return(f)
+        return f
 
     def create_symlinks(self):
         if self.osname == 'posix':
@@ -88,7 +91,7 @@ class LinkDirective(object):
         elif self.osname == 'nt':
             self.create_symlinks_nt()
 
-        return(self.link_list)
+        return self.link_list
    
     def create_symlinks_posix(self):   
         for target, symlink in self.link_list:
@@ -143,6 +146,6 @@ class LinksList(object):
         for link in self.linkdirectives_list:
             link_map.extend(link.create_symlinks())
             
-        return(link_map)
+        return link_map
         
         

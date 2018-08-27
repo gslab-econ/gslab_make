@@ -1,22 +1,27 @@
 #! /usr/bin/env python
+from __future__ import absolute_import, division, print_function
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
 
 import os
 import subprocess
 import shutil
 
-from exceptionclasses import *
-import messages as messages
-import metadata as metadata
-from utility import *
+from private.exceptionclasses import CritError
+import private.messages as messages
+import private.metadata as metadata
+from private.utility import norm_path
 
 class Directive(object):
 
     def __init__(self, 
                  osname = os.name,
+                 shell = False,
                  makelog = metadata.settings['makelog'], 
                  log = ''):
 
         self.osname   = osname
+        self.shell    = shell
         self.makelog  = makelog
         self.log      = log  
         self.check_os()
@@ -27,8 +32,8 @@ class Directive(object):
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):    
-        self.makelog  = utility.norm_path(self.makelog)
-        self.log      = utility.norm_path(self.log) if self.log != '' else self.log        
+        self.makelog  = norm_path(self.makelog)
+        self.log      = norm_path(self.log) if self.log != '' else self.log        
 
     def execute_command(self, command):   
         command = command.split()
@@ -36,12 +41,12 @@ class Directive(object):
         print(self.output)
             
         try:   
-             p = subprocess.Popen(command, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+             p = subprocess.Popen(command, stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = self.shell)
              out, err = p.communicate()
              print(err)
              self.output += '\n' + out + '\n' + err
         except Exception as errmsg:
-             error_message = messages.crit_error_bad_command % ' '.join(command), '\n', str(errmsg)
+             error_message = messages.crit_error_bad_command % ' '.join(command) + '\n' + str(errmsg)
              print(error_message)
              self.output += '\n' + error_message
 
@@ -49,11 +54,11 @@ class Directive(object):
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)
-            with open(self.makelog, 'ab') as f:
+            with open(self.makelog, 'a') as f:
                 f.write(self.output)
 
         if self.log:
-            with open(self.log, 'wb') as f:
+            with open(self.log, 'w') as f:
                 f.write(self.output)
 
 
@@ -79,7 +84,7 @@ class ProgramDirective(Directive):
         self.get_option()
 
     def parse_program(self):
-        self.program      = utility.norm_path(self.program)
+        self.program      = norm_path(self.program)
         self.program_path = os.path.dirname(self.program)
         self.program_base = os.path.basename(self.program)
         self.program_name, self.program_ext = os.path.splitext(self.program_base)
@@ -105,8 +110,8 @@ class ProgramDirective(Directive):
         """
     
         try:
-            program_output = utility.norm_path(program_output)
-            with open(program_output, 'rb') as f:
+            program_output = norm_path(program_output)
+            with open(program_output, 'r') as f:
                 out = f.read()
         except Exception as errmsg:
             print(errmsg)
@@ -115,7 +120,7 @@ class ProgramDirective(Directive):
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)
-            with open(self.makelog, 'ab') as f:
+            with open(self.makelog, 'a') as f:
                 f.write(out)
 
         if self.log: 
@@ -148,8 +153,8 @@ class LyxDirective(ProgramDirective):
         self.pdfout  = pdfout
         self.get_pdfout()
 
-    def get_pdfout():
+    def get_pdfout(self):
         if not self.doctype:
             self.pdfout = metadata.settings['temp_dir']
 
-        self.pdfout = utility.norm_path(self.pdfout)
+        self.pdfout = norm_path(self.pdfout)

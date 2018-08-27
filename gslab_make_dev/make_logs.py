@@ -1,4 +1,8 @@
 #! /usr/bin/env python
+from __future__ import absolute_import, division, print_function
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
+
 import os
 import datetime
 import re
@@ -8,6 +12,7 @@ import private.messages as messages
 import private.metadata as metadata
 from private.exceptionclasses import CritError, SyntaxError
 from private.utility import norm_path, glob_recursive
+
 
 def set_option(**kwargs):
     kwargs = {re.sub('_file$|_dir$', '', k):v for k, v in kwargs.items()}
@@ -27,16 +32,16 @@ def start_makelog(makelog = metadata.settings['makelog']):
     print('Starting makelog file at: "%s"' % makelog)
     
     try:
-        MAKELOG = open(makelog, 'wb')
+        MAKELOG = open(makelog, 'w')
     except Exception as error:
         raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
         
     time_start = datetime.datetime.now().replace(microsecond = 0)
     working_dir = os.getcwd()
-    print >> MAKELOG, messages.note_dash_separator + '\n'
-    print >> MAKELOG, messages.note_makelog_start, time_start, '\n'
-    print >> MAKELOG, messages.note_working_directory, working_dir, '\n'
-    print >> MAKELOG, messages.note_dash_separator + '\n'
+    print(messages.note_dash_separator + '\n' + file = MAKELOG)
+    print(messages.note_makelog_start + time_start + '\n', file = MAKELOG)
+    print(messages.note_working_directory + working_dir + '\n', file = MAKELOG)
+    print(messages.note_dash_separator + '\n', file = MAKELOG)
     MAKELOG.close()
 
 
@@ -48,24 +53,24 @@ def end_makelog(makelog = metadata.settings['makelog']):
         raise CritError(messages.crit_error_no_makelog % makelog)
 
     try:
-        MAKELOG = open(makelog, 'ab')
+        MAKELOG = open(makelog, 'a')
     except Exception as error:
         raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
        
     time_end = datetime.datetime.now().replace(microsecond = 0)
     working_dir = os.getcwd()
-    print >> MAKELOG, messages.note_dash_separator + '\n'
-    print >> MAKELOG, messages.note_makelog_end, time_end + '\n'
-    print >> MAKELOG, messages.note_working_directory, working_dir, '\n'
-    print >> MAKELOG, messages.note_dash_separator + '\n'
+    print(messages.note_dash_separator + '\n', file = MAKELOG)
+    print(messages.note_makelog_end + time_end + '\n', file = MAKELOG)
+    print(messages.note_working_directory + working_dir + '\n', file = MAKELOG)
+    print(messages.note_dash_separator + '\n', file = MAKELOG)
     MAKELOG.close()
 
 def make_output_logs(output_dir = metadata.settings['output_dir'],
                      output_statslog = metadata.settings['output_statslog'], 
                      output_headslog = metadata.settings['output_headslog'],
-                     recur = float('inf')):
+                     recur_lim = float('inf')):
 
-    output_files = glob_recursive(output_dir, recur)
+    output_files = glob_recursive(output_dir, recur_lim)
 
     if output_statslog:
         output_statslog = norm_path(output_statslog)
@@ -79,34 +84,34 @@ def make_output_logs(output_dir = metadata.settings['output_dir'],
 def write_stats_log (statslog_file, output_files):
     header = "file name\tlast modified\tfile size"
     
-    with open(statslog_file, 'wb') as STATSLOG:
-        print >> STATSLOG, header        
+    with open(statslog_file, 'w') as STATSLOG:
+        print(header, file = STATSLOG)      
 
         for file_name in output_files:
             stats = os.stat(file_name)
             last_mod = datetime.datetime.utcfromtimestamp(round(stats.st_mtime))
             file_size = stats.st_size
 
-            print >> STATSLOG, "%s\t%s\t%s" % (file_name, last_mod, file_size)
+            print("%s\t%s\t%s" % (file_name, last_mod, file_size), file = STATSLOG)
 
 
 def write_heads_log(headslog_file, output_files, num_lines = 10):
     header = "File headers"
 
-    with open(headslog_file, 'wb') as HEADSLOG:      
-        print >> HEADSLOG, header
-        print >> HEADSLOG, '\n' + messages.note_dash_separator + '\n'
+    with open(headslog_file, 'w') as HEADSLOG:      
+        print(header, file = HEADSLOG)
+        print('\n' + messages.note_dash_separator + '\n', file = HEADSLOG)
         
         for file_name in output_files:
-            print >> HEADSLOG, "%s\n" % file_name
+            print("%s\n" % file_name, file = HEADSLOG)
             
             try:
-                with open(file_name, 'wb') as f:
+                with open(file_name, 'w') as f:
                     for i in range(num_lines):
                         line = f.next().strip()
                         cleaned_line = filter(lambda x: x in string.printable, line)
-                        print >> HEADSLOG, cleaned_line
+                        print(cleaned_line, file = HEADSLOG)
             except:
-                print >> HEADSLOG, "Head not readable"
+                print("Head not readable", file = HEADSLOG)
 
-            print >> HEADSLOG, '\n' + messages.note_dash_separator + '\n'
+            print('\n' + messages.note_dash_separator + '\n', file = HEADSLOG)

@@ -1,4 +1,8 @@
 #! /usr/bin/env python
+from __future__ import absolute_import, division, print_function
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
+
 import os
 import shutil
 import fileinput
@@ -175,13 +179,19 @@ def run_sas(**kwargs):
 
 def execute_command(command, **kwargs):
 
-    try:
-        directive = Directive(**kwargs)
+    directive = Directive(**kwargs)
 
-        # Execute
-        directive.execute_command(command)
-        directive.write_log()   
-    except Exception as e:
-        print(e)
-        raise Exception
+    # Execute
+    directive.execute_command(command)
+    directive.write_log() 
+        
+#    try:
+#        directive = Directive(**kwargs)
+
+#        # Execute
+#        directive.execute_command(command)
+#        directive.write_log()   
+#    except Exception as e:
+#        print(e)
+#        raise Exception
         
