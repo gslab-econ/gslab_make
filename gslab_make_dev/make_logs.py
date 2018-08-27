@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from __future__ import absolute_import, division, print_function
+from __future__ import absolute_import, division, print_function, unicode_literals
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -36,9 +36,9 @@ def start_makelog(makelog = metadata.settings['makelog']):
     except Exception as error:
         raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
         
-    time_start = datetime.datetime.now().replace(microsecond = 0)
+    time_start = str(datetime.datetime.now().replace(microsecond = 0))
     working_dir = os.getcwd()
-    print(messages.note_dash_separator + '\n' + file = MAKELOG)
+    print(messages.note_dash_separator + '\n', file = MAKELOG)
     print(messages.note_makelog_start + time_start + '\n', file = MAKELOG)
     print(messages.note_working_directory + working_dir + '\n', file = MAKELOG)
     print(messages.note_dash_separator + '\n', file = MAKELOG)
@@ -57,7 +57,7 @@ def end_makelog(makelog = metadata.settings['makelog']):
     except Exception as error:
         raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
        
-    time_end = datetime.datetime.now().replace(microsecond = 0)
+    time_end = str(datetime.datetime.now().replace(microsecond = 0))
     working_dir = os.getcwd()
     print(messages.note_dash_separator + '\n', file = MAKELOG)
     print(messages.note_makelog_end + time_end + '\n', file = MAKELOG)

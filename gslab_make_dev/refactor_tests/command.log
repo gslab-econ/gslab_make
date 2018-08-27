@@ -1,3 +1,21 @@
-Executing: "1+1'
-ERROR! Command "1+1" executed with errors
-must be str, not bytes
+Executing: "ls -l'
+__init__.py
+dir_mod.py
+dir_mod.pyc
+make_link_logs.py
+make_link_logs.pyc
+make_links.py
+make_links.pyc
+make_logs.py
+make_logs.pyc
+private
+refactor_tests
+refactor_tests.py
+run_program.py
+run_program.pyc
+tablefill.py
+tablefill_info.py
+tests
+textfill.py
+textfill_info.py
+

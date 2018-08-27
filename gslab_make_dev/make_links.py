@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from __future__ import absolute_import, division, print_function
+from __future__ import absolute_import, division, print_function, unicode_literals
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -15,20 +15,25 @@ def make_links(file_list,
                link_dir = metadata.settings['link_dir'],
                makelog = metadata.settings['makelog']):
 
-    try:         
-        LINKLOG = start_log(metadata.settings['linkslog_file'], 'Linklog')
+    LINKLOG = start_log(metadata.settings['linklog'], 'Linklog')
+        
+    link_list = LinksList(file_list, link_dir)
+    link_list = link_list.make_symlinks()
+        
+    end_log(LINKLOG, 'Linklog', makelog)
+        
+    return(link_list)
 
-        if os.path.exists(list.link_dir):
-            remove_path(list.link_dir)
-            os.makedirs(list.link_dir)  
+    # try:         
+    #     LINKLOG = start_log(metadata.settings['linklog'], 'Linklog')
         
-        link_list = LinksList(file_list, link_dir)
-        link_list = link_list.make_symlinks()
+    #     link_list = LinksList(file_list, link_dir)
+    #     link_list = link_list.make_symlinks()
         
-        end_log(LINKLOG, makelog, 'Linklog')
+    #     end_log(LINKLOG, 'Linklog', makelog)
         
-        return(link_list)
+    #     return(link_list)
         
-    except Exception as error:
-        print("Error with make_links: \n", error)
-        raise Exception                    
+    # except Exception as error:
+    #     print("Error with make_links: \n", error)
+    #     raise Exception                    

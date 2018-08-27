@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from __future__ import absolute_import, division, print_function
+from __future__ import absolute_import, division, print_function, unicode_literals
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -38,7 +38,7 @@ class LinkDirective(object):
             raise CritError(messages.crit_error_bad_link % self.line)
 
         self.target = norm_path(self.target)
-        self.symlink = norm_path(os.join(self.link_dir, self.symlink))
+        self.symlink = norm_path(os.path.join(self.link_dir, self.symlink))
 
     def check_paths(self):
         if re.findall('\*', self.target)!= re.findall('\*', self.symlink):
@@ -48,7 +48,7 @@ class LinkDirective(object):
             if not glob.glob(self.target):
                 raise CritError(messages.crit_error_no_file_wildcard % self.target)
         else:
-            if not os.path.isfile(self.target):
+            if not os.path.exists(self.target):
                 raise CritError(messages.crit_error_no_file % self.target)   
 
     def get_link_list(self):
@@ -63,10 +63,10 @@ class LinkDirective(object):
             self.symlink_list = [fill_in_wildcards(s) for s in self.symlink_list]
 
         else:
-            self.target_list  = list(self.target)
-            self.symlink_list = list(self.symlink)
+            self.target_list  = [self.target]
+            self.symlink_list = [self.symlink]
 
-        self.link_list = zip(self.target_list, self.symlink_list)
+        self.link_list = list(zip(self.target_list, self.symlink_list))
 
     def parse_wildcards(self, f):
         regex = self.target.split('*')
@@ -91,12 +91,12 @@ class LinkDirective(object):
         elif self.osname == 'nt':
             self.create_symlinks_nt()
 
-        return self.link_list
-   
+        return(self.link_list)
+
     def create_symlinks_posix(self):   
         for target, symlink in self.link_list:
             command = metadata.commands[self.osname]['makelink'] % (target, symlink)
-            subprocess.Popen(command.split())
+            subprocess.Popen(command, shell = True)
 
     def create_symlinks_nt(self):   
         for target, symlink in self.link_list:
@@ -106,7 +106,7 @@ class LinkDirective(object):
                 directory = ''
 
             command = metadata.commands[self.osname]['makelink'] % (directory, target, symlink)
-            subprocess.Popen(command.split())
+            subprocess.Popen(command, shell = True)
 
 
 class LinksList(object):
@@ -115,12 +115,11 @@ class LinksList(object):
                  file_list, 
                  link_dir):
         
-        self.file_list
+        self.file_list = file_list
         self.link_dir = link_dir
         self.parse_file_list()
         self.get_paths()
         self.get_link_directive_list()
-        self.make_symlinks()
 
     def parse_file_list(self):    
         if type(self.file_list) is list:
@@ -130,8 +129,9 @@ class LinksList(object):
     
     def get_paths(self):    
         self.link_dir  = norm_path(self.link_dir)
-        self.files_list = [norm_path(f) for f in self.files_list]
-         
+        self.file_list = [norm_path(f) for f in self.file_list]
+        self.file_list
+
     def get_link_directive_list(self):
         self.link_directive_list = []
 
@@ -139,11 +139,11 @@ class LinksList(object):
             lines = file_to_array(f)
             for line in lines:
                 directive = LinkDirective(line, self.link_dir)
-                self.linkdirectives_list.append(directive)
+                self.link_directive_list.append(directive)
 
     def make_symlinks(self):        
         link_map = []
-        for link in self.linkdirectives_list:
+        for link in self.link_directive_list:
             link_map.extend(link.create_symlinks())
             
         return link_map

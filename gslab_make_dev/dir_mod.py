@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from __future__ import absolute_import, division, print_function
+from __future__ import absolute_import, division, print_function, unicode_literals
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -42,7 +42,7 @@ def clear_dir(dir_list):
     time.sleep(0.25) # Allow file manager to recognize files no longer exist
     
     for dir_path in dir_list:
-        os.mkdir(dir_path)
+        os.makedirs(dir_path)
         print('Cleared: "%s"' % dir_path) 
         
 

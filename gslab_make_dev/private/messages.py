@@ -1,12 +1,12 @@
 #! /usr/bin/env python
-from __future__ import absolute_import, division, print_function
+from __future__ import absolute_import, division, print_function, unicode_literals
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
-		
+        
 ######################################################
 # Define Messages
-######################################################		
-	
+######################################################      
+    
 # 1) Critical Errors
 crit_error_no_makelog = 'ERROR! Makelog "%s" not found (either not started or deleted)'
 crit_error_unknown_system = 'ERROR! Only the following operating systems are supported: "POSIX", "NT"'
