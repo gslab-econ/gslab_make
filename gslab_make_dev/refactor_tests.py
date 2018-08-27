@@ -22,12 +22,15 @@ make_logs.start_makelog()
 links = make_links.make_links(['refactor_tests/links.txt'])
 make_link_logs.make_link_logs(links)
 
-# Tests
-run_program.run_python(program = 'refactor_tests/python.py', log = 'refactor_tests/python.log')
-run_program.run_r(program = 'refactor_tests/r.R', log = 'refactor_tests/r.log')
-run_program.run_stata(program = 'refactor_tests/stata.do', log = 'refactor_tests/stata.log')
+# Run programs
+run_program.run_python(program = 'refactor_tests/python.py', log = '../output/python.log')
+run_program.run_r(program = 'refactor_tests/r.R', log = '../output/r.log')
+run_program.run_stata(program = 'refactor_tests/stata.do', log = '../output/stata.log')
 
-run_program.execute_command(command = 'ls -l', shell = True, log = 'refactor_tests/command.log')
+run_program.execute_command(command = 'ls', shell = True, log = '../output/command.log')
+
+# Log outputs
+make_logs.make_output_logs()
 
 # End make log
 make_logs.end_makelog()

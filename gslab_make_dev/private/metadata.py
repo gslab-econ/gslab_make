@@ -107,6 +107,7 @@ settings = {
     'makelog'         : '../log/make.log',
     'output_statslog' : '../log/output_stats.log',
     'output_headslog' : '../log/output_heads.log', 
+    'linklog'         : '../log/link.log', 
     'link_maplog'     : '../log/link_map.log',
     'link_statslog'   : '../log/link_stats.log',
     'link_headslog'   : '../log/link_heads.log'

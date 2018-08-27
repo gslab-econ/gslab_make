@@ -18,3 +18,5 @@ class SyntaxError(CustomError):
 
 class LogicError(CustomError):
     pass
+
+    

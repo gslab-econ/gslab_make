@@ -106,7 +106,7 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
             print("%s\n" % file_name, file = HEADSLOG)
             
             try:
-                with open(file_name, 'w') as f:
+                with open(file_name, 'r') as f:
                     for i in range(num_lines):
                         line = f.next().strip()
                         cleaned_line = filter(lambda x: x in string.printable, line)

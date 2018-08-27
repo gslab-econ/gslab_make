@@ -16,7 +16,16 @@ Head not readable
 
 /Users/zong/gslab_make/gslab_make_dev/private/exceptionclasses.py
 
-Head not readable
+#! /usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+zip, round, input, int, pow, object)
+
+class CustomError(Exception):
+def __init__(self, value):
+self.value = value
+
+def __str__(self):
 
 --------------------------------------------------------------------------------
 
@@ -28,7 +37,16 @@ Head not readable
 
 /Users/zong/gslab_make/gslab_make_dev/private/linkdirective.py
 
-Head not readable
+#! /usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+zip, round, input, int, pow, object)
+
+import os
+import re
+import glob
+from itertools import chain
+import subprocess
 
 --------------------------------------------------------------------------------
 
@@ -40,7 +58,16 @@ Head not readable
 
 /Users/zong/gslab_make/gslab_make_dev/private/messages.py
 
-Head not readable
+#! /usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+zip, round, input, int, pow, object)
+
+######################################################
+# Define Messages
+######################################################
+
+# 1) Critical Errors
 
 --------------------------------------------------------------------------------
 
@@ -52,7 +79,16 @@ Head not readable
 
 /Users/zong/gslab_make/gslab_make_dev/private/metadata.py
 
-Head not readable
+#! /usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+zip, round, input, int, pow, object)
+
+######################################################
+# Define Metadata
+######################################################
+
+makelog_started = False
 
 --------------------------------------------------------------------------------
 
@@ -64,7 +100,16 @@ Head not readable
 
 /Users/zong/gslab_make/gslab_make_dev/private/programdirective.py
 
-Head not readable
+#! /usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+zip, round, input, int, pow, object)
+
+import os
+import subprocess
+import shutil
+
+from private.exceptionclasses import CritError
 
 --------------------------------------------------------------------------------
 
@@ -76,7 +121,16 @@ Head not readable
 
 /Users/zong/gslab_make/gslab_make_dev/private/utility.py
 
-Head not readable
+#! /usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+zip, round, input, int, pow, object)
+
+import os
+import datetime
+import re
+import glob
+
 
 --------------------------------------------------------------------------------
 
