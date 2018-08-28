@@ -158,11 +158,11 @@ file is exported.
 '''
 
 #Import make tools
-from make_log import (set_option, start_make_logging, end_make_logging, 
+from make_logs import (set_option, start_make_logging, end_make_logging, 
                       add_log, del_log)
 from make_links import make_links
 from make_link_logs import make_link_logs
-from dir_mod import (clear_dirs, check_manifest, delete_files, 
+from dir_mod import (clear_dir, check_manifest, delete_files, 
                      list_directory, remove_dir)
 
 
