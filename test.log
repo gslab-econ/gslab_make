@@ -45,187 +45,177 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.15, pytest-3.7.1, py-1.5.4, pluggy-0.7.1
 rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 0 items / 13 errors
+collected 43 items
 
-==================================== ERRORS ====================================
-___________ ERROR collecting gslab_make_dev/tests/test_clear_dirs.py ___________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_clear_dirs.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-__________ ERROR collecting gslab_make_dev/tests/test_delete_files.py __________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_delete_files.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-________ ERROR collecting gslab_make_dev/tests/test_execute_command.py _________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_execute_command.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-____________ ERROR collecting gslab_make_dev/tests/test_run_lyx.py _____________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_run_lyx.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-________ ERROR collecting gslab_make_dev/tests/test_run_mathematica.py _________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_run_mathematica.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-___________ ERROR collecting gslab_make_dev/tests/test_run_matlab.py ___________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_run_matlab.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-____________ ERROR collecting gslab_make_dev/tests/test_run_perl.py ____________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_run_perl.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-___________ ERROR collecting gslab_make_dev/tests/test_run_python.py ___________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_run_python.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-_____________ ERROR collecting gslab_make_dev/tests/test_run_r.py ______________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_run_r.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-___________ ERROR collecting gslab_make_dev/tests/test_run_stata.py ____________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_run_stata.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-___________ ERROR collecting gslab_make_dev/tests/test_tablefill.py ____________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_tablefill.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-____________ ERROR collecting gslab_make_dev/tests/test_textfill.py ____________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_textfill.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-______________ ERROR collecting gslab_make_dev/tests/test_zip.py _______________
-ImportError while importing test module '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/test_zip.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-gslab_make_dev/__init__.py:161: in <module>
-    from make_log import (set_option, start_make_logging, end_make_logging,
-/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py:10: in <module>
-    ???
-gslab_make_dev/private/messages.py:3: in <module>
-    from builtins import (bytes, str, open, super, range,
-E   ImportError: No module named builtins
-!!!!!!!!!!!!!!!!!!! Interrupted: 13 errors during collection !!!!!!!!!!!!!!!!!!!
-=========================== 13 error in 0.34 seconds ===========================
-gslab_make_dev/make_log.py   NoSource: No source for code: '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/make_log.py'.
-Aborting report output, consider using -i.
+gslab_make_dev/tests/test_clear_dir.py ...                               [  6%]
+gslab_make_dev/tests/test_execute_command.py ...                         [ 13%]
+gslab_make_dev/tests/test_run_perl.py .....F.                            [ 30%]
+gslab_make_dev/tests/test_run_python.py ......F..                        [ 51%]
+gslab_make_dev/tests/test_run_stata.py F....F.                           [ 67%]
+gslab_make_dev/tests/test_tablefill.py ....                              [ 76%]
+gslab_make_dev/tests/test_textfill.py ........                           [ 95%]
+gslab_make_dev/tests/test_zip.py ..                                      [100%]
+
+=================================== FAILURES ===================================
+________________________ testRunPerl.test_no_extension _________________________
+
+self = <gslab_make_dev.tests.test_run_perl.testRunPerl testMethod=test_no_extension>
+
+    def test_no_extension(self):
+        with nostderrout():
+>           run_perl(program = 'gslab_make_dev/tests/input/perl_test_script')
+
+gslab_make_dev/tests/test_run_perl.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kwargs = {'program': 'gslab_make_dev/tests/input/perl_test_script'}
+e = CritError()
+
+    def run_perl(**kwargs):
+    
+        try:
+            directive = ProgramDirective(application = 'perl', **kwargs)
+    
+            # Execute
+            command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.args)
+            directive.execute_command(command)
+            directive.write_log()
+        except Exception as e:
+            print(e)
+>           raise Exception
+E           Exception
+
+gslab_make_dev/run_program.py:59: Exception
+_______________________ testRunPython.test_no_extension ________________________
+
+self = <gslab_make_dev.tests.test_run_python.testRunPython testMethod=test_no_extension>
+
+    def test_no_extension(self):
+        with nostderrout():
+>           run_python(program = 'gslab_make_dev/tests/input/python_test_script')
+
+gslab_make_dev/tests/test_run_python.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kwargs = {'program': 'gslab_make_dev/tests/input/python_test_script'}
+e = CritError()
+
+    def run_python(**kwargs):
+    
+        try:
+            directive = ProgramDirective(application = 'python', **kwargs)
+    
+            # Execute
+            command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.args)
+            directive.execute_command(command)
+            directive.write_log()
+        except Exception as e:
+            print(e)
+>           raise Exception
+E           Exception
+
+gslab_make_dev/run_program.py:73: Exception
+_______________________ testRunStata.test_bad_executable _______________________
+
+self = <gslab_make_dev.tests.test_run_stata.testRunStata testMethod=test_bad_executable>
+
+    def test_bad_executable(self):
+        with nostderrout():
+>           run_stata(program = 'gslab_make_dev/tests/input/stata_test_script.do', executable = 'nonexistent_stata_executable')
+
+gslab_make_dev/tests/test_run_stata.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kwargs = {'executable': 'nonexistent_stata_executable', 'program': 'gslab_make_dev/tests/input/stata_test_script.do'}
+directive = <gslab_make_dev.private.programdirective.ProgramDirective object at 0x10e956b10>
+program_log = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/stata_test_script.log'
+command = 'nonexistent_stata_executable -e do /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/stata_test_script.do'
+e = CritError()
+
+    def run_stata(**kwargs):
+    
+        try:
+            directive = ProgramDirective(application = 'stata', **kwargs)
+    
+            # Get program output
+            program_log = os.path.join(os.getcwd(), directive.program_name + '.log')
+    
+            # Execute
+            command = metadata.commands[directive.osname]['stata'] % (directive.executable, directive.option, directive.program)
+            directive.execute_command(command)
+            directive.write_log()
+            directive.move_program_output(program_log, directive.log)
+        except Exception as e:
+            print(e)
+>           raise Exception
+E           Exception
+
+gslab_make_dev/run_program.py:28: Exception
+________________________ testRunStata.test_no_extension ________________________
+
+self = <gslab_make_dev.tests.test_run_stata.testRunStata testMethod=test_no_extension>
+
+    def test_no_extension(self):
+        with nostderrout():
+>           run_stata(program = 'gslab_make_dev/tests/input/stata_test_script')
+
+gslab_make_dev/tests/test_run_stata.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kwargs = {'program': 'gslab_make_dev/tests/input/stata_test_script'}
+e = CritError()
+
+    def run_stata(**kwargs):
+    
+        try:
+            directive = ProgramDirective(application = 'stata', **kwargs)
+    
+            # Get program output
+            program_log = os.path.join(os.getcwd(), directive.program_name + '.log')
+    
+            # Execute
+            command = metadata.commands[directive.osname]['stata'] % (directive.executable, directive.option, directive.program)
+            directive.execute_command(command)
+            directive.write_log()
+            directive.move_program_output(program_log, directive.log)
+        except Exception as e:
+            print(e)
+>           raise Exception
+E           Exception
+
+gslab_make_dev/run_program.py:28: Exception
+===================== 4 failed, 39 passed in 11.75 seconds =====================
 Name                                           Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------------------------------------
-gslab_make_dev/dir_mod.py                         43     43     18      0     0%   2-64
-gslab_make_dev/make_link_logs.py                  18     18      2      0     0%   2-35
-gslab_make_dev/make_links.py                      13     13      0      0     0%   2-25
-gslab_make_dev/make_logs.py                       82     82     22      0     0%   2-117
-gslab_make_dev/private/exceptionclasses.py        13     13      0      0     0%   2-20
-gslab_make_dev/private/linkdirective.py          104    104     32      0     0%   2-149
-gslab_make_dev/private/messages.py                20     18      0      0    10%   11-32
-gslab_make_dev/private/metadata.py                 8      8      0      0     0%   2-103
-gslab_make_dev/private/programdirective.py       105    105     26      0     0%   2-160
-gslab_make_dev/private/utility.py                 62     62     10      0     0%   2-88
+gslab_make_dev/dir_mod.py                         43      3     18      4    89%   27, 34, 40, 20->23, 26->27, 31->34, 39->40
+gslab_make_dev/make_link_logs.py                  18     11      2      0    35%   18-24, 29-35
+gslab_make_dev/make_links.py                      13      5      0      0    62%   18-25
+gslab_make_dev/make_logs.py                       82     54     22      0    27%   18-26, 36-37, 49-66, 73-81, 85-95, 99-117
+gslab_make_dev/private/exceptionclasses.py        13      0      0      0   100%
+gslab_make_dev/private/linkdirective.py          104     76     32      0    21%   20-26, 29-30, 33-41, 44-52, 59-69, 72-79, 82-86, 89-94, 97-99, 102-109, 118-122, 125-128, 131-133, 136-142, 145-149
+gslab_make_dev/private/messages.py                20      0      0      0   100%
+gslab_make_dev/private/metadata.py                 8      0      0      0   100%
+gslab_make_dev/private/programdirective.py       105     13     26      7    83%   32, 56, 97, 122, 140-141, 151-154, 157-160, 31->32, 54->60, 55->56, 96->97, 120->126, 121->122, 127->exit
+gslab_make_dev/private/utility.py                 62     43     10      0    26%   16-30, 34-53, 66-79, 83-88
 gslab_make_dev/refactor_tests.py                  19     19      0      0     0%   2-36
-gslab_make_dev/run_program.py                    118    118     14      0     0%   2-186
-gslab_make_dev/tablefill.py                      141    141     68      0     0%   3-182
+gslab_make_dev/run_program.py                    118     72     14      0    35%   33-45, 78-87, 92-101, 106-144, 149-158, 163-177
+gslab_make_dev/tablefill.py                      141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
 gslab_make_dev/tablefill_info.py                   0      0      0      0   100%
-gslab_make_dev/tests/nostderrout.py               12     12      2      0     0%   1-14
-gslab_make_dev/tests/test_clear_dirs.py           41     41      8      0     0%   3-56
-gslab_make_dev/tests/test_delete_files.py         46     46      4      0     0%   3-56
-gslab_make_dev/tests/test_execute_command.py      84     84     16      0     0%   3-99
+gslab_make_dev/tests/nostderrout.py               12      0      2      0   100%
+gslab_make_dev/tests/test_clear_dir.py            41      2      8      1    94%   55-56, 54->55
+gslab_make_dev/tests/test_delete_files.py          0      0      0      0   100%
+gslab_make_dev/tests/test_execute_command.py      84      8     16      7    83%   17-20, 31, 52, 72, 98-99, 15->17, 28->31, 49->52, 69->72, 92->94, 94->exit, 97->98
 gslab_make_dev/tests/test_run_lyx.py               0      0      0      0   100%
 gslab_make_dev/tests/test_run_mathematica.py       0      0      0      0   100%
 gslab_make_dev/tests/test_run_matlab.py            0      0      0      0   100%
-gslab_make_dev/tests/test_run_perl.py             63     63      8      0     0%   3-77
-gslab_make_dev/tests/test_run_python.py           73     73      8      0     0%   3-89
+gslab_make_dev/tests/test_run_perl.py             64      5     10      4    88%   47-48, 74, 77-78, 67->69, 69->71, 73->74, 76->77
+gslab_make_dev/tests/test_run_python.py           74      5     10      4    89%   47-48, 86, 89-90, 79->81, 81->83, 85->86, 88->89
 gslab_make_dev/tests/test_run_r.py                 0      0      0      0   100%
-gslab_make_dev/tests/test_run_stata.py            56     56      6      0     0%   3-70
-gslab_make_dev/tests/test_tablefill.py            96     96     42      0     0%   3-144
-gslab_make_dev/tests/test_textfill.py             83     83     12      0     0%   2-139
-gslab_make_dev/tests/test_zip.py                  36     36      4      0     0%   3-47
-gslab_make_dev/textfill.py                       135    135     60      0     0%   3-190
+gslab_make_dev/tests/test_run_stata.py            59      6     10      5    84%   44, 54, 67, 69, 72-73, 62->64, 64->66, 66->67, 68->69, 71->72
+gslab_make_dev/tests/test_tablefill.py            96      2     42      6    94%   143-144, 20->exit, 37->34, 57->43, 74->exit, 138->exit, 142->143
+gslab_make_dev/tests/test_textfill.py             83      2     12      3    95%   138-139, 17->exit, 133->exit, 137->138
+gslab_make_dev/tests/test_zip.py                  36      2      4      2    90%   46-47, 42->exit, 45->46
+gslab_make_dev/textfill.py                       135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
 gslab_make_dev/textfill_info.py                    0      0      0      0   100%
 ------------------------------------------------------------------------------------------
-TOTAL                                           1471   1469    362      0     1%
+TOTAL                                           1430    335    366     58    73%

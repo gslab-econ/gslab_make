@@ -8,9 +8,9 @@ import datetime
 import re
 import glob
 
-from private.exceptionclasses import CustomError, CritError
-import private.messages as messages
-import private.metadata as metadata
+from gslab_make_dev.private.exceptionclasses import CustomError, CritError
+import gslab_make_dev.private.messages as messages
+import gslab_make_dev.private.metadata as metadata
 
 def start_log(log, log_type):
     log = norm_path(log)

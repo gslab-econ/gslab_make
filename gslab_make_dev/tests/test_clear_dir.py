@@ -2,17 +2,17 @@
 
 import unittest, sys, os, shutil
 sys.path.append('../..')
-from gslab_make_dev.dir_mod import clear_dirs
+from gslab_make_dev.dir_mod import clear_dir
 from nostderrout import nostderrout
 
 
-class testClearDirs(unittest.TestCase):
+class testClearDir(unittest.TestCase):
         
     def test_default(self):
         self.assertFalse(os.path.exists('./output_local/'))
 
         with nostderrout():
-            clear_dirs('./output_local/')
+            clear_dir(['./output_local/'])
 
         self.assertTrue(os.path.exists('./output_local/'))
         file_list = os.listdir('./output_local/')
@@ -22,7 +22,7 @@ class testClearDirs(unittest.TestCase):
         os.makedirs('./output_local_empty/')
 
         with nostderrout():
-            clear_dirs('./output_local_empty/')
+            clear_dir(['./output_local_empty/'])
 
         self.assertTrue(os.path.exists('./output_local_empty/'))
         file_list = os.listdir('./output_local_empty/')
@@ -37,7 +37,7 @@ class testClearDirs(unittest.TestCase):
         self.assertEqual(len(file_list), 1)          
 
         with nostderrout():
-            clear_dirs('./output_local_files/')
+            clear_dir(['./output_local_files/'])
 
         self.assertTrue(os.path.exists('./output_local_files/'))
         file_list = os.listdir('./output_local_files/')

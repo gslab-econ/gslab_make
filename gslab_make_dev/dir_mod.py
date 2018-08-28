@@ -8,11 +8,11 @@ import subprocess
 import zipfile
 import time
 
-import private.metadata as metadata
-import private.messages as messages
+import gslab_make_dev.private.metadata as metadata
+import gslab_make_dev.private.messages as messages
 
-from private.exceptionclasses import CustomError, CritError, SyntaxError, LogicError
-from private.utility import norm_path
+from gslab_make_dev.private.exceptionclasses import CustomError, CritError, SyntaxError, LogicError
+from gslab_make_dev.private.utility import norm_path
 
 
 def remove_path(path, option = '', quiet = False):

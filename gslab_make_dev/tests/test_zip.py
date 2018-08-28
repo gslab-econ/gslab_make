@@ -35,7 +35,7 @@ class testZip(unittest.TestCase):
         self.assertTrue(os.path.exists('./output_local/'))
         self.assertFalse(os.path.isfile('./output_local/zipped.zip'))
         with nostderrout():
-            zip_dir('./output_local/', './output_local/zipped')
+            zip_dir('./output_local/', './output_local/zipped.zip')
         self.assertTrue(os.path.isfile('./output_local/zipped.zip'))
         
     def tearDown(self):

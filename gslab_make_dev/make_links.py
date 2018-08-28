@@ -5,10 +5,10 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 
-from dir_mod import remove_path
-from private.linkdirective import LinksList
-from private.utility import start_log, end_log
-import private.metadata as metadata
+from gslab_make_dev.dir_mod import remove_path
+from gslab_make_dev.private.linkdirective import LinksList
+from gslab_make_dev.private.utility import start_log, end_log
+import gslab_make_dev.private.metadata as metadata
 
 
 def make_links(file_list,
