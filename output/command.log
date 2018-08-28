@@ -1,10 +1,13 @@
 Executing: "ls'
 __init__.py
-_tests.py
 dir_mod.py
+dir_mod.pyc
 make_link_logs.py
+make_link_logs.pyc
 make_links.py
-make_log.py
+make_links.pyc
+make_logs.py
+make_logs.pyc
 private
 refactor_tests
 refactor_tests.py

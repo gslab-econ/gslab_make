@@ -1,14 +1,14 @@
+#! /usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
+
 import os
 import shutil
 import fileinput
 
 import private.metadata as metadata
-import private.messages as messages
-from private.exceptionclasses import SyntaxError
-from private.runprogramdirective import (Directive, 
-                                         ProgramDirective, 
-                                         SASDirective, 
-                                         LyxDirective)
+from private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
 
 def run_stata(**kwargs):
 
@@ -25,6 +25,7 @@ def run_stata(**kwargs):
         directive.move_program_output(program_log, directive.log)       
     except Exception as e:
         print(e)
+        raise Exception
 
 
 def run_matlab(**kwargs):
@@ -41,7 +42,8 @@ def run_matlab(**kwargs):
         directive.move_program_output(program_log, directive.log)       
     except Exception as e:
         print(e)
-
+        raise Exception
+        
 
 def run_perl(**kwargs):
 
@@ -54,6 +56,7 @@ def run_perl(**kwargs):
         directive.write_log()
     except Exception as e:
         print(e)
+        raise Exception
 
 
 def run_python(**kwargs):
@@ -67,7 +70,8 @@ def run_python(**kwargs):
         directive.write_log()
     except Exception as e:
         print(e)
-
+        raise Exception
+        
 
 def run_mathematica(**kwargs):
 
@@ -80,7 +84,8 @@ def run_mathematica(**kwargs):
         directive.write_log()
     except Exception as e:
         print(e)
-
+        raise Exception
+        
 
 def run_stat_transfer(**kwargs):
 
@@ -93,7 +98,8 @@ def run_stat_transfer(**kwargs):
         directive.write_log()
     except Exception as e:
         print(e)
-
+        raise Exception
+        
 
 def run_lyx(**kwargs): # Check
 
@@ -135,7 +141,8 @@ def run_lyx(**kwargs): # Check
             os.remove(temp_program)
     except Exception as e:
         print(e)
-
+        raise Exception
+        
 
 def run_r(**kwargs):
 
@@ -148,12 +155,13 @@ def run_r(**kwargs):
         directive.write_log()      
     except Exception as e:
         print(e)
-
+        raise Exception
+        
 
 def run_sas(**kwargs):
     
     try:
-        directive = ProgramDirective(application = 'sas', **kwargs)
+        directive = SASDirective(application = 'sas', **kwargs)
 
         # Get program outputs
         program_log = os.path.join(os.getcwd(), directive.program_name + '.log')
@@ -166,15 +174,24 @@ def run_sas(**kwargs):
         directive.move_program_output(program_lst)        
     except Exception as e:
         print(e)
-
+        raise Exception
+        
 
 def execute_command(command, **kwargs):
 
-    try:
-        directive = Directive(**kwargs)
+    directive = Directive(**kwargs)
 
-        # Execute
-        directive.execute_command(command)
-        directive.write_log()   
-    except Exception as e:
-        print(e)
+    # Execute
+    directive.execute_command(command)
+    directive.write_log() 
+        
+#    try:
+#        directive = Directive(**kwargs)
+
+#        # Execute
+#        directive.execute_command(command)
+#        directive.write_log()   
+#    except Exception as e:
+#        print(e)
+#        raise Exception
+        
