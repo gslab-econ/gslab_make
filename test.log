@@ -66,7 +66,7 @@ self = <gslab_make_dev.tests.test_run_perl.testRunPerl testMethod=test_no_extens
         with nostderrout():
             run_perl(program = 'gslab_make_dev/tests/input/perl_test_script')
 >       self.assertIn('Test script complete', open('../output/make.log').read())
-E       AssertionError: 'Test script complete' not found in '\n make.py started: 2018-08-18 17:07:47 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make \n\n\n'
+E       AssertionError: 'Test script complete' not found in '\n make.py started: 2018-08-28 10:48:44 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make \n\n\n'
 
 gslab_make_dev/tests/test_run_perl.py:48: AssertionError
 _______________________ testRunPython.test_no_extension ________________________
@@ -77,7 +77,7 @@ self = <gslab_make_dev.tests.test_run_python.testRunPython testMethod=test_no_ex
         with nostderrout():
             run_python(program = 'gslab_make_dev/tests/input/python_test_script')
 >       self.assertIn('Test script complete', open('../output/make.log').read())
-E       AssertionError: 'Test script complete' not found in '\n make.py started: 2018-08-18 17:07:47 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make \n\n\n'
+E       AssertionError: 'Test script complete' not found in '\n make.py started: 2018-08-28 10:48:44 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make \n\n\n'
 
 gslab_make_dev/tests/test_run_python.py:48: AssertionError
 ________________________ testRunStata.test_no_extension ________________________
@@ -88,10 +88,10 @@ self = <gslab_make_dev.tests.test_run_stata.testRunStata testMethod=test_no_exte
         with nostderrout():
             run_stata(program = 'gslab_make_dev/tests/input/stata_test_script')
 >       self.assertIn('end of do-file', open('../output/make.log').read())
-E       AssertionError: 'end of do-file' not found in '\n make.py started: 2018-08-18 17:07:49 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make \n\n\n'
+E       AssertionError: 'end of do-file' not found in '\n make.py started: 2018-08-28 10:48:47 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make \n\n\n'
 
 gslab_make_dev/tests/test_run_stata.py:45: AssertionError
-===================== 3 failed, 43 passed in 3.10 seconds ======================
+===================== 3 failed, 43 passed in 3.62 seconds ======================
 Name                                                Stmts   Miss Branch BrPart  Cover   Missing
 -----------------------------------------------------------------------------------------------
 gslab_make_dev/_tests.py                                9      9      0      0     0%   2-18
@@ -113,9 +113,6 @@ gslab_make_dev/refactor_tests.py                        9      9      0      0  
 gslab_make_dev/run_program.py                         112     68     14      0    35%   32-43, 74-82, 87-95, 100-137, 142-150, 155-168, 179-180
 gslab_make_dev/tablefill.py                           141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
 gslab_make_dev/tablefill_info.py                        0      0      0      0   100%
-gslab_make_dev/tests/example_execute_command.py        18     18      0      0     0%   1-21
-gslab_make_dev/tests/example_run_lyx.py                18     18      6      0     0%   3-26
-gslab_make_dev/tests/example_run_python.py             11     11      0      0     0%   1-13
 gslab_make_dev/tests/nostderrout.py                    12      0      2      0   100%
 gslab_make_dev/tests/test_clear_dirs.py                41      2      8      1    94%   55-56, 54->55
 gslab_make_dev/tests/test_delete_files.py              46      2      4      2    92%   55-56, 51->exit, 54->55
@@ -133,4 +130,4 @@ gslab_make_dev/tests/test_zip.py                       36      2      4      2  
 gslab_make_dev/textfill.py                            135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
 gslab_make_dev/textfill_info.py                         0      0      0      0   100%
 -----------------------------------------------------------------------------------------------
-TOTAL                                                1980    842    620     56    52%
+TOTAL                                                1933    795    614     56    53%
