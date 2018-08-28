@@ -71,6 +71,6 @@ setup(name         = 'GSLab_Make',
       install_requires = requirements,
       zip_safe     = False,
       cmdclass     = {'test': TestRepo, 'clean': CleanRepo},
-      setup_requires = ['pytest-runner', 'coverage'],
+      setup_requires = ['pytest-runner', 'coverage', 'future'],
       tests_require = ['pytest', 'coverage'])
 
