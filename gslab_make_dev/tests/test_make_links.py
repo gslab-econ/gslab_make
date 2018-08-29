@@ -1,7 +1,7 @@
 # #! /usr/bin/env python
 
 # import unittest, sys, os, shutil, re
-# from gslab_make_dev.make_logs import start_makelog, end_makelog
+# from gslab_make_dev.write_logs import start_makelog, end_makelog
 # from gslab_make_dev.make_links import make_links
 # from gslab_make_dev.dir_mod import clear_dir
 # from nostderrout import nostderrout

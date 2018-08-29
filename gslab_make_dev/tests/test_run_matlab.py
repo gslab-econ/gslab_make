@@ -2,7 +2,7 @@
 
 # import unittest, sys, os, shutil, contextlib
 # sys.path.append('../..')
-# from gslab_make_dev.make_logs import start_makelog
+# from gslab_make_dev.write_logs import start_makelog
 # from gslab_make_dev.dir_mod import clear_dir
 # from gslab_make_dev.run_program import run_matlab
 # from nostderrout import nostderrout

@@ -5,26 +5,51 @@ from builtins import (bytes, str, open, super, range,
 
 import gslab_make_dev.private.metadata as metadata
 
-from gslab_make_dev.make_logs import write_stats_log, write_heads_log
+from gslab_make_dev.write_logs import write_stats_log, write_heads_log
 from gslab_make_dev.private.utility import glob_recursive
 
 
-def make_link_logs(link_map,
+def write_link_logs(link_map,
                    link_statslog = metadata.settings['link_statslog'],
                    link_headslog = metadata.settings['link_headslog'],
                    link_maplog = metadata.settings['link_maplog'],
                    recursive = float('inf')):     
     
+    """ Make link logs.
+
+    Notes
+    -----
+    The following information is logged:
+        * File path of 
+        * File name (link_statslog)
+        * Last modified (link_statslog)
+        * File size
+        * 
+
+    Parameters
+    ----------
+    path : str
+        Path to remove.
+    option : str
+        Options for shell command. Defaults to options specified in metadata.
+    quiet : bool
+        Option to print deleted file paths. Defaults to False. 
+
+    Returns
+    -------
+    None
+    """
+
     target_list = [target for target, symlink in link_map]
     target_list = [glob_recursive(target, recursive) for target in target_list]
     target_files = [f for target in target_list for f in target]
 
     write_stats_log(link_statslog, target_files)
     write_heads_log(link_headslog, target_files)    
-    make_link_maplog(link_maplog, link_map)
+    write_link_maplog(link_maplog, link_map)
     
 
-def make_link_maplog(link_maplog, link_map):
+def write_link_maplog(link_maplog, link_map):
 
     header = 'target\tsymlink'
 

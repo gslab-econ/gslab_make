@@ -154,7 +154,7 @@ class LyxDirective(ProgramDirective):
         self.get_pdfout()
 
     def get_pdfout(self):
-        if not self.doctype:
+        if self.doctype:
             self.pdfout = metadata.settings['temp_dir']
 
         self.pdfout = norm_path(self.pdfout)

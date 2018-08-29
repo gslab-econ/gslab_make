@@ -112,12 +112,38 @@ gslab_make_dev/tests/test_run_stata.py:48:
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 kwargs = {'executable': 'nonexistent_stata_executable', 'program': 'gslab_make_dev/tests/input/stata_test_script.do'}
-directive = <gslab_make_dev.private.programdirective.ProgramDirective object at 0x10f3838d0>
+directive = <gslab_make_dev.private.programdirective.ProgramDirective object at 0x102556250>
 program_log = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/stata_test_script.log'
 command = 'nonexistent_stata_executable -e do /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/stata_test_script.do'
 e = CritError()
 
     def run_stata(**kwargs):
+        """ Run Stata script.
+    
+        Parameters
+        ----------
+        osname : str, optional
+            Name of OS. Defaults to `os.name`.
+        shell : bool, optional
+            See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+            Defaults to False.
+        makelog : str, optional
+            Path of makelog. Defaults to path specified in metadata.
+        log : str, optional
+            Path of program log. Program log is only written if specified.
+        program : str
+            Path of script to run.
+        executable : str, optional
+            Executable to use for shell command. Defaults to executable specified in metadata.
+        option : str
+            Options for shell command. Defaults to options specified in metadata.
+        args : str
+            Only used for Python and Perl scripts.
+    
+        Returns
+        -------
+        None
+        """
     
         try:
             directive = ProgramDirective(application = 'stata', **kwargs)
@@ -135,22 +161,20 @@ e = CritError()
 >           raise Exception
 E           Exception
 
-gslab_make_dev/run_program.py:28: Exception
-===================== 4 failed, 40 passed in 10.30 seconds =====================
+gslab_make_dev/run_program.py:55: Exception
+===================== 4 failed, 40 passed in 10.46 seconds =====================
 Name                                           Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------------------------------------
-gslab_make_dev/dir_mod.py                         43      2     18      2    93%   34, 40, 31->34, 39->40
-gslab_make_dev/make_link_logs.py                  18     11      2      0    35%   18-24, 29-35
-gslab_make_dev/make_links.py                      13      5      0      0    62%   18-25
-gslab_make_dev/make_logs.py                       82     54     22      0    27%   18-26, 36-37, 49-66, 73-81, 85-95, 99-117
+gslab_make_dev/create_links.py                    17     17      0      0     0%   2-46
+gslab_make_dev/dir_mod.py                         46      4     20      2    88%   21-22, 69, 75, 66->69, 74->75
 gslab_make_dev/private/exceptionclasses.py        13      0      0      0   100%
-gslab_make_dev/private/linkdirective.py          104     76     32      0    21%   20-26, 29-30, 33-41, 44-52, 59-69, 72-79, 82-86, 89-94, 97-99, 102-109, 118-122, 125-128, 131-133, 136-142, 145-149
+gslab_make_dev/private/linkdirective.py          104    104     32      0     0%   2-149
 gslab_make_dev/private/messages.py                20      0      0      0   100%
 gslab_make_dev/private/metadata.py                 8      0      0      0   100%
 gslab_make_dev/private/programdirective.py       105     13     26      7    83%   32, 56, 97, 122, 140-141, 151-154, 157-160, 31->32, 54->60, 55->56, 96->97, 120->126, 121->122, 127->exit
-gslab_make_dev/private/utility.py                 62     43     10      0    26%   16-30, 34-53, 66-79, 83-88
-gslab_make_dev/refactor_tests.py                  19     19      0      0     0%   2-36
-gslab_make_dev/run_program.py                    118     72     14      0    35%   33-45, 78-87, 92-101, 106-144, 149-158, 163-177
+gslab_make_dev/private/utility.py                 33     16      6      0    44%   26-39, 43-48
+gslab_make_dev/refactor_tests.py                  20     20      0      0     0%   2-36
+gslab_make_dev/run_program.py                    123     76     14      0    34%   60-72, 105-114, 119-128, 133-172, 177-186, 191-205, 216-218
 gslab_make_dev/tablefill.py                      141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
 gslab_make_dev/tablefill_info.py                   0      0      0      0   100%
 gslab_make_dev/tests/nostderrout.py               12      0      2      0   100%
@@ -171,5 +195,7 @@ gslab_make_dev/tests/test_textfill.py             83      2     12      3    95%
 gslab_make_dev/tests/test_zip.py                  36      2      4      2    90%   46-47, 42->exit, 45->46
 gslab_make_dev/textfill.py                       135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
 gslab_make_dev/textfill_info.py                    0      0      0      0   100%
+gslab_make_dev/write_link_logs.py                 18     11      2      0    35%   43-49, 54-60
+gslab_make_dev/write_logs.py                     111     81     26      0    22%   18-26, 36-37, 49-66, 69-83, 87-106, 113-121, 125-135, 139-157
 ------------------------------------------------------------------------------------------
-TOTAL                                           1466    336    372     58    74%
+TOTAL                                           1479    383    374     58    72%
