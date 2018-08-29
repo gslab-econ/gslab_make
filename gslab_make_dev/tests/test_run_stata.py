@@ -50,7 +50,7 @@ class testRunStata(unittest.TestCase):
     
     def test_no_program(self):
         with self.assertRaises(Exception):
-            run_perl(program = 'gslab_make_dev/tests/input/nonexistent_stata_script.do')
+            run_stata(program = 'gslab_make_dev/tests/input/nonexistent_stata_script.do')
         self.assertNotIn('end of do-file', open('../log/make.log').read())
     
     def tearDown(self):

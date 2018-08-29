@@ -38,7 +38,7 @@ class testRemovePath(unittest.TestCase):
         self.assertTrue(os.path.isfile('./output_local/text.txt'))
         os.makedirs('./output_local/temp_dir/')
         with self.assertRaises(OSError):
-            remove_path('./output_local', option='v')
+            remove_path('./output_local', option='-v')
         self.assertTrue(os.path.isdir('./output_local/'))
         with nostderrout():
             remove_path('./output_local')
