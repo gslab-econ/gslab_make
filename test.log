@@ -45,18 +45,68 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.15, pytest-3.7.1, py-1.5.4, pluggy-0.7.1
 rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 43 items
+collected 47 items
 
 gslab_make_dev/tests/test_clear_dir.py ...                               [  6%]
-gslab_make_dev/tests/test_execute_command.py ...                         [ 13%]
-gslab_make_dev/tests/test_run_perl.py .....F.                            [ 30%]
-gslab_make_dev/tests/test_run_python.py ......F..                        [ 51%]
-gslab_make_dev/tests/test_run_stata.py F....F.                           [ 67%]
-gslab_make_dev/tests/test_tablefill.py ....                              [ 76%]
+gslab_make_dev/tests/test_execute_command.py ...                         [ 12%]
+gslab_make_dev/tests/test_remove_path.py FFF.                            [ 21%]
+gslab_make_dev/tests/test_run_perl.py .....F.                            [ 36%]
+gslab_make_dev/tests/test_run_python.py ......F..                        [ 55%]
+gslab_make_dev/tests/test_run_stata.py F....F.                           [ 70%]
+gslab_make_dev/tests/test_tablefill.py ....                              [ 78%]
 gslab_make_dev/tests/test_textfill.py ........                           [ 95%]
 gslab_make_dev/tests/test_zip.py ..                                      [100%]
 
 =================================== FAILURES ===================================
+_________________________ testRemovePath.test_default __________________________
+
+self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_default>
+
+    def test_default(self):
+        self.assertTrue(os.path.isdir('./output_local/'))
+        remove_path('./output_local/')
+>       self.assertFalse(os.path.isfile('./output_local/text.txt'))
+E       AssertionError: True is not false
+
+gslab_make_dev/tests/test_remove_path.py:26: AssertionError
+----------------------------- Captured stdout call -----------------------------
+<subprocess.Popen object at 0x10a19d8d0>
+rm -rf "/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local"
+
+Deleted: "/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local"
+______________________ testRemovePath.test_default_noisy _______________________
+
+self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_default_noisy>
+
+    def test_default_noisy(self):
+        self.assertTrue(os.path.isfile('./output_local/text.txt'))
+        with open('stdout.txt', 'w') as f:
+                with redirect_stdout(f):
+                        remove_path('./output_local/')
+>               self.assertIn('Deleted:', open('stdout.txt').read())
+E               AssertionError: 'Deleted:' not found in ''
+
+gslab_make_dev/tests/test_remove_path.py:34: AssertionError
+_________________________ testRemovePath.test_options __________________________
+
+self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_options>
+
+    def test_options(self):
+        self.assertTrue(os.path.isfile('./output_local/text.txt'))
+        os.makedirs('./output_local/temp_dir/')
+        with self.assertRaises(OSError):
+>           remove_path('./output_local', option='v')
+E           AssertionError: OSError not raised
+
+gslab_make_dev/tests/test_remove_path.py:40: AssertionError
+----------------------------- Captured stdout call -----------------------------
+<subprocess.Popen object at 0x10a1e30d0>
+rm v "/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local"
+
+Deleted: "/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local"
+--------------------------- Captured stderr teardown ---------------------------
+rm: v: No such file or directory
+rm: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local: No such file or directory
 ________________________ testRunPerl.test_no_extension _________________________
 
 self = <gslab_make_dev.tests.test_run_perl.testRunPerl testMethod=test_no_extension>
@@ -127,7 +177,7 @@ gslab_make_dev/tests/test_run_stata.py:53:
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 kwargs = {'executable': 'nonexistent_stata_executable', 'program': 'gslab_make_dev/tests/input/stata_test_script.do'}
-directive = <gslab_make_dev.private.programdirective.ProgramDirective object at 0x10e956b10>
+directive = <gslab_make_dev.private.programdirective.ProgramDirective object at 0x10a143f90>
 program_log = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/stata_test_script.log'
 command = 'nonexistent_stata_executable -e do /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/stata_test_script.do'
 e = CritError()
@@ -184,10 +234,10 @@ e = CritError()
 E           Exception
 
 gslab_make_dev/run_program.py:28: Exception
-===================== 4 failed, 39 passed in 11.75 seconds =====================
+===================== 7 failed, 40 passed in 12.29 seconds =====================
 Name                                           Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------------------------------------
-gslab_make_dev/dir_mod.py                         43      3     18      4    89%   27, 34, 40, 20->23, 26->27, 31->34, 39->40
+gslab_make_dev/dir_mod.py                         45      2     18      2    94%   37, 43, 34->37, 42->43
 gslab_make_dev/make_link_logs.py                  18     11      2      0    35%   18-24, 29-35
 gslab_make_dev/make_links.py                      13      5      0      0    62%   18-25
 gslab_make_dev/make_logs.py                       82     54     22      0    27%   18-26, 36-37, 49-66, 73-81, 85-95, 99-117
@@ -205,6 +255,7 @@ gslab_make_dev/tests/nostderrout.py               12      0      2      0   100%
 gslab_make_dev/tests/test_clear_dir.py            41      2      8      1    94%   55-56, 54->55
 gslab_make_dev/tests/test_delete_files.py          0      0      0      0   100%
 gslab_make_dev/tests/test_execute_command.py      84      8     16      7    83%   17-20, 31, 52, 72, 98-99, 15->17, 28->31, 49->52, 69->72, 92->94, 94->exit, 97->98
+gslab_make_dev/tests/test_remove_path.py          49      7      6      2    84%   27, 41-44, 61-62, 55->57, 60->61
 gslab_make_dev/tests/test_run_lyx.py               0      0      0      0   100%
 gslab_make_dev/tests/test_run_mathematica.py       0      0      0      0   100%
 gslab_make_dev/tests/test_run_matlab.py            0      0      0      0   100%
@@ -218,4 +269,4 @@ gslab_make_dev/tests/test_zip.py                  36      2      4      2    90%
 gslab_make_dev/textfill.py                       135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
 gslab_make_dev/textfill_info.py                    0      0      0      0   100%
 ------------------------------------------------------------------------------------------
-TOTAL                                           1430    335    366     58    73%
+TOTAL                                           1481    341    372     58    74%
