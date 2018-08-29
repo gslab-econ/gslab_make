@@ -47,12 +47,6 @@
 #         self.assertTrue(os.path.isfile('../log/R.log'))
 #         self.assertIn('Test script complete', open('../log/R.log', 'rU').read())
 #         self.assertTrue(os.path.isfile('output.txt'))
-
-#     def test_no_extension(self):
-#         with nostderrout():
-#             run_r(program = 'gslab_make_dev/tests/input/R_test_script')
-#         self.assertIn('Test script complete', open('../log/make.log', 'rU').read())
-#         self.assertTrue(os.path.isfile('output.txt'))
         
 #     def test_executable(self):
 #         with nostderrout():

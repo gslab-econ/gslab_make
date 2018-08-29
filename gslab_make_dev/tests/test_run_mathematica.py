@@ -40,12 +40,6 @@
 #         self.assertTrue(os.path.isfile('../log/mathematica.log'))    
 #         self.assertIn('mathematica test ended',  open('../log/mathematica.log', 'rU').read())   
 #         self.assertTrue(os.path.isfile('output_plot.eps')) 
-
-#     def test_no_extension(self):
-#         with nostderrout():
-#             run_mathematica(program = 'gslab_make_dev/tests/input/mathematica_test_script')       
-#         self.assertIn('mathematica test ended', open('../log/make.log', 'rU').read()  ) 
-#         self.assertTrue(os.path.isfile('output_plot.eps'))
         
 #     def test_executable(self):
 #         with nostderrout():

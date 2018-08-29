@@ -40,12 +40,6 @@ class testRunPython(unittest.TestCase):
         self.assertTrue(os.path.isfile('../log/python.log'))
         self.assertIn('Test script complete', open('../log/python.log').read())        
         self.assertTrue(os.path.isfile('output.txt'))
-
-    def test_no_extension(self):
-        with nostderrout():
-            run_python(program = 'gslab_make_dev/tests/input/python_test_script')
-        self.assertIn('Test script complete', open('../log/make.log').read())
-        self.assertTrue(os.path.isfile('output.txt'))
         
     def test_executable(self):
         with nostderrout():

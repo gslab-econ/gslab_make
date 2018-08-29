@@ -46,13 +46,6 @@
 #         self.assertIn('LaTeX', lyxlog_data)
 #         self.assertIn(lyxlog_data, makelog_data)
 #         self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))    
-
-#     def test_no_extension(self):
-#         with nostderrout():
-#             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file')
-#         logfile_data = open('../log/make.log', 'rU').read()
-#         self.assertIn('LaTeX', logfile_data)
-#         self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))
         
 #     def test_executable(self):
 #         with nostderrout():

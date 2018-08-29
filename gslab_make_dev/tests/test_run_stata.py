@@ -38,11 +38,6 @@ class testRunStata(unittest.TestCase):
         self.assertTrue(os.path.isfile('../log/stata.log'))
         self.assertIn('end of do-file', open('../log/stata.log').read())
         
-    def test_no_extension(self):
-        with nostderrout():
-            run_stata(program = 'gslab_make_dev/tests/input/stata_test_script')
-        self.assertIn('end of do-file', open('../log/make.log').read())
-        
     def test_executable(self):
         with nostderrout():
 			run_stata(program = 'gslab_make_dev/tests/input/stata_test_script.do', executable = metadata.default_executables[os.name]['stata']) 

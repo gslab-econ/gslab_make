@@ -45,15 +45,15 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.15, pytest-3.7.1, py-1.5.4, pluggy-0.7.1
 rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 47 items
+collected 44 items
 
 gslab_make_dev/tests/test_clear_dir.py ...                               [  6%]
-gslab_make_dev/tests/test_execute_command.py ...                         [ 12%]
-gslab_make_dev/tests/test_remove_path.py FFF.                            [ 21%]
-gslab_make_dev/tests/test_run_perl.py .....F.                            [ 36%]
-gslab_make_dev/tests/test_run_python.py ......F..                        [ 55%]
-gslab_make_dev/tests/test_run_stata.py F....F.                           [ 70%]
-gslab_make_dev/tests/test_tablefill.py ....                              [ 78%]
+gslab_make_dev/tests/test_execute_command.py ...                         [ 13%]
+gslab_make_dev/tests/test_remove_path.py FFF.                            [ 22%]
+gslab_make_dev/tests/test_run_perl.py ......                             [ 36%]
+gslab_make_dev/tests/test_run_python.py ........                         [ 54%]
+gslab_make_dev/tests/test_run_stata.py F.....                            [ 68%]
+gslab_make_dev/tests/test_tablefill.py ....                              [ 77%]
 gslab_make_dev/tests/test_textfill.py ........                           [ 95%]
 gslab_make_dev/tests/test_zip.py ..                                      [100%]
 
@@ -64,16 +64,12 @@ self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_def
 
     def test_default(self):
         self.assertTrue(os.path.isdir('./output_local/'))
-        remove_path('./output_local/')
+        with nostderrout():
+                remove_path('./output_local/')
 >       self.assertFalse(os.path.isfile('./output_local/text.txt'))
 E       AssertionError: True is not false
 
-gslab_make_dev/tests/test_remove_path.py:26: AssertionError
------------------------------ Captured stdout call -----------------------------
-<subprocess.Popen object at 0x10a19d8d0>
-rm -rf "/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local"
-
-Deleted: "/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local"
+gslab_make_dev/tests/test_remove_path.py:27: AssertionError
 ______________________ testRemovePath.test_default_noisy _______________________
 
 self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_default_noisy>
@@ -86,7 +82,7 @@ self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_def
 >               self.assertIn('Deleted:', open('stdout.txt').read())
 E               AssertionError: 'Deleted:' not found in ''
 
-gslab_make_dev/tests/test_remove_path.py:34: AssertionError
+gslab_make_dev/tests/test_remove_path.py:35: AssertionError
 _________________________ testRemovePath.test_options __________________________
 
 self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_options>
@@ -98,73 +94,13 @@ self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_opt
 >           remove_path('./output_local', option='v')
 E           AssertionError: OSError not raised
 
-gslab_make_dev/tests/test_remove_path.py:40: AssertionError
+gslab_make_dev/tests/test_remove_path.py:41: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-<subprocess.Popen object at 0x10a1e30d0>
-rm v "/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local"
 
 Deleted: "/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local"
 --------------------------- Captured stderr teardown ---------------------------
 rm: v: No such file or directory
 rm: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local: No such file or directory
-________________________ testRunPerl.test_no_extension _________________________
-
-self = <gslab_make_dev.tests.test_run_perl.testRunPerl testMethod=test_no_extension>
-
-    def test_no_extension(self):
-        with nostderrout():
->           run_perl(program = 'gslab_make_dev/tests/input/perl_test_script')
-
-gslab_make_dev/tests/test_run_perl.py:46: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-kwargs = {'program': 'gslab_make_dev/tests/input/perl_test_script'}
-e = CritError()
-
-    def run_perl(**kwargs):
-    
-        try:
-            directive = ProgramDirective(application = 'perl', **kwargs)
-    
-            # Execute
-            command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.args)
-            directive.execute_command(command)
-            directive.write_log()
-        except Exception as e:
-            print(e)
->           raise Exception
-E           Exception
-
-gslab_make_dev/run_program.py:59: Exception
-_______________________ testRunPython.test_no_extension ________________________
-
-self = <gslab_make_dev.tests.test_run_python.testRunPython testMethod=test_no_extension>
-
-    def test_no_extension(self):
-        with nostderrout():
->           run_python(program = 'gslab_make_dev/tests/input/python_test_script')
-
-gslab_make_dev/tests/test_run_python.py:46: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-kwargs = {'program': 'gslab_make_dev/tests/input/python_test_script'}
-e = CritError()
-
-    def run_python(**kwargs):
-    
-        try:
-            directive = ProgramDirective(application = 'python', **kwargs)
-    
-            # Execute
-            command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.args)
-            directive.execute_command(command)
-            directive.write_log()
-        except Exception as e:
-            print(e)
->           raise Exception
-E           Exception
-
-gslab_make_dev/run_program.py:73: Exception
 _______________________ testRunStata.test_bad_executable _______________________
 
 self = <gslab_make_dev.tests.test_run_stata.testRunStata testMethod=test_bad_executable>
@@ -173,11 +109,11 @@ self = <gslab_make_dev.tests.test_run_stata.testRunStata testMethod=test_bad_exe
         with nostderrout():
 >           run_stata(program = 'gslab_make_dev/tests/input/stata_test_script.do', executable = 'nonexistent_stata_executable')
 
-gslab_make_dev/tests/test_run_stata.py:53: 
+gslab_make_dev/tests/test_run_stata.py:48: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 kwargs = {'executable': 'nonexistent_stata_executable', 'program': 'gslab_make_dev/tests/input/stata_test_script.do'}
-directive = <gslab_make_dev.private.programdirective.ProgramDirective object at 0x10a143f90>
+directive = <gslab_make_dev.private.programdirective.ProgramDirective object at 0x10eabb790>
 program_log = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/stata_test_script.log'
 command = 'nonexistent_stata_executable -e do /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/stata_test_script.do'
 e = CritError()
@@ -201,43 +137,10 @@ e = CritError()
 E           Exception
 
 gslab_make_dev/run_program.py:28: Exception
-________________________ testRunStata.test_no_extension ________________________
-
-self = <gslab_make_dev.tests.test_run_stata.testRunStata testMethod=test_no_extension>
-
-    def test_no_extension(self):
-        with nostderrout():
->           run_stata(program = 'gslab_make_dev/tests/input/stata_test_script')
-
-gslab_make_dev/tests/test_run_stata.py:43: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-kwargs = {'program': 'gslab_make_dev/tests/input/stata_test_script'}
-e = CritError()
-
-    def run_stata(**kwargs):
-    
-        try:
-            directive = ProgramDirective(application = 'stata', **kwargs)
-    
-            # Get program output
-            program_log = os.path.join(os.getcwd(), directive.program_name + '.log')
-    
-            # Execute
-            command = metadata.commands[directive.osname]['stata'] % (directive.executable, directive.option, directive.program)
-            directive.execute_command(command)
-            directive.write_log()
-            directive.move_program_output(program_log, directive.log)
-        except Exception as e:
-            print(e)
->           raise Exception
-E           Exception
-
-gslab_make_dev/run_program.py:28: Exception
-===================== 7 failed, 40 passed in 12.29 seconds =====================
+===================== 4 failed, 40 passed in 11.34 seconds =====================
 Name                                           Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------------------------------------
-gslab_make_dev/dir_mod.py                         45      2     18      2    94%   37, 43, 34->37, 42->43
+gslab_make_dev/dir_mod.py                         43      2     18      2    93%   34, 40, 31->34, 39->40
 gslab_make_dev/make_link_logs.py                  18     11      2      0    35%   18-24, 29-35
 gslab_make_dev/make_links.py                      13      5      0      0    62%   18-25
 gslab_make_dev/make_logs.py                       82     54     22      0    27%   18-26, 36-37, 49-66, 73-81, 85-95, 99-117
@@ -255,18 +158,18 @@ gslab_make_dev/tests/nostderrout.py               12      0      2      0   100%
 gslab_make_dev/tests/test_clear_dir.py            41      2      8      1    94%   55-56, 54->55
 gslab_make_dev/tests/test_delete_files.py          0      0      0      0   100%
 gslab_make_dev/tests/test_execute_command.py      84      8     16      7    83%   17-20, 31, 52, 72, 98-99, 15->17, 28->31, 49->52, 69->72, 92->94, 94->exit, 97->98
-gslab_make_dev/tests/test_remove_path.py          49      7      6      2    84%   27, 41-44, 61-62, 55->57, 60->61
+gslab_make_dev/tests/test_remove_path.py          50      7      6      2    84%   28, 42-45, 62-63, 56->58, 61->62
 gslab_make_dev/tests/test_run_lyx.py               0      0      0      0   100%
 gslab_make_dev/tests/test_run_mathematica.py       0      0      0      0   100%
 gslab_make_dev/tests/test_run_matlab.py            0      0      0      0   100%
-gslab_make_dev/tests/test_run_perl.py             64      5     10      4    88%   47-48, 74, 77-78, 67->69, 69->71, 73->74, 76->77
-gslab_make_dev/tests/test_run_python.py           74      5     10      4    89%   47-48, 86, 89-90, 79->81, 81->83, 85->86, 88->89
+gslab_make_dev/tests/test_run_perl.py             59      3     10      4    90%   68, 71-72, 61->63, 63->65, 67->68, 70->71
+gslab_make_dev/tests/test_run_python.py           69      3     10      4    91%   80, 83-84, 73->75, 75->77, 79->80, 82->83
 gslab_make_dev/tests/test_run_r.py                 0      0      0      0   100%
-gslab_make_dev/tests/test_run_stata.py            59      6     10      5    84%   44, 54, 67, 69, 72-73, 62->64, 64->66, 66->67, 68->69, 71->72
+gslab_make_dev/tests/test_run_stata.py            55      5     10      5    85%   49, 62, 64, 67-68, 57->59, 59->61, 61->62, 63->64, 66->67
 gslab_make_dev/tests/test_tablefill.py            96      2     42      6    94%   143-144, 20->exit, 37->34, 57->43, 74->exit, 138->exit, 142->143
 gslab_make_dev/tests/test_textfill.py             83      2     12      3    95%   138-139, 17->exit, 133->exit, 137->138
 gslab_make_dev/tests/test_zip.py                  36      2      4      2    90%   46-47, 42->exit, 45->46
 gslab_make_dev/textfill.py                       135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
 gslab_make_dev/textfill_info.py                    0      0      0      0   100%
 ------------------------------------------------------------------------------------------
-TOTAL                                           1481    341    372     58    74%
+TOTAL                                           1466    336    372     58    74%

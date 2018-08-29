@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
 import unittest, sys, os, shutil
-sys.path.append('../..')
 from gslab_make_dev.dir_mod import clear_dir
 from nostderrout import nostderrout
 
@@ -19,6 +18,7 @@ class testClearDir(unittest.TestCase):
         self.assertEqual(len(file_list), 0)
     
     def test_already_exists(self):
+        self.assertFalse(os.path.exists('./output_local_empty/'))
         os.makedirs('./output_local_empty/')
 
         with nostderrout():

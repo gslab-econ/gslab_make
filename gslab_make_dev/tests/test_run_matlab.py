@@ -39,12 +39,6 @@
 #         self.assertTrue(os.path.isfile('../log/matlab.log'))
 #         self.assert_proper_output('../log/matlab.log')
 #         self.assertTrue(os.path.isfile('../output/matlab_test.mat'))
-
-#     def test_no_extension(self):
-#         with nostderrout():
-#             run_matlab(program = 'gslab_make_dev/tests/input/matlab_test_script')
-#         self.assert_proper_output('../log/make.log')
-#         self.assertTrue(os.path.isfile('../output/matlab_test.mat'))
         
 #     def test_executable(self):
 #         with nostderrout():

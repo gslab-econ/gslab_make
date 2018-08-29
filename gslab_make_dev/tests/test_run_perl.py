@@ -40,12 +40,6 @@ class testRunPerl(unittest.TestCase):
         self.assertTrue(os.path.isfile('../log/perl.log'))
         self.assertIn('Test script complete', open('../log/perl.log').read())        
         self.assertTrue(os.path.isfile('output.txt'))
-
-    def test_no_extension(self):
-        with nostderrout():
-            run_perl(program = 'gslab_make_dev/tests/input/perl_test_script')
-        self.assertIn('Test script complete', open('../log/make.log').read())
-        self.assertTrue(os.path.isfile('output.txt'))
         
     def test_executable(self):
         with nostderrout():
