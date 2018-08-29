@@ -12,46 +12,6 @@ from private.exceptionclasses import CustomError, CritError
 import private.messages as messages
 import private.metadata as metadata
 
-def start_log(log, log_type):
-    log = norm_path(log)
-
-    try:
-        LOG = open(log, 'w') 
-    except:
-        raise CustomError.crit(messages.crit_error_log % log)
-
-    time_start = str(datetime.datetime.now().replace(microsecond = 0))
-    working_dir = os.getcwd()
-    print(messages.note_dash_separator + '\n', file = LOG)
-    print(messages.note_log_start % log_type + time_start + '\n', file = LOG)
-    print(messages.note_working_directory + working_dir + '\n', file = LOG)
-    print(messages.note_dash_separator + '\n', file = LOG)
-
-    return LOG
-
-
-def end_log(LOG, log_type, makelog):    
-    makelog = norm_path(makelog)
-
-    time_end = str(datetime.datetime.now().replace(microsecond = 0))
-    working_dir = os.getcwd()
-    print(messages.note_dash_separator + '\n', file = LOG)
-    print(messages.note_log_end % log_type + time_end + '\n', file = LOG)
-    print(messages.note_working_directory + working_dir + '\n', file = LOG)
-    print(messages.note_dash_separator + '\n', file = LOG)
-    
-    LOG.close()
-    
-    if makelog: 
-        if not (metadata.makelog_started and os.path.isfile(makelog)):
-            raise CritError(messages.crit_error_no_makelog % makelog)
-
-        with open(makelog, 'a') as MAKELOG:
-            with open(LOG.name, 'r') as LOG:
-                MAKELOG.write(LOG.read())
-        
-        os.remove(LOG.name)
-
 
 def norm_path(path):
     path = re.split('[/\\\\]+', path)

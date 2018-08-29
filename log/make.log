@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 
-Makelog started: 2018-08-27 14:09:04
+Makelog started: 2018-08-29 15:34:53
 
 Working directory: /Users/zong/gslab_make/gslab_make_dev
 
@@ -8,7 +8,7 @@ Working directory: /Users/zong/gslab_make/gslab_make_dev
 
 --------------------------------------------------------------------------------
 
-Linklog started: 2018-08-27 14:09:04
+Linklog started: 2018-08-29 15:34:53
 
 Working directory: /Users/zong/gslab_make/gslab_make_dev
 
@@ -16,7 +16,7 @@ Working directory: /Users/zong/gslab_make/gslab_make_dev
 
 --------------------------------------------------------------------------------
 
-Linklog ended: 2018-08-27 14:09:04
+Linklog ended: 2018-08-29 15:34:53
 
 Working directory: /Users/zong/gslab_make/gslab_make_dev
 
@@ -59,16 +59,21 @@ c
 
 . 
 end of do-file
+Executing: "lyx -e pdf2 /Users/zong/gslab_make/gslab_make_dev/refactor_tests/lyx.lyx'
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./lyx.tex
+LaTeX2e <2016/03/31>
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+
+
 Executing: "ls'
 __init__.py
+create_links.py
+create_links.pyc
 dir_mod.py
 dir_mod.pyc
-make_link_logs.py
-make_link_logs.pyc
-make_links.py
-make_links.pyc
-make_logs.py
-make_logs.pyc
 private
 refactor_tests
 refactor_tests.py
@@ -79,10 +84,14 @@ tablefill_info.py
 tests
 textfill.py
 textfill_info.py
+write_link_logs.py
+write_link_logs.pyc
+write_logs.py
+write_logs.pyc
 
 --------------------------------------------------------------------------------
 
-Makelog ended: 2018-08-27 14:09:05
+Makelog ended: 2018-08-29 15:34:54
 
 Working directory: /Users/zong/gslab_make/gslab_make_dev
 

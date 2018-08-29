@@ -8,29 +8,29 @@ os.chdir("/Users/zong/gslab_make/gslab_make_dev")
 
 import run_program
 import dir_mod
-import make_link_logs
-import make_links
-import make_logs
+import create_links
+import write_link_logs
+import write_logs
 
 # Clear directories
 dir_mod.clear_dir(['../input', '../output', '../log'])
 
 # Start make log
-make_logs.start_makelog()
+write_logs.start_makelog()
 
 # Create links
-links = make_links.make_links(['refactor_tests/links.txt'])
-make_link_logs.make_link_logs(links)
+links = create_links.create_links(['refactor_tests/links.txt'])
+write_link_logs.write_link_logs(links)
 
 # Run programs
 run_program.run_python(program = 'refactor_tests/python.py', log = '../output/python.log')
 run_program.run_r(program = 'refactor_tests/r.R', log = '../output/r.log')
 run_program.run_stata(program = 'refactor_tests/stata.do', log = '../output/stata.log')
-
+run_program.run_lyx(program = 'refactor_tests/lyx.lyx')
 run_program.execute_command(command = 'ls', shell = True, log = '../output/command.log')
 
 # Log outputs
-make_logs.make_output_logs()
+write_logs.write_output_logs()
 
 # End make log
-make_logs.end_makelog()
+write_logs.end_makelog()

@@ -10,7 +10,34 @@ import fileinput
 import private.metadata as metadata
 from private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
 
+
 def run_stata(**kwargs):
+    """ Run Stata script.
+
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+    program : str
+        Path of script to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str
+        Options for shell command. Defaults to options specified in metadata.
+    args : str
+        Only used for Python and Perl scripts. 
+
+    Returns
+    -------
+    None
+    """
 
     try:
         directive = ProgramDirective(application = 'stata', **kwargs)
@@ -107,7 +134,7 @@ def run_lyx(**kwargs): # Check
         directive = LyxDirective(application = 'lyx', **kwargs)
             
         # Make handout/commented LyX file        
-        if not directive.doctype:
+        if directive.doctype:
             temp_name = os.path.join(directive.program_name + '_' + directive.doctype)
             temp_program = os.path.join(directive.program_path, temp_name + '.lyx') 
             
@@ -131,13 +158,14 @@ def run_lyx(**kwargs): # Check
 
         # Move PDF output
         temp_pdf = os.path.join(directive.program_path, temp_name + '.pdf')
-        
-        if temp_pdf != directive.pdf_out:
-            shutil.copy2(temp_pdf, directive.pdf_out)
+        output_pdf = os.path.join(directive.pdfout, directive.program_name + '.pdf')
+
+        if temp_pdf != output_pdf:
+            shutil.copy2(temp_pdf, output_pdf)
             os.remove(temp_pdf)
             
         # Remove handout/commented LyX file
-        if not directive.doctype:
+        if directive.doctype:
             os.remove(temp_program)
     except Exception as e:
         print(e)
@@ -179,19 +207,13 @@ def run_sas(**kwargs):
 
 def execute_command(command, **kwargs):
 
-    directive = Directive(**kwargs)
+   try:
+       directive = Directive(**kwargs)
 
-    # Execute
-    directive.execute_command(command)
-    directive.write_log() 
-        
-#    try:
-#        directive = Directive(**kwargs)
-
-#        # Execute
-#        directive.execute_command(command)
-#        directive.write_log()   
-#    except Exception as e:
-#        print(e)
-#        raise Exception
+       # Execute
+       directive.execute_command(command)
+       directive.write_log()   
+   except Exception as e:
+       print(e)
+       raise Exception
         

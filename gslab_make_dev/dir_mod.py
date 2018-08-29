@@ -15,7 +15,30 @@ from private.exceptionclasses import CustomError, CritError, SyntaxError, LogicE
 from private.utility import norm_path
 
 
+def check_os():
+    """ Check OS is either POSIX or NT. """
+
+    if (os.name != 'posix') & (os.name != 'nt'):
+        raise CritError(messages.crit_error_unknown_system % os.name)
+
+
 def remove_path(path, option = '', quiet = False):
+    """ Remove path using shell command specified in metadata.
+    
+    Parameters
+    ----------
+    path : str
+        Path to remove.
+    option : str
+        Options for shell command. Defaults to options specified in metadata.
+    quiet : bool
+        Suppress printing of paths removed. Defaults to False. 
+
+    Returns
+    -------
+    None
+    """
+
     path = norm_path(path)
     if not option:
         option = metadata.default_options[os.name]['rmdir']
@@ -28,10 +51,22 @@ def remove_path(path, option = '', quiet = False):
     
 
 def clear_dir(dir_list):
+    """ Remove everything in directory. Create directory if nonexistent.
+    
+    Parameters
+    ----------
+    dir_list : list
+        List of directories to clear.
+
+    Returns
+    -------
+    None
+    """
+
     if type(dir_list) is list:
         dir_list = [norm_path(dir_path) for dir_path in dir_list]
     else:
-        raise SyntaxError(messages.syn_error_file_list)
+        raise TypeError(messages.syn_error_file_list)
     
     for dir_path in dir_list:
         if os.path.isdir(dir_path):
@@ -47,11 +82,39 @@ def clear_dir(dir_list):
         
 
 def unzip(zip_path, output_dir):
+    """ Unzip file to directory.
+    
+    Parameters
+    ----------
+    zip_path : str
+        Path of file to unzip.
+    output_dir : str
+        Directory to write outputs of unzipped file.
+
+    Returns
+    -------
+    None
+    """
+
     with zipfile.ZipFile(zip_path, allowZip64 = True) as z:
         z.extractall(output_dir)
 
 
 def zip_dir(source_dir, zip_dest):
+    """ Zip directory to file.
+    
+    Parameters
+    ----------
+    source_dir : str
+        Path of directory to zip
+    zip_dest : str
+        Destination of zip file
+
+    Returns
+    -------
+    None
+    """
+
     with zipfile.ZipFile('%s' % (zip_dest), 'w', zipfile.ZIP_DEFLATED, allowZip64 = True) as z:
         source_dir = norm_path(source_dir)
 

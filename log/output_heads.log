@@ -6,14 +6,20 @@ File headers
 
 Executing: "ls'
 __init__.py
+create_links.py
+create_links.pyc
 dir_mod.py
 dir_mod.pyc
-make_link_logs.py
-make_link_logs.pyc
-make_links.py
-make_links.pyc
-make_logs.py
-make_logs.pyc
+private
+refactor_tests
+refactor_tests.py
+run_program.py
+
+--------------------------------------------------------------------------------
+
+/Users/zong/gslab_make/output/lyx.pdf
+
+Head not readable
 
 --------------------------------------------------------------------------------
 
