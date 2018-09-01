@@ -106,7 +106,7 @@ class ProgramDirective(Directive):
 
     def move_program_output(self, program_output, log = ''):
         """
-        Certain programs create outputs that need to be moved to appropriate logging files
+        Certain programs create outputs that need to be moved to appropriate logging files.
         """
     
         try:

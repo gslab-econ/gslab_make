@@ -29,9 +29,9 @@ def remove_path(path, option = '', quiet = False):
     ----------
     path : str
         Path to remove.
-    option : str
+    option : str, optional
         Options for shell command. Defaults to options specified in metadata.
-    quiet : bool
+    quiet : bool, optional
         Suppress printing of paths removed. Defaults to False. 
 
     Returns

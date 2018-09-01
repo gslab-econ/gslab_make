@@ -12,22 +12,22 @@ import private.metadata as metadata
 
 
 def create_links(file_list,
-               link_dir = metadata.settings['link_dir'],
-               makelog = metadata.settings['makelog']):
+                 link_dir = metadata.settings['link_dir'],
+                 makelog = metadata.settings['makelog']):
     """ Create symlinks from list of files containing linking information.
 
     Parameters
     ----------
     file_list : list
         List of files containing linking information.
-    link_dir : str
+    link_dir : str, optional
         Directory to write symlinks. Defaults to directory specified in metadata.
-    makelog : str
+    makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
 
     Returns
     -------
-    link_map:
+    link_map : list
         List of (target, symlink) for each symlink created.
     """
 

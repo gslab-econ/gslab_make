@@ -15,6 +15,8 @@ from private.utility import norm_path, glob_recursive
 
 
 def set_option(**kwargs):
+    """ Set global options. See metadata for default options. """
+
     kwargs = {re.sub('_file$|_dir$', '', k):v for k, v in kwargs.items()}
 
     if len(kwargs.keys()) != len(set(kwargs.keys())):
@@ -27,6 +29,23 @@ def set_option(**kwargs):
 
 
 def start_makelog(makelog = metadata.settings['makelog']):
+    """ Start make log. Record start time.
+
+    Notes
+    -----
+    The make log start condition is needed by other functions to confirm a 
+    make log exists.
+
+    Parameters
+    ----------
+    makelog : str, optional
+        Path to write make log. Defaults to path specified in metadata.
+
+    Returns
+    -------
+    None
+    """
+
     metadata.makelog_started = True
     makelog = norm_path(makelog)
     print('Starting makelog file at: "%s"' % makelog)
@@ -46,6 +65,18 @@ def start_makelog(makelog = metadata.settings['makelog']):
 
 
 def end_makelog(makelog = metadata.settings['makelog']):
+     """ End make log. Record end time.
+
+    Parameters
+    ----------
+    makelog : str, optional
+        Path to write make log. Defaults to path specified in metadata.
+
+    Returns
+    -------
+    None
+    """
+
     makelog = norm_path(makelog)
     print('Ending makelog file at: "%s"' % makelog)
 
@@ -66,6 +97,22 @@ def end_makelog(makelog = metadata.settings['makelog']):
     MAKELOG.close()
 
 def start_log(log, log_type):
+    """ Start ad hoc log. Record start time.
+
+    Parameters
+    ----------
+    log : str
+        Path to create log file.
+
+    log_type: str
+        Name of log.
+
+    Returns
+    -------
+    LOG : file
+        File of log.
+    """
+
     log = norm_path(log)
 
     try:
@@ -83,7 +130,26 @@ def start_log(log, log_type):
     return LOG
 
 
-def end_log(LOG, log_type, makelog):    
+def end_log(LOG, log_type, makelog = ''):    
+    """ End ad hoc log. Record end time.
+
+    Parameters
+    ----------
+    LOG : file
+        File of log.
+
+    log_type: str
+        Name of log.
+
+    makelog: str, optional
+        Path of make log. If specified, appends log to make log and removes log.
+        Default is to keep log as is.
+
+    Returns
+    -------
+    None
+    """
+
     makelog = norm_path(makelog)
 
     time_end = str(datetime.datetime.now().replace(microsecond = 0))
@@ -106,11 +172,38 @@ def end_log(LOG, log_type, makelog):
         os.remove(LOG.name)
         
 def write_output_logs(output_dir = metadata.settings['output_dir'],
-                     output_statslog = metadata.settings['output_statslog'], 
-                     output_headslog = metadata.settings['output_headslog'],
-                     recur_lim = float('inf')):
+                      output_statslog = metadata.settings['output_statslog'], 
+                      output_headslog = metadata.settings['output_headslog'],
+                      recursive = float('inf')):
 
-    output_files = glob_recursive(output_dir, recur_lim)
+    """ Write output logs.
+
+    Notes
+    -----
+    The following information is logged of all files contained in output directory:
+        * File name (output stats log)
+        * Last modified (output stats log)
+        * File size (output stats log)
+        * File head (output headers log)
+    * When walking through output directory, recursive determines depth.
+
+    Parameters
+    ----------
+    output_dir : str, optional
+        Path of output directory. Defaults to path specified in metadata.
+    output_statslog : str, optional
+        Path to write output stats log. Defaults to path specified in metadata.
+    output_headslog : str, optional
+        Path to write output headers log. Defaults to path specified in metadata.
+    recursive : int, optional
+        Level of depth when walking through output directory.
+
+    Returns
+    -------
+    None
+    """
+
+    output_files = glob_recursive(output_dir, recursive)
 
     if output_statslog:
         output_statslog = norm_path(output_statslog)
@@ -122,6 +215,28 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
     
 
 def write_stats_log (statslog_file, output_files):
+    """ Write stats log.
+   
+    Notes
+    -----
+    The following information is logged of all output files:
+        * File name 
+        * Last modified 
+        * File size
+
+    Parameters
+    ----------
+    statslog_file : str
+        Path to write stats log. 
+
+    output_files : list
+        List of output files to log stats.
+
+    Returns
+    -------
+    None
+    """
+
     header = "file name\tlast modified\tfile size"
     
     with open(statslog_file, 'w') as STATSLOG:
@@ -136,6 +251,24 @@ def write_stats_log (statslog_file, output_files):
 
 
 def write_heads_log(headslog_file, output_files, num_lines = 10):
+    """ Write headers log.
+
+    Parameters
+    ----------
+    statsheads_file : str
+        Path to write headers log. 
+
+    output_files : list
+        List of output files to log headers.
+
+    num_lines: int, optional
+        Number of lines for headers. Default is 10.
+
+    Returns
+    -------
+    None
+    """
+
     header = "File headers"
 
     with open(headslog_file, 'w') as HEADSLOG:      

@@ -10,30 +10,36 @@ from private.utility import glob_recursive
 
 
 def write_link_logs(link_map,
-                   link_statslog = metadata.settings['link_statslog'],
-                   link_headslog = metadata.settings['link_headslog'],
-                   link_maplog = metadata.settings['link_maplog'],
-                   recursive = float('inf')):     
+                    link_statslog = metadata.settings['link_statslog'],
+                    link_headslog = metadata.settings['link_headslog'],
+                    link_maplog = metadata.settings['link_maplog'],
+                    recursive = float('inf')):     
     
-    """ Make link logs.
+    """ Write link logs.
 
     Notes
     -----
     The following information is logged:
-        * File path of 
-        * File name (link_statslog)
-        * Last modified (link_statslog)
-        * File size
-        * 
+        * Mapping of symlinks to targets (link map log)
+        * Details on files contained in targets: 
+            * File name (link stats log)
+            * Last modified (link stats log)
+            * File size (link stats log)
+            * File head (link headers log)
+        * When walking through target directories, recursive determines depth.
 
     Parameters
     ----------
-    path : str
-        Path to remove.
-    option : str
-        Options for shell command. Defaults to options specified in metadata.
-    quiet : bool
-        Option to print deleted file paths. Defaults to False. 
+    link_map : list 
+        Mapping of symlinks to targets (returned by LinksList).
+    link_statslog : str, optional
+        Path to write link stats log. Defaults to path specified in metadata.
+    link_headslog : str, optional
+        Path to write link headers log. Defaults to path specified in metadata.
+    link_maplog : str, optional
+        Path to write link map log. Defaults to path specified in metadata.
+    recursive : int, optional
+        Level of depth when walking through target directories. Defaults to infinite.
 
     Returns
     -------
@@ -49,8 +55,21 @@ def write_link_logs(link_map,
     write_link_maplog(link_maplog, link_map)
     
 
-def write_link_maplog(link_maplog, link_map):
+def write_link_maplog(link_map, link_maplog):
+    
+    """ Make link map log.
 
+    Parameters
+    ----------
+    link_map : list 
+        Mapping of symlinks to targets (returned by LinksList).
+    link_maplog : str
+        Path to write link map log. Defaults to path specified in metadata.
+
+    Returns
+    -------
+    None
+    """
     header = 'target\tsymlink'
 
     with open(link_maplog, 'w') as MAPLOG:

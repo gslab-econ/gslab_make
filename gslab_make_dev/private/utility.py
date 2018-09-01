@@ -14,6 +14,8 @@ import private.metadata as metadata
 
 
 def norm_path(path):
+    """ Normalizes path to be OS-compatible. """
+
     path = re.split('[/\\\\]+', path)
     path = os.path.sep.join(path)
     path = path.rstrip(os.path.sep)
@@ -22,12 +24,27 @@ def norm_path(path):
     return path
 
 
-def glob_recursive(path, recur_lim):
+def glob_recursive(path, recursive):
+    """ Walks through path.
+
+    Parameters
+    ----------
+    path : str
+        Path to walk through.
+    recursive : int
+        Level of depth when walking through path
+
+    Returns
+    -------
+    path_files : list
+        List of files contained in path.
+    """
+
     path = norm_path(path)
     path_files = []
 
     i = 0 
-    while i <= recur_lim:          
+    while i <= recursive:          
         path = os.path.join(path, "*")
         glob_files = glob.glob(path)
         if glob_files:
