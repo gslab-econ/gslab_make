@@ -12,7 +12,7 @@ from private.programdirective import Directive, ProgramDirective, SASDirective, 
 
 
 def run_stata(**kwargs):
-    """ Run Stata script.
+    """ Run Stata script using shell command.
 
     Parameters
     ----------
@@ -32,7 +32,7 @@ def run_stata(**kwargs):
     option : str, optional
         Options for shell command. Defaults to options specified in metadata.
     args : str, optional
-        Only used for Python and Perl. 
+        Not applicable.
 
     Returns
     -------
@@ -56,7 +56,7 @@ def run_stata(**kwargs):
 
 
 def run_matlab(**kwargs):
-    """ Run Matlab script.
+    """ Run Matlab script using shell command.
 
     Parameters
     ----------
@@ -76,7 +76,7 @@ def run_matlab(**kwargs):
     option : str, optional
         Options for shell command. Defaults to options specified in metadata.
     args : str, optional
-        Only used for Python and Perl. 
+        Not applicable.
 
     Returns
     -------
@@ -99,7 +99,7 @@ def run_matlab(**kwargs):
         
 
 def run_perl(**kwargs):
-    """ Run Perl script.
+    """ Run Perl script using shell command.
 
     Parameters
     ----------
@@ -139,7 +139,7 @@ def run_perl(**kwargs):
 
 
 def run_python(**kwargs):
-    """ Run Python script.
+    """ Run Python script using shell command.
 
     Parameters
     ----------
@@ -179,7 +179,7 @@ def run_python(**kwargs):
         
 
 def run_mathematica(**kwargs):
-    """ Run Mathematica script.
+    """ Run Mathematica script using shell command.
 
     Parameters
     ----------
@@ -199,7 +199,7 @@ def run_mathematica(**kwargs):
     option : str, optional
         Options for shell command. Defaults to options specified in metadata.
     args : str, optional
-        Only used for Python and Perl.
+        Not applicable.
         
     Returns
     -------
@@ -219,7 +219,7 @@ def run_mathematica(**kwargs):
         
 
 def run_stat_transfer(**kwargs):
-    """ Run StatTransfer script.
+    """ Run StatTransfer script using shell command.
 
     Parameters
     ----------
@@ -239,7 +239,7 @@ def run_stat_transfer(**kwargs):
     option : str, optional
         Options for shell command. Defaults to options specified in metadata.
     args : str, optional
-        Only used for Python and Perl.
+        Not applicable.
 
     Returns
     -------
@@ -258,8 +258,39 @@ def run_stat_transfer(**kwargs):
         raise Exception
         
 
-def run_lyx(**kwargs): # Check
+def run_lyx(**kwargs): 
+    """ Run Lyx script using shell command.
 
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+    program : str
+        Path of script to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str, optional
+        Options for shell command. Defaults to options specified in metadata.
+    args : str, optional
+        Not applicable.
+    doctype : str, optional
+       Type of Lyx document. Takes either `handout` and `comments`. 
+       Defaults to no special document type.
+    pdfout : str, optional
+        Directory to write PDF. Defaults to directory specified in metadata.
+        
+    Returns
+    -------
+    None
+    """
+    
     try:
         directive = LyxDirective(application = 'lyx', **kwargs)
             
@@ -303,7 +334,7 @@ def run_lyx(**kwargs): # Check
         
 
 def run_r(**kwargs):
-    """ Run R script.
+    """ Run R script using shell command.
 
     Parameters
     ----------
@@ -323,7 +354,7 @@ def run_r(**kwargs):
     option : str, optional
         Options for shell command. Defaults to options specified in metadata.
     args : str, optional
-        Only used for Python and Perl.
+        Not applicable.
 
     Returns
     -------
@@ -343,7 +374,7 @@ def run_r(**kwargs):
         
 
 def run_sas(**kwargs):
-     """ Run StatTransfer script.
+    """ Run SAS script using shell command.
 
     Parameters
     ----------
@@ -363,7 +394,7 @@ def run_sas(**kwargs):
     option : str, optional
         Options for shell command. Defaults to options specified in metadata.
     args : str, optional
-        Only used for Python and Perl.
+        Not applicable.
     lst : str, optional
         Path of program lst. Program lst is only written if specified. 
         
@@ -390,7 +421,7 @@ def run_sas(**kwargs):
         
 
 def execute_command(command, **kwargs):
-     """ Run shell command.
+    """ Run shell command.
 
     Parameters
     ----------
@@ -411,13 +442,13 @@ def execute_command(command, **kwargs):
     None
     """
     
-   try:
-       directive = Directive(**kwargs)
+    try:
+        directive = Directive(**kwargs)
 
-       # Execute
-       directive.execute_command(command)
-       directive.write_log()   
-   except Exception as e:
-       print(e)
-       raise Exception
+        # Execute
+        directive.execute_command(command)
+        directive.write_log()   
+    except Exception as e:
+        print(e)
+        raise Exception
         

@@ -31,7 +31,7 @@ def write_link_logs(link_map,
     Parameters
     ----------
     link_map : list 
-        Mapping of symlinks to targets (returned by LinksList).
+        Mapping of symlinks to targets (returned from `LinksList.create_symlinks`).
     link_statslog : str, optional
         Path to write link stats log. Defaults to path specified in metadata.
     link_headslog : str, optional

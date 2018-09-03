@@ -1,0 +1,81 @@
+I. Directory functions
+
+dir_mod.check_os()
+Confirms that operating system is Unix or Windows. If operating system is neither, raises exception. 
+Note: `gslab_make` only supports Unix or Windows. 
+
+dir_mod.clear_dir(dir_list)
+Removes all directory trees in list __dir_list__ using shell command. Safetly deletes symbolic links.
+
+dir_mod.unzip(zip_path, 
+              output_dir)
+Unzips file __zip_path__ into directory __output_dir__.
+
+dir_mod.zip_dir(source_dir, 
+                zip_dest)
+Zips directory __source_dir__ into file __zip_dest__. 
+
+I. Logging functions
+
+write_logs.set_option
+Sets default paths. The following default paths can be changed:
+
+* 'link_dir' = '../input/'
+  Default path for writing and finding inputs (in the form of symbolic links).
+* 'temp_dir' = '../temp/'
+  Default path for writing temporary PDFs.
+* 'output_dir' = '../output/'
+  Default path for writing PDFs and finding outputs for logging.
+* 'makelog' = '../log/make.log'
+  Default path for writing make log.
+* 'output_statslog' = '../log/output_stats.log'
+  Default path for writing output stats log.
+* 'output_headslog' = '../log/output_heads.log'
+  'linklog' = '../log/link.log'
+* Default path for writing link log.
+  'link_maplog' = '../log/link_map.log'
+* Default path for writing link mapping log.
+  'link_statslog' = '../log/link_stats.log',
+* Default path for writing link stats log.
+  'link_headslog' = '../log/link_heads.log'
+* Default path for writing link headers log.	
+	
+write_logs.start_makelog(makelog = '../log/make.log')
+Starts new make log at __makelog__, recording start time. Sets make log start condition to True, which is needed by other functions to confirm make log exists.
+
+write_logs.end_makelog(makelog = '../log/make.log')
+End make log at __makelog__, recording end time. 
+
+write_logs.start_log(log, 
+                     log_type)
+					 
+write_logs.end_log(LOG, 
+                   log_type, 
+				   makelog = '')
+
+write_logs.write_output_logs(output_dir = '../output/', 
+                             output_statslog = '../log/output_stats.log', 
+							 output_headslog = '../log/output_heads.log',
+							 recursive = float('inf'))
+
+III.
+create_links.create_links(file_list, 
+                          link_dir = '../input/', 
+						  makelog = '../log/make.log')
+						  
+Create symbolic links using instructions contained in files of list __file_list. Symbolic links are written in __link_dir__.
+
+IV.
+write_link_logs.write_link_logs(link_map, link_statslog = '../log/link_stats.log', link_headslog = '../log/link_heads.log', link_maplog = '../log/link_map.log', recursive = float('inf'))
+
+V.
+run_program.run_stata()
+run_program.run_matlab()
+run_program.run_perl()
+run_program.run_python()
+run_program.run_mathematica()
+run_program.run_stat_transfer()
+run_program.run_lyx()
+run_program.run_r()
+run_program.run_sas()
+run_program.execute_command()

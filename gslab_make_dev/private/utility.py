@@ -36,7 +36,7 @@ def glob_recursive(path, recursive):
     path : str
         Path to walk through.
     recursive : int
-        Level of depth when walking through path
+        Level of depth when walking through path.
 
     Returns
     -------
@@ -61,12 +61,12 @@ def glob_recursive(path, recursive):
 
  
 def file_to_array(file_name):
-    """ Read path and extract lines to list. 
+    """ Read file and extract lines to list. 
 
     Parameters
     ----------
     file_name : str
-        Path to read.
+        Path of file to read.
 
     Returns
     -------

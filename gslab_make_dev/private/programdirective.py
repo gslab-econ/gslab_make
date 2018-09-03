@@ -62,7 +62,7 @@ class Directive(object):
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):   
-        """ Normalizes paths.   
+        """ Normalize paths.   
         
         Returns
         -------
@@ -223,7 +223,7 @@ class ProgramDirective(Directive):
         if not self.option:
             self.option = metadata.default_options[self.osname][self.application]
 
-    def move_program_output(self, program_output, log = ''):
+    def move_program_output(self, program_output, log_file = ''):
         """ Move program outputs.
         
         Notes
@@ -235,8 +235,8 @@ class ProgramDirective(Directive):
         ----------
         program_output : str
              Path of program output.
-        log : str, optional
-             Path of directive log. Directive log is only written if specified.  
+        log_file : str, optional
+             Path of log file. Log file is only written if specified.  
 
         """
     
@@ -254,9 +254,9 @@ class ProgramDirective(Directive):
             with open(self.makelog, 'a') as f:
                 f.write(out)
 
-        if log: 
-            if program_output != log:
-                shutil.copy2(program_output, log)
+        if log_file: 
+            if program_output != log_file:
+                shutil.copy2(program_output, log_file)
                 os.remove(program_output)
         else: 
             os.remove(program_output)
@@ -299,8 +299,11 @@ class LyxDirective(ProgramDirective):
     ----------
     See `ProgramDirective`.
     
-    doctype : str
-    pdf out : str
+    doctype : str, optional
+       Type of Lyx document. Takes either `handout` and `comments`. 
+       Defaults to no special document type.
+    pdfout : str, optional
+        Directory to write PDF. Defaults to directory specified in metadata.
     """
     
     def __init__(self, 
@@ -311,9 +314,29 @@ class LyxDirective(ProgramDirective):
         super(LyxDirective, self).__init__(**kwargs)
         self.doctype = doctype
         self.pdfout  = pdfout
+        self.check_doctype()
         self.get_pdfout()
 
+    def check_doctype(self):
+        """ Check document type is valid.
+        
+        Returns
+        -------
+        None
+        """
+    
+        if self.doctype not in ['handout', 'comments', '']:
+            print('Document type "%s"unrecognized. Reverting to default' % self.doctype)
+            self.doctype = ''
+            
     def get_pdfout(self):
+        """ Get PDF output directory.
+        
+        Returns
+        -------
+        None
+        """
+        
         if self.doctype:
             self.pdfout = metadata.settings['temp_dir']
 

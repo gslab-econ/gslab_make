@@ -3,9 +3,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
-import os
-
-from dir_mod import remove_path
 from write_logs import start_log, end_log
 from private.linkdirective import LinksList
 import private.metadata as metadata
@@ -35,7 +32,7 @@ def create_links(file_list,
         LINKLOG = start_log(metadata.settings['linklog'], 'Linklog')
         
         link_list = LinksList(file_list, link_dir)
-        link_map = link_list.make_symlinks()
+        link_map = link_list.create_symlinks()
         
         end_log(LINKLOG, 'Linklog', makelog)
         

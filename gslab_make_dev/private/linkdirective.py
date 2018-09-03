@@ -147,7 +147,7 @@ class LinkDirective(object):
         return wildcards
 
     def fill_in_wildcards(self, wildcards):
-        """ Fill in symlink path wildcards.
+        """ Fill in wildcards for symlink path.
         
         Notes
         -----
@@ -157,7 +157,7 @@ class LinkDirective(object):
         Parameters
         ----------
         wildcards: iterator
-           Extracted wildcard characters from `extract_wildcards`.
+           Extracted wildcard characters (returned from `extract_wildcards`).
         
         Returns
         -------
@@ -233,8 +233,7 @@ class LinksList(object):
     Attributes
     ----------
     link_directive_list : list
-        List of symlink directives.
-        
+        List of symlink directives.   
     """
     
     def __init__(self, 
@@ -288,8 +287,8 @@ class LinksList(object):
                 directive = LinkDirective(line, self.link_dir)
                 self.link_directive_list.append(directive)
 
-    def make_symlinks(self):       
-        """ Make symlinks according to directives. 
+    def create_symlinks(self):       
+        """ Create symlinks according to directives. 
         
         Returns
         -------

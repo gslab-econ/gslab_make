@@ -16,7 +16,12 @@ from private.utility import norm_path
 
 
 def check_os():
-    """ Check OS is either POSIX or NT. """
+    """ Check OS is either POSIX or NT. 
+    
+    Returns
+    -------
+    None
+    """
 
     if (os.name != 'posix') & (os.name != 'nt'):
         raise CritError(messages.crit_error_unknown_system % os.name)
@@ -106,9 +111,9 @@ def zip_dir(source_dir, zip_dest):
     Parameters
     ----------
     source_dir : str
-        Path of directory to zip
+        Path of directory to zip.
     zip_dest : str
-        Destination of zip file
+        Destination of zip file.
 
     Returns
     -------

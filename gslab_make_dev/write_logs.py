@@ -15,7 +15,12 @@ from private.utility import norm_path, glob_recursive
 
 
 def set_option(**kwargs):
-    """ Set global options. See metadata for default options. """
+    """ Set global options. See metadata for default options. 
+    
+    Returns
+    -------
+    None
+    """
 
     kwargs = {re.sub('_file$|_dir$', '', k):v for k, v in kwargs.items()}
 
