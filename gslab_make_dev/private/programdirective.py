@@ -13,7 +13,30 @@ import private.metadata as metadata
 from private.utility import norm_path
 
 class Directive(object):
+    """
+    Directive.
+    
+    Notes
+    -----
+    Contains instructions on how to run shell commands.
 
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of directive log. Directive log is only written if specified.  
+
+    Returns
+    -------
+    None
+    """
+    
     def __init__(self, 
                  osname = os.name,
                  shell = False,
@@ -28,14 +51,39 @@ class Directive(object):
         self.get_paths()
 
     def check_os(self):
+        """ Check OS is either POSIX or NT. 
+        
+        Returns
+        -------
+        None
+        """    
+        
         if (self.osname != 'posix') & (self.osname != 'nt'):
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
-    def get_paths(self):    
+    def get_paths(self):   
+        """ Normalizes paths.   
+        
+        Returns
+        -------
+        None  
+        """
         self.makelog  = norm_path(self.makelog)
         self.log      = norm_path(self.log) if self.log != '' else self.log        
 
     def execute_command(self, command):   
+        """ Execute shell command.
+        
+        Parameters
+        ----------
+        command : str
+            Shell command to execute.
+        
+        Returns
+        -------
+        None
+        """
+        
         command = command.split()
         self.output = 'Executing: "' + ' '.join(command) + "'"
         print(self.output)
@@ -51,6 +99,12 @@ class Directive(object):
              self.output += '\n' + error_message
 
     def write_log(self):
+        """ Write logs for shell command.
+        
+        Returns
+        -------
+        None
+        """
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)
@@ -63,7 +117,44 @@ class Directive(object):
 
 
 class ProgramDirective(Directive):
+    """
+    Program directive.
+    
+    Notes
+    -----
+    Contains instructions on how to run a program through shell command.
 
+    Parameters
+    ----------
+    See `Directive`.
+    
+    application : str
+        Name of application to run program.
+    program : str
+        Path of program to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str, optional
+        Options for shell command. Defaults to options specified in metadata.
+    args : str, optional
+        Arguments for shell command. Defaults to no arguments.
+        
+    Attributes
+    ----------
+    program_dir : str
+        Directory of program parsed from program.
+    program_base : str
+        `program_name.program_ext` of program parsed from program.
+    program_name : str
+        Name of program parsed from program.
+    program_ext : str
+        Extension of program parsed from program.
+        
+    Returns
+    -------
+    None
+    """
+    
     def __init__(self, 
                  application, 
                  program,
@@ -84,12 +175,26 @@ class ProgramDirective(Directive):
         self.get_option()
 
     def parse_program(self):
+        """ Parse program for directory, name, and extension.
+        
+        Returns
+        -------
+        None
+        """
+    
         self.program      = norm_path(self.program)
-        self.program_path = os.path.dirname(self.program)
+        self.program_dir = os.path.dirname(self.program)
         self.program_base = os.path.basename(self.program)
         self.program_name, self.program_ext = os.path.splitext(self.program_base)
 
     def check_program(self):
+        """ Check program exists and has correct extension given application.
+        
+        Returns
+        -------
+        None
+        """  
+    
         if not os.path.isfile(self.program):
             raise CritError(messages.crit_error_no_file % self.program)
             
@@ -97,16 +202,42 @@ class ProgramDirective(Directive):
             raise CritError(messages.crit_error_extension % self.program)
 
     def get_executable(self):
+        """ Set executable to default from metadata if unspecified.
+        
+        Returns
+        -------
+        None
+        """
+        
         if not self.executable:
             self.executable = metadata.default_executables[self.osname][self.application]
 
     def get_option(self):
+        """ Set options to default from metadata if unspecified.
+        
+        Returns
+        -------
+        None
+        """
+
         if not self.option:
             self.option = metadata.default_options[self.osname][self.application]
 
     def move_program_output(self, program_output, log = ''):
-        """
-        Certain programs create outputs that need to be moved to appropriate logging files.
+        """ Move program outputs.
+        
+        Notes
+        -----
+        Certain applications create program outputs that need to be moved to 
+        appropriate logging files.
+        
+        Parameters
+        ----------
+        program_output : str
+             Path of program output.
+        log : str, optional
+             Path of directive log. Directive log is only written if specified.  
+
         """
     
         try:
@@ -123,7 +254,7 @@ class ProgramDirective(Directive):
             with open(self.makelog, 'a') as f:
                 f.write(out)
 
-        if self.log: 
+        if log: 
             if program_output != log:
                 shutil.copy2(program_output, log)
                 os.remove(program_output)
@@ -133,6 +264,20 @@ class ProgramDirective(Directive):
 
 class SASDirective(ProgramDirective):    
 
+    """
+    SAS directive.
+    
+    Notes
+    -----
+    Contains instructions on how to run a SAS program through shell command.
+
+    Parameters
+    ----------
+    See `ProgramDirective`.
+    
+    lst : str, optional
+       Path of directive lst. Directive lst is only written if specified.  
+    """
     def __init__(self, 
                  lst = '', 
                  **kwargs):
@@ -143,6 +288,21 @@ class SASDirective(ProgramDirective):
 
 class LyxDirective(ProgramDirective):    
 
+    """
+    Lyx directive.
+    
+    Notes
+    -----
+    Contains instructions on how to run a Lyx program through shell command.
+
+    Parameters
+    ----------
+    See `ProgramDirective`.
+    
+    doctype : str
+    pdf out : str
+    """
+    
     def __init__(self, 
                  doctype = '',
                  pdfout = metadata.settings['output_dir'],

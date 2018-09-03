@@ -25,7 +25,11 @@ def norm_path(path):
 
 
 def glob_recursive(path, recursive):
-    """ Walks through path.
+    """ Walks through path. 
+    
+    Notes
+    -----
+    Takes glob-style wildcards.
 
     Parameters
     ----------
@@ -57,10 +61,25 @@ def glob_recursive(path, recursive):
 
  
 def file_to_array(file_name):
+    """ Read path and extract lines to list. 
+
+    Parameters
+    ----------
+    file_name : str
+        Path to read.
+
+    Returns
+    -------
+    array : list
+        List of lines contained in file.
+    """
+    
+    
     if not os.path.isfile(file_name):
         raise CritError(messages.crit_error_file % file_name)        
 
     with open(file_name, 'r') as f:
         array = [line for line in f if not re.match('\s*\#',line)]
-        return array
+                                                    
+    return array
 

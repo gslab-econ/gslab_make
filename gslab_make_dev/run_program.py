@@ -29,10 +29,10 @@ def run_stata(**kwargs):
         Path of script to run.
     executable : str, optional
         Executable to use for shell command. Defaults to executable specified in metadata.
-    option : str
+    option : str, optional
         Options for shell command. Defaults to options specified in metadata.
-    args : str
-        Only used for Python and Perl scripts. 
+    args : str, optional
+        Only used for Python and Perl. 
 
     Returns
     -------
@@ -56,7 +56,33 @@ def run_stata(**kwargs):
 
 
 def run_matlab(**kwargs):
+    """ Run Matlab script.
 
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+    program : str
+        Path of script to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str, optional
+        Options for shell command. Defaults to options specified in metadata.
+    args : str, optional
+        Only used for Python and Perl. 
+
+    Returns
+    -------
+    None
+    """
+    
     try:
         directive = ProgramDirective(application = 'matlab', **kwargs)
         
@@ -73,7 +99,33 @@ def run_matlab(**kwargs):
         
 
 def run_perl(**kwargs):
+    """ Run Perl script.
 
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+    program : str
+        Path of script to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str, optional
+        Options for shell command. Defaults to options specified in metadata.
+    args : str, optional
+        Arguments for shell command. Defaults to no arguments.
+
+    Returns
+    -------
+    None
+    """
+    
     try:
         directive = ProgramDirective(application = 'perl', **kwargs)
         
@@ -87,7 +139,33 @@ def run_perl(**kwargs):
 
 
 def run_python(**kwargs):
+    """ Run Python script.
 
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+    program : str
+        Path of script to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str, optional
+        Options for shell command. Defaults to options specified in metadata.
+    args : str, optional
+        Arguments for shell command. Defaults to no arguments.
+
+    Returns
+    -------
+    None
+    """
+    
     try:
         directive = ProgramDirective(application = 'python', **kwargs)
 
@@ -101,7 +179,33 @@ def run_python(**kwargs):
         
 
 def run_mathematica(**kwargs):
+    """ Run Mathematica script.
 
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+    program : str
+        Path of script to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str, optional
+        Options for shell command. Defaults to options specified in metadata.
+    args : str, optional
+        Only used for Python and Perl.
+        
+    Returns
+    -------
+    None
+    """
+    
     try:
         directive = ProgramDirective(application = 'math', **kwargs)
 
@@ -115,7 +219,33 @@ def run_mathematica(**kwargs):
         
 
 def run_stat_transfer(**kwargs):
+    """ Run StatTransfer script.
 
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+    program : str
+        Path of script to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str, optional
+        Options for shell command. Defaults to options specified in metadata.
+    args : str, optional
+        Only used for Python and Perl.
+
+    Returns
+    -------
+    None
+    """
+    
     try:
         directive = ProgramDirective(application = 'st', **kwargs)
 
@@ -136,7 +266,7 @@ def run_lyx(**kwargs): # Check
         # Make handout/commented LyX file        
         if directive.doctype:
             temp_name = os.path.join(directive.program_name + '_' + directive.doctype)
-            temp_program = os.path.join(directive.program_path, temp_name + '.lyx') 
+            temp_program = os.path.join(directive.program_dir, temp_name + '.lyx') 
             
             beamer = False
             shutil.copy2(directive.program, temp_program) 
@@ -157,7 +287,7 @@ def run_lyx(**kwargs): # Check
         directive.write_log()
 
         # Move PDF output
-        temp_pdf = os.path.join(directive.program_path, temp_name + '.pdf')
+        temp_pdf = os.path.join(directive.program_dir, temp_name + '.pdf')
         output_pdf = os.path.join(directive.pdfout, directive.program_name + '.pdf')
 
         if temp_pdf != output_pdf:
@@ -173,7 +303,33 @@ def run_lyx(**kwargs): # Check
         
 
 def run_r(**kwargs):
+    """ Run R script.
 
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+    program : str
+        Path of script to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str, optional
+        Options for shell command. Defaults to options specified in metadata.
+    args : str, optional
+        Only used for Python and Perl.
+
+    Returns
+    -------
+    None
+    """
+    
     try:
         directive = ProgramDirective(application = 'r', **kwargs)
 
@@ -187,7 +343,35 @@ def run_r(**kwargs):
         
 
 def run_sas(**kwargs):
-    
+     """ Run StatTransfer script.
+
+    Parameters
+    ----------
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+    program : str
+        Path of script to run.
+    executable : str, optional
+        Executable to use for shell command. Defaults to executable specified in metadata.
+    option : str, optional
+        Options for shell command. Defaults to options specified in metadata.
+    args : str, optional
+        Only used for Python and Perl.
+    lst : str, optional
+        Path of program lst. Program lst is only written if specified. 
+        
+    Returns
+    -------
+    None
+    """
+
     try:
         directive = SASDirective(application = 'sas', **kwargs)
 
@@ -206,7 +390,27 @@ def run_sas(**kwargs):
         
 
 def execute_command(command, **kwargs):
+     """ Run shell command.
 
+    Parameters
+    ----------
+    command : str
+        Shell command to run.
+    osname : str, optional
+        Name of OS. Defaults to `os.name`.
+    shell : bool, optional
+        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        Defaults to False.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
+    log : str, optional
+        Path of shell command log. Shell command log is only written if specified. 
+        
+    Returns
+    -------
+    None
+    """
+    
    try:
        directive = Directive(**kwargs)
 
