@@ -46,27 +46,41 @@ Starts new make log at __makelog__, recording start time. Sets make log start co
 write_logs.end_makelog(makelog = '../log/make.log')
 End make log at __makelog__, recording end time. 
 
-write_logs.start_log(log, 
-                     log_type)
-					 
-write_logs.end_log(LOG, 
-                   log_type, 
-				   makelog = '')
-
 write_logs.write_output_logs(output_dir = '../output/', 
                              output_statslog = '../log/output_stats.log', 
 							 output_headslog = '../log/output_heads.log',
 							 recursive = float('inf'))
 
+Log the following information for all files contained in directory __output_dir__:
+  * File name (in file __output_statslog__)
+  * Last modified (in file __output_statslog__)
+  * File size (in file __output_statslog__)
+  * File head (in file __output_headslog__)
+
+When walking through __output_dir__, float __recursive__ determines level of depth to walk.
+
 III.
 create_links.create_links(file_list, 
-                          link_dir = '../input/', 
-						  makelog = '../log/make.log')
+                          link_dir = '../input/')
 						  
 Create symbolic links using instructions contained in files of list __file_list. Symbolic links are written in __link_dir__.
 
 IV.
-write_link_logs.write_link_logs(link_map, link_statslog = '../log/link_stats.log', link_headslog = '../log/link_heads.log', link_maplog = '../log/link_map.log', recursive = float('inf'))
+write_link_logs.write_link_logs(link_map, 
+                                link_statslog = '../log/link_stats.log', 
+								link_headslog = '../log/link_heads.log', 
+								link_maplog = '../log/link_map.log', 
+								recursive = float('inf'))
+								 
+Log the following information for files contained in all (target, symbolic link) mappings of list __link_map__:
+  * Mapping of symbolic links to targets (in __link_maplog__)
+  * Details on files contained in targets: 			
+    * File name (in file _link_statslog__)
+    * Last modified (in file __link_statslog__)
+    * File size (in file __link_statslog__)
+    * File head (in file __link_headslog__)
+
+When walking through target , float __recursive__ determines level of depth to walk.
 
 V.
 run_program.run_stata()

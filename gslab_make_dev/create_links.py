@@ -9,8 +9,7 @@ import private.metadata as metadata
 
 
 def create_links(file_list,
-                 link_dir = metadata.settings['link_dir'],
-                 makelog = metadata.settings['makelog']):
+                 link_dir = metadata.settings['link_dir']):
     """ Create symlinks from list of files containing linking instructions.
 
     Parameters
