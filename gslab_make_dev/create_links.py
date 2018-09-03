@@ -28,14 +28,10 @@ def create_links(file_list,
         List of (target, symlink) for each symlink created.
     """
 
-    try:         
-        LINKLOG = start_log(metadata.settings['linklog'], 'Linklog')
-        
+    try:              
         link_list = LinksList(file_list, link_dir)
         link_map = link_list.create_symlinks()
-        
-        end_log(LINKLOG, 'Linklog', makelog)
-        
+               
         return(link_map)
         
     except Exception as error:
