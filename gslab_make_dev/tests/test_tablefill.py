@@ -10,8 +10,6 @@ from subprocess import check_call, CalledProcessError
 
 # Ensure that Python can find and load the GSLab libraries
 #os.chdir(os.path.dirname(os.path.realpath(__file__)))
-sys.path.append('../..')
-
 from gslab_make_dev import tablefill
 from gslab_make_dev.tests import nostderrout
 

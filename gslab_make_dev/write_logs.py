@@ -8,10 +8,10 @@ import datetime
 import re
 import string
 
-import private.messages as messages
-import private.metadata as metadata
-from private.exceptionclasses import CritError, SyntaxError
-from private.utility import norm_path, glob_recursive
+import gslab_make_dev.private.messages as messages
+import gslab_make_dev.private.metadata as metadata
+from gslab_make_dev.private.exceptionclasses import CritError, SyntaxError
+from gslab_make_dev.private.utility import norm_path, glob_recursive
 
 
 def set_option(**kwargs):

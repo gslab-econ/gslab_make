@@ -158,12 +158,10 @@ file is exported.
 '''
 
 #Import make tools
-from make_log import (set_option, start_make_logging, end_make_logging, 
-                      add_log, del_log)
-from make_links import make_links
-from make_link_logs import make_link_logs
-from dir_mod import (clear_dirs, check_manifest, delete_files, 
-                     list_directory, remove_dir)
+from write_logs import (set_option, start_makelog, end_makelog, start_log, end_log,
+                      write_output_logs, write_stats_log, write_heads_log)
+from write_link_logs import write_link_logs
+from dir_mod import remove_path, clear_dir, unzip, zip_dir
 
 
 from run_program import run_stata, run_matlab, run_perl, run_python, run_mathematica

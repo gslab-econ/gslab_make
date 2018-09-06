@@ -7,8 +7,8 @@ import os
 import shutil
 import fileinput
 
-import private.metadata as metadata
-from private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
+import gslab_make_dev.private.metadata as metadata
+from gslab_make_dev.private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
 
 
 def run_stata(**kwargs):
