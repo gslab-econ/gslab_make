@@ -1,69 +1,91 @@
-I. Directory functions
+# Directory functions
 
-dir_mod.check_os()
-Confirms that operating system is Unix or Windows. If operating system is neither, raises exception. 
-Note: `gslab_make` only supports Unix or Windows. 
+<pre>
+dir_mod.<b>check_os()</b>
+</pre>
+> Confirms that operating system is Unix or Windows. If operating system is neither, raises exception. 
+> Note: `gslab_make` only supports Unix or Windows. 
 
-dir_mod.clear_dir(dir_list)
-Removes all directory trees in list __dir_list__ using shell command. Safely deletes symbolic links.
+<br>
 
-dir_mod.unzip(zip_path, 
-              output_dir)
-Unzips file __zip_path__ into directory __output_dir__.
+<pre>
+dir_mod.<b>clear_dir(dir_list)</b>
+</pre>
+> Removes all directory trees in list `dir_list` using shell command. Safely deletes symbolic links.
 
-dir_mod.zip_dir(source_dir, 
-                zip_dest)
-Zips directory __source_dir__ into file __zip_dest__. 
+<br>
 
-II. Logging functions
+<pre>
+dir_mod.<b>unzip(zip_path, output_dir)</b>
+</pre>
+> Unzips file `zip_path` into directory `output_dir`.
 
-write_logs.set_option
-Sets default paths. The following default paths can be changed:
+<br>
 
-* 'link_dir' = '../input/'
-  Default path for writing symbolic links to inputs.
-* 'temp_dir' = '../temp/'
-  Default path for writing temporary documents.
-* 'output_dir' = '../output/'
-  Default path for writing permanent documents.
-  Default path for finding outputs for logging.
-* 'makelog' = '../log/make.log'
-  Default path for writing make log.
-* 'output_statslog' = '../log/output_stats.log'
-  Default path for writing log containing output statistics.
-* 'output_headslog' = '../log/output_heads.log'
-  Default path for writing log containing output headers.
-* 'link_maplog' = '../log/link_map.log'
-  Default path for writing log containing link mappings..
-* 'link_statslog' = '../log/link_stats.log',
-  Default path for writing log containing link statistics.
-* 'link_headslog' = '../log/link_heads.log'
-  Default path for writing log containing link headers.	
+<pre>
+dir_mod.<b>zip_dir(source_dir, zip_dest)</b>
+</pre>
+> Zips directory `source_dir` into file `zip_dest`. 
+
+# Logging functions
+
+<pre>
+write_logs.<b>set_option()</b>
+</pre>
+
+> Sets default paths. The following default paths can be changed:
+> * `link_dir` = '../input/'
+> 
+> Default path for writing symbolic links to inputs. 
+> * `temp_dir` = '../temp/'
+> 
+> Default path for writing temporary documents.
+> * `output_dir` = '../output/' 
+> 
+> Default path for writing permanent documents. Default path for finding outputs for logging.
+> * `makelog` = '../log/make.log'
+> 
+> Default path for writing make log.
+> * `output_statslog` = '../log/output_stats.log'
+> 
+> Default path for writing log containing output statistics.
+> * `output_headslog` = '../log/output_heads.log'
+> 
+> Default path for writing log containing output headers.
+> * `link_maplog` = '../log/link_map.log'
+> 
+> Default path for writing log containing link mappings.
+> * `link_statslog` = '../log/link_stats.log'
+> 
+> Default path for writing log containing link statistics.
+> * `link_headslog` = '../log/link_heads.log'
+> 
+> Default path for writing log containing link headers.	
 	
 write_logs.start_makelog(makelog = '../log/make.log')
-Starts new make log at __makelog__, recording start time. Sets make log start condition to __True__, which is needed by other functions to confirm make log exists.
+Starts new make log at <b>makelog<b>, recording start time. Sets make log start condition to <b>True<b>, which is needed by other functions to confirm make log exists.
 
 write_logs.end_makelog(makelog = '../log/make.log')
-End make log at __makelog__, recording end time. 
+End make log at <b>makelog<b>, recording end time. 
 
 write_logs.write_output_logs(output_dir = '../output/', 
                              output_statslog = '../log/output_stats.log', 
 			     output_headslog = '../log/output_heads.log',
 			     recursive = float('inf'))
 
-Log the following information for all files contained in directory __output_dir__:
-  * File name (in file __output_statslog__)
-  * Last modified (in file __output_statslog__)
-  * File size (in file __output_statslog__)
-  * File head (in file __output_headslog__)
+Log the following information for all files contained in directory <b>output_dir<b>:
+  * File name (in file <b>output_statslog<b>)
+  * Last modified (in file <b>output_statslog<b>)
+  * File size (in file <b>output_statslog<b>)
+  * File head (in file <b>output_headslog<b>)
 
-When walking through __output_dir__, float __recursive__ determines level of depth to walk.
+When walking through <b>output_dir<b>, float <b>recursive<b> determines level of depth to walk.
 
 III. Linking functions
 create_links.create_links(file_list, 
                           link_dir = '../input/')
 						  
-Create symbolic links using instructions contained in files of list __file_list. Symbolic links are written in __link_dir__.
+Create symbolic links using instructions contained in files of list <b>file_list. Symbolic links are written in <b>link_dir<b>.
 
 IV. Link logging functions
 write_link_logs.write_link_logs(link_map, 
@@ -72,52 +94,52 @@ write_link_logs.write_link_logs(link_map,
 				link_maplog = '../log/link_map.log', 
 				recursive = float('inf'))
 								 
-Log the following information for files contained in all (target, symbolic link) mappings of list __link_map__ (returned by create_links.create_links):
-  * Mapping of symbolic links to targets (in __link_maplog__)
+Log the following information for files contained in all (target, symbolic link) mappings of list <b>link_map<b> (returned by create_links.create_links):
+  * Mapping of symbolic links to targets (in <b>link_maplog<b>)
   * Details on files contained in targets: 			
-    * File name (in file _link_statslog__)
-    * Last modified (in file __link_statslog__)
-    * File size (in file __link_statslog__)
-    * File head (in file __link_headslog__)
+    * File name (in file _link_statslog<b>)
+    * Last modified (in file <b>link_statslog<b>)
+    * File size (in file <b>link_statslog<b>)
+    * File head (in file <b>link_headslog<b>)
 
-When walking through target , float __recursive__ determines level of depth to walk.
+When walking through target , float <b>recursive<b> determines level of depth to walk.
 
 V. Program functions
 
 By default, 
 run_program.run_stata(program, arguments)
-Runs script __program__ using shell command, with script specified in the form of `'script.do'`. By default:
+Runs script <b>program<b> using shell command, with script specified in the form of `'script.do'`. By default:
 
 
 
-See __arguments__ for additional optional arguments that can be set.
+See <b>arguments<b> for additional optional arguments that can be set.
 
 run_program.run_matlab(program, arguments)
-Runs script __program__ using shell command, with script specified in the form of `'script.m'`.
+Runs script <b>program<b> using shell command, with script specified in the form of `'script.m'`.
 
 run_program.run_perl(program, arguments)
-Runs script __program__ using shell command, with script specified in the form of `'script.pl'`.
+Runs script <b>program<b> using shell command, with script specified in the form of `'script.pl'`.
 
 run_program.run_python(program, arguments)
-Runs script __program__ using shell command, with script specified in the form of `'script.py'`.
+Runs script <b>program<b> using shell command, with script specified in the form of `'script.py'`.
 
 run_program.run_mathematica(program, arguments)
-Runs script __program__ using shell command, with script specified in the form of `'script.m'`.
+Runs script <b>program<b> using shell command, with script specified in the form of `'script.m'`.
 
 run_program.run_stat_transfer(program, arguments)
-Runs script __program__ using shell command, with script specified in the form of `'script.stc'` or `'script.md'`.
+Runs script <b>program<b> using shell command, with script specified in the form of `'script.stc'` or `'script.md'`.
 
 run_program.run_lyx(program, options, arguments)
-Runs script __program__ using shell command, with script specified in the form of `'script.lyx'`.
+Runs script <b>program<b> using shell command, with script specified in the form of `'script.lyx'`.
 
 run_program.run_r(program, options, arguments)
-Runs script __program__ using shell command, with script specified in the form of `'script.R'`.
+Runs script <b>program<b> using shell command, with script specified in the form of `'script.R'`.
 
 run_program.run_sas(program, options, arguments)
-Runs script __program__ using shell command, with script specified in the form of `'script.sas'`.
+Runs script <b>program<b> using shell command, with script specified in the form of `'script.sas'`.
 
 run_program.execute_command(command, arguments)
-Runs shell command __command__.
+Runs shell command <b>command<b>.
 
 
 Arguments
