@@ -12,7 +12,7 @@ from gslab_make_dev.private.programdirective import Directive, ProgramDirective,
 
 
 def run_stata(**kwargs):
-    """ Run Stata script using shell command.
+    """ Run Stata script using system command.
 
     Parameters
     ----------
@@ -20,7 +20,7 @@ def run_stata(**kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
@@ -28,9 +28,9 @@ def run_stata(**kwargs):
     program : str
         Path of script to run.
     executable : str, optional
-        Executable to use for shell command. Defaults to executable specified in metadata.
+        Executable to use for system command. Defaults to executable specified in metadata.
     option : str, optional
-        Options for shell command. Defaults to options specified in metadata.
+        Options for system command. Defaults to options specified in metadata.
     args : str, optional
         Not applicable.
 
@@ -56,7 +56,7 @@ def run_stata(**kwargs):
 
 
 def run_matlab(**kwargs):
-    """ Run Matlab script using shell command.
+    """ Run Matlab script using system command.
 
     Parameters
     ----------
@@ -64,7 +64,7 @@ def run_matlab(**kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
@@ -72,9 +72,9 @@ def run_matlab(**kwargs):
     program : str
         Path of script to run.
     executable : str, optional
-        Executable to use for shell command. Defaults to executable specified in metadata.
+        Executable to use for system command. Defaults to executable specified in metadata.
     option : str, optional
-        Options for shell command. Defaults to options specified in metadata.
+        Options for system command. Defaults to options specified in metadata.
     args : str, optional
         Not applicable.
 
@@ -99,7 +99,7 @@ def run_matlab(**kwargs):
         
 
 def run_perl(**kwargs):
-    """ Run Perl script using shell command.
+    """ Run Perl script using system command.
 
     Parameters
     ----------
@@ -107,7 +107,7 @@ def run_perl(**kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
@@ -115,11 +115,11 @@ def run_perl(**kwargs):
     program : str
         Path of script to run.
     executable : str, optional
-        Executable to use for shell command. Defaults to executable specified in metadata.
+        Executable to use for system command. Defaults to executable specified in metadata.
     option : str, optional
-        Options for shell command. Defaults to options specified in metadata.
+        Options for system command. Defaults to options specified in metadata.
     args : str, optional
-        Arguments for shell command. Defaults to no arguments.
+        Arguments for system command. Defaults to no arguments.
 
     Returns
     -------
@@ -139,7 +139,7 @@ def run_perl(**kwargs):
 
 
 def run_python(**kwargs):
-    """ Run Python script using shell command.
+    """ Run Python script using system command.
 
     Parameters
     ----------
@@ -147,7 +147,7 @@ def run_python(**kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
@@ -155,11 +155,11 @@ def run_python(**kwargs):
     program : str
         Path of script to run.
     executable : str, optional
-        Executable to use for shell command. Defaults to executable specified in metadata.
+        Executable to use for system command. Defaults to executable specified in metadata.
     option : str, optional
-        Options for shell command. Defaults to options specified in metadata.
+        Options for system command. Defaults to options specified in metadata.
     args : str, optional
-        Arguments for shell command. Defaults to no arguments.
+        Arguments for system command. Defaults to no arguments.
 
     Returns
     -------
@@ -179,7 +179,7 @@ def run_python(**kwargs):
         
 
 def run_mathematica(**kwargs):
-    """ Run Mathematica script using shell command.
+    """ Run Mathematica script using system command.
 
     Parameters
     ----------
@@ -187,7 +187,7 @@ def run_mathematica(**kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
@@ -195,9 +195,9 @@ def run_mathematica(**kwargs):
     program : str
         Path of script to run.
     executable : str, optional
-        Executable to use for shell command. Defaults to executable specified in metadata.
+        Executable to use for system command. Defaults to executable specified in metadata.
     option : str, optional
-        Options for shell command. Defaults to options specified in metadata.
+        Options for system command. Defaults to options specified in metadata.
     args : str, optional
         Not applicable.
         
@@ -219,7 +219,7 @@ def run_mathematica(**kwargs):
         
 
 def run_stat_transfer(**kwargs):
-    """ Run StatTransfer script using shell command.
+    """ Run StatTransfer script using system command.
 
     Parameters
     ----------
@@ -227,7 +227,7 @@ def run_stat_transfer(**kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
@@ -235,9 +235,9 @@ def run_stat_transfer(**kwargs):
     program : str
         Path of script to run.
     executable : str, optional
-        Executable to use for shell command. Defaults to executable specified in metadata.
+        Executable to use for system command. Defaults to executable specified in metadata.
     option : str, optional
-        Options for shell command. Defaults to options specified in metadata.
+        Options for system command. Defaults to options specified in metadata.
     args : str, optional
         Not applicable.
 
@@ -259,7 +259,7 @@ def run_stat_transfer(**kwargs):
         
 
 def run_lyx(**kwargs): 
-    """ Run Lyx script using shell command.
+    """ Run Lyx script using system command.
 
     Parameters
     ----------
@@ -267,7 +267,7 @@ def run_lyx(**kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
@@ -275,9 +275,9 @@ def run_lyx(**kwargs):
     program : str
         Path of script to run.
     executable : str, optional
-        Executable to use for shell command. Defaults to executable specified in metadata.
+        Executable to use for system command. Defaults to executable specified in metadata.
     option : str, optional
-        Options for shell command. Defaults to options specified in metadata.
+        Options for system command. Defaults to options specified in metadata.
     args : str, optional
         Not applicable.
     doctype : str, optional
@@ -334,7 +334,7 @@ def run_lyx(**kwargs):
         
 
 def run_r(**kwargs):
-    """ Run R script using shell command.
+    """ Run R script using system command.
 
     Parameters
     ----------
@@ -342,7 +342,7 @@ def run_r(**kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
@@ -350,9 +350,9 @@ def run_r(**kwargs):
     program : str
         Path of script to run.
     executable : str, optional
-        Executable to use for shell command. Defaults to executable specified in metadata.
+        Executable to use for system command. Defaults to executable specified in metadata.
     option : str, optional
-        Options for shell command. Defaults to options specified in metadata.
+        Options for system command. Defaults to options specified in metadata.
     args : str, optional
         Not applicable.
 
@@ -374,7 +374,7 @@ def run_r(**kwargs):
         
 
 def run_sas(**kwargs):
-    """ Run SAS script using shell command.
+    """ Run SAS script using system command.
 
     Parameters
     ----------
@@ -382,7 +382,7 @@ def run_sas(**kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
@@ -390,9 +390,9 @@ def run_sas(**kwargs):
     program : str
         Path of script to run.
     executable : str, optional
-        Executable to use for shell command. Defaults to executable specified in metadata.
+        Executable to use for system command. Defaults to executable specified in metadata.
     option : str, optional
-        Options for shell command. Defaults to options specified in metadata.
+        Options for system command. Defaults to options specified in metadata.
     args : str, optional
         Not applicable.
     lst : str, optional
@@ -421,21 +421,21 @@ def run_sas(**kwargs):
         
 
 def execute_command(command, **kwargs):
-    """ Run shell command.
+    """ Run system command.
 
     Parameters
     ----------
     command : str
-        Shell command to run.
+        system command to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to `False`.
     makelog : str, optional
         Path of makelog. Defaults to path specified in metadata.
     log : str, optional
-        Path of shell command log. Shell command log is only written if specified. 
+        Path of system command log. system command log is only written if specified. 
         
     Returns
     -------
