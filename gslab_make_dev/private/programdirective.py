@@ -276,7 +276,7 @@ class SASDirective(ProgramDirective):
     See `ProgramDirective`.
     
     lst : str, optional
-       Path of directive lst. Directive lst is only written if specified.  
+        Path of directive lst. Directive lst is only written if specified.  
     """
     def __init__(self, 
                  lst = '', 
@@ -300,8 +300,8 @@ class LyxDirective(ProgramDirective):
     See `ProgramDirective`.
     
     doctype : str, optional
-       Type of Lyx document. Takes either `handout` and `comments`. 
-       Defaults to no special document type.
+        Type of Lyx document. Takes either `handout` and `comments`. 
+        Defaults to no special document type.
     pdfout : str, optional
         Directory to write PDF. Defaults to directory specified in metadata.
     """
