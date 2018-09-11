@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
 '''
+#UPDATE
 =======================================================
 gslab_make: a library of make.py and LyX filling tools
 =======================================================
