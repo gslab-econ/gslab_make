@@ -70,12 +70,12 @@ def start_makelog(makelog = metadata.settings['makelog']):
 
 
 def end_makelog(makelog = metadata.settings['makelog']):
-     """ End make log. Record end time.
+    """ End make log. Record end time.
 
     Parameters
     ----------
     makelog : str, optional
-        Path to write make log. Defaults to path specified in metadata.
+        Path of started make log. Defaults to path specified in metadata.
 
     Returns
     -------
@@ -100,20 +100,49 @@ def end_makelog(makelog = metadata.settings['makelog']):
     print(messages.note_working_directory + working_dir + '\n', file = MAKELOG)
     print(messages.note_dash_separator + '\n', file = MAKELOG)
     MAKELOG.close()
-        
+       
+    
+def write_error(error, makelog = metadata.settings['makelog']):
+    """ Write error to make log.
+
+    Parameters
+    ----------
+    error : str
+        Error message to write
+    makelog : str, optional
+        Path of started make log. Defaults to path specified in metadata.
+
+    Returns
+    -------
+    None
+    """
+
+    makelog = norm_path(makelog)
+
+    if not (metadata.makelog_started and os.path.isfile(makelog)):
+        raise CritError(messages.crit_error_no_makelog % makelog)
+
+    try:
+        MAKELOG = open(makelog, 'a')
+    except Exception as error:
+        raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
+
+    print(error + '\n', file = MAKELOG)
+    MAKELOG.close()
+    
+    
 def write_output_logs(output_dir = metadata.settings['output_dir'],
                       output_statslog = metadata.settings['output_statslog'], 
                       output_headslog = metadata.settings['output_headslog'],
                       recursive = float('inf')):
-
     """ Write output logs.
 
     Notes
     -----
     The following information is logged of all files contained in output directory:
-        * File name (output stats log)
-        * Last modified (output stats log)
-        * File size (output stats log)
+        * File name (output statistics log)
+        * Last modified (output statistics log)
+        * File size (output statistics log)
         * File head (output headers log)
     * When walking through output directory, recursive determines depth.
 
@@ -122,7 +151,7 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
     output_dir : str, optional
         Path of output directory. Defaults to path specified in metadata.
     output_statslog : str, optional
-        Path to write output stats log. Defaults to path specified in metadata.
+        Path to write output statistics log. Defaults to path specified in metadata.
     output_headslog : str, optional
         Path to write output headers log. Defaults to path specified in metadata.
     recursive : int, optional
@@ -145,7 +174,7 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
     
 
 def write_stats_log (statslog_file, output_files):
-    """ Write stats log.
+    """ Write statistics log.
    
     Notes
     -----
@@ -157,10 +186,10 @@ def write_stats_log (statslog_file, output_files):
     Parameters
     ----------
     statslog_file : str
-        Path to write stats log. 
+        Path to write statistics log. 
 
     output_files : list
-        List of output files to log stats.
+        List of output files to log statistics.
 
     Returns
     -------
@@ -185,7 +214,7 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
 
     Parameters
     ----------
-    statsheads_file : str
+    headslog_file : str
         Path to write headers log. 
 
     output_files : list

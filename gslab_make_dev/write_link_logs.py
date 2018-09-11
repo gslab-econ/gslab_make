@@ -13,8 +13,7 @@ def write_link_logs(link_map,
                     link_statslog = metadata.settings['link_statslog'],
                     link_headslog = metadata.settings['link_headslog'],
                     link_maplog = metadata.settings['link_maplog'],
-                    recursive = float('inf')):     
-    
+                    recursive = float('inf')):        
     """ Write link logs.
 
     Notes
@@ -22,9 +21,9 @@ def write_link_logs(link_map,
     The following information is logged:
         * Mapping of symlinks to targets (link map log)
         * Details on files contained in targets: 
-            * File name (link stats log)
-            * Last modified (link stats log)
-            * File size (link stats log)
+            * File name (link statistics log)
+            * Last modified (link statistics log)
+            * File size (link statistics log)
             * File head (link headers log)
         * When walking through target directories, recursive determines depth.
 
@@ -33,7 +32,7 @@ def write_link_logs(link_map,
     link_map : list 
         Mapping of symlinks to targets (returned from `LinksList.create_symlinks`).
     link_statslog : str, optional
-        Path to write link stats log. Defaults to path specified in metadata.
+        Path to write link statistics log. Defaults to path specified in metadata.
     link_headslog : str, optional
         Path to write link headers log. Defaults to path specified in metadata.
     link_maplog : str, optional
@@ -56,7 +55,6 @@ def write_link_logs(link_map,
     
 
 def write_link_maplog(link_map, link_maplog):
-    
     """ Make link map log.
 
     Parameters
@@ -64,12 +62,13 @@ def write_link_maplog(link_map, link_maplog):
     link_map : list 
         Mapping of symlinks to targets (returned by LinksList).
     link_maplog : str
-        Path to write link map log. Defaults to path specified in metadata.
+        Path to write link map log.
 
     Returns
     -------
     None
     """
+    
     header = 'target\tsymlink'
 
     with open(link_maplog, 'w') as MAPLOG:

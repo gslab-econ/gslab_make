@@ -9,7 +9,7 @@ import fileinput
 
 import gslab_make_dev.private.metadata as metadata
 from gslab_make_dev.private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
-
+from write_logs import write_error
 
 def run_stata(**kwargs):
     """ Run Stata script using system command.
@@ -50,8 +50,8 @@ def run_stata(**kwargs):
         directive.execute_command(command)
         directive.write_log()
         directive.move_program_output(program_log, directive.log)       
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with run_stata: \n" + error)
         raise Exception
 
 
@@ -93,8 +93,8 @@ def run_matlab(**kwargs):
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.program_name + '.log')
         directive.execute_command(command)    
         directive.move_program_output(program_log, directive.log)       
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with run_matlab: \n" + error)
         raise Exception
         
 
@@ -133,8 +133,8 @@ def run_perl(**kwargs):
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.args)
         directive.execute_command(command)
         directive.write_log()
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with run_perl: \n" + error)
         raise Exception
 
 
@@ -173,8 +173,8 @@ def run_python(**kwargs):
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.args)
         directive.execute_command(command)
         directive.write_log()
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with run_python: \n" + error)
         raise Exception
         
 
@@ -213,8 +213,8 @@ def run_mathematica(**kwargs):
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.program, directive.option)
         directive.execute_command(command)
         directive.write_log()
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with run_mathematica: \n" + error)
         raise Exception
         
 
@@ -253,8 +253,8 @@ def run_stat_transfer(**kwargs):
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.program)
         directive.execute_command(command)
         directive.write_log()
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with run_stat_transfer: \n" + error)
         raise Exception
         
 
@@ -328,8 +328,8 @@ def run_lyx(**kwargs):
         # Remove handout/commented LyX file
         if directive.doctype:
             os.remove(temp_program)
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with run_lyx: \n" + error)
         raise Exception
         
 
@@ -368,8 +368,8 @@ def run_r(**kwargs):
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program)
         directive.execute_command(command)
         directive.write_log()      
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with run_r: \n" + error)
         raise Exception
         
 
@@ -415,8 +415,8 @@ def run_sas(**kwargs):
         directive.execute_command(command)
         directive.move_program_output(program_log)
         directive.move_program_output(program_lst)        
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with run_sas: \n" + error)
         raise Exception
         
 
@@ -448,7 +448,7 @@ def execute_command(command, **kwargs):
         # Execute
         directive.execute_command(command)
         directive.write_log()   
-    except Exception as e:
-        print(e)
+    except Exception as error:
+        write_error("Error with execute_command: \n" + error)
         raise Exception
         

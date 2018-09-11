@@ -11,7 +11,6 @@ import time
 import gslab_make_dev.private.metadata as metadata
 import gslab_make_dev.private.messages as messages
 
-from gslab_make_dev.private.exceptionclasses import CustomError, CritError, SyntaxError, LogicError
 from gslab_make_dev.private.utility import norm_path
 
 

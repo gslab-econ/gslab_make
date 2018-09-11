@@ -26,7 +26,5 @@ syn_error_options = 'ERROR! Duplicate options specified'
 # 3) Notes & Warnings
 note_makelog_start = 'Makelog started: '
 note_makelog_end = 'Makelog ended: '
-note_log_start = '%s started: '
-note_log_end = '%s ended: '
 note_working_directory = 'Working directory: '
 note_dash_separator = '-' * 80

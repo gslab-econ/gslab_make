@@ -105,6 +105,7 @@ class Directive(object):
         -------
         None
         """
+        
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)
@@ -237,7 +238,6 @@ class ProgramDirective(Directive):
              Path of program output.
         log_file : str, optional
              Path of log file. Log file is only written if specified.  
-
         """
     
         try:
@@ -263,7 +263,6 @@ class ProgramDirective(Directive):
 
 
 class SASDirective(ProgramDirective):    
-
     """
     SAS directive.
     
@@ -287,7 +286,6 @@ class SASDirective(ProgramDirective):
 
 
 class LyxDirective(ProgramDirective):    
-
     """
     Lyx directive.
     

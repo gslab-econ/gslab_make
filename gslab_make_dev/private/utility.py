@@ -4,13 +4,11 @@ from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import os
-import datetime
 import re
 import glob
 
-from gslab_make_dev.private.exceptionclasses import CustomError, CritError
+from gslab_make_dev.private.exceptionclasses import CritError
 import gslab_make_dev.private.messages as messages
-import gslab_make_dev.private.metadata as metadata
 
 
 def norm_path(path):
@@ -73,8 +71,7 @@ def file_to_array(file_name):
     array : list
         List of lines contained in file.
     """
-    
-    
+       
     if not os.path.isfile(file_name):
         raise CritError(messages.crit_error_file % file_name)        
 

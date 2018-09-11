@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
 '''
-==============================================================
+=======================================================
 gslab_make: a library of make.py and LyX filling tools
-==============================================================
+=======================================================
 
 Description:
 make.py is a Python script that facilitates running programs in batch mode. 

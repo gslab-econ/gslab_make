@@ -3,10 +3,9 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
-from write_logs import start_log, end_log
 from private.linkdirective import LinksList
 import private.metadata as metadata
-
+from write_logs import write_error
 
 def create_links(file_list,
                  link_dir = metadata.settings['link_dir']):
@@ -34,5 +33,5 @@ def create_links(file_list,
         return(link_map)
         
     except Exception as error:
-        print("Error with make_links: \n", error)
+        write_error("Error with create_links: \n", error)
         raise Exception                    
