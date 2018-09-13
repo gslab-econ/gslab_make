@@ -3,10 +3,10 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
-import private.metadata as metadata
-from private.linkdirective import LinksList
+import gslab_make_dev.private.metadata as metadata
+from gslab_make_dev.private.linkdirective import LinksList
 
-from write_logs import write_to_makelog
+from gslab_make_dev.write_logs import write_to_makelog
 
 
 def create_links(file_list,

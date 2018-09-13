@@ -7,9 +7,9 @@ import os
 import shutil
 import fileinput
 
-import private.metadata as metadata
-from private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
-from write_logs import write_to_makelog
+import gslab_make_dev.private.metadata as metadata
+from gslab_make_dev.private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
+from gslab_make_dev.write_logs import write_to_makelog
 
 
 def run_stata(**kwargs):
