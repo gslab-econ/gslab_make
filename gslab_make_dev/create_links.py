@@ -3,9 +3,11 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
-from private.linkdirective import LinksList
 import private.metadata as metadata
+from private.linkdirective import LinksList
+
 from write_logs import write_to_makelog
+
 
 def create_links(file_list,
                  link_dir = metadata.settings['link_dir'],

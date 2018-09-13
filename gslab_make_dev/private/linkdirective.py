@@ -14,6 +14,7 @@ import gslab_make_dev.private.messages as messages
 import gslab_make_dev.private.metadata as metadata
 from gslab_make_dev.private.utility import norm_path, file_to_array
 
+
 class LinkDirective(object):
     """ 
     Directive for creating symlink(s).

@@ -3,10 +3,10 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
-import gslab_make_dev.private.metadata as metadata
+import private.metadata as metadata
 
-from gslab_make_dev.write_logs import write_stats_log, write_heads_log
-from gslab_make_dev.private.utility import glob_recursive
+from private.utility import glob_recursive
+from write_logs import write_stats_log, write_heads_log
 
 
 def write_link_logs(link_map,
