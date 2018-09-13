@@ -140,7 +140,7 @@ write_logs.<b>write_output_logs(</b><i>
 <pre>
 create_links.<b>create_links(</b><i>
     file_list, 
-	link_dir = '../input/'</i>, 
+	link_dir = '../input/', 
 	makelog = '../log/make.log'</i><b>
 )</b> 
 </pre>
@@ -154,12 +154,15 @@ create_links.<b>create_links(</b><i>
 <br>
 Suppose file 'file1' contained the following text:
 <br>
-</ul>
 <code># Each line of this file should contain a symbolic link and target delimited by a tab</code>
+<br>
 <code># Lines beginning with # are ignored</code>
+<br>
 <code>symlink1    target1</code>
+<br>
 <code>symlink2    target2</code>
-<ul>
+<br>
+<br>
 Symbolic links <code>symlink1</code> and <code>symlink2</code> would be created in directory <code>link_dir</code>. Their targets would be <code>target1</code> and <code>target2</code>, respectively. 
 <br>
 <br>
