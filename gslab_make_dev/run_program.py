@@ -9,7 +9,7 @@ import fileinput
 
 import gslab_make_dev.private.metadata as metadata
 from gslab_make_dev.private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
-from write_logs import write_error
+from write_logs import write_to_makelog
 
 def run_stata(**kwargs):
     """ Run Stata script using system command.
@@ -51,7 +51,7 @@ def run_stata(**kwargs):
         directive.write_log()
         directive.move_program_output(program_log, directive.log)       
     except Exception as error:
-        write_error("Error with run_stata: \n" + error)
+        write_to_makelog("Error with run_stata: \n" + error, directive.makelog)
         raise Exception
 
 
@@ -94,7 +94,7 @@ def run_matlab(**kwargs):
         directive.execute_command(command)    
         directive.move_program_output(program_log, directive.log)       
     except Exception as error:
-        write_error("Error with run_matlab: \n" + error)
+        write_to_makelog("Error with run_matlab: \n" + error, directive.makelog)
         raise Exception
         
 
@@ -134,7 +134,7 @@ def run_perl(**kwargs):
         directive.execute_command(command)
         directive.write_log()
     except Exception as error:
-        write_error("Error with run_perl: \n" + error)
+        write_to_makelog("Error with run_perl: \n" + error, directive.makelog)
         raise Exception
 
 
@@ -174,7 +174,7 @@ def run_python(**kwargs):
         directive.execute_command(command)
         directive.write_log()
     except Exception as error:
-        write_error("Error with run_python: \n" + error)
+        write_to_makelog("Error with run_python: \n" + error, directive.makelog)
         raise Exception
         
 
@@ -214,7 +214,7 @@ def run_mathematica(**kwargs):
         directive.execute_command(command)
         directive.write_log()
     except Exception as error:
-        write_error("Error with run_mathematica: \n" + error)
+        write_to_makelog("Error with run_mathematica: \n" + error, directive.makelog)
         raise Exception
         
 
@@ -254,7 +254,7 @@ def run_stat_transfer(**kwargs):
         directive.execute_command(command)
         directive.write_log()
     except Exception as error:
-        write_error("Error with run_stat_transfer: \n" + error)
+        write_to_makelog("Error with run_stat_transfer: \n" + error, directive.makelog)
         raise Exception
         
 
@@ -329,7 +329,7 @@ def run_lyx(**kwargs):
         if directive.doctype:
             os.remove(temp_program)
     except Exception as error:
-        write_error("Error with run_lyx: \n" + error)
+        write_to_makelog("Error with run_lyx: \n" + error, directive.makelog)
         raise Exception
         
 
@@ -369,7 +369,7 @@ def run_r(**kwargs):
         directive.execute_command(command)
         directive.write_log()      
     except Exception as error:
-        write_error("Error with run_r: \n" + error)
+        write_to_makelog("Error with run_r: \n" + error, directive.makelog)
         raise Exception
         
 
@@ -416,7 +416,7 @@ def run_sas(**kwargs):
         directive.move_program_output(program_log)
         directive.move_program_output(program_lst)        
     except Exception as error:
-        write_error("Error with run_sas: \n" + error)
+        write_to_makelog("Error with run_sas: \n" + error, directive.makelog)
         raise Exception
         
 
@@ -449,6 +449,6 @@ def execute_command(command, **kwargs):
         directive.execute_command(command)
         directive.write_log()   
     except Exception as error:
-        write_error("Error with execute_command: \n" + error)
+        write_to_makelog("Error with execute_command: \n" + error, directive.makelog)
         raise Exception
         

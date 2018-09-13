@@ -138,9 +138,13 @@ write_logs.<b>write_output_logs(</b><i>
 
 # Linking functions
 <pre>
-create_links.<b>create_links(</b><i>file_list, link_dir = '../input/'</i><b>)</b> 
+create_links.<b>create_links(</b><i>
+    file_list, 
+	link_dir = '../input/'</i>, 
+	makelog = '../log/make.log'</i><b>
+)</b> 
 </pre>
-> Create symbolic links using instructions contained in files of list `file_list`. Symbolic links are written in directory `link_dir`.
+> Create symbolic links using instructions contained in files of list `file_list`. Symbolic links are written in directory `link_dir`. Status messages are appended to make log `makelog`.
 
 <ul>
 <b>Example 1:</b>
@@ -230,7 +234,7 @@ run_program.<b>execute_command(</b><i>
     log = ''</i><b>
 )</b>
 </pre>
-> Runs system command `command`, assuming operating system `osname` and shell execution boolean `shell`. Outputs are appended to make log file `makelog` and written to program log file `log`.
+> Runs system command `command`, assuming operating system `osname` and shell execution boolean `shell`. Outputs are appended to make log file `makelog` and written to program log file `log`. Status messages are appended to make log `makelog`.
 > 
 
 <ul>
@@ -247,7 +251,7 @@ By default, program log is not written as <code>log</code> = ''.
 <br>
 <b>Notes:</b> 
 <br>
-<code>execute_command('ls', makelog = '', log = 'file')</code> executes the 'ls' command, writes outputs to program log 'file', but does not append outputs to make log.
+<code>execute_command('ls', makelog = '', log = 'file')</code> executes the 'ls' command, writes outputs to program log 'file', but does not append status messages or outputs to make log.
 </ul>
 
 <br> 
@@ -258,7 +262,7 @@ By default, program log is not written as <code>log</code> = ''.
 <pre>
 run_program.<b>run_stata(program, *settings)</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.do'`.
+> Runs script `program` using system command, with script specified in the form of `'script.do'`. Status messages are appended to make log `makelog`.
 <ul>
 <b>Example:</b>
 <br>
@@ -271,7 +275,7 @@ run_program.<b>run_stata(program, *settings)</b>
 <pre>
 run_program.<b>run_matlab(program, *settings)</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.m'`.
+> Runs script `program` using system command, with script specified in the form of `'script.m'`. Status messages are appended to make log `makelog`.
 <ul>
 <b>Example:</b>
 <br>
@@ -283,7 +287,7 @@ run_program.<b>run_matlab(program, *settings)</b>
 <pre>
 run_program.<b>run_perl(program, *settings)</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.pl'`.
+> Runs script `program` using system command, with script specified in the form of `'script.pl'`. Status messages are appended to make log `makelog`.
 <ul>
 <b>Example:</b>
 <br>
@@ -296,7 +300,7 @@ run_program.<b>run_perl(program, *settings)</b>
 <pre>
 run_program.<b>run_python(program, *settings)</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.py'`.
+> Runs script `program` using system command, with script specified in the form of `'script.py'`. Status messages are appended to make log `makelog`.
 <ul>
 <b>Example:</b>
 <br>
@@ -309,7 +313,7 @@ run_program.<b>run_python(program, *settings)</b>
 <pre>
 run_program.<b>run_mathematica(program, *settings)</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.m'`.
+> Runs script `program` using system command, with script specified in the form of `'script.m'`. Status messages are appended to make log `makelog`.
 <ul>
 <b>Example:</b>
 <br>
@@ -322,7 +326,7 @@ run_program.<b>run_mathematica(program, *settings)</b>
 <pre>
 run_program.<b>run_stat_transfer(program, *settings)</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.stc'` or `'script.stcmd'`.
+> Runs script `program` using system command, with script specified in the form of `'script.stc'` or `'script.stcmd'`. Status messages are appended to make log `makelog`.
 <ul>
 <b>Example:</b>
 <br>
@@ -335,7 +339,7 @@ run_program.<b>run_stat_transfer(program, *settings)</b>
 <pre>
 run_program.<b>run_lyx(program, doctype = '', pdfout = '', *settings)</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.lyx'`.
+> Runs script `program` using system command, with script specified in the form of `'script.lyx'`. Status messages are appended to make log `makelog`.
 <ul>
 <b>Example:</b>
 <br>
@@ -348,7 +352,7 @@ run_program.<b>run_lyx(program, doctype = '', pdfout = '', *settings)</b>
 <pre>
 run_program.<b>run_r(program, options, *settings)</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.R'`.
+> Runs script `program` using system command, with script specified in the form of `'script.R'`. Status messages are appended to make log `makelog`.
 <ul>
 <b>Example:</b>
 <br>
@@ -361,7 +365,7 @@ run_program.<b>run_r(program, options, *settings)</b>
 <pre>
 run_program.<b>run_sas(program, lst = '', *settings)</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.sas'`.
+> Runs script `program` using system command, with script specified in the form of `'script.sas'`. Status messages are appended to make log `makelog`.
 <ul>
 <b>Example:</b>
 <br>

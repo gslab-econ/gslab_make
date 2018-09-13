@@ -5,10 +5,11 @@ from builtins import (bytes, str, open, super, range,
 
 from private.linkdirective import LinksList
 import private.metadata as metadata
-from write_logs import write_error
+from write_logs import write_to_makelog
 
 def create_links(file_list,
-                 link_dir = metadata.settings['link_dir']):
+                 link_dir = metadata.settings['link_dir'],
+                 makelog = metadata.settings['makelog']):
     """ Create symlinks from list of files containing linking instructions.
 
     Parameters
@@ -33,5 +34,5 @@ def create_links(file_list,
         return(link_map)
         
     except Exception as error:
-        write_error("Error with create_links: \n", error)
+        write_to_makelog("Error with create_links: \n" + error, makelog)
         raise Exception                    

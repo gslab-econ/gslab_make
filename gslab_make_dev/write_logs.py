@@ -100,15 +100,15 @@ def end_makelog(makelog = metadata.settings['makelog']):
     print(messages.note_working_directory + working_dir + '\n', file = MAKELOG)
     print(messages.note_dash_separator + '\n', file = MAKELOG)
     MAKELOG.close()
-       
     
-def write_error(error, makelog = metadata.settings['makelog']):
-    """ Write error to make log.
+    
+def write_to_makelog(message, makelog = metadata.settings['makelog']):
+    """ Write message to make log.
 
     Parameters
     ----------
-    error : str
-        Error message to write
+    message : str
+        Message to write
     makelog : str, optional
         Path of started make log. Defaults to path specified in metadata.
 
@@ -127,7 +127,7 @@ def write_error(error, makelog = metadata.settings['makelog']):
     except Exception as error:
         raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
 
-    print(error + '\n', file = MAKELOG)
+    print(message + '\n', file = MAKELOG)
     MAKELOG.close()
     
     
