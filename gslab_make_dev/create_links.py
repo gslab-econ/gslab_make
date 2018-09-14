@@ -4,7 +4,10 @@ from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import gslab_make_dev.private.metadata as metadata
+
+from gslab_make_dev.private.exceptionclasses import CritError
 from gslab_make_dev.private.linkdirective import LinksList
+from gslab_make_dev.private.utility import format_error
 
 from gslab_make_dev.write_logs import write_to_makelog
 
@@ -33,8 +36,12 @@ def create_links(file_list,
         link_list = LinksList(file_list, link_dir)
         link_map = link_list.create_symlinks()
                
+        write_to_makelog('\nLinks successfully created!', makelog)    
         return(link_map)
         
     except Exception as error:
-        write_to_makelog("Error with create_links: \n" + error, makelog)
-        raise Exception                    
+        error = 'ERROR! See `create_links`:\n%s' % str(error)
+        error = format_error(error)
+
+        write_to_makelog(error, makelog)
+        raise CritError(error)               

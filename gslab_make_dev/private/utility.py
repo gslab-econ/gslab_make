@@ -42,18 +42,23 @@ def glob_recursive(path, recursive):
         List of files contained in path.
     """
 
-    path = norm_path(path)
-    path_files = []
+    path_walk = norm_path(path)
+    path_files = glob.glob(path_walk)
 
     i = 0 
     while i <= recursive:          
-        path = os.path.join(path, "*")
-        glob_files = glob.glob(path)
+        path_walk = os.path.join(path_walk, "*")
+        glob_files = glob.glob(path_walk)
         if glob_files:
-            path_files.extend(glob.glob(path)) 
+            path_files.extend(glob_files) 
             i += 1
         else:
             break
+
+    path_files = [p for p in path_files if os.path.isfile(p)]
+
+    if not path_files:
+        print('WARNING! %s contains no files' % path)
 
     return path_files
 
@@ -80,3 +85,22 @@ def file_to_array(file_name):
                                                     
     return array
 
+
+def format_error(error):
+    """ Format error message. 
+
+    Parameters
+    ----------
+    error : str
+        Error message to format.
+
+    Returns
+    -------
+    formatted : str
+        Formatted error message.
+    """
+
+    formatted = '\n' + messages.note_star_line + '\n%s\n' + messages.note_star_line
+    formatted = formatted % error
+    
+    return(formatted)

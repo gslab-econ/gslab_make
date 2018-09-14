@@ -27,4 +27,5 @@ syn_error_options = 'ERROR! Duplicate options specified'
 note_makelog_start = 'Makelog started: '
 note_makelog_end = 'Makelog ended: '
 note_working_directory = 'Working directory: '
-note_dash_separator = '-' * 80
+note_dash_line = '-' * 80
+note_star_line = '*' * 80

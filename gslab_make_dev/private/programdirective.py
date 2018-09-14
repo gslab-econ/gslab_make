@@ -10,7 +10,7 @@ import shutil
 from gslab_make_dev.private.exceptionclasses import CritError
 import gslab_make_dev.private.messages as messages
 import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.utility import norm_path
+from gslab_make_dev.private.utility import norm_path, format_error
 
 
 class Directive(object):
@@ -94,10 +94,10 @@ class Directive(object):
              out, err = p.communicate()
              print(err)
              self.output += '\n' + out + '\n' + err
-        except Exception as errmsg:
-             error_message = messages.crit_error_bad_command % ' '.join(command) + '\n' + str(errmsg)
-             print(error_message)
-             self.output += '\n' + error_message
+        except Exception as error:
+             error = messages.crit_error_bad_command % ' '.join(command) + '\n' + str(error)
+             print(error)
+             self.output += '\n' + error
 
     def write_log(self):
         """ Write logs for shell command.
@@ -184,7 +184,7 @@ class ProgramDirective(Directive):
         None
         """
     
-        self.program      = norm_path(self.program)
+        self.program = norm_path(self.program)
         self.program_dir = os.path.dirname(self.program)
         self.program_base = os.path.basename(self.program)
         self.program_name, self.program_ext = os.path.splitext(self.program_base)
@@ -245,8 +245,7 @@ class ProgramDirective(Directive):
             program_output = norm_path(program_output)
             with open(program_output, 'r') as f:
                 out = f.read()
-        except Exception as errmsg:
-            print(errmsg)
+        except:
             raise CritError(messages.crit_error_no_file % program_output)
 
         if self.makelog: 

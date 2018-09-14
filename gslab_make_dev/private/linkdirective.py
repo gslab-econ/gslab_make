@@ -9,7 +9,7 @@ import glob
 from itertools import chain
 import subprocess
 
-from gslab_make_dev.private.exceptionclasses import CritError, SyntaxError
+from gslab_make_dev.private.exceptionclasses import CritError
 import gslab_make_dev.private.messages as messages
 import gslab_make_dev.private.metadata as metadata
 from gslab_make_dev.private.utility import norm_path, file_to_array
@@ -94,6 +94,7 @@ class LinkDirective(object):
         
         if re.search('\*', self.target):
             if not glob.glob(self.target):
+                error = format_error(messages.syn_error_wildcard)
                 raise CritError(messages.crit_error_no_file_wildcard % self.target)
         else:
             if not os.path.exists(self.target):
