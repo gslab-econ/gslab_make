@@ -8,6 +8,8 @@ import shutil
 import fileinput
 
 import gslab_make_dev.private.metadata as metadata
+
+from gslab_make_dev.private.exceptionclasses import CritError
 from gslab_make_dev.private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
 from gslab_make_dev.private.utility import format_error
 from gslab_make_dev.write_logs import write_to_makelog
@@ -54,8 +56,8 @@ def run_stata(**kwargs):
         directive.move_program_output(program_log, directive.log)       
     except Exception as error:
         error = format_error('Error with run_stata: \n' + str(error))
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
 
 
 def run_matlab(**kwargs):
@@ -98,8 +100,8 @@ def run_matlab(**kwargs):
         directive.move_program_output(program_log, directive.log)       
     except Exception as error:
         error = format_error('Error with run_matlab: \n' + str(error))
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
         
 
 def run_perl(**kwargs):
@@ -139,8 +141,8 @@ def run_perl(**kwargs):
         directive.write_log()
     except Exception as error:
         error = format_error('Error with run_perl: \n' + str(error),)
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
 
 
 def run_python(**kwargs):
@@ -180,8 +182,8 @@ def run_python(**kwargs):
         directive.write_log()
     except Exception as error:
         error = format_error('Error with run_python: \n' + str(error))        
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
         
 
 def run_mathematica(**kwargs):
@@ -221,8 +223,8 @@ def run_mathematica(**kwargs):
         directive.write_log()
     except Exception as error:
         error = format_error('Error with run_mathematica: \n' + str(error))        
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
         
 
 def run_stat_transfer(**kwargs):
@@ -262,8 +264,8 @@ def run_stat_transfer(**kwargs):
         directive.write_log()
     except Exception as error:
         error = format_error('Error with run_stat_transfer: \n' + str(error))        
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
         
 
 def run_lyx(**kwargs): 
@@ -338,8 +340,8 @@ def run_lyx(**kwargs):
             os.remove(temp_program)
     except Exception as error:
         error = format_error('Error with run_lyx: \n' + str(error))        
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
         
 
 def run_r(**kwargs):
@@ -379,8 +381,8 @@ def run_r(**kwargs):
         directive.write_log()      
     except Exception as error:
         error = format_error('Error with run_r: \n' + str(error))        
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
         
 
 def run_sas(**kwargs):
@@ -427,8 +429,8 @@ def run_sas(**kwargs):
         directive.move_program_output(program_lst)        
     except Exception as error:
         error = format_error('Error with run_sas: \n' + str(error))
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
         
 
 def execute_command(command, **kwargs):
@@ -461,6 +463,6 @@ def execute_command(command, **kwargs):
         directive.write_log()   
     except Exception as error:
         error = format_error('Error with execute_command: \n' + str(error))        
-        write_to_makelog(error, directive.makelog)
-        raise Exception
+        # write_to_makelog(error, directive.makelog)
+        raise CritError(error)
         
