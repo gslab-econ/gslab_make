@@ -256,7 +256,7 @@ class LinksList(object):
         if type(self.file_list) is list:
             self.file_list = [f for file in self.file_list for f in glob.glob(file)]
         else:
-            raise SyntaxError(messages.syn_error_file_list)
+            raise TypeError(messages.type_error_file_list)
     
     def get_paths(self):    
         """ Normalize paths. 

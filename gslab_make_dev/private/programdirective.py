@@ -6,6 +6,7 @@ from builtins import (bytes, str, open, super, range,
 import os
 import subprocess
 import shutil
+import traceback
 
 from gslab_make_dev.private.exceptionclasses import CritError
 import gslab_make_dev.private.messages as messages
@@ -94,8 +95,8 @@ class Directive(object):
              out, err = p.communicate()
              print(err)
              self.output += '\n' + out + '\n' + err
-        except Exception as error:
-             error = messages.crit_error_bad_command % ' '.join(command) + '\n' + str(error)
+        except:
+             error = messages.crit_error_bad_command % ' '.join(command) + '\n' + traceback.format_exc()
              print(error)
              self.output += '\n' + error
 
@@ -324,7 +325,7 @@ class LyxDirective(ProgramDirective):
         """
     
         if self.doctype not in ['handout', 'comments', '']:
-            print('Document type "%s"unrecognized. Reverting to default' % self.doctype)
+            print('Document type "%s" unrecognized. Reverting to default' % self.doctype)
             self.doctype = ''
             
     def get_pdfout(self):

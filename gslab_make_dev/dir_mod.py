@@ -71,15 +71,15 @@ def clear_dir(dir_list):
     if type(dir_list) is list:
         dir_list = [norm_path(dir_path) for dir_path in dir_list]
     else:
-        error = format_error(messages.syn_error_file_list)
+        error = format_error(messages.type_error_file_list)
         raise TypeError(error)
     
     for dir_path in dir_list:
         if os.path.isdir(dir_path):
             remove_path(dir_path, quiet = True)
         elif os.path.isfile(dir_path): 
-            error = format_error(messages.crit_error_not_dir % dir_path)
-            raise CritError(error)
+            error = format_error(messages.type_error_not_dir % dir_path)
+            raise TypeError(error)
         
     time.sleep(0.25) # Allow file manager to recognize files no longer exist
     

@@ -7,6 +7,7 @@ import os
 import datetime
 import re
 import string
+import traceback
 
 import gslab_make_dev.private.messages as messages
 import gslab_make_dev.private.metadata as metadata
@@ -58,8 +59,9 @@ def start_makelog(makelog = metadata.settings['makelog']):
     
     try:
         MAKELOG = open(makelog, 'w')
-    except Exception as error:
-        error = format_error((messages.crit_error_log % makelog) + '\n' + str(error))
+    except:
+        error = (messages.crit_error_log % makelog) + '\n' + traceback.format_exc()
+        error = format_error(error)
         raise CritError(error)
         
     time_start = str(datetime.datetime.now().replace(microsecond = 0))
@@ -83,18 +85,19 @@ def end_makelog(makelog = metadata.settings['makelog']):
     -------
     None
     """
-
+ 
     makelog = norm_path(makelog)
     print('Ending makelog file at: "%s"' % makelog)
 
     if not (metadata.makelog_started and os.path.isfile(makelog)):
-        error = format_error(error = messages.crit_error_no_makelog % makelog)
+        error = format_error(messages.crit_error_no_makelog % makelog)
         raise CritError(error)
 
     try:
         MAKELOG = open(makelog, 'a')
-    except Exception as error:
-        error = format_error((messages.crit_error_log % makelog) + '\n' + str(error))
+    except:
+        error = (messages.crit_error_log % makelog) + '\n' + traceback.format_exc()
+        error = format_error(error)
         raise CritError(error)
        
     time_end = str(datetime.datetime.now().replace(microsecond = 0))
@@ -124,15 +127,16 @@ def write_to_makelog(message, makelog = metadata.settings['makelog']):
     makelog = norm_path(makelog)
 
     if not (metadata.makelog_started and os.path.isfile(makelog)):
-        error = format_error(error = messages.crit_error_no_makelog % makelog)
+        error = format_error(messages.crit_error_no_makelog % makelog)
         raise CritError(error)
 
     try:
         MAKELOG = open(makelog, 'a')
-    except Exception as error:
-        error = format_error((messages.crit_error_log % makelog) + '\n' + str(error))
+    except:
+        error = (messages.crit_error_log % makelog) + '\n' + traceback.format_exc()
+        error = format_error(error)
         raise CritError(error)
-
+        
     print(message, file = MAKELOG)
     MAKELOG.close()
     

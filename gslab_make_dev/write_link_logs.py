@@ -3,6 +3,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
+import traceback
+
 import gslab_make_dev.private.metadata as metadata
 import gslab_make_dev.private.messages as messages
 from gslab_make_dev.private.exceptionclasses import CritError
@@ -58,10 +60,9 @@ def write_link_logs(link_map,
         write_heads_log(link_headslog, target_files)    
         write_link_maplog(link_maplog, link_map)
         write_to_makelog('Link logs successfully written!', makelog)  
-    except Exception as error:
-        error = 'ERROR! See `write_link_logs`:\n' + str(error)
+    except:
+        error = 'ERROR! See `write_link_logs`:\n' + traceback.format_exc()
         error = format_error(error)
-
         write_to_makelog(error, makelog)
         raise CritError(error)
 

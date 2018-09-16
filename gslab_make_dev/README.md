@@ -132,7 +132,16 @@ write_logs.<b>write_output_logs(</b><i>
 >
 > * File head (in file `output_headslog`)
 >
-> When walking through directory `output_dir`, float `recursive` determines level of depth to walk.
+> When walking through directory `output_dir`, float `recursive` determines level of depth to walk. 
+
+<ul>
+<b>Example:</b>
+<br>
+<code>write_output_logs(recursive = 1)</code> will log information for all files contained in '../output/'.
+<br>
+<br>
+<code>write_output_logs(recursive = 2)</code> will log information for all files contained in '../output/' and all files contained in any directories in '../output/.
+</ul>
 
 <br>
 
@@ -224,6 +233,15 @@ write_link_logs.<b>write_link_logs(</b><i>
 >     * File head (in file `link_headslog`)
 >
 > When walking through targets, float `recursive` determines level of depth to walk. Status messages are appended to make log `makelog`.
+
+<ul>
+<b>Example:</b>
+<br>
+<code>write_link_logs(recursive = 1)</code> will log information for link mappings and all target files linked to in '../input/'.
+<br>
+<br>
+<code>write_output_logs(recursive = 2)</code> will log information for link mappings and all target files linked to in '../input/' and all target files linked to in linked directories in '../output/.
+</ul>
 
 <br> 
 
