@@ -94,7 +94,6 @@ class LinkDirective(object):
         
         if re.search('\*', self.target):
             if not glob.glob(self.target):
-                error = format_error(messages.syn_error_wildcard)
                 raise CritError(messages.crit_error_no_file_wildcard % self.target)
         else:
             if not os.path.exists(self.target):
@@ -110,10 +109,8 @@ class LinkDirective(object):
     
         if re.match('\*', self.target):
             self.target_list  = glob.glob(self.target)
-
             self.symlink_list = [extract_wildcards(t) for t in self.target_list]
             self.symlink_list = [fill_in_wildcards(s) for s in self.symlink_list]
-
         else:
             self.target_list  = [self.target]
             self.symlink_list = [self.symlink]

@@ -107,12 +107,12 @@ def end_makelog(makelog = metadata.settings['makelog']):
     
     
 def write_to_makelog(message, makelog = metadata.settings['makelog']):
-    """ Write message to make log.
+    """ Append message to make log.
 
     Parameters
     ----------
     message : str
-        Message to write
+        Message to append.
     makelog : str, optional
         Path of started make log. Defaults to path specified in metadata.
 

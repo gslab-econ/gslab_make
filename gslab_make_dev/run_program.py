@@ -8,14 +8,13 @@ import shutil
 import fileinput
 
 import gslab_make_dev.private.metadata as metadata
-
 from gslab_make_dev.private.exceptionclasses import CritError
 from gslab_make_dev.private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
 from gslab_make_dev.private.utility import format_error
 from gslab_make_dev.write_logs import write_to_makelog
 
 
-def run_stata(**kwargs):
+def run_stata(makelog = metadata.settings['makelog'], **kwargs):
     """ Run Stata script using system command.
 
     Parameters
@@ -44,7 +43,7 @@ def run_stata(**kwargs):
     """
 
     try:
-        directive = ProgramDirective(application = 'stata', **kwargs)
+        directive = ProgramDirective(application = 'stata', makelog = makelog, **kwargs)
 
         # Get program output
         program_log = os.path.join(os.getcwd(), directive.program_name + '.log')
@@ -55,12 +54,12 @@ def run_stata(**kwargs):
         directive.write_log()
         directive.move_program_output(program_log, directive.log)       
     except Exception as error:
-        error = format_error('Error with run_stata: \n' + str(error))
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `run_stata`: \n' + str(error))
+        write_to_makelog(error, makelog)
         raise CritError(error)
-
-
-def run_matlab(**kwargs):
+    
+    
+def run_matlab(makelog = metadata.settings['makelog'], **kwargs):
     """ Run Matlab script using system command.
 
     Parameters
@@ -89,7 +88,7 @@ def run_matlab(**kwargs):
     """
     
     try:
-        directive = ProgramDirective(application = 'matlab', **kwargs)
+        directive = ProgramDirective(application = 'matlab', makelog = makelog, **kwargs)
         
         # Get program output
         program_log = os.path.join(os.getcwd(), directive.program_name + '.log')
@@ -99,12 +98,12 @@ def run_matlab(**kwargs):
         directive.execute_command(command)    
         directive.move_program_output(program_log, directive.log)       
     except Exception as error:
-        error = format_error('Error with run_matlab: \n' + str(error))
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `run_matlab`: \n' + str(error))
+        write_to_makelog(error, makelog)
         raise CritError(error)
         
 
-def run_perl(**kwargs):
+def run_perl(makelog = metadata.settings['makelog'], **kwargs):
     """ Run Perl script using system command.
 
     Parameters
@@ -133,19 +132,19 @@ def run_perl(**kwargs):
     """
     
     try:
-        directive = ProgramDirective(application = 'perl', **kwargs)
+        directive = ProgramDirective(application = 'perl', makelog = makelog, **kwargs)
         
         # Execute
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.args)
         directive.execute_command(command)
         directive.write_log()
     except Exception as error:
-        error = format_error('Error with run_perl: \n' + str(error),)
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `run_perl`: \n' + str(error))
+        write_to_makelog(error, makelog)
         raise CritError(error)
 
 
-def run_python(**kwargs):
+def run_python(makelog = metadata.settings['makelog'], **kwargs):
     """ Run Python script using system command.
 
     Parameters
@@ -174,19 +173,19 @@ def run_python(**kwargs):
     """
     
     try:
-        directive = ProgramDirective(application = 'python', **kwargs)
+        directive = ProgramDirective(application = 'python', makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program, directive.args)
         directive.execute_command(command)
         directive.write_log()
     except Exception as error:
-        error = format_error('Error with run_python: \n' + str(error))        
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `run_python`: \n' + str(error))        
+        write_to_makelog(error, makelog)
         raise CritError(error)
         
 
-def run_mathematica(**kwargs):
+def run_mathematica(makelog = metadata.settings['makelog'], **kwargs):
     """ Run Mathematica script using system command.
 
     Parameters
@@ -215,19 +214,19 @@ def run_mathematica(**kwargs):
     """
     
     try:
-        directive = ProgramDirective(application = 'math', **kwargs)
+        directive = ProgramDirective(application = 'math', makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.program, directive.option)
         directive.execute_command(command)
         directive.write_log()
     except Exception as error:
-        error = format_error('Error with run_mathematica: \n' + str(error))        
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `run_mathematica`: \n' + str(error))        
+        write_to_makelog(error, makelog)
         raise CritError(error)
         
 
-def run_stat_transfer(**kwargs):
+def run_stat_transfer(makelog = metadata.settings['makelog'], **kwargs):
     """ Run StatTransfer script using system command.
 
     Parameters
@@ -256,19 +255,19 @@ def run_stat_transfer(**kwargs):
     """
     
     try:
-        directive = ProgramDirective(application = 'st', **kwargs)
+        directive = ProgramDirective(application = 'st', makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.program)
         directive.execute_command(command)
         directive.write_log()
     except Exception as error:
-        error = format_error('Error with run_stat_transfer: \n' + str(error))        
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `run_stat_transfer`: \n' + str(error))        
+        write_to_makelog(error, makelog)
         raise CritError(error)
         
 
-def run_lyx(**kwargs): 
+def run_lyx(makelog = metadata.settings['makelog'], **kwargs): 
     """ Run Lyx script using system command.
 
     Parameters
@@ -302,7 +301,7 @@ def run_lyx(**kwargs):
     """
     
     try:
-        directive = LyxDirective(application = 'lyx', **kwargs)
+        directive = LyxDirective(application = 'lyx', makelog = makelog, **kwargs)
             
         # Make handout/commented LyX file        
         if directive.doctype:
@@ -339,12 +338,12 @@ def run_lyx(**kwargs):
         if directive.doctype:
             os.remove(temp_program)
     except Exception as error:
-        error = format_error('Error with run_lyx: \n' + str(error))        
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `run_lyx`: \n' + str(error))        
+        write_to_makelog(error, makelog)
         raise CritError(error)
         
 
-def run_r(**kwargs):
+def run_r(makelog = metadata.settings['makelog'], **kwargs):
     """ Run R script using system command.
 
     Parameters
@@ -373,19 +372,19 @@ def run_r(**kwargs):
     """
     
     try:
-        directive = ProgramDirective(application = 'r', **kwargs)
+        directive = ProgramDirective(application = 'r', makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, directive.program)
         directive.execute_command(command)
         directive.write_log()      
     except Exception as error:
-        error = format_error('Error with run_r: \n' + str(error))        
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `run_r`: \n' + str(error))        
+        write_to_makelog(error, makelog)
         raise CritError(error)
         
 
-def run_sas(**kwargs):
+def run_sas(makelog = metadata.settings['makelog'], **kwargs):
     """ Run SAS script using system command.
 
     Parameters
@@ -416,7 +415,7 @@ def run_sas(**kwargs):
     """
 
     try:
-        directive = SASDirective(application = 'sas', **kwargs)
+        directive = SASDirective(application = 'sas', makelog = makelog, **kwargs)
 
         # Get program outputs
         program_log = os.path.join(os.getcwd(), directive.program_name + '.log')
@@ -428,12 +427,12 @@ def run_sas(**kwargs):
         directive.move_program_output(program_log)
         directive.move_program_output(program_lst)        
     except Exception as error:
-        error = format_error('Error with run_sas: \n' + str(error))
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `run_sas`: \n' + str(error))
+        write_to_makelog(error, makelog)
         raise CritError(error)
         
 
-def execute_command(command, **kwargs):
+def execute_command(command, makelog = metadata.settings['makelog'], **kwargs):
     """ Run system command.
 
     Parameters
@@ -456,13 +455,13 @@ def execute_command(command, **kwargs):
     """
     
     try:
-        directive = Directive(**kwargs)
+        directive = Directive(makelog = makelog, **kwargs)
 
         # Execute
         directive.execute_command(command)
         directive.write_log()   
     except Exception as error:
-        error = format_error('Error with execute_command: \n' + str(error))        
-        # write_to_makelog(error, directive.makelog)
+        error = format_error('Error with `execute_command`: \n' + str(error))        
+        write_to_makelog(error, makelog)
         raise CritError(error)
         

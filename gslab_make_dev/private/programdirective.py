@@ -10,7 +10,7 @@ import shutil
 from gslab_make_dev.private.exceptionclasses import CritError
 import gslab_make_dev.private.messages as messages
 import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.utility import norm_path, format_error
+from gslab_make_dev.private.utility import norm_path
 
 
 class Directive(object):
@@ -29,7 +29,7 @@ class Directive(object):
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to False.
     makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
+        Path of make log.
     log : str, optional
         Path of directive log. Directive log is only written if specified.  
 
@@ -41,7 +41,7 @@ class Directive(object):
     def __init__(self, 
                  osname = os.name,
                  shell = False,
-                 makelog = metadata.settings['makelog'], 
+                 makelog, 
                  log = ''):
 
         self.osname   = osname

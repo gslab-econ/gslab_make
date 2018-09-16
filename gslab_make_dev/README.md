@@ -204,7 +204,8 @@ write_link_logs.<b>write_link_logs(</b><i>
     link_statslog = '../log/link_stats.log', 
     link_headslog = '../log/link_heads.log', 
     link_maplog = '../log/link_map.log', 
-    recursive = float('inf')</i><b>
+    recursive = float('inf'), 
+	makelog = '../log/make.log'</i><b>
 )</b>
 </pre>
 
@@ -222,7 +223,7 @@ write_link_logs.<b>write_link_logs(</b><i>
 >
 >     * File head (in file `link_headslog`)
 >
-> When walking through targets, float `recursive` determines level of depth to walk.
+> When walking through targets, float `recursive` determines level of depth to walk. Status messages are appended to make log `makelog`.
 
 <br> 
 
