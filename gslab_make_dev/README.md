@@ -1,5 +1,9 @@
 # Directory functions
 
+#### The following functions are used to make modifications to a directory. Functions to check operating system, clear directories, and zip/unzip files are included.
+
+<br>
+
 <pre>
 dir_mod.<b>check_os()</b>
 </pre>
@@ -49,6 +53,10 @@ dir_mod.<b>zip_dir(</b><i>source_dir, zip_dest</i><b>)</b>
 <br>
 
 # Logging functions
+
+#### The following functions are used to create a master log of activity (i.e., a <i>make log</i>) and to log information about output files. The logs are intended to facilitate the reproducibility of research.
+
+<br>
 
 <pre>
 write_logs.<b>set_option(</b><i>*default_paths</i><b>)</b>
@@ -119,7 +127,8 @@ write_logs.<b>write_output_logs(</b><i>
     output_dir = '../output/',
     output_statslog = '../log/output_stats.log', 
     output_headslog = '../log/output_heads.log', 
-    recursive = float('inf')</i><b>
+    recursive = float('inf')</i><b>, 
+    makelog = '../log/make.log'</i><b>
 )</b>
 </pre>
 > Logs the following information for all files contained in directory `output_dir`:
@@ -132,7 +141,7 @@ write_logs.<b>write_output_logs(</b><i>
 >
 > * File head (in file `output_headslog`)
 >
-> When walking through directory `output_dir`, float `recursive` determines level of depth to walk. 
+> When walking through directory `output_dir`, float `recursive` determines level of depth to walk. Status messages are appended to make log `makelog`.
 
 <ul>
 <b>Example:</b>
@@ -146,6 +155,11 @@ write_logs.<b>write_output_logs(</b><i>
 <br>
 
 # Linking functions
+
+#### The following function is used to create symbolic links to input files. Doing so avoids potential duplication of input files and any associated confusion.
+
+<br>
+
 <pre>
 create_links.<b>create_links(</b><i>
     file_list, 
@@ -207,6 +221,11 @@ Specifying <code>symlink*   target*</code> in one of your files would create the
 <br>
 
 # Link logging functions
+
+#### The following function is used to log linking activity and information about input files. The logs are intended to facilitate the reproducibility of research.
+
+<br>
+
 <pre>
 write_link_logs.<b>write_link_logs(</b><i>
     link_map, 
@@ -240,12 +259,16 @@ write_link_logs.<b>write_link_logs(</b><i>
 <code>write_link_logs(recursive = 1)</code> will log information for link mappings and all target files linked to in '../input/'.
 <br>
 <br>
-<code>write_output_logs(recursive = 2)</code> will log information for link mappings and all target files linked to in '../input/' and all target files linked to in linked directories in '../output/.
+<code>write_output_logs(recursive = 2)</code> will log information for link mappings and all target files linked to in '../input/' and all target files linked to in linked directories in '../input/.
 </ul>
 
 <br> 
 
 # Program functions
+
+#### The following functions are used to run system commands or programs for certain applications.
+
+<br>
 
 <pre>
 run_program.<b>execute_command(</b><i>

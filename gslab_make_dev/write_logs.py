@@ -144,7 +144,8 @@ def write_to_makelog(message, makelog = metadata.settings['makelog']):
 def write_output_logs(output_dir = metadata.settings['output_dir'],
                       output_statslog = metadata.settings['output_statslog'], 
                       output_headslog = metadata.settings['output_headslog'],
-                      recursive = float('inf')):
+                      recursive = float('inf')
+                      makelog = makelog = metadata.settings['makelog']):
     """ Write output logs.
 
     Notes
@@ -166,6 +167,8 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
         Path to write output headers log. Defaults to path specified in metadata.
     recursive : int, optional
         Level of depth when walking through output directory.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
 
     Returns
     -------
@@ -182,7 +185,9 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
         output_headslog = norm_path(output_headslog)
         write_heads_log(output_headslog, output_files)
     
-
+    write_to_makelog('Output logs successfully written!', makelog)  
+        
+    s
 def write_stats_log (statslog_file, output_files):
     """ Write statistics log.
    
