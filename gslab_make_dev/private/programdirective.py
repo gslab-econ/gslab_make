@@ -11,7 +11,7 @@ import traceback
 from gslab_make_dev.private.exceptionclasses import CritError
 import gslab_make_dev.private.messages as messages
 import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.utility import norm_path
+from gslab_make_dev.private.utility import norm_path, format_error
 
 
 class Directive(object):
@@ -40,14 +40,14 @@ class Directive(object):
     """
     
     def __init__(self, 
+                 makelog, 
                  osname = os.name,
                  shell = False,
-                 makelog, 
                  log = ''):
 
+        self.makelog  = makelog
         self.osname   = osname
         self.shell    = shell
-        self.makelog  = makelog
         self.log      = log  
         self.check_os()
         self.get_paths()
@@ -87,16 +87,21 @@ class Directive(object):
         """
         
         command = command.split()
-        self.output = 'Executing: "' + ' '.join(command) + "'"
+        self.output = 'Executing: "%s"' % ' '.join(command)
         print(self.output)
-            
+        self.output = messages.note_dash_line + '\n' + self.output + '\n' + messages.note_dash_line
+
         try:   
              p = subprocess.Popen(command, stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = self.shell)
              out, err = p.communicate()
-             print(err)
-             self.output += '\n' + out + '\n' + err
+             if out:
+                self.output += '\n' + out
+             if err:
+                print(err)
+                self.output += '\n' + err
         except:
              error = messages.crit_error_bad_command % ' '.join(command) + '\n' + traceback.format_exc()
+             error = format_error(error)
              print(error)
              self.output += '\n' + error
 

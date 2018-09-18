@@ -144,8 +144,8 @@ def write_to_makelog(message, makelog = metadata.settings['makelog']):
 def write_output_logs(output_dir = metadata.settings['output_dir'],
                       output_statslog = metadata.settings['output_statslog'], 
                       output_headslog = metadata.settings['output_headslog'],
-                      recursive = float('inf')
-                      makelog = makelog = metadata.settings['makelog']):
+                      recursive = float('inf'),
+                      makelog = metadata.settings['makelog']):
     """ Write output logs.
 
     Notes
@@ -187,7 +187,7 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
     
     write_to_makelog('Output logs successfully written!', makelog)  
         
-    s
+    
 def write_stats_log (statslog_file, output_files):
     """ Write statistics log.
    
