@@ -52,9 +52,11 @@ def run_stata(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname]['stata'] % (direct.executable, direct.option, direct.program)
-        direct.execute_command(command)
+        exit_code, error = direct.execute_command(command)
         direct.write_log()
-        direct.move_program_output(program_log, direct.log)       
+        direct.move_program_output(program_log, direct.log)  
+        if exit_code != 0:
+            raise CritError(error)
     except:
         error = 'Error with `run_stata`: \n' + traceback.format_exc()
         error = format_error(error)
@@ -99,8 +101,10 @@ def run_matlab(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.program_name + '.log')
-        direct.execute_command(command)    
-        direct.move_program_output(program_log, direct.log)       
+        exit_code, error = direct.execute_command(command)    
+        direct.move_program_output(program_log, direct.log)   
+        if exit_code != 0:
+            raise CritError(error)   
     except:
         error = 'Error with `run_matlab`: \n' + traceback.format_exc()
         error = format_error(error)
@@ -142,8 +146,10 @@ def run_perl(makelog = metadata.settings['makelog'], **kwargs):
         
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
-        direct.execute_command(command)
+        exit_code, error = direct.execute_command(command)
         direct.write_log()
+        if exit_code != 0:
+            raise CritError(error)
     except:
         error = 'Error with `run_perl`: \n' + traceback.format_exc()
         error = format_error(error)
@@ -185,8 +191,10 @@ def run_python(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
-        direct.execute_command(command)
+        exit_code, error = direct.execute_command(command)
         direct.write_log()
+        if exit_code != 0:
+            raise CritError(error)
     except:
         error = 'Error with `run_python`: \n' + traceback.format_exc()
         error = format_error(error)        
@@ -228,8 +236,10 @@ def run_mathematica(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program, direct.option)
-        direct.execute_command(command)
+        exit_code, error = direct.execute_command(command)
         direct.write_log()
+        if exit_code != 0:
+            raise CritError(error)
     except:
         error = 'Error with `run_mathematica`: \n' + traceback.format_exc()
         error = format_error(error)        
@@ -271,8 +281,10 @@ def run_stat_transfer(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program)
-        direct.execute_command(command)
+        exit_code, error = direct.execute_command(command)
         direct.write_log()
+        if exit_code != 0:
+            raise CritError(error)
     except:
         error = 'Error with `run_stat_transfer`: \n' + traceback.format_exc()
         error = format_error()        
@@ -337,8 +349,10 @@ def run_lyx(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, temp_program)
-        direct.execute_command(command)
+        exit_code, error = direct.execute_command(command)
         direct.write_log()
+        if exit_code != 0:
+            raise CritError(error)
 
         # Move PDF output
         temp_pdf = os.path.join(direct.program_dir, temp_name + '.pdf')
@@ -392,8 +406,10 @@ def run_r(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)
-        direct.execute_command(command)
+        exit_code, error = direct.execute_command(command)
         direct.write_log()      
+        if exit_code != 0:
+            raise CritError(error)
     except:
         error = 'Error with `run_r`: \n' + traceback.format_exc()
         error = format_error(error)        
@@ -441,9 +457,11 @@ def run_sas(makelog = metadata.settings['makelog'], **kwargs):
         
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)       
-        direct.execute_command(command)
+        exit_code, error = direct.execute_command(command)
         direct.move_program_output(program_log)
         direct.move_program_output(program_lst)        
+        if exit_code != 0:
+            raise CritError(error)
     except:
         error = 'Error with `run_sas`: \n' + traceback.format_exc()
         error = format_error(error)
@@ -477,8 +495,10 @@ def execute_command(command, makelog = metadata.settings['makelog'], **kwargs):
         direct = Directive(makelog = makelog, **kwargs)
 
         # Execute
-        direct.execute_command(command)
+        exit_code, error = direct.execute_command(command)
         direct.write_log()   
+        if exit_code != 0:
+            raise CritError(error)
     except:
         error = 'Error with `execute_command`: \n' + traceback.format_exc()
         error = format_error(error)        

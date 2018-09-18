@@ -101,6 +101,6 @@ def format_error(error):
     """
 
     formatted = '\n' + messages.note_star_line + '\n%s\n' + messages.note_star_line
-    formatted = formatted % error
+    formatted = formatted % error.strip()
     
     return(formatted)

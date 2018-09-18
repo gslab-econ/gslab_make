@@ -83,27 +83,31 @@ class Directive(object):
         
         Returns
         -------
-        None
+        exit : tuple
+            (Exit code, error message).
         """
         
-        command = command.split()
-        self.output = 'Executing: "%s"' % ' '.join(command)
+        self.output = 'Executing: "%s"' % command
         print(self.output)
-        self.output = messages.note_dash_line + '\n' + self.output + '\n' + messages.note_dash_line
 
         try:   
+             command = command.split()
              p = subprocess.Popen(command, stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = self.shell)
-             out, err = p.communicate()
-             if out:
-                self.output += '\n' + out
-             if err:
-                print(err)
-                self.output += '\n' + err
+             stdout, stderr = p.communicate()
+             exit = (p.returncode, stderr)
+
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
         except:
              error = messages.crit_error_bad_command % ' '.join(command) + '\n' + traceback.format_exc()
              error = format_error(error)
-             print(error)
+             exit = (1, error)
+
              self.output += '\n' + error
+             
+        return(exit)
 
     def write_log(self):
         """ Write logs for shell command.
