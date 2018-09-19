@@ -351,7 +351,6 @@ run_program.<b>run_perl(program, *settings)</b>
 <code>run_perl(program = 'script.pl')</code>
 </ul>
 
-
 <br>
 
 <pre>
@@ -363,7 +362,6 @@ run_program.<b>run_python(program, *settings)</b>
 <br>
 <code>run_python(program = 'script.py')</code>
 </ul>
-
 
 <br>
 
@@ -377,7 +375,6 @@ run_program.<b>run_mathematica(program, *settings)</b>
 <code>run_mathematica(program = 'script.m')</code>
 </ul>
 
-
 <br>
 
 <pre>
@@ -390,24 +387,33 @@ run_program.<b>run_stat_transfer(program, *settings)</b>
 <code>run_stat_transfer(program = 'script.stc')</code>
 </ul>
 
-
 <br>
 
 <pre>
 run_program.<b>run_lyx(program, doctype = '', pdfout = '', *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.lyx'`. Status messages are appended to make log `makelog`.
+>
+> LyX-specific settings:
+>
+> * `doctype` : str
+>
+>     * Type of LyX document. Takes either `handout` and `comments`. Defaults to no special document type.
+>
+> * `pdfout` : str
+>
+>     * Directory to write PDF. Defaults to '../output/' if no special document type, '../temp/' otherwise.
+
 <ul>
 <b>Example:</b>
 <br>
 <code>run_lyx(program = 'script.lyx')</code>
 </ul>
 
-
 <br>
 
 <pre>
-run_program.<b>run_r(program, options, *settings)</b>
+run_program.<b>run_r(program, *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.R'`. Status messages are appended to make log `makelog`.
 <ul>
@@ -416,13 +422,18 @@ run_program.<b>run_r(program, options, *settings)</b>
 <code>run_r(program = 'script.R')</code>
 </ul>
 
-
 <br>
 
 <pre>
 run_program.<b>run_sas(program, lst = '', *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.sas'`. Status messages are appended to make log `makelog`.
+>
+> SAS-specific settings:
+>
+> * `lst` : str
+>
+>     * Path of program lst to write outputs. Defaults to '' (i.e., not written).
 <ul>
 <b>Example:</b>
 <br>
