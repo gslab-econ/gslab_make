@@ -320,6 +320,7 @@ By default, program log is not written as <code>log</code> = ''.
 run_program.<b>run_stata(program, *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.do'`. Status messages are appended to make log `makelog`.
+
 <ul>
 <b>Example:</b>
 <br>
@@ -333,6 +334,7 @@ run_program.<b>run_stata(program, *settings)</b>
 run_program.<b>run_matlab(program, *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.m'`. Status messages are appended to make log `makelog`.
+
 <ul>
 <b>Example:</b>
 <br>
@@ -345,6 +347,7 @@ run_program.<b>run_matlab(program, *settings)</b>
 run_program.<b>run_perl(program, *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.pl'`. Status messages are appended to make log `makelog`.
+
 <ul>
 <b>Example:</b>
 <br>
@@ -357,6 +360,7 @@ run_program.<b>run_perl(program, *settings)</b>
 run_program.<b>run_python(program, *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.py'`. Status messages are appended to make log `makelog`.
+
 <ul>
 <b>Example:</b>
 <br>
@@ -369,6 +373,7 @@ run_program.<b>run_python(program, *settings)</b>
 run_program.<b>run_mathematica(program, *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.m'`. Status messages are appended to make log `makelog`.
+
 <ul>
 <b>Example:</b>
 <br>
@@ -381,6 +386,7 @@ run_program.<b>run_mathematica(program, *settings)</b>
 run_program.<b>run_stat_transfer(program, *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.stc'` or `'script.stcmd'`. Status messages are appended to make log `makelog`.
+
 <ul>
 <b>Example:</b>
 <br>
@@ -403,6 +409,7 @@ run_program.<b>run_lyx(program, doctype = '', pdfout = '', *settings)</b>
 > * `pdfout` : str
 >
 >     * Directory to write PDF. Defaults to '../output/' if no special document type, '../temp/' otherwise.
+>
 
 <ul>
 <b>Example:</b>
@@ -416,6 +423,7 @@ run_program.<b>run_lyx(program, doctype = '', pdfout = '', *settings)</b>
 run_program.<b>run_r(program, *settings)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.R'`. Status messages are appended to make log `makelog`.
+
 <ul>
 <b>Example:</b>
 <br>
@@ -434,6 +442,8 @@ run_program.<b>run_sas(program, lst = '', *settings)</b>
 > * `lst` : str
 >
 >     * Path of program lst to write outputs. Defaults to '' (i.e., not written).
+>
+
 <ul>
 <b>Example:</b>
 <br>
