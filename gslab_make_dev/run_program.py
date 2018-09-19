@@ -336,16 +336,18 @@ def run_lyx(makelog = metadata.settings['makelog'], **kwargs):
             
             beamer = False
             shutil.copy2(direct.program, temp_program) 
+
             for line in fileinput.input(temp_program, inplace = True):
                 if r'\textclass beamer' in line:
-                    beamer = True
-                elif direct.doctype == 'handout' and r'\options' in line and beamer:
+                    beamer = True          
+                if direct.doctype == 'handout' and r'\options' in line and beamer:
                     line = line.rstrip('\n') + ', handout\n'
                 elif direct.doctype == 'comments' and r'\begin_inset Note Note' in line:
                     line = line.replace('Note Note', 'Note Greyedout')
+                print(line)
         else:
-             temp_name = direct.program_name
-             temp_program = direct.program
+            temp_name = direct.program_name
+            temp_program = direct.program
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, temp_program)
