@@ -52,16 +52,16 @@ def run_stata(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname]['stata'] % (direct.executable, direct.option, direct.program)
-        exit_code, error = direct.execute_command(command)
+        exit_code, error_message = direct.execute_command(command)
         direct.write_log()
         direct.move_program_output(program_log, direct.log)  
         if exit_code != 0:
-            raise CritError(error)
+            raise CritError('* Stata program executed with errors: *\n%s' % error_message)
     except:
-        error = 'Error with `run_stata`: \n' + traceback.format_exc()
-        error = format_error(error)
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `run_stata`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
     
     
 def run_matlab(makelog = metadata.settings['makelog'], **kwargs):
@@ -101,15 +101,15 @@ def run_matlab(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.program_name + '.log')
-        exit_code, error = direct.execute_command(command)    
+        exit_code, error_message = direct.execute_command(command)    
         direct.move_program_output(program_log, direct.log)   
         if exit_code != 0:
-            raise CritError(error)   
+            raise CritError('* Matlab program executed with errors: *\n%s' % error_message)
     except:
-        error = 'Error with `run_matlab`: \n' + traceback.format_exc()
-        error = format_error(error)
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `run_matlab`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
         
 
 def run_perl(makelog = metadata.settings['makelog'], **kwargs):
@@ -146,15 +146,15 @@ def run_perl(makelog = metadata.settings['makelog'], **kwargs):
         
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
-        exit_code, error = direct.execute_command(command)
+        exit_code, error_message = direct.execute_command(command)
         direct.write_log()
         if exit_code != 0:
-            raise CritError(error)
+            raise CritError('* Perl program executed with errors: *\n%s' % error_message)
     except:
-        error = 'Error with `run_perl`: \n' + traceback.format_exc()
-        error = format_error(error)
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `run_perl`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
 
 
 def run_python(makelog = metadata.settings['makelog'], **kwargs):
@@ -191,15 +191,15 @@ def run_python(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
-        exit_code, error = direct.execute_command(command)
+        exit_code, error_message = direct.execute_command(command)
         direct.write_log()
         if exit_code != 0:
-            raise CritError(error)
+            raise CritError('* Python program executed with errors: *\n%s' % error_message)
     except:
-        error = 'Error with `run_python`: \n' + traceback.format_exc()
-        error = format_error(error)        
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `run_python`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
         
 
 def run_mathematica(makelog = metadata.settings['makelog'], **kwargs):
@@ -236,15 +236,15 @@ def run_mathematica(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program, direct.option)
-        exit_code, error = direct.execute_command(command)
+        exit_code, error_message = direct.execute_command(command)
         direct.write_log()
         if exit_code != 0:
-            raise CritError(error)
+            raise CritError('* Mathematica program executed with errors: *\n%s' % error_message)
     except:
-        error = 'Error with `run_mathematica`: \n' + traceback.format_exc()
-        error = format_error(error)        
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `run_mathematica`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
         
 
 def run_stat_transfer(makelog = metadata.settings['makelog'], **kwargs):
@@ -281,15 +281,15 @@ def run_stat_transfer(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program)
-        exit_code, error = direct.execute_command(command)
+        exit_code, error_message = direct.execute_command(command)
         direct.write_log()
         if exit_code != 0:
-            raise CritError(error)
+            raise CritError('* StatTransfer program executed with errors: *\n%s' % error_message)
     except:
-        error = 'Error with `run_stat_transfer`: \n' + traceback.format_exc()
-        error = format_error()        
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `run_stat_transfer`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
         
 
 def run_lyx(makelog = metadata.settings['makelog'], **kwargs): 
@@ -351,10 +351,10 @@ def run_lyx(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, temp_program)
-        exit_code, error = direct.execute_command(command)
+        exit_code, error_message = direct.execute_command(command)
         direct.write_log()
         if exit_code != 0:
-            raise CritError(error)
+            raise CritError('* LyX program executed with errors: *\n%s' % error_message)
 
         # Move PDF output
         temp_pdf = os.path.join(direct.program_dir, temp_name + '.pdf')
@@ -368,10 +368,10 @@ def run_lyx(makelog = metadata.settings['makelog'], **kwargs):
         if direct.doctype:
             os.remove(temp_program)
     except:
-        error = 'Error with `run_lyx`: \n' + traceback.format_exc()
-        error = format_error(error)        
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `run_lyx`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
         
 
 def run_r(makelog = metadata.settings['makelog'], **kwargs):
@@ -408,15 +408,15 @@ def run_r(makelog = metadata.settings['makelog'], **kwargs):
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)
-        exit_code, error = direct.execute_command(command)
+        exit_code, error_message = direct.execute_command(command)
         direct.write_log()      
         if exit_code != 0:
-            raise CritError(error)
+            raise CritError('* R program executed with errors: *\n%s' % error_message)
     except:
-        error = 'Error with `run_r`: \n' + traceback.format_exc()
-        error = format_error(error)        
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `run_r`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
         
 
 def run_sas(makelog = metadata.settings['makelog'], **kwargs):
@@ -459,16 +459,16 @@ def run_sas(makelog = metadata.settings['makelog'], **kwargs):
         
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)       
-        exit_code, error = direct.execute_command(command)
+        exit_code, error_message = direct.execute_command(command)
         direct.move_program_output(program_log)
         direct.move_program_output(program_lst)        
         if exit_code != 0:
-            raise CritError(error)
+            raise CritError('* SAS program executed with errors: *\n%s' % error_message)
     except:
-        error = 'Error with `run_sas`: \n' + traceback.format_exc()
-        error = format_error(error)
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `run_sas`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
         
 
 def execute_command(command, makelog = metadata.settings['makelog'], **kwargs):
@@ -497,13 +497,13 @@ def execute_command(command, makelog = metadata.settings['makelog'], **kwargs):
         direct = Directive(makelog = makelog, **kwargs)
 
         # Execute
-        exit_code, error = direct.execute_command(command)
+        exit_code, error_message = direct.execute_command(command)
         direct.write_log()   
         if exit_code != 0:
-            raise CritError(error)
+            raise CritError('* Command executed with errors: *\n%s' % error_message)
     except:
-        error = 'Error with `execute_command`: \n' + traceback.format_exc()
-        error = format_error(error)        
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `execute_command`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
         

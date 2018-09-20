@@ -26,8 +26,7 @@ def set_option(**kwargs):
     options = {re.sub('_file$|_dir$', '', k):v for k, v in kwargs.items()}
 
     if len(options.keys()) != len(kwargs.keys()):
-        error = format_error(messages.syn_error_options)
-        raise SyntaxError(error)      
+        raise SyntaxError(messages.syn_error_options)      
 
     for key in metadata.settings.keys():
         root = re.sub('_file$|_dir$', '', key) 
@@ -54,23 +53,17 @@ def start_makelog(makelog = metadata.settings['makelog']):
     """
 
     metadata.makelog_started = True
-    makelog = norm_path(makelog)
-    print('Starting makelog file at: "%s"' % makelog)
-    
-    try:
-        MAKELOG = open(makelog, 'w')
-    except:
-        error = (messages.crit_error_log % makelog) + '\n' + traceback.format_exc()
-        error = format_error(error)
-        raise CritError(error)
+    if makelog:
+        makelog = norm_path(makelog)
+        print('Starting makelog file at: "%s"' % makelog)
         
-    time_start = str(datetime.datetime.now().replace(microsecond = 0))
-    working_dir = os.getcwd()
-    print(messages.note_dash_line, file = MAKELOG)
-    print(messages.note_makelog_start + time_start, file = MAKELOG)
-    print(messages.note_working_directory + working_dir, file = MAKELOG)
-    print(messages.note_dash_line, file = MAKELOG)
-    MAKELOG.close()
+        with open(makelog, 'w') as MAKELOG:
+            time_start = str(datetime.datetime.now().replace(microsecond = 0))
+            working_dir = os.getcwd()
+            print(messages.note_dash_line, file = MAKELOG)
+            print(messages.note_makelog_start + time_start, file = MAKELOG)
+            print(messages.note_working_directory + working_dir, file = MAKELOG)
+            print(messages.note_dash_line, file = MAKELOG)
 
 
 def end_makelog(makelog = metadata.settings['makelog']):
@@ -86,28 +79,21 @@ def end_makelog(makelog = metadata.settings['makelog']):
     None
     """
  
-    makelog = norm_path(makelog)
-    print('Ending makelog file at: "%s"' % makelog)
+    if makelog:
+        makelog = norm_path(makelog)
+        print('Ending makelog file at: "%s"' % makelog)
 
-    if not (metadata.makelog_started and os.path.isfile(makelog)):
-        error = format_error(messages.crit_error_no_makelog % makelog)
-        raise CritError(error)
+        if not (metadata.makelog_started and os.path.isfile(makelog)):
+            raise CritError(messages.crit_error_no_makelog % makelog)
 
-    try:
-        MAKELOG = open(makelog, 'a')
-    except:
-        error = (messages.crit_error_log % makelog) + '\n' + traceback.format_exc()
-        error = format_error(error)
-        raise CritError(error)
-       
-    time_end = str(datetime.datetime.now().replace(microsecond = 0))
-    working_dir = os.getcwd()
-    print(messages.note_dash_line, file = MAKELOG)
-    print(messages.note_makelog_end + time_end, file = MAKELOG)
-    print(messages.note_working_directory + working_dir, file = MAKELOG)
-    print(messages.note_dash_line, file = MAKELOG)
-    MAKELOG.close()
-    
+        with open(makelog, 'a') as MAKELOG:
+            time_end = str(datetime.datetime.now().replace(microsecond = 0))
+            working_dir = os.getcwd()
+            print(messages.note_dash_line, file = MAKELOG)
+            print(messages.note_makelog_end + time_end, file = MAKELOG)
+            print(messages.note_working_directory + working_dir, file = MAKELOG)
+            print(messages.note_dash_line, file = MAKELOG)
+
     
 def write_to_makelog(message, makelog = metadata.settings['makelog']):
     """ Append message to make log.
@@ -124,21 +110,14 @@ def write_to_makelog(message, makelog = metadata.settings['makelog']):
     None
     """
 
-    makelog = norm_path(makelog)
+    if makelog:
+        makelog = norm_path(makelog)
 
-    if not (metadata.makelog_started and os.path.isfile(makelog)):
-        error = format_error(messages.crit_error_no_makelog % makelog)
-        raise CritError(error)
+        if not (metadata.makelog_started and os.path.isfile(makelog)):
+            raise CritError(messages.crit_error_no_makelog % makelog)
 
-    try:
-        MAKELOG = open(makelog, 'a')
-    except:
-        error = (messages.crit_error_log % makelog) + '\n' + traceback.format_exc()
-        error = format_error(error)
-        raise CritError(error)
-        
-    print(message, file = MAKELOG)
-    MAKELOG.close()
+        with open(makelog, 'a') as MAKELOG:
+            print(message, file = MAKELOG)
     
     
 def write_output_logs(output_dir = metadata.settings['output_dir'],

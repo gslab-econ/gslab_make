@@ -11,7 +11,7 @@ import traceback
 from gslab_make_dev.private.exceptionclasses import CritError
 import gslab_make_dev.private.messages as messages
 import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.utility import norm_path, format_error
+from gslab_make_dev.private.utility import norm_path
 
 
 class Directive(object):
@@ -53,14 +53,14 @@ class Directive(object):
         self.get_paths()
 
     def check_os(self):
-        """ Check OS is either POSIX or NT. 
-        
+        """ Check OS is either POSIX or NT.  
+                
         Returns
         -------
         None
-        """    
+        """      
         
-        if (self.osname != 'posix') & (self.osname != 'nt'):
+        if self.osname not in {'posix', 'nt'}:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):   
@@ -84,30 +84,31 @@ class Directive(object):
         Returns
         -------
         exit : tuple
-            (Exit code, error message).
+            Tuple (exit code, error message) for shell command.
         """
         
         self.output = 'Executing: "%s"' % command
         print(self.output)
 
         try:   
-             command = command.split()
-             p = subprocess.Popen(command, stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = self.shell)
-             stdout, stderr = p.communicate()
-             exit = (p.returncode, stderr)
+             process = subprocess.Popen(command.split(), 
+                                  stdout = subprocess.PIPE, 
+                                  stderr = subprocess.PIPE, 
+                                  shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
 
              if stdout:
                 self.output += '\n' + stdout
              if stderr:
                 self.output += '\n' + stderr
-        except:
-             error = messages.crit_error_bad_command % ' '.join(command) + '\n' + traceback.format_exc()
-             error = format_error(error)
-             exit = (1, error)
+            
+             return(exit)
 
-             self.output += '\n' + error
+        except:
+             error_message = messages.crit_error_bad_command % command
+             raise CritError(error_message)
              
-        return(exit)
 
     def write_log(self):
         """ Write logs for shell command.
@@ -251,12 +252,9 @@ class ProgramDirective(Directive):
              Path of log file. Log file is only written if specified.  
         """
     
-        try:
-            program_output = norm_path(program_output)
-            with open(program_output, 'r') as f:
-                out = f.read()
-        except:
-            raise CritError(messages.crit_error_no_file % program_output)
+        program_output = norm_path(program_output)
+        with open(program_output, 'r') as f:
+            out = f.read()
 
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):

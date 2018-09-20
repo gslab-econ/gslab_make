@@ -6,7 +6,6 @@ from builtins import (bytes, str, open, super, range,
 import traceback
 
 import gslab_make_dev.private.metadata as metadata
-import gslab_make_dev.private.messages as messages
 from gslab_make_dev.private.exceptionclasses import CritError
 from gslab_make_dev.private.utility import glob_recursive, format_error
 from gslab_make_dev.write_logs import write_to_makelog, write_stats_log, write_heads_log
@@ -61,10 +60,10 @@ def write_link_logs(link_map,
         write_link_maplog(link_maplog, link_map)
         write_to_makelog('Link logs successfully written!', makelog)  
     except:
-        error = 'ERROR! See `write_link_logs`:\n' + traceback.format_exc()
-        error = format_error(error)
-        write_to_makelog(error, makelog)
-        raise CritError(error)
+        error_message = 'Error with `write_link_logs`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise
 
 def write_link_maplog(link_maplog, link_map):
     """ Make link map log.

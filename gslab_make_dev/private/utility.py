@@ -58,7 +58,7 @@ def glob_recursive(path, recursive):
     path_files = [p for p in path_files if os.path.isfile(p)]
 
     if not path_files:
-        print('WARNING! %s contains no files' % path)
+        print('WARNING! `glob_recursive(path = "%s", recursive = %s)` returned no files' % (path, recursive))
 
     return path_files
 
@@ -77,9 +77,6 @@ def file_to_array(file_name):
         List of lines contained in file.
     """
        
-    if not os.path.isfile(file_name):
-        raise CritError(messages.crit_error_file % file_name)        
-
     with open(file_name, 'r') as f:
         array = [line for line in f if not re.match('\s*\#',line)]
                                                     
@@ -100,7 +97,7 @@ def format_error(error):
         Formatted error message.
     """
 
-    formatted = '\n' + messages.note_star_line + '\n%s\n' + messages.note_star_line
+    formatted = messages.note_star_line + '\n%s\n' + messages.note_star_line
     formatted = formatted % error.strip()
     
     return(formatted)

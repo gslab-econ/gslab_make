@@ -60,7 +60,7 @@ class LinkDirective(object):
         None
         """      
         
-        if (self.osname != 'posix') & (self.osname != 'nt'):
+        if self.osname not in {'posix', 'nt'}:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):
@@ -94,10 +94,10 @@ class LinkDirective(object):
         
         if re.search('\*', self.target):
             if not glob.glob(self.target):
-                raise CritError(messages.crit_error_no_file_wildcard % self.target)
+                raise CritError(messages.crit_error_no_path_wildcard % self.target)
         else:
             if not os.path.exists(self.target):
-                raise CritError(messages.crit_error_no_file % self.target)   
+                raise CritError(messages.crit_error_no_path % self.target)   
 
     def get_link_list(self):
         """ Interpret wildcards to get list of paths that meet criteria. 
