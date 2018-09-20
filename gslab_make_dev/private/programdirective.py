@@ -6,6 +6,7 @@ from builtins import (bytes, str, open, super, range,
 import os
 import subprocess
 import shutil
+import traceback
 
 from gslab_make_dev.private.exceptionclasses import CritError
 import gslab_make_dev.private.messages as messages
@@ -29,7 +30,7 @@ class Directive(object):
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to False.
     makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
+        Path of make log.
     log : str, optional
         Path of directive log. Directive log is only written if specified.  
 
@@ -39,27 +40,27 @@ class Directive(object):
     """
     
     def __init__(self, 
+                 makelog, 
                  osname = os.name,
                  shell = False,
-                 makelog = metadata.settings['makelog'], 
                  log = ''):
 
+        self.makelog  = makelog
         self.osname   = osname
         self.shell    = shell
-        self.makelog  = makelog
         self.log      = log  
         self.check_os()
         self.get_paths()
 
     def check_os(self):
-        """ Check OS is either POSIX or NT. 
-        
+        """ Check OS is either POSIX or NT.  
+                
         Returns
         -------
         None
-        """    
+        """      
         
-        if (self.osname != 'posix') & (self.osname != 'nt'):
+        if self.osname not in {'posix', 'nt'}:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):   
@@ -82,22 +83,32 @@ class Directive(object):
         
         Returns
         -------
-        None
+        exit : tuple
+            Tuple (exit code, error message) for shell command.
         """
         
-        command = command.split()
-        self.output = 'Executing: "' + ' '.join(command) + "'"
+        self.output = 'Executing: "%s"' % command
         print(self.output)
-            
+
         try:   
-             p = subprocess.Popen(command, stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = self.shell)
-             out, err = p.communicate()
-             print(err)
-             self.output += '\n' + out + '\n' + err
-        except Exception as errmsg:
-             error_message = messages.crit_error_bad_command % ' '.join(command) + '\n' + str(errmsg)
-             print(error_message)
-             self.output += '\n' + error_message
+             process = subprocess.Popen(command.split(), 
+                                  stdout = subprocess.PIPE, 
+                                  stderr = subprocess.PIPE, 
+                                  shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+            
+             return(exit)
+
+        except:
+             error_message = messages.crit_error_bad_command % command
+             raise CritError(error_message)
+             
 
     def write_log(self):
         """ Write logs for shell command.
@@ -184,7 +195,7 @@ class ProgramDirective(Directive):
         None
         """
     
-        self.program      = norm_path(self.program)
+        self.program = norm_path(self.program)
         self.program_dir = os.path.dirname(self.program)
         self.program_base = os.path.basename(self.program)
         self.program_name, self.program_ext = os.path.splitext(self.program_base)
@@ -241,13 +252,9 @@ class ProgramDirective(Directive):
              Path of log file. Log file is only written if specified.  
         """
     
-        try:
-            program_output = norm_path(program_output)
-            with open(program_output, 'r') as f:
-                out = f.read()
-        except Exception as errmsg:
-            print(errmsg)
-            raise CritError(messages.crit_error_no_file % program_output)
+        program_output = norm_path(program_output)
+        with open(program_output, 'r') as f:
+            out = f.read()
 
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
@@ -299,7 +306,7 @@ class LyxDirective(ProgramDirective):
     See `ProgramDirective`.
     
     doctype : str, optional
-        Type of Lyx document. Takes either `handout` and `comments`. 
+        Type of LyX document. Takes either `handout` and `comments`. 
         Defaults to no special document type.
     pdfout : str, optional
         Directory to write PDF. Defaults to directory specified in metadata.
@@ -325,7 +332,7 @@ class LyxDirective(ProgramDirective):
         """
     
         if self.doctype not in ['handout', 'comments', '']:
-            print('Document type "%s"unrecognized. Reverting to default' % self.doctype)
+            print('Document type "%s" unrecognized. Reverting to default' % self.doctype)
             self.doctype = ''
             
     def get_pdfout(self):

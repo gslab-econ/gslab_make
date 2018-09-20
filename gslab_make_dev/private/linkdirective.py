@@ -9,7 +9,7 @@ import glob
 from itertools import chain
 import subprocess
 
-from gslab_make_dev.private.exceptionclasses import CritError, SyntaxError
+from gslab_make_dev.private.exceptionclasses import CritError
 import gslab_make_dev.private.messages as messages
 import gslab_make_dev.private.metadata as metadata
 from gslab_make_dev.private.utility import norm_path, file_to_array
@@ -60,7 +60,7 @@ class LinkDirective(object):
         None
         """      
         
-        if (self.osname != 'posix') & (self.osname != 'nt'):
+        if self.osname not in {'posix', 'nt'}:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):
@@ -94,10 +94,10 @@ class LinkDirective(object):
         
         if re.search('\*', self.target):
             if not glob.glob(self.target):
-                raise CritError(messages.crit_error_no_file_wildcard % self.target)
+                raise CritError(messages.crit_error_no_path_wildcard % self.target)
         else:
             if not os.path.exists(self.target):
-                raise CritError(messages.crit_error_no_file % self.target)   
+                raise CritError(messages.crit_error_no_path % self.target)   
 
     def get_link_list(self):
         """ Interpret wildcards to get list of paths that meet criteria. 
@@ -109,10 +109,8 @@ class LinkDirective(object):
     
         if re.match('\*', self.target):
             self.target_list  = glob.glob(self.target)
-
             self.symlink_list = [extract_wildcards(t) for t in self.target_list]
             self.symlink_list = [fill_in_wildcards(s) for s in self.symlink_list]
-
         else:
             self.target_list  = [self.target]
             self.symlink_list = [self.symlink]
@@ -258,7 +256,7 @@ class LinksList(object):
         if type(self.file_list) is list:
             self.file_list = [f for file in self.file_list for f in glob.glob(file)]
         else:
-            raise SyntaxError(messages.syn_error_file_list)
+            raise TypeError(messages.type_error_file_list)
     
     def get_paths(self):    
         """ Normalize paths. 

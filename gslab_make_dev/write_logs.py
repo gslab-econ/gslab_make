@@ -7,11 +7,12 @@ import os
 import datetime
 import re
 import string
+import traceback
 
 import gslab_make_dev.private.messages as messages
 import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.exceptionclasses import CritError, SyntaxError
-from gslab_make_dev.private.utility import norm_path, glob_recursive
+from gslab_make_dev.private.exceptionclasses import CritError
+from gslab_make_dev.private.utility import norm_path, glob_recursive, format_error
 
 
 def set_option(**kwargs):
@@ -22,15 +23,15 @@ def set_option(**kwargs):
     None
     """
 
-    kwargs = {re.sub('_file$|_dir$', '', k):v for k, v in kwargs.items()}
+    options = {re.sub('_file$|_dir$', '', k):v for k, v in kwargs.items()}
 
-    if len(kwargs.keys()) != len(set(kwargs.keys())):
+    if len(options.keys()) != len(kwargs.keys()):
         raise SyntaxError(messages.syn_error_options)      
 
     for key in metadata.settings.keys():
         root = re.sub('_file$|_dir$', '', key) 
-        if root in kwargs.keys():
-            metadata.settings[key] = kwargs[root]
+        if root in options.keys():
+            metadata.settings[key] = options[root]
 
 
 def start_makelog(makelog = metadata.settings['makelog']):
@@ -52,21 +53,17 @@ def start_makelog(makelog = metadata.settings['makelog']):
     """
 
     metadata.makelog_started = True
-    makelog = norm_path(makelog)
-    print('Starting makelog file at: "%s"' % makelog)
-    
-    try:
-        MAKELOG = open(makelog, 'w')
-    except Exception as error:
-        raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
+    if makelog:
+        makelog = norm_path(makelog)
+        print('Starting makelog file at: "%s"' % makelog)
         
-    time_start = str(datetime.datetime.now().replace(microsecond = 0))
-    working_dir = os.getcwd()
-    print(messages.note_dash_separator + '\n', file = MAKELOG)
-    print(messages.note_makelog_start + time_start + '\n', file = MAKELOG)
-    print(messages.note_working_directory + working_dir + '\n', file = MAKELOG)
-    print(messages.note_dash_separator + '\n', file = MAKELOG)
-    MAKELOG.close()
+        with open(makelog, 'w') as MAKELOG:
+            time_start = str(datetime.datetime.now().replace(microsecond = 0))
+            working_dir = os.getcwd()
+            print(messages.note_dash_line, file = MAKELOG)
+            print(messages.note_makelog_start + time_start, file = MAKELOG)
+            print(messages.note_working_directory + working_dir, file = MAKELOG)
+            print(messages.note_dash_line, file = MAKELOG)
 
 
 def end_makelog(makelog = metadata.settings['makelog']):
@@ -81,34 +78,30 @@ def end_makelog(makelog = metadata.settings['makelog']):
     -------
     None
     """
+ 
+    if makelog:
+        makelog = norm_path(makelog)
+        print('Ending makelog file at: "%s"' % makelog)
 
-    makelog = norm_path(makelog)
-    print('Ending makelog file at: "%s"' % makelog)
+        if not (metadata.makelog_started and os.path.isfile(makelog)):
+            raise CritError(messages.crit_error_no_makelog % makelog)
 
-    if not (metadata.makelog_started and os.path.isfile(makelog)):
-        raise CritError(messages.crit_error_no_makelog % makelog)
+        with open(makelog, 'a') as MAKELOG:
+            time_end = str(datetime.datetime.now().replace(microsecond = 0))
+            working_dir = os.getcwd()
+            print(messages.note_dash_line, file = MAKELOG)
+            print(messages.note_makelog_end + time_end, file = MAKELOG)
+            print(messages.note_working_directory + working_dir, file = MAKELOG)
+            print(messages.note_dash_line, file = MAKELOG)
 
-    try:
-        MAKELOG = open(makelog, 'a')
-    except Exception as error:
-        raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
-       
-    time_end = str(datetime.datetime.now().replace(microsecond = 0))
-    working_dir = os.getcwd()
-    print(messages.note_dash_separator + '\n', file = MAKELOG)
-    print(messages.note_makelog_end + time_end + '\n', file = MAKELOG)
-    print(messages.note_working_directory + working_dir + '\n', file = MAKELOG)
-    print(messages.note_dash_separator + '\n', file = MAKELOG)
-    MAKELOG.close()
-    
     
 def write_to_makelog(message, makelog = metadata.settings['makelog']):
-    """ Write message to make log.
+    """ Append message to make log.
 
     Parameters
     ----------
     message : str
-        Message to write
+        Message to append.
     makelog : str, optional
         Path of started make log. Defaults to path specified in metadata.
 
@@ -117,24 +110,21 @@ def write_to_makelog(message, makelog = metadata.settings['makelog']):
     None
     """
 
-    makelog = norm_path(makelog)
+    if makelog:
+        makelog = norm_path(makelog)
 
-    if not (metadata.makelog_started and os.path.isfile(makelog)):
-        raise CritError(messages.crit_error_no_makelog % makelog)
+        if not (metadata.makelog_started and os.path.isfile(makelog)):
+            raise CritError(messages.crit_error_no_makelog % makelog)
 
-    try:
-        MAKELOG = open(makelog, 'a')
-    except Exception as error:
-        raise CritError((messages.crit_error_log % makelog) + '\n' + str(error))
-
-    print(message + '\n', file = MAKELOG)
-    MAKELOG.close()
+        with open(makelog, 'a') as MAKELOG:
+            print(message, file = MAKELOG)
     
     
 def write_output_logs(output_dir = metadata.settings['output_dir'],
                       output_statslog = metadata.settings['output_statslog'], 
                       output_headslog = metadata.settings['output_headslog'],
-                      recursive = float('inf')):
+                      recursive = float('inf'),
+                      makelog = metadata.settings['makelog']):
     """ Write output logs.
 
     Notes
@@ -156,6 +146,8 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
         Path to write output headers log. Defaults to path specified in metadata.
     recursive : int, optional
         Level of depth when walking through output directory.
+    makelog : str, optional
+        Path of makelog. Defaults to path specified in metadata.
 
     Returns
     -------
@@ -172,7 +164,9 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
         output_headslog = norm_path(output_headslog)
         write_heads_log(output_headslog, output_files)
     
-
+    write_to_makelog('Output logs successfully written!', makelog)  
+        
+    
 def write_stats_log (statslog_file, output_files):
     """ Write statistics log.
    
@@ -232,10 +226,11 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
 
     with open(headslog_file, 'w') as HEADSLOG:      
         print(header, file = HEADSLOG)
-        print('\n' + messages.note_dash_separator + '\n', file = HEADSLOG)
+        print(messages.note_dash_line, file = HEADSLOG)
         
         for file_name in output_files:
-            print("%s\n" % file_name, file = HEADSLOG)
+            print("%s" % file_name, file = HEADSLOG)
+            print(messages.note_dash_line, file = HEADSLOG)
             
             try:
                 with open(file_name, 'r') as f:
@@ -244,6 +239,6 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
                         cleaned_line = filter(lambda x: x in string.printable, line)
                         print(cleaned_line, file = HEADSLOG)
             except:
-                print("Head not readable", file = HEADSLOG)
+                print("Head not readable or less than %s lines" % num_lines, file = HEADSLOG)
 
-            print('\n' + messages.note_dash_separator + '\n', file = HEADSLOG)
+            print(messages.note_dash_line, file = HEADSLOG)

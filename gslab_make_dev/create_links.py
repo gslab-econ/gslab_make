@@ -3,9 +3,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
-import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.linkdirective import LinksList
+import traceback
 
+import gslab_make_dev.private.metadata as metadata
+from gslab_make_dev.private.exceptionclasses import CritError
+from gslab_make_dev.private.linkdirective import LinksList
+from gslab_make_dev.private.utility import format_error
 from gslab_make_dev.write_logs import write_to_makelog
 
 
@@ -31,10 +34,12 @@ def create_links(file_list,
 
     try:              
         link_list = LinksList(file_list, link_dir)
-        link_map = link_list.create_symlinks()
-               
-        return(link_map)
+        link_map = link_list.create_symlinks()       
+        write_to_makelog('Links successfully created!', makelog)    
         
-    except Exception as error:
-        write_to_makelog("Error with create_links: \n" + error, makelog)
-        raise Exception                    
+        return(link_map)
+    except:
+        error_message = 'An error was encountered with `create_links`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(error_message, makelog)
+        raise               

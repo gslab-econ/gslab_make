@@ -10,9 +10,8 @@ import time
 
 import gslab_make_dev.private.metadata as metadata
 import gslab_make_dev.private.messages as messages
-
 from gslab_make_dev.private.exceptionclasses import CritError
-from gslab_make_dev.private.utility import norm_path
+from gslab_make_dev.private.utility import norm_path, format_error
 
 
 def check_os():
@@ -71,13 +70,13 @@ def clear_dir(dir_list):
     if type(dir_list) is list:
         dir_list = [norm_path(dir_path) for dir_path in dir_list]
     else:
-        raise TypeError(messages.syn_error_file_list)
+        raise TypeError(messages.type_error_file_list)
     
     for dir_path in dir_list:
         if os.path.isdir(dir_path):
             remove_path(dir_path, quiet = True)
         elif os.path.isfile(dir_path): 
-            raise CritError(messages.crit_not_dir % dir_path)
+            raise TypeError(messages.type_error_not_dir % dir_path)
         
     time.sleep(0.25) # Allow file manager to recognize files no longer exist
     
