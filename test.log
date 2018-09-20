@@ -45,220 +45,28 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.15, pytest-3.7.1, py-1.5.4, pluggy-0.7.1
 rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 6 items
+collected 4 items
 
-gslab_make_dev/tests/test_create_links.py F.F.FF                         [100%]
+gslab_make_dev/test_makelog.py ....                                      [100%]
 
-=================================== FAILURES ===================================
-________________________ testCreateLinks.test_bad_list _________________________
-
-self = <gslab_make_dev.tests.test_create_links.testCreateLinks testMethod=test_bad_list>
-
-    def test_bad_list(self):
-        with nostderrout():
->           create_links('nonexistent_list')
-
-gslab_make_dev/tests/test_create_links.py:31: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-file_list = 'nonexistent_list', link_dir = '../input/'
-makelog = '../log/make.log'
-
-    def create_links(file_list,
-                     link_dir = metadata.settings['link_dir'],
-                     makelog = metadata.settings['makelog']):
-        """ Create symlinks from list of files containing linking instructions.
-    
-        Parameters
-        ----------
-        file_list : list
-            List of files containing linking instructions.
-        link_dir : str, optional
-            Directory to write symlinks. Defaults to directory specified in metadata.
-        makelog : str, optional
-            Path of makelog. Defaults to path specified in metadata.
-    
-        Returns
-        -------
-        link_map : list
-            List of (target, symlink) for each symlink created.
-        """
-    
-        try:
-            link_list = LinksList(file_list, link_dir)
-            link_map = link_list.create_symlinks()
-    
-            return(link_map)
-    
-        except Exception as error:
->           write_to_makelog("Error with create_links: \n" + error, makelog)
-E           TypeError: coercing to Unicode: need string or buffer, SyntaxError found
-
-gslab_make_dev/create_links.py:39: TypeError
-_______________________ testCreateLinks.test_change_log ________________________
-
-self = <gslab_make_dev.tests.test_create_links.testCreateLinks testMethod=test_change_log>
-
-    def test_change_log(self):
-        with nostderrout():
-            end_makelog()
-            newlog = '../input/new_log'
-            start_makelog(makelog = newlog)
->           create_links('nonexistent_list', makelog = newlog)
-
-gslab_make_dev/tests/test_create_links.py:63: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-file_list = 'nonexistent_list', link_dir = '../input/'
-makelog = '../input/new_log'
-
-    def create_links(file_list,
-                     link_dir = metadata.settings['link_dir'],
-                     makelog = metadata.settings['makelog']):
-        """ Create symlinks from list of files containing linking instructions.
-    
-        Parameters
-        ----------
-        file_list : list
-            List of files containing linking instructions.
-        link_dir : str, optional
-            Directory to write symlinks. Defaults to directory specified in metadata.
-        makelog : str, optional
-            Path of makelog. Defaults to path specified in metadata.
-    
-        Returns
-        -------
-        link_map : list
-            List of (target, symlink) for each symlink created.
-        """
-    
-        try:
-            link_list = LinksList(file_list, link_dir)
-            link_map = link_list.create_symlinks()
-    
-            return(link_map)
-    
-        except Exception as error:
->           write_to_makelog("Error with create_links: \n" + error, makelog)
-E           TypeError: coercing to Unicode: need string or buffer, SyntaxError found
-
-gslab_make_dev/create_links.py:39: TypeError
-_____________________ testCreateLinks.test_multiple_lists ______________________
-
-self = <gslab_make_dev.tests.test_create_links.testCreateLinks testMethod=test_multiple_lists>
-
-    def test_multiple_lists(self):
-        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/test_file_list.txt'))
-        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/test_file_list_w_wildcard.txt'))
-        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/matlab_test_script_wait1.m'))
-        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/matlab_test_script_wait2.m'))
-        with nostderrout():
-            create_links('gslab_make_dev/tests/input/test_file_list.txt', \
->                           'gslab_make_dev/tests/input/test_file_list_w_wildcard.txt')
-
-gslab_make_dev/tests/test_create_links.py:51: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-file_list = 'gslab_make_dev/tests/input/test_file_list.txt'
-link_dir = 'gslab_make_dev/tests/input/test_file_list_w_wildcard.txt'
-makelog = '../log/make.log'
-
-    def create_links(file_list,
-                     link_dir = metadata.settings['link_dir'],
-                     makelog = metadata.settings['makelog']):
-        """ Create symlinks from list of files containing linking instructions.
-    
-        Parameters
-        ----------
-        file_list : list
-            List of files containing linking instructions.
-        link_dir : str, optional
-            Directory to write symlinks. Defaults to directory specified in metadata.
-        makelog : str, optional
-            Path of makelog. Defaults to path specified in metadata.
-    
-        Returns
-        -------
-        link_map : list
-            List of (target, symlink) for each symlink created.
-        """
-    
-        try:
-            link_list = LinksList(file_list, link_dir)
-            link_map = link_list.create_symlinks()
-    
-            return(link_map)
-    
-        except Exception as error:
->           write_to_makelog("Error with create_links: \n" + error, makelog)
-E           TypeError: coercing to Unicode: need string or buffer, SyntaxError found
-
-gslab_make_dev/create_links.py:39: TypeError
-________________________ testCreateLinks.test_wildcard _________________________
-
-self = <gslab_make_dev.tests.test_create_links.testCreateLinks testMethod=test_wildcard>
-
-    def test_wildcard(self):
-        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/test_file_list_w_wildcard.txt'))
-        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/matlab_test_script_wait1.m'))
-        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/matlab_test_script_wait2.m'))
-        with nostderrout():
->           create_links('gslab_make_dev/tests/input/test_file_list_w_wildcard.txt')
-
-gslab_make_dev/tests/test_create_links.py:39: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-file_list = 'gslab_make_dev/tests/input/test_file_list_w_wildcard.txt'
-link_dir = '../input/', makelog = '../log/make.log'
-
-    def create_links(file_list,
-                     link_dir = metadata.settings['link_dir'],
-                     makelog = metadata.settings['makelog']):
-        """ Create symlinks from list of files containing linking instructions.
-    
-        Parameters
-        ----------
-        file_list : list
-            List of files containing linking instructions.
-        link_dir : str, optional
-            Directory to write symlinks. Defaults to directory specified in metadata.
-        makelog : str, optional
-            Path of makelog. Defaults to path specified in metadata.
-    
-        Returns
-        -------
-        link_map : list
-            List of (target, symlink) for each symlink created.
-        """
-    
-        try:
-            link_list = LinksList(file_list, link_dir)
-            link_map = link_list.create_symlinks()
-    
-            return(link_map)
-    
-        except Exception as error:
->           write_to_makelog("Error with create_links: \n" + error, makelog)
-E           TypeError: coercing to Unicode: need string or buffer, SyntaxError found
-
-gslab_make_dev/create_links.py:39: TypeError
-====================== 4 failed, 2 passed in 2.09 seconds ======================
+=========================== 4 passed in 1.25 seconds ===========================
 Name                                           Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------------------------------------
-gslab_make_dev/create_links.py                    13      1      0      0    92%   40
+gslab_make_dev/create_links.py                    13      7      0      0    46%   32-40
 gslab_make_dev/dir_mod.py                         46     22     20      3    47%   26-27, 47-55, 74, 78, 80, 104-105, 123-132, 71->74, 77->78, 79->80
 gslab_make_dev/private/exceptionclasses.py        13      1      0      0    92%   12
-gslab_make_dev/private/linkdirective.py          104     28     32      6    68%   64, 78-79, 93, 96-97, 100, 111-114, 141-148, 169-173, 185-186, 209-216, 63->64, 92->93, 95->96, 99->100, 110->111, 183->185
+gslab_make_dev/private/linkdirective.py          104     76     32      0    21%   47-53, 63-64, 74-82, 92-100, 110-120, 141-148, 169-173, 183-188, 198-200, 209-216, 244-248, 258-261, 271-273, 283-289, 300-304
 gslab_make_dev/private/messages.py                18      0      0      0   100%
 gslab_make_dev/private/metadata.py                 8      0      0      0   100%
 gslab_make_dev/private/programdirective.py       110     82     28      0    20%   47-52, 62-63, 72-73, 88-100, 110-118, 168-177, 187-190, 200-204, 214-215, 225-226, 244-263, 285-286, 313-317, 327-329, 339-342
-gslab_make_dev/private/utility.py                 31     12      6      1    54%   45-58, 76, 75->76
+gslab_make_dev/private/utility.py                 31     16      6      0    41%   45-58, 75-81
 gslab_make_dev/run_program.py                    124    106     14      0    13%   43-56, 87-99, 130-139, 170-179, 210-219, 250-259, 295-334, 365-374, 407-421, 446-454
 gslab_make_dev/tablefill.py                      141    122     68      0     9%   13-25, 31-40, 44-47, 51-57, 61-77, 81-84, 87-115, 118-149, 152-160, 164-176, 180-182
 gslab_make_dev/tablefill_info.py                   0      0      0      0   100%
+gslab_make_dev/test_makelog.py                    67      2      4      2    94%   77-78, 72->74, 76->77
 gslab_make_dev/tests/nostderrout.py               12      0      2      0   100%
 gslab_make_dev/tests/test_clear_dir.py             0      0      0      0   100%
-gslab_make_dev/tests/test_create_links.py         67     12      6      3    79%   32, 40-42, 52-56, 64, 79-80, 73->75, 75->exit, 78->79
+gslab_make_dev/tests/test_create_links.py          0      0      0      0   100%
 gslab_make_dev/tests/test_delete_files.py          0      0      0      0   100%
 gslab_make_dev/tests/test_execute_command.py       0      0      0      0   100%
 gslab_make_dev/tests/test_remove_path.py           0      0      0      0   100%
@@ -275,6 +83,6 @@ gslab_make_dev/tests/test_zip.py                   0      0      0      0   100%
 gslab_make_dev/textfill.py                       135    114     60      0    11%   12-24, 31-52, 56-59, 63-72, 77-82, 85-89, 92-93, 96-101, 104-106, 110-119, 123-128, 132-162, 166-190
 gslab_make_dev/textfill_info.py                    0      0      0      0   100%
 gslab_make_dev/write_link_logs.py                 18     11      2      0    35%   48-54, 72-78
-gslab_make_dev/write_logs.py                      92     51     24      1    36%   25-33, 60-61, 89, 93-94, 120-131, 165-173, 199-209, 231-249, 88->89
+gslab_make_dev/write_logs.py                      92     43     24      0    46%   25-33, 60-61, 93-94, 127-128, 165-173, 199-209, 231-249
 ------------------------------------------------------------------------------------------
-TOTAL                                            932    562    262     14    34%
+TOTAL                                            932    602    260      5    29%
