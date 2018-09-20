@@ -1,0 +1,2 @@
+linked_lyx_file	gslab_make_dev/tests/input/lyx_test_file.lyx
+linked_folder	gslab_make_dev/tests

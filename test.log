@@ -45,416 +45,236 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.15, pytest-3.7.1, py-1.5.4, pluggy-0.7.1
 rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 54 items
+collected 6 items
 
-gslab_make_dev/tests/test_clear_dir.py ...                               [  5%]
-gslab_make_dev/tests/test_execute_command.py ...                         [ 11%]
-gslab_make_dev/tests/test_remove_path.py FFF.                            [ 18%]
-gslab_make_dev/tests/test_run_lyx.py FF...F...F                          [ 37%]
-gslab_make_dev/tests/test_run_perl.py ......                             [ 48%]
-gslab_make_dev/tests/test_run_python.py ........                         [ 62%]
-gslab_make_dev/tests/test_run_stata.py F.....                            [ 74%]
-gslab_make_dev/tests/test_tablefill.py ....                              [ 81%]
-gslab_make_dev/tests/test_textfill.py ........                           [ 96%]
-gslab_make_dev/tests/test_zip.py ..                                      [100%]
+gslab_make_dev/tests/test_create_links.py F.F.FF                         [100%]
 
 =================================== FAILURES ===================================
-_________________________ testRemovePath.test_default __________________________
+________________________ testCreateLinks.test_bad_list _________________________
 
-self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_default>
+self = <gslab_make_dev.tests.test_create_links.testCreateLinks testMethod=test_bad_list>
 
-    def test_default(self):
-        self.assertTrue(os.path.isdir('./output_local/'))
+    def test_bad_list(self):
         with nostderrout():
-                remove_path('./output_local/')
->       self.assertFalse(os.path.isfile('./output_local/text.txt'))
-E       AssertionError: True is not false
+>           create_links('nonexistent_list')
 
-gslab_make_dev/tests/test_remove_path.py:27: AssertionError
-______________________ testRemovePath.test_default_noisy _______________________
-
-self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_default_noisy>
-
-    def test_default_noisy(self):
-        self.assertTrue(os.path.isfile('./output_local/text.txt'))
-        with open('stdout.txt', 'w') as f:
-                with redirect_stdout(f):
-                        remove_path('./output_local/')
->               self.assertIn('Deleted:', open('stdout.txt').read())
-E               AssertionError: 'Deleted:' not found in ''
-
-gslab_make_dev/tests/test_remove_path.py:35: AssertionError
-_________________________ testRemovePath.test_options __________________________
-
-self = <gslab_make_dev.tests.test_remove_path.testRemovePath testMethod=test_options>
-
-    def test_options(self):
-        self.assertTrue(os.path.isfile('./output_local/text.txt'))
-        os.makedirs('./output_local/temp_dir/')
-        with self.assertRaises(OSError):
->           remove_path('./output_local', option='-v')
-E           AssertionError: OSError not raised
-
-gslab_make_dev/tests/test_remove_path.py:41: AssertionError
------------------------------ Captured stdout call -----------------------------
-
-Deleted: "/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local"
---------------------------- Captured stderr teardown ---------------------------
-rm: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/output_local: No such file or directory
-________________________ testRunLyx.test_bad_executable ________________________
-
-self = <gslab_make_dev.tests.test_run_lyx.testRunLyx testMethod=test_bad_executable>
-
-    def test_bad_executable(self):
-        with nostderrout():
->           run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', executable = 'nonexistent_lyx_executable')
-
-gslab_make_dev/tests/test_run_lyx.py:59: 
+gslab_make_dev/tests/test_create_links.py:31: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-kwargs = {'executable': 'nonexistent_lyx_executable', 'program': 'gslab_make_dev/tests/input/lyx_test_file.lyx'}
-directive = <gslab_make_dev.private.programdirective.LyxDirective object at 0x1045c8a90>
-temp_name = 'lyx_test_file'
-temp_program = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file.lyx'
-command = 'nonexistent_lyx_executable -e pdf2 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file.lyx'
-temp_pdf = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file.pdf'
+file_list = 'nonexistent_list', link_dir = '../input/'
+makelog = '../log/make.log'
 
-    def run_lyx(**kwargs): # Check
-    
-        try:
-            directive = LyxDirective(application = 'lyx', **kwargs)
-    
-            # Make handout/commented LyX file
-            if directive.doctype:
-                temp_name = os.path.join(directive.program_name + '_' + directive.doctype)
-                temp_program = os.path.join(directive.program_path, temp_name + '.lyx')
-    
-                beamer = False
-                shutil.copy2(directive.program, temp_program)
-                for line in fileinput.input(temp_program, inplace = True):
-                    if r'\textclass beamer' in line:
-                        beamer = True
-                    elif directive.doctype == 'handout' and r'\options' in line and beamer:
-                        line = line.rstrip('\n') + ', handout\n'
-                    elif directive.doctype == 'comments' and r'\begin_inset Note Note' in line:
-                        line = line.replace('Note Note', 'Note Greyedout')
-            else:
-                 temp_name = directive.program_name
-                 temp_program = directive.program
-    
-            # Execute
-            command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, temp_program)
-            directive.execute_command(command)
-            directive.write_log()
-    
-            # Move PDF output
-            temp_pdf = os.path.join(directive.program_path, temp_name + '.pdf')
-            output_pdf = os.path.join(directive.pdfout, directive.program_name + '.pdf')
-    
-            if temp_pdf != output_pdf:
-                shutil.copy2(temp_pdf, output_pdf)
-                os.remove(temp_pdf)
-    
-            # Remove handout/commented LyX file
-            if directive.doctype:
-                os.remove(temp_program)
-        except Exception as e:
-            print(e)
->           raise Exception
-E           Exception
-
-gslab_make_dev/run_program.py:172: Exception
-___________________________ testRunLyx.test_comments ___________________________
-
-self = <gslab_make_dev.tests.test_run_lyx.testRunLyx testMethod=test_comments>
-
-    def test_comments(self):
-        temp_dir = '../temp/'
-        with nostderrout():
-            clear_dir([temp_dir])
->           run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', doctype = 'comments')
-
-gslab_make_dev/tests/test_run_lyx.py:90: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-kwargs = {'doctype': 'comments', 'program': 'gslab_make_dev/tests/input/lyx_test_file.lyx'}
-directive = <gslab_make_dev.private.programdirective.LyxDirective object at 0x1046fa990>
-temp_name = 'lyx_test_file_comments'
-temp_program = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file_comments.lyx'
-beamer = False, line = '\\end_document\r\n'
-command = 'lyx -e pdf2 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file_comments.lyx'
-temp_pdf = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file_comments.pdf'
-
-    def run_lyx(**kwargs): # Check
-    
-        try:
-            directive = LyxDirective(application = 'lyx', **kwargs)
-    
-            # Make handout/commented LyX file
-            if directive.doctype:
-                temp_name = os.path.join(directive.program_name + '_' + directive.doctype)
-                temp_program = os.path.join(directive.program_path, temp_name + '.lyx')
-    
-                beamer = False
-                shutil.copy2(directive.program, temp_program)
-                for line in fileinput.input(temp_program, inplace = True):
-                    if r'\textclass beamer' in line:
-                        beamer = True
-                    elif directive.doctype == 'handout' and r'\options' in line and beamer:
-                        line = line.rstrip('\n') + ', handout\n'
-                    elif directive.doctype == 'comments' and r'\begin_inset Note Note' in line:
-                        line = line.replace('Note Note', 'Note Greyedout')
-            else:
-                 temp_name = directive.program_name
-                 temp_program = directive.program
-    
-            # Execute
-            command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, temp_program)
-            directive.execute_command(command)
-            directive.write_log()
-    
-            # Move PDF output
-            temp_pdf = os.path.join(directive.program_path, temp_name + '.pdf')
-            output_pdf = os.path.join(directive.pdfout, directive.program_name + '.pdf')
-    
-            if temp_pdf != output_pdf:
-                shutil.copy2(temp_pdf, output_pdf)
-                os.remove(temp_pdf)
-    
-            # Remove handout/commented LyX file
-            if directive.doctype:
-                os.remove(temp_program)
-        except Exception as e:
-            print(e)
->           raise Exception
-E           Exception
-
-gslab_make_dev/run_program.py:172: Exception
-________________________ testRunLyx.test_handout_pdfout ________________________
-
-self = <gslab_make_dev.tests.test_run_lyx.testRunLyx testMethod=test_handout_pdfout>
-
-    def test_handout_pdfout(self):
-        temp_dir = '../temp/'
-        with nostderrout():
-            clear_dir([temp_dir])
->           run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', doctype = 'handout', pdfout = 'gslab_make_dev/tests/input/custom_outfile.pdf')
-
-gslab_make_dev/tests/test_run_lyx.py:100: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-kwargs = {'doctype': 'handout', 'pdfout': 'gslab_make_dev/tests/input/custom_outfile.pdf', 'program': 'gslab_make_dev/tests/input/lyx_test_file.lyx'}
-directive = <gslab_make_dev.private.programdirective.LyxDirective object at 0x1033cfb10>
-temp_name = 'lyx_test_file_handout'
-temp_program = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file_handout.lyx'
-beamer = False, line = '\\end_document\r\n'
-command = 'lyx -e pdf2 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file_handout.lyx'
-temp_pdf = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file_handout.pdf'
-
-    def run_lyx(**kwargs): # Check
-    
-        try:
-            directive = LyxDirective(application = 'lyx', **kwargs)
-    
-            # Make handout/commented LyX file
-            if directive.doctype:
-                temp_name = os.path.join(directive.program_name + '_' + directive.doctype)
-                temp_program = os.path.join(directive.program_path, temp_name + '.lyx')
-    
-                beamer = False
-                shutil.copy2(directive.program, temp_program)
-                for line in fileinput.input(temp_program, inplace = True):
-                    if r'\textclass beamer' in line:
-                        beamer = True
-                    elif directive.doctype == 'handout' and r'\options' in line and beamer:
-                        line = line.rstrip('\n') + ', handout\n'
-                    elif directive.doctype == 'comments' and r'\begin_inset Note Note' in line:
-                        line = line.replace('Note Note', 'Note Greyedout')
-            else:
-                 temp_name = directive.program_name
-                 temp_program = directive.program
-    
-            # Execute
-            command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, temp_program)
-            directive.execute_command(command)
-            directive.write_log()
-    
-            # Move PDF output
-            temp_pdf = os.path.join(directive.program_path, temp_name + '.pdf')
-            output_pdf = os.path.join(directive.pdfout, directive.program_name + '.pdf')
-    
-            if temp_pdf != output_pdf:
-                shutil.copy2(temp_pdf, output_pdf)
-                os.remove(temp_pdf)
-    
-            # Remove handout/commented LyX file
-            if directive.doctype:
-                os.remove(temp_program)
-        except Exception as e:
-            print(e)
->           raise Exception
-E           Exception
-
-gslab_make_dev/run_program.py:172: Exception
-____________________________ testRunLyx.test_pdfout ____________________________
-
-self = <gslab_make_dev.tests.test_run_lyx.testRunLyx testMethod=test_pdfout>
-
-    def test_pdfout(self):
-        with nostderrout():
->           run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', pdfout = 'gslab_make_dev/tests/input/custom_outfile.pdf')
-
-gslab_make_dev/tests/test_run_lyx.py:80: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-kwargs = {'pdfout': 'gslab_make_dev/tests/input/custom_outfile.pdf', 'program': 'gslab_make_dev/tests/input/lyx_test_file.lyx'}
-directive = <gslab_make_dev.private.programdirective.LyxDirective object at 0x103e860d0>
-temp_name = 'lyx_test_file'
-temp_program = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file.lyx'
-command = 'lyx -e pdf2 /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file.lyx'
-temp_pdf = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/lyx_test_file.pdf'
-
-    def run_lyx(**kwargs): # Check
-    
-        try:
-            directive = LyxDirective(application = 'lyx', **kwargs)
-    
-            # Make handout/commented LyX file
-            if directive.doctype:
-                temp_name = os.path.join(directive.program_name + '_' + directive.doctype)
-                temp_program = os.path.join(directive.program_path, temp_name + '.lyx')
-    
-                beamer = False
-                shutil.copy2(directive.program, temp_program)
-                for line in fileinput.input(temp_program, inplace = True):
-                    if r'\textclass beamer' in line:
-                        beamer = True
-                    elif directive.doctype == 'handout' and r'\options' in line and beamer:
-                        line = line.rstrip('\n') + ', handout\n'
-                    elif directive.doctype == 'comments' and r'\begin_inset Note Note' in line:
-                        line = line.replace('Note Note', 'Note Greyedout')
-            else:
-                 temp_name = directive.program_name
-                 temp_program = directive.program
-    
-            # Execute
-            command = metadata.commands[directive.osname][directive.application] % (directive.executable, directive.option, temp_program)
-            directive.execute_command(command)
-            directive.write_log()
-    
-            # Move PDF output
-            temp_pdf = os.path.join(directive.program_path, temp_name + '.pdf')
-            output_pdf = os.path.join(directive.pdfout, directive.program_name + '.pdf')
-    
-            if temp_pdf != output_pdf:
-                shutil.copy2(temp_pdf, output_pdf)
-                os.remove(temp_pdf)
-    
-            # Remove handout/commented LyX file
-            if directive.doctype:
-                os.remove(temp_program)
-        except Exception as e:
-            print(e)
->           raise Exception
-E           Exception
-
-gslab_make_dev/run_program.py:172: Exception
-_______________________ testRunStata.test_bad_executable _______________________
-
-self = <gslab_make_dev.tests.test_run_stata.testRunStata testMethod=test_bad_executable>
-
-    def test_bad_executable(self):
-        with nostderrout():
->           run_stata(program = 'gslab_make_dev/tests/input/stata_test_script.do', executable = 'nonexistent_stata_executable')
-
-gslab_make_dev/tests/test_run_stata.py:48: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-kwargs = {'executable': 'nonexistent_stata_executable', 'program': 'gslab_make_dev/tests/input/stata_test_script.do'}
-directive = <gslab_make_dev.private.programdirective.ProgramDirective object at 0x103279610>
-program_log = '/Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/stata_test_script.log'
-command = 'nonexistent_stata_executable -e do /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/gslab_make_dev/tests/input/stata_test_script.do'
-e = CritError()
-
-    def run_stata(**kwargs):
-        """ Run Stata script.
+    def create_links(file_list,
+                     link_dir = metadata.settings['link_dir'],
+                     makelog = metadata.settings['makelog']):
+        """ Create symlinks from list of files containing linking instructions.
     
         Parameters
         ----------
-        osname : str, optional
-            Name of OS. Defaults to `os.name`.
-        shell : bool, optional
-            See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-            Defaults to False.
+        file_list : list
+            List of files containing linking instructions.
+        link_dir : str, optional
+            Directory to write symlinks. Defaults to directory specified in metadata.
         makelog : str, optional
             Path of makelog. Defaults to path specified in metadata.
-        log : str, optional
-            Path of program log. Program log is only written if specified.
-        program : str
-            Path of script to run.
-        executable : str, optional
-            Executable to use for shell command. Defaults to executable specified in metadata.
-        option : str
-            Options for shell command. Defaults to options specified in metadata.
-        args : str
-            Only used for Python and Perl scripts.
     
         Returns
         -------
-        None
+        link_map : list
+            List of (target, symlink) for each symlink created.
         """
     
         try:
-            directive = ProgramDirective(application = 'stata', **kwargs)
+            link_list = LinksList(file_list, link_dir)
+            link_map = link_list.create_symlinks()
     
-            # Get program output
-            program_log = os.path.join(os.getcwd(), directive.program_name + '.log')
+            return(link_map)
     
-            # Execute
-            command = metadata.commands[directive.osname]['stata'] % (directive.executable, directive.option, directive.program)
-            directive.execute_command(command)
-            directive.write_log()
-            directive.move_program_output(program_log, directive.log)
-        except Exception as e:
-            print(e)
->           raise Exception
-E           Exception
+        except Exception as error:
+>           write_to_makelog("Error with create_links: \n" + error, makelog)
+E           TypeError: coercing to Unicode: need string or buffer, SyntaxError found
 
-gslab_make_dev/run_program.py:55: Exception
-===================== 8 failed, 46 passed in 18.57 seconds =====================
+gslab_make_dev/create_links.py:39: TypeError
+_______________________ testCreateLinks.test_change_log ________________________
+
+self = <gslab_make_dev.tests.test_create_links.testCreateLinks testMethod=test_change_log>
+
+    def test_change_log(self):
+        with nostderrout():
+            end_makelog()
+            newlog = '../input/new_log'
+            start_makelog(makelog = newlog)
+>           create_links('nonexistent_list', makelog = newlog)
+
+gslab_make_dev/tests/test_create_links.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+file_list = 'nonexistent_list', link_dir = '../input/'
+makelog = '../input/new_log'
+
+    def create_links(file_list,
+                     link_dir = metadata.settings['link_dir'],
+                     makelog = metadata.settings['makelog']):
+        """ Create symlinks from list of files containing linking instructions.
+    
+        Parameters
+        ----------
+        file_list : list
+            List of files containing linking instructions.
+        link_dir : str, optional
+            Directory to write symlinks. Defaults to directory specified in metadata.
+        makelog : str, optional
+            Path of makelog. Defaults to path specified in metadata.
+    
+        Returns
+        -------
+        link_map : list
+            List of (target, symlink) for each symlink created.
+        """
+    
+        try:
+            link_list = LinksList(file_list, link_dir)
+            link_map = link_list.create_symlinks()
+    
+            return(link_map)
+    
+        except Exception as error:
+>           write_to_makelog("Error with create_links: \n" + error, makelog)
+E           TypeError: coercing to Unicode: need string or buffer, SyntaxError found
+
+gslab_make_dev/create_links.py:39: TypeError
+_____________________ testCreateLinks.test_multiple_lists ______________________
+
+self = <gslab_make_dev.tests.test_create_links.testCreateLinks testMethod=test_multiple_lists>
+
+    def test_multiple_lists(self):
+        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/test_file_list.txt'))
+        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/test_file_list_w_wildcard.txt'))
+        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/matlab_test_script_wait1.m'))
+        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/matlab_test_script_wait2.m'))
+        with nostderrout():
+            create_links('gslab_make_dev/tests/input/test_file_list.txt', \
+>                           'gslab_make_dev/tests/input/test_file_list_w_wildcard.txt')
+
+gslab_make_dev/tests/test_create_links.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+file_list = 'gslab_make_dev/tests/input/test_file_list.txt'
+link_dir = 'gslab_make_dev/tests/input/test_file_list_w_wildcard.txt'
+makelog = '../log/make.log'
+
+    def create_links(file_list,
+                     link_dir = metadata.settings['link_dir'],
+                     makelog = metadata.settings['makelog']):
+        """ Create symlinks from list of files containing linking instructions.
+    
+        Parameters
+        ----------
+        file_list : list
+            List of files containing linking instructions.
+        link_dir : str, optional
+            Directory to write symlinks. Defaults to directory specified in metadata.
+        makelog : str, optional
+            Path of makelog. Defaults to path specified in metadata.
+    
+        Returns
+        -------
+        link_map : list
+            List of (target, symlink) for each symlink created.
+        """
+    
+        try:
+            link_list = LinksList(file_list, link_dir)
+            link_map = link_list.create_symlinks()
+    
+            return(link_map)
+    
+        except Exception as error:
+>           write_to_makelog("Error with create_links: \n" + error, makelog)
+E           TypeError: coercing to Unicode: need string or buffer, SyntaxError found
+
+gslab_make_dev/create_links.py:39: TypeError
+________________________ testCreateLinks.test_wildcard _________________________
+
+self = <gslab_make_dev.tests.test_create_links.testCreateLinks testMethod=test_wildcard>
+
+    def test_wildcard(self):
+        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/test_file_list_w_wildcard.txt'))
+        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/matlab_test_script_wait1.m'))
+        self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/matlab_test_script_wait2.m'))
+        with nostderrout():
+>           create_links('gslab_make_dev/tests/input/test_file_list_w_wildcard.txt')
+
+gslab_make_dev/tests/test_create_links.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+file_list = 'gslab_make_dev/tests/input/test_file_list_w_wildcard.txt'
+link_dir = '../input/', makelog = '../log/make.log'
+
+    def create_links(file_list,
+                     link_dir = metadata.settings['link_dir'],
+                     makelog = metadata.settings['makelog']):
+        """ Create symlinks from list of files containing linking instructions.
+    
+        Parameters
+        ----------
+        file_list : list
+            List of files containing linking instructions.
+        link_dir : str, optional
+            Directory to write symlinks. Defaults to directory specified in metadata.
+        makelog : str, optional
+            Path of makelog. Defaults to path specified in metadata.
+    
+        Returns
+        -------
+        link_map : list
+            List of (target, symlink) for each symlink created.
+        """
+    
+        try:
+            link_list = LinksList(file_list, link_dir)
+            link_map = link_list.create_symlinks()
+    
+            return(link_map)
+    
+        except Exception as error:
+>           write_to_makelog("Error with create_links: \n" + error, makelog)
+E           TypeError: coercing to Unicode: need string or buffer, SyntaxError found
+
+gslab_make_dev/create_links.py:39: TypeError
+====================== 4 failed, 2 passed in 2.09 seconds ======================
 Name                                           Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------------------------------------
-gslab_make_dev/create_links.py                    17     17      0      0     0%   2-46
-gslab_make_dev/dir_mod.py                         46      4     20      2    88%   21-22, 69, 75, 66->69, 74->75
-gslab_make_dev/private/exceptionclasses.py        13      0      0      0   100%
-gslab_make_dev/private/linkdirective.py          104    104     32      0     0%   2-149
-gslab_make_dev/private/messages.py                20      0      0      0   100%
+gslab_make_dev/create_links.py                    13      1      0      0    92%   40
+gslab_make_dev/dir_mod.py                         46     22     20      3    47%   26-27, 47-55, 74, 78, 80, 104-105, 123-132, 71->74, 77->78, 79->80
+gslab_make_dev/private/exceptionclasses.py        13      1      0      0    92%   12
+gslab_make_dev/private/linkdirective.py          104     28     32      6    68%   64, 78-79, 93, 96-97, 100, 111-114, 141-148, 169-173, 185-186, 209-216, 63->64, 92->93, 95->96, 99->100, 110->111, 183->185
+gslab_make_dev/private/messages.py                18      0      0      0   100%
 gslab_make_dev/private/metadata.py                 8      0      0      0   100%
-gslab_make_dev/private/programdirective.py       105      6     26      7    90%   32, 56, 97, 122, 140-141, 31->32, 54->60, 55->56, 96->97, 120->126, 121->122, 127->exit
-gslab_make_dev/private/utility.py                 33     16      6      0    44%   26-39, 43-48
-gslab_make_dev/refactor_tests.py                  20     20      0      0     0%   2-36
-gslab_make_dev/run_program.py                    123     50     14      4    61%   60-72, 105-114, 119-128, 145, 147, 169, 177-186, 191-205, 216-218, 144->145, 146->147, 163->168, 168->169
-gslab_make_dev/tablefill.py                      141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
+gslab_make_dev/private/programdirective.py       110     82     28      0    20%   47-52, 62-63, 72-73, 88-100, 110-118, 168-177, 187-190, 200-204, 214-215, 225-226, 244-263, 285-286, 313-317, 327-329, 339-342
+gslab_make_dev/private/utility.py                 31     12      6      1    54%   45-58, 76, 75->76
+gslab_make_dev/run_program.py                    124    106     14      0    13%   43-56, 87-99, 130-139, 170-179, 210-219, 250-259, 295-334, 365-374, 407-421, 446-454
+gslab_make_dev/tablefill.py                      141    122     68      0     9%   13-25, 31-40, 44-47, 51-57, 61-77, 81-84, 87-115, 118-149, 152-160, 164-176, 180-182
 gslab_make_dev/tablefill_info.py                   0      0      0      0   100%
 gslab_make_dev/tests/nostderrout.py               12      0      2      0   100%
-gslab_make_dev/tests/test_clear_dir.py            41      2      8      1    94%   55-56, 54->55
+gslab_make_dev/tests/test_clear_dir.py             0      0      0      0   100%
+gslab_make_dev/tests/test_create_links.py         67     12      6      3    79%   32, 40-42, 52-56, 64, 79-80, 73->75, 75->exit, 78->79
 gslab_make_dev/tests/test_delete_files.py          0      0      0      0   100%
-gslab_make_dev/tests/test_execute_command.py      84      8     16      7    83%   17-20, 31, 52, 72, 98-99, 15->17, 28->31, 49->52, 69->72, 92->94, 94->exit, 97->98
-gslab_make_dev/tests/test_make_links.py            0      0      0      0   100%
-gslab_make_dev/tests/test_remove_path.py          50      7      6      2    84%   28, 42-45, 62-63, 56->58, 61->62
-gslab_make_dev/tests/test_run_lyx.py             101     19     14      4    78%   60-64, 81-84, 91-94, 101-104, 116, 119-120, 107->109, 109->111, 115->116, 118->119
+gslab_make_dev/tests/test_execute_command.py       0      0      0      0   100%
+gslab_make_dev/tests/test_remove_path.py           0      0      0      0   100%
+gslab_make_dev/tests/test_run_lyx.py               0      0      0      0   100%
 gslab_make_dev/tests/test_run_mathematica.py       0      0      0      0   100%
 gslab_make_dev/tests/test_run_matlab.py            0      0      0      0   100%
-gslab_make_dev/tests/test_run_perl.py             59      3     10      4    90%   68, 71-72, 61->63, 63->65, 67->68, 70->71
-gslab_make_dev/tests/test_run_python.py           69      3     10      4    91%   80, 83-84, 73->75, 75->77, 79->80, 82->83
+gslab_make_dev/tests/test_run_perl.py              0      0      0      0   100%
+gslab_make_dev/tests/test_run_python.py            0      0      0      0   100%
 gslab_make_dev/tests/test_run_r.py                 0      0      0      0   100%
-gslab_make_dev/tests/test_run_stata.py            55      5     10      5    85%   49, 62, 64, 67-68, 57->59, 59->61, 61->62, 63->64, 66->67
-gslab_make_dev/tests/test_tablefill.py            96      2     42      6    94%   143-144, 20->exit, 37->34, 57->43, 74->exit, 138->exit, 142->143
-gslab_make_dev/tests/test_textfill.py             83      2     12      3    95%   138-139, 17->exit, 133->exit, 137->138
-gslab_make_dev/tests/test_zip.py                  36      2      4      2    90%   46-47, 42->exit, 45->46
-gslab_make_dev/textfill.py                       135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
+gslab_make_dev/tests/test_run_stata.py             0      0      0      0   100%
+gslab_make_dev/tests/test_tablefill.py             0      0      0      0   100%
+gslab_make_dev/tests/test_textfill.py              0      0      0      0   100%
+gslab_make_dev/tests/test_zip.py                   0      0      0      0   100%
+gslab_make_dev/textfill.py                       135    114     60      0    11%   12-24, 31-52, 56-59, 63-72, 77-82, 85-89, 92-93, 96-101, 104-106, 110-119, 123-128, 132-162, 166-190
 gslab_make_dev/textfill_info.py                    0      0      0      0   100%
-gslab_make_dev/write_link_logs.py                 18     11      2      0    35%   43-49, 54-60
-gslab_make_dev/write_logs.py                     111     81     26      0    22%   18-26, 36-37, 49-66, 69-83, 87-106, 113-121, 125-135, 139-157
+gslab_make_dev/write_link_logs.py                 18     11      2      0    35%   48-54, 72-78
+gslab_make_dev/write_logs.py                      92     51     24      1    36%   25-33, 60-61, 89, 93-94, 120-131, 165-173, 199-209, 231-249, 88->89
 ------------------------------------------------------------------------------------------
-TOTAL                                           1580    369    388     66    74%
+TOTAL                                            932    562    262     14    34%
