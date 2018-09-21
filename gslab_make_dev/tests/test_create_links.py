@@ -3,6 +3,7 @@
 # from gslab_make_dev.write_logs import start_makelog, end_makelog
 # from gslab_make_dev.create_links import create_links
 # from gslab_make_dev.private.utility import norm_path
+# import gslab_make_dev.private.metadata as metadata
 # from gslab_make_dev.dir_mod import clear_dir
 # from nostderrout import nostderrout
 # import time
@@ -27,6 +28,7 @@
 #         self.assertTrue(expected_entry==link_map[0])
 #         self.assertTrue(os.path.isfile('../input/linked_lyx_file'))
 #         self.assertTrue(os.path.isdir('../input/linked_folder'))
+#         self.assertIn('Links successfully created!', open('../log/make.log').read())
 #         with nostderrout():
 #             os.remove('../input/linked_lyx_file')
 #         self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/lyx_test_file.lyx'))
@@ -65,8 +67,8 @@
 #             end_makelog()
 #             newlog = '../input/new_log'
 #             start_makelog(makelog = newlog)
-#             create_links(['nonexistent_list'], makelog = newlog)
-#         self.assertIn('An error was encountered with `create_links`', open(newlog).read())
+#             create_links(['gslab_make_dev/tests/input/test_file_list.txt'], makelog = newlog)
+#         self.assertIn('Links successfully created!', open(newlog).read())
 
 #     def test_change_linkdir(self):
 #         with nostderrout():

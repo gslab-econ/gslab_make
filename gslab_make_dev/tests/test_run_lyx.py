@@ -7,27 +7,25 @@
 # from gslab_make_dev.run_program import run_lyx
 # from gslab_make_dev.tests import nostderrout
 # import gslab_make_dev.private.metadata as metadata
+# from gslab_make_dev.private.exceptionclasses import CritError
     
 
 # class testRunLyx(unittest.TestCase):
 
 #     def setUp(self):
-#         makelog_file = '../log/make.log'
-#         log_dir	= '../log'
-#         output_dir = '../output/'
 #         with nostderrout():
-#             clear_dir([output_dir, log_dir])
-#             start_makelog(makelog_file)
+#             clear_dir(['../log', '../output/', '../temp'])
 
 #     def test_default_log(self):
-#         with nostderrout():
+#         default_makelog = metadata.settings['makelog']
+#         with nostderrout():    
+#             start_makelog(default_makelog)
 #             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx')
-#         logfile_data = open('../log/make.log', 'rU').read()
+#         logfile_data = open(default_makelog, 'rU').read()
 #         self.assertIn('LaTeX', logfile_data)
 #         self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))
         
 #     def test_custom_log(self):
-#         os.remove('../log/make.log')
 #         makelog_file = '../log/custom_make.log'
 #         with nostderrout():        
 #             start_makelog(makelog_file)
@@ -37,71 +35,84 @@
 #         self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))
         
 #     def test_independent_log(self):
-#         with nostderrout():
-#             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', log = '../log/lyx.log')
-#         makelog_data = open('../log/make.log', 'rU').read()
+#         default_makelog = metadata.settings['makelog']
+#         independent_log = '../log/lyx.log'
+#         with nostderrout():    
+#             start_makelog(default_makelog)
+#             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', log = independent_log)
+#         makelog_data = open(default_makelog, 'rU').read()
 #         self.assertIn('LaTeX', makelog_data)
 #         self.assertTrue(os.path.isfile('../log/lyx.log'))
-#         lyxlog_data = open('../log/lyx.log', 'rU').read()
+#         lyxlog_data = open(independent_log, 'rU').read()
 #         self.assertIn('LaTeX', lyxlog_data)
 #         self.assertIn(lyxlog_data, makelog_data)
 #         self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))    
         
 #     def test_executable(self):
-#         with nostderrout():
+#         default_makelog = metadata.settings['makelog']
+#         with nostderrout():    
+#             start_makelog(default_makelog)
 #             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', executable = metadata.default_executables[os.name]['lyx']) 
-#         logfile_data = open('../log/make.log', 'rU').read()
+#         logfile_data = open(default_makelog, 'rU').read()
 #         self.assertIn('LaTeX', logfile_data)
 #         self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))
         
 #     def test_bad_executable(self):
-#         with nostderrout():
+#         default_makelog = metadata.settings['makelog']
+#         with nostderrout():    
+#             start_makelog(default_makelog)
+#         with self.assertRaises(CritError):
 #             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', executable = 'nonexistent_lyx_executable')
-#         logfile_data = open('../log/make.log', 'rU').read()
-#         if os.name == 'posix':
-#             self.assertIn('/bin/sh: nonexistent_lyx_executable: command not found', logfile_data)
-#         else:
-#             self.assertIn('\'nonexistent_lyx_executable\' is not recognized as an internal or external command', logfile_data)
-    
+#         logfile_data = open(default_makelog, 'rU').read()
+#         self.assertIn('CritError', logfile_data)
+#         self.assertIn('nonexistent_lyx_executable', logfile_data)
+
 #     def test_no_program(self):
+#         default_makelog = metadata.settings['makelog']
+#         with nostderrout():    
+#             start_makelog(default_makelog)
 #         with self.assertRaises(Exception):
 #             run_lyx(program = 'gslab_make_dev/tests/input/nonexistent_lyx_file.lyx')
 #         self.assertFalse(os.path.isfile('../output/lyx_test_file.pdf'))
     
 #     def test_option(self):
+#         default_makelog = metadata.settings['makelog']
 #         with nostderrout():
+#             start_makelog(default_makelog)
 #             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', option = '-e pdf')
-#         logfile_data = open('../log/make.log', 'rU').read()
+#         logfile_data = open(default_makelog, 'rU').read()
 #         self.assertIn('LaTeX', logfile_data)
 #         self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))
         
-#     def test_pdfout(self): 
-#         with nostderrout():    
-#             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', pdfout = 'gslab_make_dev/tests/input/custom_outfile.pdf')
-#         logfile_data = open('../log/make.log', 'rU').read()
+#     def test_pdfout(self):
+#         default_makelog = metadata.settings['makelog']
+#         with nostderrout():
+#             start_makelog(default_makelog)
+#             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', pdfout = '../log')
+#         logfile_data = open(default_makelog, 'rU').read()
 #         self.assertIn('LaTeX', logfile_data)
-#         self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/custom_outfile.pdf'))
+#         self.assertTrue(os.path.isfile('../log/lyx_test_file.pdf'))
 #         self.assertFalse(os.path.isfile('../output/lyx_test_file.pdf'))
 
-#     def test_comments(self):  
-#         temp_dir = '../temp/'
-#         with nostderrout():   
-#             clear_dir([temp_dir])
+#     def test_comments(self):
+#         default_makelog = metadata.settings['makelog']
+#         with nostderrout():    
+#             start_makelog(default_makelog)
 #             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', doctype = 'comments')
-#         logfile_data = open('../log/make.log', 'rU').read()
+#         logfile_data = open(default_makelog, 'rU').read()
 #         self.assertIn('LaTeX', logfile_data)
-#         self.assertTrue(os.path.isfile('../temp/lyx_test_file_comments.pdf'))
+#         self.assertTrue(os.path.isfile('../temp/lyx_test_file.pdf'))
 #         self.assertFalse(os.path.isfile('../output/lyx_test_file_comments.pdf'))
 
 #     def test_handout_pdfout(self):
-#         temp_dir = '../temp/'
+#     	default_makelog = metadata.settings['makelog']
 #         with nostderrout():    
-#             clear_dir([temp_dir])
-#             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', doctype = 'handout', pdfout = 'gslab_make_dev/tests/input/custom_outfile.pdf')
-#         logfile_data = open('../log/make.log', 'rU').read()
+#             start_makelog(default_makelog)
+#             run_lyx(program = 'gslab_make_dev/tests/input/lyx_test_file.lyx', doctype = 'handout', pdfout = '../output')
+#         logfile_data = open(default_makelog, 'rU').read()
 #         self.assertIn('LaTeX', logfile_data)
-#         self.assertTrue(os.path.isfile('gslab_make_dev/tests/input/custom_outfile.pdf'))
-#         self.assertFalse(os.path.isfile('../temp/lyx_test_file_handout.pdf'))
+#         self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))
+#         self.assertFalse(os.path.isfile('../temp/lyx_test_file.pdf'))
         
 #     def tearDown(self):
 #         if os.path.isdir('../output/'):
@@ -110,10 +121,6 @@
 #             shutil.rmtree('../log/')
 #         if os.path.isdir('../temp/'):
 #             shutil.rmtree('../temp/')
-#         if os.path.isfile('gslab_make_dev/tests/input/lyx_test_file.pdf'):
-#             os.remove('gslab_make_dev/tests/input/lyx_test_file.pdf')
-#         if os.path.isfile('gslab_make_dev/tests/input/custom_outfile.pdf'):
-#             os.remove('gslab_make_dev/tests/input/custom_outfile.pdf')
     
 # if __name__ == '__main__':
 #     os.getcwd()

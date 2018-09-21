@@ -45,26 +45,27 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.15, pytest-3.7.1, py-1.5.4, pluggy-0.7.1
 rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 0 items
+collected 2 items
 
-========================= no tests ran in 0.27 seconds =========================
+gslab_make_dev/tests/test_zip.py ..                                      [100%]
+
+=========================== 2 passed in 0.24 seconds ===========================
 Name                                           Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------------------------------------
 gslab_make_dev/create_links.py                    19     10      0      0    47%   35-45
-gslab_make_dev/dir_mod.py                         46     31     20      0    23%   25-26, 46-54, 70-85, 103-104, 122-131
+gslab_make_dev/dir_mod.py                         46     21     20      0    44%   25-26, 46-54, 70-85
 gslab_make_dev/private/exceptionclasses.py         4      0      0      0   100%
 gslab_make_dev/private/linkdirective.py          104     76     32      0    21%   47-53, 63-64, 74-82, 92-100, 110-118, 139-146, 167-171, 181-186, 196-198, 207-214, 242-246, 256-259, 269-271, 281-287, 298-302
 gslab_make_dev/private/messages.py                19      0      0      0   100%
 gslab_make_dev/private/metadata.py                 8      0      0      0   100%
 gslab_make_dev/private/programdirective.py       109     80     32      0    21%   48-53, 63-64, 73-74, 90-110, 121-129, 179-188, 198-201, 211-215, 225-226, 236-237, 255-270, 292-293, 320-324, 334-336, 346-349
-gslab_make_dev/private/utility.py                 36     25      6      0    26%   17-22, 45-63, 80-83, 100-103
+gslab_make_dev/private/utility.py                 36     20      6      0    38%   45-63, 80-83, 100-103
 gslab_make_dev/run_program.py                    168    147     34      0    10%   47-64, 96-112, 144-157, 189-202, 234-247, 279-292, 329-374, 406-419, 453-471, 496-508
 gslab_make_dev/tablefill.py                      141    122     68      0     9%   13-25, 31-40, 44-47, 51-57, 61-77, 81-84, 87-115, 118-149, 152-160, 164-176, 180-182
 gslab_make_dev/tablefill_info.py                   0      0      0      0   100%
-gslab_make_dev/tests/nostderrout.py               12      9      2      0    21%   6-14
+gslab_make_dev/tests/nostderrout.py               12      0      2      0   100%
 gslab_make_dev/tests/test_clear_dir.py             0      0      0      0   100%
 gslab_make_dev/tests/test_create_links.py          0      0      0      0   100%
-gslab_make_dev/tests/test_delete_files.py          0      0      0      0   100%
 gslab_make_dev/tests/test_execute_command.py       0      0      0      0   100%
 gslab_make_dev/tests/test_link_logs.py             0      0      0      0   100%
 gslab_make_dev/tests/test_makelog.py               0      0      0      0   100%
@@ -77,13 +78,13 @@ gslab_make_dev/tests/test_run_perl.py              0      0      0      0   100%
 gslab_make_dev/tests/test_run_python.py            0      0      0      0   100%
 gslab_make_dev/tests/test_run_r.py                 0      0      0      0   100%
 gslab_make_dev/tests/test_run_stata.py             0      0      0      0   100%
+gslab_make_dev/tests/test_set_option.py            0      0      0      0   100%
 gslab_make_dev/tests/test_tablefill.py             0      0      0      0   100%
-gslab_make_dev/tests/test_test_option.py           0      0      0      0   100%
 gslab_make_dev/tests/test_textfill.py              0      0      0      0   100%
-gslab_make_dev/tests/test_zip.py                   0      0      0      0   100%
+gslab_make_dev/tests/test_zip.py                  35      2      4      2    90%   45-46, 41->exit, 44->45
 gslab_make_dev/textfill.py                       135    114     60      0    11%   12-24, 31-52, 56-59, 63-72, 77-82, 85-89, 92-93, 96-101, 104-106, 110-119, 123-128, 132-162, 166-190
 gslab_make_dev/textfill_info.py                    0      0      0      0   100%
 gslab_make_dev/write_link_logs.py                 27     18      2      0    31%   53-66, 83-89
 gslab_make_dev/write_logs.py                      86     68     30      0    16%   26-34, 55-66, 82-95, 113-120, 157-167, 193-203, 225-244
 ------------------------------------------------------------------------------------------
-TOTAL                                            914    700    286      0    18%
+TOTAL                                            949    678    290      2    23%

@@ -11,7 +11,7 @@
 # class testRunMathematica(unittest.TestCase):
 
 #     def setUp(self):
-#         makelog_file = '../log/make.log'
+#         makelog_file = metadata.settings['makelog']
 #         log_dir = '../log/'
 #         output_dir = '../output/'
 #         with nostderrout():

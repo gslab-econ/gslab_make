@@ -8,8 +8,6 @@
 # import gslab_make_dev.private.messages as messages
 # from gslab_make_dev.private.exceptionclasses import CritError
 
-    
-
 # class testMakeLog(unittest.TestCase):
 
 #     def setUp(self):

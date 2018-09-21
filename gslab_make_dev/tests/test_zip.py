@@ -1,7 +1,6 @@
 # #! /usr/bin/env python
 
 # import unittest, sys, os, shutil, contextlib, zipfile
-# sys.path.append('../..')
 # from gslab_make_dev.dir_mod import zip_dir, unzip
 
 # from nostderrout import nostderrout
