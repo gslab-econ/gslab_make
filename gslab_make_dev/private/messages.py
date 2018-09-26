@@ -13,6 +13,7 @@ crit_error_unknown_system = 'ERROR! Only the following operating systems are sup
 crit_error_bad_command = 'ERROR! Command "%s" cannot be executed by operating system' 
 crit_error_extension = 'ERROR! "%s" does not have the right program extension' 
 crit_error_no_file = 'ERROR! File "%s" not found' 
+crit_error_no_files = 'ERROR! Files "%s" not found'
 crit_error_no_path = 'ERROR! Path "%s" not found' 
 crit_error_no_path_wildcard = 'ERROR! Paths matching "%s" not found' 
 crit_error_bad_link = 'ERROR! Link "%s" incorrectly specified' 

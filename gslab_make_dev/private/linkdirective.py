@@ -253,11 +253,16 @@ class LinksList(object):
         None
         """
         
-        if type(self.file_list) is list:
-            self.file_list = [f for file in self.file_list for f in glob.glob(file)]
-        else:
+        if type(self.file_list) is not list:
             raise TypeError(messages.type_error_file_list)
-    
+
+        file_list_parsed = [f for file in self.file_list for f in glob.glob(file)]   
+        if file_list_parsed:
+            self.file_list = file_list_parsed
+        else:
+            error_list = [str(f) for f in self.file_list]
+            raise CritError(messages.crit_error_no_files % str(error_list))
+
     def get_paths(self):    
         """ Normalize paths. 
                 
@@ -268,7 +273,6 @@ class LinksList(object):
         
         self.link_dir  = norm_path(self.link_dir)
         self.file_list = [norm_path(f) for f in self.file_list]
-        self.file_list
 
     def get_link_directive_list(self):
         """ Parse list of files to create symlink directives. 
