@@ -56,7 +56,6 @@ def glob_recursive(path, recursive):
             break
 
     path_files = [p for p in path_files if os.path.isfile(p)]
-
     if not path_files:
         print('WARNING! `glob_recursive(path = "%s", recursive = %s)` returned no files' % (path, recursive))
 

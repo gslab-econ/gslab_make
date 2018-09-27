@@ -30,11 +30,11 @@ class LinkDirective(object):
         Line of text containing linking instructions.
     link_dir : str
         Directory to write symlink(s).
-        
-    Attributes
-    ----------
     osname : str, optional
         Name of OS. Defaults to `os.name`.
+
+    Attributes
+    ----------
     target : list
         List of targets parsed from line.
     symlink : list
@@ -43,8 +43,8 @@ class LinkDirective(object):
         List of (target, symlink) mappings parsed from line.
     """
     
-    def __init__(self, line, link_dir):
-        self.osname    = os.name
+    def __init__(self, line, link_dir, osname = os.name):
+        self.osname    = osname
         self.line      = line
         self.link_dir  = link_dir
         self.check_os()
