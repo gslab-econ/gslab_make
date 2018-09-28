@@ -65,7 +65,7 @@ def run_stata(paths, **kwargs):
     except:
         error_message = 'Error with `run_stata`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
     
     
@@ -118,7 +118,7 @@ def run_matlab(paths, **kwargs):
     except:
         error_message = 'Error with `run_matlab`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
@@ -168,7 +168,7 @@ def run_perl(paths, **kwargs):
     except:
         error_message = 'Error with `run_perl`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
 
 
@@ -218,7 +218,7 @@ def run_python(paths, **kwargs):
     except:
         error_message = 'Error with `run_python`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
@@ -268,7 +268,7 @@ def run_mathematica(paths, **kwargs):
     except:
         error_message = 'Error with `run_mathematica`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
@@ -318,7 +318,7 @@ def run_stat_transfer(paths, **kwargs):
     except:
         error_message = 'Error with `run_stat_transfer`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
@@ -406,7 +406,7 @@ def run_lyx(paths, **kwargs):
     except:
         error_message = 'Error with `run_lyx`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
@@ -456,7 +456,7 @@ def run_r(paths, **kwargs):
     except:
         error_message = 'Error with `run_r`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
@@ -513,7 +513,7 @@ def run_sas(paths, **kwargs):
     except:
         error_message = 'Error with `run_sas`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
@@ -555,6 +555,6 @@ def execute_command(paths, command, **kwargs):
     except:
         error_message = 'Error with `execute_command`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         

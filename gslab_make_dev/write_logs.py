@@ -148,9 +148,9 @@ def write_output_logs(paths,
     None
     """
 
-    output_dir      = paths['output_dir'],
-    output_statslog = paths['output_statslog'], 
-    output_headslog = paths['output_headslog'],
+    output_dir      = paths['output_dir']
+    output_statslog = paths['output_statslog']
+    output_headslog = paths['output_headslog']
     makelog         = paths['makelog']
 
     output_files = glob_recursive(output_dir, recursive)
@@ -163,10 +163,10 @@ def write_output_logs(paths,
         output_headslog = norm_path(output_headslog)
         write_heads_log(output_headslog, output_files)
     
-    write_to_makelog('Output logs successfully written!', makelog)  
+    write_to_makelog(paths, 'Output logs successfully written!')  
         
     
-def write_stats_log (statslog_file, output_files):
+def write_stats_log(statslog_file, output_files):
     """ Write statistics log.
    
     Notes

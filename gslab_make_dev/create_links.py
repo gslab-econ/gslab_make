@@ -39,12 +39,12 @@ def create_links(paths,
     try:              
         link_list = LinksList(file_list, link_dir)
         link_map = link_list.create_symlinks()       
-        write_to_makelog('Links successfully created!', makelog)    
+        write_to_makelog(paths, 'Links successfully created!')    
         
         return(link_map)
     except:
         error_message = 'An error was encountered with `create_links`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         
         raise               

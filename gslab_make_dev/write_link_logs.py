@@ -61,11 +61,12 @@ def write_link_logs(paths,
         write_stats_log(link_statslog, target_files)
         write_heads_log(link_headslog, target_files)    
         write_link_maplog(link_maplog, link_map)
-        write_to_makelog('Link logs successfully written!', makelog)  
+        write_to_makelog(paths, 'Link logs successfully written!')  
     except:
         error_message = 'Error with `write_link_logs`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
+        
         raise
 
 def write_link_maplog(link_maplog, link_map):

@@ -312,11 +312,10 @@ class LyXDirective(ProgramDirective):
     def __init__(self, 
                  pdf_dir,
                  doctype = '',
-
                  **kwargs):
 
-        super(LyxDirective, self).__init__(**kwargs)
-        self.pdf_dir  = pdf_dir
+        super(LyXDirective, self).__init__(**kwargs)
+        self.pdf_dir = pdf_dir
         self.doctype = doctype
         self.check_doctype()
 
