@@ -5,8 +5,8 @@ from builtins import (bytes, str, open, super, range,
 
 import traceback
 
-from gslab_make_dev.private.utility import glob_recursive, format_error
-from gslab_make_dev.write_logs import write_to_makelog, write_stats_log, write_heads_log
+from gslab_make.private.utility import glob_recursive, format_error
+from gslab_make.write_logs import write_to_makelog, write_stats_log, write_heads_log
 
 
 def write_link_logs(paths, 
@@ -70,7 +70,7 @@ def write_link_logs(paths,
         raise
 
 def write_link_maplog(link_maplog, link_map):
-    """ Make link map log.
+    """ Write link map log.
 
     Parameters
     ----------

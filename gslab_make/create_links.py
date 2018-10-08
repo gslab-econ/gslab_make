@@ -5,10 +5,10 @@ from builtins import (bytes, str, open, super, range,
 
 import traceback
 
-import gslab_make_dev.private.messages as messages
-from gslab_make_dev.private.linkdirective import LinksList
-from gslab_make_dev.private.utility import format_error
-from gslab_make_dev.write_logs import write_to_makelog
+import gslab_make.private.messages as messages
+from gslab_make.private.linkdirective import LinksList
+from gslab_make.private.utility import format_error
+from gslab_make.write_logs import write_to_makelog
 
 
 def create_links(paths,

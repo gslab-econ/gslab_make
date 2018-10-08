@@ -8,11 +8,11 @@ import shutil
 import fileinput
 import traceback
 
-import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.exceptionclasses import CritError
-from gslab_make_dev.private.programdirective import Directive, ProgramDirective, SASDirective, LyXDirective
-from gslab_make_dev.private.utility import format_error
-from gslab_make_dev.write_logs import write_to_makelog
+import gslab_make.private.metadata as metadata
+from gslab_make.private.exceptionclasses import CritError
+from gslab_make.private.programdirective import Directive, ProgramDirective, SASDirective, LyXDirective
+from gslab_make.private.utility import format_error
+from gslab_make.write_logs import write_to_makelog
 
 
 def run_stata(paths, **kwargs):

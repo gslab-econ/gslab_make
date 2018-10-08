@@ -9,10 +9,10 @@ import glob
 from itertools import chain
 import subprocess
 
-from gslab_make_dev.private.exceptionclasses import CritError
-import gslab_make_dev.private.messages as messages
-import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.utility import norm_path, file_to_array
+from gslab_make.private.exceptionclasses import CritError
+import gslab_make.private.messages as messages
+import gslab_make.private.metadata as metadata
+from gslab_make.private.utility import norm_path, file_to_array
 
 
 class LinkDirective(object):

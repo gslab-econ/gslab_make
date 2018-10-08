@@ -7,10 +7,10 @@ import os
 import datetime
 import string
 
-import gslab_make_dev.private.messages as messages
-import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.exceptionclasses import CritError
-from gslab_make_dev.private.utility import norm_path, glob_recursive
+import gslab_make.private.messages as messages
+import gslab_make.private.metadata as metadata
+from gslab_make.private.exceptionclasses import CritError
+from gslab_make.private.utility import norm_path, glob_recursive
 
 
 def start_makelog(paths):
@@ -114,9 +114,9 @@ def write_to_makelog(paths, message):
             print(message, file = MAKELOG)
     
     
-def write_output_logs(paths,
-                      recursive = float('inf')):
-    """ Write output logs.
+def log_files_in_output(paths,
+                        recursive = float('inf')):
+    """ Log files in output directory.
 
     Notes
     -----
