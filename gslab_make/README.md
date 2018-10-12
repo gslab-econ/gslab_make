@@ -1,7 +1,7 @@
 # Paths
 
 <b>
-The majority of the functions in </b>`gslab_make`<b> contain a </b>`paths`<b> argument that requires passing in a dictionary specifying default paths used for writing and logging purposes. The dictionary <i>must</i> contain values for the following keys (i.e., default paths):
+The majority of the functions in </b><code>gslab_make</code><b> contain a </b><code>paths</code><b> argument that requires passing in a dictionary specifying default paths used for writing and logging purposes. The dictionary <i>must</i> contain values for the following keys (i.e., default paths):
 </b>
 
 > * `link_dir` 
@@ -43,7 +43,7 @@ The majority of the functions in </b>`gslab_make`<b> contain a </b>`paths`<b> ar
 <ul>
 <b>Note:</b>
 <br> 
-To suppress make log writing for any function that requires specifying a default path for <code>makelog</code>, set <code>makelog</code> to <code>''</code>.
+To suppress writing to make log for any function, set <code>makelog</code> to <code>''</code>.
 <br>
 <br>
 <b>Example:</b>
@@ -68,7 +68,7 @@ paths = {
 <br> 
 
 <b>
-Functions below will specify which default paths in </b>`paths`<b> are required in their documentation. For example, </b>`function(paths = {makelog, linklog})`<b> uses the default paths corresponding to </b>`paths['makelog']`<b> and </b>`paths['linklog']`<b>.
+Functions below will specify which default paths in </b><code>paths</code><b> are required in their documentation. For example, </b><code>function(paths = {makelog, linklog})</code><b> uses the default paths corresponding to </b><code>paths['makelog']</code><b> and </b><code>paths['linklog']</code><b>.
 </b>
 
 <br> 
@@ -276,7 +276,7 @@ run_program.<b>execute_command(</b><i>
 For more information on shell execution, see <a href = 'https://docs.python.org/2/library/subprocess.html#frequently-used-arguments'>here</a>.
 <br>
 <br>
-By default, program log is not written as <code>log</code> = ''.
+By default, program log is not written as <code>log = ''</code>.
 <br>
 <br>
 <b>Example:</b> 
@@ -413,7 +413,7 @@ run_program.<b>run_sas(</b><i>
 >
 > * `lst` : str
 >
->     * Path of program lst to write outputs. Defaults to '' (i.e., not written).
+>     * Path of program lst to write outputs. Defaults to <code>''</code> (i.e., not written).
 >
 
 <ul>
@@ -467,7 +467,7 @@ run_program.<b>run_stata(</b><i>
     * For more information on shell execution, see <a href = 'https://docs.python.org/2/library/subprocess.html#frequently-used-arguments'>here</a>.
 
 * `log` : str
-    * Path of program log to write outputs. Defaults to '' (i.e., not written).
+    * Path of program log to write outputs. Defaults to `''` (i.e., not written).
 
 * `executable` : str
     * Executable to use for system command. Default executable depends on application.
@@ -555,7 +555,7 @@ dir_mod.<b>clear_dir(</b><i>dir_list</i><b>)</b>
 <ul>
 <b>Example:</b>
 <br>
-<code>clear_dir(['dir1', 'dir2'])</code> clears directories 'dir1' and 'dir2'. 
+<code>clear_dir(['dir1', 'dir2'])</code> clears directories <code>'dir1'</code> and <code>'dir2'</code>. 
 <br>
 <br>
 <b>Notes:</b>
