@@ -1,3 +1,78 @@
+# Paths
+
+<b>
+The majority of the functions in </b>`gslab_make`<b> contain a </b>`paths`<b> argument that requires passing in a dictionary specifying default paths used for writing and logging purposes. The dictionary <i>must</i> contain values for the following keys (i.e., default paths):
+</b>
+
+> * `link_dir` 
+> 
+>     * Default path for writing symbolic links to inputs. 
+>
+> * `output_dir` 
+> 
+>     * Default path for finding outputs for logging.
+>
+> * `pdf_dir` 
+> 
+>     * Default path for writing LyX documents. 
+>
+> * `makelog`
+> 
+>     * Default path for writing make log. 
+>
+> * `output_statslog`
+> 
+>     * Default path for writing log containing output statistics.
+>
+> * `output_headslog`
+> 
+>     * Default path for writing log containing output headers.
+>
+> * `link_maplog`
+> 
+>     * Default path for writing log containing link mappings.
+>
+> * `link_statslog` 
+> 
+>     * Default path for writing log containing link statistics.
+>
+> * `link_headslog`
+> 
+>     * Default path for writing log containing link headers.   
+
+<ul>
+<b>Note:</b>
+<br> 
+To suppress make log writing for any function that requires specifying a default path for <code>makelog</code>, set <code>makelog</code> to <code>''</code>.
+<br>
+<br>
+<b>Example:</b>
+<br>
+The following default paths are recommended:
+<pre>
+paths = {
+    'link_dir'        : '../input/',
+    'output_dir'      : '../output/',
+    'pdf_dir'         : '../output/',
+    'makelog'         : '../log/make.log',
+    'output_statslog' : '../log/output_stats.log',
+    'output_headslog' : '../log/output_heads.log', 
+    'linklog'         : '../log/link.log', 
+    'link_maplog'     : '../log/link_map.log',
+    'link_statslog'   : '../log/link_stats.log',
+    'link_headslog'   : '../log/link_heads.log'
+}
+</pre>
+</ul>
+
+<br> 
+
+<b>
+Functions below will specify which default paths in </b>`paths`<b> are required in their documentation. For example, </b>`function(paths = {makelog, linklog})`<b> uses the default paths corresponding to </b>`paths['makelog']`<b> and </b>`paths['linklog']`<b>.
+</b>
+
+<br> 
+
 # Logging functions
 
 <b>The following functions are used to create a master log of activity (i.e., a <i>make log</i>) and to log information about output files. The logs are intended to facilitate the reproducibility of research.</b>
@@ -5,14 +80,14 @@
 <br>
 
 <pre>
-write_logs.<b>start_makelog(</b><i>paths = {makelog: '../log/make.log'}</i><b>)</b>
+write_logs.<b>start_makelog(</b><i>paths = {makelog}</i><b>)</b>
 </pre>
 > Starts new make log at file `makelog`, recording start time. Sets start condition for make log to boolean `True`, which is needed by other functions to confirm make log exists.
 
 <br>
 
 <pre>
-write_logs.<b>end_makelog(</b><i>paths = {makelog: '../log/make.log'}</i><b>)</b>
+write_logs.<b>end_makelog(</b><i>paths = {makelog}</i><b>)</b>
 </pre>
 > Ends make log at file `makelog`, recording end time. 
 
@@ -21,10 +96,10 @@ write_logs.<b>end_makelog(</b><i>paths = {makelog: '../log/make.log'}</i><b>)</b
 <pre>
 write_logs.<b>log_files_in_output(</b><i> 
     paths = {
-        output_dir: '../output/',
-        output_statslog: '../log/output_stats.log', 
-        output_headslog: '../log/output_heads.log', 
-        makelog: '../log/make.log'
+        output_dir, 
+        output_statslog,
+        output_headslog, 
+        makelog
     }, 
     recursive = float('inf'),</i><b>
 )</b>
@@ -44,13 +119,13 @@ write_logs.<b>log_files_in_output(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>write_output_logs(recursive = 1)</code> will log information for all files contained in '../output/'.
+<code>write_output_logs(paths, recursive = 1)</code> will log information for all files contained in <code>paths['output_dir']</code>.
 <br>
 <br>
-<code>write_output_logs(recursive = 2)</code> will log information for all files contained in '../output/' and all files contained in any directories in '../output/.
+<code>write_output_logs(paths, recursive = 2)</code> will log information for all files contained in <code>paths['output_dir']</code> and all files contained in any directories in <code>paths['output_dir']</code>.
 <br>
 <br>
-<code>write_output_logs(recursive = inf(float))</code> will log information for all files contained in any level of '../output/'.
+<code>write_output_logs(paths, recursive = inf(float))</code> will log information for all files contained in any level of <code>paths['output_dir']</code>.
 </ul>
 
 <br>
@@ -64,8 +139,8 @@ write_logs.<b>log_files_in_output(</b><i>
 <pre>
 create_links.<b>create_links(</b><i>
 	paths = {
-        link_dir: '../input/', 
-	    makelog: '../log/make.log'
+        link_dir,
+	    makelog,
     }, 
     file_list</i><b>
 )</b> 
@@ -92,17 +167,17 @@ Symbolic links and their targets can also be specified with the * shell pattern.
 <br>
 <b>Example 1:</b>
 <br>
-<code>create_links(['file1', 'file2'])</code> uses instruction files 'file1' and 'file2' to create symbolic links.
+<code>create_links(paths, ['file1', 'file2'])</code> uses instruction files <code>'file1'</code> and <code>'file2'</code> to create symbolic links.
 <br>
 <br>
-Suppose instruction file 'file1' contained the following text:
+Suppose instruction file <code>'file1'</code> contained the following text:
 <br>
 <code>symlink1  target1</code>
 <br>
 <code>symlink2  target2</code>
 <br>
 <br>
-Symbolic links <code>symlink1</code> and <code>symlink2</code> would be created in directory <code>link_dir</code>. Their targets would be <code>target1</code> and <code>target2</code>, respectively. 
+Symbolic links <code>symlink1</code> and <code>symlink2</code> would be created in directory <code>paths['link_dir']</code>. Their targets would be <code>target1</code> and <code>target2</code>, respectively. 
 <br>
 <br>
 <b>Example 2:</b>
@@ -116,7 +191,7 @@ Suppose you have the following targets:
 <code>target3</code>
 <br>
 <br>
-Specifying <code>symlink*   target*</code> in one of your instruction files would create the following symbolic links in <code>link_dir</code>:
+Specifying <code>symlink*   target*</code> in one of your instruction files would create the following symbolic links in <code>paths['link_dir']</code>:
 <br>
 <code>symlink1</code>
 <br>
@@ -137,10 +212,10 @@ Specifying <code>symlink*   target*</code> in one of your instruction files woul
 <pre>
 write_link_logs.<b>write_link_logs(</b><i>
     paths = {
-        link_statslog = '../log/link_stats.log', 
-        link_headslog = '../log/link_heads.log', 
-        link_maplog = '../log/link_map.log', 
-        makelog = '../log/make.log'
+        link_statslog,
+        link_headslog, 
+        link_maplog,
+        makelog,
     }, 
     link_map, 
     recursive = float('inf')</i><b>
@@ -166,13 +241,13 @@ write_link_logs.<b>write_link_logs(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>write_link_logs(recursive = 1)</code> will log information for all link mappings and target files linked in '../input/'.
+<code>write_link_logs(paths, recursive = 1)</code> will log information for all link mappings and target files linked in <code>paths['input']</code>.
 <br>
 <br>
-<code>write_link_logs(recursive = 2)</code> will log information for all link mappings, target files linked in '../input/', and files contained in target directories linked in '../input/'.
+<code>write_link_logs(paths, recursive = 2)</code> will log information for all link mappings, target files linked in <code>paths['input']</code>, and files contained in target directories linked in <code>paths['input']</code>.
 <br>
 <br>
-<code>write_link_logs(recursive = inf(float))</code> will log information for all link mappings, target files linked in '../input/', and files contained in any level of target directories linked in '../input/'.
+<code>write_link_logs(paths, recursive = inf(float))</code> will log information for all link mappings, target files linked in <code>paths['input']</code>, and files contained in any level of target directories linked in <code>paths['input']</code>.
 </ul>
 
 <br> 
@@ -185,7 +260,7 @@ write_link_logs.<b>write_link_logs(</b><i>
 
 <pre>
 run_program.<b>execute_command(</b><i>
-    paths = {makelog: '../log/make.log'}, 
+    paths = {makelog}, 
     command, 
     osname = os.name, 
     shell = False, 
@@ -201,15 +276,12 @@ run_program.<b>execute_command(</b><i>
 For more information on shell execution, see <a href = 'https://docs.python.org/2/library/subprocess.html#frequently-used-arguments'>here</a>.
 <br>
 <br>
-To prevent appending outputs to make log, specify <code>makelog</code> = ''.
-<br>
-<br>
 By default, program log is not written as <code>log</code> = ''.
 <br>
 <br>
 <b>Example:</b> 
 <br>
-<code>execute_command(paths = {makelog: ''}, 'ls', log = 'file')</code> executes the 'ls' command, writes outputs to program log 'file', but does not append status messages or outputs to make log.
+<code>execute_command(paths, 'ls', log = 'file')</code> executes the 'ls' command, writes outputs to program log 'file', and appends outputs and/or status messages to <code>path['makelog']</code>.
 </ul>
 
 <br> 
@@ -220,37 +292,31 @@ By default, program log is not written as <code>log</code> = ''.
 
 <pre>
 run_program.<b>run_lyx(</b><i>
-    paths = {makelog: '../log/make.log'}, 
+    paths = {makelog, pdf_dir}, 
     program, 
-    doctype = '', 
-    pdfout = '', 
+    doctype = ''
     *settings</i><b>
 )</b>
 </pre>
-> Runs script `program` using system command, with script specified in the form of `'script.lyx'`. Status messages are appended to make log `makelog`.
+> Runs script `program` using system command, with script specified in the form of `'script.lyx'`. Status messages are appended to make log `makelog`. PDF outputs are written in directory `pdf_dir`.
 >
 > LyX-specific settings:
 >
 > * `doctype` : str
 >
 >     * Type of LyX document. Takes either `handout` and `comments`. Defaults to no special document type.
->
-> * `pdfout` : str
->
->     * Directory to write PDF. Defaults to '../output/' if no special document type, '../temp/' otherwise.
->
 
 <ul>
 <b>Example:</b>
 <br>
-<code>run_lyx(paths = {makelog: '../log/make.log'}, program = 'script.lyx')</code>
+<code>run_lyx(paths, program = 'script.lyx')</code>
 </ul>
 
 <br>
 
 <pre>
 run_program.<b>run_mathematica(</b><i>
-    paths = {makelog: '../log/make.log'}, 
+    paths = {makelog:}, 
     program, 
     *settings</i><b>
 )</b>
@@ -260,14 +326,14 @@ run_program.<b>run_mathematica(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_mathematica(paths = {makelog: '../log/make.log'}, program = 'script.m')</code>
+<code>run_mathematica(paths, program = 'script.m')</code>
 </ul>
 
 <br>
 
 <pre>
 run_program.<b>run_matlab(</b><i>
-     paths = {makelog: '../log/make.log'}, 
+     paths = {makelog:}, 
      program, 
      *settings</i><b>
 )</b>
@@ -277,14 +343,14 @@ run_program.<b>run_matlab(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_matlab(paths = {makelog: '../log/make.log'}, program = 'script.m')</code>
+<code>run_matlab(paths, program = 'script.m')</code>
 </ul>
 
 <br>
 
 <pre>
 run_program.<b>run_perl(</b><i>
-    paths = {makelog: '../log/make.log'}, 
+    paths = {makelog:}, 
     program, 
     *settings</i><b>
 )</b>
@@ -294,14 +360,14 @@ run_program.<b>run_perl(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_perl(paths = {makelog: '../log/make.log'}, program = 'script.pl')</code>
+<code>run_perl(paths, program = 'script.pl')</code>
 </ul>
 
 <br>
 
 <pre>
 run_program.<b>run_python(</b><i>
-    paths = {makelog: '../log/make.log'}, 
+    paths = {makelog:}, 
     program, 
     *settings</i><b>
 )</b>
@@ -311,14 +377,14 @@ run_program.<b>run_python(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_python(paths = {makelog: '../log/make.log'}, program = 'script.py')</code>
+<code>run_python(paths, program = 'script.py')</code>
 </ul>
 
 <br>
 
 <pre>
 run_program.<b>run_r(</b><i>
-    paths = {makelog: '../log/make.log'}, 
+    paths = {makelog}, 
     program, 
     *settings</i><b>
 )</b>
@@ -328,14 +394,14 @@ run_program.<b>run_r(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_r(paths = {makelog: '../log/make.log'}, program = 'script.R')</code>
+<code>run_r(paths, program = 'script.R')</code>
 </ul>
 
 <br>
 
 <pre>
 run_program.<b>run_sas(</b><i>
-    paths = {makelog: '../log/make.log'}, 
+    paths = {makelog}, 
     program, 
     lst = '', 
     *settings</i><b>
@@ -353,14 +419,14 @@ run_program.<b>run_sas(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_sas(paths = {makelog: '../log/make.log'}, program = 'script.sas')</code>
+<code>run_sas(paths, program = 'script.sas')</code>
 </ul>
 
 <br>
 
 <pre>
 run_program.<b>run_stat_transfer(</b><i>
-    paths = {makelog: '../log/make.log'}, 
+    paths = {makelog}, 
     program,
     *settings</i><b>
 )</b>
@@ -370,14 +436,14 @@ run_program.<b>run_stat_transfer(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_stat_transfer(paths = {makelog: '../log/make.log'}, program = 'script.stc')</code>
+<code>run_stat_transfer(paths, program = 'script.stc')</code>
 </ul>
 
 <br>
 
 <pre>
 run_program.<b>run_stata(</b><i>
-    paths = {makelog: '../log/make.log'}, 
+    paths = {makelog}, 
     program, 
     *settings</i><b>
 )</b>
@@ -387,7 +453,7 @@ run_program.<b>run_stata(</b><i>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_stata(paths = {makelog: '../log/make.log'}, program = 'script.do')</code>
+<code>run_stata(paths, program = 'script.do')</code>
 </ul>
 
 <br>
@@ -399,9 +465,6 @@ run_program.<b>run_stata(</b><i>
 
 * `shell` : bool
     * For more information on shell execution, see <a href = 'https://docs.python.org/2/library/subprocess.html#frequently-used-arguments'>here</a>.
-
-* `makelog` : str
-    * Path of make log to append outputs. Defaults to '../log/make.log'. To prevent appending outputs to make log, set `makelog` = ''.
 
 * `log` : str
     * Path of program log to write outputs. Defaults to '' (i.e., not written).
