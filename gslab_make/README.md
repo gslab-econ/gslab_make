@@ -138,9 +138,9 @@ write_logs.<b>log_files_in_output(</b><i>
 
 <pre>
 create_links.<b>create_links(</b><i>
-	paths = {
+    paths = {
         link_dir,
-	    makelog,
+        makelog,
     }, 
     file_list</i><b>
 )</b> 
@@ -281,7 +281,7 @@ By default, program log is not written as <code>log = ''</code>.
 <br>
 <b>Example:</b> 
 <br>
-<code>execute_command(paths, 'ls', log = 'file')</code> executes the 'ls' command, writes outputs to program log 'file', and appends outputs and/or status messages to <code>path['makelog']</code>.
+<code>execute_command(paths, 'ls', log = 'file')</code> executes the <code>'ls'</code> command, writes outputs to program log <code>'file'</code>, and appends outputs and/or status messages to <code>path['makelog']</code>.
 </ul>
 
 <br> 
@@ -316,7 +316,7 @@ run_program.<b>run_lyx(</b><i>
 
 <pre>
 run_program.<b>run_mathematica(</b><i>
-    paths = {makelog:}, 
+    paths = {makelog}, 
     program, 
     *settings</i><b>
 )</b>
@@ -333,7 +333,7 @@ run_program.<b>run_mathematica(</b><i>
 
 <pre>
 run_program.<b>run_matlab(</b><i>
-     paths = {makelog:}, 
+     paths = {makelog}, 
      program, 
      *settings</i><b>
 )</b>
@@ -350,7 +350,7 @@ run_program.<b>run_matlab(</b><i>
 
 <pre>
 run_program.<b>run_perl(</b><i>
-    paths = {makelog:}, 
+    paths = {makelog}, 
     program, 
     *settings</i><b>
 )</b>
@@ -367,7 +367,7 @@ run_program.<b>run_perl(</b><i>
 
 <pre>
 run_program.<b>run_python(</b><i>
-    paths = {makelog:}, 
+    paths = {makelog}, 
     program, 
     *settings</i><b>
 )</b>
