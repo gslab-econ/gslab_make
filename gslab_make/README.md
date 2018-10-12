@@ -68,7 +68,7 @@ paths = {
 <br> 
 
 <b>
-Functions below will specify which default paths in </b><code>paths</code><b> are required in their documentation. For example, </b><code>function(paths = {makelog, linklog})</code><b> uses the default paths corresponding to </b><code>paths['makelog']</code><b> and </b><code>paths['linklog']</code><b>.
+The following functions will specify which default paths in </b><code>paths</code><b> are required in their documentation. For example, </b><code>function(paths = {makelog, linklog})</code><b> uses the default paths corresponding to </b><code>paths['makelog']</code><b> and </b><code>paths['linklog']</code><b>.
 </b>
 
 <br> 
