@@ -254,39 +254,7 @@ write_link_logs.<b>write_link_logs(</b><i>
 
 # Program functions
 
-<b>The following functions are used to run system commands or programs for certain applications.</b>
-
-<br>
-
-<pre>
-run_program.<b>execute_command(</b><i>
-    paths = {makelog}, 
-    command, 
-    osname = os.name, 
-    shell = False, 
-    log = ''</i><b>
-)</b>
-</pre>
-> Runs system command `command`, assuming operating system `osname` and shell execution boolean `shell`. Outputs are appended to make log file `makelog` and written to program log file `log`. Status messages are appended to make log `makelog`.
-> 
-
-<ul>
-<b>Notes:</b> 
-<br>
-For more information on shell execution, see <a href = 'https://docs.python.org/2/library/subprocess.html#frequently-used-arguments'>here</a>.
-<br>
-<br>
-By default, program log is not written as <code>log = ''</code>.
-<br>
-<br>
-<b>Example:</b> 
-<br>
-<code>execute_command(paths, 'ls', log = 'file')</code> executes the <code>'ls'</code> command, writes outputs to program log <code>'file'</code>, and appends outputs and/or status messages to <code>path['makelog']</code>.
-</ul>
-
-<br> 
-
-<b>Unless specified otherwise, the following program functions will use default settings to run your program. See the setting section below for more information.</b>
+<b>The following functions are used to run programs for certain applications. Unless specified otherwise, the program functions will use default settings to run your program. See the setting section below for more information.</b>
 
 <br>
 
@@ -458,6 +426,37 @@ run_program.<b>run_stata(</b><i>
 
 <br>
 
+<b>The following function is used to run system commands.</b>
+
+<br>
+
+<pre>
+run_program.<b>execute_command(</b><i>
+    paths = {makelog}, 
+    command, 
+    osname = os.name, 
+    shell = False, 
+    log = ''</i><b>
+)</b>
+</pre>
+> Runs system command `command`, assuming operating system `osname` and shell execution boolean `shell`. Outputs are appended to make log file `makelog` and written to program log file `log`. Status messages are appended to make log `makelog`.
+
+<ul>
+<b>Notes:</b> 
+<br>
+For more information on shell execution, see <a href = 'https://docs.python.org/2/library/subprocess.html#frequently-used-arguments'>here</a>.
+<br>
+<br>
+By default, program log is not written as <code>log = ''</code>.
+<br>
+<br>
+<b>Example:</b> 
+<br>
+<code>execute_command(paths, 'ls', log = 'file')</code> executes the <code>'ls'</code> command, writes outputs to program log <code>'file'</code>, and appends outputs and/or status messages to <code>path['makelog']</code>.
+</ul>
+
+<br>
+
 #### Settings
 
 * `osname` : str
@@ -527,6 +526,8 @@ run_program.<b>run_stata(</b><i>
 
 * `args`
     * Arguments for system command. Defaults to no arguments.
+
+<br> 
 
 # Directory functions
 
