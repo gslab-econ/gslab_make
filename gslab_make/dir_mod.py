@@ -8,10 +8,10 @@ import subprocess
 import zipfile
 import time
 
-import gslab_make_dev.private.metadata as metadata
-import gslab_make_dev.private.messages as messages
-from gslab_make_dev.private.exceptionclasses import CritError
-from gslab_make_dev.private.utility import norm_path, format_error
+import gslab_make.private.metadata as metadata
+import gslab_make.private.messages as messages
+from gslab_make.private.exceptionclasses import CritError
+from gslab_make.private.utility import norm_path
 
 
 def check_os():

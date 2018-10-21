@@ -5,18 +5,13 @@ from builtins import (bytes, str, open, super, range,
 
 import traceback
 
-import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.exceptionclasses import CritError
-from gslab_make_dev.private.utility import glob_recursive, format_error
-from gslab_make_dev.write_logs import write_to_makelog, write_stats_log, write_heads_log
+from gslab_make.private.utility import glob_recursive, format_error
+from gslab_make.write_logs import write_to_makelog, write_stats_log, write_heads_log
 
 
-def write_link_logs(link_map,
-                    link_statslog = metadata.settings['link_statslog'],
-                    link_headslog = metadata.settings['link_headslog'],
-                    link_maplog = metadata.settings['link_maplog'],
-                    recursive = float('inf'), 
-                    makelog = metadata.settings['makelog']):        
+def write_link_logs(paths, 
+                    link_map,
+                    recursive = float('inf')):        
     """ Write link logs.
 
     Notes
@@ -32,23 +27,31 @@ def write_link_logs(link_map,
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'link_statslog' : str
+                Path to write link statistics log.
+            'link_headslog' : str
+                Path to write link headers log.
+            'link_maplog' : str
+                Path to write link map log.
+            'makelog' : str
+                Path of makelog.
+        }
     link_map : list 
         Mapping of symlinks to targets (returned from `LinksList.create_symlinks`).
-    link_statslog : str, optional
-        Path to write link statistics log. Defaults to path specified in metadata.
-    link_headslog : str, optional
-        Path to write link headers log. Defaults to path specified in metadata.
-    link_maplog : str, optional
-        Path to write link map log. Defaults to path specified in metadata.
     recursive : int, optional
         Level of depth when walking through target directories. Defaults to infinite.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
 
     Returns
     -------
     None
     """
+
+    link_statslog = paths['link_statslog']
+    link_headslog = paths['link_headslog']
+    link_maplog   = paths['link_maplog']
+    makelog       = paths['makelog']
 
     try:
         target_list = [target for target, symlink in link_map]
@@ -58,15 +61,16 @@ def write_link_logs(link_map,
         write_stats_log(link_statslog, target_files)
         write_heads_log(link_headslog, target_files)    
         write_link_maplog(link_maplog, link_map)
-        write_to_makelog('Link logs successfully written!', makelog)  
+        write_to_makelog(paths, 'Link logs successfully written!')  
     except:
         error_message = 'Error with `write_link_logs`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
+        
         raise
 
 def write_link_maplog(link_maplog, link_map):
-    """ Make link map log.
+    """ Write link map log.
 
     Parameters
     ----------

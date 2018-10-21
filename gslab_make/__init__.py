@@ -37,10 +37,10 @@ from dir_mod import check_os, remove_path, clear_dir, unzip, zip_dir
 from run_program import (run_stata, run_matlab, run_perl, run_python, 
                          run_mathematica, run_stat_transfer, run_lyx, 
                          run_r, run_sas, execute_command)
-from write_logs import (set_option, start_makelog, end_makelog, write_to_makelog,
-                        write_output_logs, write_stats_log, write_heads_log)
+from write_logs import (start_makelog, end_makelog, write_to_makelog,
+                        log_files_in_output, write_stats_log, write_heads_log)
 from write_link_logs import write_link_logs
 
-#Import tablefill and textfill tools
+# Import fill tools
 from tablefill import tablefill
 from textfill import textfill

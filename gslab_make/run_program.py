@@ -8,25 +8,28 @@ import shutil
 import fileinput
 import traceback
 
-import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.exceptionclasses import CritError
-from gslab_make_dev.private.programdirective import Directive, ProgramDirective, SASDirective, LyxDirective
-from gslab_make_dev.private.utility import format_error
-from gslab_make_dev.write_logs import write_to_makelog
+import gslab_make.private.metadata as metadata
+from gslab_make.private.exceptionclasses import CritError
+from gslab_make.private.programdirective import Directive, ProgramDirective, SASDirective, LyXDirective
+from gslab_make.private.utility import format_error
+from gslab_make.write_logs import write_to_makelog
 
 
-def run_stata(makelog = metadata.settings['makelog'], **kwargs):
+def run_stata(paths, **kwargs):
     """ Run Stata script using system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     program : str
@@ -43,6 +46,8 @@ def run_stata(makelog = metadata.settings['makelog'], **kwargs):
     -------
     None
     """
+
+    makelog = paths['makelog']
 
     try:
         direct = ProgramDirective(application = 'stata', makelog = makelog, **kwargs)
@@ -60,22 +65,25 @@ def run_stata(makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `run_stata`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
     
     
-def run_matlab(makelog = metadata.settings['makelog'], **kwargs):
+def run_matlab(paths, **kwargs):
     """ Run Matlab script using system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     program : str
@@ -92,7 +100,9 @@ def run_matlab(makelog = metadata.settings['makelog'], **kwargs):
     -------
     None
     """
-    
+  
+    makelog = paths['makelog']
+
     try:
         direct = ProgramDirective(application = 'matlab', makelog = makelog, **kwargs)
         
@@ -108,22 +118,25 @@ def run_matlab(makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `run_matlab`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
-def run_perl(makelog = metadata.settings['makelog'], **kwargs):
+def run_perl(paths, **kwargs):
     """ Run Perl script using system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     program : str
@@ -141,6 +154,8 @@ def run_perl(makelog = metadata.settings['makelog'], **kwargs):
     None
     """
     
+    makelog = paths['makelog']
+
     try:
         direct = ProgramDirective(application = 'perl', makelog = makelog, **kwargs)
         
@@ -153,22 +168,25 @@ def run_perl(makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `run_perl`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
 
 
-def run_python(makelog = metadata.settings['makelog'], **kwargs):
+def run_python(paths, **kwargs):
     """ Run Python script using system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     program : str
@@ -186,6 +204,8 @@ def run_python(makelog = metadata.settings['makelog'], **kwargs):
     None
     """
     
+    makelog = paths['makelog']
+
     try:
         direct = ProgramDirective(application = 'python', makelog = makelog, **kwargs)
 
@@ -198,22 +218,25 @@ def run_python(makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `run_python`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
-def run_mathematica(makelog = metadata.settings['makelog'], **kwargs):
+def run_mathematica(paths, **kwargs):
     """ Run Mathematica script using system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     program : str
@@ -231,6 +254,8 @@ def run_mathematica(makelog = metadata.settings['makelog'], **kwargs):
     None
     """
     
+    makelog = paths['makelog']
+
     try:
         direct = ProgramDirective(application = 'math', makelog = makelog, **kwargs)
 
@@ -243,22 +268,25 @@ def run_mathematica(makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `run_mathematica`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
-def run_stat_transfer(makelog = metadata.settings['makelog'], **kwargs):
+def run_stat_transfer(paths, **kwargs):
     """ Run StatTransfer script using system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     program : str
@@ -276,6 +304,8 @@ def run_stat_transfer(makelog = metadata.settings['makelog'], **kwargs):
     None
     """
     
+    makelog = paths['makelog']
+
     try:
         direct = ProgramDirective(application = 'st', makelog = makelog, **kwargs)
 
@@ -288,22 +318,27 @@ def run_stat_transfer(makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `run_stat_transfer`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
-def run_lyx(makelog = metadata.settings['makelog'], **kwargs): 
-    """ Run Lyx script using system command.
+def run_lyx(paths, **kwargs): 
+    """ Run LyX script using system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+            'pdf_dir' : str
+                Directory to write PDFs.
+        }
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     program : str
@@ -318,16 +353,17 @@ def run_lyx(makelog = metadata.settings['makelog'], **kwargs):
     doctype : str, optional
        Type of Lyx document. Takes either `handout` and `comments`. 
        Defaults to no special document type.
-    pdfout : str, optional
-        Directory to write PDF. Defaults to directory specified in metadata.
         
     Returns
     -------
     None
     """
     
+    makelog = paths['makelog']
+    pdf_dir = paths['pdf_dir']
+
     try:
-        direct = LyxDirective(application = 'lyx', makelog = makelog, **kwargs)
+        direct = LyXDirective(application = 'lyx', makelog = makelog, pdf_dir = pdf_dir, **kwargs)
             
         # Make handout/commented LyX file        
         if direct.doctype:
@@ -358,7 +394,7 @@ def run_lyx(makelog = metadata.settings['makelog'], **kwargs):
 
         # Move PDF output
         temp_pdf = os.path.join(direct.program_dir, temp_name + '.pdf')
-        output_pdf = os.path.join(direct.pdfout, direct.program_name + '.pdf')
+        output_pdf = os.path.join(direct.pdf_dir, direct.program_name + '.pdf')
 
         if temp_pdf != output_pdf:
             shutil.copy2(temp_pdf, output_pdf)
@@ -370,22 +406,25 @@ def run_lyx(makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `run_lyx`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
-def run_r(makelog = metadata.settings['makelog'], **kwargs):
+def run_r(paths, **kwargs):
     """ Run R script using system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     program : str
@@ -403,6 +442,8 @@ def run_r(makelog = metadata.settings['makelog'], **kwargs):
     None
     """
     
+    makelog = paths['makelog']
+
     try:
         direct = ProgramDirective(application = 'r', makelog = makelog, **kwargs)
 
@@ -415,22 +456,25 @@ def run_r(makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `run_r`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
-def run_sas(makelog = metadata.settings['makelog'], **kwargs):
+def run_sas(paths, **kwargs):
     """ Run SAS script using system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     program : str
@@ -450,6 +494,8 @@ def run_sas(makelog = metadata.settings['makelog'], **kwargs):
     None
     """
 
+    makelog = paths['makelog']
+
     try:
         direct = SASDirective(application = 'sas', makelog = makelog, **kwargs)
 
@@ -467,15 +513,20 @@ def run_sas(makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `run_sas`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         
 
-def execute_command(command, makelog = metadata.settings['makelog'], **kwargs):
+def execute_command(paths, command, **kwargs):
     """ Run system command.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     command : str
         system command to run.
     osname : str, optional
@@ -483,8 +534,6 @@ def execute_command(command, makelog = metadata.settings['makelog'], **kwargs):
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
         Defaults to `False`.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
     log : str, optional
         Path of system command log. system command log is only written if specified. 
         
@@ -493,6 +542,8 @@ def execute_command(command, makelog = metadata.settings['makelog'], **kwargs):
     None
     """
     
+    makelog = paths['makelog']
+
     try:
         direct = Directive(makelog = makelog, **kwargs)
 
@@ -504,6 +555,6 @@ def execute_command(command, makelog = metadata.settings['makelog'], **kwargs):
     except:
         error_message = 'Error with `execute_command`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(error_message, makelog)
+        write_to_makelog(paths, error_message)
         raise
         

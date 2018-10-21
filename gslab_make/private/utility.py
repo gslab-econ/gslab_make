@@ -7,8 +7,8 @@ import os
 import re
 import glob
 
-from gslab_make_dev.private.exceptionclasses import CritError
-import gslab_make_dev.private.messages as messages
+from gslab_make.private.exceptionclasses import CritError
+import gslab_make.private.messages as messages
 
 
 def norm_path(path):
@@ -56,7 +56,6 @@ def glob_recursive(path, recursive):
             break
 
     path_files = [p for p in path_files if os.path.isfile(p)]
-
     if not path_files:
         print('WARNING! `glob_recursive(path = "%s", recursive = %s)` returned no files' % (path, recursive))
 

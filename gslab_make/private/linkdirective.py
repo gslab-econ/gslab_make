@@ -9,10 +9,10 @@ import glob
 from itertools import chain
 import subprocess
 
-from gslab_make_dev.private.exceptionclasses import CritError
-import gslab_make_dev.private.messages as messages
-import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.utility import norm_path, file_to_array
+from gslab_make.private.exceptionclasses import CritError
+import gslab_make.private.messages as messages
+import gslab_make.private.metadata as metadata
+from gslab_make.private.utility import norm_path, file_to_array
 
 
 class LinkDirective(object):
@@ -30,11 +30,11 @@ class LinkDirective(object):
         Line of text containing linking instructions.
     link_dir : str
         Directory to write symlink(s).
-        
-    Attributes
-    ----------
     osname : str, optional
         Name of OS. Defaults to `os.name`.
+
+    Attributes
+    ----------
     target : list
         List of targets parsed from line.
     symlink : list
@@ -43,8 +43,8 @@ class LinkDirective(object):
         List of (target, symlink) mappings parsed from line.
     """
     
-    def __init__(self, line, link_dir):
-        self.osname    = os.name
+    def __init__(self, line, link_dir, osname = os.name):
+        self.osname    = osname
         self.line      = line
         self.link_dir  = link_dir
         self.check_os()
@@ -253,11 +253,16 @@ class LinksList(object):
         None
         """
         
-        if type(self.file_list) is list:
-            self.file_list = [f for file in self.file_list for f in glob.glob(file)]
-        else:
+        if type(self.file_list) is not list:
             raise TypeError(messages.type_error_file_list)
-    
+
+        file_list_parsed = [f for file in self.file_list for f in glob.glob(file)]   
+        if file_list_parsed:
+            self.file_list = file_list_parsed
+        else:
+            error_list = [str(f) for f in self.file_list]
+            raise CritError(messages.crit_error_no_files % str(error_list))
+
     def get_paths(self):    
         """ Normalize paths. 
                 
@@ -268,7 +273,6 @@ class LinksList(object):
         
         self.link_dir  = norm_path(self.link_dir)
         self.file_list = [norm_path(f) for f in self.file_list]
-        self.file_list
 
     def get_link_directive_list(self):
         """ Parse list of files to create symlink directives. 

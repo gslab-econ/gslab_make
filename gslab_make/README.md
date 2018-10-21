@@ -1,57 +1,3 @@
-# Directory functions
-
-<b>The following functions are used to make modifications to a directory. Functions to check operating system, clear directories, and zip/unzip files are included.</b>
-
-<br>
-
-<pre>
-dir_mod.<b>check_os()</b>
-</pre>
-> Confirms that operating system is Unix or Windows. If operating system is neither, raises exception. 
-
-<ul>
-<b>Note:</b> 
-<br>
-<code>gslab_make</code> only supports Unix or Windows. 
-</ul>
-
-<br>
-
-<pre>
-dir_mod.<b>clear_dir(</b><i>dir_list</i><b>)</b>
-</pre>
-> Clears all directories in list <code>dir_list</code> using system command. Safely clears symbolic links.
-
-<ul>
-<b>Example:</b>
-<br>
-<code>clear_dir(['dir1', 'dir2'])</code> clears directories 'dir1' and 'dir2'. 
-<br>
-<br>
-<b>Notes:</b>
-<br>
-To clear a directory means to remove all contents of a directory. If the directory is nonexistent, the directory is created.
-<br>
-<br>
-Directories can be specified with the * shell pattern (see <a href = 'https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html'>here</a>).
-</ul>
-
-<br>
-
-<pre>
-dir_mod.<b>unzip(</b><i>zip_path, output_dir</i><b>)</b>
-</pre>
-> Unzips file `zip_path` into directory `output_dir`.
-
-<br>
-
-<pre>
-dir_mod.<b>zip_dir(</b><i>source_dir, zip_dest</i><b>)</b>
-</pre>
-> Zips directory `source_dir` into file `zip_dest`. 
-
-<br>
-
 # Logging functions
 
 <b>The following functions are used to create a master log of activity (i.e., a <i>make log</i>) and to log information about output files. The logs are intended to facilitate the reproducibility of research.</b>
@@ -59,76 +5,28 @@ dir_mod.<b>zip_dir(</b><i>source_dir, zip_dest</i><b>)</b>
 <br>
 
 <pre>
-write_logs.<b>set_option(</b><i>*default_paths</i><b>)</b>
-</pre>
-> Sets default paths. The following default paths can be changed:
->
-> * `link_dir` = '../input/'
-> 
->     * Default path for writing symbolic links to inputs. 
->
-> * `temp_dir` = '../temp/'
-> 
->     * Default path for writing temporary files.
->
-> * `output_dir` = '../output/' 
-> 
->     * Default path for writing Lyx documents. 
->     * Default path for finding outputs for logging.
->
-> * `makelog` = '../log/make.log'
-> 
->     * Default path for writing make log.
->
-> * `output_statslog` = '../log/output_stats.log'
-> 
->     * Default path for writing log containing output statistics.
->
-> * `output_headslog` = '../log/output_heads.log'
-> 
->     * Default path for writing log containing output headers.
->
-> * `link_maplog` = '../log/link_map.log'
-> 
->     * Default path for writing log containing link mappings.
->
-> * `link_statslog` = '../log/link_stats.log'
-> 
->     * Default path for writing log containing link statistics.
->
-> * `link_headslog` = '../log/link_heads.log'
-> 
->     * Default path for writing log containing link headers.	
-
-<ul>
-<b>Example:</b>
-<br>
-<code>set_option(makelog = 'file1')</code> changes the default make log path to 'file1'. All future functions will use 'file1' as the make log path. 
-</ul>
-
-<br>
-
-<pre>
-write_logs.<b>start_makelog(</b><i>makelog = '../log/make.log'</i><b>)</b>
+write_logs.<b>start_makelog(</b><i>paths = {makelog: '../log/make.log'}</i><b>)</b>
 </pre>
 > Starts new make log at file `makelog`, recording start time. Sets start condition for make log to boolean `True`, which is needed by other functions to confirm make log exists.
 
 <br>
 
 <pre>
-write_logs.<b>end_makelog(</b><i>makelog = '../log/make.log'</i><b>)</b>
+write_logs.<b>end_makelog(</b><i>paths = {makelog: '../log/make.log'}</i><b>)</b>
 </pre>
 > Ends make log at file `makelog`, recording end time. 
 
 <br>
 
 <pre>
-write_logs.<b>write_output_logs(</b><i> 
-    output_dir = '../output/',
-    output_statslog = '../log/output_stats.log', 
-    output_headslog = '../log/output_heads.log', 
-    recursive = float('inf'), 
-    makelog = '../log/make.log'</i><b>
+write_logs.<b>log_files_in_output(</b><i> 
+    paths = {
+        output_dir: '../output/',
+        output_statslog: '../log/output_stats.log', 
+        output_headslog: '../log/output_heads.log', 
+        makelog: '../log/make.log'
+    }, 
+    recursive = float('inf'),</i><b>
 )</b>
 </pre>
 > Logs the following information for all files contained in directory `output_dir`:
@@ -165,9 +63,11 @@ write_logs.<b>write_output_logs(</b><i>
 
 <pre>
 create_links.<b>create_links(</b><i>
-    file_list, 
-	link_dir = '../input/', 
-	makelog = '../log/make.log'</i><b>
+	paths = {
+        link_dir: '../input/', 
+	    makelog: '../log/make.log'
+    }, 
+    file_list</i><b>
 )</b> 
 </pre>
 > Create symbolic links using instructions contained in files of list `file_list`. Symbolic links are written in directory `link_dir`. Status messages are appended to make log `makelog`.
@@ -236,12 +136,14 @@ Specifying <code>symlink*   target*</code> in one of your instruction files woul
 
 <pre>
 write_link_logs.<b>write_link_logs(</b><i>
+    paths = {
+        link_statslog = '../log/link_stats.log', 
+        link_headslog = '../log/link_heads.log', 
+        link_maplog = '../log/link_map.log', 
+        makelog = '../log/make.log'
+    }, 
     link_map, 
-    link_statslog = '../log/link_stats.log', 
-    link_headslog = '../log/link_heads.log', 
-    link_maplog = '../log/link_map.log', 
-    recursive = float('inf'), 
-	makelog = '../log/make.log'</i><b>
+    recursive = float('inf')</i><b>
 )</b>
 </pre>
 
@@ -283,10 +185,10 @@ write_link_logs.<b>write_link_logs(</b><i>
 
 <pre>
 run_program.<b>execute_command(</b><i>
+    paths = {makelog: '../log/make.log'}, 
     command, 
     osname = os.name, 
     shell = False, 
-    makelog = '../log/make.log', 
     log = ''</i><b>
 )</b>
 </pre>
@@ -307,7 +209,7 @@ By default, program log is not written as <code>log</code> = ''.
 <br>
 <b>Example:</b> 
 <br>
-<code>execute_command('ls', makelog = '', log = 'file')</code> executes the 'ls' command, writes outputs to program log 'file', but does not append status messages or outputs to make log.
+<code>execute_command(paths = {makelog: ''}, 'ls', log = 'file')</code> executes the 'ls' command, writes outputs to program log 'file', but does not append status messages or outputs to make log.
 </ul>
 
 <br> 
@@ -317,86 +219,13 @@ By default, program log is not written as <code>log</code> = ''.
 <br>
 
 <pre>
-run_program.<b>run_stata(program, *settings)</b>
-</pre>
-> Runs script `program` using system command, with script specified in the form of `'script.do'`. Status messages are appended to make log `makelog`.
-
-<ul>
-<b>Example:</b>
-<br>
-<code>run_stata(program = 'script.do')</code>
-</ul>
-
-
-<br>
-
-<pre>
-run_program.<b>run_matlab(program, *settings)</b>
-</pre>
-> Runs script `program` using system command, with script specified in the form of `'script.m'`. Status messages are appended to make log `makelog`.
-
-<ul>
-<b>Example:</b>
-<br>
-<code>run_matlab(program = 'script.m')</code>
-</ul>
-
-<br>
-
-<pre>
-run_program.<b>run_perl(program, *settings)</b>
-</pre>
-> Runs script `program` using system command, with script specified in the form of `'script.pl'`. Status messages are appended to make log `makelog`.
-
-<ul>
-<b>Example:</b>
-<br>
-<code>run_perl(program = 'script.pl')</code>
-</ul>
-
-<br>
-
-<pre>
-run_program.<b>run_python(program, *settings)</b>
-</pre>
-> Runs script `program` using system command, with script specified in the form of `'script.py'`. Status messages are appended to make log `makelog`.
-
-<ul>
-<b>Example:</b>
-<br>
-<code>run_python(program = 'script.py')</code>
-</ul>
-
-<br>
-
-<pre>
-run_program.<b>run_mathematica(program, *settings)</b>
-</pre>
-> Runs script `program` using system command, with script specified in the form of `'script.m'`. Status messages are appended to make log `makelog`.
-
-<ul>
-<b>Example:</b>
-<br>
-<code>run_mathematica(program = 'script.m')</code>
-</ul>
-
-<br>
-
-<pre>
-run_program.<b>run_stat_transfer(program, *settings)</b>
-</pre>
-> Runs script `program` using system command, with script specified in the form of `'script.stc'` or `'script.stcmd'`. Status messages are appended to make log `makelog`.
-
-<ul>
-<b>Example:</b>
-<br>
-<code>run_stat_transfer(program = 'script.stc')</code>
-</ul>
-
-<br>
-
-<pre>
-run_program.<b>run_lyx(program, doctype = '', pdfout = '', *settings)</b>
+run_program.<b>run_lyx(</b><i>
+    paths = {makelog: '../log/make.log'}, 
+    program, 
+    doctype = '', 
+    pdfout = '', 
+    *settings</i><b>
+)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.lyx'`. Status messages are appended to make log `makelog`.
 >
@@ -414,26 +243,103 @@ run_program.<b>run_lyx(program, doctype = '', pdfout = '', *settings)</b>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_lyx(program = 'script.lyx')</code>
+<code>run_lyx(paths = {makelog: '../log/make.log'}, program = 'script.lyx')</code>
 </ul>
 
 <br>
 
 <pre>
-run_program.<b>run_r(program, *settings)</b>
+run_program.<b>run_mathematica(</b><i>
+    paths = {makelog: '../log/make.log'}, 
+    program, 
+    *settings</i><b>
+)</b>
+</pre>
+> Runs script `program` using system command, with script specified in the form of `'script.m'`. Status messages are appended to make log `makelog`.
+
+<ul>
+<b>Example:</b>
+<br>
+<code>run_mathematica(paths = {makelog: '../log/make.log'}, program = 'script.m')</code>
+</ul>
+
+<br>
+
+<pre>
+run_program.<b>run_matlab(</b><i>
+     paths = {makelog: '../log/make.log'}, 
+     program, 
+     *settings</i><b>
+)</b>
+</pre>
+> Runs script `program` using system command, with script specified in the form of `'script.m'`. Status messages are appended to make log `makelog`.
+
+<ul>
+<b>Example:</b>
+<br>
+<code>run_matlab(paths = {makelog: '../log/make.log'}, program = 'script.m')</code>
+</ul>
+
+<br>
+
+<pre>
+run_program.<b>run_perl(</b><i>
+    paths = {makelog: '../log/make.log'}, 
+    program, 
+    *settings</i><b>
+)</b>
+</pre>
+> Runs script `program` using system command, with script specified in the form of `'script.pl'`. Status messages are appended to make log `makelog`.
+
+<ul>
+<b>Example:</b>
+<br>
+<code>run_perl(paths = {makelog: '../log/make.log'}, program = 'script.pl')</code>
+</ul>
+
+<br>
+
+<pre>
+run_program.<b>run_python(</b><i>
+    paths = {makelog: '../log/make.log'}, 
+    program, 
+    *settings</i><b>
+)</b>
+</pre>
+> Runs script `program` using system command, with script specified in the form of `'script.py'`. Status messages are appended to make log `makelog`.
+
+<ul>
+<b>Example:</b>
+<br>
+<code>run_python(paths = {makelog: '../log/make.log'}, program = 'script.py')</code>
+</ul>
+
+<br>
+
+<pre>
+run_program.<b>run_r(</b><i>
+    paths = {makelog: '../log/make.log'}, 
+    program, 
+    *settings</i><b>
+)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.R'`. Status messages are appended to make log `makelog`.
 
 <ul>
 <b>Example:</b>
 <br>
-<code>run_r(program = 'script.R')</code>
+<code>run_r(paths = {makelog: '../log/make.log'}, program = 'script.R')</code>
 </ul>
 
 <br>
 
 <pre>
-run_program.<b>run_sas(program, lst = '', *settings)</b>
+run_program.<b>run_sas(</b><i>
+    paths = {makelog: '../log/make.log'}, 
+    program, 
+    lst = '', 
+    *settings</i><b>
+)</b>
 </pre>
 > Runs script `program` using system command, with script specified in the form of `'script.sas'`. Status messages are appended to make log `makelog`.
 >
@@ -447,9 +353,42 @@ run_program.<b>run_sas(program, lst = '', *settings)</b>
 <ul>
 <b>Example:</b>
 <br>
-<code>run_sas(program = 'script.sas')</code>
+<code>run_sas(paths = {makelog: '../log/make.log'}, program = 'script.sas')</code>
 </ul>
 
+<br>
+
+<pre>
+run_program.<b>run_stat_transfer(</b><i>
+    paths = {makelog: '../log/make.log'}, 
+    program,
+    *settings</i><b>
+)</b>
+</pre>
+> Runs script `program` using system command, with script specified in the form of `'script.stc'` or `'script.stcmd'`. Status messages are appended to make log `makelog`.
+
+<ul>
+<b>Example:</b>
+<br>
+<code>run_stat_transfer(paths = {makelog: '../log/make.log'}, program = 'script.stc')</code>
+</ul>
+
+<br>
+
+<pre>
+run_program.<b>run_stata(</b><i>
+    paths = {makelog: '../log/make.log'}, 
+    program, 
+    *settings</i><b>
+)</b>
+</pre>
+> Runs script `program` using system command, with script specified in the form of `'script.do'`. Status messages are appended to make log `makelog`.
+
+<ul>
+<b>Example:</b>
+<br>
+<code>run_stata(paths = {makelog: '../log/make.log'}, program = 'script.do')</code>
+</ul>
 
 <br>
 
@@ -473,25 +412,25 @@ run_program.<b>run_sas(program, lst = '', *settings)</b>
     <pre>
     default_executables = {
         'posix': 
-            {'stata'     : 'statamp',
-             'matlab'    : 'matlab',
+            {'lyx'       : 'lyx',
              'perl'      : 'perl',
              'python'    : 'python',
              'math'      : 'math',
-             'st'        : 'st',
-             'lyx'       : 'lyx',
+             'matlab'    : 'matlab',
              'r'         : 'Rscript',
-             'sas'       : 'sas'},
+             'sas'       : 'sas', 
+             'st'        : 'st',
+             'stata'     : 'statamp'},
         'nt': 
-            {'stata'     : '%STATAEXE%',
-             'matlab'    : 'matlab',
+            {'lyx'       : 'lyx',
              'perl'      : 'perl',
              'python'    : 'python',
+             'matlab'    : 'matlab',
              'math'      : 'math',
-             'st'        : 'st',
-             'lyx'       : 'lyx',
              'r'         : 'Rscript',
-             'sas'       : 'sas'}
+             'sas'       : 'sas', 
+             'st'        : 'st',
+             'stata'     : '%STATAEXE%'}
     }
     </pre>
 
@@ -501,27 +440,81 @@ run_program.<b>run_sas(program, lst = '', *settings)</b>
     <pre>
     default_options = {
         'posix': 
-            {'stata'     : '-e',
+            {'lyx'       : '-e pdf2',
+             'perl'      : '',
+             'python'    : '',
+             'math'      : '-noprompt',
              'matlab'    : '-nosplash -nodesktop',
-             'perl'      : '',
-             'python'    : '',
-             'math'      : '-noprompt',
-             'st'        : '',
-             'lyx'       : '-e pdf2',
              'r'         : '--no-save',
-             'sas'       : ''},
+             'st'        : '',
+             'sas'       : '', 
+             'stata'     : '-e'},
         'nt': 
-            {'stata'     : '/e',
-             'matlab'    : '-nosplash -minimize -wait',
+            {'lyx'       : '-e pdf2',
              'perl'      : '',
              'python'    : '',
+             'matlab'    : '-nosplash -minimize -wait',
              'math'      : '-noprompt',
-             'st'        : '',
-             'lyx'       : '-e pdf2',
              'r'         : '--no-save',
-             'sas'       : '-nosplash'}
+             'st'        : '',
+             'sas'       : '-nosplash', 
+             'stata'     : '/e'}
     }
     </pre>
 
 * `args`
     * Arguments for system command. Defaults to no arguments.
+
+# Directory functions
+
+<b>The following functions are used to make modifications to a directory. Functions to check operating system, clear directories, and zip/unzip files are included.</b>
+
+<br>
+
+<pre>
+dir_mod.<b>check_os()</b>
+</pre>
+> Confirms that operating system is Unix or Windows. If operating system is neither, raises exception. 
+
+<ul>
+<b>Note:</b> 
+<br>
+<code>gslab_make</code> only supports Unix or Windows. 
+</ul>
+
+<br>
+
+<pre>
+dir_mod.<b>clear_dir(</b><i>dir_list</i><b>)</b>
+</pre>
+> Clears all directories in list <code>dir_list</code> using system command. Safely clears symbolic links.
+
+<ul>
+<b>Example:</b>
+<br>
+<code>clear_dir(['dir1', 'dir2'])</code> clears directories 'dir1' and 'dir2'. 
+<br>
+<br>
+<b>Notes:</b>
+<br>
+To clear a directory means to remove all contents of a directory. If the directory is nonexistent, the directory is created.
+<br>
+<br>
+Directories can be specified with the * shell pattern (see <a href = 'https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html'>here</a>).
+</ul>
+
+<br>
+
+<pre>
+dir_mod.<b>unzip(</b><i>zip_path, output_dir</i><b>)</b>
+</pre>
+> Unzips file `zip_path` into directory `output_dir`.
+
+<br>
+
+<pre>
+dir_mod.<b>zip_dir(</b><i>source_dir, zip_dest</i><b>)</b>
+</pre>
+> Zips directory `source_dir` into file `zip_dest`. 
+
+<br>

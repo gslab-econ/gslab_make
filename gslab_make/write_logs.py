@@ -5,36 +5,15 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import datetime
-import re
 import string
-import traceback
 
-import gslab_make_dev.private.messages as messages
-import gslab_make_dev.private.metadata as metadata
-from gslab_make_dev.private.exceptionclasses import CritError
-from gslab_make_dev.private.utility import norm_path, glob_recursive, format_error
-
-
-def set_option(**kwargs):
-    """ Set global options. See metadata for default options. 
-    
-    Returns
-    -------
-    None
-    """
-
-    options = {re.sub('_file$|_dir$', '', k):v for k, v in kwargs.items()}
-
-    if len(options.keys()) != len(kwargs.keys()):
-        raise SyntaxError(messages.syn_error_options)      
-
-    for key in metadata.settings.keys():
-        root = re.sub('_file$|_dir$', '', key) 
-        if root in options.keys():
-            metadata.settings[key] = options[root]
+import gslab_make.private.messages as messages
+import gslab_make.private.metadata as metadata
+from gslab_make.private.exceptionclasses import CritError
+from gslab_make.private.utility import norm_path, glob_recursive
 
 
-def start_makelog(makelog = metadata.settings['makelog']):
+def start_makelog(paths):
     """ Start make log. Record start time.
 
     Notes
@@ -44,13 +23,18 @@ def start_makelog(makelog = metadata.settings['makelog']):
 
     Parameters
     ----------
-    makelog : str, optional
-        Path to write make log. Defaults to path specified in metadata.
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
 
     Returns
     -------
     None
     """
+
+    makelog = paths['makelog']
 
     metadata.makelog_started = True
     if makelog:
@@ -66,19 +50,24 @@ def start_makelog(makelog = metadata.settings['makelog']):
             print(messages.note_dash_line, file = MAKELOG)
 
 
-def end_makelog(makelog = metadata.settings['makelog']):
+def end_makelog(paths):
     """ End make log. Record end time.
 
     Parameters
     ----------
-    makelog : str, optional
-        Path of started make log. Defaults to path specified in metadata.
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
 
     Returns
     -------
     None
     """
  
+    makelog = paths['makelog']
+
     if makelog:
         makelog = norm_path(makelog)
         print('Ending makelog file at: "%s"' % makelog)
@@ -95,20 +84,25 @@ def end_makelog(makelog = metadata.settings['makelog']):
             print(messages.note_dash_line, file = MAKELOG)
 
     
-def write_to_makelog(message, makelog = metadata.settings['makelog']):
+def write_to_makelog(paths, message):
     """ Append message to make log.
 
     Parameters
     ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'makelog' : str
+                Path of makelog.
+        }
     message : str
         Message to append.
-    makelog : str, optional
-        Path of started make log. Defaults to path specified in metadata.
 
     Returns
     -------
     None
     """
+
+    makelog = paths['makelog']
 
     if makelog:
         makelog = norm_path(makelog)
@@ -120,12 +114,9 @@ def write_to_makelog(message, makelog = metadata.settings['makelog']):
             print(message, file = MAKELOG)
     
     
-def write_output_logs(output_dir = metadata.settings['output_dir'],
-                      output_statslog = metadata.settings['output_statslog'], 
-                      output_headslog = metadata.settings['output_headslog'],
-                      recursive = float('inf'),
-                      makelog = metadata.settings['makelog']):
-    """ Write output logs.
+def log_files_in_output(paths,
+                        recursive = float('inf')):
+    """ Log files in output directory.
 
     Notes
     -----
@@ -138,21 +129,29 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
 
     Parameters
     ----------
-    output_dir : str, optional
-        Path of output directory. Defaults to path specified in metadata.
-    output_statslog : str, optional
-        Path to write output statistics log. Defaults to path specified in metadata.
-    output_headslog : str, optional
-        Path to write output headers log. Defaults to path specified in metadata.
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'output_dir' : str
+                Path of output directory.
+            'output_statslog' : str
+                Path to write output statistics log.
+            'output_headslog' : str
+                Path to write output headers log.
+            'makelog' : str
+                Path of makelog.
+        }
     recursive : int, optional
         Level of depth when walking through output directory.
-    makelog : str, optional
-        Path of makelog. Defaults to path specified in metadata.
 
     Returns
     -------
     None
     """
+
+    output_dir      = paths['output_dir']
+    output_statslog = paths['output_statslog']
+    output_headslog = paths['output_headslog']
+    makelog         = paths['makelog']
 
     output_files = glob_recursive(output_dir, recursive)
 
@@ -164,10 +163,10 @@ def write_output_logs(output_dir = metadata.settings['output_dir'],
         output_headslog = norm_path(output_headslog)
         write_heads_log(output_headslog, output_files)
     
-    write_to_makelog('Output logs successfully written!', makelog)  
+    write_to_makelog(paths, 'Output logs successfully written!')  
         
     
-def write_stats_log (statslog_file, output_files):
+def write_stats_log(statslog_file, output_files):
     """ Write statistics log.
    
     Notes
@@ -181,7 +180,6 @@ def write_stats_log (statslog_file, output_files):
     ----------
     statslog_file : str
         Path to write statistics log. 
-
     output_files : list
         List of output files to log statistics.
 
@@ -210,10 +208,8 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
     ----------
     headslog_file : str
         Path to write headers log. 
-
     output_files : list
         List of output files to log headers.
-
     num_lines: int, optional
         Number of lines for headers. Default is 10.
 
