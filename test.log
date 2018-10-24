@@ -1,39 +1,4 @@
 running pytest
-Searching for pytest
-Best match: pytest 3.7.1
-Processing pytest-3.7.1-py2.7.egg
-
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pytest-3.7.1-py2.7.egg
-Searching for py>=1.5.0
-Best match: py 1.5.4
-Processing py-1.5.4-py2.7.egg
-
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/py-1.5.4-py2.7.egg
-Searching for pluggy>=0.7
-Best match: pluggy 0.7.1
-Processing pluggy-0.7.1-py2.7.egg
-
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pluggy-0.7.1-py2.7.egg
-Searching for pathlib2>=2.2.0
-Best match: pathlib2 2.3.2
-Processing pathlib2-2.3.2-py2.7.egg
-
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/pathlib2-2.3.2-py2.7.egg
-Searching for more-itertools>=4.0.0
-Best match: more-itertools 4.3.0
-Processing more_itertools-4.3.0-py2.7.egg
-
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/more_itertools-4.3.0-py2.7.egg
-Searching for attrs>=17.4.0
-Best match: attrs 18.1.0
-Processing attrs-18.1.0-py2.7.egg
-
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/attrs-18.1.0-py2.7.egg
-Searching for atomicwrites>=1.0
-Best match: atomicwrites 1.1.5
-Processing atomicwrites-1.1.5-py2.7.egg
-
-Using /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make/.eggs/atomicwrites-1.1.5-py2.7.egg
 running egg_info
 writing requirements to GSLab_Make.egg-info/requires.txt
 writing GSLab_Make.egg-info/PKG-INFO
@@ -43,48 +8,1139 @@ reading manifest file 'GSLab_Make.egg-info/SOURCES.txt'
 writing manifest file 'GSLab_Make.egg-info/SOURCES.txt'
 running build_ext
 ============================= test session starts ==============================
-platform darwin -- Python 2.7.15, pytest-3.7.1, py-1.5.4, pluggy-0.7.1
-rootdir: /Users/jacob/Documents/School/Stanford/RA/Gentzkow/gslab_make, inifile:
-collected 2 items
+platform darwin -- Python 2.7.13, pytest-3.2.1, py-1.4.34, pluggy-0.4.0
+rootdir: /Users/danielagonzalez/gslab_make, inifile:
+collected 80 items
 
-gslab_make_dev/tests/test_zip.py ..                                      [100%]
+gslab_make/tests/test_clear_dir.py ...
+gslab_make/tests/test_execute_command.py FFF
+gslab_make/tests/test_remove_path.py ....
+gslab_make/tests/test_run_lyx.py FFFFFFF.FF
+gslab_make/tests/test_run_mathematica.py FFFFF.F
+gslab_make/tests/test_run_matlab.py FFFFF.FF
+gslab_make/tests/test_run_perl.py FFFFFF
+gslab_make/tests/test_run_python.py FFFFFF
+gslab_make/tests/test_run_r.py FFFFFFFFFFFFF
+gslab_make/tests/test_run_stata.py FFFFFF
+gslab_make/tests/test_tablefill.py ....
+gslab_make/tests/test_textfill.py ........
+gslab_make/tests/test_zip.py ..
 
-=========================== 2 passed in 0.24 seconds ===========================
-Name                                           Stmts   Miss Branch BrPart  Cover   Missing
-------------------------------------------------------------------------------------------
-gslab_make_dev/create_links.py                    19     10      0      0    47%   35-45
-gslab_make_dev/dir_mod.py                         46     21     20      0    44%   25-26, 46-54, 70-85
-gslab_make_dev/private/exceptionclasses.py         4      0      0      0   100%
-gslab_make_dev/private/linkdirective.py          104     76     32      0    21%   47-53, 63-64, 74-82, 92-100, 110-118, 139-146, 167-171, 181-186, 196-198, 207-214, 242-246, 256-259, 269-271, 281-287, 298-302
-gslab_make_dev/private/messages.py                19      0      0      0   100%
-gslab_make_dev/private/metadata.py                 8      0      0      0   100%
-gslab_make_dev/private/programdirective.py       109     80     32      0    21%   48-53, 63-64, 73-74, 90-110, 121-129, 179-188, 198-201, 211-215, 225-226, 236-237, 255-270, 292-293, 320-324, 334-336, 346-349
-gslab_make_dev/private/utility.py                 36     20      6      0    38%   45-63, 80-83, 100-103
-gslab_make_dev/run_program.py                    168    147     34      0    10%   47-64, 96-112, 144-157, 189-202, 234-247, 279-292, 329-374, 406-419, 453-471, 496-508
-gslab_make_dev/tablefill.py                      141    122     68      0     9%   13-25, 31-40, 44-47, 51-57, 61-77, 81-84, 87-115, 118-149, 152-160, 164-176, 180-182
-gslab_make_dev/tablefill_info.py                   0      0      0      0   100%
-gslab_make_dev/tests/nostderrout.py               12      0      2      0   100%
-gslab_make_dev/tests/test_clear_dir.py             0      0      0      0   100%
-gslab_make_dev/tests/test_create_links.py          0      0      0      0   100%
-gslab_make_dev/tests/test_execute_command.py       0      0      0      0   100%
-gslab_make_dev/tests/test_link_logs.py             0      0      0      0   100%
-gslab_make_dev/tests/test_makelog.py               0      0      0      0   100%
-gslab_make_dev/tests/test_output_logs.py           0      0      0      0   100%
-gslab_make_dev/tests/test_remove_path.py           0      0      0      0   100%
-gslab_make_dev/tests/test_run_lyx.py               0      0      0      0   100%
-gslab_make_dev/tests/test_run_mathematica.py       0      0      0      0   100%
-gslab_make_dev/tests/test_run_matlab.py            0      0      0      0   100%
-gslab_make_dev/tests/test_run_perl.py              0      0      0      0   100%
-gslab_make_dev/tests/test_run_python.py            0      0      0      0   100%
-gslab_make_dev/tests/test_run_r.py                 0      0      0      0   100%
-gslab_make_dev/tests/test_run_stata.py             0      0      0      0   100%
-gslab_make_dev/tests/test_set_option.py            0      0      0      0   100%
-gslab_make_dev/tests/test_tablefill.py             0      0      0      0   100%
-gslab_make_dev/tests/test_textfill.py              0      0      0      0   100%
-gslab_make_dev/tests/test_zip.py                  35      2      4      2    90%   45-46, 41->exit, 44->45
-gslab_make_dev/textfill.py                       135    114     60      0    11%   12-24, 31-52, 56-59, 63-72, 77-82, 85-89, 92-93, 96-101, 104-106, 110-119, 123-128, 132-162, 166-190
-gslab_make_dev/textfill_info.py                    0      0      0      0   100%
-gslab_make_dev/write_link_logs.py                 27     18      2      0    31%   53-66, 83-89
-gslab_make_dev/write_logs.py                      86     68     30      0    16%   26-34, 55-66, 82-95, 113-120, 157-167, 193-203, 225-244
-------------------------------------------------------------------------------------------
-TOTAL                                            949    678    290      2    23%
+=================================== FAILURES ===================================
+______________________ testExecuteCommand.test_custom_log ______________________
+
+self = <gslab_make.tests.test_execute_command.testExecuteCommand testMethod=test_custom_log>
+
+    def test_custom_log(self):
+        makelog_file = {'makelog' : '../log/custom_make.log'}
+        start_makelog(makelog_file)
+        if os.name=='posix':
+            our_unzip = 'unzip gslab_make/tests/input/zip_test_file.zip'
+        else:
+            our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'
+        with nostderrout():
+>           execute_command(makelog = makelog_file, command = our_unzip)
+E           TypeError: execute_command() takes exactly 2 arguments (1 given)
+
+gslab_make/tests/test_execute_command.py:41: TypeError
+----------------------------- Captured stdout call -----------------------------
+Starting makelog file at: "/Users/danielagonzalez/log/custom_make.log"
+_____________________ testExecuteCommand.test_default_log ______________________
+
+self = <gslab_make.tests.test_execute_command.testExecuteCommand testMethod=test_default_log>
+
+    def test_default_log(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        start_makelog(default_makelog)
+        self.assertFalse(os.path.isfile('test_data.txt'))
+        if os.name=='posix':
+            our_unzip = 'unzip gslab_make/tests/input/zip_test_file.zip'
+        else:
+            our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'
+        with nostderrout():
+>           execute_command(makelog = default_makelog, command = our_unzip)
+E           TypeError: execute_command() takes exactly 2 arguments (1 given)
+
+gslab_make/tests/test_execute_command.py:29: TypeError
+----------------------------- Captured stdout call -----------------------------
+Starting makelog file at: "/Users/danielagonzalez/log/make.log"
+___________________ testExecuteCommand.test_independent_log ____________________
+
+self = <gslab_make.tests.test_execute_command.testExecuteCommand testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        independent_log = {'makelog' : '../log/command.log'}
+        start_makelog(default_makelog)
+        if os.name=='posix':
+            our_unzip = 'unzip gslab_make/tests/input/zip_test_file.zip'
+        else:
+            our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'
+        with nostderrout():
+>           execute_command(log = independent_log, command = our_unzip)
+E           TypeError: execute_command() takes exactly 2 arguments (1 given)
+
+gslab_make/tests/test_execute_command.py:54: TypeError
+----------------------------- Captured stdout call -----------------------------
+Starting makelog file at: "/Users/danielagonzalez/log/make.log"
+________________________ testRunLyx.test_bad_executable ________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_bad_executable>
+
+    def test_bad_executable(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+        with self.assertRaises(CritError):
+>           run_lyx(program = 'gslab_make/tests/input/lyx_test_file.lyx', executable = 'nonexistent_lyx_executable')
+E           TypeError: run_lyx() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_lyx.py:65: TypeError
+___________________________ testRunLyx.test_comments ___________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_comments>
+
+    def test_comments(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_lyx(program = 'gslab_make/tests/input/lyx_test_file.lyx', doctype = 'comments')
+E           TypeError: run_lyx() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_lyx.py:101: TypeError
+__________________________ testRunLyx.test_custom_log __________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_custom_log>
+
+    def test_custom_log(self):
+        makelog_file = {'makelog' : '../log/custom_make.log'}
+        with nostderrout():
+            start_makelog(makelog_file)
+>           run_lyx(program = 'gslab_make/tests/input/lyx_test_file.lyx', makelog = makelog_file)
+E           TypeError: run_lyx() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_lyx.py:32: TypeError
+_________________________ testRunLyx.test_default_log __________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_default_log>
+
+    def test_default_log(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_lyx(program = 'gslab_make/tests/input/lyx_test_file.lyx')
+E           TypeError: run_lyx() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_lyx.py:23: TypeError
+__________________________ testRunLyx.test_executable __________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_executable>
+
+    def test_executable(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_lyx(program = 'gslab_make/tests/input/lyx_test_file.lyx', executable = metadata.default_executables[os.name]['lyx'])
+E           TypeError: run_lyx() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_lyx.py:55: TypeError
+________________________ testRunLyx.test_handout_pdfout ________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_handout_pdfout>
+
+    def test_handout_pdfout(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_lyx(program = 'gslab_make/tests/input/lyx_test_file.lyx', doctype = 'handout', pdfout = '../output')
+E           TypeError: run_lyx() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_lyx.py:111: TypeError
+_______________________ testRunLyx.test_independent_log ________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        independent_log = {'makelog' : '../log/lyx.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_lyx(program = 'gslab_make/tests/input/lyx_test_file.lyx', log = independent_log)
+E           TypeError: run_lyx() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_lyx.py:42: TypeError
+____________________________ testRunLyx.test_option ____________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_option>
+
+    def test_option(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_lyx(program = 'gslab_make/tests/input/lyx_test_file.lyx', option = '-e pdf')
+E           TypeError: run_lyx() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_lyx.py:82: TypeError
+____________________________ testRunLyx.test_pdfout ____________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_pdfout>
+
+    def test_pdfout(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_lyx(program = 'gslab_make/tests/input/lyx_test_file.lyx', pdfout = '../log')
+E           TypeError: run_lyx() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_lyx.py:91: TypeError
+____________________ testRunMathematica.test_bad_executable ____________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_bad_executable>
+
+    def test_bad_executable(self):
+        with nostderrout():
+>           run_mathematica(program = 'gslab_make/tests/input/mathematica_test_script.m', executable = 'nonexistent_mathematica_executable')
+E           TypeError: run_mathematica() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_mathematica.py:52: TypeError
+______________________ testRunMathematica.test_custom_log ______________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_custom_log>
+
+    def test_custom_log(self):
+        os.remove('../log/make.log')
+        makelog_file = {'makelog' : '../log/custom_make.log'}
+        with nostderrout():
+            start_makelog(makelog_file)
+>           run_mathematica(program = 'gslab_make/tests/input/mathematica_test_script.m', makelog = makelog_file)
+E           TypeError: run_mathematica() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_mathematica.py:32: TypeError
+_____________________ testRunMathematica.test_default_log ______________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_default_log>
+
+    def test_default_log(self):
+        with nostderrout():
+>           run_mathematica(program = 'gslab_make/tests/input/mathematica_test_script.m')
+E           TypeError: run_mathematica() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_mathematica.py:23: TypeError
+______________________ testRunMathematica.test_executable ______________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_executable>
+
+    def test_executable(self):
+        with nostderrout():
+>           run_mathematica(program = 'gslab_make/tests/input/mathematica_test_script.m', executable = metadata.default_executables[os.name]['math'])
+E           TypeError: run_mathematica() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_mathematica.py:46: TypeError
+___________________ testRunMathematica.test_independent_log ____________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        with nostderrout():
+>           run_mathematica(program = 'gslab_make/tests/input/mathematica_test_script.m', log = '../log/mathematica.log')
+E           TypeError: run_mathematica() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_mathematica.py:38: TypeError
+________________________ testRunMathematica.test_option ________________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_option>
+
+    def test_option(self):
+        with nostderrout():
+>           run_mathematica(program = 'gslab_make/tests/input/mathematica_test_script.m', option = '-initfile gslab_make/tests/input/mathematica_init_script.m')
+E           TypeError: run_mathematica() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_mathematica.py:62: TypeError
+______________________ testRunMatlab.test_bad_executable _______________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_bad_executable>
+
+    def test_bad_executable(self):
+        with nostderrout():
+>           run_matlab(program = 'gslab_make/tests/input/matlab_test_script.m', executable = 'nonexistent_matlab_executable')
+E           TypeError: run_matlab() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_matlab.py:50: TypeError
+________________________ testRunMatlab.test_custom_log _________________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_custom_log>
+
+    def test_custom_log(self):
+        os.remove('../log/make.log')
+        makelog_file = {'makelog' : '../log/custom_make.log'}
+        with nostderrout():
+            start_makelog(makelog_file)
+>           run_matlab(program = 'gslab_make/tests/input/matlab_test_script.m', makelog = makelog_file)
+E           TypeError: run_matlab() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_matlab.py:30: TypeError
+________________________ testRunMatlab.test_default_log ________________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_default_log>
+
+    def test_default_log(self):
+>       run_matlab(program = 'gslab_make/tests/input/matlab_test_script.m')
+E       TypeError: run_matlab() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_matlab.py:21: TypeError
+________________________ testRunMatlab.test_executable _________________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_executable>
+
+    def test_executable(self):
+        with nostderrout():
+>           run_matlab(program = 'gslab_make/tests/input/matlab_test_script.m', executable = metadata.default_executables[os.name]['matlab'])
+E           TypeError: run_matlab() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_matlab.py:44: TypeError
+______________________ testRunMatlab.test_independent_log ______________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        with nostderrout():
+>           run_matlab(program = 'gslab_make/tests/input/matlab_test_script.m', log = '../log/matlab.log')
+E           TypeError: run_matlab() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_matlab.py:36: TypeError
+__________________________ testRunMatlab.test_option ___________________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_option>
+
+    def test_option(self):
+        with nostderrout():
+>           run_matlab(program = 'gslab_make/tests/input/matlab_test_script.m', option = '-h')
+E           TypeError: run_matlab() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_matlab.py:60: TypeError
+___________________________ testRunMatlab.test_wait ____________________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_wait>
+
+    def test_wait(self):
+        with nostderrout():
+>           run_matlab(program = 'gslab_make/tests/input/matlab_test_script_wait1.m')
+E           TypeError: run_matlab() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_matlab.py:69: TypeError
+_______________________ testRunPerl.test_bad_executable ________________________
+
+self = <gslab_make.tests.test_run_perl.testRunPerl testMethod=test_bad_executable>
+
+    def test_bad_executable(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+        with self.assertRaises(CritError):
+>           run_perl(program = 'gslab_make/tests/input/perl_test_script.pl', executable = 'nonexistent_perl_executable')
+E           TypeError: run_perl() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_perl.py:57: TypeError
+_________________________ testRunPerl.test_custom_log __________________________
+
+self = <gslab_make.tests.test_run_perl.testRunPerl testMethod=test_custom_log>
+
+    def test_custom_log(self):
+        makelog_file = {'makelog' : '../log/custom_make.log'}
+        with nostderrout():
+            start_makelog(makelog_file)
+>           run_perl(program = 'gslab_make/tests/input/perl_test_script.pl', makelog = makelog_file)
+E           TypeError: run_perl() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_perl.py:30: TypeError
+_________________________ testRunPerl.test_default_log _________________________
+
+self = <gslab_make.tests.test_run_perl.testRunPerl testMethod=test_default_log>
+
+    def test_default_log(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_perl(program = 'gslab_make/tests/input/perl_test_script.pl')
+E           TypeError: run_perl() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_perl.py:22: TypeError
+_________________________ testRunPerl.test_executable __________________________
+
+self = <gslab_make.tests.test_run_perl.testRunPerl testMethod=test_executable>
+
+    def test_executable(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_perl(program = 'gslab_make/tests/input/perl_test_script.pl', executable = metadata.default_executables[os.name]['perl'])
+E           TypeError: run_perl() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_perl.py:48: TypeError
+_______________________ testRunPerl.test_independent_log _______________________
+
+self = <gslab_make.tests.test_run_perl.testRunPerl testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        independent_log = {'makelog' : '../log/perl.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_perl(program = 'gslab_make/tests/input/perl_test_script.pl', log = independent_log)
+E           TypeError: run_perl() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_perl.py:39: TypeError
+_________________________ testRunPerl.test_no_program __________________________
+
+self = <gslab_make.tests.test_run_perl.testRunPerl testMethod=test_no_program>
+
+    def test_no_program(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+        with self.assertRaises(Exception):
+            run_perl(program = 'gslab_make/tests/input/nonexistent_perl_script.pl')
+>       self.assertNotIn('Test script complete', open(default_makelog).read())
+E       TypeError: coercing to Unicode: need string or buffer, dict found
+
+gslab_make/tests/test_run_perl.py:66: TypeError
+______________________ testRunPython.test_bad_executable _______________________
+
+self = <gslab_make.tests.test_run_python.testRunPython testMethod=test_bad_executable>
+
+    def test_bad_executable(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+        with self.assertRaises(CritError):
+>           run_python(program = 'gslab_make/tests/input/python_test_script.py', executable = 'nonexistent_python_executable')
+E           TypeError: run_python() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_python.py:57: TypeError
+________________________ testRunPython.test_custom_log _________________________
+
+self = <gslab_make.tests.test_run_python.testRunPython testMethod=test_custom_log>
+
+    def test_custom_log(self):
+        makelog_file = {'makelog' : '../log/custom_make.log'}
+        with nostderrout():
+            start_makelog(makelog_file)
+>           run_python(program = 'gslab_make/tests/input/python_test_script.py', makelog = makelog_file)
+E           TypeError: run_python() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_python.py:30: TypeError
+________________________ testRunPython.test_default_log ________________________
+
+self = <gslab_make.tests.test_run_python.testRunPython testMethod=test_default_log>
+
+    def test_default_log(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_python(program = 'gslab_make/tests/input/python_test_script.py')
+E           TypeError: run_python() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_python.py:22: TypeError
+________________________ testRunPython.test_executable _________________________
+
+self = <gslab_make.tests.test_run_python.testRunPython testMethod=test_executable>
+
+    def test_executable(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_python(program = 'gslab_make/tests/input/python_test_script.py', executable = metadata.default_executables[os.name]['python'])
+E           TypeError: run_python() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_python.py:48: TypeError
+______________________ testRunPython.test_independent_log ______________________
+
+self = <gslab_make.tests.test_run_python.testRunPython testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        independent_log = {'makelog': '../log/python.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+>           run_python(program = 'gslab_make/tests/input/python_test_script.py', log = independent_log)
+E           TypeError: run_python() takes exactly 1 argument (0 given)
+
+gslab_make/tests/test_run_python.py:39: TypeError
+________________________ testRunPython.test_no_program _________________________
+
+self = <gslab_make.tests.test_run_python.testRunPython testMethod=test_no_program>
+
+    def test_no_program(self):
+        default_makelog = {'makelog' : '../log/make.log'}
+        with nostderrout():
+            start_makelog(default_makelog)
+        with self.assertRaises(Exception):
+            run_python(program = 'gslab_make/tests/input/nonexistent_python_script.py')
+>       self.assertNotIn('Test script complete', open(default_makelog).read())
+E       TypeError: coercing to Unicode: need string or buffer, dict found
+
+gslab_make/tests/test_run_python.py:66: TypeError
+_________________________ testRunR.test_bad_executable _________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_bad_executable>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+___________________________ testRunR.test_custom_log ___________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_custom_log>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+__________________________ testRunR.test_default_log ___________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_default_log>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+______________________ testRunR.test_default_log_install _______________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_default_log_install>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+___________________________ testRunR.test_executable ___________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_executable>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+________________________ testRunR.test_independent_log _________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_independent_log>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+___________________________ testRunR.test_no_package ___________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_no_package>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+___________________________ testRunR.test_no_program ___________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_no_program>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+_____________________________ testRunR.test_option _____________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_option>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+_________________________ testRunR.test_option_install _________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_option_install>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+____________________________ testRunR.test_r_error _____________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_r_error>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+__________________________ testRunR.test_specify_lib ___________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_specify_lib>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+___________________________ testRunR.test_two_option ___________________________
+
+self = <gslab_make.tests.test_run_r.testRunR testMethod=test_two_option>
+
+    def setUp(self):
+        makelog_file = '../log/make.log'
+        log_dir = '../log/'
+        output_dir = '../output/'
+        with nostderrout():
+            clear_dir([output_dir, log_dir])
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_r.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/make.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+_______________________ testRunStata.test_bad_executable _______________________
+
+self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_bad_executable>
+
+    def test_bad_executable(self):
+>       default_makelog = metadata.settings['makelog']
+E       AttributeError: 'module' object has no attribute 'settings'
+
+gslab_make/tests/test_run_stata.py:50: AttributeError
+_________________________ testRunStata.test_custom_log _________________________
+
+self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_custom_log>
+
+    def test_custom_log(self):
+        makelog_file = '../log/custom.log'
+        with nostderrout():
+>           start_makelog(makelog_file)
+
+gslab_make/tests/test_run_stata.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = '../log/custom.log'
+
+    def start_makelog(paths):
+        """ Start make log. Record start time.
+    
+        Notes
+        -----
+        The make log start condition is needed by other functions to confirm a
+        make log exists.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+    
+        Returns
+        -------
+        None
+        """
+    
+>       makelog = paths['makelog']
+E       TypeError: string indices must be integers, not unicode
+
+gslab_make/write_logs.py:37: TypeError
+________________________ testRunStata.test_default_log _________________________
+
+self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_default_log>
+
+    def test_default_log(self):
+>       default_makelog = metadata.settings['makelog']
+E       AttributeError: 'module' object has no attribute 'settings'
+
+gslab_make/tests/test_run_stata.py:19: AttributeError
+_________________________ testRunStata.test_executable _________________________
+
+self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_executable>
+
+    def test_executable(self):
+>       default_makelog = metadata.settings['makelog']
+E       AttributeError: 'module' object has no attribute 'settings'
+
+gslab_make/tests/test_run_stata.py:43: AttributeError
+______________________ testRunStata.test_independent_log _______________________
+
+self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_independent_log>
+
+    def test_independent_log(self):
+>       default_makelog = metadata.settings['makelog']
+E       AttributeError: 'module' object has no attribute 'settings'
+
+gslab_make/tests/test_run_stata.py:33: AttributeError
+_________________________ testRunStata.test_no_program _________________________
+
+self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_no_program>
+
+    def test_no_program(self):
+>       default_makelog = metadata.settings['makelog']
+E       AttributeError: 'module' object has no attribute 'settings'
+
+gslab_make/tests/test_run_stata.py:58: AttributeError
+==================== 56 failed, 24 passed in 17.77 seconds =====================
+Name                                       Stmts   Miss Branch BrPart  Cover   Missing
+--------------------------------------------------------------------------------------
+gslab_make/create_links.py                    20     12      0      0    40%   36-50
+gslab_make/dir_mod.py                         46      4     20      2    88%   25-26, 73, 79, 70->73, 78->79
+gslab_make/private/exceptionclasses.py         4      0      0      0   100%
+gslab_make/private/linkdirective.py          107     79     34      0    20%   47-53, 63-64, 74-82, 92-100, 110-118, 139-146, 167-171, 181-186, 196-198, 207-214, 242-246, 256-264, 274-275, 285-291, 302-306
+gslab_make/private/messages.py                20      0      0      0   100%
+gslab_make/private/metadata.py                 7      0      0      0   100%
+gslab_make/private/programdirective.py       102     75     30      0    20%   47-52, 62-63, 72-73, 89-107, 118-126, 176-185, 195-198, 208-212, 222-223, 233-234, 252-267, 289-290, 317-320, 330-332
+gslab_make/private/utility.py                 36     20      6      0    38%   45-62, 79-82, 99-102
+gslab_make/run_program.py                    179    158     34      0    10%   50-69, 104-122, 157-172, 207-222, 257-272, 307-322, 362-410, 445-460, 497-517, 545-559
+gslab_make/tablefill.py                      141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
+gslab_make/tablefill_info.py                   0      0      0      0   100%
+gslab_make/tests/nostderrout.py               12      0      2      0   100%
+gslab_make/tests/test_clear_dir.py            41      2      8      1    94%   55-56, 54->55
+gslab_make/tests/test_execute_command.py      53     13     12      6    71%   27, 30-31, 39, 42-43, 52, 55-57, 63, 66-67, 24->27, 36->39, 49->52, 60->62, 62->63, 65->66
+gslab_make/tests/test_remove_path.py          56      3      6      2    92%   63, 68-69, 62->63, 67->68
+gslab_make/tests/test_run_lyx.py             109     36      8      4    66%   24-26, 33-35, 43-49, 56-58, 66-68, 83-85, 92-95, 102-105, 112-115, 126-127, 118->120, 120->122, 122->exit, 125->126
+gslab_make/tests/test_run_mathematica.py      63     16     10      5    71%   24-25, 33-34, 39-42, 47-48, 53, 63, 71, 73, 76-77, 66->68, 68->70, 70->71, 72->73, 75->76
+gslab_make/tests/test_run_matlab.py           72     24      8      3    64%   22-23, 31-32, 37-40, 45-46, 51, 61-65, 70-73, 76-78, 87-88, 81->83, 83->exit, 86->87
+gslab_make/tests/test_run_perl.py             65     13      8      4    77%   23-24, 31-32, 40-42, 49-50, 58, 74, 77-78, 69->71, 71->73, 73->74, 76->77
+gslab_make/tests/test_run_python.py           65     13      8      4    77%   23-24, 31-32, 40-42, 49-50, 58, 74, 77-78, 69->71, 71->73, 73->74, 76->77
+gslab_make/tests/test_run_r.py               111     83     12      1    24%   21-26, 29-31, 34-41, 44-49, 52-55, 58-60, 63-68, 71-74, 77-83, 86-92, 95-101, 104-106, 109-115, 118-127, 130-131, 129->130
+gslab_make/tests/test_run_stata.py            62     30      8      4    51%   20-23, 29-30, 34-40, 44-47, 51-55, 59-63, 71, 74-75, 66->68, 68->70, 70->71, 73->74
+gslab_make/tests/test_tablefill.py            96      2     42      6    94%   143-144, 20->exit, 37->34, 57->43, 74->exit, 138->exit, 142->143
+gslab_make/tests/test_textfill.py             83      2     12      3    95%   138-139, 17->exit, 133->exit, 137->138
+gslab_make/tests/test_zip.py                  35      2      4      2    90%   45-46, 41->exit, 44->45
+gslab_make/textfill.py                       135      2     60      5    96%   44, 170, 32->35, 35->37, 43->44, 100->exit, 169->170
+gslab_make/textfill_info.py                    0      0      0      0   100%
+gslab_make/write_link_logs.py                 29     22      2      0    23%   51-70, 87-93
+gslab_make/write_logs.py                      83     56     22      1    27%   69-84, 105-114, 151-166, 191-201, 221-240, 40->exit
+--------------------------------------------------------------------------------------
+TOTAL                                       1832    672    424     63    61%
