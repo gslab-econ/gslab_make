@@ -19,16 +19,16 @@ class testRunPython(unittest.TestCase):
     	default_makelog = {'makelog' : '../log/make.log'}
         with nostderrout():
             start_makelog(default_makelog)
-            run_python(program = 'gslab_make/tests/input/python_test_script.py')
-        self.assertIn('Test script complete', open(default_makelog).read())
+            run_python(default_makelog, program = 'gslab_make/tests/input/python_test_script.py')
+        self.assertIn('Test script complete', open(default_makelog['makelog']).read())
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_custom_log(self):
         makelog_file = {'makelog' : '../log/custom_make.log'}
         with nostderrout():
             start_makelog(makelog_file)
-            run_python(program = 'gslab_make/tests/input/python_test_script.py', makelog = makelog_file)
-        self.assertIn('Test script complete', open(makelog_file).read())
+            run_python(makelog_file, program = 'gslab_make/tests/input/python_test_script.py')
+        self.assertIn('Test script complete', open(makelog_file['makelog']).read())
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_independent_log(self):
@@ -36,17 +36,17 @@ class testRunPython(unittest.TestCase):
     	independent_log = {'makelog': '../log/python.log'}
         with nostderrout():
             start_makelog(default_makelog)
-            run_python(program = 'gslab_make/tests/input/python_test_script.py', log = independent_log)
-        self.assertIn('Test script complete', open(default_makelog).read())
-        self.assertIn('Test script complete', open(independent_log).read())        
+            run_python(independent_log, program = 'gslab_make/tests/input/python_test_script.py')
+        self.assertIn('Test script complete', open(default_makelog['makelog']).read())
+        self.assertIn('Test script complete', open(independent_log['makelog']).read())        
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_executable(self):
     	default_makelog = {'makelog' : '../log/make.log'}
         with nostderrout():
             start_makelog(default_makelog)
-            run_python(program = 'gslab_make/tests/input/python_test_script.py', executable = metadata.default_executables[os.name]['python']) 
-        self.assertIn('Test script complete', open(default_makelog).read())
+            run_python(default_makelog, program = 'gslab_make/tests/input/python_test_script.py', executable = metadata.default_executables[os.name]['python']) 
+        self.assertIn('Test script complete', open(default_makelog['makelog']).read())
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_bad_executable(self):
@@ -54,16 +54,16 @@ class testRunPython(unittest.TestCase):
         with nostderrout():
             start_makelog(default_makelog)
         with self.assertRaises(CritError):
-            run_python(program = 'gslab_make/tests/input/python_test_script.py', executable = 'nonexistent_python_executable')
-        self.assertNotIn('Test script complete', open(default_makelog).read())
+            run_python(default_makelog, program = 'gslab_make/tests/input/python_test_script.py', executable = 'nonexistent_python_executable')
+        self.assertNotIn('Test script complete', open(default_makelog['makelog']).read())
 
     def test_no_program(self):
     	default_makelog = {'makelog' : '../log/make.log'}
         with nostderrout():
             start_makelog(default_makelog)
         with self.assertRaises(Exception):
-            run_python(program = 'gslab_make/tests/input/nonexistent_python_script.py')
-        self.assertNotIn('Test script complete', open(default_makelog).read())
+            run_python(default_makelog, program = 'gslab_make/tests/input/nonexistent_python_script.py')
+        self.assertNotIn('Test script complete', open(default_makelog['makelog']).read())
     
     def tearDown(self):
         if os.path.isdir('../output/'):

@@ -26,8 +26,8 @@ class testExecuteCommand(unittest.TestCase):
         else:
             our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'
         with nostderrout():
-            execute_command(makelog = default_makelog, command = our_unzip) 
-        self.assertIn('test_data.txt', open(default_makelog).read())
+            execute_command(default_makelog, our_unzip) 
+        self.assertIn('test_data.txt', open(default_makelog['makelog']).read())
         self.assertTrue(os.path.isfile('test_data.txt'))
         
     def test_custom_log(self):
@@ -38,8 +38,8 @@ class testExecuteCommand(unittest.TestCase):
         else:
             our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'
         with nostderrout():
-            execute_command(makelog = makelog_file, command = our_unzip)
-        self.assertIn('test_data.txt', open(makelog_file).read())
+            execute_command(makelog_file, our_unzip)
+        self.assertIn('test_data.txt', open(makelog_file['makelog']).read())
         self.assertTrue(os.path.isfile('test_data.txt'))
         
     def test_independent_log(self):
@@ -51,9 +51,9 @@ class testExecuteCommand(unittest.TestCase):
         else:
             our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'     
         with nostderrout():
-            execute_command(log = independent_log, command = our_unzip)
-        self.assertIn('test_data.txt', open(default_makelog).read())
-        self.assertIn('test_data.txt', open(independent_log).read())
+            execute_command(independent_log, our_unzip)
+        self.assertIn('test_data.txt', open(default_makelog['makelog']).read())
+        self.assertIn('test_data.txt', open(independent_log['makelog']).read())
         self.assertTrue(os.path.isfile('test_data.txt'))
    
     def tearDown(self):
