@@ -48,11 +48,9 @@ def run_stata(paths, **kwargs):
     """
 
     makelog = paths['makelog']
-    program = kwargs['program']
-    del kwargs['program']
 
     try:
-        direct = ProgramDirective('stata', program, **kwargs)
+        direct = ProgramDirective(application='stata', makelog=makelog, **kwargs)
 
         # Get program output
         program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
@@ -104,11 +102,9 @@ def run_matlab(paths, **kwargs):
     """
   
     makelog = paths['makelog']
-    program = kwargs['program']
-    del kwargs['program']
 
     try:
-        direct = ProgramDirective('matlab', program, **kwargs)
+        direct = ProgramDirective(application='matlab', makelog=makelog, **kwargs)
         
         # Get program output
         program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
@@ -159,11 +155,9 @@ def run_perl(paths, **kwargs):
     """
     
     makelog = paths['makelog']
-    program = kwargs['program']
-    del kwargs['program']
 
     try:
-        direct = ProgramDirective('perl', program, **kwargs)
+        direct = ProgramDirective(application='perl', makelog=makelog, **kwargs)
         
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
@@ -211,11 +205,9 @@ def run_python(paths, **kwargs):
     """
     
     makelog = paths['makelog']
-    program = kwargs['program']
-    del kwargs['program']
 
     try:
-        direct = ProgramDirective('python', program, **kwargs)
+        direct = ProgramDirective(application='python', makelog=makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
@@ -263,11 +255,9 @@ def run_mathematica(paths, **kwargs):
     """
     
     makelog = paths['makelog']
-    program = kwargs['program']
-    del kwargs['program']
 
     try:
-        direct = ProgramDirective('math', program **kwargs)
+        direct = ProgramDirective(application='math', makelog=makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program, direct.option)
@@ -315,11 +305,9 @@ def run_stat_transfer(paths, **kwargs):
     """
     
     makelog = paths['makelog']
-    program = kwargs['program']
-    del kwargs['program']
 
     try:
-        direct = ProgramDirective('st', program **kwargs)
+        direct = ProgramDirective(application='st', makelog=makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program)
@@ -455,11 +443,9 @@ def run_r(paths, **kwargs):
     """
     
     makelog = paths['makelog']
-    program = kwargs['program']
-    del kwargs['program']
 
     try:
-        direct = ProgramDirective('r', program, **kwargs)
+        direct = ProgramDirective(application = 'r', makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)

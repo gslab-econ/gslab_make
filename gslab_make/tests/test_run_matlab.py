@@ -35,6 +35,7 @@
 #     def test_independent_log(self):
 #         makelog_file = {'makelog' : '../log/matlab.log'}
 #         with nostderrout():
+#             start_makelog(makelog_file)
 #             run_matlab(makelog_file, program = 'gslab_make/tests/input/matlab_test_script.m')
 #         self.assert_proper_output('../log/make.log')
 #         self.assertTrue(os.path.isfile('../log/matlab.log'))

@@ -45,14 +45,13 @@ class testExecuteCommand(unittest.TestCase):
     def test_independent_log(self):
     	default_makelog = {'makelog' : '../log/make.log'}
     	independent_log = {'makelog' : '../log/command.log'}
-    	start_makelog(default_makelog)
+    	start_makelog(independent_log)
         if os.name=='posix':
             our_unzip = 'unzip gslab_make/tests/input/zip_test_file.zip'
         else:
             our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'     
         with nostderrout():
             execute_command(independent_log, our_unzip)
-        self.assertIn('test_data.txt', open(default_makelog['makelog']).read())
         self.assertIn('test_data.txt', open(independent_log['makelog']).read())
         self.assertTrue(os.path.isfile('test_data.txt'))
    

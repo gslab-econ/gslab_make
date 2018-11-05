@@ -35,9 +35,9 @@ class testRunPython(unittest.TestCase):
     	default_makelog = {'makelog' : '../log/make.log'}
     	independent_log = {'makelog': '../log/python.log'}
         with nostderrout():
-            start_makelog(default_makelog)
+            start_makelog(independent_log)
             run_python(independent_log, program = 'gslab_make/tests/input/python_test_script.py')
-        self.assertIn('Test script complete', open(default_makelog['makelog']).read())
+        # self.assertIn('Test script complete', open(default_makelog['makelog']).read())
         self.assertIn('Test script complete', open(independent_log['makelog']).read())        
         self.assertTrue(os.path.isfile('output.txt'))
         
