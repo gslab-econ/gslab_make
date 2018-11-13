@@ -13,46 +13,20 @@ class testExecuteCommand(unittest.TestCase):
     def setUp(self):
     	self.assertIn(os.name, ['posix', 'nt'])
     	self.assertFalse(os.path.isfile('test_data.txt'))
-        # default_makelog = metadata.settings['makelog']
         with nostderrout():
             clear_dir(['../log/'])  
 
-    def test_default_log(self):
-    	default_makelog = {'makelog' : '../log/make.log'}
-    	start_makelog(default_makelog)
+    def test_log(self):
+    	makelog = {'makelog' : '../log/make.log'}
+    	start_makelog(makelog)
         self.assertFalse(os.path.isfile('test_data.txt'))
         if os.name=='posix':
             our_unzip = 'unzip gslab_make/tests/input/zip_test_file.zip'
         else:
             our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'
         with nostderrout():
-            execute_command(default_makelog, our_unzip) 
-        self.assertIn('test_data.txt', open(default_makelog['makelog']).read())
-        self.assertTrue(os.path.isfile('test_data.txt'))
-        
-    def test_custom_log(self):
-        makelog_file = {'makelog' : '../log/custom_make.log'}
-        start_makelog(makelog_file)
-        if os.name=='posix':
-            our_unzip = 'unzip gslab_make/tests/input/zip_test_file.zip'
-        else:
-            our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'
-        with nostderrout():
-            execute_command(makelog_file, our_unzip)
-        self.assertIn('test_data.txt', open(makelog_file['makelog']).read())
-        self.assertTrue(os.path.isfile('test_data.txt'))
-        
-    def test_independent_log(self):
-    	default_makelog = {'makelog' : '../log/make.log'}
-    	independent_log = {'makelog' : '../log/command.log'}
-    	start_makelog(independent_log)
-        if os.name=='posix':
-            our_unzip = 'unzip gslab_make/tests/input/zip_test_file.zip'
-        else:
-            our_unzip = 'wzunzip gslab_make/tests/input/zip_test_file.zip'     
-        with nostderrout():
-            execute_command(independent_log, our_unzip)
-        self.assertIn('test_data.txt', open(independent_log['makelog']).read())
+            execute_command(makelog, our_unzip) 
+        self.assertIn('test_data.txt', open(makelog['makelog']).read())
         self.assertTrue(os.path.isfile('test_data.txt'))
    
     def tearDown(self):

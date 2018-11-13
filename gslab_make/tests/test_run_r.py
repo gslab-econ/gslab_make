@@ -10,121 +10,66 @@ from nostderrout import nostderrout
 class testRunR(unittest.TestCase):
 
     def setUp(self):
-        makelog_file = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : '../log/make.log'}
         log_dir = '../log/'
         output_dir = '../output/'
         with nostderrout():
             clear_dir([output_dir, log_dir])
-            start_makelog(makelog_file)
+            start_makelog(makelog)
 
-    def test_default_log(self):
-        makelog_file = {'makelog' : '../log/make.log'}
+    def test_log(self):
+        makelog = {'makelog' : '../log/make.log'}
         with nostderrout():
-            run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R')      
+            run_r(makelog, program = 'gslab_make/tests/input/R_test_script.R')      
         logfile_data = open('../log/make.log', 'rU').read()
         self.assertIn('Test script complete', logfile_data)
-        self.assertNotIn('> proc.time()', logfile_data) # unsure if should be In or NotIn?
-        self.assertTrue(os.path.isfile('output.txt'))
-
-    # def test_default_log_install(self):
-    #     makelog_file = {'makelog' : '../log/make.log'}
-    #     with nostderrout():
-    #         run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R', package = 'gslab_make/tests/input/rinstall_test_package/Ecdat_0.1-6.1.tar.gz')
-    #     self.assertIn('* DONE (Ecdat)', open('../log/make.log', 'rU').read()) 
-        
-    def test_custom_log(self):
-        os.remove('../log/make.log')
-        makelog_file = {'makelog' : '../log/custom_make.log'}
-        output_dir = '../output/'
-        with nostderrout():
-            start_makelog(makelog_file)
-            run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R')
-        self.assertIn('Test script complete', open(makelog_file['makelog'], 'rU').read())
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_independent_log(self):
-        default_makelog = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : '../log/make.log'}
         independent_log = {'makelog' : '../log/R.log'}
         with nostderrout():
+            start_makelog(makelog)
             start_makelog(independent_log)
-            run_r(independent_log, program = 'gslab_make/tests/input/R_test_script.R')
-        # self.assertIn('Test script complete', open('../log/make.log', 'rU').read())
+            run_r(makelog, program = 'gslab_make/tests/input/R_test_script.R', log=independent_log['makelog'])
+        self.assertIn('Test script complete', open(makelog['makelog'], 'rU').read())
         self.assertTrue(os.path.isfile('../log/R.log'))
-        self.assertIn('Test script complete', open('../log/R.log', 'rU').read())
+        self.assertIn('Test script complete', open(independent_log['makelog'], 'rU').read())
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_executable(self):
-        makelog_file = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : '../log/make.log'}
         with nostderrout():
-            run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R', executable = 'R CMD BATCH') 
+            run_r(makelog, program = 'gslab_make/tests/input/R_test_script.R', executable = 'R CMD BATCH') 
         self.assertNotIn('Test script complete', open('../log/make.log', 'rU').read()) # check this
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_bad_executable(self):
-        makelog_file = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : '../log/make.log'}
         with self.assertRaises(Exception):
-            run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R', executable = 'nonexistent_R_executable')
+            run_r(makelog, program = 'gslab_make/tests/input/R_test_script.R', executable = 'nonexistent_R_executable')
         self.assertNotIn('Test script complete', open('../log/make.log', 'rU').read()) # check this
    
     def test_no_program(self):
-        makelog_file = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : '../log/make.log'}
     	with self.assertRaises(Exception):
-             run_r(makelog_file, program = 'gslab_make/tests/input/nonexistent_R_script.R')
+             run_r(makelog, program = 'gslab_make/tests/input/nonexistent_R_script.R')
         logfile_data = open('../log/make.log', 'rU').readlines()
-        self.assertNotIn('Test script complete', open('../log/make.log', 'rU').read()) # check this
-
-    # def test_no_package(self):
-    #     makelog_file = {'makelog' : '../log/make.log'}
-    #     with nostderrout():
-    #         run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R', package = 'nonexistent_R_package')
-    #     logfile_data = open('../log/make.log', 'rU').readlines()
-    #     self.assertIn('* DONE (Ecdat)', open('../log/make.log', 'rU').read()) 
+        self.assertNotIn('Test script complete', open('../log/make.log', 'rU').read())
     
     def test_option(self):
-        makelog_file = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : '../log/make.log'}
         with nostderrout():
-            run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R', option = '--no-timing')
+            run_r(makelog, program = 'gslab_make/tests/input/R_test_script.R', option = '--slave')
         logfile_data = open('../log/make.log', 'rU').read()
-        self.assertIn('Test script complete', logfile_data)
-        #self.assertIn('R version', logfile_data)        
-        self.assertNotIn('> proc.time()', logfile_data)
+        self.assertIn('Test script complete', logfile_data)      
         self.assertTrue(os.path.isfile('output.txt'))
-        
-    def test_two_option(self):
-        makelog_file = {'makelog' : '../log/make.log'}
-        with nostderrout():
-            run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R', option = '--no-timing --slave')
-        logfile_data = open('../log/make.log', 'rU').read()
-        self.assertIn('Test script complete', logfile_data)
-        self.assertNotIn('R version', logfile_data)        
-        self.assertNotIn('> proc.time()', logfile_data)
-        self.assertTrue(os.path.isfile('output.txt'))   
-
-    # def test_option_install(self):
-    #     makelog_file = {'makelog' : '../log/make.log'}
-    #     self.assertFalse(os.path.isdir('../output/Ecdat/'))
-    #     self.assertFalse(os.path.isfile('../output/Ecdat/INDEX'))       
-    #     with nostderrout():
-    #         run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R', package = 'gslab_make/tests/input/rinstall_test_package/Ecdat_0.1-6.1.tar.gz', option = '--no-data')
-    #     self.assertTrue(os.path.isdir('../output/Ecdat/'))
-    #     self.assertTrue(os.path.isfile('../output/Ecdat/INDEX'))   
-    #     self.assertFalse(os.path.isdir('../output/Ecdat/data/'))     
     
     def test_r_error(self):
-        makelog_file = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : '../log/make.log'}
         with self.assertRaises(Exception):
-            run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script_error.R')
+            run_r(makelog, program = 'gslab_make/tests/input/R_test_script_error.R')
         self.assertIn('executed with errors', open('../log/make.log', 'rU').read())
-
-    # def test_specify_lib(self):
-    #     makelog_file = {'makelog' : '../log/make.log'}
-    #     self.assertFalse(os.path.isdir('../output/Ecdat/'))
-    #     self.assertFalse(os.path.isfile('../output/Ecdat/INDEX'))       
-    #     with nostderrout():
-    #         run_r(makelog_file, program = 'gslab_make/tests/input/R_test_script.R', package = 'gslab_make/tests/input/rinstall_test_package/Ecdat_0.1-6.1.tar.gz')
-    #     self.assertIn('* DONE (Ecdat)', open('../log/make.log', 'rU').read())
-    #     self.assertTrue(os.path.isdir('../output/Ecdat/'))
-    #     self.assertTrue(os.path.isfile('../output/Ecdat/INDEX'))    
         
     def tearDown(self):
         if os.path.isdir('../output/'):
