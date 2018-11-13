@@ -10,20 +10,409 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.13, pytest-3.2.1, py-1.4.34, pluggy-0.4.0
 rootdir: /Users/danielagonzalez/gslab_make, inifile:
-collected 45 items
+collected 53 items
 
 gslab_make/tests/test_clear_dir.py ...
 gslab_make/tests/test_execute_command.py .
 gslab_make/tests/test_remove_path.py ....
+gslab_make/tests/test_run_lyx.py .FFFFF.FF
 gslab_make/tests/test_run_perl.py .....
-gslab_make/tests/test_run_python.py ......
+gslab_make/tests/test_run_python.py .....
 gslab_make/tests/test_run_r.py .......
 gslab_make/tests/test_run_stata.py .....
 gslab_make/tests/test_tablefill.py ....
 gslab_make/tests/test_textfill.py ........
 gslab_make/tests/test_zip.py ..
 
-========================== 45 passed in 10.28 seconds ==========================
+=================================== FAILURES ===================================
+___________________________ testRunLyx.test_comments ___________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_comments>
+
+    def test_comments(self):
+        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', doctype = 'comments')
+
+gslab_make/tests/test_run_lyx.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:390: in run_lyx
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10ba51710>
+command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_comments.lyx'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_comments.lyx` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+_________________________ testRunLyx.test_default_log __________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_default_log>
+
+    def test_default_log(self):
+        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx')
+
+gslab_make/tests/test_run_lyx.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:390: in run_lyx
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10bb70950>
+command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+__________________________ testRunLyx.test_executable __________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_executable>
+
+    def test_executable(self):
+        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', executable = metadata.default_executables[os.name]['lyx'])
+
+gslab_make/tests/test_run_lyx.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:390: in run_lyx
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10bb70f90>
+command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+________________________ testRunLyx.test_handout_pdfout ________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_handout_pdfout>
+
+    def test_handout_pdfout(self):
+        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', doctype = 'handout')
+
+gslab_make/tests/test_run_lyx.py:102: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:390: in run_lyx
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10bbb8c10>
+command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_handout.lyx'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_handout.lyx` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+_______________________ testRunLyx.test_independent_log ________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        independent_log = {'makelog' : '../log/lyx.log', 'pdf_dir' : '../output'}
+        with nostderrout():
+            start_makelog(makelog)
+            start_makelog(independent_log)
+>           run_lyx(independent_log, program = 'gslab_make/tests/input/lyx_test_file.lyx', log=independent_log['makelog'])
+
+gslab_make/tests/test_run_lyx.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:390: in run_lyx
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10bbc08d0>
+command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+____________________________ testRunLyx.test_option ____________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_option>
+
+    def test_option(self):
+        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', option = '-e pdf')
+
+gslab_make/tests/test_run_lyx.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:390: in run_lyx
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10bba60d0>
+command = 'lyx -e pdf /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `lyx -e pdf /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+____________________________ testRunLyx.test_pdfout ____________________________
+
+self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_pdfout>
+
+    def test_pdfout(self):
+        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../log'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx')
+
+gslab_make/tests/test_run_lyx.py:82: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:390: in run_lyx
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10bbe1890>
+command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+===================== 7 failed, 46 passed in 12.33 seconds =====================
 Name                                       Stmts   Miss Branch BrPart  Cover   Missing
 --------------------------------------------------------------------------------------
 gslab_make/create_links.py                    20     12      0      0    40%   36-50
@@ -32,20 +421,20 @@ gslab_make/private/exceptionclasses.py         4      0      0      0   100%
 gslab_make/private/linkdirective.py          107     79     34      0    20%   47-53, 63-64, 74-82, 92-100, 110-118, 139-146, 167-171, 181-186, 196-198, 207-214, 242-246, 256-264, 274-275, 285-291, 302-306
 gslab_make/private/messages.py                20      0      0      0   100%
 gslab_make/private/metadata.py                 7      0      0      0   100%
-gslab_make/private/programdirective.py       102     13     30      7    83%   63, 120, 213, 259, 290-291, 318-321, 331-333, 62->63, 118->124, 119->120, 212->213, 257->263, 258->259, 264->exit
+gslab_make/private/programdirective.py       102      8     30      8    88%   63, 120, 213, 259, 290-291, 332-333, 62->63, 118->124, 119->120, 212->213, 257->263, 258->259, 264->exit, 331->332
 gslab_make/private/utility.py                 36     17      6      0    45%   45-62, 79-82
-gslab_make/run_program.py                    179    101     34      4    39%   64, 104-122, 167, 217, 257-272, 307-322, 362-410, 497-517, 554-559, 63->64, 166->167, 216->217, 553->554
+gslab_make/run_program.py                    179     77     34      6    54%   64, 104-122, 167, 217, 257-272, 307-322, 378, 380, 391-405, 497-517, 554-559, 63->64, 166->167, 216->217, 377->378, 379->380, 553->554
 gslab_make/tablefill.py                      141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
 gslab_make/tablefill_info.py                   0      0      0      0   100%
 gslab_make/tests/nostderrout.py               12      0      2      0   100%
 gslab_make/tests/test_clear_dir.py            41      2      8      1    94%   55-56, 54->55
 gslab_make/tests/test_execute_command.py      31      3      8      4    82%   26, 39-40, 23->26, 33->35, 35->exit, 38->39
 gslab_make/tests/test_remove_path.py          56      3      6      2    92%   63, 68-69, 62->63, 67->68
-gslab_make/tests/test_run_lyx.py               0      0      0      0   100%
+gslab_make/tests/test_run_lyx.py             101     29      8      4    70%   24-26, 35-40, 47-49, 74-76, 83-86, 93-96, 103-106, 117-118, 109->111, 111->113, 113->exit, 116->117
 gslab_make/tests/test_run_mathematica.py       0      0      0      0   100%
 gslab_make/tests/test_run_matlab.py            0      0      0      0   100%
 gslab_make/tests/test_run_perl.py             59      2      8      3    93%   70-71, 62->64, 64->66, 69->70
-gslab_make/tests/test_run_python.py           64      2      8      3    93%   77-78, 69->71, 71->73, 76->77
+gslab_make/tests/test_run_python.py           59      2      8      3    93%   70-71, 62->64, 64->66, 69->70
 gslab_make/tests/test_run_r.py                74      4     12      5    90%   82, 84, 87-88, 75->77, 77->79, 81->82, 83->84, 86->87
 gslab_make/tests/test_run_stata.py            57      3      8      4    89%   65, 68-69, 60->62, 62->64, 64->65, 67->68
 gslab_make/tests/test_tablefill.py            96      2     42      6    94%   143-144, 20->exit, 37->34, 57->43, 74->exit, 138->exit, 142->143
@@ -56,4 +445,4 @@ gslab_make/textfill_info.py                    0      0      0      0   100%
 gslab_make/write_link_logs.py                 29     22      2      0    23%   51-70, 87-93
 gslab_make/write_logs.py                      83     50     22      3    34%   69-84, 111, 151-166, 191-201, 221-240, 40->exit, 107->exit, 110->111
 --------------------------------------------------------------------------------------
-TOTAL                                       1517    330    394     64    75%
+TOTAL                                       1613    330    402     71    76%
