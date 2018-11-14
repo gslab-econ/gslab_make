@@ -36,7 +36,7 @@ class testRunLyx(unittest.TestCase):
         makelog_data = open(makelog['makelog'], 'rU').read()
         lyxlog_data = open(independent_log['makelog'], 'rU').read()
         self.assertIn('LaTeX', lyxlog_data)
-        self.assertIn(lyxlog_data, makelog_data)
+        self.assertIn('LaTeX', makelog_data)
         self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))    
         
     def test_executable(self):
@@ -92,7 +92,7 @@ class testRunLyx(unittest.TestCase):
             run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', doctype = 'comments')
         logfile_data = open(makelog['makelog'], 'rU').read()
         self.assertIn('LaTeX', logfile_data)
-        self.assertTrue(os.path.isfile('../temp/lyx_test_file.pdf'))
+        self.assertTrue(os.path.isfile('../output/lyx_test_file.pdf'))
         self.assertFalse(os.path.isfile('../output/lyx_test_file_comments.pdf'))
 
     def test_handout_pdfout(self):
