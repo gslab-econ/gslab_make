@@ -15,7 +15,7 @@ class testRunPython(unittest.TestCase):
         with nostderrout():
             clear_dir(['../output/', '../log'])
 
-    def test_default_log(self):
+    def test_log(self):
     	makelog = {'makelog' : '../log/make.log'}
         with nostderrout():
             start_makelog(makelog)
