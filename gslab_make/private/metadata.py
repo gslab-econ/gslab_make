@@ -64,7 +64,7 @@ default_options = {
 
 default_executables = {
     'posix': 
-        {'stata'     : 'stata-mp',
+        {'stata'     : 'statamp',
          'matlab'    : 'matlab',
          'perl'      : 'perl',
          'python'    : 'python',
