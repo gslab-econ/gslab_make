@@ -39,21 +39,21 @@ class Directive(object):
     None
     """
     
-    def __init__(self, 
-                 makelog, 
+    def __init__(self,
+                 makelog,
                  log = '',
                  osname = os.name,
                  shell = False):
 
         self.makelog  = makelog
-        self.log      = log  
+        self.log      = log
         self.osname   = osname
         self.shell    = shell
         self.check_os()
         self.get_paths()
 
     def check_os(self):
-        """ Check OS is either POSIX or NT.  
+        """ Check OS is either POSIX or NT.
                 
         Returns
         -------
@@ -63,19 +63,19 @@ class Directive(object):
         if self.osname not in {'posix', 'nt'}:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
-    def get_paths(self):   
-        """ Normalize paths.   
+    def get_paths(self):
+        """ Normalize paths.
         
         Returns
         -------
         None  
         """
         self.makelog  = norm_path(self.makelog)
-        self.log      = norm_path(self.log) if self.log != '' else self.log        
+        self.log      = norm_path(self.log) if self.log != '' else self.log
 
-    def execute_command(self, command):   
+    def execute_command(self, command):
         """ Execute shell command.
-        
+    
         Parameters
         ----------
         command : str
@@ -90,7 +90,7 @@ class Directive(object):
         self.output = 'Executing: "%s"' % command
         print(self.output)
 
-        try:    
+        try:
             process = subprocess.Popen(command.split(), 
                                        stdout = subprocess.PIPE, 
                                        stderr = subprocess.PIPE, 

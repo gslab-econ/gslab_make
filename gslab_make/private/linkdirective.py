@@ -44,9 +44,9 @@ class LinkDirective(object):
     """
     
     def __init__(self, line, link_dir, osname = os.name):
-        self.osname    = osname
         self.line      = line
         self.link_dir  = link_dir
+        self.osname    = osname
         self.check_os()
         self.get_paths()
         self.check_paths()
