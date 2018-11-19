@@ -6,6 +6,7 @@ from builtins import (bytes, str, open, super, range,
 import os
 import subprocess
 import shutil
+import traceback
 
 from gslab_make.private.exceptionclasses import CritError
 import gslab_make.private.messages as messages
@@ -89,22 +90,24 @@ class Directive(object):
         self.output = 'Executing: "%s"' % command
         print(self.output)
 
-        try:   
-             process = subprocess.Popen(command.split(), 
-                                        stdout = subprocess.PIPE, 
-                                        stderr = subprocess.PIPE, 
-                                        shell = self.shell)
-             stdout, stderr = process.communicate()
-             exit = (process.returncode, stderr)             
+        try:    
+            process = subprocess.Popen(command.split(), 
+                                       stdout = subprocess.PIPE, 
+                                       stderr = subprocess.PIPE, 
+                                       shell = self.shell)
+            stdout, stderr = process.communicate()
+            exit = (process.returncode, stderr)             
              
-             if stdout:
-                self.output += '\n' + stdout
-             if stderr:
-                self.output += '\n' + stderr 
+            if stdout:
+               self.output += '\n' + stdout
+            if stderr:
+               self.output += '\n' + stderr 
                             
-             return(exit)
+            return(exit)
         except:
-             raise CritError(messages.crit_error_bad_command % command)
+            error_message = messages.crit_error_bad_command % command
+            error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
+            raise CritError(error_message)
              
 
     def write_log(self):
@@ -166,7 +169,6 @@ class ProgramDirective(Directive):
     """
     
     def __init__(self, 
-                 makelog,
                  application, 
                  program,
                  executable = '', 
@@ -174,12 +176,12 @@ class ProgramDirective(Directive):
                  args = '', 
                  **kwargs):
 
-        super(ProgramDirective, self).__init__(makelog, **kwargs)
         self.application = application
         self.program     = program
         self.executable  = executable
         self.option      = option
         self.args        = args      
+        super(ProgramDirective, self).__init__(**kwargs)
         self.parse_program()
         self.check_program()
         self.get_executable()
@@ -287,8 +289,8 @@ class SASDirective(ProgramDirective):
                  lst = '', 
                  **kwargs):
 
-        super(SASDirective, self).__init__(**kwargs)
         self.lst = lst  
+        super(SASDirective, self).__init__(**kwargs)
 
 
 class LyXDirective(ProgramDirective):    
@@ -303,7 +305,7 @@ class LyXDirective(ProgramDirective):
     ----------
     See `ProgramDirective`.
     
-    pdf_dir : str, optional
+    pdf_dir : str
         Directory to write PDFs.
     doctype : str, optional
         Type of LyX document. Takes either `handout` and `comments`. 
@@ -315,9 +317,9 @@ class LyXDirective(ProgramDirective):
                  doctype = '',
                  **kwargs):
 
-        super(LyXDirective, self).__init__(**kwargs)
         self.pdf_dir = pdf_dir
         self.doctype = doctype
+        super(LyXDirective, self).__init__(**kwargs)
         self.check_doctype()
 
     def check_doctype(self):

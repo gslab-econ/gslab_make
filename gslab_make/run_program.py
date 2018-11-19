@@ -15,7 +15,7 @@ from gslab_make.private.utility import format_error
 from gslab_make.write_logs import write_to_makelog
 
 
-def run_stata(paths, **kwargs):
+def run_stata(paths, program, **kwargs):
     """ Run Stata script using system command.
 
     Parameters
@@ -25,6 +25,8 @@ def run_stata(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
@@ -32,8 +34,6 @@ def run_stata(paths, **kwargs):
         Defaults to `False`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -50,7 +50,7 @@ def run_stata(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application = 'stata', makelog = makelog, **kwargs)
+        direct = ProgramDirective(application = 'stata', program = program, makelog = makelog, **kwargs)
 
         # Get program output
         program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
@@ -69,7 +69,7 @@ def run_stata(paths, **kwargs):
         raise
     
     
-def run_matlab(paths, **kwargs):
+def run_matlab(paths, program, **kwargs):
     """ Run Matlab script using system command.
 
     Parameters
@@ -79,6 +79,8 @@ def run_matlab(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
@@ -86,8 +88,6 @@ def run_matlab(paths, **kwargs):
         Defaults to `False`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -104,7 +104,7 @@ def run_matlab(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application = 'matlab', makelog = makelog, **kwargs)
+        direct = ProgramDirective(application = 'matlab', program = program, makelog = makelog, **kwargs)
         
         # Get program output
         program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
@@ -122,7 +122,7 @@ def run_matlab(paths, **kwargs):
         raise
         
 
-def run_perl(paths, **kwargs):
+def run_perl(paths, program, **kwargs):
     """ Run Perl script using system command.
 
     Parameters
@@ -132,6 +132,8 @@ def run_perl(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
@@ -139,8 +141,6 @@ def run_perl(paths, **kwargs):
         Defaults to `False`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -157,7 +157,7 @@ def run_perl(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application = 'perl', makelog = makelog, **kwargs)
+        direct = ProgramDirective(application = 'perl', program = program, makelog = makelog, **kwargs)
         
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
@@ -172,7 +172,7 @@ def run_perl(paths, **kwargs):
         raise
 
 
-def run_python(paths, **kwargs):
+def run_python(paths, program, **kwargs):
     """ Run Python script using system command.
 
     Parameters
@@ -182,6 +182,8 @@ def run_python(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
@@ -189,8 +191,6 @@ def run_python(paths, **kwargs):
         Defaults to `False`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -207,7 +207,7 @@ def run_python(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application = 'python', makelog = makelog, **kwargs)
+        direct = ProgramDirective(application = 'python', program = program, makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
@@ -222,7 +222,7 @@ def run_python(paths, **kwargs):
         raise
         
 
-def run_mathematica(paths, **kwargs):
+def run_mathematica(paths, program, **kwargs):
     """ Run Mathematica script using system command.
 
     Parameters
@@ -232,6 +232,8 @@ def run_mathematica(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
@@ -239,8 +241,6 @@ def run_mathematica(paths, **kwargs):
         Defaults to `False`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -257,7 +257,7 @@ def run_mathematica(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application = 'math', makelog = makelog, **kwargs)
+        direct = ProgramDirective(application = 'math', program = program, makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program, direct.option)
@@ -272,7 +272,7 @@ def run_mathematica(paths, **kwargs):
         raise
         
 
-def run_stat_transfer(paths, **kwargs):
+def run_stat_transfer(paths, program, **kwargs):
     """ Run StatTransfer script using system command.
 
     Parameters
@@ -282,6 +282,8 @@ def run_stat_transfer(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
@@ -289,8 +291,6 @@ def run_stat_transfer(paths, **kwargs):
         Defaults to `False`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -307,7 +307,7 @@ def run_stat_transfer(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application = 'st', makelog = makelog, **kwargs)
+        direct = ProgramDirective(application = 'st', program = program, makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program)
@@ -322,7 +322,7 @@ def run_stat_transfer(paths, **kwargs):
         raise
         
 
-def run_lyx(paths, **kwargs): 
+def run_lyx(paths, program, **kwargs): 
     """ Run LyX script using system command.
 
     Parameters
@@ -334,6 +334,8 @@ def run_lyx(paths, **kwargs):
             'pdf_dir' : str
                 Directory to write PDFs.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
@@ -341,8 +343,6 @@ def run_lyx(paths, **kwargs):
         Defaults to `False`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -363,7 +363,7 @@ def run_lyx(paths, **kwargs):
     pdf_dir = paths['pdf_dir']
 
     try:
-        direct = LyXDirective(application = 'lyx', makelog = makelog, pdf_dir = pdf_dir, **kwargs)
+        direct = LyXDirective(pdf_dir = pdf_dir, application = 'lyx', program = program, makelog = makelog, **kwargs)
             
         # Make handout/commented LyX file        
         if direct.doctype:
@@ -410,7 +410,7 @@ def run_lyx(paths, **kwargs):
         raise
         
 
-def run_r(paths, **kwargs):
+def run_r(paths, program, **kwargs):
     """ Run R script using system command.
 
     Parameters
@@ -420,6 +420,8 @@ def run_r(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
@@ -427,8 +429,6 @@ def run_r(paths, **kwargs):
         Defaults to `False`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -445,7 +445,7 @@ def run_r(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application = 'r', makelog = makelog, **kwargs)
+        direct = ProgramDirective(application = 'r', program = program, makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)
@@ -460,7 +460,7 @@ def run_r(paths, **kwargs):
         raise
         
 
-def run_sas(paths, **kwargs):
+def run_sas(paths, program, **kwargs):
     """ Run SAS script using system command.
 
     Parameters
@@ -470,6 +470,8 @@ def run_sas(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
@@ -477,8 +479,6 @@ def run_sas(paths, **kwargs):
         Defaults to `False`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -497,7 +497,7 @@ def run_sas(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = SASDirective(application = 'sas', makelog = makelog, **kwargs)
+        direct = SASDirective(application = 'sas', program = program, makelog = makelog, **kwargs)
 
         # Get program outputs
         program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
