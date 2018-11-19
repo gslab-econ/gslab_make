@@ -166,6 +166,7 @@ class ProgramDirective(Directive):
     """
     
     def __init__(self, 
+                 makelog,
                  application, 
                  program,
                  executable = '', 
@@ -173,7 +174,7 @@ class ProgramDirective(Directive):
                  args = '', 
                  **kwargs):
 
-        super(ProgramDirective, self).__init__(**kwargs)
+        super(ProgramDirective, self).__init__(makelog, **kwargs)
         self.application = application
         self.program     = program
         self.executable  = executable
