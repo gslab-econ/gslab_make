@@ -4,7 +4,7 @@ from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 ######################################################
-# Define Metadata
+# Define metadata
 ######################################################  
 
 makelog_started = False
@@ -15,7 +15,7 @@ commands = {
         {'makelink'  : 'ln -s \"%s\" \"%s\"', 
          'rmdir'     : 'rm %s \"%s\"', 
          'stata'     : '%s %s do %s',
-         'matlab'    : '%s %s -r run(\'%s\') -logfile %s',
+         'matlab'    : '%s %s -r \"try run(\'%s\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)\" -logfile \'%s\'',
          'perl'      : '%s %s %s %s',
          'python'    : '%s %s %s %s',
          'math'      : '%s < %s %s',
@@ -27,7 +27,7 @@ commands = {
         {'makelink'  : 'mklink %s \"%s\" \"%s\"', 
          'rmdir'     : 'rmdir %s \"%s\"', 
          'stata'     : '%s %s do %s',
-         'matlab'    : '%s %s -r run(\'%s\') -logfile %s',
+         'matlab'    : '%s %s -r \"try run(\'%s\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)\" -logfile %s',
          'perl'      : '%s %s %s %s',
          'python'    : '%s %s %s %s',
          'math'      : '%s < %s %s',

@@ -91,7 +91,10 @@ class Directive(object):
         print(self.output)
 
         try:
-            process = subprocess.Popen(command.split(), 
+            if not self.shell:
+                command = command.split()
+
+            process = subprocess.Popen(command, 
                                        stdout = subprocess.PIPE, 
                                        stderr = subprocess.PIPE, 
                                        shell = self.shell)
@@ -122,7 +125,7 @@ class Directive(object):
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
             with open(self.makelog, 'a') as f:
-                f.write(self.output)
+                print(self.output, file = f)
 
         if self.log:
             with open(self.log, 'w') as f:
@@ -260,7 +263,7 @@ class ProgramDirective(Directive):
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
             with open(self.makelog, 'a') as f:
-                f.write(out)
+                print(out, file = f)
 
         if log_file: 
             if program_output != log_file:
