@@ -10,16 +10,18 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.13, pytest-3.2.1, py-1.4.34, pluggy-0.4.0
 rootdir: /Users/danielagonzalez/gslab_make, inifile:
-collected 53 items
+collected 66 items
 
 gslab_make/tests/test_clear_dir.py ...
 gslab_make/tests/test_execute_command.py .
 gslab_make/tests/test_remove_path.py ....
 gslab_make/tests/test_run_lyx.py .FFFFF.FF
+gslab_make/tests/test_run_mathematica.py .FFF.F
+gslab_make/tests/test_run_matlab.py FFFF.FF
 gslab_make/tests/test_run_perl.py .....
 gslab_make/tests/test_run_python.py .....
 gslab_make/tests/test_run_r.py .......
-gslab_make/tests/test_run_stata.py .....
+gslab_make/tests/test_run_stata.py .FFF.
 gslab_make/tests/test_tablefill.py ....
 gslab_make/tests/test_textfill.py ........
 gslab_make/tests/test_zip.py ..
@@ -30,18 +32,18 @@ ___________________________ testRunLyx.test_comments ___________________________
 self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_comments>
 
     def test_comments(self):
-        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        makelog = {'makelog' : 'log/make.log', 'pdf_dir' : 'output'}
         with nostderrout():
             start_makelog(makelog)
 >           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', doctype = 'comments')
 
-gslab_make/tests/test_run_lyx.py:92: 
+gslab_make/tests/test_run_lyx.py:91: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x10ba51710>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x105c01910>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_comments.lyx'
 
     def execute_command(self, command):
@@ -85,7 +87,7 @@ _________________________ testRunLyx.test_default_log __________________________
 self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_default_log>
 
     def test_default_log(self):
-        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        makelog = {'makelog' : 'log/make.log', 'pdf_dir' : 'output'}
         with nostderrout():
             start_makelog(makelog)
 >           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx')
@@ -96,7 +98,7 @@ gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x10bb70950>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x105c019d0>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -140,18 +142,18 @@ __________________________ testRunLyx.test_executable __________________________
 self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_executable>
 
     def test_executable(self):
-        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        makelog = {'makelog' : 'log/make.log', 'pdf_dir' : 'output'}
         with nostderrout():
             start_makelog(makelog)
 >           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', executable = metadata.default_executables[os.name]['lyx'])
 
-gslab_make/tests/test_run_lyx.py:46: 
+gslab_make/tests/test_run_lyx.py:45: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x10bb70f90>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x105d8e2d0>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -195,18 +197,18 @@ ________________________ testRunLyx.test_handout_pdfout ________________________
 self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_handout_pdfout>
 
     def test_handout_pdfout(self):
-        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        makelog = {'makelog' : 'log/make.log', 'pdf_dir' : 'output'}
         with nostderrout():
             start_makelog(makelog)
 >           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', doctype = 'handout')
 
-gslab_make/tests/test_run_lyx.py:102: 
+gslab_make/tests/test_run_lyx.py:101: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x10bbb8c10>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x105c2af10>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_handout.lyx'
 
     def execute_command(self, command):
@@ -250,20 +252,19 @@ _______________________ testRunLyx.test_independent_log ________________________
 self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_independent_log>
 
     def test_independent_log(self):
-        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
-        independent_log = {'makelog' : '../log/lyx.log', 'pdf_dir' : '../output'}
+        makelog = {'makelog' : 'log/make.log', 'pdf_dir' : 'output'}
+        independent_log = {'makelog' : 'log/lyx.log', 'pdf_dir' : 'output'}
         with nostderrout():
             start_makelog(makelog)
-            start_makelog(independent_log)
->           run_lyx(independent_log, program = 'gslab_make/tests/input/lyx_test_file.lyx', log=independent_log['makelog'])
+>           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', log=independent_log['makelog'])
 
-gslab_make/tests/test_run_lyx.py:34: 
+gslab_make/tests/test_run_lyx.py:33: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x10bbc08d0>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x105d7dbd0>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -307,18 +308,18 @@ ____________________________ testRunLyx.test_option ____________________________
 self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_option>
 
     def test_option(self):
-        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../output'}
+        makelog = {'makelog' : 'log/make.log', 'pdf_dir' : 'output'}
         with nostderrout():
             start_makelog(makelog)
 >           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx', option = '-e pdf')
 
-gslab_make/tests/test_run_lyx.py:73: 
+gslab_make/tests/test_run_lyx.py:72: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x10bba60d0>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x105d71350>
 command = 'lyx -e pdf /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -362,18 +363,18 @@ ____________________________ testRunLyx.test_pdfout ____________________________
 self = <gslab_make.tests.test_run_lyx.testRunLyx testMethod=test_pdfout>
 
     def test_pdfout(self):
-        makelog = {'makelog' : '../log/make.log', 'pdf_dir' : '../log'}
+        makelog = {'makelog' : 'log/make.log', 'pdf_dir' : 'log'}
         with nostderrout():
             start_makelog(makelog)
 >           run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file.lyx')
 
-gslab_make/tests/test_run_lyx.py:82: 
+gslab_make/tests/test_run_lyx.py:81: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x10bbe1890>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x105d532d0>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -412,7 +413,716 @@ command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/
 E            CritError: ERROR! Command `lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx` cannot be executed by operating system
 
 gslab_make/private/programdirective.py:107: CritError
-===================== 7 failed, 46 passed in 12.33 seconds =====================
+_____________________ testRunMathematica.test_default_log ______________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_default_log>
+
+    def test_default_log(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+>           run_mathematica(makelog, program = 'gslab_make/tests/input/mathematica_test_script.m')
+
+gslab_make/tests/test_run_mathematica.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:264: in run_mathematica
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d55410>
+command = 'math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -noprompt'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -noprompt` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+______________________ testRunMathematica.test_executable ______________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_executable>
+
+    def test_executable(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+>           run_mathematica(makelog, program = 'gslab_make/tests/input/mathematica_test_script.m', executable = metadata.default_executables[os.name]['math'])
+
+gslab_make/tests/test_run_mathematica.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:264: in run_mathematica
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d6b110>
+command = 'math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -noprompt'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -noprompt` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+___________________ testRunMathematica.test_independent_log ____________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        makelog = {'makelog' : 'log/make.log'}
+        independent_log = {'makelog' : 'log/mathematica.log'}
+        with nostderrout():
+>           run_mathematica(makelog, program = 'gslab_make/tests/input/mathematica_test_script.m')
+
+gslab_make/tests/test_run_mathematica.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:264: in run_mathematica
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d7bb10>
+command = 'math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -noprompt'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -noprompt` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+________________________ testRunMathematica.test_option ________________________
+
+self = <gslab_make.tests.test_run_mathematica.testRunMathematica testMethod=test_option>
+
+    def test_option(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+>           run_mathematica(makelog, program = 'gslab_make/tests/input/mathematica_test_script.m', option = '-initfile gslab_make/tests/input/mathematica_init_script.m')
+
+gslab_make/tests/test_run_mathematica.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:264: in run_mathematica
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d60110>
+command = 'math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -initfile gslab_make/tests/input/mathematica_init_script.m'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -initfile gslab_make/tests/input/mathematica_init_script.m` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+______________________ testRunMatlab.test_bad_executable _______________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_bad_executable>
+
+    def test_bad_executable(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+>           run_matlab(makelog, program = 'gslab_make/tests/input/matlab_test_script.m', executable = 'nonexistent_matlab_executable')
+
+gslab_make/tests/test_run_matlab.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:114: in run_matlab
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d7d890>
+command = "nonexistent_matlab_executable -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `nonexistent_matlab_executable -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+________________________ testRunMatlab.test_default_log ________________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_default_log>
+
+    def test_default_log(self):
+        makelog = {'makelog' : 'log/make.log'}
+>       run_matlab(makelog, program = 'gslab_make/tests/input/matlab_test_script.m')
+
+gslab_make/tests/test_run_matlab.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:114: in run_matlab
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d71550>
+command = "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+----------------------------- Captured stdout call -----------------------------
+Executing: "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
+________________________ testRunMatlab.test_executable _________________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_executable>
+
+    def test_executable(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+>           run_matlab(makelog, program = 'gslab_make/tests/input/matlab_test_script.m', executable = metadata.default_executables[os.name]['matlab'])
+
+gslab_make/tests/test_run_matlab.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:114: in run_matlab
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d8fc50>
+command = "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+______________________ testRunMatlab.test_independent_log ______________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        makelog = {'makelog' : 'log/make.log'}
+        independent_log = {'makelog' : 'log/matlab.log'}
+        with nostderrout():
+>           run_matlab(makelog, program = 'gslab_make/tests/input/matlab_test_script.m', log=independent_log['makelog'])
+
+gslab_make/tests/test_run_matlab.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:114: in run_matlab
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d64d90>
+command = "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+__________________________ testRunMatlab.test_option ___________________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_option>
+
+    def test_option(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+>           run_matlab(makelog, program = 'gslab_make/tests/input/matlab_test_script.m', option = '-h')
+
+gslab_make/tests/test_run_matlab.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:114: in run_matlab
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105705ed0>
+command = "matlab -h -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `matlab -h -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+___________________________ testRunMatlab.test_wait ____________________________
+
+self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_wait>
+
+    def test_wait(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+>           run_matlab(makelog, program = 'gslab_make/tests/input/matlab_test_script_wait1.m')
+
+gslab_make/tests/test_run_matlab.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:114: in run_matlab
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d8ed50>
+command = "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script_wait1.m') -logfile matlab_test_script_wait1.log"
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script_wait1.m') -logfile matlab_test_script_wait1.log` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+_________________________ testRunStata.test_executable _________________________
+
+self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_executable>
+
+    def test_executable(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_stata(makelog, program = 'gslab_make/tests/input/stata_test_script.do', executable = metadata.default_executables[os.name]['stata'])
+
+gslab_make/tests/test_run_stata.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:60: in run_stata
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d5e690>
+command = 'statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+______________________ testRunStata.test_independent_log _______________________
+
+self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_independent_log>
+
+    def test_independent_log(self):
+        makelog = {'makelog' : 'log/make.log'}
+        independent_log = {'makelog' : 'log/stata.log'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_stata(makelog, program = 'gslab_make/tests/input/stata_test_script.do', log=independent_log['makelog'])
+
+gslab_make/tests/test_run_stata.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:60: in run_stata
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d71850>
+command = 'statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+____________________________ testRunStata.test_log _____________________________
+
+self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_log>
+
+    def test_log(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_stata(makelog, program = 'gslab_make/tests/input/stata_test_script.do')
+
+gslab_make/tests/test_run_stata.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:60: in run_stata
+    exit_code, error_message = direct.execute_command(command)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d67f10>
+command = 'statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do'
+
+    def execute_command(self, command):
+        """ Execute shell command.
+    
+            Parameters
+            ----------
+            command : str
+                Shell command to execute.
+    
+            Returns
+            -------
+            exit : tuple
+                Tuple (exit code, error message) for shell command.
+            """
+    
+        self.output = 'Executing: "%s"' % command
+        print(self.output)
+    
+        try:
+             process = subprocess.Popen(command.split(),
+                                        stdout = subprocess.PIPE,
+                                        stderr = subprocess.PIPE,
+                                        shell = self.shell)
+             stdout, stderr = process.communicate()
+             exit = (process.returncode, stderr)
+    
+             if stdout:
+                self.output += '\n' + stdout
+             if stderr:
+                self.output += '\n' + stderr
+    
+             return(exit)
+        except:
+>            raise CritError(messages.crit_error_bad_command % command)
+E            CritError: ERROR! Command `statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do` cannot be executed by operating system
+
+gslab_make/private/programdirective.py:107: CritError
+==================== 20 failed, 46 passed in 16.02 seconds =====================
 Name                                       Stmts   Miss Branch BrPart  Cover   Missing
 --------------------------------------------------------------------------------------
 gslab_make/create_links.py                    20     12      0      0    40%   36-50
@@ -421,22 +1131,22 @@ gslab_make/private/exceptionclasses.py         4      0      0      0   100%
 gslab_make/private/linkdirective.py          107     79     34      0    20%   47-53, 63-64, 74-82, 92-100, 110-118, 139-146, 167-171, 181-186, 196-198, 207-214, 242-246, 256-264, 274-275, 285-291, 302-306
 gslab_make/private/messages.py                20      0      0      0   100%
 gslab_make/private/metadata.py                 7      0      0      0   100%
-gslab_make/private/programdirective.py       102      8     30      8    88%   63, 120, 213, 259, 290-291, 332-333, 62->63, 118->124, 119->120, 212->213, 257->263, 258->259, 264->exit, 331->332
+gslab_make/private/programdirective.py       102     20     30      5    75%   63, 120, 213, 253-268, 290-291, 332-333, 62->63, 118->124, 119->120, 212->213, 331->332
 gslab_make/private/utility.py                 36     17      6      0    45%   45-62, 79-82
-gslab_make/run_program.py                    179     77     34      6    54%   64, 104-122, 167, 217, 257-272, 307-322, 378, 380, 391-405, 497-517, 554-559, 63->64, 166->167, 216->217, 377->378, 379->380, 553->554
+gslab_make/run_program.py                    179     59     34      5    62%   61-64, 115-117, 167, 217, 265-267, 307-322, 378, 380, 391-405, 497-517, 554-559, 166->167, 216->217, 377->378, 379->380, 553->554
 gslab_make/tablefill.py                      141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
 gslab_make/tablefill_info.py                   0      0      0      0   100%
 gslab_make/tests/nostderrout.py               12      0      2      0   100%
 gslab_make/tests/test_clear_dir.py            41      2      8      1    94%   55-56, 54->55
 gslab_make/tests/test_execute_command.py      31      3      8      4    82%   26, 39-40, 23->26, 33->35, 35->exit, 38->39
 gslab_make/tests/test_remove_path.py          56      3      6      2    92%   63, 68-69, 62->63, 67->68
-gslab_make/tests/test_run_lyx.py             101     29      8      4    70%   24-26, 35-40, 47-49, 74-76, 83-86, 93-96, 103-106, 117-118, 109->111, 111->113, 113->exit, 116->117
-gslab_make/tests/test_run_mathematica.py       0      0      0      0   100%
-gslab_make/tests/test_run_matlab.py            0      0      0      0   100%
-gslab_make/tests/test_run_perl.py             59      2      8      3    93%   70-71, 62->64, 64->66, 69->70
-gslab_make/tests/test_run_python.py           59      2      8      3    93%   70-71, 62->64, 64->66, 69->70
-gslab_make/tests/test_run_r.py                74      4     12      5    90%   82, 84, 87-88, 75->77, 77->79, 81->82, 83->84, 86->87
-gslab_make/tests/test_run_stata.py            57      3      8      4    89%   65, 68-69, 60->62, 62->64, 64->65, 67->68
+gslab_make/tests/test_run_lyx.py             100     29      8      4    69%   24-26, 34-39, 46-48, 73-75, 82-85, 92-95, 102-105, 116-117, 108->110, 110->112, 112->exit, 115->116
+gslab_make/tests/test_run_mathematica.py      62     13     10      5    75%   25-26, 33-36, 42-43, 61, 69, 71, 74-75, 64->66, 66->68, 68->69, 70->71, 73->74
+gslab_make/tests/test_run_matlab.py           72     22      8      3    66%   24-25, 32-35, 41-42, 48, 60-64, 70-73, 76-78, 87-88, 81->83, 83->exit, 86->87
+gslab_make/tests/test_run_perl.py             58      2      8      3    92%   69-70, 61->63, 63->65, 68->69
+gslab_make/tests/test_run_python.py           57      2      8      3    92%   68-69, 60->62, 62->64, 67->68
+gslab_make/tests/test_run_r.py                73      4     12      5    89%   81, 83, 86-87, 74->76, 76->78, 80->81, 82->83, 85->86
+gslab_make/tests/test_run_stata.py            56      8      8      4    81%   23, 31-33, 40, 64, 67-68, 59->61, 61->63, 63->64, 66->67
 gslab_make/tests/test_tablefill.py            96      2     42      6    94%   143-144, 20->exit, 37->34, 57->43, 74->exit, 138->exit, 142->143
 gslab_make/tests/test_textfill.py             83      2     12      3    95%   138-139, 17->exit, 133->exit, 137->138
 gslab_make/tests/test_zip.py                  35      2      4      2    90%   45-46, 41->exit, 44->45
@@ -445,4 +1155,4 @@ gslab_make/textfill_info.py                    0      0      0      0   100%
 gslab_make/write_link_logs.py                 29     22      2      0    23%   51-70, 87-93
 gslab_make/write_logs.py                      83     50     22      3    34%   69-84, 111, 151-166, 191-201, 221-240, 40->exit, 107->exit, 110->111
 --------------------------------------------------------------------------------------
-TOTAL                                       1613    330    402     71    76%
+TOTAL                                       1741    364    420     75    76%

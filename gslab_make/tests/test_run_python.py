@@ -13,10 +13,10 @@ class testRunPython(unittest.TestCase):
 
     def setUp(self):
         with nostderrout():
-            clear_dir(['../output/', '../log'])
+            clear_dir(['output/', 'log'])
 
     def test_log(self):
-    	makelog = {'makelog' : '../log/make.log'}
+    	makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
             run_python(makelog, program = 'gslab_make/tests/input/python_test_script.py')
@@ -24,18 +24,16 @@ class testRunPython(unittest.TestCase):
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_independent_log(self):
-    	makelog = {'makelog' : '../log/make.log'}
-    	independent_log = {'makelog': '../log/python.log'}
+    	makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
-            start_makelog(independent_log)
-            run_python(makelog, program = 'gslab_make/tests/input/python_test_script.py', log=independent_log['makelog'])
+            run_python(makelog, program = 'gslab_make/tests/input/python_test_script.py', log='log/python.log')
         self.assertIn('Test script complete', open(makelog['makelog']).read())
-        self.assertIn('Test script complete', open(independent_log['makelog']).read())        
+        self.assertIn('Test script complete', open('log/python.log').read())        
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_executable(self):
-    	makelog = {'makelog' : '../log/make.log'}
+    	makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
             run_python(makelog, program = 'gslab_make/tests/input/python_test_script.py', executable = metadata.default_executables[os.name]['python']) 
@@ -43,7 +41,7 @@ class testRunPython(unittest.TestCase):
         self.assertTrue(os.path.isfile('output.txt'))
         
     def test_bad_executable(self):
-    	makelog = {'makelog' : '../log/make.log'}
+    	makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
         with self.assertRaises(CritError):
@@ -51,7 +49,7 @@ class testRunPython(unittest.TestCase):
         self.assertNotIn('Test script complete', open(makelog['makelog']).read())
 
     def test_no_program(self):
-    	makelog = {'makelog' : '../log/make.log'}
+    	makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
         with self.assertRaises(Exception):
@@ -59,10 +57,10 @@ class testRunPython(unittest.TestCase):
         self.assertNotIn('Test script complete', open(makelog['makelog']).read())
     
     def tearDown(self):
-        if os.path.isdir('../output/'):
-            shutil.rmtree('../output/')
-        if os.path.isdir('../log/'):
-            shutil.rmtree('../log/')
+        if os.path.isdir('output/'):
+            shutil.rmtree('output/')
+        if os.path.isdir('log/'):
+            shutil.rmtree('log/')
         if os.path.isfile('output.txt'):
             os.remove('output.txt')
                 

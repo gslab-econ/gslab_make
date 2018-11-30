@@ -13,35 +13,34 @@ class testRunStata(unittest.TestCase):
 
     def setUp(self):
         with nostderrout():
-            clear_dir(['../output/', '../log'])
+            clear_dir(['output/', 'log'])
 
     def test_log(self):
-        makelog = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
             run_stata(makelog, program = 'gslab_make/tests/input/stata_test_script.do')
         self.assertIn('end of do-file', open(makelog['makelog']).read())
 
     def test_independent_log(self):
-        makelog = {'makelog' : '../log/make.log'}
-        independent_log = {'makelog' : '../log/stata.log'}
+        makelog = {'makelog' : 'log/make.log'}
+        independent_log = {'makelog' : 'log/stata.log'}
         with nostderrout():
             start_makelog(makelog)
-            start_makelog(independent_log)
             run_stata(makelog, program = 'gslab_make/tests/input/stata_test_script.do', log=independent_log['makelog'])
         self.assertIn('end of do-file', open(makelog['makelog']).read())
-        self.assertTrue(os.path.isfile('../log/stata.log'))
+        self.assertTrue(os.path.isfile('log/stata.log'))
         self.assertIn('end of do-file', open(independent_log['makelog']).read())
         
     def test_executable(self):
-        makelog = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
             run_stata(makelog, program = 'gslab_make/tests/input/stata_test_script.do', executable = metadata.default_executables[os.name]['stata']) 
         self.assertIn('end of do-file', open(makelog['makelog']).read())
         
     def test_bad_executable(self):
-        makelog = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
         with self.assertRaises(CritError):
@@ -49,7 +48,7 @@ class testRunStata(unittest.TestCase):
         self.assertNotIn('end of do-file', open(makelog['makelog']).read())
     
     def test_no_program(self):
-        makelog = {'makelog' : '../log/make.log'}
+        makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
         with self.assertRaises(Exception):
@@ -57,10 +56,10 @@ class testRunStata(unittest.TestCase):
         self.assertNotIn('end of do-file', open(makelog['makelog']).read())
     
     def tearDown(self):
-        if os.path.isdir('../output/'):
-            shutil.rmtree('../output/')
-        if os.path.isdir('../log/'):
-            shutil.rmtree('../log/')
+        if os.path.isdir('output/'):
+            shutil.rmtree('output/')
+        if os.path.isdir('log/'):
+            shutil.rmtree('log/')
         if os.path.isfile('output.txt'):
             os.remove('output.txt')
                 
