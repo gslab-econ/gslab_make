@@ -14,10 +14,11 @@ import gslab_make.private.messages as messages
 def norm_path(path):
     """ Normalizes path to be OS-compatible. """
 
-    path = re.split('[/\\\\]+', path)
-    path = os.path.sep.join(path)
-    path = path.rstrip(os.path.sep)
-    path = os.path.abspath(path)
+    if path:
+        path = re.split('[/\\\\]+', path)
+        path = os.path.sep.join(path)
+        path = path.rstrip(os.path.sep)
+        path = os.path.abspath(path)
 
     return path
 
