@@ -78,7 +78,9 @@ def file_to_array(file_name):
     """
        
     with open(file_name, 'r') as f:
-        array = [line for line in f if not re.match('\s*\#',line)]
+        array = [line.strip() for line in f]
+        array = [line for line in array if line]
+        array = [line for line in array if not re.match('\#',line)]
                                                     
     return array
 
