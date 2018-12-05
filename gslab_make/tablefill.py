@@ -1,13 +1,16 @@
 #! /usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
 
 import os
 import argparse
 import types
 import re
 import traceback
-import tablefill_info
 from decimal import Decimal, ROUND_HALF_UP
 
+import gslab_make.tablefill_info as tablefill_info
 
 def tablefill(**kwargs):
     try:
@@ -16,12 +19,12 @@ def tablefill(**kwargs):
         lyx_text = insert_tables(args, tables)
         write_to_lyx(args, lyx_text)
         exitmessage = args['template'] + ' filled successfully by tablefill'
-        print exitmessage
+        print(exitmessage)
         return exitmessage    
     except:
-        print 'Error Found'
+        print('Error Found')
         exitmessage = traceback.format_exc()
-        print exitmessage
+        print(exitmessage)
         return exitmessage
 
 # Set tablefill's docstring as the text in "tablefill_info.py"
