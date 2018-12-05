@@ -94,7 +94,5 @@ extensions = {
     'st'        : ['.stc', '.stcmd'],
     'lyx'       : '.lyx',
     'r'         : ['.r', '.R'],
-    'rinstall'  : '',
-    'sas'       : '.sas',
-    'other'     : ''
+    'sas'       : '.sas'
 }

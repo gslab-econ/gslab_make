@@ -214,7 +214,7 @@ class ProgramDirective(Directive):
         if not os.path.isfile(self.program):
             raise CritError(messages.crit_error_no_file % self.program)    
         
-        if self.program_ext != metadata.extensions[self.application]:
+        if self.program_ext not in metadata.extensions[self.application]:
             raise CritError(messages.crit_error_extension % self.program)
 
     def get_executable(self):
