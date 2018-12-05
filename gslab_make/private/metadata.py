@@ -93,7 +93,7 @@ extensions = {
     'math'      : '.m',
     'st'        : ['.stc', '.stcmd'],
     'lyx'       : '.lyx',
-    'r'         : '.R',
+    'r'         : ['.r', '.R'],
     'rinstall'  : '',
     'sas'       : '.sas',
     'other'     : ''
