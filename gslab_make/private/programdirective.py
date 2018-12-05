@@ -32,7 +32,7 @@ class Directive(object):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to True.
 
     Returns
     -------
@@ -43,7 +43,7 @@ class Directive(object):
                  makelog,
                  log = '',
                  osname = os.name,
-                 shell = False):
+                 shell = True):
 
         self.makelog  = makelog
         self.log      = log

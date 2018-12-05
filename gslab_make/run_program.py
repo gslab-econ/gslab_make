@@ -31,7 +31,7 @@ def run_stata(paths, program, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     executable : str, optional
@@ -85,7 +85,7 @@ def run_matlab(paths, program, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     executable : str, optional
@@ -138,7 +138,7 @@ def run_perl(paths, program, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     executable : str, optional
@@ -188,7 +188,7 @@ def run_python(paths, program, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     executable : str, optional
@@ -238,7 +238,7 @@ def run_mathematica(paths, program, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     executable : str, optional
@@ -288,7 +288,7 @@ def run_stat_transfer(paths, program, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     executable : str, optional
@@ -340,7 +340,7 @@ def run_lyx(paths, program, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     executable : str, optional
@@ -426,7 +426,7 @@ def run_r(paths, program, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     executable : str, optional
@@ -476,7 +476,7 @@ def run_sas(paths, program, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
     executable : str, optional
@@ -533,7 +533,7 @@ def execute_command(paths, command, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of system command log. system command log is only written if specified. 
         
