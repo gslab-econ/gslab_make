@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
+import os
 import traceback
 
 import gslab_make.private.messages as messages
@@ -38,9 +39,13 @@ def create_links(paths,
 
     try:              
         link_list = LinksList(file_list, link_dir)
-        link_map = link_list.create_symlinks()       
+        if link_list.link_directive_list:
+            os.makedirs(link_dir)
+            link_map = link_list.create_symlinks()       
+        else:
+            link_map = []
+
         write_to_makelog(paths, 'Links successfully created!')    
-        
         return(link_map)
     except:
         error_message = 'An error was encountered with `create_links`' 

@@ -51,8 +51,33 @@ def remove_path(path, option = '', quiet = False):
     subprocess.Popen(command, shell = True)
 
     if not quiet:
-        print('\nDeleted: "%s"' % path)
+        print('Removed: "%s"' % path)
     
+
+def remove_dir(dir_list, quiet = False):
+    """ Remove everything in directory.
+    
+    Parameters
+    ----------
+    dir_list : list
+        List of directories to remove.
+
+    Returns
+    -------
+    None
+    """
+
+    if type(dir_list) is list:
+        dir_list = [norm_path(dir_path) for dir_path in dir_list]
+    else:
+        raise TypeError(messages.type_error_file_list)
+    
+    for dir_path in dir_list:
+        if os.path.isdir(dir_path):
+            remove_path(dir_path, quiet = quiet)
+        elif os.path.isfile(dir_path): 
+            raise TypeError(messages.type_error_not_dir % dir_path)
+
 
 def clear_dir(dir_list):
     """ Remove everything in directory. Create directory if nonexistent.
@@ -67,17 +92,7 @@ def clear_dir(dir_list):
     None
     """
 
-    if type(dir_list) is list:
-        dir_list = [norm_path(dir_path) for dir_path in dir_list]
-    else:
-        raise TypeError(messages.type_error_file_list)
-    
-    for dir_path in dir_list:
-        if os.path.isdir(dir_path):
-            remove_path(dir_path, quiet = True)
-        elif os.path.isfile(dir_path): 
-            raise TypeError(messages.type_error_not_dir % dir_path)
-        
+    remove_dir(dir_list, quiet = True)
     time.sleep(0.25) # Allow file manager to recognize files no longer exist
     
     for dir_path in dir_list:

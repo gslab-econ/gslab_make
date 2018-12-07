@@ -38,7 +38,7 @@ Notes:
 
 # Import make tools
 from gslab_make.create_links import create_links
-from gslab_make.dir_mod import check_os, remove_path, clear_dir, unzip, zip_dir
+from gslab_make.dir_mod import check_os, remove_path, remove_dir, clear_dir, unzip, zip_dir
 from gslab_make.run_program import (run_stata, run_matlab, run_perl, run_python, 
                                     run_mathematica, run_stat_transfer, run_lyx, 
                                     run_r, run_sas, execute_command)
