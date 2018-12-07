@@ -74,6 +74,7 @@ class LinkDirective(object):
         try:
             line_parsed = self.line.strip().split('\t')
             line_parsed = [l.strip() for l in line_parsed]
+            line_parsed = [l.strip('"\'') for l in line_parsed]
             self.symlink, self.target = line_parsed
         except:
             raise CritError(messages.crit_error_bad_link % self.line)

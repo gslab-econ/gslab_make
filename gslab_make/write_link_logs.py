@@ -84,12 +84,12 @@ def write_link_maplog(link_maplog, link_map):
     None
     """
     
-    header = 'target\tsymlink'
+    header = 'symlink\ttarget'
 
     with open(link_maplog, 'w') as MAPLOG:
         print(header, file = MAPLOG)
 
         for target, symlink in link_map:
-            print("%s\t%s" % (target, symlink), file = MAPLOG)
+            print("%s\t%s" % (symlink, target), file = MAPLOG)
         
       
