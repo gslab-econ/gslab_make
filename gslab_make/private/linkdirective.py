@@ -238,10 +238,12 @@ class LinksList(object):
     
     def __init__(self, 
                  file_list, 
-                 link_dir):
+                 link_dir, 
+                 path_dict = {}):
         
         self.file_list = file_list
         self.link_dir = link_dir
+        self.path_dict = path_dict
         self.parse_file_list()
         self.get_paths()
         self.get_link_directive_list()
@@ -288,6 +290,7 @@ class LinksList(object):
         for f in self.file_list:
             lines = file_to_array(f)
             for line in lines:
+                line = line.format(**self.path_dict) # move to file_to_array? probably =O, add error messaging
                 directive = LinkDirective(line, self.link_dir)
                 self.link_directive_list.append(directive)
 

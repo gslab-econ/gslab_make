@@ -13,7 +13,8 @@ from gslab_make.write_logs import write_to_makelog
 
 
 def create_links(paths,
-                 file_list):
+                 file_list, 
+                 path_dict):
     """ Create symlinks from list of files containing linking instructions.
 
     Parameters
@@ -38,7 +39,7 @@ def create_links(paths,
     makelog  = paths['makelog']   
 
     try:              
-        link_list = LinksList(file_list, link_dir)
+        link_list = LinksList(file_list, link_dir, path_dict)
         if link_list.link_directive_list:
             os.makedirs(link_dir)
             link_map = link_list.create_symlinks()       

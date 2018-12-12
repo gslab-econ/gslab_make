@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
+import os
 import traceback
 
 from gslab_make.private.utility import glob_recursive, format_error
@@ -90,6 +91,7 @@ def write_link_maplog(link_maplog, link_map):
         print(header, file = MAPLOG)
 
         for target, symlink in link_map:
+            symlink = symlink.replace(os.getcwd(), '')
             print("%s\t%s" % (symlink, target), file = MAPLOG)
         
       
