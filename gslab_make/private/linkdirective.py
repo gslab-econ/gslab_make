@@ -229,6 +229,9 @@ class LinksList(object):
         List of files from which to parse linking instructions.
     link_dir : str
         Directory to write symlink(s).
+    mapping_dict : dict, optional
+        Dictionary of path mappings used to parse linking instructions. 
+        Defaults to no mappings.
         
     Attributes
     ----------
@@ -239,11 +242,11 @@ class LinksList(object):
     def __init__(self, 
                  file_list, 
                  link_dir, 
-                 path_dict = {}):
+                 mapping_dict = {}):
         
         self.file_list = file_list
         self.link_dir = link_dir
-        self.path_dict = path_dict
+        self.mapping_dict = mapping_dict
         self.parse_file_list()
         self.get_paths()
         self.get_link_directive_list()
@@ -285,14 +288,9 @@ class LinksList(object):
         None
         """
         
-        self.link_directive_list = []
-
-        for f in self.file_list:
-            lines = file_to_array(f)
-            for line in lines:
-                line = line.format(**self.path_dict) # move to file_to_array? probably =O, add error messaging
-                directive = LinkDirective(line, self.link_dir)
-                self.link_directive_list.append(directive)
+        lines = [line for file in self.file_list for line in file_to_array(file)]
+        lines = [line.format_map(self.mapping_dct) for line in lines]
+        self.link_directive_list = [LinkDirective(line, self.link_dir) for line in lines]
 
     def create_symlinks(self):       
         """ Create symlinks according to directives. 

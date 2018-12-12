@@ -36,7 +36,6 @@ def create_links(paths,
     """
 
     link_dir = paths['link_dir']
-    makelog  = paths['makelog']   
 
     try:              
         link_list = LinksList(file_list, link_dir, path_dict)

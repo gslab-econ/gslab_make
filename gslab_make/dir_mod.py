@@ -61,7 +61,9 @@ def remove_dir(dir_list, quiet = False):
     ----------
     dir_list : list
         List of directories to remove.
-
+    quiet : bool, optional
+        Suppress printing of directories removed. Defaults to False. 
+        
     Returns
     -------
     None
@@ -93,7 +95,7 @@ def clear_dir(dir_list):
     """
 
     remove_dir(dir_list, quiet = True)
-    time.sleep(0.25) # Allow file manager to recognize files no longer exist
+    time.sleep(0.1) # Allow file manager to recognize files no longer exist
     
     for dir_path in dir_list:
         os.makedirs(dir_path)

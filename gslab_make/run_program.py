@@ -557,4 +557,3 @@ def execute_command(paths, command, **kwargs):
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
         write_to_makelog(paths, error_message)
         raise
-        

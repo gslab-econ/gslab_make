@@ -52,7 +52,6 @@ def write_link_logs(paths,
     link_statslog = paths['link_statslog']
     link_headslog = paths['link_headslog']
     link_maplog   = paths['link_maplog']
-    makelog       = paths['makelog']
 
     try:
         target_list = [target for target, symlink in link_map]
@@ -93,5 +92,3 @@ def write_link_maplog(link_maplog, link_map):
         for target, symlink in link_map:
             symlink = symlink.replace(os.getcwd(), '')
             print("%s\t%s" % (symlink, target), file = MAPLOG)
-        
-      

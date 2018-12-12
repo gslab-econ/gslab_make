@@ -151,7 +151,6 @@ def log_files_in_output(paths,
     output_dir      = paths['output_dir']
     output_statslog = paths['output_statslog']
     output_headslog = paths['output_headslog']
-    makelog         = paths['makelog']
 
     output_files = glob_recursive(output_dir, recursive)
 
