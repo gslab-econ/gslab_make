@@ -90,5 +90,5 @@ def write_link_maplog(link_maplog, link_map):
         print(header, file = MAPLOG)
 
         for target, symlink in link_map:
-            symlink = symlink.replace(os.getcwd(), '')
+            symlink = os.path.relpath(symlink)
             print("%s\t%s" % (symlink, target), file = MAPLOG)
