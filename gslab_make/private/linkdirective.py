@@ -289,7 +289,7 @@ class LinksList(object):
         """
         
         lines = [line for file in self.file_list for line in file_to_array(file)]
-        lines = [line.format_map(self.mapping_dct) for line in lines]
+        lines = [str(line).format(**self.mapping_dict) for line in lines]
         self.link_directive_list = [LinkDirective(line, self.link_dir) for line in lines]
 
     def create_symlinks(self):       
