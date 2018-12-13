@@ -292,7 +292,7 @@ class LinksList(object):
         try:
             lines = [str(line).format(**self.mapping_dict) for line in lines]
         except KeyError as e:
-            raise CritError(message.crit_error_path_mapping % str(e).strip("'"))
+            raise CritError(messages.crit_error_path_mapping % e.message)
 
         self.link_directive_list = [LinkDirective(line, self.link_dir) for line in lines]
 
