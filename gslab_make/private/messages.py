@@ -17,6 +17,7 @@ crit_error_no_path_wildcard = 'ERROR! Paths matching `%s` not found'
 crit_error_bad_command = 'ERROR! Command `%s` cannot be executed by operating system' 
 crit_error_bad_link = 'ERROR! Link `%s` incorrectly specified (check if tab-delimited)' 
 crit_error_extension = 'ERROR! `%s` does not have the right program extension' 
+crit_error_path_mapping = 'ERROR! `{%s}` found in linking instructions but not in path mapping'
 
 # 2) Syntax Errors
 syn_error_wildcard = 'ERROR! Symlink and target must have same number of wildcards' 
