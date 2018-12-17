@@ -72,7 +72,7 @@ class LinkDirective(object):
         """
         
         try:
-            line_parsed = self.line.strip().split('\t')
+            line_parsed = self.line.strip().split('|')
             line_parsed = [l.strip() for l in line_parsed]
             line_parsed = [l.strip('"\'') for l in line_parsed]
             self.symlink, self.target = line_parsed
@@ -211,7 +211,7 @@ class LinkDirective(object):
             else:
                 directory = ''
 
-            command = metadata.commands[self.osname]['makelink'] % (directory, target, symlink)
+            command = metadata.commands[self.osname]['makelink'] % (directory, symlink, target)
             subprocess.Popen(command, shell = True)
 
 
@@ -292,7 +292,7 @@ class LinksList(object):
         try:
             lines = [str(line).format(**self.mapping_dict) for line in lines]
         except KeyError as e:
-            raise CritError(messages.crit_error_path_mapping % e.message)
+            raise CritError(message.crit_error_path_mapping % str(e).strip("'"))
 
         self.link_directive_list = [LinkDirective(line, self.link_dir) for line in lines]
 
