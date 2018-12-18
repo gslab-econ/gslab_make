@@ -19,6 +19,7 @@ def norm_path(path):
         path = os.path.sep.join(path)
         path = path.rstrip(os.path.sep)
         path = os.path.abspath(path)
+        path = os.path.expanduser(path)
 
     return path
 

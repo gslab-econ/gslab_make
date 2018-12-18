@@ -53,13 +53,14 @@ def run_stata(paths, program, **kwargs):
         direct = ProgramDirective(application = 'stata', program = program, makelog = makelog, **kwargs)
 
         # Get program output
-        program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
+        program_name = direct.program.split(" ")[0]
+        program_name = os.path.split(program_name)[-1]
+        program_log = os.path.join(os.getcwd(), program_name + '.log')
 
         # Execute
         command = metadata.commands[direct.osname]['stata'] % (direct.executable, direct.option, direct.program)
         exit_code, error_message = direct.execute_command(command)
-        direct.write_log()
-        direct.move_program_output(program_log, direct.log)  
+        direct.move_program_output(program_log, direct.log)
         if exit_code != 0:
             raise CritError('* Stata program executed with errors: *\n%s' % error_message)
     except:
