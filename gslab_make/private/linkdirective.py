@@ -227,6 +227,8 @@ class LinksList(object):
     ----------
     file_list : list
         List of files from which to parse linking instructions.
+    file_format : str
+        Format of files from which to parse linking instructions.
     link_dir : str
         Directory to write symlink(s).
     mapping_dict : dict, optional
@@ -241,10 +243,12 @@ class LinksList(object):
     
     def __init__(self, 
                  file_list, 
+                 file_format,
                  link_dir, 
                  mapping_dict = {}):
         
         self.file_list = file_list
+        self.file_format = file_format
         self.link_dir = link_dir
         self.mapping_dict = mapping_dict
         self.parse_file_list()
@@ -288,7 +292,7 @@ class LinksList(object):
         None
         """
         
-        lines = [line for file in self.file_list for line in file_to_array(file)]
+        lines = [line for file in self.file_list for line in file_to_array(file, self.file_format)]
         try:
             lines = [str(line).format(**self.mapping_dict) for line in lines]
         except KeyError as e:
