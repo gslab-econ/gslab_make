@@ -18,8 +18,8 @@ def norm_path(path):
         path = re.split('[/\\\\]+', path)
         path = os.path.sep.join(path)
         path = path.rstrip(os.path.sep)
-        path = os.path.abspath(path)
         path = os.path.expanduser(path)
+        path = os.path.abspath(path)
 
     return path
 
@@ -85,7 +85,7 @@ def file_to_array(file_name, file_format):
             array = [line.strip() for line in f]
             array = [line for line in array if line]
             array = [line for line in array if not re.match('\#',line)]
-    else if file_format == "external":
+    if file_format == "external":
         with open(file_name, 'r') as f:
             array = [line.strip() for line in f]
             array = [line for line in array if line]

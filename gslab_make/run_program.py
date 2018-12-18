@@ -55,6 +55,7 @@ def run_stata(paths, program, **kwargs):
         # Get program output
         program_name = direct.program.split(" ")[0]
         program_name = os.path.split(program_name)[-1]
+        program_name = os.path.splitext(program_name)[0]
         program_log = os.path.join(os.getcwd(), program_name + '.log')
 
         # Execute

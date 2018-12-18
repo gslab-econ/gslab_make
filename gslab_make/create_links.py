@@ -59,3 +59,73 @@ def create_links(paths,
         write_to_makelog(paths, error_message)
         
         raise               
+        
+
+def create_input_links(paths,
+                       file_list,
+                       mapping_dict = {}):
+    """ 
+    Create symlinks from list of files containing linking instructions. 
+
+    Notes
+    -----
+    Linking instructions should be in input format.
+
+    Parameters
+    ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'input_dir' : str
+                Directory to write symlinks.
+            'makelog' : str
+                Path of makelog.
+        }
+    file_list : list
+        List of files containing linking instructions.
+    mapping_dict : dict, optional
+        Dictionary of path mappings used to parse linking instructions. 
+        Defaults to no mappings.
+
+    Returns
+    -------
+    link_map : list
+        List of (target, symlink) for each symlink created.
+    """
+    paths['link_dir'] = paths['input_dir']
+    link_map = create_links(paths, file_list, "input", mapping_dict)
+    return(link_map)
+
+
+def create_external_links(paths,
+                          file_list,
+                          mapping_dict = {}):
+    """ 
+    Create symlinks from list of files containing linking instructions. 
+
+    Notes
+    -----
+    Linking instructions should be in external format.
+
+    Parameters
+    ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'external_dir' : str
+                Directory to write symlinks.
+            'makelog' : str
+                Path of makelog.
+        }
+    file_list : list
+        List of files containing linking instructions.
+    mapping_dict : dict, optional
+        Dictionary of path mappings used to parse linking instructions. 
+        Defaults to no mappings.
+
+    Returns
+    -------
+    link_map : list
+        List of (target, symlink) for each symlink created.
+    """
+    paths['link_dir'] = paths['external_dir']
+    link_map = create_links(paths, file_list, "external", mapping_dict)
+    return(link_map)
