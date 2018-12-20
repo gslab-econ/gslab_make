@@ -59,7 +59,7 @@ def create_links(paths,
         write_to_makelog(paths, error_message)
         
         raise               
-        
+
 
 def create_input_links(paths,
                        file_list,
