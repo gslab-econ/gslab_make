@@ -153,6 +153,7 @@ def log_files_in_output(paths,
     output_headslog = paths['output_headslog']
 
     output_files = glob_recursive(output_dir, recursive)
+    output_files = set(output_files)
 
     if output_statslog:
         output_statslog = norm_path(output_statslog)

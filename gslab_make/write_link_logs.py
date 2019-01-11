@@ -57,6 +57,7 @@ def write_link_logs(paths,
         target_list = [target for target, symlink in link_map]
         target_list = [glob_recursive(target, recursive) for target in target_list]
         target_files = [f for target in target_list for f in target]
+        target_files = set(target_files)
 
         write_stats_log(link_statslog, target_files)
         write_heads_log(link_headslog, target_files)    

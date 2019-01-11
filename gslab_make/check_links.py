@@ -6,12 +6,11 @@ from builtins import (bytes, str, open, super, range,
 import git
 
 import gslab_make.private.messages as messages
-from gslab_make.private.utility import norm_path
+from gslab_make.private.utility import norm_path, format_error, glob_recursive
 from gslab_make.write_logs import write_to_makelog
 
 
-def get_git_status(repo):
-     
+def get_git_status(repo): 
     root = repo.working_tree_dir
 
     file_list = repo.git.status(porcelain = True)
@@ -22,20 +21,21 @@ def get_git_status(repo):
 
     return(file_list)
 
+def get_modified_links(paths, 
+                       link_map, 
+                       recursive = float('inf')):
 
-def get_modified_links(paths):
-    link_maplog = paths['link_maplog']
+    target_list = [target for target, symlink in link_map]
+    target_list = [glob_recursive(target, recursive) for target in target_list]
+    target_files = [f for target in target_list for f in target]
+    target_files = set(target_files)
    
-    repo = git.Repo(link_maplog, search_parent_directories = True)    
+    repo = git.Repo('.', search_parent_directories = True)    
     modified = get_git_status(repo)
-    with open(link_maplog, 'r') as f:
-        links = f.readlines()
-        links = links[1:len(links)]
-        links = [l.split('\t')[1].strip() for l in links]
-    overlap = [l for l in links if l in modified]
+    overlap = [l for l in target_files if l in modified]
     
     if overlap:
-        message = messages.note_modified_files % '\n'.join(overlap)
+        message = format_error(messages.note_modified_files % '\n'.join(overlap))
         write_to_makelog(paths, message)
         print(message)
 

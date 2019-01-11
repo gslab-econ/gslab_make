@@ -31,6 +31,6 @@ type_error_not_dir = 'ERROR! Path `%s` is not a directory'
 note_makelog_start = 'Makelog started: '
 note_makelog_end = 'Makelog ended: '
 note_working_directory = 'Working directory: '
-note_modified_files = "WARNING! The following input files have been modified according to git status:\n%s"
+note_modified_files = "WARNING! The following target files have been modified according to git status:\n%s"
 note_dash_line = '-' * 80
 note_star_line = '*' * 80 
