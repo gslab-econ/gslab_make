@@ -10,7 +10,7 @@ from gslab_make.private.exceptionclasses import CritError
 import gslab_make.private.messages as messages
 from gslab_make.private.utility import norm_path, format_error, glob_recursive
 from gslab_make.write_logs import write_to_makelog
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 
 def get_git_status(repo): 
     """ Get git status.
@@ -55,7 +55,7 @@ def get_modified_links(paths,
 
     Returns
     -------
-    overlap : list
+ `   overlap : list
         List of target files considered changed by git status.
     """
     

@@ -7,7 +7,6 @@ import os
 import re
 import glob
 
-from gslab_make.private.exceptionclasses import CritError
 import gslab_make.private.messages as messages
 
 
