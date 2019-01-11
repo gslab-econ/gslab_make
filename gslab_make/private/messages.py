@@ -18,6 +18,7 @@ crit_error_bad_command = 'ERROR! Command `%s` cannot be executed by operating sy
 crit_error_bad_link = 'ERROR! Link `%s` incorrectly specified (check if tab-delimited)' 
 crit_error_extension = 'ERROR! `%s` does not have the right program extension' 
 crit_error_path_mapping = 'ERROR! `{%s}` found in linking instructions but not in path mapping'
+crit_error_no_repo = 'ERROR! Current working directory is not associated with a git repository'
 
 # 2) Syntax Errors
 syn_error_wildcard = 'ERROR! Symlink and target must have same number of wildcards' 
