@@ -67,10 +67,10 @@ def get_modified_links(paths,
    
         try:
             repo = git.Repo('.', search_parent_directories = True)    
-            modified = get_git_status(repo)
         except:
             raise CritError(messages.crit_error_no_repo)
-                
+        modified = get_git_status(repo)
+
         overlap = [l for l in target_files if l in modified]   
         if overlap:
             message = format_error(messages.note_modified_files % '\n'.join(overlap))
