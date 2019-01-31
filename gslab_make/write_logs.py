@@ -226,7 +226,7 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
 
     header = "File headers"
 
-    with open(headslog_file, 'w', encoding - 'utf8') as HEADSLOG:      
+    with open(headslog_file, 'w', encoding = 'utf8') as HEADSLOG:      
         print(header, file = HEADSLOG)
         print(messages.note_dash_line, file = HEADSLOG)
         
