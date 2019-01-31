@@ -58,7 +58,7 @@ class CleanRepo(build_py):
             shutil.rmtree('./dist')
 
 # Requirements
-requirements = ['requests', 'scandir', 'mmh3']
+requirements = ['requests', 'scandir', 'mmh3', 'future']
 
 setup(name         = 'GSLab_Make',
       version      = '1.1.1',
@@ -71,6 +71,6 @@ setup(name         = 'GSLab_Make',
       install_requires = requirements,
       zip_safe     = False,
       cmdclass     = {'test': TestRepo, 'clean': CleanRepo},
-      setup_requires = ['pytest-runner', 'coverage'],
+      setup_requires = ['pytest-runner', 'coverage', 'future'],
       tests_require = ['pytest', 'coverage'])
 
