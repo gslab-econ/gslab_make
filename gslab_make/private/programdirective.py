@@ -6,6 +6,7 @@ from builtins import (bytes, str, open, super, range,
 import os
 import subprocess
 import shutil
+import traceback
 
 from gslab_make.private.exceptionclasses import CritError
 import gslab_make.private.messages as messages
@@ -31,28 +32,28 @@ class Directive(object):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to False.
+        Defaults to True.
 
     Returns
     -------
     None
     """
     
-    def __init__(self, 
-                 makelog, 
+    def __init__(self,
+                 makelog,
                  log = '',
                  osname = os.name,
-                 shell = False):
+                 shell = True):
 
         self.makelog  = makelog
-        self.log      = log  
+        self.log      = log
         self.osname   = osname
         self.shell    = shell
         self.check_os()
         self.get_paths()
 
     def check_os(self):
-        """ Check OS is either POSIX or NT.  
+        """ Check OS is either POSIX or NT.
                 
         Returns
         -------
@@ -62,19 +63,19 @@ class Directive(object):
         if self.osname not in {'posix', 'nt'}:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
-    def get_paths(self):   
-        """ Normalize paths.   
+    def get_paths(self):
+        """ Normalize paths.
         
         Returns
         -------
         None  
         """
         self.makelog  = norm_path(self.makelog)
-        self.log      = norm_path(self.log) if self.log != '' else self.log        
+        self.log      = norm_path(self.log) if self.log != '' else self.log
 
-    def execute_command(self, command):   
+    def execute_command(self, command):
         """ Execute shell command.
-        
+    
         Parameters
         ----------
         command : str
@@ -89,22 +90,27 @@ class Directive(object):
         self.output = 'Executing: "%s"' % command
         print(self.output)
 
-        try:   
-             process = subprocess.Popen(command.split(), 
-                                        stdout = subprocess.PIPE, 
-                                        stderr = subprocess.PIPE, 
-                                        shell = self.shell)
-             stdout, stderr = process.communicate()
-             exit = (process.returncode, stderr)             
+        try:
+            if not self.shell:
+                command = command.split()
+
+            process = subprocess.Popen(command, 
+                                       stdout = subprocess.PIPE, 
+                                       stderr = subprocess.PIPE, 
+                                       shell = self.shell)
+            stdout, stderr = process.communicate()
+            exit = (process.returncode, stderr)             
              
-             if stdout:
-                self.output += '\n' + stdout
-             if stderr:
-                self.output += '\n' + stderr 
+            if stdout:
+               self.output += '\n' + stdout
+            if stderr:
+               self.output += '\n' + stderr 
                             
-             return(exit)
+            return(exit)
         except:
-             raise CritError(messages.crit_error_bad_command % command)
+            error_message = messages.crit_error_bad_command % command
+            error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
+            raise CritError(error_message)
              
 
     def write_log(self):
@@ -119,7 +125,7 @@ class Directive(object):
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
             with open(self.makelog, 'a') as f:
-                f.write(self.output)
+                print(self.output, file = f)
 
         if self.log:
             with open(self.log, 'w') as f:
@@ -174,12 +180,16 @@ class ProgramDirective(Directive):
                  args = '', 
                  **kwargs):
 
-        super(ProgramDirective, self).__init__(makelog, **kwargs)
+# <<<<<<< HEAD
+#         super(ProgramDirective, self).__init__(makelog, **kwargs)
+# =======
+# >>>>>>> origin/issue13_template_to_dos
         self.application = application
         self.program     = program
         self.executable  = executable
         self.option      = option
         self.args        = args      
+        super(ProgramDirective, self).__init__(**kwargs)
         self.parse_program()
         self.check_program()
         self.get_executable()
@@ -209,7 +219,7 @@ class ProgramDirective(Directive):
         if not os.path.isfile(self.program):
             raise CritError(messages.crit_error_no_file % self.program)    
         
-        if self.program_ext != metadata.extensions[self.application]:
+        if self.program_ext not in metadata.extensions[self.application]:
             raise CritError(messages.crit_error_extension % self.program)
 
     def get_executable(self):
@@ -258,7 +268,7 @@ class ProgramDirective(Directive):
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
             with open(self.makelog, 'a') as f:
-                f.write(out)
+                print(out, file = f)
 
         if log_file: 
             if program_output != log_file:
@@ -287,8 +297,8 @@ class SASDirective(ProgramDirective):
                  lst = '', 
                  **kwargs):
 
-        super(SASDirective, self).__init__(**kwargs)
         self.lst = lst  
+        super(SASDirective, self).__init__(**kwargs)
 
 
 class LyXDirective(ProgramDirective):    
@@ -303,7 +313,7 @@ class LyXDirective(ProgramDirective):
     ----------
     See `ProgramDirective`.
     
-    pdf_dir : str, optional
+    pdf_dir : str
         Directory to write PDFs.
     doctype : str, optional
         Type of LyX document. Takes either `handout` and `comments`. 
@@ -315,9 +325,9 @@ class LyXDirective(ProgramDirective):
                  doctype = '',
                  **kwargs):
 
-        super(LyXDirective, self).__init__(**kwargs)
         self.pdf_dir = pdf_dir
         self.doctype = doctype
+        super(LyXDirective, self).__init__(**kwargs)
         self.check_doctype()
 
     def check_doctype(self):

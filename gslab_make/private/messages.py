@@ -15,8 +15,10 @@ crit_error_no_files = 'ERROR! Files `%s` not found'
 crit_error_no_path = 'ERROR! Path `%s` not found' 
 crit_error_no_path_wildcard = 'ERROR! Paths matching `%s` not found' 
 crit_error_bad_command = 'ERROR! Command `%s` cannot be executed by operating system' 
-crit_error_bad_link = 'ERROR! Link `%s` incorrectly specified' 
+crit_error_bad_link = 'ERROR! Link `%s` incorrectly specified (check if tab-delimited)' 
 crit_error_extension = 'ERROR! `%s` does not have the right program extension' 
+crit_error_path_mapping = 'ERROR! `{%s}` found in linking instructions but not in path mapping'
+crit_error_no_repo = 'ERROR! Current working directory is not associated with a git repository'
 
 # 2) Syntax Errors
 syn_error_wildcard = 'ERROR! Symlink and target must have same number of wildcards' 
@@ -30,5 +32,6 @@ type_error_not_dir = 'ERROR! Path `%s` is not a directory'
 note_makelog_start = 'Makelog started: '
 note_makelog_end = 'Makelog ended: '
 note_working_directory = 'Working directory: '
+note_modified_files = "WARNING! The following target files have been modified according to git status:\n%s"
 note_dash_line = '-' * 80
 note_star_line = '*' * 80 

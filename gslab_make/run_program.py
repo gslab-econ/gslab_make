@@ -7,6 +7,7 @@ import os
 import shutil
 import fileinput
 import traceback
+import re
 
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError
@@ -15,7 +16,7 @@ from gslab_make.private.utility import format_error
 from gslab_make.write_logs import write_to_makelog
 
 
-def run_stata(paths, **kwargs):
+def run_stata(paths, program, **kwargs):
     """ Run Stata script using system command.
 
     Parameters
@@ -25,15 +26,15 @@ def run_stata(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -51,17 +52,25 @@ def run_stata(paths, **kwargs):
 
     try:
         direct = ProgramDirective(application='stata', makelog=makelog, **kwargs)
+# =======
+#         direct = ProgramDirective(application = 'stata', program = program, makelog = makelog, **kwargs)
+# >>>>>>> origin/issue13_template_to_dos
 
         # Get program output
-        program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
+        program_name = direct.program.split(" ")[0]
+        program_name = os.path.split(program_name)[-1]
+        program_name = os.path.splitext(program_name)[0]
+        program_log = os.path.join(os.getcwd(), program_name + '.log')
+        
+        # Sanitize program
+        direct.program = re.escape(direct.program)
 
         # Execute
         command = metadata.commands[direct.osname]['stata'] % (direct.executable, direct.option, direct.program)
         exit_code, error_message = direct.execute_command(command)
-        direct.write_log()
-        direct.move_program_output(program_log, direct.log)  
         if exit_code != 0:
             raise CritError('* Stata program executed with errors: *\n%s' % error_message)
+        direct.move_program_output(program_log, direct.log)
     except:
         error_message = 'Error with `run_stata`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
@@ -69,7 +78,7 @@ def run_stata(paths, **kwargs):
         raise
     
     
-def run_matlab(paths, **kwargs):
+def run_matlab(paths, program, **kwargs):
     """ Run Matlab script using system command.
 
     Parameters
@@ -79,15 +88,15 @@ def run_matlab(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -105,6 +114,9 @@ def run_matlab(paths, **kwargs):
 
     try:
         direct = ProgramDirective(application='matlab', makelog=makelog, **kwargs)
+# =======
+#         direct = ProgramDirective(application = 'matlab', program = program, makelog = makelog, **kwargs)
+# >>>>>>> origin/issue13_template_to_dos
         
         # Get program output
         program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
@@ -112,9 +124,9 @@ def run_matlab(paths, **kwargs):
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.program_name + '.log')
         exit_code, error_message = direct.execute_command(command)    
-        direct.move_program_output(program_log, direct.log)   
         if exit_code != 0:
             raise CritError('* Matlab program executed with errors: *\n%s' % error_message)
+        direct.move_program_output(program_log, direct.log)   
     except:
         error_message = 'Error with `run_matlab`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
@@ -122,7 +134,7 @@ def run_matlab(paths, **kwargs):
         raise
         
 
-def run_perl(paths, **kwargs):
+def run_perl(paths, program, **kwargs):
     """ Run Perl script using system command.
 
     Parameters
@@ -132,15 +144,15 @@ def run_perl(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -158,6 +170,9 @@ def run_perl(paths, **kwargs):
 
     try:
         direct = ProgramDirective(application='perl', makelog=makelog, **kwargs)
+# =======
+#         direct = ProgramDirective(application = 'perl', program = program, makelog = makelog, **kwargs)
+# >>>>>>> origin/issue13_template_to_dos
         
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
@@ -172,7 +187,7 @@ def run_perl(paths, **kwargs):
         raise
 
 
-def run_python(paths, **kwargs):
+def run_python(paths, program, **kwargs):
     """ Run Python script using system command.
 
     Parameters
@@ -182,15 +197,15 @@ def run_python(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -208,6 +223,9 @@ def run_python(paths, **kwargs):
 
     try:
         direct = ProgramDirective(application='python', makelog=makelog, **kwargs)
+# =======
+#         direct = ProgramDirective(application = 'python', program = program, makelog = makelog, **kwargs)
+# >>>>>>> origin/issue13_template_to_dos
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
@@ -222,7 +240,7 @@ def run_python(paths, **kwargs):
         raise
         
 
-def run_mathematica(paths, **kwargs):
+def run_mathematica(paths, program, **kwargs):
     """ Run Mathematica script using system command.
 
     Parameters
@@ -232,15 +250,15 @@ def run_mathematica(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -258,6 +276,9 @@ def run_mathematica(paths, **kwargs):
 
     try:
         direct = ProgramDirective(application='math', makelog=makelog, **kwargs)
+# =======
+#         direct = ProgramDirective(application = 'math', program = program, makelog = makelog, **kwargs)
+# >>>>>>> origin/issue13_template_to_dos
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program, direct.option)
@@ -272,7 +293,7 @@ def run_mathematica(paths, **kwargs):
         raise
         
 
-def run_stat_transfer(paths, **kwargs):
+def run_stat_transfer(paths, program, **kwargs):
     """ Run StatTransfer script using system command.
 
     Parameters
@@ -282,15 +303,15 @@ def run_stat_transfer(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -308,6 +329,9 @@ def run_stat_transfer(paths, **kwargs):
 
     try:
         direct = ProgramDirective(application='st', makelog=makelog, **kwargs)
+# =======
+#         direct = ProgramDirective(application = 'st', program = program, makelog = makelog, **kwargs)
+# >>>>>>> origin/issue13_template_to_dos
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program)
@@ -322,7 +346,7 @@ def run_stat_transfer(paths, **kwargs):
         raise
         
 
-def run_lyx(paths, **kwargs): 
+def run_lyx(paths, program, **kwargs): 
     """ Run LyX script using system command.
 
     Parameters
@@ -334,15 +358,15 @@ def run_lyx(paths, **kwargs):
             'pdf_dir' : str
                 Directory to write PDFs.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -363,7 +387,7 @@ def run_lyx(paths, **kwargs):
     pdf_dir = paths['pdf_dir']
 
     try:
-        direct = LyXDirective(application = 'lyx', makelog = makelog, pdf_dir = pdf_dir, **kwargs)
+        direct = LyXDirective(pdf_dir = pdf_dir, application = 'lyx', program = program, makelog = makelog, **kwargs)
             
         # Make handout/commented LyX file        
         if direct.doctype:
@@ -410,7 +434,7 @@ def run_lyx(paths, **kwargs):
         raise
         
 
-def run_r(paths, **kwargs):
+def run_r(paths, program, **kwargs):
     """ Run R script using system command.
 
     Parameters
@@ -420,15 +444,15 @@ def run_r(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -445,7 +469,7 @@ def run_r(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application = 'r', makelog = makelog, **kwargs)
+        direct = ProgramDirective(application = 'r', program = program, makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)
@@ -460,7 +484,7 @@ def run_r(paths, **kwargs):
         raise
         
 
-def run_sas(paths, **kwargs):
+def run_sas(paths, program, **kwargs):
     """ Run SAS script using system command.
 
     Parameters
@@ -470,15 +494,15 @@ def run_sas(paths, **kwargs):
             'makelog' : str
                 Path of makelog.
         }
+    program : str
+        Path of script to run.
     osname : str, optional
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of program log. Program log is only written if specified. 
-    program : str
-        Path of script to run.
     executable : str, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
@@ -497,7 +521,7 @@ def run_sas(paths, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = SASDirective(application = 'sas', makelog = makelog, **kwargs)
+        direct = SASDirective(application = 'sas', program = program, makelog = makelog, **kwargs)
 
         # Get program outputs
         program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
@@ -506,10 +530,10 @@ def run_sas(paths, **kwargs):
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)       
         exit_code, error_message = direct.execute_command(command)
-        direct.move_program_output(program_log)
-        direct.move_program_output(program_lst)        
         if exit_code != 0:
             raise CritError('* SAS program executed with errors: *\n%s' % error_message)
+        direct.move_program_output(program_log)
+        direct.move_program_output(program_lst)        
     except:
         error_message = 'Error with `run_sas`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
@@ -533,7 +557,7 @@ def execute_command(paths, command, **kwargs):
         Name of OS. Defaults to `os.name`.
     shell : bool, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `False`.
+        Defaults to `True`.
     log : str, optional
         Path of system command log. system command log is only written if specified. 
         
@@ -557,4 +581,3 @@ def execute_command(paths, command, **kwargs):
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
         write_to_makelog(paths, error_message)
         raise
-        

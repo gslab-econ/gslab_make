@@ -1,12 +1,15 @@
 #! /usr/bin/env python
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
 
 import os
 import argparse
 import types
 import traceback
-import textfill_info
 from HTMLParser import HTMLParser, HTMLParseError
 
+import gslab_make.textfill_info as textfill_info
 
 def textfill(**kwargs):
     try:
@@ -14,13 +17,13 @@ def textfill(**kwargs):
         text = parse_text(args)
         insert_text(args, text)
         exitmessage = args['template'] + ' filled successfully by textfill'
-        print exitmessage
+        print(exitmessage)
         return exitmessage	
         
     except:
-        print 'Error Found'
+        print('Error Found')
         exitmessage = traceback.format_exc()
-        print exitmessage
+        print(exitmessage)
         return exitmessage    
 
 # Set textfill's docstring as the text in "textfill_info.py"

@@ -39,6 +39,14 @@ class testRunPython(unittest.TestCase):
             run_python(makelog, program = 'gslab_make/tests/input/python_test_script.py', executable = metadata.default_executables[os.name]['python']) 
         self.assertIn('Test script complete', open(makelog['makelog']).read())
         self.assertTrue(os.path.isfile('output.txt'))
+
+    def test_path_with_space(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+            start_makelog(makelog)
+            run_python(makelog, program = 'gslab_make/tests/input/python_test_script copy.py', executable = metadata.default_executables[os.name]['python']) 
+        self.assertIn('Test script complete', open(makelog['makelog']).read())
+        self.assertTrue(os.path.isfile('output.txt'))
         
     def test_bad_executable(self):
     	makelog = {'makelog' : 'log/make.log'}

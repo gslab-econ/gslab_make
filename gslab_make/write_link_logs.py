@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
+import os
 import traceback
 
 from gslab_make.private.utility import glob_recursive, format_error
@@ -51,12 +52,12 @@ def write_link_logs(paths,
     link_statslog = paths['link_statslog']
     link_headslog = paths['link_headslog']
     link_maplog   = paths['link_maplog']
-    makelog       = paths['makelog']
 
     try:
         target_list = [target for target, symlink in link_map]
         target_list = [glob_recursive(target, recursive) for target in target_list]
         target_files = [f for target in target_list for f in target]
+        target_files = set(target_files)
 
         write_stats_log(link_statslog, target_files)
         write_heads_log(link_headslog, target_files)    
@@ -84,12 +85,11 @@ def write_link_maplog(link_maplog, link_map):
     None
     """
     
-    header = 'target\tsymlink'
+    header = 'symlink\ttarget'
 
     with open(link_maplog, 'w') as MAPLOG:
         print(header, file = MAPLOG)
 
         for target, symlink in link_map:
-            print("%s\t%s" % (target, symlink), file = MAPLOG)
-        
-      
+            symlink = os.path.relpath(symlink)
+            print("%s\t%s" % (symlink, target), file = MAPLOG)

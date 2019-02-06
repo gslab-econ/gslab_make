@@ -133,6 +133,8 @@ def log_files_in_output(paths,
         Dictionary of paths. Dictionary should contain {
             'output_dir' : str
                 Path of output directory.
+            'output_local_dir' : str
+                Path of local output directory.
             'output_statslog' : str
                 Path to write output statistics log.
             'output_headslog' : str
@@ -147,13 +149,17 @@ def log_files_in_output(paths,
     -------
     None
     """
-
     output_dir      = paths['output_dir']
     output_statslog = paths['output_statslog']
     output_headslog = paths['output_headslog']
-    makelog         = paths['makelog']
+    try:
+        output_local_dir = paths['output_local_dir']
+    except:
+        output_local_dir = ''
 
     output_files = glob_recursive(output_dir, recursive)
+    output_local_files = glob_recursive(output_dir, recursive)
+    output_files = set(output_files + output_local_files)
 
     if output_statslog:
         output_statslog = norm_path(output_statslog)
@@ -190,7 +196,7 @@ def write_stats_log(statslog_file, output_files):
 
     header = "file name\tlast modified\tfile size"
     
-    with open(statslog_file, 'w') as STATSLOG:
+    with open(statslog_file, 'w', encoding = 'utf8') as STATSLOG:
         print(header, file = STATSLOG)      
 
         for file_name in output_files:
@@ -220,7 +226,7 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
 
     header = "File headers"
 
-    with open(headslog_file, 'w') as HEADSLOG:      
+    with open(headslog_file, 'w', encoding - 'utf8') as HEADSLOG:      
         print(header, file = HEADSLOG)
         print(messages.note_dash_line, file = HEADSLOG)
         

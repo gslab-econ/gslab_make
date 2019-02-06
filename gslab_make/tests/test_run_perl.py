@@ -40,6 +40,14 @@ class testRunPerl(unittest.TestCase):
             run_perl(makelog, program = 'gslab_make/tests/input/perl_test_script.pl', executable = metadata.default_executables[os.name]['perl']) 
         self.assertIn('Test script complete', open(makelog['makelog']).read())
         self.assertTrue(os.path.isfile('output.txt'))
+
+    def test_path_with_space(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+            start_makelog(makelog)
+            run_perl(makelog, program = 'gslab_make/tests/input alias/perl_test_script.pl', executable = metadata.default_executables[os.name]['perl']) 
+        self.assertIn('Test script complete', open(makelog['makelog']).read())
+        self.assertTrue(os.path.isfile('output.txt'))
         
     def test_bad_executable(self):
     	makelog = {'makelog' : 'log/make.log'}

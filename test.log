@@ -10,7 +10,7 @@ running build_ext
 ============================= test session starts ==============================
 platform darwin -- Python 2.7.13, pytest-3.2.1, py-1.4.34, pluggy-0.4.0
 rootdir: /Users/danielagonzalez/gslab_make, inifile:
-collected 66 items
+collected 68 items
 
 gslab_make/tests/test_clear_dir.py ...
 gslab_make/tests/test_execute_command.py .
@@ -18,8 +18,8 @@ gslab_make/tests/test_remove_path.py ....
 gslab_make/tests/test_run_lyx.py .FFFFF.FF
 gslab_make/tests/test_run_mathematica.py .FFF.F
 gslab_make/tests/test_run_matlab.py FFFF.FF
-gslab_make/tests/test_run_perl.py .....
-gslab_make/tests/test_run_python.py .....
+gslab_make/tests/test_run_perl.py .....F
+gslab_make/tests/test_run_python.py .....F
 gslab_make/tests/test_run_r.py .......
 gslab_make/tests/test_run_stata.py .FFF.
 gslab_make/tests/test_tablefill.py ....
@@ -43,7 +43,7 @@ gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x105c01910>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10d865a10>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_comments.lyx'
 
     def execute_command(self, command):
@@ -98,7 +98,7 @@ gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x105c019d0>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10d8659d0>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -153,7 +153,7 @@ gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x105d8e2d0>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10d891c90>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -208,7 +208,7 @@ gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x105c2af10>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10d9dc350>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_handout.lyx'
 
     def execute_command(self, command):
@@ -264,7 +264,7 @@ gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x105d7dbd0>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10d9b2310>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -319,7 +319,7 @@ gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x105d71350>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10d9de350>
 command = 'lyx -e pdf /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -374,7 +374,7 @@ gslab_make/run_program.py:390: in run_lyx
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.LyXDirective object at 0x105d532d0>
+self = <gslab_make.private.programdirective.LyXDirective object at 0x10d9d2110>
 command = 'lyx -e pdf2 /Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
     def execute_command(self, command):
@@ -428,7 +428,7 @@ gslab_make/run_program.py:264: in run_mathematica
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d55410>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9dccd0>
 command = 'math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -noprompt'
 
     def execute_command(self, command):
@@ -482,7 +482,7 @@ gslab_make/run_program.py:264: in run_mathematica
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d6b110>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9ddf10>
 command = 'math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -noprompt'
 
     def execute_command(self, command):
@@ -537,7 +537,7 @@ gslab_make/run_program.py:264: in run_mathematica
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d7bb10>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9ca190>
 command = 'math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -noprompt'
 
     def execute_command(self, command):
@@ -591,7 +591,7 @@ gslab_make/run_program.py:264: in run_mathematica
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d60110>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9def10>
 command = 'math < /Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m -initfile gslab_make/tests/input/mathematica_init_script.m'
 
     def execute_command(self, command):
@@ -636,54 +636,10 @@ self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_bad_execu
 
     def test_bad_executable(self):
         makelog = {'makelog' : 'log/make.log'}
-        with nostderrout():
->           run_matlab(makelog, program = 'gslab_make/tests/input/matlab_test_script.m', executable = 'nonexistent_matlab_executable')
+>       with self.assertRaises(CritError):
+E       NameError: global name 'CritError' is not defined
 
-gslab_make/tests/test_run_matlab.py:47: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-gslab_make/run_program.py:114: in run_matlab
-    exit_code, error_message = direct.execute_command(command)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d7d890>
-command = "nonexistent_matlab_executable -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
-
-    def execute_command(self, command):
-        """ Execute shell command.
-    
-            Parameters
-            ----------
-            command : str
-                Shell command to execute.
-    
-            Returns
-            -------
-            exit : tuple
-                Tuple (exit code, error message) for shell command.
-            """
-    
-        self.output = 'Executing: "%s"' % command
-        print(self.output)
-    
-        try:
-             process = subprocess.Popen(command.split(),
-                                        stdout = subprocess.PIPE,
-                                        stderr = subprocess.PIPE,
-                                        shell = self.shell)
-             stdout, stderr = process.communicate()
-             exit = (process.returncode, stderr)
-    
-             if stdout:
-                self.output += '\n' + stdout
-             if stderr:
-                self.output += '\n' + stderr
-    
-             return(exit)
-        except:
->            raise CritError(messages.crit_error_bad_command % command)
-E            CritError: ERROR! Command `nonexistent_matlab_executable -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log` cannot be executed by operating system
-
-gslab_make/private/programdirective.py:107: CritError
+gslab_make/tests/test_run_matlab.py:46: NameError
 ________________________ testRunMatlab.test_default_log ________________________
 
 self = <gslab_make.tests.test_run_matlab.testRunMatlab testMethod=test_default_log>
@@ -698,7 +654,7 @@ gslab_make/run_program.py:114: in run_matlab
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d71550>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9d2fd0>
 command = "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
 
     def execute_command(self, command):
@@ -754,7 +710,7 @@ gslab_make/run_program.py:114: in run_matlab
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d8fc50>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9cff50>
 command = "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
 
     def execute_command(self, command):
@@ -809,7 +765,7 @@ gslab_make/run_program.py:114: in run_matlab
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d64d90>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9b9590>
 command = "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
 
     def execute_command(self, command):
@@ -863,7 +819,7 @@ gslab_make/run_program.py:114: in run_matlab
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105705ed0>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9bb090>
 command = "matlab -h -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m') -logfile matlab_test_script.log"
 
     def execute_command(self, command):
@@ -917,7 +873,7 @@ gslab_make/run_program.py:114: in run_matlab
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d8ed50>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9b2d10>
 command = "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script_wait1.m') -logfile matlab_test_script_wait1.log"
 
     def execute_command(self, command):
@@ -956,6 +912,111 @@ command = "matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make
 E            CritError: ERROR! Command `matlab -nosplash -nodesktop -r run('/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script_wait1.m') -logfile matlab_test_script_wait1.log` cannot be executed by operating system
 
 gslab_make/private/programdirective.py:107: CritError
+_______________________ testRunPerl.test_path_with_space _______________________
+
+self = <gslab_make.tests.test_run_perl.testRunPerl testMethod=test_path_with_space>
+
+    def test_path_with_space(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_perl(makelog, program = 'gslab_make/tests/input alias/perl_test_script.pl', executable = metadata.default_executables[os.name]['perl'])
+
+gslab_make/tests/test_run_perl.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+gslab_make/run_program.py:160: in run_perl
+    direct = ProgramDirective(application='perl', makelog=makelog, **kwargs)
+gslab_make/private/programdirective.py:184: in __init__
+    self.check_program()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10da86c50>
+
+    def check_program(self):
+        """ Check program exists and has correct extension given application.
+    
+            Returns
+            -------
+            None
+            """
+    
+        if not os.path.isfile(self.program):
+>           raise CritError(messages.crit_error_no_file % self.program)
+E           CritError: ERROR! File `/Users/danielagonzalez/gslab_make/gslab_make/tests/input alias/perl_test_script.pl` not found
+
+gslab_make/private/programdirective.py:210: CritError
+______________________ testRunPython.test_path_with_space ______________________
+
+self = <gslab_make.tests.test_run_python.testRunPython testMethod=test_path_with_space>
+
+    def test_path_with_space(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+            start_makelog(makelog)
+>           run_python(makelog, program = 'gslab_make/tests/input/python_test_script copy.py', executable = metadata.default_executables[os.name]['python'])
+
+gslab_make/tests/test_run_python.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paths = {'makelog': 'log/make.log'}
+kwargs = {'executable': 'python', 'program': 'gslab_make/tests/input/python_test_script copy.py'}
+makelog = 'log/make.log'
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9cafd0>
+command = 'python  /Users/danielagonzalez/gslab_make/gslab_make/tests/input/python_test_script copy.py '
+exit_code = 2
+error_message = "********************************************************************************
+Error with `run_python`
+************...e '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/python_test_script': [Errno 2] No such file or directory
+
+"
+
+    def run_python(paths, **kwargs):
+        """ Run Python script using system command.
+    
+        Parameters
+        ----------
+        paths : dict
+            Dictionary of paths. Dictionary should contain {
+                'makelog' : str
+                    Path of makelog.
+            }
+        osname : str, optional
+            Name of OS. Defaults to `os.name`.
+        shell : bool, optional
+            See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+            Defaults to `False`.
+        log : str, optional
+            Path of program log. Program log is only written if specified.
+        program : str
+            Path of script to run.
+        executable : str, optional
+            Executable to use for system command.
+            Defaults to executable specified in metadata.
+        option : str, optional
+            Options for system command. Defaults to options specified in metadata.
+        args : str, optional
+            Arguments for system command. Defaults to no arguments.
+    
+        Returns
+        -------
+        None
+        """
+    
+        makelog = paths['makelog']
+    
+        try:
+            direct = ProgramDirective(application='python', makelog=makelog, **kwargs)
+    
+            # Execute
+            command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
+            exit_code, error_message = direct.execute_command(command)
+            direct.write_log()
+            if exit_code != 0:
+>               raise CritError('* Python program executed with errors: *\n%s' % error_message)
+E               CritError: * Python program executed with errors: *
+E               python: can't open file '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/python_test_script': [Errno 2] No such file or directory
+
+gslab_make/run_program.py:217: CritError
 _________________________ testRunStata.test_executable _________________________
 
 self = <gslab_make.tests.test_run_stata.testRunStata testMethod=test_executable>
@@ -972,7 +1033,7 @@ gslab_make/run_program.py:60: in run_stata
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d5e690>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9cff50>
 command = 'statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do'
 
     def execute_command(self, command):
@@ -1028,7 +1089,7 @@ gslab_make/run_program.py:60: in run_stata
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d71850>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9a8350>
 command = 'statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do'
 
     def execute_command(self, command):
@@ -1083,7 +1144,7 @@ gslab_make/run_program.py:60: in run_stata
     exit_code, error_message = direct.execute_command(command)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = <gslab_make.private.programdirective.ProgramDirective object at 0x105d67f10>
+self = <gslab_make.private.programdirective.ProgramDirective object at 0x10d9dca90>
 command = 'statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do'
 
     def execute_command(self, command):
@@ -1122,7 +1183,7 @@ command = 'statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/inpu
 E            CritError: ERROR! Command `statamp -e do /Users/danielagonzalez/gslab_make/gslab_make/tests/input/stata_test_script.do` cannot be executed by operating system
 
 gslab_make/private/programdirective.py:107: CritError
-==================== 20 failed, 46 passed in 16.02 seconds =====================
+==================== 22 failed, 46 passed in 16.89 seconds =====================
 Name                                       Stmts   Miss Branch BrPart  Cover   Missing
 --------------------------------------------------------------------------------------
 gslab_make/create_links.py                    20     12      0      0    40%   36-50
@@ -1133,7 +1194,7 @@ gslab_make/private/messages.py                20      0      0      0   100%
 gslab_make/private/metadata.py                 7      0      0      0   100%
 gslab_make/private/programdirective.py       102     20     30      5    75%   63, 120, 213, 253-268, 290-291, 332-333, 62->63, 118->124, 119->120, 212->213, 331->332
 gslab_make/private/utility.py                 36     17      6      0    45%   45-62, 79-82
-gslab_make/run_program.py                    179     59     34      5    62%   61-64, 115-117, 167, 217, 265-267, 307-322, 378, 380, 391-405, 497-517, 554-559, 166->167, 216->217, 377->378, 379->380, 553->554
+gslab_make/run_program.py                    179     58     34      4    63%   61-64, 115-117, 167, 265-267, 307-322, 378, 380, 391-405, 497-517, 554-559, 166->167, 377->378, 379->380, 553->554
 gslab_make/tablefill.py                      141      5     68     10    93%   53, 105, 138, 171, 174, 32->35, 35->37, 52->53, 83->exit, 91->88, 104->105, 122->119, 137->138, 167->171, 173->174
 gslab_make/tablefill_info.py                   0      0      0      0   100%
 gslab_make/tests/nostderrout.py               12      0      2      0   100%
@@ -1142,9 +1203,9 @@ gslab_make/tests/test_execute_command.py      31      3      8      4    82%   2
 gslab_make/tests/test_remove_path.py          56      3      6      2    92%   63, 68-69, 62->63, 67->68
 gslab_make/tests/test_run_lyx.py             100     29      8      4    69%   24-26, 34-39, 46-48, 73-75, 82-85, 92-95, 102-105, 116-117, 108->110, 110->112, 112->exit, 115->116
 gslab_make/tests/test_run_mathematica.py      62     13     10      5    75%   25-26, 33-36, 42-43, 61, 69, 71, 74-75, 64->66, 66->68, 68->69, 70->71, 73->74
-gslab_make/tests/test_run_matlab.py           72     22      8      3    66%   24-25, 32-35, 41-42, 48, 60-64, 70-73, 76-78, 87-88, 81->83, 83->exit, 86->87
-gslab_make/tests/test_run_perl.py             58      2      8      3    92%   69-70, 61->63, 63->65, 68->69
-gslab_make/tests/test_run_python.py           57      2      8      3    92%   68-69, 60->62, 62->64, 67->68
+gslab_make/tests/test_run_matlab.py           72     23      8      3    65%   24-25, 32-35, 41-42, 47-48, 60-64, 70-73, 76-78, 87-88, 81->83, 83->exit, 86->87
+gslab_make/tests/test_run_perl.py             65      4      8      3    90%   49-50, 77-78, 69->71, 71->73, 76->77
+gslab_make/tests/test_run_python.py           64      4      8      3    90%   48-49, 76-77, 68->70, 70->72, 75->76
 gslab_make/tests/test_run_r.py                73      4     12      5    89%   81, 83, 86-87, 74->76, 76->78, 80->81, 82->83, 85->86
 gslab_make/tests/test_run_stata.py            56      8      8      4    81%   23, 31-33, 40, 64, 67-68, 59->61, 61->63, 63->64, 66->67
 gslab_make/tests/test_tablefill.py            96      2     42      6    94%   143-144, 20->exit, 37->34, 57->43, 74->exit, 138->exit, 142->143
@@ -1155,4 +1216,4 @@ gslab_make/textfill_info.py                    0      0      0      0   100%
 gslab_make/write_link_logs.py                 29     22      2      0    23%   51-70, 87-93
 gslab_make/write_logs.py                      83     50     22      3    34%   69-84, 111, 151-166, 191-201, 221-240, 40->exit, 107->exit, 110->111
 --------------------------------------------------------------------------------------
-TOTAL                                       1741    364    420     75    76%
+TOTAL                                       1755    368    420     74    76%

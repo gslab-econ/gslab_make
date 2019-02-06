@@ -1,5 +1,10 @@
 #!/usr/bin/python
 # -*- coding: latin-1 -*-
+
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
+
 """
 =======================================================
 gslab_make: a library of make.py and LyX filling tools
@@ -32,15 +37,17 @@ Notes:
 """
 
 # Import make tools
-from create_links import create_links
-from dir_mod import check_os, remove_path, clear_dir, unzip, zip_dir
-from run_program import (run_stata, run_matlab, run_perl, run_python, 
-                         run_mathematica, run_stat_transfer, run_lyx, 
-                         run_r, run_sas, execute_command)
-from write_logs import (start_makelog, end_makelog, write_to_makelog,
-                        log_files_in_output, write_stats_log, write_heads_log)
-from write_link_logs import write_link_logs
+from gslab_make.create_links import create_links, create_input_links, create_external_links
+from gslab_make.check_links import get_modified_links
+from gslab_make.dir_mod import check_os, remove_path, remove_dir, clear_dir, unzip, zip_dir
+from gslab_make.run_program import (run_stata, run_matlab, run_perl, run_python, 
+                                    run_mathematica, run_stat_transfer, run_lyx, 
+                                    run_r, run_sas, execute_command)
+from gslab_make.write_logs import (start_makelog, end_makelog, write_to_makelog,
+                                   log_files_in_output, write_stats_log, write_heads_log)
+from gslab_make.write_link_logs import write_link_logs
+
 
 # Import fill tools
-from tablefill import tablefill
-from textfill import textfill
+from gslab_make.tablefill import tablefill
+from gslab_make.textfill import textfill

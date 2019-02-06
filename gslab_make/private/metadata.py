@@ -4,7 +4,7 @@ from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 ######################################################
-# Define Metadata
+# Define metadata
 ######################################################  
 
 makelog_started = False
@@ -14,26 +14,26 @@ commands = {
     'posix': 
         {'makelink'  : 'ln -s \"%s\" \"%s\"', 
          'rmdir'     : 'rm %s \"%s\"', 
-         'stata'     : '%s %s do %s',
-         'matlab'    : '%s %s -r run(\'%s\') -logfile %s',
-         'perl'      : '%s %s %s %s',
-         'python'    : '%s %s %s %s',
-         'math'      : '%s < %s %s',
-         'st'        : '%s %s',
-         'lyx'       : '%s %s %s',
-         'r'         : '%s %s %s',
+         'stata'     : '%s %s do \\\"%s\\\"',
+         'matlab'    : '%s %s -r \"try run(\'%s\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)\" -logfile \"%s\"',
+         'perl'      : '%s %s \"%s\" %s',
+         'python'    : '%s %s \"%s\" %s',
+         'math'      : '%s < \"%s\" %s',
+         'st'        : '%s \"%s\"',
+         'lyx'       : '%s %s \"%s\"',
+         'r'         : '%s %s \"%s\"',
          'sas'       : '%s %s -log -print %s'},
     'nt': 
         {'makelink'  : 'mklink %s \"%s\" \"%s\"', 
          'rmdir'     : 'rmdir %s \"%s\"', 
-         'stata'     : '%s %s do %s',
-         'matlab'    : '%s %s -r run(\'%s\') -logfile %s',
-         'perl'      : '%s %s %s %s',
-         'python'    : '%s %s %s %s',
-         'math'      : '%s < %s %s',
-         'st'        : '%s %s',
-         'lyx'       : '%s %s %s',
-         'r'         : '%s %s %s',
+         'stata'     : '%s %s do \\\"%s\\\"',
+         'matlab'    : '%s %s -r \"try run(\'%s\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)\" -logfile \"%s\"',
+         'perl'      : '%s %s \"%s\" %s',
+         'python'    : '%s %s \"%s\" %s',
+         'math'      : '%s < \"%s\" %s',
+         'st'        : '%s \"%s\"',
+         'lyx'       : '%s %s \"%s\"',
+         'r'         : '%s %s \"%s\"',
          'sas'       : '%s %s -log -print %s'}
 }
 
@@ -64,7 +64,7 @@ default_options = {
 
 default_executables = {
     'posix': 
-        {'stata'     : 'statamp',
+        {'stata'     : 'stata-mp',
          'matlab'    : 'matlab',
          'perl'      : 'perl',
          'python'    : 'python',
@@ -93,8 +93,6 @@ extensions = {
     'math'      : '.m',
     'st'        : ['.stc', '.stcmd'],
     'lyx'       : '.lyx',
-    'r'         : '.R',
-    'rinstall'  : '',
-    'sas'       : '.sas',
-    'other'     : ''
+    'r'         : ['.r', '.R'],
+    'sas'       : '.sas'
 }
