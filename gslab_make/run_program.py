@@ -51,10 +51,7 @@ def run_stata(paths, program, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application='stata', makelog=makelog, **kwargs)
-# =======
-#         direct = ProgramDirective(application = 'stata', program = program, makelog = makelog, **kwargs)
-# >>>>>>> origin/issue13_template_to_dos
+        direct = ProgramDirective(application = 'stata', program = program, makelog = makelog, **kwargs)
 
         # Get program output
         program_name = direct.program.split(" ")[0]
@@ -113,10 +110,7 @@ def run_matlab(paths, program, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application='matlab', makelog=makelog, **kwargs)
-# =======
-#         direct = ProgramDirective(application = 'matlab', program = program, makelog = makelog, **kwargs)
-# >>>>>>> origin/issue13_template_to_dos
+        direct = ProgramDirective(application = 'matlab', program = program, makelog = makelog, **kwargs)
         
         # Get program output
         program_log = os.path.join(os.getcwd(), direct.program_name + '.log')
@@ -169,10 +163,7 @@ def run_perl(paths, program, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application='perl', makelog=makelog, **kwargs)
-# =======
-#         direct = ProgramDirective(application = 'perl', program = program, makelog = makelog, **kwargs)
-# >>>>>>> origin/issue13_template_to_dos
+        direct = ProgramDirective(application = 'perl', program = program, makelog = makelog, **kwargs)
         
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
@@ -222,10 +213,7 @@ def run_python(paths, program, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application='python', makelog=makelog, **kwargs)
-# =======
-#         direct = ProgramDirective(application = 'python', program = program, makelog = makelog, **kwargs)
-# >>>>>>> origin/issue13_template_to_dos
+        direct = ProgramDirective(application = 'python', program = program, makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
@@ -275,10 +263,7 @@ def run_mathematica(paths, program, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application='math', makelog=makelog, **kwargs)
-# =======
-#         direct = ProgramDirective(application = 'math', program = program, makelog = makelog, **kwargs)
-# >>>>>>> origin/issue13_template_to_dos
+        direct = ProgramDirective(application = 'math', program = program, makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program, direct.option)
@@ -328,10 +313,7 @@ def run_stat_transfer(paths, program, **kwargs):
     makelog = paths['makelog']
 
     try:
-        direct = ProgramDirective(application='st', makelog=makelog, **kwargs)
-# =======
-#         direct = ProgramDirective(application = 'st', program = program, makelog = makelog, **kwargs)
-# >>>>>>> origin/issue13_template_to_dos
+        direct = ProgramDirective(application = 'st', program = program, makelog = makelog, **kwargs)
 
         # Execute
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.program)
