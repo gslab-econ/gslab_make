@@ -17,132 +17,106 @@ _____________ ERROR collecting gslab_make/tests/test_clear_dir.py ______________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_clear_dir.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 __________ ERROR collecting gslab_make/tests/test_execute_command.py ___________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_execute_command.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 ____________ ERROR collecting gslab_make/tests/test_remove_path.py _____________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_remove_path.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 ______________ ERROR collecting gslab_make/tests/test_run_lyx.py _______________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_run_lyx.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 __________ ERROR collecting gslab_make/tests/test_run_mathematica.py ___________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_run_mathematica.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 _____________ ERROR collecting gslab_make/tests/test_run_matlab.py _____________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_run_matlab.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 ______________ ERROR collecting gslab_make/tests/test_run_perl.py ______________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_run_perl.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 _____________ ERROR collecting gslab_make/tests/test_run_python.py _____________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_run_python.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 _______________ ERROR collecting gslab_make/tests/test_run_r.py ________________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_run_r.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 _____________ ERROR collecting gslab_make/tests/test_run_stata.py ______________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_run_stata.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 _____________ ERROR collecting gslab_make/tests/test_tablefill.py ______________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_tablefill.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 ______________ ERROR collecting gslab_make/tests/test_textfill.py ______________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_textfill.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 ________________ ERROR collecting gslab_make/tests/test_zip.py _________________
 ImportError while importing test module '/Users/danielagonzalez/gslab_make/gslab_make/tests/test_zip.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-gslab_make/__init__.py:41: in <module>
-    from gslab_make.check_links import get_modified_links
-gslab_make/check_links.py:6: in <module>
-    import git
-E   ImportError: No module named git
+gslab_make/__init__.py:40: in <module>
+    from gslab_make.create_links import create_links, create_input_links, create_external_links
+E   ImportError: No module named create_links
 !!!!!!!!!!!!!!!!!!! Interrupted: 13 errors during collection !!!!!!!!!!!!!!!!!!!
-=========================== 13 error in 0.41 seconds ===========================
+=========================== 13 error in 0.35 seconds ===========================
 Name                                       Stmts   Miss Branch BrPart  Cover   Missing
 --------------------------------------------------------------------------------------
-gslab_make/check_links.py                     37     34      2      0     8%   7-84
-gslab_make/create_links.py                    30     20      2      0    31%   43-60, 93-95, 128-130
+gslab_make/check_links.py                     37     37      2      0     0%   2-84
+gslab_make/create_links.py                    30     30      2      0     0%   2-130
 gslab_make/dir_mod.py                         48     48     20      0     0%   2-148
-gslab_make/private/exceptionclasses.py         4      0      0      0   100%
-gslab_make/private/linkdirective.py          110     82     30      0    20%   47-53, 63-64, 74-83, 93-101, 111-119, 140-147, 168-172, 182-187, 197-199, 208-215, 250-256, 266-274, 284-285, 295-301, 312-316
-gslab_make/private/messages.py                23      0      0      0   100%
-gslab_make/private/metadata.py                 7      0      0      0   100%
-gslab_make/private/programdirective.py       107    107     32      0     0%   2-338
-gslab_make/private/utility.py                 46     36     12      0    17%   16-23, 46-63, 82-94, 111-114
+gslab_make/private/exceptionclasses.py         4      4      0      0     0%   2-8
+gslab_make/private/linkdirective.py          110    110     30      0     0%   2-316
+gslab_make/private/messages.py                23     23      0      0     0%   2-37
+gslab_make/private/metadata.py                 7      7      0      0     0%   2-88
+gslab_make/private/programdirective.py       107    107     32      0     0%   2-339
+gslab_make/private/utility.py                 46     46     12      0     0%   2-114
 gslab_make/run_program.py                    183    183     34      0     0%   2-565
 gslab_make/tablefill.py                      143    143     68      0     0%   2-185
 gslab_make/tablefill_info.py                   0      0      0      0   100%
@@ -163,6 +137,6 @@ gslab_make/tests/test_zip.py                  35     35      4      0     0%   3
 gslab_make/textfill.py                       137    137     60      0     0%   2-193
 gslab_make/textfill_info.py                    0      0      0      0   100%
 gslab_make/write_link_logs.py                 31     31      2      0     0%   2-95
-gslab_make/write_logs.py                      88     73     22      0    14%   37-50, 69-84, 105-114, 152-172, 197-207, 227-246
+gslab_make/write_logs.py                      88     88     22      0     0%   2-246
 --------------------------------------------------------------------------------------
-TOTAL                                       1833   1733    428      0     4%
+TOTAL                                       1833   1833    428      0     0%

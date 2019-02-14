@@ -172,6 +172,7 @@ class ProgramDirective(Directive):
     """
     
     def __init__(self, 
+                 makelog,
                  application, 
                  program,
                  executable = '', 
