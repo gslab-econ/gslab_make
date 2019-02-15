@@ -256,13 +256,13 @@ class ProgramDirective(Directive):
         """
     
         program_output = norm_path(program_output)
-        with open(program_output, 'r') as f:
+        with open(program_output, 'r', encoding = 'utf8') as f:
             out = f.read()
 
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
-            with open(self.makelog, 'a') as f:
+            with open(self.makelog, 'a', encoding = 'utf8') as f:
                 print(out, file = f)
 
         if log_file: 

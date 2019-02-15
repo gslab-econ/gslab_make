@@ -41,7 +41,7 @@ def start_makelog(paths):
         makelog = norm_path(makelog)
         print('Starting makelog file at: "%s"' % makelog)
         
-        with open(makelog, 'w') as MAKELOG:
+        with open(makelog, 'w', encoding = 'utf8') as MAKELOG:
             time_start = str(datetime.datetime.now().replace(microsecond = 0))
             working_dir = os.getcwd()
             print(messages.note_dash_line, file = MAKELOG)
@@ -75,7 +75,7 @@ def end_makelog(paths):
         if not (metadata.makelog_started and os.path.isfile(makelog)):
             raise CritError(messages.crit_error_no_makelog % makelog)
 
-        with open(makelog, 'a') as MAKELOG:
+        with open(makelog, 'a', encoding = 'utf8') as MAKELOG:
             time_end = str(datetime.datetime.now().replace(microsecond = 0))
             working_dir = os.getcwd()
             print(messages.note_dash_line, file = MAKELOG)
@@ -110,7 +110,7 @@ def write_to_makelog(paths, message):
         if not (metadata.makelog_started and os.path.isfile(makelog)):
             raise CritError(messages.crit_error_no_makelog % makelog)
 
-        with open(makelog, 'a') as MAKELOG:
+        with open(makelog, 'a', encoding = 'utf8') as MAKELOG:
             print(message, file = MAKELOG)
     
     
@@ -149,6 +149,7 @@ def log_files_in_output(paths,
     -------
     None
     """
+
     output_dir      = paths['output_dir']
     output_statslog = paths['output_statslog']
     output_headslog = paths['output_headslog']
@@ -158,7 +159,7 @@ def log_files_in_output(paths,
         output_local_dir = ''
 
     output_files = glob_recursive(output_dir, recursive)
-    output_local_files = glob_recursive(output_dir, recursive)
+    output_local_files = glob_recursive(output_local_dir, recursive)
     output_files = set(output_files + output_local_files)
 
     if output_statslog:
@@ -235,7 +236,7 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
             print(messages.note_dash_line, file = HEADSLOG)
             
             try:
-                with open(file_name, 'r') as f:
+                with open(file_name, 'r', encoding = 'utf8') as f:
                     for i in range(num_lines):
                         line = f.next().strip()
                         cleaned_line = filter(lambda x: x in string.printable, line)
