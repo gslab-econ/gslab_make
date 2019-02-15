@@ -42,7 +42,14 @@ class testRunR(unittest.TestCase):
             run_r(makelog, program = 'gslab_make/tests/input/R_test_script.R', executable = 'R CMD BATCH') 
         self.assertNotIn('Test script complete', open(makelog['makelog'], 'rU').read()) # check this
         self.assertTrue(os.path.isfile('output.txt'))
-        
+    
+    def test_executable(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+            run_r(makelog, program = 'gslab_make/tests/input/R_test_script copy.R', executable = 'R CMD BATCH') 
+        self.assertNotIn('Test script complete', open(makelog['makelog'], 'rU').read()) # check this
+        self.assertTrue(os.path.isfile('output.txt'))
+
     def test_bad_executable(self):
         makelog = {'makelog' : 'log/make.log'}
         with self.assertRaises(Exception):

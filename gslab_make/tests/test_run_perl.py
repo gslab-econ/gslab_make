@@ -45,7 +45,7 @@ class testRunPerl(unittest.TestCase):
         makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)
-            run_perl(makelog, program = 'gslab_make/tests/input alias/perl_test_script.pl', executable = metadata.default_executables[os.name]['perl']) 
+            run_perl(makelog, program = 'gslab_make/tests/input/perl_test_script copy.pl', executable = metadata.default_executables[os.name]['perl']) 
         self.assertIn('Test script complete', open(makelog['makelog']).read())
         self.assertTrue(os.path.isfile('output.txt'))
         

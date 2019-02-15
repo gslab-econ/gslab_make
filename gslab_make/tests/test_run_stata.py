@@ -38,7 +38,14 @@ class testRunStata(unittest.TestCase):
             start_makelog(makelog)
             run_stata(makelog, program = 'gslab_make/tests/input/stata_test_script.do', executable = metadata.default_executables[os.name]['stata']) 
         self.assertIn('end of do-file', open(makelog['makelog']).read())
-        
+    
+    def test_executable(self):
+        makelog = {'makelog' : 'log/make.log'}
+        with nostderrout():
+            start_makelog(makelog)
+            run_stata(makelog, program = 'gslab_make/tests/input/stata_test_script copy.do', executable = metadata.default_executables[os.name]['stata']) 
+        self.assertIn('end of do-file', open(makelog['makelog']).read())
+
     def test_bad_executable(self):
         makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
