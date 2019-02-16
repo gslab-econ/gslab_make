@@ -134,7 +134,7 @@ def log_files_in_output(paths,
             'output_dir' : str
                 Path of output directory.
             'output_local_dir' : str
-                Path of local output directory.
+                Path of local output directory. Defaults to `[]`.
             'output_statslog' : str
                 Path to write output statistics log.
             'output_headslog' : str
@@ -154,26 +154,34 @@ def log_files_in_output(paths,
     output_statslog = paths['output_statslog']
     output_headslog = paths['output_headslog']
     try:
-        output_local_dir = paths['output_local_dir']
+        output_local_dir = paths['output_local_dir'] # Make required?
         if type(output_local_dir) is not list:
             raise TypeError(messages.type_error_file_list)
     except:
         output_local_dir = []
+  
+    try:
+        output_files = glob_recursive(output_dir, recursive)
+        output_local_files = [f for dir_path in output_local_dir for f in glob_recursive(dir_path, recursive)]   
+        output_files = set(output_files + output_local_files)
 
-    output_files = glob_recursive(output_dir, recursive)
-    output_local_files = [f for dir_path in output_local_dir for f in glob_recursive(dir_path, recursive)]   
-    output_files = set(output_files + output_local_files)
-
-    if output_statslog:
-        output_statslog = norm_path(output_statslog)
-        write_stats_log(output_statslog, output_files)
-    
-    if output_headslog:
-        output_headslog = norm_path(output_headslog)
-        write_heads_log(output_headslog, output_files)
-    
-    write_to_makelog(paths, 'Output logs successfully written!')  
+        if output_statslog:
+            output_statslog = norm_path(output_statslog)
+            write_stats_log(output_statslog, output_files)
         
+        if output_headslog:
+            output_headslog = norm_path(output_headslog)
+            write_heads_log(output_headslog, output_files)
+        
+        write_to_makelog(paths, 'Output logs successfully written!')  
+    except:
+        error_message = 'Error with `log_files_in_output`' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(paths, error_message)
+        
+        raise
+
+       
     
 def write_stats_log(statslog_file, output_files):
     """ Write statistics log.
