@@ -155,11 +155,13 @@ def log_files_in_output(paths,
     output_headslog = paths['output_headslog']
     try:
         output_local_dir = paths['output_local_dir']
+        if type(output_local_dir) is not list:
+            raise TypeError(messages.type_error_file_list)
     except:
-        output_local_dir = ''
+        output_local_dir = []
 
     output_files = glob_recursive(output_dir, recursive)
-    output_local_files = glob_recursive(output_local_dir, recursive)
+    output_local_files = [f for dir_path in output_local_dir for f in glob_recursive(dir_path, recursive)]   
     output_files = set(output_files + output_local_files)
 
     if output_statslog:
@@ -238,7 +240,7 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
             try:
                 with open(file_name, 'r', encoding = 'utf8') as f:
                     for i in range(num_lines):
-                        line = f.next().strip()
+                        line = f.next().strip() # Is there any way to make this faster?
                         cleaned_line = filter(lambda x: x in string.printable, line)
                         print(cleaned_line, file = HEADSLOG)
             except:
