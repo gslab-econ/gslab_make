@@ -55,7 +55,7 @@ def get_modified_links(paths,
 
     Returns
     -------
- `   overlap : list
+    overlap : list
         List of target files considered changed by git status.
     """
     
@@ -71,8 +71,12 @@ def get_modified_links(paths,
             raise CritError(messages.crit_error_no_repo)
         modified = get_git_status(repo)
 
-        overlap = [l for l in target_files if l in modified]   
+        overlap = [l for l in target_files if l in modified] 
+			
         if overlap:
+			if len(overlap) > 100:
+				overlap = overlap[0:100]
+				overlap = overlap + ["and more (file list truncated due to length)"]
             message = format_error(messages.note_modified_files % '\n'.join(overlap))
             write_to_makelog(paths, message)
             print(message)

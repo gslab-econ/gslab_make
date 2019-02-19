@@ -248,7 +248,7 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
             try:
                 with open(file_name, 'r', encoding = 'utf8') as f:
                     for i in range(num_lines):
-                        line = f.next().strip() # Is there any way to make this faster?
+                        line = f.readline.strip() # Is there any way to make this faster?
                         cleaned_line = filter(lambda x: x in string.printable, line)
                         print(cleaned_line, file = HEADSLOG)
             except:
