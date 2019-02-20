@@ -67,7 +67,8 @@ def run_stata(paths, program, **kwargs):
         exit_code, error_message = direct.execute_command(command)
         if exit_code != 0:
             raise CritError('* Stata program executed with errors: *\n%s' % error_message)
-        direct.move_program_output(program_log, direct.log)
+        output = direct.move_program_output(program_log, direct.log)
+        check_stata_output(output)
     except:
         error_message = 'Error with `run_stata`' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
@@ -75,6 +76,12 @@ def run_stata(paths, program, **kwargs):
         raise
     
     
+def check_stata_output(output):
+    regex = "end of do-file[\s]*r\([0-9]*\);"
+    if re.search(regex, output):
+        raise CritError('* Stata program executed with errors (check logs for further detail) *')
+
+
 def run_matlab(paths, program, **kwargs):
     """ Run Matlab script using system command.
 
