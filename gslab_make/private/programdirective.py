@@ -272,6 +272,8 @@ class ProgramDirective(Directive):
         else: 
             os.remove(program_output)
 
+        return(out)
+
 
 class SASDirective(ProgramDirective):    
     """
