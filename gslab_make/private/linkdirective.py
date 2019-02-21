@@ -46,8 +46,8 @@ class LinkDirective(object):
         List of (target, symlink) mappings parsed from line.
     """
     
-    def __init__(self, line, line_parsed, link_dir, osname = os.name):
-        self.line_raw = line
+    def __init__(self, raw, line, link_dir, osname = os.name):
+        self.raw      = raw
         self.line     = line
         self.link_dir = link_dir
         self.osname   = osname
@@ -301,18 +301,18 @@ class LinksList(object):
         lines = [line for file in self.file_list for line in file_to_array(file)]
 
         if self.file_format == "input":
-            lines = [(line, line) for line in lines]
+            lines = [(l, l) for l in lines]
         if self.file_format == "external":
-            lines = [(line, "%s | {%s}" % (line, line)) for line in lines]
+            lines = [(l, "%s | {%s}" % (l, l)) for l  in lines]
 
         try:
-            lines = [(line_raw, str(line).format(**self.mapping_dict)) for (line_raw, line) in lines]
+            lines = [(raw, str(line).format(**self.mapping_dict)) for (raw, line) in lines]
         except KeyError as e:
             error_message = messages.crit_error_bad_link % messages.crit_error_path_mapping % str(e).strip("'")
             error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
             raise CritError(error_message)
 			
-        self.link_directive_list = [LinkDirective(line_raw, line, self.link_dir) for (line_raw, line) in lines]
+        self.link_directive_list = [LinkDirective(raw, line, self.link_dir) for (raw, line) in lines]
 
     def create_symlinks(self):       
         """ Create symlinks according to directives. 
