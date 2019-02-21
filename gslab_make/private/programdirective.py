@@ -45,10 +45,10 @@ class Directive(object):
                  osname = os.name,
                  shell = True):
 
-        self.makelog  = makelog
-        self.log      = log
-        self.osname   = osname
-        self.shell    = shell
+        self.makelog = makelog
+        self.log     = log
+        self.osname  = osname
+        self.shell   = shell
         self.check_os()
         self.get_paths()
 

@@ -63,15 +63,13 @@ def glob_recursive(path, recursive):
     return path_files
 
  
-def file_to_array(file_name, file_format):
+def file_to_array(file_name):
     """ Read file and extract lines to list. 
 
     Parameters
     ----------
     file_name : str
         Path of file to read.
-    file_format : str
-        Format of file to read.
 
     Returns
     -------
@@ -79,17 +77,10 @@ def file_to_array(file_name, file_format):
         List of lines contained in file.
     """
        
-    if file_format == "input":
-        with open(file_name, 'r') as f:
-            array = [line.strip() for line in f]
-            array = [line for line in array if line]
-            array = [line for line in array if not re.match('\#',line)]
-    if file_format == "external":
-        with open(file_name, 'r') as f:
-            array = [line.strip() for line in f]
-            array = [line for line in array if line]
-            array = [line for line in array if not re.match('\#',line)]
-            array = ["%s | {%s}" % (line, line) for line in array]
+    with open(file_name, 'r') as f:
+        array = [line.strip() for line in f]
+        array = [line for line in array if line]
+        array = [line for line in array if not re.match('\#',line)]
 
     return array
 
@@ -112,6 +103,7 @@ def format_error(error):
     formatted = formatted % error.strip()
     
     return(formatted)
+
 
 def format_list(list):
     """ Format list. 

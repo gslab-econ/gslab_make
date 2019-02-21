@@ -27,6 +27,8 @@ class LinkDirective(object):
     
     Parameters
     ----------
+    line_raw : str
+        Raw text of linking instructions (used for error messaging).
     line : str
         Line of text containing linking instructions.
     link_dir : str
@@ -44,10 +46,11 @@ class LinkDirective(object):
         List of (target, symlink) mappings parsed from line.
     """
     
-    def __init__(self, line, link_dir, osname = os.name):
-        self.line      = line
-        self.link_dir  = link_dir
-        self.osname    = osname
+    def __init__(self, line, line_parsed, link_dir, osname = os.name):
+        self.line_raw = line
+        self.line     = line
+        self.link_dir = link_dir
+        self.osname   = osname
         self.check_os()
         self.get_paths()
         self.check_paths()
@@ -73,12 +76,12 @@ class LinkDirective(object):
         """
         
         try:
-            line_parsed = self.line.strip().split('|')
-            line_parsed = [l.strip() for l in line_parsed]
-            line_parsed = [l.strip('"\'') for l in line_parsed]
-            self.symlink, self.target = line_parsed
+            self.line = self.line.strip().split('|')
+            self.line = [l.strip() for l in self.line]
+            self.line = [l.strip('"\'') for l in self.line]
+            self.symlink, self.target = self.line
         except:
-            error_message = messages.crit_error_bad_link % self.line
+            error_message = messages.crit_error_bad_link % self.line_raw
             error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
             raise CritError(error_message)
 
@@ -250,9 +253,9 @@ class LinksList(object):
                  link_dir, 
                  mapping_dict = {}):
         
-        self.file_list = file_list
-        self.file_format = file_format
-        self.link_dir = link_dir
+        self.file_list    = file_list
+        self.file_format  = file_format
+        self.link_dir     = link_dir
         self.mapping_dict = mapping_dict
         self.parse_file_list()
         self.get_paths()
@@ -295,15 +298,21 @@ class LinksList(object):
         None
         """
         
-        lines = [line for file in self.file_list for line in file_to_array(file, self.file_format)]
+        lines = [line for file in self.file_list for line in file_to_array(file)]
+
+        if self.file_format == "input":
+            lines = [(line, line) for line in lines]
+        if self.file_format == "external":
+            lines = [(line, "%s | {%s}" % (line, line)) for line in lines]
+
         try:
-            lines = [str(line).format(**self.mapping_dict) for line in lines]
+            lines = [(line_raw, str(line).format(**self.mapping_dict)) for (line_raw, line) in lines]
         except KeyError as e:
             error_message = messages.crit_error_bad_link % messages.crit_error_path_mapping % str(e).strip("'")
             error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
             raise CritError(error_message)
 			
-        self.link_directive_list = [LinkDirective(line, self.link_dir) for line in lines]
+        self.link_directive_list = [LinkDirective(line_raw, line, self.link_dir) for (line_raw, line) in lines]
 
     def create_symlinks(self):       
         """ Create symlinks according to directives. 
