@@ -81,7 +81,7 @@ def get_modified_links(paths,
             write_to_makelog(paths, message)
             print(message)
     except:
-        error_message = 'Error with `get_modified_links`' 
+        error_message = 'Error with `get_modified_links`. Traceback can be found below.' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
         write_to_makelog(paths, error_message)
         

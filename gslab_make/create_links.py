@@ -53,7 +53,7 @@ def create_links(paths,
         write_to_makelog(paths, 'Links successfully created!')    
         return(link_map)
     except:
-        error_message = 'An error was encountered with `create_links`' 
+        error_message = 'An error was encountered with `create_links`. Traceback can be found below.' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
         write_to_makelog(paths, error_message)
         

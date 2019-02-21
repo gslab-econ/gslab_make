@@ -139,7 +139,7 @@ def log_files_in_output(paths,
                 Path to write output statistics log.
             'output_headslog' : str
                 Path to write output headers log.
-            'makelog' : str
+            'makelog' : 
                 Path of makelog.
         }
     recursive : int, optional
@@ -156,7 +156,7 @@ def log_files_in_output(paths,
     try:
         output_local_dir = paths['output_local_dir'] # Make required?
         if type(output_local_dir) is not list:
-            raise TypeError(messages.type_error_file_list)
+            raise TypeError(messages.type_error_dir_list % output_local_dir)
     except:
         output_local_dir = []
   
