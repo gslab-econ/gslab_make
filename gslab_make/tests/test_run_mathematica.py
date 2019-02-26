@@ -42,7 +42,7 @@ class testRunMathematica(unittest.TestCase):
         self.assertIn('mathematica test ended', open(makelog['makelog'], 'rU').read()     )  
         self.assertTrue(os.path.isfile('output_plot.eps'))
     
-    def test_executable(self):
+    def test_path_with_space(self):
         makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             run_mathematica(makelog, program = 'gslab_make/tests/input/mathematica_test_script copy.m', executable = metadata.default_executables[os.name]['math'])       

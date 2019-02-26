@@ -39,7 +39,7 @@ class testRunStata(unittest.TestCase):
             run_stata(makelog, program = 'gslab_make/tests/input/stata_test_script.do', executable = metadata.default_executables[os.name]['stata']) 
         self.assertIn('end of do-file', open(makelog['makelog']).read())
     
-    def test_executable(self):
+    def test_path_with_space(self):
         makelog = {'makelog' : 'log/make.log'}
         with nostderrout():
             start_makelog(makelog)

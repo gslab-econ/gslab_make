@@ -40,13 +40,6 @@ class testRunMatlab(unittest.TestCase):
             run_matlab(makelog, program = 'gslab_make/tests/input/matlab_test_script.m', executable = metadata.default_executables[os.name]['matlab']) 
         self.assert_proper_output(makelog['makelog'])
         self.assertTrue(os.path.isfile('output/matlab_test.mat'))
-    
-    def test_executable(self):
-        makelog = {'makelog' : 'log/make.log'}
-        with nostderrout():
-            run_matlab(makelog, program = 'gslab_make/tests/input/matlab_test_script copy.m', executable = metadata.default_executables[os.name]['matlab']) 
-        self.assert_proper_output(makelog['makelog'])
-        self.assertTrue(os.path.isfile('output/matlab_test.mat'))
 
     def test_bad_executable(self):
         makelog = {'makelog' : 'log/make.log'}
