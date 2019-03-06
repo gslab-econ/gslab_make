@@ -74,9 +74,9 @@ def get_modified_links(paths,
         overlap = [l for l in target_files if l in modified] 
 			
         if overlap:
-			if len(overlap) > 100:
-				overlap = overlap[0:100]
-				overlap = overlap + ["and more (file list truncated due to length)"]
+            if len(overlap) > 100:
+                overlap = overlap[0:100]
+                overlap = overlap + ["and more (file list truncated due to length)"]
             message = format_error(messages.warning_modified_files % '\n'.join(overlap))
             write_to_makelog(paths, message)
             print(message)
