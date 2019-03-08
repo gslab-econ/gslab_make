@@ -103,9 +103,9 @@ class Directive(object):
             exit = (process.returncode, stderr)             
              
             if stdout:
-               self.output += '\n' + stdout
+               self.output += '\n' + str(stdout)
             if stderr:
-               self.output += '\n' + stderr 
+               self.output += '\n' + str(stderr)
                             
             return(exit)
         except:
