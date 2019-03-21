@@ -60,6 +60,52 @@ def create_links(paths,
         raise               
 
 
+def copy_inputs(paths,
+                file_list,
+                mapping_dict = {}):
+    """ Copy inputs from list of files containing linking instructions.
+
+    Parameters
+    ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain {
+            'input_dir' : str
+                Directory to copy input.
+            'makelog' : str
+                Path of makelog.
+        }
+    file_list : list
+        List of files containing copying instructions.
+    mapping_dict : dict, optional
+        Dictionary of path mappings used to parse copying instructions. 
+        Defaults to no mappings.
+
+    Returns
+    -------
+    copy_map : list
+        List of (target, symlink) for each input copied.
+    """
+
+    link_dir = paths['input_dir']
+
+    try:              
+        link_list = LinksList(file_list, "input", link_dir, mapping_dict, True)
+        if link_list.link_directive_list:
+            os.makedirs(link_dir)
+            link_map = link_list.create_symlinks()       
+        else:
+            link_map = []
+
+        write_to_makelog(paths, 'Inputs successfully copied!')    
+        return(link_map)
+    except:
+        error_message = 'An error was encountered with `copy_inputs`. Traceback can be found below.' 
+        error_message = format_error(error_message) + '\n' + traceback.format_exc()
+        write_to_makelog(paths, error_message)
+        
+        raise    
+
+
 def create_input_links(paths,
                        file_list,
                        mapping_dict = {}):

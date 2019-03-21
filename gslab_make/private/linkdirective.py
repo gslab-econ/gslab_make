@@ -177,36 +177,54 @@ class LinkDirective(object):
 
         return f
 
-    def create_symlinks(self):
+    def create_symlinks(self, copy = False):
         """ Create symlinks. 
                 
+        Parameters
+        ----------
+        copy : bool, optional
+            Copy target(s) instead of creating symlink(s). Defaults to False.
+
         Returns
         -------
         None
         """
         
         if self.osname == 'posix':
-            self.create_symlinks_posix()
+            self.create_symlinks_posix(copy)
         elif self.osname == 'nt':
-            self.create_symlinks_nt()
+            self.create_symlinks_nt(copy)
 
         return(self.link_list)
 
-    def create_symlinks_posix(self):   
+    def create_symlinks_posix(self, copy = False):   
         """ Create symlinks using POSIX shell command specified in metadata.  
         
+        Parameters
+        ----------
+        copy : bool, optional
+            Copy target(s) instead of creating symlink(s). Defaults to False.
+
         Returns
         -------
         None
         """
     
         for target, symlink in self.link_list:
-            command = metadata.commands[self.osname]['makelink'] % (target, symlink)
+            if copy == True:
+                command = metadata.commands[self.osname]['makecopy'] % (target, symlink)
+            else:
+                command = metadata.commands[self.osname]['makelink'] % (target, symlink)
             subprocess.Popen(command, shell = True)
 
-    def create_symlinks_nt(self):   
+    def create_symlinks_nt(self, copy = False):   
         """ Create symlinks using NT shell command specified in metadata. 
-                
+        
+        Parameters
+        ----------
+        copy : bool, optional
+            Copy target(s) instead of creating symlink(s). Defaults to False.
+
         Returns
         -------
         None
@@ -217,7 +235,10 @@ class LinkDirective(object):
             else:
                 directory = ''
 
-            command = metadata.commands[self.osname]['makelink'] % (directory, symlink, target)
+            if copy == True:
+                command = metadata.commands[self.osname]['makecopy'] % (target, symlink)
+            else:
+                command = metadata.commands[self.osname]['makelink'] % (directory, symlink, target)
             subprocess.Popen(command, shell = True)
 
 
@@ -240,6 +261,8 @@ class LinksList(object):
     mapping_dict : dict, optional
         Dictionary of path mappings used to parse linking instructions. 
         Defaults to no mappings.
+    copy : bool, optional
+        Copy target(s) instead of creating symlink(s). Defaults to False.
         
     Attributes
     ----------
@@ -251,12 +274,14 @@ class LinksList(object):
                  file_list, 
                  file_format,
                  link_dir, 
-                 mapping_dict = {}):
+                 mapping_dict = {}, 
+                 copy = False):
         
         self.file_list    = file_list
         self.file_format  = file_format
         self.link_dir     = link_dir
         self.mapping_dict = mapping_dict
+        self.copy         = copy
         self.parse_file_list()
         self.get_paths()
         self.get_link_directive_list()
@@ -325,6 +350,6 @@ class LinksList(object):
         
         link_map = []
         for link in self.link_directive_list:
-            link_map.extend(link.create_symlinks())
+            link_map.extend(link.create_symlinks(self.copy))
             
         return link_map
