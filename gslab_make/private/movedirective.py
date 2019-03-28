@@ -13,7 +13,7 @@ import subprocess
 from gslab_make.private.exceptionclasses import CritError
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
-from gslab_make.private.utility import norm_path, file_to_array
+from gslab_make.private.utility import norm_path, file_to_array, check_duplicate
 
 
 class MoveDirective(object):
@@ -230,7 +230,9 @@ class MoveDirective(object):
     
         for source, destination in self.move_list:
             if movetype == 'copy':
-                command = metadata.commands[self.osname]['makecopy'] % (source, destination)
+                duplicate = check_duplicate(source, destination)
+                if not duplicate:
+                    command = metadata.commands[self.osname]['makecopy'] % (source, destination)
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (source, destination)
             subprocess.Popen(command, shell = True)
@@ -254,7 +256,9 @@ class MoveDirective(object):
                 directory = ''
 
             if movetype == 'copy':
-                command = metadata.commands[self.osname]['makecopy'] % (source, destination)
+                duplicate = check_duplicate(source, destination)
+                if not duplicate:
+                    command = metadata.commands[self.osname]['makecopy'] % (source, destination)
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (directory, destination, source)
             subprocess.Popen(command, shell = True)
@@ -339,11 +343,11 @@ class MoveList(object):
         try:
             lines = [(raw, str(line).format(**self.mapping_dict)) for (raw, line) in lines]
         except KeyError as e:
-            error_message = messages.crit_error_bad_link % messages.crit_error_path_mapping % str(e).strip("'")
+            error_message = messages.crit_error_bad_move % messages.crit_error_path_mapping % str(e).strip("'")
             error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
             raise CritError(error_message)
 			
-        self.move_directive_list = [LinkDirective(raw, line, self.move_dir) for (raw, line) in lines]
+        self.move_directive_list = [MoveDirective(raw, line, self.move_dir) for (raw, line) in lines]
 
     def create_symlinks(self):       
         """ Create symlinks according to directives. 
@@ -356,7 +360,7 @@ class MoveList(object):
         
         move_map = []
         for move in self.move_directive_list:
-            move_map.extend(link.create_symlinks)
+            move_map.extend(move.create_symlinks)
             
         return move_map
 
@@ -371,6 +375,6 @@ class MoveList(object):
         
         move_map = []
         for move in self.move_directive_list:
-            move_map.extend(link.create_copies)
+            move_map.extend(move.create_copies)
             
         return move_map
