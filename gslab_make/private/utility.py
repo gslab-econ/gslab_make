@@ -128,6 +128,7 @@ def format_list(list):
     
     return(formatted)
 
+
 def check_duplicate(original, copy):
     """ Check duplicate.
 
@@ -157,6 +158,7 @@ def check_duplicate(original, copy):
             
     return duplicate
     
+
 def parse_dircmp(dircmp):
     """ Parse dircmp to see if directories duplicate """
 

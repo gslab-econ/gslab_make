@@ -36,9 +36,9 @@ def get_git_status(repo):
 
     return(file_list)
 
-def get_modified_inputs(paths, 
-                        move_map, 
-                        recursive = float('inf')):
+def get_modified_sources(paths, 
+                         move_map, 
+                         recursive = float('inf')):
     """ Get source files considered changed by git status.
 
     Parameters
@@ -49,7 +49,7 @@ def get_modified_inputs(paths,
                 Path of makelog.
         }
     move_map : list 
-        Mapping of destinations to sources (returned from `MoveList.create_symlinks` or `MoveList.create_copies`).
+        Mapping of symlinks/copies (destination) to sources (returned from `MoveList.create_symlinks` or `MoveList.create_copies`).
     recursive : int, optional
         Level of depth when walking through source directories. Defaults to infinite.
 
@@ -60,7 +60,7 @@ def get_modified_inputs(paths,
     """
     
     try:
-        source_list = [source for source, symlink in link_map]
+        source_list = [source for source, destination in move_map]
         source_list = [glob_recursive(source, recursive) for source in source_list]
         source_files = [f for source in source_list for f in source]
         source_files = set(source_files)
@@ -81,7 +81,7 @@ def get_modified_inputs(paths,
             write_to_makelog(paths, message)
             print(message)
     except:
-        error_message = 'Error with `get_modified_inputs`. Traceback can be found below.' 
+        error_message = 'Error with `get_modified_sources`. Traceback can be found below.' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
         write_to_makelog(paths, error_message)
         

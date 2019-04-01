@@ -37,15 +37,15 @@ Notes:
 """
 
 # Import make tools
-from gslab_make.create_inputs import create_links, copy_inputs, link_inputs, link_externals
-from gslab_make.check_inputs import get_modified_inputs
+from gslab_make.move_sources import create_links, copy_inputs, link_inputs, link_externals
+from gslab_make.check_sources import get_modified_sources
 from gslab_make.dir_mod import check_os, remove_path, remove_dir, clear_dir, unzip, zip_dir
 from gslab_make.run_program import (run_stata, run_matlab, run_perl, run_python, 
                                     run_mathematica, run_stat_transfer, run_lyx, 
                                     run_r, run_sas, execute_command)
 from gslab_make.write_logs import (start_makelog, end_makelog, write_to_makelog,
                                    log_files_in_output, write_stats_log, write_heads_log)
-from gslab_make.write_link_logs import write_link_logs
+from gslab_make.write_source_logs import write_source_logs
 
 
 # Import fill tools

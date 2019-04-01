@@ -190,9 +190,9 @@ class MoveDirective(object):
         """
         
         if self.osname == 'posix':
-            self.move_posix(type = 'link')
+            self.move_posix(movetype = 'symlink')
         elif self.osname == 'nt':
-            self.move_nt(type = 'link')
+            self.move_nt(movetype = 'symlink')
 
         return(self.move_list)
 
@@ -209,9 +209,9 @@ class MoveDirective(object):
         """
         
         if self.osname == 'posix':
-            self.move_posix(type = 'copy')
+            self.move_posix(movetype = 'copy')
         elif self.osname == 'nt':
-            self.move_nt(type = 'copy')
+            self.move_nt(movetype = 'copy')
 
         return(self.move_list)
 
@@ -292,7 +292,6 @@ class MoveList(object):
         self.file_list    = file_list
         self.move_dir     = move_dir
         self.mapping_dict = mapping_dict
-        self.move_type    = move_type
         self.parse_file_list()
         self.get_paths()
         self.get_move_directive_list()
@@ -356,7 +355,7 @@ class MoveList(object):
         
         move_map = []
         for move in self.move_directive_list:
-            move_map.extend(move.create_symlinks)
+            move_map.extend(move.create_symlinks())
             
         return move_map
 
@@ -371,6 +370,6 @@ class MoveList(object):
         
         move_map = []
         for move in self.move_directive_list:
-            move_map.extend(move.create_copies)
+            move_map.extend(move.create_copies())
             
         return move_map

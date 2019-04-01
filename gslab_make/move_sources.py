@@ -6,13 +6,13 @@ from builtins import (bytes, str, open, super, range,
 import os
 import traceback
 
-from gslab_make.private.linkdirective import LinksList
+from gslab_make.private.movedirective import MoveList
 from gslab_make.private.utility import format_error
 from gslab_make.write_logs import write_to_makelog
 
 
 def create_links(paths,
-                 file_list,, 
+                 file_list,
                  mapping_dict = {}):
     """ Create symlinks from list of files containing linking instructions.
 
@@ -50,8 +50,8 @@ def create_links(paths,
         write_to_makelog(paths, 'Links successfully created!')    
         return(move_map)
     except:
-        raise CritError(traceback.format_exc())
-		
+        raise Exception(traceback.format_exc())
+        
 
 def copy_inputs(paths,
                 file_list,
@@ -78,7 +78,7 @@ def copy_inputs(paths,
     move_map : list
         List of (source, destination) for each copy created.
     """
-		
+        
     move_dir = paths['input_dir']
 
     try:              
@@ -91,7 +91,7 @@ def copy_inputs(paths,
 
         write_to_makelog(paths, 'Copies successfully created!')    
         return(move_map)
-		
+        
     except:
         error_message = 'An error was encountered with `copy_inputs`. Traceback can be found below.' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
@@ -127,15 +127,16 @@ def link_inputs(paths,
         List of (source, destination) for each symlink created.
     """
     try:
-		paths['move_dir'] = paths['input_dir']
-		move_map = create_links(paths, file_list, mapping_dict)
-		return(move_map)
-	except:
+        paths['move_dir'] = paths['input_dir']
+        move_map = create_links(paths, file_list, mapping_dict)
+        return(move_map)
+    except:
         error_message = 'An error was encountered with `link_inputs`. Traceback can be found below.' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
         write_to_makelog(paths, error_message)
         
         raise 
+        
 
 def link_externals(paths,
                    file_list,
@@ -164,11 +165,11 @@ def link_externals(paths,
         List of (source, destination) for each symlink created.
     """
     
-	try:
-		paths['move_dir'] = paths['external_dir']
-		move_map = create_links(paths, file_list, mapping_dict)
-		return(move_map)
-	except:
+    try:
+        paths['move_dir'] = paths['external_dir']
+        move_map = create_links(paths, file_list, mapping_dict)
+        return(move_map)
+    except:
         error_message = 'An error was encountered with `link_externals`. Traceback can be found below.' 
         error_message = format_error(error_message) + '\n' + traceback.format_exc()
         write_to_makelog(paths, error_message)
