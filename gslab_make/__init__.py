@@ -20,7 +20,7 @@ These are `tablefill` and `textfill`. Please see their docstrings for further
 detail on their use and functionalities.
 
 Prerequisites:
-*  Python 2.7 installed and executable path is added to system path
+*  Python 2.7/3.7 installed and executable path is added to system path
 
 To use functions in this library that call applications other than Python, 
 you must have the application installed with its executable path added to the
@@ -37,8 +37,8 @@ Notes:
 """
 
 # Import make tools
-from gslab_make.create_links import create_links, copy_inputs, create_input_links, create_external_links
-from gslab_make.check_links import get_modified_links
+from gslab_make.create_inputs import create_links, copy_inputs, link_inputs, link_externals
+from gslab_make.check_inputs import get_modified_inputs
 from gslab_make.dir_mod import check_os, remove_path, remove_dir, clear_dir, unzip, zip_dir
 from gslab_make.run_program import (run_stata, run_matlab, run_perl, run_python, 
                                     run_mathematica, run_stat_transfer, run_lyx, 

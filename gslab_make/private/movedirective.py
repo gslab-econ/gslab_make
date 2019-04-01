@@ -81,7 +81,7 @@ class MoveDirective(object):
             self.line = [l.strip('"\'') for l in self.line]
             self.destination, self.source = self.line
         except:
-            error_message = messages.crit_error_bad_link % self.line_raw
+            error_message = messages.crit_error_bad_move % self.line_raw
             error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
             raise CritError(error_message)
 
@@ -230,9 +230,7 @@ class MoveDirective(object):
     
         for source, destination in self.move_list:
             if movetype == 'copy':
-                duplicate = check_duplicate(source, destination)
-                if not duplicate:
-                    command = metadata.commands[self.osname]['makecopy'] % (source, destination)
+                command = metadata.commands[self.osname]['makecopy'] % (source, destination)
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (source, destination)
             subprocess.Popen(command, shell = True)
@@ -256,9 +254,7 @@ class MoveDirective(object):
                 directory = ''
 
             if movetype == 'copy':
-                duplicate = check_duplicate(source, destination)
-                if not duplicate:
-                    command = metadata.commands[self.osname]['makecopy'] % (source, destination)
+                command = metadata.commands[self.osname]['makecopy'] % (source, destination)
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (directory, destination, source)
             subprocess.Popen(command, shell = True)

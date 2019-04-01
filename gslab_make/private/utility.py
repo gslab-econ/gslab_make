@@ -129,7 +129,7 @@ def format_list(list):
     return(formatted)
 
 def check_duplicate(original, copy):
-    """ Format list. 
+    """ Check duplicate.
 
     Parameters
     ----------
@@ -148,12 +148,13 @@ def check_duplicate(original, copy):
     
     if duplicate: 
         if os.path.isfile(original):
-            duplicate = filecmp.cmp(original, copy)
-            
+            duplicate = filecmp.cmp(original, copy)            
         elif os.path.isdir(copy):
             dircmp = filecmp.dircmp(original, copy, ignore = ['.DS_Store'])
             duplicate = parse_dircmp(dircmp)
-    
+        else:
+            duplicate = False
+            
     return duplicate
     
 def parse_dircmp(dircmp):
