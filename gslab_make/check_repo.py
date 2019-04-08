@@ -3,8 +3,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
+import yaml
 import git
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 
 def convert_size_to_bytes(size_str):
     multipliers = {
@@ -57,24 +57,32 @@ def check_repository_size(paths):
     
     repo = git.Repo('.', search_parent_directories = True)    
     g = git.Git(repo)
-    
-    files = g.execute('git ls-tree -r -l HEAD').split('\n')
+            
+    files = g.execute('git ls-tree -r -l HEAD', shell = True).split('\n')
     files = [parse_git_ls(f) for f in files]
     files = {file: size for (file, size) in files}
-            
-    lfs_files = g.execute('git lfs ls-files --size').split('\n')   
+    
+    lfs_files = g.execute('git lfs ls-files --size', shell = True).split('\n')
     lfs_files = [parse_lfs_ls(f) for f in lfs_files]
     lfs_files = {file: size for (file, size) in lfs_files}
     
     for key in lfs_files.keys():
         files.pop(key, None)
     
-    files = sum(files.values())
-    lfs_files = sum(lfs_files.values())
-    max_file_sizes:
-        
-    file_MB_limit_lfs: 2               # Soft limit on file size (w/ LFS)
-    total_MB_limit_lfs: 500            # Soft limit on total size (w/ LFS)  
-    file_MB_limit: 0.5                 # Soft limit on file size (w/o LFS)
-    total_MB_limit: 125                # Soft limit on total size (w/o LFS)
-  
+    file_MB_limit = max(files.values()) / (1024 ** 2)
+    total_MB_limit = sum(files.values()) / (1024 ** 2)
+    file_MB_limit_lfs = max(lfs_files.values()) / (1024 ** 2)
+    total_MB_limit_lfs = sum(lfs_files.values()) / (1024 ** 2)
+    
+    config = yaml.load(open(paths['config'], 'rb'))
+    max_file_sizes = config['max_file_sizes']
+    
+    if file_MB_limit      > max_file_sizes['file_MB_limit']:
+        print("hi")
+    if total_MB_limit     > max_file_sizes['total_MB_limit']:
+        print("hi")
+    if file_MB_limit_lfs  > max_file_sizes['file_MB_limit_lfs']:
+        print("hi")
+    if total_MB_limit_lfs > max_file_sizes['total_MB_limit_lfs']:
+        print("hi")
+                                
