@@ -6,8 +6,12 @@ from builtins import (bytes, str, open, super, range,
 import yaml
 import git
 
+import gslab_make.private.messages as messages
+
 def convert_size_to_bytes(size_str):
-    multipliers = {
+    """ Convert human readable size to bytes. """
+		
+	multipliers = {
         ' B': 1024 ** 0,
         'KB': 1024 ** 1,
         'MB': 1024 ** 2,
@@ -22,6 +26,8 @@ def convert_size_to_bytes(size_str):
             return size
             
 def parse_git_ls(text):
+    """ Parse git ls-tree. """
+
     text = text.split()
     
     file = text[4]
@@ -31,6 +37,8 @@ def parse_git_ls(text):
     return (file, size)
     
 def parse_lfs_ls(text):
+    """ Parse git lfs ls-files. """
+
     text = text.split(' ', 2)[2].rsplit('(', 1)
     
     file = text[0].strip()
@@ -40,14 +48,14 @@ def parse_lfs_ls(text):
     return (file, size)
    
 def check_repository_size(paths):
-    """ Check repository size
+    """ Check file sizes for repository.
 
     Parameters
     ----------
     paths : dict 
         Dictionary of paths. Dictionary should contain {
             'config' : str
-                Path of config YAML file.
+                Path of config file.
         }
 
     Returns
@@ -78,11 +86,11 @@ def check_repository_size(paths):
     max_file_sizes = config['max_file_sizes']
     
     if file_MB_limit      > max_file_sizes['file_MB_limit']:
-        print("hi")
+        print(messages.warning_git_file % max_file_sizes['file_MB_limit']")
     if total_MB_limit     > max_file_sizes['total_MB_limit']:
-        print("hi")
+        print(messages.warning_git_repo % max_file_sizes['total_MB_limit'])
     if file_MB_limit_lfs  > max_file_sizes['file_MB_limit_lfs']:
-        print("hi")
+        print(messages.warning_git_file_lfs % max_file_sizes['file_MB_limit_lfs']")
     if total_MB_limit_lfs > max_file_sizes['total_MB_limit_lfs']:
-        print("hi")
+        print(messages.warning_git_file_repo % max_file_sizes['total_MB_limit_lfs'])
                                 
