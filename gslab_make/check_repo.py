@@ -10,8 +10,8 @@ import gslab_make.private.messages as messages
 
 def convert_size_to_bytes(size_str):
     """ Convert human readable size to bytes. """
-		
-	multipliers = {
+        
+    multipliers = {
         ' B': 1024 ** 0,
         'KB': 1024 ** 1,
         'MB': 1024 ** 2,
@@ -47,7 +47,7 @@ def parse_lfs_ls(text):
     
     return (file, size)
    
-def check_repository_size(paths):
+def check_repo_size(paths):
     """ Check file sizes for repository.
 
     Parameters
@@ -86,11 +86,11 @@ def check_repository_size(paths):
     max_file_sizes = config['max_file_sizes']
     
     if file_MB_limit      > max_file_sizes['file_MB_limit']:
-        print(messages.warning_git_file % max_file_sizes['file_MB_limit']")
+        print(messages.warning_git_file % max_file_sizes['file_MB_limit'])
     if total_MB_limit     > max_file_sizes['total_MB_limit']:
         print(messages.warning_git_repo % max_file_sizes['total_MB_limit'])
     if file_MB_limit_lfs  > max_file_sizes['file_MB_limit_lfs']:
-        print(messages.warning_git_file_lfs % max_file_sizes['file_MB_limit_lfs']")
+        print(messages.warning_git_file_lfs % max_file_sizes['file_MB_limit_lfs'])
     if total_MB_limit_lfs > max_file_sizes['total_MB_limit_lfs']:
         print(messages.warning_git_file_repo % max_file_sizes['total_MB_limit_lfs'])
                                 
