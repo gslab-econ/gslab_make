@@ -12,6 +12,61 @@ import gslab_make.private.messages as messages
 from gslab_make.private.utility import norm_path, format_error, glob_recursive
 from gslab_make.write_logs import write_to_makelog
 
+
+def get_file_sizes(repo):
+    file_sizes = []
+    exclude = ['.git']
+    
+    for root, dirs, files in os.walk(repo, topdown = True):
+        dirs[:] = [d for d in dirs if d not in exclude]
+        
+        files = [os.path.join(root, f) for f in files]
+        sizes = [os.path.getsize(f) for f in files]
+        file_sizes.extend(izip(files, sizes))
+        
+    file_sizes = dict(file_sizes)
+    return(file_sizes)
+    
+
+import os
+from itertools import izip
+
+import subprocess
+
+def get_file_sizes(path):
+    file_sizes = []
+    exclude = ['.git']
+    
+    for root, dirs, files in os.walk(path, topdown = True):
+        dirs[:] = [d for d in dirs if d not in exclude]
+        
+        files = [os.path.join(root, f) for f in files]
+        files = [norm_path(f) in files]
+        sizes = [os.path.getsize(f) for f in files]
+        file_sizes.extend(izip(files, sizes))
+        
+    file_sizes = dict(file_sizes)
+    return(file_sizes)
+    
+get_file_sizes("/Users/zong/template")
+
+    
+    
+def check_track_lfs(filepath, attributes = '../.gitattributes'):
+    with open(attributes) as f:
+        lfs_list = f.readlines()
+        lfs_list = [l for l in lfs_list if re.match('filter=lfs( )+diff=lfs( )+merge=lfs( )+-text')]
+        lfs_list = [x.split()[0] for x in track_list] 
+
+    match_list = [fnmatch.fnmatch(filepath, trackpath) for track in track_list]
+
+    if sum(match_list) == 0:
+        return False
+    return True
+
+
+
+
 def convert_size_to_bytes(size):
     """ Convert human readable size information to bytes. """
         
