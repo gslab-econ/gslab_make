@@ -7,7 +7,6 @@ import os
 import subprocess
 import shutil
 import traceback
-from termcolor import colored
 
 from gslab_make.private.exceptionclasses import CritError
 import gslab_make.private.messages as messages
@@ -89,7 +88,7 @@ class Directive(object):
             Tuple (exit code, error message) for shell command.
         """
         
-        self.output = 'Executing command:\n\t%s' % colored(command, green)
+        self.output = 'Executing command:\n    %s' % command
         print(self.output)
 
         try:

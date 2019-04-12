@@ -76,7 +76,7 @@ class MoveDirective(object):
         """
         
         try:
-            self.line = self.line.strip().split('|')
+            self.line = self.line.split('|')
             self.line = [l.strip() for l in self.line]
             self.line = [l.strip('"\'') for l in self.line]
             self.destination, self.source = self.line
@@ -146,7 +146,7 @@ class MoveDirective(object):
         regex = self.source.split('*')
         regex = '(.*)'.join(regex) 
 
-        wildcards = re.findall(regex, f)
+        wildcards = re.findall(regex, f) # Returns list if single match, list of set if multiple matches
         wildcards = [(w, ) if isinstance(w, str) else w for w in wildcards]
         wildcards = chain(*wildcards)
 
@@ -172,8 +172,8 @@ class MoveDirective(object):
         """
         
         f = self.destination
-        for wild in wildcards:
-            f = re.sub('\*', wild, f, 1)
+        for w in wildcards:
+            f = re.sub('\*', w, f, 1)
 
         return f
 
