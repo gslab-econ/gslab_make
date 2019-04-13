@@ -23,8 +23,8 @@ def get_file_sizes(dir_path, exclude):
     ----------
     dir_path : str
        Path of directory to walk through.
-	exclude : list
-	   List of subdirectories to exclude when walking.
+    exclude : list
+       List of subdirectories to exclude when walking.
 
     Returns
     -------
@@ -85,7 +85,7 @@ def get_git_ignore(repo):
 
 
 def parse_git_attributes(attributes):
-	""" Get git lfs patterns from .gitattributes.
+    """ Get git lfs patterns from .gitattributes.
     
     Parameters
     ----------
@@ -109,11 +109,12 @@ def parse_git_attributes(attributes):
 
 
 def check_path_lfs(path, lfs_list):
-	""" Check if file matches git lfs patterns."""
+    """ Check if file matches git lfs patterns."""
 
     for l in lfs_list:
         if fnmatch.fnmatch(path, l):
             return True
+            
     return False
 
 def get_repo_size(repo):
@@ -132,21 +133,21 @@ def get_repo_size(repo):
             Dictionary of {file : size} for each file tracked by git lfs. 
     """
     
-    	repo = git.Repo('.', search_parent_directories = True) 
-        git_files = get_file_sizes(repo.working_tree_dir, exclude = ['.git'])
-        git_ignore_files = get_git_ignore(repo)
-        
-        lfs_list = parse_git_attributes(repo.working_tree_dir + os.path.sep + '.gitattributes')
-
-        for ignore in git_ignore_files: 
-            git_files.pop(ignore)
-        
-        git_lfs_files = dict()
-        for key in [*git_files.keys()]:
-            if check_path_lfs(key, lfs_list):         
-                git_lfs_files[key] = git_files.pop(key)
+    repo = git.Repo('.', search_parent_directories = True) 
+    git_files = get_file_sizes(repo.working_tree_dir, exclude = ['.git'])
+    git_ignore_files = get_git_ignore(repo)
     
-        return(git_files, git_lfs_files)
+    lfs_list = parse_git_attributes(repo.working_tree_dir + os.path.sep + '.gitattributes')
+
+    for ignore in git_ignore_files: 
+        git_files.pop(ignore)
+    
+    git_lfs_files = dict()
+    for key in list(git_files.keys()):
+        if check_path_lfs(key, lfs_list):         
+            git_lfs_files[key] = git_files.pop(key)
+
+    return(git_files, git_lfs_files)
 
 
 def check_repo_size(paths):
