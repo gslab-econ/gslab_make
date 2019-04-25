@@ -6,11 +6,16 @@ from builtins import (bytes, str, open, super, range,
 import os
 import datetime
 import string
+import traceback
+
+from termcolor import colored
+import colorama
+colorama.init()
 
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
-from gslab_make.private.exceptionclasses import CritError
-from gslab_make.private.utility import norm_path, glob_recursive
+from gslab_make.private.exceptionclasses import CritError, ColoredError
+from gslab_make.private.utility import norm_path, glob_recursive, format_error
 
 
 def start_makelog(paths):
@@ -39,7 +44,8 @@ def start_makelog(paths):
     metadata.makelog_started = True
     if makelog:
         makelog = norm_path(makelog)
-        print('Starting makelog file at: "%s"' % makelog)
+        message = 'Starting makelog file at: `%s`' % makelog
+        print(colored(message, 'green'))
         
         with open(makelog, 'w', encoding = 'utf8') as MAKELOG:
             time_start = str(datetime.datetime.now().replace(microsecond = 0))
@@ -70,7 +76,8 @@ def end_makelog(paths):
 
     if makelog:
         makelog = norm_path(makelog)
-        print('Ending makelog file at: "%s"' % makelog)
+        message = 'Ending makelog file at: `%s`' % makelog
+        print(colored(message, 'green'))
 
         if not (metadata.makelog_started and os.path.isfile(makelog)):
             raise CritError(messages.crit_error_no_makelog % makelog)
@@ -157,7 +164,7 @@ def log_files_in_output(paths,
         output_local_dir = paths['output_local_dir'] # Make required?
         if type(output_local_dir) is not list:
             raise TypeError(messages.type_error_dir_list % output_local_dir)
-    except:
+    except KeyError:
         output_local_dir = []
   
     try:
@@ -173,15 +180,15 @@ def log_files_in_output(paths,
             output_headslog = norm_path(output_headslog)
             write_heads_log(output_headslog, output_files)
         
-        write_to_makelog(paths, 'Output logs successfully written!')  
+        message = 'Output logs successfully written!'
+        write_to_makelog(paths, message)
+        print(colored(message, 'green'))  
     except:
-        error_message = 'Error with `log_files_in_output`' 
-        error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(paths, error_message)
-        
-        raise
+        error_message = 'Error with `log_files_in_output`. Traceback can be found below.' 
+        error_message = format_error(error_message)
+        write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
+        raise ColoredError(error_message, traceback.format_exc())
 
-       
     
 def write_stats_log(statslog_file, output_files):
     """ Write statistics log.
@@ -249,7 +256,7 @@ def write_heads_log(headslog_file, output_files, num_lines = 10):
                 with open(file_name, 'r', encoding = 'utf8') as f:
                     for i in range(num_lines):
                         line = f.readline.strip() # Is there any way to make this faster?
-                        cleaned_line = filter(lambda x: x in string.printable, line)
+                        cleaned_line = filter(lambda x: x in string.printable, line) # Maybe overly conservative
                         print(cleaned_line, file = HEADSLOG)
             except:
                 print("Head not readable or less than %s lines" % num_lines, file = HEADSLOG)

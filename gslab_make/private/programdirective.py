@@ -6,12 +6,15 @@ from builtins import (bytes, str, open, super, range,
 import os
 import subprocess
 import shutil
-import traceback
 
-from gslab_make.private.exceptionclasses import CritError
+from termcolor import colored
+import colorama
+colorama.init()
+
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
-from gslab_make.private.utility import norm_path, format_list
+from gslab_make.private.exceptionclasses import CritError
+from gslab_make.private.utility import norm_path, format_list, format_traceback
 
 
 class Directive(object):
@@ -88,8 +91,8 @@ class Directive(object):
             Tuple (exit code, error message) for shell command.
         """
         
-        self.output = 'Executing command:\n    %s' % command
-        print(self.output)
+        self.output = 'Executing command: `%s`' % command
+        print(colored(self.output, 'cyan'))
 
         try:
             if not self.shell:
@@ -111,7 +114,7 @@ class Directive(object):
             return(exit)
         except:
             error_message = messages.crit_error_bad_command % command
-            error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
+            error_message = error_message + format_traceback()
             raise CritError(error_message)
              
 
@@ -266,7 +269,7 @@ class ProgramDirective(Directive):
                 out = f.read()
         except:
             error_message = messages.crit_error_no_program_output % (program_output, self.program)
-            error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
+            error_message = error_message + format_traceback()
             raise CritError(error_message)
 
         if self.makelog: 
@@ -346,5 +349,5 @@ class LyXDirective(ProgramDirective):
         """
     
         if self.doctype not in ['handout', 'comments', '']:
-            print(messages.warning_lyx_type % self.doctype)
+            print(colored(messages.warning_lyx_type % self.doctype, 'red'))
             self.doctype = ''

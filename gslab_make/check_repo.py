@@ -4,17 +4,21 @@ from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import os
-import yaml
+import re
 import git
+import fnmatch
+import yaml
 import traceback
-from itertools import izip
 
-from gslab_make.private.exceptionclasses import CritError
+from termcolor import colored
+import colorama
+colorama.init()
+
 import gslab_make.private.messages as messages
+from gslab_make.private.exceptionclasses import CritError, ColoredError
 from gslab_make.private.utility import norm_path, format_error, glob_recursive
 from gslab_make.write_logs import write_to_makelog
 
-import subprocess
 
 def get_file_sizes(dir_path, exclude):
     """ Walk through directory and get file sizes.
@@ -39,7 +43,7 @@ def get_file_sizes(dir_path, exclude):
         
         files = [os.path.join(root, f) for f in files]
         files = [norm_path(f) for f in files]
-        sizes = [os.path.getsize(f) for f in files]
+        sizes = [os.lstat(f).st_size for f in files]
         file_sizes.extend(zip(files, sizes))
         
     file_sizes = dict(file_sizes)
@@ -117,6 +121,7 @@ def check_path_lfs(path, lfs_list):
             
     return False
 
+
 def get_repo_size(repo):
     """ Get file sizes for repository.
     
@@ -169,9 +174,12 @@ def check_repo_size(paths):
     """
     
     try:
-        repo = git.Repo('.', search_parent_directories = True) 
+        try:
+            repo = git.Repo('.', search_parent_directories = True)    
+        except:
+            raise CritError(messages.crit_error_no_repo)
+        
         git_files, git_lfs_files = get_repo_size(repo)
-
         file_MB = max(git_files.values()) / (1024 ** 2)
         total_MB = sum(git_files.values()) / (1024 ** 2)
         file_MB_lfs = max(git_lfs_files.values()) / (1024 ** 2)
@@ -180,25 +188,43 @@ def check_repo_size(paths):
         config = yaml.load(open(paths['config'], 'rb'))
         max_file_sizes = config['max_file_sizes']
         
-        message = ''
+        print_message = ''
         if file_MB > max_file_sizes['file_MB_limit']:
-            message + '\n' + messages.warning_git_file % max_file_sizes['file_MB_limit']
+            print_message = print_message + messages.warning_git_file_print % max_file_sizes['file_MB_limit']
         if total_MB > max_file_sizes['total_MB_limit']:
-            message + '\n' + messages.warning_git_repo % max_file_sizes['total_MB_limit']
+            print_message = print_message + messages.warning_git_repo % max_file_sizes['total_MB_limit']
         if file_MB_lfs > max_file_sizes['file_MB_limit_lfs']:
-            message + '\n' + messages.warning_git_file_lfs % max_file_sizes['file_MB_limit_lfs']
+            print_message = print_message + messages.warning_git_lfs_file_print % max_file_sizes['file_MB_limit_lfs']
         if total_MB_lfs > max_file_sizes['total_MB_limit_lfs']:
-            message + '\n' + messages.warning_git_file_repo % max_file_sizes['total_MB_limit_lfs']
+            print_message = print_message + messages.warning_git_lfs_repo % max_file_sizes['total_MB_limit_lfs']
+        print_message = print_message.strip()
 
-        message = format_error(message)
-        write_to_makelog(paths, message)
-        print(message)
+        log_message = ''
+        if file_MB > max_file_sizes['file_MB_limit']:
+            log_message = log_message + messages.warning_git_file_log % max_file_sizes['file_MB_limit']
+            exceed_files = [f for (f, s) in git_files.items() if s / (1024 ** 2) > max_file_sizes['file_MB_limit']]
+            exceed_files = '\n'.join(exceed_files)
+            log_message = log_message + '\n' + exceed_files
+        if total_MB > max_file_sizes['total_MB_limit']:
+            log_message = log_message + messages.warning_git_repo % max_file_sizes['total_MB_limit']
+        if file_MB_lfs > max_file_sizes['file_MB_limit_lfs']:
+            log_message = log_message + messages.warning_git_lfs_file_log % max_file_sizes['file_MB_limit_lfs']
+            exceed_files = [f for (f, s) in git_lfs_files.items() if s / (1024 ** 2) > max_file_sizes['file_MB_limit_lfs']]
+            exceed_files = '\n'.join(exceed_files)
+            log_message = log_message + '\n' + exceed_files
+        if total_MB_lfs > max_file_sizes['total_MB_limit_lfs']:
+            log_message = log_message + messages.warning_git_lfs_repo % max_file_sizes['total_MB_limit_lfs']
+        log_message = log_message.strip()
+
+        if print_message:
+            print(colored(print_message, 'red'))
+        if log_message:
+            write_to_makelog(paths, log_message)
     except:
         error_message = 'Error with `check_repo_size`. Traceback can be found below.' 
-        error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(paths, error_message)
-        
-        raise
+        error_message = format_error(error_message) 
+        write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def get_git_status(repo): 
@@ -267,13 +293,11 @@ def get_modified_sources(paths,
             if len(overlap) > 100:
                 overlap = overlap[0:100]
                 overlap = overlap + ["and more (file list truncated due to length)"]
-            message = format_error(messages.warning_modified_files % '\n'.join(overlap))
+            message = messages.warning_modified_files % '\n'.join(overlap)
             write_to_makelog(paths, message)
-            print(message)
+            print(colored(message, 'red'))
     except:
         error_message = 'Error with `get_modified_sources`. Traceback can be found below.' 
-        error_message = format_error(error_message) + '\n' + traceback.format_exc()
-        write_to_makelog(paths, error_message)
-        
-        raise
-                                
+        error_message = format_error(error_message) 
+        write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
+        raise ColoredError(error_message, traceback.format_exc())               

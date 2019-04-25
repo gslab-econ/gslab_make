@@ -6,7 +6,9 @@ from builtins import (bytes, str, open, super, range,
 import os
 import re
 import glob
+import traceback
 import filecmp
+
 import gslab_make.private.messages as messages
 
 
@@ -84,12 +86,26 @@ def file_to_array(file_name):
     return array
 
 
+def format_traceback(trace = ''):
+    """ Format error message. """
+    
+    if not trace:
+        trace = traceback.format_exc()
+
+    trace = '\n' + trace.strip()
+    formatted = re.sub('\n', '\n  : ', trace)
+
+    return(formatted)
+
+
 def format_error(error):
     """ Format error message. """
 
-    formatted = messages.note_star_line + '\n%s\n' + messages.note_star_line
-    formatted = formatted % error.strip()
-    
+    error = error.strip()
+    star_line = '*' * (len(error) + 4)
+    formatted = star_line + '\n* %s *\n' + star_line
+    formatted = formatted % error
+
     return(formatted)
 
 
@@ -180,7 +196,7 @@ def parse_dircmp(dircmp):
     
     for subdir in dircmp.subdirs.itervalues():
         if duplicate:
-            duplicate = dir_identical(subdir)
+            duplicate = check_duplicate(subdir)
         else:
             break
         
