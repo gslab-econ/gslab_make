@@ -57,7 +57,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log', 'pdf_dir': 'output'}
 program = 'gslab_make/tests/input/lyx_test_file.lyx'
 kwargs = {'doctype': 'comments'}, makelog = 'log/make.log', pdf_dir = 'output'
-direct = <gslab_make.private.programdirective.LyXDirective object at 0x10902eb90>
+direct = <gslab_make.private.programdirective.LyXDirective object at 0x1087afc90>
 temp_name = 'lyx_test_file_comments'
 temp_program = '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_comments.lyx'
 beamer = False, line = '\\end_document\r\n'
@@ -151,7 +151,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log', 'pdf_dir': 'output'}
 program = 'gslab_make/tests/input/lyx_test_file.lyx', kwargs = {}
 makelog = 'log/make.log', pdf_dir = 'output'
-direct = <gslab_make.private.programdirective.LyXDirective object at 0x1090eb290>
+direct = <gslab_make.private.programdirective.LyXDirective object at 0x1087d99d0>
 temp_name = 'lyx_test_file'
 temp_program = '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
@@ -244,7 +244,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log', 'pdf_dir': 'output'}
 program = 'gslab_make/tests/input/lyx_test_file.lyx'
 kwargs = {'executable': 'lyx'}, makelog = 'log/make.log', pdf_dir = 'output'
-direct = <gslab_make.private.programdirective.LyXDirective object at 0x10906dfd0>
+direct = <gslab_make.private.programdirective.LyXDirective object at 0x10884f250>
 temp_name = 'lyx_test_file'
 temp_program = '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
@@ -337,7 +337,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log', 'pdf_dir': 'output'}
 program = 'gslab_make/tests/input/lyx_test_file.lyx'
 kwargs = {'doctype': 'handout'}, makelog = 'log/make.log', pdf_dir = 'output'
-direct = <gslab_make.private.programdirective.LyXDirective object at 0x1090eb850>
+direct = <gslab_make.private.programdirective.LyXDirective object at 0x1087d99d0>
 temp_name = 'lyx_test_file_handout'
 temp_program = '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file_handout.lyx'
 beamer = False, line = '\\end_document\r\n'
@@ -432,7 +432,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log', 'pdf_dir': 'output'}
 program = 'gslab_make/tests/input/lyx_test_file.lyx'
 kwargs = {'log': 'log/lyx.log'}, makelog = 'log/make.log', pdf_dir = 'output'
-direct = <gslab_make.private.programdirective.LyXDirective object at 0x10906d410>
+direct = <gslab_make.private.programdirective.LyXDirective object at 0x10884fd90>
 temp_name = 'lyx_test_file'
 temp_program = '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
@@ -525,7 +525,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log', 'pdf_dir': 'output'}
 program = 'gslab_make/tests/input/lyx_test_file.lyx'
 kwargs = {'option': '-e pdf'}, makelog = 'log/make.log', pdf_dir = 'output'
-direct = <gslab_make.private.programdirective.LyXDirective object at 0x1090eb4d0>
+direct = <gslab_make.private.programdirective.LyXDirective object at 0x1087f7050>
 temp_name = 'lyx_test_file'
 temp_program = '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
@@ -618,7 +618,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log', 'pdf_dir': 'output'}
 program = 'gslab_make/tests/input/lyx_test_file copy.lyx'
 kwargs = {'executable': 'lyx'}, makelog = 'log/make.log', pdf_dir = 'output'
-direct = <gslab_make.private.programdirective.LyXDirective object at 0x10906dc50>
+direct = <gslab_make.private.programdirective.LyXDirective object at 0x10884fc50>
 temp_name = 'lyx_test_file copy'
 temp_program = '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file copy.lyx'
 
@@ -711,7 +711,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log', 'pdf_dir': 'log'}
 program = 'gslab_make/tests/input/lyx_test_file.lyx', kwargs = {}
 makelog = 'log/make.log', pdf_dir = 'log'
-direct = <gslab_make.private.programdirective.LyXDirective object at 0x10909d050>
+direct = <gslab_make.private.programdirective.LyXDirective object at 0x108813fd0>
 temp_name = 'lyx_test_file'
 temp_program = '/Users/danielagonzalez/gslab_make/gslab_make/tests/input/lyx_test_file.lyx'
 
@@ -803,7 +803,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/mathematica_test_script.m', kwargs = {}
 makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x109085b90>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x10881f850>
 command = 'math < "/Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m" -noprompt'
 exit_code = 127
 error_message = "********************************************************************************
@@ -876,7 +876,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/mathematica_test_script.m'
 kwargs = {'executable': 'math'}, makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x10909dc10>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x1087f73d0>
 command = 'math < "/Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m" -noprompt'
 exit_code = 127
 error_message = "********************************************************************************
@@ -950,7 +950,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/mathematica_test_script.m', kwargs = {}
 makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x10909a210>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x10882c1d0>
 command = 'math < "/Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m" -noprompt'
 exit_code = 127
 error_message = "********************************************************************************
@@ -1024,7 +1024,7 @@ paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/mathematica_test_script.m'
 kwargs = {'option': '-initfile gslab_make/tests/input/mathematica_init_script.m'}
 makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x109085e90>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x108813910>
 command = 'math < "/Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script.m" -initfile gslab_make/tests/input/mathematica_init_script.m'
 exit_code = 127
 error_message = "********************************************************************************
@@ -1097,7 +1097,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/mathematica_test_script copy.m'
 kwargs = {'executable': 'math'}, makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x1090a50d0>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x108877a50>
 command = 'math < "/Users/danielagonzalez/gslab_make/gslab_make/tests/input/mathematica_test_script copy.m" -noprompt'
 exit_code = 127
 error_message = "********************************************************************************
@@ -1179,7 +1179,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/matlab_test_script.m', kwargs = {}
 makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x10909d110>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x108823710>
 program_log = '/Users/danielagonzalez/gslab_make/matlab_test_script.log'
 command = 'matlab -nosplash -nodesktop -r "try run(\'/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)" -logfile "matlab_test_script.log"'
 exit_code = 127
@@ -1257,7 +1257,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/matlab_test_script.m'
 kwargs = {'executable': 'matlab'}, makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x109085990>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x1088190d0>
 program_log = '/Users/danielagonzalez/gslab_make/matlab_test_script.log'
 command = 'matlab -nosplash -nodesktop -r "try run(\'/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)" -logfile "matlab_test_script.log"'
 exit_code = 127
@@ -1334,7 +1334,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/matlab_test_script.m'
 kwargs = {'log': 'log/matlab.log'}, makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x1090a50d0>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x108877ad0>
 program_log = '/Users/danielagonzalez/gslab_make/matlab_test_script.log'
 command = 'matlab -nosplash -nodesktop -r "try run(\'/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)" -logfile "matlab_test_script.log"'
 exit_code = 127
@@ -1410,7 +1410,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/matlab_test_script.m'
 kwargs = {'option': '-h'}, makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x1091581d0>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x1088292d0>
 program_log = '/Users/danielagonzalez/gslab_make/matlab_test_script.log'
 command = 'matlab -h -r "try run(\'/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script.m\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)" -logfile "matlab_test_script.log"'
 exit_code = 127
@@ -1486,7 +1486,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/matlab_test_script_wait1.m', kwargs = {}
 makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x1090cc390>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x10882c350>
 program_log = '/Users/danielagonzalez/gslab_make/matlab_test_script_wait1.log'
 command = 'matlab -nosplash -nodesktop -r "try run(\'/Users/danielagonzalez/gslab_make/gslab_make/tests/input/matlab_test_script_wait1.m\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)" -logfile "matlab_test_script_wait1.log"'
 exit_code = 127
@@ -1562,7 +1562,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 paths = {'makelog': 'log/make.log'}
 program = 'gslab_make/tests/input/R_test_script copy.R'
 kwargs = {'executable': 'R CMD BATCH'}, makelog = 'log/make.log'
-direct = <gslab_make.private.programdirective.ProgramDirective object at 0x109111a50>
+direct = <gslab_make.private.programdirective.ProgramDirective object at 0x1088aab10>
 command = 'R CMD BATCH --no-save "/Users/danielagonzalez/gslab_make/gslab_make/tests/input/R_test_script copy.R"'
 exit_code = 2
 error_message = "********************************************************************************
@@ -1618,7 +1618,7 @@ CritError: * R program executed with errors: *
 E               CritError: * R program executed with errors: *
 
 gslab_make/run_program.py:461: CritError
-===================== 21 failed, 51 passed in 9.98 seconds =====================
+==================== 21 failed, 51 passed in 10.37 seconds =====================
 Name                                       Stmts   Miss Branch BrPart  Cover   Missing
 --------------------------------------------------------------------------------------
 gslab_make/check_links.py                     37     27      2      0    26%   29-37, 62-84
@@ -1631,7 +1631,7 @@ gslab_make/private/metadata.py                 7      0      0      0   100%
 gslab_make/private/programdirective.py       107     13     32      9    84%   64, 95, 110-113, 126, 218, 264, 295-296, 337-338, 63->64, 94->95, 124->130, 125->126, 217->218, 262->268, 263->264, 269->exit, 336->337
 gslab_make/private/utility.py                 46     26     12      1    36%   46-63, 82-94, 16->23
 gslab_make/run_program.py                    183     45     34      6    73%   123, 313-328, 384, 386, 402-411, 503-523, 560-565, 121->123, 272->exit, 383->384, 385->386, 398->402, 559->560
-gslab_make/tablefill.py                      143      5     68     10    93%   56, 108, 141, 174, 177, 35->38, 38->40, 55->56, 86->exit, 94->91, 107->108, 125->122, 140->141, 170->174, 176->177
+gslab_make/tablefill.py                      144      5     68     10    93%   57, 109, 142, 175, 178, 36->39, 39->41, 56->57, 87->exit, 95->92, 108->109, 126->123, 141->142, 171->175, 177->178
 gslab_make/tablefill_info.py                   0      0      0      0   100%
 gslab_make/tests/nostderrout.py               12      0      2      0   100%
 gslab_make/tests/test_clear_dir.py            41      2      8      1    94%   55-56, 54->55
@@ -1645,11 +1645,11 @@ gslab_make/tests/test_run_python.py           64      2      8      3    93%   7
 gslab_make/tests/test_run_r.py                79      6     12      5    88%   50-51, 88, 90, 93-94, 81->83, 83->85, 87->88, 89->90, 92->93
 gslab_make/tests/test_run_stata.py            62      3      8      4    90%   71, 74-75, 66->68, 68->70, 70->71, 73->74
 gslab_make/tests/test_tablefill.py            96      2     42      6    94%   143-144, 20->exit, 37->34, 57->43, 74->exit, 138->exit, 142->143
-gslab_make/tests/test_textfill.py             83      2     12      3    95%   138-139, 17->exit, 133->exit, 137->138
+gslab_make/tests/test_textfill.py             84      2     12      3    95%   136-137, 18->exit, 131->exit, 135->136
 gslab_make/tests/test_zip.py                  35      2      4      2    90%   45-46, 41->exit, 44->45
-gslab_make/textfill.py                       137      2     60      5    96%   47, 173, 35->38, 38->40, 46->47, 103->exit, 172->173
+gslab_make/textfill.py                       116      1     50      2    98%   148, 88->exit, 147->148
 gslab_make/textfill_info.py                    0      0      0      0   100%
 gslab_make/write_link_logs.py                 31     23      2      0    24%   52-71, 88-95
 gslab_make/write_logs.py                      88     55     22      3    33%   69-84, 111, 152-172, 197-207, 227-246, 40->exit, 107->exit, 110->111
 --------------------------------------------------------------------------------------
-TOTAL                                       1866    399    428     81    76%
+TOTAL                                       1847    398    418     78    76%

@@ -17,15 +17,10 @@ def textfill(**kwargs):
         args = parse_arguments(kwargs)
         text = parse_text(args)
         insert_text(args, text)
-        exitmessage = args['template'] + ' filled successfully by textfill'
-        print(exitmessage)
-        return exitmessage	
+        return args['template'] + ' filled successfully by textfill'
         
     except:
-        print('Error Found')
-        exitmessage = traceback.format_exc()
-        print(exitmessage)
-        return exitmessage    
+        raise CritError('Error found')    
 
 # Set textfill's docstring as the text in "textfill_info.py"
 textfill.__doc__ = textfill_info.__doc__   
@@ -33,34 +28,23 @@ textfill.__doc__ = textfill_info.__doc__
 
 def parse_arguments(kwargs):
     args = dict()
-    if 'input' in kwargs.keys():
-        input_list = kwargs['input'].split()
-        args['input'] = input_list
-    if 'template' in kwargs.keys():
-        args['template'] = kwargs['template']
-    if 'output' in kwargs.keys():
-        args['output'] = kwargs['output'] 
-    if 'remove_echoes' in kwargs.keys():
-        args['remove_echoes'] = kwargs['remove_echoes']
-    else:
-        args['remove_echoes'] = False
-    if 'size' in kwargs.keys():
-        args['size'] = kwargs['size']
-    else:
-        args['size'] = 'Default'
-    if 'prefix' in kwargs.keys():
-        args['prefix'] = kwargs['prefix'] + "_"
-    else:
-        args['prefix'] = 'textfill_'
-    
+    args['remove_echoes'] = False  
+    args['size'] = 'Default' 
+    args['prefix'] = 'textfill_'  
+    for key, value in kwargs.items():
+        if key == 'input':
+            input_list = kwargs['input'].split()        
+            args['input'] = input_list 
+        elif key == 'prefix':
+            args['prefix'] = kwargs['prefix'] + "_"
+        else:
+            args[key] = kwargs[key]
+
     return args
 
 
 def parse_text(args):
-    text = read_text(args['input'], args['prefix'])
-    text = clean_text(text, args['remove_echoes'])
-    
-    return text
+    return clean_text(read_text(args['input'], args['prefix']), args['remove_echoes'])
 
 
 def read_text(input, prefix):
@@ -135,42 +119,31 @@ def remove_trailing_leading_blanklines(list):
 def insert_text(args,text):
     lyx_text = open(args['template'], 'rU').readlines()
     # Loop over (expanding) raw LyX text
-    n = 0
-    loop = True
-    while loop==True:
-        n+=1 
-        if n<len(lyx_text):
-            if (lyx_text[n].startswith('name "text:')):
-                tag = lyx_text[n].replace('name "text:','',1).rstrip('"\n').lower()
-                if tag in text.results:
-                    # Insert text after preceding layout is closed
-                    insert_now = False
-                    i = n
-                    while insert_now is False:
-                        i+=1
-                        if lyx_text[i]=='\\end_layout\n':
-                            insert_now = True
-                    
-                    # Insert text
-                    for key in text.results:
-                        if tag==key:
-                            lyx_code = write_data_to_lyx(text.results[key], args['size'])
-                    lyx_text.insert(i+1, lyx_code)
-        else:
-            loop = False
+    for n in range(1, len(lyx_text)):
+        if (lyx_text[n].startswith('name "text:')):
+            tag = lyx_text[n].replace('name "text:','',1).rstrip('"\n').lower()
+            if tag in text.results:
+                # Insert text after preceding layout is closed
+                i = n
+                while lyx_text[i] != '\\end_layout\n':
+                    i += 1
+                # Insert text
+                for key in text.results:
+                    if tag == key:
+                        lyx_code = write_data_to_lyx(text.results[key], args['size'])
+                lyx_text.insert(i+1, lyx_code)
     
     outfile = open(args['output'], 'wb')
-    outfile.write( ''.join(lyx_text) )
+    outfile.write(''.join(lyx_text))
     outfile.close()
     
     return lyx_text
 
 
 def write_data_to_lyx(data, size):
-    data_list = data.split('\n')
     linewrap_beg = '\\begin_layout Plain Layout\n'
     linewrap_end = '\\end_layout\n'
-    if size!='Default':
+    if size != 'Default':
         size_line = '\\backslash\n' + size + '\n' + linewrap_end + linewrap_beg
     else:
         size_line = ''
@@ -187,7 +160,7 @@ def write_data_to_lyx(data, size):
                 '\end_layout'
     
     lyx_code = preamble
-    for line in data_list:
+    for line in data.split('\n'):
         lyx_code += linewrap_beg + line + linewrap_end
     lyx_code += postamble
     

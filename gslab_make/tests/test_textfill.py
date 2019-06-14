@@ -10,6 +10,7 @@ import shutil
 from gslab_make.textfill import (textfill, read_text, 
                                  remove_trailing_leading_blanklines)
 from gslab_make.tests import nostderrout
+from gslab_make.private.exceptionclasses import CritError
 
 class testTextfill(unittest.TestCase):
 
@@ -64,18 +65,18 @@ class testTextfill(unittest.TestCase):
                 self.assertIn(raw_table[n], raw_lyx)
     
     def test_tags_dont_match(self):
-        with nostderrout():
-            error = textfill(input    = 'gslab_make/tests/input/tags_dont_match.log', 
-                             template = 'gslab_make/tests/input/textfill_template.lyx', 
-                             output   = './build/textfill_template_filled.lyx')
-        self.assertIn('ValueError', error)
+        with self.assertRaises(CritError):
+            with nostderrout():
+                error = textfill(input    = 'gslab_make/tests/input/tags_dont_match.log', 
+                                 template = 'gslab_make/tests/input/textfill_template.lyx', 
+                                 output   = './build/textfill_template_filled.lyx')
         
     def test_tags_not_closed(self):
-        with nostderrout():   
-            error = textfill(input    = 'gslab_make/tests/input/tags_not_closed.log', 
-                             template = 'gslab_make/tests/input/textfill_template.lyx', 
-                             output   = './build/textfill_template_filled.lyx')
-        self.assertIn('HTMLParseError', error)
+        with self.assertRaises(CritError):
+            with nostderrout():   
+                error = textfill(input    = 'gslab_make/tests/input/tags_not_closed.log', 
+                                 template = 'gslab_make/tests/input/textfill_template.lyx', 
+                                 output   = './build/textfill_template_filled.lyx')
         
     def test_tags_incorrectly_specified(self):
         with nostderrout():
@@ -91,27 +92,24 @@ class testTextfill(unittest.TestCase):
         
     def test_illegal_syntax(self):
         # missing arguments
-        with nostderrout(): 
-            error = textfill(input    = 'gslab_make/tests/input/legal.log', 
-                             template = 'gslab_make/tests/input/textfill_template.lyx')
-        self.assertIn('KeyError', error)                      
+        with self.assertRaises(CritError):
+            with nostderrout(): 
+                error = textfill(input    = 'gslab_make/tests/input/legal.log', 
+                                 template = 'gslab_make/tests/input/textfill_template.lyx')                    
                           
         # non-existent input 1
-        with nostderrout():
-            error = textfill(input    = 'gslab_make/tests/input/fake_file.log', 
-                             template = 'gslab_make/tests/input/textfill_template.lyx', 
-                             output   = './build/textfill_template_filled.lyx')
-
-
-        self.assertIn('IOError', error)
+        with self.assertRaises(CritError):
+            with nostderrout():
+                error = textfill(input    = 'gslab_make/tests/input/fake_file.log', 
+                                 template = 'gslab_make/tests/input/textfill_template.lyx', 
+                                 output   = './build/textfill_template_filled.lyx')
         
         # non-existent input 2
-        with nostderrout():
-            error = textfill(input    = './log/stata.log ./input/fake_file.log', 
-                             template = 'gslab_make/tests/input/textfill_template.lyx', 
-                             output   = './build/textfill_template_filled.lyx')
-
-        self.assertIn('IOError', error)
+        with self.assertRaises(CritError):
+            with nostderrout():
+                error = textfill(input    = './log/stata.log ./input/fake_file.log', 
+                                 template = 'gslab_make/tests/input/textfill_template.lyx', 
+                                 output   = './build/textfill_template_filled.lyx')
         
     def test_argument_order(self):
 
