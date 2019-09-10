@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
+from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -26,8 +27,10 @@ class MoveDirective(object):
     
     Parameters
     ----------
-    line_raw : str
-        Raw text of linking/copying instructions (used for error messaging).
+    file: str
+        File containing linking/copying instructions (used for error messaging).
+    raw_line : str
+        Raw text of line containing linking/copying instructions (used for error messaging).
     line : str
         Line of text containing linking/copying instructions.
     move_dir : str
@@ -45,8 +48,9 @@ class MoveDirective(object):
         List of (source, destination) mappings parsed from line.
     """
     
-    def __init__(self, raw, line, move_dir, osname = os.name):
-        self.raw      = raw
+    def __init__(self, raw_line, file, line, move_dir, osname = os.name):
+        self.raw_line = raw_line
+        self.file     = file
         self.line     = line
         self.move_dir = move_dir
         self.osname   = osname
@@ -63,7 +67,7 @@ class MoveDirective(object):
         None
         """      
         
-        if self.osname not in {'posix', 'nt'}:
+        if self.osname not in ['posix', 'nt']:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):
@@ -79,10 +83,10 @@ class MoveDirective(object):
             self.line = [l.strip() for l in self.line]
             self.line = [l.strip('"\'') for l in self.line]
             self.destination, self.source = self.line
-        except:
-            error_message = messages.crit_error_bad_move % self.raw
+        except Exception as e:
+            error_message = messages.crit_error_bad_move % (self.raw_line, self.file)
             error_message = error_message + format_traceback()
-            raise CritError(error_message)
+            raise_from(CritError(error_message), None)
 
         self.source = norm_path(self.source)
         self.destination = norm_path(os.path.join(self.move_dir, self.destination))
@@ -96,7 +100,7 @@ class MoveDirective(object):
         """
 
         if re.findall('\*', self.source) != re.findall('\*', self.destination):
-            raise SyntaxError(messages.syn_error_wildcard)
+            raise SyntaxError(messages.syn_error_wildcard % (self.raw_line, self.file))
         
         if re.search('\*', self.source):
             if not glob.glob(self.source):
@@ -141,10 +145,15 @@ class MoveDirective(object):
            Iterator of extracted wildcard characters.
         """
         
-        regex = self.source.split('*')
+        regex = re.escape(self.source)
+        regex = regex.split('\*')
         regex = '(.*)'.join(regex) 
 
         wildcards = re.findall(regex, f) # Returns list if single match, list of set if multiple matches
+        for w in wildcards:
+            print(w)
+            print(1)
+
         wildcards = [(w, ) if isinstance(w, str) else w for w in wildcards]
         wildcards = chain(*wildcards)
 
@@ -259,14 +268,16 @@ class MoveDirective(object):
         """
         for source, destination in self.move_list:
             if os.path.isdir(source):
-                directory = '/d'
-            else:
-                directory = ''
+                link_option = '/d'
+                copy_option = ''
+            elif os.path.isfile(source):
+                link_option = ''
+                copy_option = 'cmd /c echo F | '
 
             if movetype == 'copy':
-                command = metadata.commands[self.osname]['makecopy'] % (source, destination)
+                command = metadata.commands[self.osname]['makecopy'] % (copy_option, source, destination)
             elif movetype == 'symlink':
-                command = metadata.commands[self.osname]['makelink'] % (directory, destination, source)
+                command = metadata.commands[self.osname]['makelink'] % (link_option, destination, source)
 
             process = subprocess.Popen(command,
                                        shell = True,
@@ -353,17 +364,19 @@ class MoveList(object):
         -------
         None
         """
-        
-        lines = [line for file in self.file_list for line in file_to_array(file)]
-        lines = [(l, l) for l in lines]
-        try:
-            lines = [(raw, str(line).format(**self.mapping_dict)) for (raw, line) in lines]
-        except KeyError as e:
-            error_message = messages.crit_error_path_mapping % str(e).lstrip("u'").rstrip("'")
-            error_message = error_message + format_traceback()
-            raise CritError(error_message)
-			
-        self.move_directive_list = [MoveDirective(raw, line, self.move_dir) for (raw, line) in lines]
+        lines = []
+        for file in self.file_list:
+            for raw_line in file_to_array(file):
+                try:
+                    line = str(raw_line).format(**self.mapping_dict)
+                    lines.append((file, raw_line, line))
+                except KeyError as e:
+                    key = str(e).lstrip("u'").rstrip("'")
+                    error_message = messages.crit_error_path_mapping % (key, key, file, raw_line, key)
+                    error_message = error_message + format_traceback()
+                    raise_from(CritError(error_message), None)
+
+        self.move_directive_list = [MoveDirective(file, raw_line, line, self.move_dir) for (file, raw_line, line) in lines]
 
     def create_symlinks(self):       
         """ Create symlinks according to directives. 
