@@ -1,13 +1,17 @@
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
+from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import os
 import re
 import glob
+import traceback
+import filecmp
 
 import gslab_make.private.messages as messages
+from gslab_make.private.exceptionclasses import CritError
 
 
 def norm_path(path):
@@ -16,14 +20,24 @@ def norm_path(path):
     if path:
         path = re.split('[/\\\\]+', path)
         path = os.path.sep.join(path)
-        path = path.rstrip(os.path.sep)
         path = os.path.expanduser(path)
         path = os.path.abspath(path)
 
     return path
 
 
-def glob_recursive(path, recursive):
+def get_path(paths_dict, key):
+    """ Get path for key. """
+
+    try:
+        path = paths_dict[key]
+    except KeyError:
+        raise_from(CritError(messages.crit_error_no_key % (key, key)), None)
+
+    return(path)
+
+
+def glob_recursive(path, depth, quiet = True):
     """ Walks through path. 
     
     Notes
@@ -34,8 +48,10 @@ def glob_recursive(path, recursive):
     ----------
     path : str
         Path to walk through.
-    recursive : int
+    depth : int
         Level of depth when walking through path.
+    quiet : bool, optional
+        Suppress warning if no files globbed. Defaults to True. 
 
     Returns
     -------
@@ -47,7 +63,7 @@ def glob_recursive(path, recursive):
     path_files = glob.glob(path_walk)
 
     i = 0 
-    while i <= recursive:          
+    while i <= depth:          
         path_walk = os.path.join(path_walk, "*")
         glob_files = glob.glob(path_walk)
         if glob_files:
@@ -57,8 +73,9 @@ def glob_recursive(path, recursive):
             break
 
     path_files = [p for p in path_files if os.path.isfile(p)]
-    if not path_files:
-        print(messages.warning_glob % (path, recursive))
+    
+    if not path_files and not quiet:
+        print(messages.warning_glob % (path, depth))
 
     return path_files
 
@@ -85,23 +102,41 @@ def file_to_array(file_name):
     return array
 
 
-def format_error(error):
-    """ Format error message. 
+def format_traceback(trace = ''):
+    """ Format traceback message.
 
     Parameters
     ----------
-    error : str
-        Error message to format.
+    trace : str
+        Traceback to format. Defaults to `traceback.format_exc()`.
+
+    Notes
+    -----
+    Format traceback for readability to pass into user messages. 
 
     Returns
     -------
     formatted : str
-        Formatted error message.
+        Formatted traceback.
     """
-
-    formatted = messages.note_star_line + '\n%s\n' + messages.note_star_line
-    formatted = formatted % error.strip()
     
+    if not trace:
+        trace = traceback.format_exc()
+
+    trace = '\n' + trace.strip()
+    formatted = re.sub('\n', '\n  > ', trace)
+
+    return(formatted)
+
+
+def format_message(message):
+    """ Format message. """
+
+    message = message.strip()
+    star_line = '*' * (len(message) + 4)
+    formatted = star_line + '\n* %s *\n' + star_line
+    formatted = formatted % message
+
     return(formatted)
 
 
@@ -115,7 +150,7 @@ def format_list(list):
 
     Notes
     -----
-    Format list for readability to pass into user messages 
+    Format list for readability to pass into user messages.
 
     Returns
     -------
@@ -123,7 +158,78 @@ def format_list(list):
         Formatted list.
     """
 
-    formatted = ['`' + item + '`' for item in list]
+    formatted = ['`' + str(item) + '`' for item in list]
     formatted = ", ".join(formatted)
     
     return(formatted)
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+# Following functions are not currently actively used in code base #
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+def check_duplicate(original, copy): 
+    """ Check duplicate.
+
+    Parameters
+    ----------
+    original : str
+        Original path.
+    copy : str 
+        Path to check if duplicate.
+
+    Returns
+    -------
+    duplicate : bool
+        Destination is duplicate.
+    """
+
+    duplicate = os.path.exists(copy)
+    
+    if duplicate: 
+        if os.path.isfile(original):
+            duplicate = filecmp.cmp(original, copy)            
+        elif os.path.isdir(copy):
+            dircmp = filecmp.dircmp(original, copy, ignore = ['.DS_Store'])
+            duplicate = parse_dircmp(dircmp)
+        else:
+            duplicate = False
+            
+    return duplicate
+    
+
+def parse_dircmp(dircmp):
+    """ Parse dircmp to see if directories duplicate. 
+
+    Parameters
+    ----------
+    dircmp : filecmp.dircmp
+        dircmp to parse if directories duplicate.
+
+    Returns
+    -------
+    duplicate : bool
+        Directories are duplicates.
+    """
+
+    # Check directory
+    if dircmp.left_only:
+        return False
+    if dircmp.right_only:
+        return False
+    if dircmp.diff_files:
+        return False
+    if dircmp.funny_files:
+        return False
+    if dircmp.common_funny:
+        return False
+
+    # Check subdirectories
+    duplicate = True
+    
+    for subdir in dircmp.subdirs.itervalues():
+        if duplicate:
+            duplicate = check_duplicate(subdir)
+        else:
+            break
+        
+    return duplicate

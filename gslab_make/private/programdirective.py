@@ -1,17 +1,21 @@
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
+from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import os
 import subprocess
 import shutil
-import traceback
 
-from gslab_make.private.exceptionclasses import CritError
+from termcolor import colored
+import colorama
+colorama.init()
+
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
-from gslab_make.private.utility import norm_path, format_list
+from gslab_make.private.exceptionclasses import CritError
+from gslab_make.private.utility import norm_path, format_list, format_traceback
 
 
 class Directive(object):
@@ -60,7 +64,7 @@ class Directive(object):
         None
         """      
         
-        if self.osname not in {'posix', 'nt'}:
+        if self.osname not in ['posix', 'nt']:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):
@@ -71,8 +75,8 @@ class Directive(object):
         None  
         """
 
-        self.makelog  = norm_path(self.makelog)
-        self.log      = norm_path(self.log) if self.log else self.log
+        self.makelog = norm_path(self.makelog)
+        self.log     = norm_path(self.log) 
 
     def execute_command(self, command):
         """ Execute shell command.
@@ -88,8 +92,8 @@ class Directive(object):
             Tuple (exit code, error message) for shell command.
         """
         
-        self.output = 'Executing: "%s"' % command
-        print(self.output)
+        self.output = 'Executing command: `%s`' % command
+        print(colored(self.output, metadata.color_in_process))
 
         try:
             if not self.shell:
@@ -98,20 +102,21 @@ class Directive(object):
             process = subprocess.Popen(command, 
                                        stdout = subprocess.PIPE, 
                                        stderr = subprocess.PIPE, 
-                                       shell = self.shell)
+                                       shell = self.shell, 
+                                       universal_newlines = True)
             stdout, stderr = process.communicate()
             exit = (process.returncode, stderr)             
              
             if stdout:
                self.output += '\n' + stdout
             if stderr:
-               self.output += '\n' + stderr 
+               self.output += '\n' + stderr
                             
             return(exit)
         except:
             error_message = messages.crit_error_bad_command % command
-            error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
-            raise CritError(error_message)
+            error_message = error_message + format_traceback()
+            raise_from(CritError(error_message), None)
              
 
     def write_log(self):
@@ -219,7 +224,6 @@ class ProgramDirective(Directive):
             extensions = format_list(metadata.extensions[self.application])
             raise CritError(messages.crit_error_extension % (self.program, extensions))
 
-
     def get_executable(self):
         """ Set executable to default from metadata if unspecified.
         
@@ -264,9 +268,9 @@ class ProgramDirective(Directive):
             with open(program_output, 'r', encoding = 'utf8') as f:
                 out = f.read()
         except:
-            error_message = crit_error_no_program_output % (self.program, program_output)
-            error_message = error_message + '\n' + traceback.format_exc().splitlines()[-1]
-            raise CritError(error_message)
+            error_message = messages.crit_error_no_program_output % (program_output, self.program)
+            error_message = error_message + format_traceback()
+            raise_from(CritError(error_message), None)
 
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
@@ -322,7 +326,7 @@ class LyXDirective(ProgramDirective):
     pdf_dir : str
         Directory to write PDFs.
     doctype : str, optional
-        Type of LyX document. Takes either `handout` and `comments`. 
+        Type of LyX document. Takes either `handout` or `comments`. 
         Defaults to no special document type.
     """
     
@@ -345,5 +349,5 @@ class LyXDirective(ProgramDirective):
         """
     
         if self.doctype not in ['handout', 'comments', '']:
-            print(messages.warning_lyx_type % self.doctype)
+            print(colored(messages.warning_lyx_type % self.doctype, 'red'))
             self.doctype = ''
