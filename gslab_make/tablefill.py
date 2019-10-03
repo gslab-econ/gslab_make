@@ -45,10 +45,12 @@ def parse_data(data, null):
         List of data values from input.
     """
     null_strings = ['', '.', 'NA']
-    
-    data = [row.strip().split('\t') for row in data]
+     
+    data = [row.rstrip('\r\n') for row in data]
+    data = [row for row in data if row]
+    data = [row.split('\t') for row in data]
     data = chain(*data)
-    data = [value.strip() for value in data]
+    data = [*data]
     if (null != None):
         data = [null if value in null_strings else value for value in data]
     
@@ -71,7 +73,7 @@ def parse_content(file, null):
     return(tag, data)
     
     
-def insert_value(line, value, type):
+def insert_value_lyx(line, value, type):
     if (type == 'no change'):
         line = line.replace('###', value)
     elif (type == 'round'):
@@ -95,6 +97,29 @@ def insert_value(line, value, type):
 
     return(line)
 
+def insert_value_latex(line, value, type):
+    if (type == 'no change'):
+        line = line.replace('\\\\#\\\\#\\\\#', value)
+    elif (type == 'round'):
+        try:
+            value = float(value)
+        except:
+            raise_from(CritError(messages.crit_error_not_float % value), None)
+
+        digits = re.findall('\\\\#([0-9]+)\\\\#', line)[0]
+        rounded_value = format(value, '.%sf' % digits)
+        line = re.sub('(.*)\\\\#[0-9]+\\\\#', r'\g<1>' + rounded_value, line)
+    elif (type == 'comma + round'):
+        try:
+            value = float(value)
+        except:
+            raise_from(CritError(messages.crit_error_not_float % value), None)
+
+        digits = re.findall('\\\\#([0-9]+),\\\\#', line)[0]
+        rounded_value = format(value, ',.%sf' % digits)
+        line = re.sub('(.*)\\\\#[0-9]+,\\\\#', r'\g<1>' + rounded_value, line)
+
+    return(line)
 
 def insert_tables_lyx(template, tables):
     with open(template, 'r') as f:
@@ -116,15 +141,15 @@ def insert_tables_lyx(template, tables):
         while is_table:
             try:
                 if re.match('.*###', doc[i]):
-                    doc[i] = insert_value(doc[i], values[entry_count], 'no change')
+                    doc[i] = insert_value_lyx(doc[i], values[entry_count], 'no change')
                     entry_count += 1
                     break
                 elif re.match('.*#[0-9]+#', doc[i]):
-                    doc[i] = insert_value(doc[i], values[entry_count], 'round')
+                    doc[i] = insert_value_lyx(doc[i], values[entry_count], 'round')
                     entry_count += 1
                     break
                 elif re.match('.*#[0-9]+,#', doc[i]):
-                    doc[i] = insert_value(doc[i], values[entry_count], 'comma + round')
+                    doc[i] = insert_value_lyx(doc[i], values[entry_count], 'comma + round')
                     entry_count += 1
                     break
                 elif re.match('</lyxtabular>', doc[i]):
@@ -133,7 +158,7 @@ def insert_tables_lyx(template, tables):
                         raise_from(CritError(messages.crit_error_too_many_values % tag), None)
                 else:
                     break
-            except KeyError:
+            except IndexError:
                 raise_from(CritError(messages.crit_error_not_enough_values % tag), None)
                 
 
@@ -148,9 +173,9 @@ def insert_tables_latex(template, tables):
     is_table = False
 
     for i in range(len(doc)):
-        if doc[i].startswith('label{tab:'):
+        if re.search('label\{tab:', doc[i], flags = re.IGNORECASE):
             tag = doc[i].split(':')[1].rstrip('}\n').strip('"').lower()
-            
+
             try:
                 values = tables[tag]
                 entry_count = 0
@@ -161,31 +186,29 @@ def insert_tables_latex(template, tables):
         while is_table:
             line_col = doc[i].split("&")
 
-            for col in line_col:
-                try:
-                    if re.match('.*###', col):
-                        col = insert_value(col, values[entry_count], 'no change')
-                        entry_count += 1
-                        break
-                    elif re.match('.*#[0-9]+#', col):
-                        col = insert_value(col, values[entry_count], 'round')
-                        entry_count += 1
-                        break
-                    elif re.match('.*#[0-9]+,#', col):
-                        col = insert_value(col, values[entry_count], 'comma + round')
-                        entry_count += 1
-                        break
-                except KeyError:
-                    raise_from(CritError(messages.crit_error_not_enough_values % tag), None)
-                
+            for j in range(len(line_col)):
+                if re.search('.*\\\\#\\\\#\\\\#', line_col[j]):
+                    line_col[j] = insert_value_latex(line_col[j], values[entry_count], 'no change')
+                    entry_count += 1
+                elif re.search('.*\\\\#[0-9]+\\\\#', line_col[j]):
+                    line_col[j] = insert_value_latex(line_col[j], values[entry_count], 'round')                   
+                    entry_count += 1
+                elif re.search('.*\\\\#[0-9]+,\\\\#', line_col[j]):
+                    line_col[j] = insert_value_latex(line_col[j], values[entry_count], 'comma + round')
+                    entry_count += 1
+               
             doc[i] = "&".join(line_col)
-                
-            if doc[i] == 'end{tabular}':
+
+            if re.search('end\{tabular\}', doc[i], flags = re.IGNORECASE):
                 is_table = False
                 if entry_count != len(values):
                     raise_from(CritError(messages.crit_error_too_many_values % tag), None)
             else:
-            	break
+                break
+
+    doc = '\n'.join(doc)
+
+    return(doc)
 
 
 def insert_tables(template, tables):
@@ -199,10 +222,12 @@ def insert_tables(template, tables):
 
 def tablefill(inputs, template, output, null = None):
     try:
+        if type(inputs) is not list:
+            raise_from(TypeError(messages.type_error_dir_list % inputs), None)
         inputs = [norm_path(file) for file in inputs]
         content = [parse_content(file, null) for file in inputs]
         tables = {tag:data for (tag, data) in content}
-        
+
         if (len(content) != len(tables)):
             raise_from(CritError(messages.crit_error_duplicate_tables), None)
 
@@ -213,5 +238,4 @@ def tablefill(inputs, template, output, null = None):
     except:
         error_message = 'Error with `tablefill`. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
