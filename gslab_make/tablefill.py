@@ -15,7 +15,7 @@ colorama.init()
 import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError, ColoredError
 from gslab_make.private.utility import norm_path, format_message
-from gslab_make.write_logs import write_to_makelogs
+from gslab_make.write_logs import write_to_makelog
 
 def parse_tag(tag):
     """ Parse tag from input."""
