@@ -84,7 +84,7 @@ def insert_value(line, value, type):
 
         digits = re.findall('\\\\?#([0-9]+)\\\\?#', line)[0]
         rounded_value = format(value, '.%sf' % digits)
-        line = re.sub('(.*)\\\\?#[0-9]+\\\\?#', r'\g<1>' + rounded_value, line)
+        line = re.sub('(.*?)\\\\?#[0-9]+\\\\?#', r'\g<1>' + rounded_value, line)
     elif (type == 'comma + round'):
         try:
             value = float(value)
@@ -93,7 +93,7 @@ def insert_value(line, value, type):
 
         digits = re.findall('\\\\?#([0-9]+),\\\\?#', line)[0]
         rounded_value = format(value, ',.%sf' % digits)
-        line = re.sub('(.*)\\\\?#[0-9]+,\\\\?#', r'\g<1>' + rounded_value, line)
+        line = re.sub('(.*?)\\\\?#[0-9]+,\\\\?#', r'\g<1>' + rounded_value, line)
 
     return(line)
 
