@@ -15,7 +15,6 @@ colorama.init()
 import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError, ColoredError
 from gslab_make.private.utility import norm_path, format_message
-from gslab_make.write_logs import write_to_makelog
 
 def parse_tag(tag):
     """ Parse tag from input."""
@@ -74,6 +73,23 @@ def parse_content(file, null):
     
     
 def insert_value(line, value, type):
+    """ Insert value into line.
+    
+    Parameters
+    ----------
+    line : str
+        Line of document to insert value.
+    value : str
+        Value to insert.
+    type : str
+        Formatting for value.
+
+    Returns
+    -------
+    line : str
+        Line of document with inserted value.
+    """
+    
     if (type == 'no change'):
         line = re.replace('\\\\?#\\\\?#\\\\?#', value, line)
     elif (type == 'round'):
@@ -99,6 +115,21 @@ def insert_value(line, value, type):
 
 
 def insert_tables_lyx(template, tables):
+    """ Fill tables for LyX template.
+    
+    Parameters
+    ----------
+    template : str
+        Path of LyX template to fill.
+    tables : dict
+        Dictionary {tag: values} of tables.
+
+    Returns
+    -------
+    template : str
+        Filled LyX template.
+    """
+
     with open(template, 'r') as f:
         doc = f.readlines()
       
@@ -144,6 +175,21 @@ def insert_tables_lyx(template, tables):
 
 
 def insert_tables_latex(template, tables):
+    """ Fill tables for LaTeX template.
+    
+    Parameters
+    ----------
+    template : str
+        Path of LaTeX template to fill.
+    tables : dict
+        Dictionary {tag: values} of tables.
+
+    Returns
+    -------
+    template : str
+        Filled LaTeX template.
+    """
+
     with open(template, 'r') as f:
         doc = f.readlines()
 
@@ -189,6 +235,21 @@ def insert_tables_latex(template, tables):
 
 
 def insert_tables(template, tables):
+    """ Fill tables for template.
+    
+    Parameters
+    ----------
+    template : str
+        Path of template to fill.
+    tables : dict
+        Dictionary {tag: values} of tables.
+
+    Returns
+    -------
+    template : str
+        Filled template.
+    """
+    
     if re.search('\.lyx', template):
         doc = insert_tables_lyx(template, tables)
     elif re.search('\.tex', template):
@@ -198,6 +259,24 @@ def insert_tables(template, tables):
 
 
 def tablefill(inputs, template, output, null = None):
+    """ Fill tables for template using inputs.
+    
+    Parameters
+    ----------
+    inputs : list
+        List of inputs to fill into template.
+    template : str
+        Path of template to fill.
+    output : str
+        Path of output.
+    null : str
+        Value to replace null characters (`''`, `'.'`, `'NA'`). Defaults to None.
+
+    Returns
+    -------
+    None
+    """
+
     try:
         if type(inputs) is not list:
             raise_from(TypeError(messages.type_error_dir_list % inputs), None)
