@@ -73,53 +73,30 @@ def parse_content(file, null):
     return(tag, data)
     
     
-def insert_value_lyx(line, value, type):
+def insert_value(line, value, type):
     if (type == 'no change'):
-        line = line.replace('###', value)
+        line = re.replace('\\\\?#\\\\?#\\\\?#', value, line)
     elif (type == 'round'):
         try:
             value = float(value)
         except:
             raise_from(CritError(messages.crit_error_not_float % value), None)
 
-        digits = re.findall('#([0-9]+)#', line)[0]
+        digits = re.findall('\\\\?#([0-9]+)\\\\?#', line)[0]
         rounded_value = format(value, '.%sf' % digits)
-        line = re.sub('(.*)#[0-9]+#', r'\g<1>' + rounded_value, line)
+        line = re.sub('(.*)\\\\?#[0-9]+\\\\?#', r'\g<1>' + rounded_value, line)
     elif (type == 'comma + round'):
         try:
             value = float(value)
         except:
             raise_from(CritError(messages.crit_error_not_float % value), None)
 
-        digits = re.findall('#([0-9]+),#', line)[0]
+        digits = re.findall('\\\\?#([0-9]+),\\\\?#', line)[0]
         rounded_value = format(value, ',.%sf' % digits)
-        line = re.sub('(.*)#[0-9]+,#', r'\g<1>' + rounded_value, line)
+        line = re.sub('(.*)\\\\?#[0-9]+,\\\\?#', r'\g<1>' + rounded_value, line)
 
     return(line)
 
-def insert_value_latex(line, value, type):
-    if (type == 'no change'):
-        line = line.replace('\\\\#\\\\#\\\\#', value)
-    elif (type == 'round'):
-        try:
-            value = float(value)
-        except:
-            raise_from(CritError(messages.crit_error_not_float % value), None)
-
-        digits = re.findall('\\\\#([0-9]+)\\\\#', line)[0]
-        rounded_value = format(value, '.%sf' % digits)
-        line = re.sub('(.*)\\\\#[0-9]+\\\\#', r'\g<1>' + rounded_value, line)
-    elif (type == 'comma + round'):
-        try:
-            value = float(value)
-        except:
-            raise_from(CritError(messages.crit_error_not_float % value), None)
-
-        digits = re.findall('\\\\#([0-9]+),\\\\#', line)[0]
-        rounded_value = format(value, ',.%sf' % digits)
-        line = re.sub('(.*)\\\\#[0-9]+,\\\\#', r'\g<1>' + rounded_value, line)
-
-    return(line)
 
 def insert_tables_lyx(template, tables):
     with open(template, 'r') as f:
@@ -128,7 +105,7 @@ def insert_tables_lyx(template, tables):
     is_table = False
 
     for i in range(len(doc)):
-        if doc[i].startswith('name "tab:'):
+        if re.match('name "tab:', doc[i]):
             tag = doc[i].replace('name "tab:','').rstrip('"\n').lower()
             
             try:
@@ -141,15 +118,15 @@ def insert_tables_lyx(template, tables):
         while is_table:
             try:
                 if re.match('.*###', doc[i]):
-                    doc[i] = insert_value_lyx(doc[i], values[entry_count], 'no change')
+                    doc[i] = insert_value(doc[i], values[entry_count], 'no change')
                     entry_count += 1
                     break
                 elif re.match('.*#[0-9]+#', doc[i]):
-                    doc[i] = insert_value_lyx(doc[i], values[entry_count], 'round')
+                    doc[i] = insert_value(doc[i], values[entry_count], 'round')
                     entry_count += 1
                     break
                 elif re.match('.*#[0-9]+,#', doc[i]):
-                    doc[i] = insert_value_lyx(doc[i], values[entry_count], 'comma + round')
+                    doc[i] = insert_value(doc[i], values[entry_count], 'comma + round')
                     entry_count += 1
                     break
                 elif re.match('</lyxtabular>', doc[i]):
@@ -173,7 +150,7 @@ def insert_tables_latex(template, tables):
     is_table = False
 
     for i in range(len(doc)):
-        if re.search('label\{tab:', doc[i], flags = re.IGNORECASE):
+        if re.search('label\{tab:', doc[i]):
             tag = doc[i].split(':')[1].rstrip('}\n').strip('"').lower()
 
             try:
@@ -188,13 +165,13 @@ def insert_tables_latex(template, tables):
 
             for j in range(len(line_col)):
                 if re.search('.*\\\\#\\\\#\\\\#', line_col[j]):
-                    line_col[j] = insert_value_latex(line_col[j], values[entry_count], 'no change')
+                    line_col[j] = insert_value(line_col[j], values[entry_count], 'no change')
                     entry_count += 1
                 elif re.search('.*\\\\#[0-9]+\\\\#', line_col[j]):
-                    line_col[j] = insert_value_latex(line_col[j], values[entry_count], 'round')                   
+                    line_col[j] = insert_value(line_col[j], values[entry_count], 'round')                   
                     entry_count += 1
                 elif re.search('.*\\\\#[0-9]+,\\\\#', line_col[j]):
-                    line_col[j] = insert_value_latex(line_col[j], values[entry_count], 'comma + round')
+                    line_col[j] = insert_value(line_col[j], values[entry_count], 'comma + round')
                     entry_count += 1
                
             doc[i] = "&".join(line_col)
