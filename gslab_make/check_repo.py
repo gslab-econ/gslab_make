@@ -22,8 +22,8 @@ from gslab_make.private.utility import norm_path, get_path, format_message, glob
 from gslab_make.write_logs import write_to_makelog
 
 
-def get_file_sizes(dir_path, exclude):
-    """ Walk through directory and get file sizes.
+def _get_file_sizes(dir_path, exclude):
+    """Walk through directory and get file sizes.
     
     Parameters
     ----------
@@ -53,8 +53,8 @@ def get_file_sizes(dir_path, exclude):
     return(file_sizes)
 
      
-def get_git_ignore(repo):
-    """ Get files ignored by git.
+def _get_git_ignore(repo):
+    """Get files ignored by git.
     
     Parameters
     ----------
@@ -90,8 +90,8 @@ def get_git_ignore(repo):
     return(ignore_files)
 
 
-def parse_git_attributes(attributes): # TODO: WHAT IF MISSING ATTRIBUTES FILE?
-    """ Get git lfs patterns from .gitattributes.
+def _parse_git_attributes(attributes): # TODO: WHAT IF MISSING ATTRIBUTES FILE?
+    """Get git lfs patterns from .gitattributes.
     
     Parameters
     ----------
@@ -114,8 +114,8 @@ def parse_git_attributes(attributes): # TODO: WHAT IF MISSING ATTRIBUTES FILE?
     return(lfs_list)
 
 
-def check_path_lfs(path, lfs_list):
-    """ Check if file matches git lfs patterns."""
+def _check_path_lfs(path, lfs_list):
+    """Check if file matches git lfs patterns."""
 
     for l in lfs_list:
         if fnmatch.fnmatch(path, l):
@@ -124,8 +124,8 @@ def check_path_lfs(path, lfs_list):
     return False
 
 
-def get_dir_sizes(dir_path):
-    """ Get file sizes for directory.
+def _get_dir_sizes(dir_path):
+    """Get file sizes for directory.
     
     Parameters
     ----------
@@ -147,8 +147,8 @@ def get_dir_sizes(dir_path):
     except:
         raise_from(CritError(messages.crit_error_no_repo), None)
 
-    git_files = get_file_sizes(dir_path, exclude = ['.git'])
-    git_ignore_files = get_git_ignore(repo)
+    git_files = _get_file_sizes(dir_path, exclude = ['.git'])
+    git_ignore_files = _get_git_ignore(repo)
 
     for ignore in git_ignore_files: 
         try:
@@ -156,19 +156,19 @@ def get_dir_sizes(dir_path):
         except KeyError:
             pass
     
-    lfs_list = parse_git_attributes(os.path.join(root, '.gitattributes'))
+    lfs_list = _parse_git_attributes(os.path.join(root, '.gitattributes'))
     git_lfs_files = dict()
     
     for key in list(git_files.keys()):
-        if check_path_lfs(key, lfs_list):         
+        if _check_path_lfs(key, lfs_list):         
             git_lfs_files[key] = git_files.pop(key)
         
     return(git_files, git_lfs_files)
 
 
-def get_size_values(git_files, git_lfs_files):
+def _get_size_values(git_files, git_lfs_files):
 
-    """ Get file sizes for repository.
+    """Get file sizes for repository.
     
     Parameters
     ----------
@@ -202,7 +202,7 @@ def get_size_values(git_files, git_lfs_files):
 
 
 def check_module_size(paths):
-    """ Check file sizes for module.
+    """Check file sizes for module.
 
     Parameters
     ----------
@@ -220,8 +220,8 @@ def check_module_size(paths):
     """
     
     try:
-        git_files, git_lfs_files = get_dir_sizes('.')
-        file_MB, total_MB, file_MB_lfs, total_MB_lfs = get_size_values(git_files, git_lfs_files)
+        git_files, git_lfs_files = _get_dir_sizes('.')
+        file_MB, total_MB, file_MB_lfs, total_MB_lfs = _get_size_values(git_files, git_lfs_files)
     
         config = get_path(paths, 'config')
         config = yaml.load(open(config, 'rb'))
@@ -266,8 +266,8 @@ def check_module_size(paths):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
-def get_git_status(repo): 
-    """ Get git status.
+def _get_git_status(repo): 
+    """Get git status.
     
     Parameters
     ----------
@@ -294,7 +294,7 @@ def get_git_status(repo):
 def get_modified_sources(paths, 
                          move_map, 
                          depth = float('inf')):
-    """ Get source files considered changed by git status.
+    """Get source files considered changed by git status.
 
     Parameters
     ----------
@@ -324,7 +324,7 @@ def get_modified_sources(paths,
             repo = git.Repo('.', search_parent_directories = True)    
         except:
             raise_from(CritError(messages.crit_error_no_repo), None)
-        modified = get_git_status(repo)
+        modified = _get_git_status(repo)
 
         overlap = [l for l in source_files if l in modified] 
             
