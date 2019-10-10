@@ -6,8 +6,8 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import yaml
-import shutil
 import traceback
+import shutil
 
 from termcolor import colored
 import colorama
@@ -32,7 +32,7 @@ def check_os(osname = os.name):
     None
     """
 
-    if osname not in ['posix', 'nt']:
+    if (osname != 'posix') & (osname != 'nt'):
         raise CritError(messages.crit_error_unknown_system % osname)
 
 
@@ -56,7 +56,7 @@ def update_executables(paths, osname = os.name):
 
     try:
         config_user = get_path(paths, 'config_user')
-        config_user = yaml.load(open(config_user, 'rb'))
+        config_user = yaml.load(open(config_user, 'rb'), Loader = yaml.Loader)
     
         check_os(osname)
     
@@ -68,7 +68,7 @@ def update_executables(paths, osname = os.name):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
-def update_mappings(paths, mapping_dict = {}):
+def update_paths(paths):
     """ Update path mappings using user config file. 
     
     Parameters
@@ -90,12 +90,12 @@ def update_mappings(paths, mapping_dict = {}):
 
     try:
         config_user = get_path(paths, 'config_user')
-        config_user = yaml.load(open(config_user, 'rb'))
+        config_user = yaml.load(open(config_user, 'rb'), Loader = yaml.Loader)
 
         if config_user['external']:
-            mapping_dict.update(config_user['external'])
+            paths.update(config_user['external'])
 
-        return(mapping_dict)
+        return(paths)
     except:
         error_message = 'Error with `update_mappings`. Traceback can be found below.' 
         error_message = format_message(error_message) 

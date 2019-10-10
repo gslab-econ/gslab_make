@@ -67,7 +67,7 @@ class MoveDirective(object):
         None
         """      
         
-        if self.osname not in ['posix', 'nt']:
+        if self.osname not in {'posix', 'nt'}:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):
@@ -83,7 +83,7 @@ class MoveDirective(object):
             self.line = [l.strip() for l in self.line]
             self.line = [l.strip('"\'') for l in self.line]
             self.destination, self.source = self.line
-        except Exception as e:
+        except Exception:
             error_message = messages.crit_error_bad_move % (self.raw_line, self.file)
             error_message = error_message + format_traceback()
             raise_from(CritError(error_message), None)
@@ -150,10 +150,6 @@ class MoveDirective(object):
         regex = '(.*)'.join(regex) 
 
         wildcards = re.findall(regex, f) # Returns list if single match, list of set if multiple matches
-        for w in wildcards:
-            print(w)
-            print(1)
-
         wildcards = [(w, ) if isinstance(w, str) else w for w in wildcards]
         wildcards = chain(*wildcards)
 
@@ -268,16 +264,16 @@ class MoveDirective(object):
         """
         for source, destination in self.move_list:
             if os.path.isdir(source):
-                link_option = '/d'
-                copy_option = ''
-            elif os.path.isfile(source):
-                link_option = ''
-                copy_option = 'cmd /c echo F | '
+                directory = '/d'
+            else:
+                directory = ''
 
             if movetype == 'copy':
-                command = metadata.commands[self.osname]['makecopy'] % (copy_option, source, destination)
+                command = metadata.commands[self.osname]['makecopy'] % (source, destination)
+                if os.path.isfile(source):
+                    command = 'cmd /c echo F | ' + command   
             elif movetype == 'symlink':
-                command = metadata.commands[self.osname]['makelink'] % (link_option, destination, source)
+                command = metadata.commands[self.osname]['makelink'] % (directory, destination, source)
 
             process = subprocess.Popen(command,
                                        shell = True,
