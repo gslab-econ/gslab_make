@@ -35,7 +35,7 @@ class testRemovePath(unittest.TestCase):
         	with redirect_stdout(f):
         		remove_path('./output_local/')
         time.sleep(0.1)
-        self.assertIn('Deleted:', open('stdout.txt').read())
+        self.assertIn('Removed:', open('stdout.txt').read())
 
     def test_options(self):
         self.assertTrue(os.path.isfile('./output_local/text.txt'))
@@ -55,7 +55,7 @@ class testRemovePath(unittest.TestCase):
         	with redirect_stdout(f):
         		remove_path('./output_local', quiet=True)
 		time.sleep(0.1)
-		self.assertNotIn('Deleted:', open('stdout.txt').read())
+		self.assertNotIn('Removed:', open('stdout.txt').read())
 
             
     def tearDown(self):

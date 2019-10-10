@@ -75,7 +75,7 @@ class testTextfill(unittest.TestCase):
             error = textfill(input    = 'gslab_make/tests/input/tags_not_closed.log', 
                              template = 'gslab_make/tests/input/textfill_template.lyx', 
                              output   = './build/textfill_template_filled.lyx')
-        self.assertIn('HTMLParseError', error)
+        self.assertIn('CritError', error)
         
     def test_tags_incorrectly_specified(self):
         with nostderrout():
