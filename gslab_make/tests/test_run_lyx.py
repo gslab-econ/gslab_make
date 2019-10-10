@@ -54,7 +54,7 @@ class testRunLyx(unittest.TestCase):
             run_lyx(makelog, program = 'gslab_make/tests/input/lyx_test_file copy.lyx', executable = metadata.default_executables[os.name]['lyx']) 
         logfile_data = open(makelog['makelog'], 'rU').read()
         self.assertIn('LaTeX', logfile_data)
-        self.assertTrue(os.path.isfile('output/lyx_test_file.pdf'))
+        self.assertTrue(os.path.isfile('output/lyx_test_file copy.pdf'))
         
     def test_bad_executable(self):
         makelog = {'makelog' : 'log/make.log', 'pdf_dir' : 'output'}
