@@ -57,18 +57,18 @@ class Directive(object):
         self.get_paths()
 
     def check_os(self):
-        """ Check OS is either POSIX or NT.
+        """Check OS is either POSIX or NT.
                 
         Returns
         -------
         None
-        """      
+        """     
         
         if self.osname not in ['posix', 'nt']:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):
-        """ Normalize paths.
+        """Normalize paths.
         
         Returns
         -------
@@ -79,7 +79,7 @@ class Directive(object):
         self.log     = norm_path(self.log) 
 
     def execute_command(self, command):
-        """ Execute shell command.
+        """Execute shell command.
     
         Parameters
         ----------
@@ -120,7 +120,7 @@ class Directive(object):
              
 
     def write_log(self):
-        """ Write logs for shell command.
+        """Write logs for shell command.
         
         Returns
         -------
@@ -148,7 +148,7 @@ class ProgramDirective(Directive):
 
     Parameters
     ----------
-    See `Directive`.
+    See `private.programdirective.Directive`.
     
     application : str
         Name of application to run program.
@@ -197,7 +197,7 @@ class ProgramDirective(Directive):
         self.get_option()
 
     def parse_program(self):
-        """ Parse program for directory, name, and extension.
+        """Parse program for directory, name, and extension.
         
         Returns
         -------
@@ -210,12 +210,12 @@ class ProgramDirective(Directive):
         self.program_name, self.program_ext = os.path.splitext(self.program_base)
 
     def check_program(self):
-        """ Check program exists and has correct extension given application.
+        """Check program exists and has correct extension given application.
         
         Returns
         -------
         None
-        """  
+        """ 
     
         if not os.path.isfile(self.program):
             raise CritError(messages.crit_error_no_file % self.program)    
@@ -225,7 +225,7 @@ class ProgramDirective(Directive):
             raise CritError(messages.crit_error_extension % (self.program, extensions))
 
     def get_executable(self):
-        """ Set executable to default from metadata if unspecified.
+        """Set executable to default from metadata if unspecified.
         
         Returns
         -------
@@ -236,7 +236,7 @@ class ProgramDirective(Directive):
             self.executable = metadata.default_executables[self.osname][self.application]
 
     def get_option(self):
-        """ Set options to default from metadata if unspecified.
+        """Set options to default from metadata if unspecified.
         
         Returns
         -------
@@ -247,7 +247,7 @@ class ProgramDirective(Directive):
             self.option = metadata.default_options[self.osname][self.application]
 
     def move_program_output(self, program_output, log_file = ''):
-        """ Move program outputs.
+        """Move program outputs.
         
         Notes
         -----
@@ -341,7 +341,7 @@ class LyXDirective(ProgramDirective):
         self.check_doctype()
 
     def check_doctype(self):
-        """ Check document type is valid.
+        """Check document type is valid.
         
         Returns
         -------

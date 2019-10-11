@@ -17,7 +17,7 @@ from gslab_make.private.exceptionclasses import CritError, ColoredError
 from gslab_make.private.utility import norm_path, format_message
 
 def parse_tag(tag):
-    """ Parse tag from input."""
+    """Parse tag from input."""
     
     if not re.match('<Tab:(.*)>\n', tag, flags = re.IGNORECASE):
         raise Exception
@@ -29,7 +29,7 @@ def parse_tag(tag):
     
     
 def parse_data(data, null):
-    """ Parse data from input.
+    """Parse data from input.
     
     Parameters
     ----------
@@ -57,7 +57,7 @@ def parse_data(data, null):
         
     
 def parse_content(file, null):
-    """ Parse content from input."""
+    """Parse content from input."""
         
     with open(file, 'r') as f:
         content = f.readlines()
@@ -73,7 +73,7 @@ def parse_content(file, null):
     
     
 def insert_value(line, value, type):
-    """ Insert value into line.
+    """Insert value into line.
     
     Parameters
     ----------
@@ -115,7 +115,7 @@ def insert_value(line, value, type):
 
 
 def insert_tables_lyx(template, tables):
-    """ Fill tables for LyX template.
+    """Fill tables for LyX template.
     
     Parameters
     ----------
@@ -175,7 +175,7 @@ def insert_tables_lyx(template, tables):
 
 
 def insert_tables_latex(template, tables):
-    """ Fill tables for LaTeX template.
+    """Fill tables for LaTeX template.
     
     Parameters
     ----------
@@ -235,7 +235,7 @@ def insert_tables_latex(template, tables):
 
 
 def insert_tables(template, tables):
-    """ Fill tables for template.
+    """Fill tables for template.
     
     Parameters
     ----------
@@ -259,7 +259,7 @@ def insert_tables(template, tables):
 
 
 def tablefill(inputs, template, output, null = None):
-    """ Fill tables for template using inputs.
+    """Fill tables for template using inputs.
     
     Parameters
     ----------

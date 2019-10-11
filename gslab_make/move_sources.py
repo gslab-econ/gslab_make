@@ -21,7 +21,7 @@ from gslab_make.write_logs import write_to_makelog
 def create_links(paths,
                  file_list,
                  mapping_dict = {}):
-    """ Create symlinks from list of files containing linking instructions.
+    """Create symlinks from list of files containing linking instructions.
 
     Parameters
     ----------
@@ -59,7 +59,7 @@ def create_links(paths,
 def create_copies(paths,
                   file_list,
                   mapping_dict = {}):
-    """ Create copies from list of files containing copying instructions.
+    """Create copies from list of files containing copying instructions.
 
     Parameters
     ----------
@@ -97,7 +97,7 @@ def create_copies(paths,
 def link_inputs(paths,
                 file_list,
                 mapping_dict = {}):
-    """ 
+    """
     Create symlinks to inputs from list of files containing linking instructions. 
 
     Parameters
@@ -139,7 +139,7 @@ def link_inputs(paths,
 def link_externals(paths,
                    file_list,
                    mapping_dict = {}):
-    """ 
+    """
     Create symlinks to externals from list of files containing linking instructions. 
 
     Parameters
@@ -181,7 +181,7 @@ def link_externals(paths,
 def copy_inputs(paths,
                 file_list,
                 mapping_dict = {}):
-    """ Create copies to inputs from list of files containing copying instructions.
+    """Create copies to inputs from list of files containing copying instructions.
 
     Parameters
     ----------
@@ -222,7 +222,7 @@ def copy_inputs(paths,
 def copy_externals(paths,
                 file_list,
                 mapping_dict = {}):
-    """ Create copies to externals from list of files containing copying instructions.
+    """Create copies to externals from list of files containing copying instructions.
 
     Parameters
     ----------

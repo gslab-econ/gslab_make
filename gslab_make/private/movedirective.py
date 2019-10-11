@@ -17,7 +17,7 @@ from gslab_make.private.utility import norm_path, file_to_array, format_tracebac
 
 
 class MoveDirective(object):
-    """ 
+    """
     Directive for creating symbolic link or copy of data.
     
     Notes
@@ -60,18 +60,18 @@ class MoveDirective(object):
         self.get_move_list()
 
     def check_os(self):
-        """ Check OS is either POSIX or NT.  
+        """Check OS is either POSIX or NT.  
                 
         Returns
         -------
         None
-        """      
+        """     
         
         if self.osname not in ['posix', 'nt']:
             raise CritError(messages.crit_error_unknown_system % self.osname)
 
     def get_paths(self):
-        """ Parse sources and destinations from line. 
+        """Parse sources and destinations from line. 
                 
         Returns
         -------
@@ -92,7 +92,7 @@ class MoveDirective(object):
         self.destination = norm_path(os.path.join(self.move_dir, self.destination))
 
     def check_paths(self):
-        """ Check sources and destination exist and have same number of wildcards. 
+        """Check sources and destination exist and have same number of wildcards. 
                 
         Returns
         -------
@@ -110,7 +110,7 @@ class MoveDirective(object):
                 raise CritError(messages.crit_error_no_path % self.source)
 
     def get_move_list(self):
-        """ Interpret wildcards to get list of paths that meet criteria. 
+        """Interpret wildcards to get list of paths that meet criteria. 
                 
         Returns
         -------
@@ -127,7 +127,7 @@ class MoveDirective(object):
         self.move_list = list(zip(self.source_list, self.destination_list))
 
     def extract_wildcards(self, f):
-        """ Extract wildcard characters from source path.
+        """Extract wildcard characters from source path.
     
         Notes
         -----
@@ -160,7 +160,7 @@ class MoveDirective(object):
         return wildcards
 
     def fill_in_wildcards(self, wildcards):
-        """ Fill in wildcards for destination path.
+        """Fill in wildcards for destination path.
         
         Notes
         -----
@@ -185,7 +185,7 @@ class MoveDirective(object):
         return f
 
     def create_symlinks(self):
-        """ Create symlinks. 
+        """Create symlinks. 
                 
         Parameters
         ----------
@@ -204,7 +204,7 @@ class MoveDirective(object):
         return(self.move_list)
 
     def create_copies(self):
-        """ Create copies. 
+        """Create copies. 
                 
         Parameters
         ----------
@@ -223,7 +223,7 @@ class MoveDirective(object):
         return(self.move_list)
 
     def move_posix(self, movetype):   
-        """ Create symlinks/copies using POSIX shell command specified in metadata.  
+        """Create symlinks/copies using POSIX shell command specified in metadata.  
         
         Parameters
         ----------
@@ -255,7 +255,7 @@ class MoveDirective(object):
 
 
     def move_nt(self, movetype):   
-        """ Create symlinks/copies using NT shell command specified in metadata. 
+        """Create symlinks/copies using NT shell command specified in metadata. 
         
         Parameters
         ----------
@@ -293,7 +293,7 @@ class MoveDirective(object):
 
 
 class MoveList(object):
-    """ 
+    """
     List of move directives.
     
     Notes
@@ -329,7 +329,7 @@ class MoveList(object):
         self.get_move_directive_list()
 
     def parse_file_list(self): 
-        """ Parse wildcards in list of files. 
+        """Parse wildcards in list of files. 
                 
         Returns
         -------
@@ -347,7 +347,7 @@ class MoveList(object):
             raise CritError(messages.crit_error_no_files % error_list) 
 
     def get_paths(self):    
-        """ Normalize paths. 
+        """Normalize paths. 
                 
         Returns
         -------
@@ -358,7 +358,7 @@ class MoveList(object):
         self.file_list = [norm_path(f) for f in self.file_list]
 
     def get_move_directive_list(self):
-        """ Parse list of files to create symlink directives. 
+        """Parse list of files to create symlink directives. 
                 
         Returns
         -------
@@ -379,7 +379,7 @@ class MoveList(object):
         self.move_directive_list = [MoveDirective(file, raw_line, line, self.move_dir) for (file, raw_line, line) in lines]
 
     def create_symlinks(self):       
-        """ Create symlinks according to directives. 
+        """Create symlinks according to directives. 
         
         Returns
         -------
@@ -394,7 +394,7 @@ class MoveList(object):
         return move_map
 
     def create_copies(self):       
-        """ Create copies according to directives. 
+        """Create copies according to directives. 
         
         Returns
         -------

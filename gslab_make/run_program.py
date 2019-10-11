@@ -26,7 +26,7 @@ from gslab_make.write_logs import write_to_makelog
 
 
 def run_stata(paths, program, **kwargs):
-    """ Run Stata script using system command.
+    """Run Stata script using system command.
 
     Parameters
     ----------
@@ -98,7 +98,7 @@ def check_stata_output(output):
 
 
 def run_matlab(paths, program, **kwargs):
-    """ Run Matlab script using system command.
+    """Run Matlab script using system command.
 
     Parameters
     ----------
@@ -154,7 +154,7 @@ def run_matlab(paths, program, **kwargs):
         
 
 def run_perl(paths, program, **kwargs):
-    """ Run Perl script using system command.
+    """Run Perl script using system command.
 
     Parameters
     ----------
@@ -207,7 +207,7 @@ def run_perl(paths, program, **kwargs):
 
 
 def run_python(paths, program, **kwargs):
-    """ Run Python script using system command.
+    """Run Python script using system command.
 
     Parameters
     ----------
@@ -260,7 +260,7 @@ def run_python(paths, program, **kwargs):
         
 
 def run_jupyter(paths, program, timeout = None, kernel_name = ''):
-    """ Run Jupyter notebook using system command.
+    """Run Jupyter notebook using system command.
 
     Parameters
     ----------
@@ -307,7 +307,7 @@ def run_jupyter(paths, program, timeout = None, kernel_name = ''):
 
 
 def run_mathematica(paths, program, **kwargs):
-    """ Run Mathematica script using system command.
+    """Run Mathematica script using system command.
 
     Parameters
     ----------
@@ -360,7 +360,7 @@ def run_mathematica(paths, program, **kwargs):
         
 
 def run_stat_transfer(paths, program, **kwargs):
-    """ Run StatTransfer script using system command.
+    """Run StatTransfer script using system command.
 
     Parameters
     ----------
@@ -413,7 +413,7 @@ def run_stat_transfer(paths, program, **kwargs):
         
 
 def run_lyx(paths, program, **kwargs): 
-    """ Run LyX script using system command.
+    """Run LyX script using system command.
 
     Parameters
     ----------
@@ -505,7 +505,7 @@ def run_lyx(paths, program, **kwargs):
         
 
 def run_r(paths, program, **kwargs):
-    """ Run R script using system command.
+    """Run R script using system command.
 
     Parameters
     ----------
@@ -558,7 +558,7 @@ def run_r(paths, program, **kwargs):
         
 
 def run_sas(paths, program, **kwargs):
-    """ Run SAS script using system command.
+    """Run SAS script using system command.
 
     Parameters
     ----------
@@ -618,7 +618,7 @@ def run_sas(paths, program, **kwargs):
         
 
 def execute_command(paths, command, **kwargs):
-    """ Run system command.
+    """Run system command.
 
     Parameters
     ----------
@@ -663,7 +663,7 @@ def execute_command(paths, command, **kwargs):
 
 
 def run_module(root, module, build_script = 'make.py'):
-    """ Run module. 
+    """Run module. 
     
     Parameters
     ----------

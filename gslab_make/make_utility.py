@@ -20,7 +20,7 @@ from gslab_make.private.utility import get_path, format_message, norm_path
 
 
 def check_os(osname = os.name):
-    """ Check OS is either POSIX or NT. 
+    """Check OS is either POSIX or NT. 
     
     Parameters
     ----------
@@ -37,7 +37,7 @@ def check_os(osname = os.name):
 
 
 def update_executables(paths, osname = os.name):
-    """ Update executable names using user config file. 
+    """Update executable names using user config file. 
     
     Parameters
     ----------
@@ -69,7 +69,7 @@ def update_executables(paths, osname = os.name):
 
 
 def update_mappings(paths, mapping_dict = {}):
-    """ Update path mappings using user config file. 
+    """Update path mappings using user config file. 
     
     Parameters
     ----------
@@ -103,7 +103,7 @@ def update_mappings(paths, mapping_dict = {}):
 
 
 def copy_output(file, copy_dir):
-    """ Copy output file.
+    """Copy output file.
     
     Parameters
     ----------

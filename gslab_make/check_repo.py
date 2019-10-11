@@ -207,7 +207,7 @@ def check_module_size(paths):
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain {
+        Dictionary of paths. Dictionary should contain values for the following keys {
             'config' : str
                 Path of config file.
             'makelog' : str

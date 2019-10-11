@@ -15,7 +15,7 @@ from gslab_make.private.exceptionclasses import CritError
 
 
 def norm_path(path):
-    """ Normalizes path to be OS-compatible. """
+    """Normalizes path to be OS-compatible."""
 
     if path:
         path = re.split('[/\\\\]+', path)
@@ -27,7 +27,7 @@ def norm_path(path):
 
 
 def get_path(paths_dict, key):
-    """ Get path for key. """
+    """Get path for key."""
 
     try:
         path = paths_dict[key]
@@ -38,7 +38,7 @@ def get_path(paths_dict, key):
 
 
 def glob_recursive(path, depth, quiet = True):
-    """ Walks through path. 
+    """Walks through path. 
     
     Notes
     -----
@@ -81,7 +81,7 @@ def glob_recursive(path, depth, quiet = True):
 
  
 def file_to_array(file_name):
-    """ Read file and extract lines to list. 
+    """Read file and extract lines to list. 
 
     Parameters
     ----------
@@ -103,7 +103,7 @@ def file_to_array(file_name):
 
 
 def format_traceback(trace = ''):
-    """ Format traceback message.
+    """Format traceback message.
 
     Parameters
     ----------
@@ -130,7 +130,7 @@ def format_traceback(trace = ''):
 
 
 def format_message(message):
-    """ Format message. """
+    """Format message."""
 
     message = message.strip()
     star_line = '*' * (len(message) + 4)
@@ -141,7 +141,7 @@ def format_message(message):
 
 
 def format_list(list):
-    """ Format list. 
+    """Format list. 
 
     Parameters
     ----------
@@ -168,7 +168,7 @@ def format_list(list):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 def check_duplicate(original, copy): 
-    """ Check duplicate.
+    """Check duplicate.
 
     Parameters
     ----------
@@ -198,7 +198,7 @@ def check_duplicate(original, copy):
     
 
 def parse_dircmp(dircmp):
-    """ Parse dircmp to see if directories duplicate. 
+    """Parse dircmp to see if directories duplicate. 
 
     Parameters
     ----------

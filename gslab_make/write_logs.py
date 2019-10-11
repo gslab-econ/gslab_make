@@ -19,7 +19,7 @@ from gslab_make.private.utility import norm_path, get_path, glob_recursive, form
 
 
 def start_makelog(paths):
-    """ Start make log. Record start time.
+    """Start make log. Record start time.
 
     Notes
     -----
@@ -62,7 +62,7 @@ def start_makelog(paths):
 
 
 def end_makelog(paths):
-    """ End make log. Record end time.
+    """End make log. Record end time.
 
     Parameters
     ----------
@@ -102,7 +102,7 @@ def end_makelog(paths):
     
 
 def write_to_makelog(paths, message):
-    """ Append message to make log.
+    """Append message to make log.
 
     Parameters
     ----------
@@ -133,7 +133,7 @@ def write_to_makelog(paths, message):
     
 def log_files_in_output(paths,
                         depth = float('inf')):
-    """ Log files in output directory.
+    """Log files in output directory.
 
     Notes
     -----
@@ -201,7 +201,7 @@ def log_files_in_output(paths,
 
     
 def write_stats_log(statslog_file, output_files):
-    """ Write statistics log.
+    """Write statistics log.
    
     Notes
     -----
@@ -236,7 +236,7 @@ def write_stats_log(statslog_file, output_files):
 
 
 def write_heads_log(headslog_file, output_files, num_lines = 10):
-    """ Write headers log.
+    """Write headers log.
 
     Parameters
     ----------

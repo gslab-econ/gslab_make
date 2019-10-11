@@ -20,7 +20,7 @@ from gslab_make.write_logs import write_to_makelog, write_stats_log, write_heads
 def write_source_logs(paths, 
                       source_map,
                       depth = float('inf')):        
-    """ Write source logs.
+    """Write source logs.
 
     Notes
     -----
@@ -66,7 +66,7 @@ def write_source_logs(paths,
         source_files = [f for source in source_list for f in source]
         source_files = set(source_files)
 
-        """ IF WE DECIDE TO ALLOW FOR RAW SUBDIRECTORIES WITHOUT LINKING
+        """IF WE DECIDE TO ALLOW FOR RAW SUBDIRECTORIES WITHOUT LINKING
         raw_dir = get_path(paths, 'raw_dir')
         raw_files = glob_recursive(raw_dir)
         source_files = set(source_files + raw_files)
@@ -95,7 +95,7 @@ def write_source_logs(paths,
 
 
 def write_source_maplog(source_maplog, source_map):
-    """ Write link map log.
+    """Write link map log.
 
     Parameters
     ----------

@@ -21,7 +21,7 @@ from gslab_make.private.utility import norm_path, format_message
 
 
 def remove_path(path, option = '', quiet = False):
-    """ Remove path using shell command specified in metadata.
+    """Remove path using shell command specified in metadata.
     
     Parameters
     ----------
@@ -51,7 +51,7 @@ def remove_path(path, option = '', quiet = False):
 
 
 def remove_dir(dir_list, quiet = False):
-    """ Remove everything in directory.
+    """Remove everything in directory.
     
     Parameters
     ----------
@@ -82,7 +82,7 @@ def remove_dir(dir_list, quiet = False):
 
 
 def clear_dir(dir_list):
-    """ Remove everything in directory. Create directory if nonexistent.
+    """Remove everything in directory. Create directory if nonexistent.
     
     Parameters
     ----------
@@ -110,7 +110,7 @@ def clear_dir(dir_list):
 
 
 def unzip(zip_path, output_dir):
-    """ Unzip file to directory.
+    """Unzip file to directory.
     
     Parameters
     ----------
@@ -134,7 +134,7 @@ def unzip(zip_path, output_dir):
 
 
 def zip_dir(source_dir, zip_dest):
-    """ Zip directory to file.
+    """Zip directory to file.
     
     Parameters
     ----------
