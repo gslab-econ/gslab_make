@@ -27,15 +27,15 @@ def _get_file_sizes(dir_path, exclude):
     
     Parameters
     ----------
-    dir_path : str
+    dir_path : :obj:`str`
        Path of directory to walk through.
-    exclude : list
+    exclude : :obj:`list`
        List of subdirectories to exclude when walking.
 
     Returns
     -------
-    file_size : dict
-        Dictionary of {file : size} for each file in dir_path. 
+    file_size : :obj:`dict`
+        Dictionary of :obj:`{file : size}` for each file in :obj:`dir_path`. 
     """
 
     file_sizes = []
@@ -58,12 +58,12 @@ def _get_git_ignore(repo):
     
     Parameters
     ----------
-    repo : git.Repo 
+    repo : :class:`git.Repo`
         Git repository to get ignored files.
 
     Returns
     -------
-    ignore_files : list
+    ignore_files : :obj:`list`
         List of files in repository ignored by git. 
     """
 
@@ -90,29 +90,32 @@ def _get_git_ignore(repo):
     return(ignore_files)
 
 
-def _parse_git_attributes(attributes): # TODO: WHAT IF MISSING ATTRIBUTES FILE?
-    """Get git lfs patterns from .gitattributes.
+def _parse_git_attributes(attributes):
+    """Get git lfs patterns from git attributes.
     
     Parameters
     ----------
-    attributes : str 
-        Path to .gitattributes file.
+    attributes : :obj:`str`
+        Path to git attributes file.
 
     Returns
     -------
-    lfs_list: list
+    lfs_list: :obj:`list`
         List of patterns to determine files tracked by git lfs. 
     """
 
-    with open(attributes) as f:
-        attributes_list = f.readlines()
+    try:
+        with open(attributes) as f:
+            attributes_list = f.readlines()
         
-        lfs_regex = 'filter=lfs( )+diff=lfs( )+merge=lfs( )+-text'      
-        lfs_list = [l for l in attributes_list if re.search(lfs_regex, l)]
-        lfs_list = [l.split()[0] for l in lfs_list] 
+            lfs_regex = 'filter=lfs( )+diff=lfs( )+merge=lfs( )+-text'      
+            lfs_list = [l for l in attributes_list if re.search(lfs_regex, l)]
+            lfs_list = [l.split()[0] for l in lfs_list] 
 
-    return(lfs_list)
-
+            return(lfs_list)
+    except IOError:
+        raise_from(CritError(messages.crit_error_no_attributes), None)
+    
 
 def _check_path_lfs(path, lfs_list):
     """Check if file matches git lfs patterns."""
@@ -129,16 +132,15 @@ def _get_dir_sizes(dir_path):
     
     Parameters
     ----------
-    dir_path : str 
+    dir_path : :obj:`str`
         Path of directory to get file sizes.
 
     Returns
     -------
-    (git_files, git_lfs_files) : list
-        git_files : dict
-            Dictionary of {file : size} for each file tracked by git. 
-        git_lfs_files : dict
-            Dictionary of {file : size} for each file tracked by git lfs. 
+    git_files : :obj:`dict`
+        Dictionary of :obj:`{file : size}` for each file tracked by git. 
+    git_lfs_files : :obj:`dict`
+        Dictionary of :obj:`{file : size}` for each file tracked by git lfs. 
     """
 
     try:
@@ -167,27 +169,25 @@ def _get_dir_sizes(dir_path):
 
 
 def _get_size_values(git_files, git_lfs_files):
-
     """Get file sizes for repository.
-    
+
     Parameters
     ----------
-        git_files : dict
-            Dictionary of {file : size} for each file tracked by git. 
-        git_lfs_files : dict
-            Dictionary of {file : size} for each file tracked by git lfs. 
+    git_files : :obj:`dict`
+        Dictionary of :obj:`{file : size}` for each file tracked by git. 
+    git_lfs_files : :obj:`dict`
+        Dictionary of :obj:`{file : size}` for each file tracked by git lfs. 
 
     Returns
     -------
-    (file_MB, total_MB, file_MB_lfs, total_MB_lfs) : list
-        file_MB : float
-            Size of largest file tracked by git in megabytes.
-        total_MB : float
-            Total size of files tracked by git.
-        file_MB : float
-            Size of largest file tracked by git lfs.
-        total_MB : float
-            Total size of files tracked by git lfs.
+    file_MB : :obj:`float`
+        Size of largest file tracked by git in megabytes.
+    total_MB : :obj:`float`
+        Total size of files tracked by git.
+    file_MB : :obj:`float`
+        Size of largest file tracked by git lfs.
+    total_MB : :obj:`float`
+        Total size of files tracked by git lfs.
     """
 
     file_MB = max(git_files.values() or [0])
@@ -206,17 +206,19 @@ def check_module_size(paths):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain values for the following keys {
-            'config' : str
-                Path of config file.
-            'makelog' : str
-                Path of makelog.
-        }
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+
+    Keys
+    ----
+    config : :obj:`str`
+        Path of config file.   
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
-    None
+    :obj:`None`
     """
     
     try:
@@ -271,12 +273,12 @@ def _get_git_status(repo):
     
     Parameters
     ----------
-    repo : git.Repo 
+    repo : :class:`git.Repo `
         Git repository to show working tree status.
 
     Returns
     -------
-    file_list : list
+    file_list : :obj:`list`
         List of changed files in git repository according to git status.
     """
     
@@ -292,26 +294,28 @@ def _get_git_status(repo):
 
 
 def get_modified_sources(paths, 
-                         move_map, 
+                         source_map, 
                          depth = float('inf')):
-    """Get source files considered changed by git status.
+    """Get source files considered changed by git.
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    move_map : list 
-        Mapping of symlinks/copies (destination) to sources (returned from `MoveList.create_symlinks` or `MoveList.create_copies`).
-    depth : float, optional
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    source_map : :obj:`list`
+        Mapping of sources (returned from :mod:`move_sources` functions).
+    depth : :obj:`float`, optional
         Level of depth when walking through source directories. Defaults to infinite.
+
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
-    overlap : list
-        List of source files considered changed by git status.
+    overlap : :obj:`list`
+        List of source files considered changed by git.
     """
     
     try:

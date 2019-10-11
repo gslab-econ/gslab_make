@@ -1,56 +1,373 @@
 
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GSLab Make &mdash; GSLab Make 2.0.0 documentation</title>
+  
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
-    <title>Welcome to GSLab Make’s documentation! &#8212; GSLab Make 2.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
           
 
-          <div class="body" role="main">
+          
+            <a href="#" class="icon icon-home"> GSLab Make
+          
+
+          
+          </a>
+
+          
             
-  <div class="section" id="welcome-to-gslab-make-s-documentation">
-<h1>Welcome to GSLab Make’s documentation!<a class="headerlink" href="#welcome-to-gslab-make-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
-<span class="target" id="module-gslab_make.check_repo"></span><dl class="function">
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">GSLab Make</a></li>
+<li><a class="reference internal" href="#module-gslab_make.check_repo">Repository functions</a></li>
+<li><a class="reference internal" href="#module-gslab_make.run_program">Program functions</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">GSLab Make</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>GSLab Make</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gslab-make">
+<h1>GSLab Make<a class="headerlink" href="#gslab-make" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="module-gslab_make.check_repo">
+<span id="repository-functions"></span><h1>Repository functions<a class="headerlink" href="#module-gslab_make.check_repo" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
 <dt id="gslab_make.check_repo.check_module_size">
 <code class="sig-prename descclassname">gslab_make.check_repo.</code><code class="sig-name descname">check_module_size</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.check_module_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check file sizes for module.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt><cite>‘config’</cite><span class="classifier">str</span></dt><dd><p>Path of config file.</p>
+<dd class="field-odd"><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p>
 </dd>
-<dt><cite>’makelog’</cite><span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>config</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of config file.</p></li>
+<li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.check_repo.get_modified_sources">
+<code class="sig-prename descclassname">gslab_make.check_repo.</code><code class="sig-name descname">get_modified_sources</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">source_map</em>, <em class="sig-param">depth=inf</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.get_modified_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get source files considered changed by git.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>source_map</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code>) – Mapping of sources (returned from <code class="xref py py-mod docutils literal notranslate"><span class="pre">move_sources</span></code> functions).</p></li>
+<li><p><strong>depth</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>, optional) – Level of depth when walking through source directories. Defaults to infinite.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>overlap</strong> – List of source files considered changed by git.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></p>
 </dd>
 </dl>
-<p>}</p>
-</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-gslab_make.run_program">
+<span id="program-functions"></span><h1>Program functions<a class="headerlink" href="#module-gslab_make.run_program" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="gslab_make.run_program.execute_command">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">execute_command</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">command</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.execute_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>command</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – system command to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of system command log. system command log is only written if specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
+<li><p><strong>pdf_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory to write PDFs.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_jupyter">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_jupyter</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">timeout=None</em>, <em class="sig-param">kernel_name=''</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_jupyter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Jupyter notebook using system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – Time to wait (in seconds) for execution outputs before raising exception.
+Defaults to no timeout.</p></li>
+<li><p><strong>kernel_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Name of kernel to use for execution.
+Defaults to kernel specified in notebook.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_lyx">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_lyx</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_lyx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run LyX script using system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
+<li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
+Defaults to executable specified in metadata.</p></li>
+<li><p><strong>option</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Options for system command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
+<li><p><strong>doctype</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Type of Lyx document. Takes either <code class="xref py py-obj docutils literal notranslate"><span class="pre">'handout'</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">'comments'</span></code>.
+Defaults to no special document type.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
+<li><p><strong>pdf_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory to write PDFs.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_mathematica">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_mathematica</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_mathematica" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Mathematica script using system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
+<li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
+Defaults to executable specified in metadata.</p></li>
+<li><p><strong>option</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Options for system command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_matlab">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_matlab</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_matlab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Matlab script using system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
+<li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
+Defaults to executable specified in metadata.</p></li>
+<li><p><strong>option</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Options for system command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_module">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_module</code><span class="sig-paren">(</span><em class="sig-param">root</em>, <em class="sig-param">module</em>, <em class="sig-param">build_script='make.py'</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory of root.</p></li>
+<li><p><strong>module</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Name of module.</p></li>
+<li><p><strong>build_script</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Name of build script.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p></p>
@@ -62,105 +379,238 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.check_repo.get_modified_sources">
-<code class="sig-prename descclassname">gslab_make.check_repo.</code><code class="sig-name descname">get_modified_sources</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">move_map</em>, <em class="sig-param">depth=inf</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.get_modified_sources" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get source files considered changed by git status.</p>
+<dt id="gslab_make.run_program.run_perl">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_perl</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_perl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Perl script using system command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>move_map</strong> (<em>list</em>) – Mapping of symlinks/copies (destination) to sources (returned from <cite>MoveList.create_symlinks</cite> or <cite>MoveList.create_copies</cite>).</p></li>
-<li><p><strong>depth</strong> (<em>float</em><em>, </em><em>optional</em>) – Level of depth when walking through source directories. Defaults to infinite.</p></li>
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
+<li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
+Defaults to executable specified in metadata.</p></li>
+<li><p><strong>option</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Options for system command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Arguments for system command. Defaults to no arguments.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>overlap</strong> – List of source files considered changed by git status.</p>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_python">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_python</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_python" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Python script using system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
+<li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
+Defaults to executable specified in metadata.</p></li>
+<li><p><strong>option</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Options for system command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Arguments for system command. Defaults to no arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_r">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_r</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run R script using system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
+<li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
+Defaults to executable specified in metadata.</p></li>
+<li><p><strong>option</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Options for system command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
+<li><p><strong>pdf_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory to write PDFs.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_sas">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_sas</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_sas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run SAS script using system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
+<li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
+Defaults to executable specified in metadata.</p></li>
+<li><p><strong>option</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Options for system command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
+<li><p><strong>lst</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program lst. Program lst is only written if specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
+<li><p><strong>pdf_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory to write PDFs.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_stat_transfer">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_stat_transfer</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_stat_transfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run StatTransfer script using system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
+<li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
+Defaults to executable specified in metadata.</p></li>
+<li><p><strong>option</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Options for system command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="gslab_make.run_program.run_stata">
+<code class="sig-prename descclassname">gslab_make.run_program.</code><code class="sig-name descname">run_stata</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">program</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_stata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Stata script using system command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+<li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
+<li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
+Defaults to executable specified in metadata.</p></li>
+<li><p><strong>option</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Options for system command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
-</div>
 
 
+           </div>
+           
           </div>
-          
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">GSLab Make</a></h1>
+          <footer>
+  
 
+  <hr/>
 
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Matthew Gentzkow
 
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
+</footer>
 
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2019, Matthew Gentzkow.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/index.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
 
-    
+    </section>
 
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
     
-  </body>
+   
+
+</body>
 </html>

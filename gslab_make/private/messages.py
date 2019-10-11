@@ -32,6 +32,8 @@ crit_error_no_path = \
     '\nERROR! Path `%s` cannot be found.' 
 crit_error_no_path_wildcard = \
     '\nERROR! Paths matching pattern `%s` cannot be found.' 
+crit_error_no_attributes = \
+    '\nERROR! Cannot open git attributes file for repository. Confirm that repository has git attributes file.'
 crit_error_bad_command = \
     '\nERROR! The following command cannot be executed by operating system.\n' + \
     '  > %s\n' + \

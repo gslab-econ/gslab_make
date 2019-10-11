@@ -30,27 +30,29 @@ def run_stata(paths, program, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
-    executable : str, optional
+    executable : :obj:`str`, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for system command. Defaults to options specified in metadata.
-    args : str, optional
+    args : :obj:`str`, optional
         Not applicable.
+
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -79,7 +81,7 @@ def run_stata(paths, program, **kwargs):
             error_message = format_message(error_message)
             raise_from(ProgramError(error_message, stderr), None)
         output = direct.move_program_output(program_log, direct.log)
-        check_stata_output(output)
+        _check_stata_output(output)
     except ProgramError:
         raise
     except:
@@ -89,7 +91,7 @@ def run_stata(paths, program, **kwargs):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
     
     
-def check_stata_output(output):
+def _check_stata_output(output):
     regex = "end of do-file[\s]*r\([0-9]*\);"
     if re.search(regex, output):
         error_message = 'Stata program executed with errors.'
@@ -102,27 +104,29 @@ def run_matlab(paths, program, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
-    executable : str, optional
+    executable : :obj:`str`, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for system command. Defaults to options specified in metadata.
-    args : str, optional
+    args : :obj:`str`, optional
         Not applicable.
+
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -158,27 +162,29 @@ def run_perl(paths, program, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
-    executable : str, optional
+    executable : :obj:`str`, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for system command. Defaults to options specified in metadata.
-    args : str, optional
+    args : :obj:`str`, optional
         Arguments for system command. Defaults to no arguments.
+
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -211,27 +217,29 @@ def run_python(paths, program, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
-    executable : str, optional
+    executable : :obj:`str`, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for system command. Defaults to options specified in metadata.
-    args : str, optional
+    args : :obj:`str`, optional
         Arguments for system command. Defaults to no arguments.
+
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -264,19 +272,22 @@ def run_jupyter(paths, program, timeout = None, kernel_name = ''):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
     timeout : int
         Time to wait (in seconds) for execution outputs before raising exception.
         Defaults to no timeout.
-    kernel_name : str
+    kernel_name : :obj:`str`
         Name of kernel to use for execution.
         Defaults to kernel specified in notebook.
+
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
+
     Returns
     -------
     None
@@ -311,28 +322,30 @@ def run_mathematica(paths, program, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
-    executable : str, optional
+    executable : :obj:`str`, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for system command. Defaults to options specified in metadata.
-    args : str, optional
+    args : :obj:`str`, optional
         Not applicable.
-        
+  
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
+
     Returns
     -------
     None
@@ -364,27 +377,29 @@ def run_stat_transfer(paths, program, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
-    executable : str, optional
+    executable : :obj:`str`, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for system command. Defaults to options specified in metadata.
-    args : str, optional
+    args : :obj:`str`, optional
         Not applicable.
+
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -417,33 +432,35 @@ def run_lyx(paths, program, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-            'pdf_dir' : str
-                Directory to write PDFs.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
-    executable : str, optional
+    executable : :obj:`str`, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for system command. Defaults to options specified in metadata.
-    args : str, optional
+    args : :obj:`str`, optional
         Not applicable.
-    doctype : str, optional
-       Type of Lyx document. Takes either `handout` and `comments`. 
+    doctype : :obj:`str`, optional
+       Type of Lyx document. Takes either :obj:`'handout'` and :obj:`'comments'`. 
        Defaults to no special document type.
-        
+
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
+    pdf_dir : :obj:`str`
+        Directory to write PDFs.
+
     Returns
     -------
     None
@@ -509,27 +526,31 @@ def run_r(paths, program, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
-    executable : str, optional
+    executable : :obj:`str`, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for system command. Defaults to options specified in metadata.
-    args : str, optional
+    args : :obj:`str`, optional
         Not applicable.
+
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
+    pdf_dir : :obj:`str`
+        Directory to write PDFs.
 
     Returns
     -------
@@ -562,30 +583,34 @@ def run_sas(paths, program, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    program : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : :obj:`str`
         Path of script to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
-    executable : str, optional
+    executable : :obj:`str`, optional
         Executable to use for system command. 
         Defaults to executable specified in metadata.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for system command. Defaults to options specified in metadata.
-    args : str, optional
+    args : :obj:`str`, optional
         Not applicable.
-    lst : str, optional
+    lst : :obj:`str`, optional
         Path of program lst. Program lst is only written if specified. 
-        
+       
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
+    pdf_dir : :obj:`str`
+        Directory to write PDFs.
+
     Returns
     -------
     None
@@ -622,21 +647,25 @@ def execute_command(paths, command, **kwargs):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    command : str
+    paths : :obj:`dict`
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    command : :obj:`str`
         system command to run.
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
-    shell : bool, optional
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+    shell : :obj:`bool`, optional
         See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
-        Defaults to `True`.
-    log : str, optional
+        Defaults to :obj:`True`.
+    log : :obj:`str`, optional
         Path of system command log. system command log is only written if specified. 
         
+    Keys
+    ----
+    makelog : :obj:`str`
+        Path of makelog.
+    pdf_dir : :obj:`str`
+        Directory to write PDFs.
+
     Returns
     -------
     None
@@ -667,11 +696,11 @@ def run_module(root, module, build_script = 'make.py'):
     
     Parameters
     ----------
-    root : str 
+    root : :obj:`str` 
         Directory of root.
-    module: str
+    module: :obj:`str`
         Name of module.
-    build_script : str
+    build_script : :obj:`str`
         Name of build script.
 
     Returns
