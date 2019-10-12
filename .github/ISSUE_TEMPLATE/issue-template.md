@@ -9,7 +9,7 @@ assignees: ''
 
 Follows # (if applicable.)
 
-Motivation and background context for issue. Summary of work to be done.
+Motivation and background context for issue. Summary of work to be completed.
 
 Task list
 - [ ] Incomplete
