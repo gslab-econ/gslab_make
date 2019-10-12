@@ -34,10 +34,13 @@ def run_stata(paths, program, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
@@ -49,8 +52,8 @@ def run_stata(paths, program, **kwargs):
     args : :obj:`str`, optional
         Not applicable.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
 
@@ -108,10 +111,13 @@ def run_matlab(paths, program, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
@@ -123,8 +129,8 @@ def run_matlab(paths, program, **kwargs):
     args : :obj:`str`, optional
         Not applicable.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
 
@@ -166,10 +172,13 @@ def run_perl(paths, program, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
@@ -181,8 +190,8 @@ def run_perl(paths, program, **kwargs):
     args : :obj:`str`, optional
         Arguments for system command. Defaults to no arguments.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
 
@@ -221,10 +230,13 @@ def run_python(paths, program, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
@@ -236,8 +248,8 @@ def run_python(paths, program, **kwargs):
     args : :obj:`str`, optional
         Arguments for system command. Defaults to no arguments.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
 
@@ -276,6 +288,9 @@ def run_jupyter(paths, program, timeout = None, kernel_name = ''):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     timeout : int
         Time to wait (in seconds) for execution outputs before raising exception.
         Defaults to no timeout.
@@ -283,8 +298,8 @@ def run_jupyter(paths, program, timeout = None, kernel_name = ''):
         Name of kernel to use for execution.
         Defaults to kernel specified in notebook.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
 
@@ -326,10 +341,13 @@ def run_mathematica(paths, program, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
@@ -341,8 +359,8 @@ def run_mathematica(paths, program, **kwargs):
     args : :obj:`str`, optional
         Not applicable.
   
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
 
@@ -381,10 +399,13 @@ def run_stat_transfer(paths, program, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
@@ -396,8 +417,8 @@ def run_stat_transfer(paths, program, **kwargs):
     args : :obj:`str`, optional
         Not applicable.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
 
@@ -436,10 +457,13 @@ def run_lyx(paths, program, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
@@ -454,8 +478,8 @@ def run_lyx(paths, program, **kwargs):
        Type of Lyx document. Takes either :obj:`'handout'` and :obj:`'comments'`. 
        Defaults to no special document type.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
     pdf_dir : :obj:`str`
@@ -530,10 +554,13 @@ def run_r(paths, program, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
@@ -545,8 +572,8 @@ def run_r(paths, program, **kwargs):
     args : :obj:`str`, optional
         Not applicable.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
     pdf_dir : :obj:`str`
@@ -587,10 +614,13 @@ def run_sas(paths, program, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     program : :obj:`str`
         Path of script to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of program log. Program log is only written if specified. 
@@ -604,8 +634,8 @@ def run_sas(paths, program, **kwargs):
     lst : :obj:`str`, optional
         Path of program lst. Program lst is only written if specified. 
        
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
     pdf_dir : :obj:`str`
@@ -651,16 +681,19 @@ def execute_command(paths, command, **kwargs):
         Dictionary of paths. Dictionary should contain values for all keys listed below.
     command : :obj:`str`
         system command to run.
+
+    Other Parameters
+    ----------------
     osname : :obj:`str`, optional
         Name of OS. Defaults to :func:`os.name`.
     shell : :obj:`bool`, optional
-        See: https://docs.python.org/2/library/subprocess.html#frequently-used-arguments.
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_.
         Defaults to :obj:`True`.
     log : :obj:`str`, optional
         Path of system command log. system command log is only written if specified. 
         
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
     pdf_dir : :obj:`str`
@@ -701,7 +734,7 @@ def run_module(root, module, build_script = 'make.py'):
     module: :obj:`str`
         Name of module.
     build_script : :obj:`str`
-        Name of build script.
+        Name of build script. Defaults to :obj:`make.py`.
 
     Returns
     -------

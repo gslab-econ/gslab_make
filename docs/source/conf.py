@@ -24,12 +24,12 @@ extensions = ['sphinx.ext.autodoc',
 # -- Extensions to Napoleon --------------------------------------------------
 
 def parse_keys_section(self, section):
-    return self._format_fields('Keys', self._consume_fields())
+    return self._format_fields('Path Keys', self._consume_fields())
 
 GoogleDocstring._parse_keys_section = parse_keys_section
 
 def patched_parse(self):
-    self._sections['keys'] = self._parse_keys_section
+    self._sections['path keys'] = self._parse_keys_section
     self._unpatched_parse()
 
 GoogleDocstring._unpatched_parse = GoogleDocstring._parse

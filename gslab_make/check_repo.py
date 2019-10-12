@@ -209,8 +209,8 @@ def check_module_size(paths):
     paths : :obj:`dict` 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     config : :obj:`str`
         Path of config file.   
     makelog : :obj:`str`
@@ -219,6 +219,15 @@ def check_module_size(paths):
     Returns
     -------
     :obj:`None`
+
+    Notes
+    -----
+    Checks file sizes in the current directory. Produces warning if any of the following size statistics are larger than limits set in config file :obj:`config`. Warning messages are appended to make log :obj:`makelog`.
+    
+    * Individual size of a file tracked by git lfs (`file_MB_limit_lfs`)
+    * Total size of all files tracked by git lfs (`total_MB_limit_lfs`)
+    * Individual size of a file tracked by git (`file_MB_limit`)
+    * Total size of all files tracked by git (`total_MB_limit`)
     """
     
     try:
@@ -307,8 +316,8 @@ def get_modified_sources(paths,
     depth : :obj:`float`, optional
         Level of depth when walking through source directories. Defaults to infinite.
 
-    Keys
-    ----
+    Path Keys
+    ---------
     makelog : :obj:`str`
         Path of makelog.
 
@@ -316,6 +325,10 @@ def get_modified_sources(paths,
     -------
     overlap : :obj:`list`
         List of source files considered changed by git.
+
+    Notes
+    -----
+    Checks the modification status for sources contained in all mappings of list :obj:`source_map` (returned from :mod:`move_sources` functions). Produces warning if sources have been modified according to git. When walking through sources, float :obj:`depth` determines level of depth to walk. Warnings are appended to make log :obj:`makelog`.
     """
     
     try:

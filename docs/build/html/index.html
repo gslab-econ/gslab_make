@@ -81,7 +81,7 @@
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">GSLab Make</a></li>
-<li><a class="reference internal" href="#module-gslab_make.check_repo">Repository functions</a></li>
+<li><a class="reference internal" href="#repository-functions">Repository functions</a></li>
 <li><a class="reference internal" href="#module-gslab_make.run_program">Program functions</a></li>
 </ul>
 </div>
@@ -150,9 +150,10 @@
   <div class="section" id="gslab-make">
 <h1>GSLab Make<a class="headerlink" href="#gslab-make" title="Permalink to this headline">¶</a></h1>
 </div>
-<div class="section" id="module-gslab_make.check_repo">
-<span id="repository-functions"></span><h1>Repository functions<a class="headerlink" href="#module-gslab_make.check_repo" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<div class="section" id="repository-functions">
+<h1>Repository functions<a class="headerlink" href="#repository-functions" title="Permalink to this headline">¶</a></h1>
+<p>The following functions are used to check file size and modification status of files tracked by git. The logs are intended to facilitate proper committing activity.</p>
+<span class="target" id="module-gslab_make.check_repo"></span><dl class="function">
 <dt id="gslab_make.check_repo.check_module_size">
 <code class="sig-prename descclassname">gslab_make.check_repo.</code><code class="sig-name descname">check_module_size</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.check_module_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check file sizes for module.</p>
@@ -160,7 +161,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p>
 </dd>
-<dt class="field-even">Keys</dt>
+<dt class="field-even">Path Keys</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>config</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of config file.</p></li>
 <li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
@@ -173,6 +174,14 @@
 <dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Checks file sizes in the current directory. Produces warning if any of the following size statistics are larger than limits set in config file <code class="xref py py-obj docutils literal notranslate"><span class="pre">config</span></code>. Warning messages are appended to make log <code class="xref py py-obj docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<ul class="simple">
+<li><p>Individual size of a file tracked by git lfs (<cite>file_MB_limit_lfs</cite>)</p></li>
+<li><p>Total size of all files tracked by git lfs (<cite>total_MB_limit_lfs</cite>)</p></li>
+<li><p>Individual size of a file tracked by git (<cite>file_MB_limit</cite>)</p></li>
+<li><p>Total size of all files tracked by git (<cite>total_MB_limit</cite>)</p></li>
+</ul>
 </dd></dl>
 
 <dl class="function">
@@ -187,7 +196,7 @@
 <li><p><strong>depth</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>, optional) – Level of depth when walking through source directories. Defaults to infinite.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
+<dt class="field-even">Path Keys</dt>
 <dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
 </dd>
 <dt class="field-odd">Returns</dt>
@@ -197,6 +206,8 @@
 <dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Checks the modification status for sources contained in all mappings of list <code class="xref py py-obj docutils literal notranslate"><span class="pre">source_map</span></code> (returned from <code class="xref py py-mod docutils literal notranslate"><span class="pre">move_sources</span></code> functions). Produces warning if sources have been modified according to git. When walking through sources, float <code class="xref py py-obj docutils literal notranslate"><span class="pre">depth</span></code> determines level of depth to walk. Warnings are appended to make log <code class="xref py py-obj docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 </dd></dl>
 
 </div>
@@ -211,23 +222,27 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>command</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – system command to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of system command log. system command log is only written if specified.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><ul class="simple">
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
 <li><p><strong>pdf_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory to write PDFs.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -241,20 +256,24 @@ Defaults to <code class="xref py py-obj docutils literal notranslate"><span clas
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>timeout</strong> (<em>int</em>) – Time to wait (in seconds) for execution outputs before raising exception.
 Defaults to no timeout.</p></li>
 <li><p><strong>kernel_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Name of kernel to use for execution.
 Defaults to kernel specified in notebook.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -268,8 +287,12 @@ Defaults to kernel specified in notebook.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
 <li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
@@ -280,17 +303,17 @@ Defaults to executable specified in metadata.</p></li>
 Defaults to no special document type.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><ul class="simple">
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
 <li><p><strong>pdf_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory to write PDFs.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -304,8 +327,12 @@ Defaults to no special document type.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
 <li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
@@ -314,14 +341,14 @@ Defaults to executable specified in metadata.</p></li>
 <li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -335,8 +362,12 @@ Defaults to executable specified in metadata.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
 <li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
@@ -345,14 +376,14 @@ Defaults to executable specified in metadata.</p></li>
 <li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -366,7 +397,7 @@ Defaults to executable specified in metadata.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>root</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory of root.</p></li>
 <li><p><strong>module</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Name of module.</p></li>
-<li><p><strong>build_script</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Name of build script.</p></li>
+<li><p><strong>build_script</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Name of build script. Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">make.py</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -387,8 +418,12 @@ Defaults to executable specified in metadata.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
 <li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
@@ -397,14 +432,14 @@ Defaults to executable specified in metadata.</p></li>
 <li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Arguments for system command. Defaults to no arguments.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -418,8 +453,12 @@ Defaults to executable specified in metadata.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
 <li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
@@ -428,14 +467,14 @@ Defaults to executable specified in metadata.</p></li>
 <li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Arguments for system command. Defaults to no arguments.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -449,8 +488,12 @@ Defaults to executable specified in metadata.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
 <li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
@@ -459,17 +502,17 @@ Defaults to executable specified in metadata.</p></li>
 <li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><ul class="simple">
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
 <li><p><strong>pdf_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory to write PDFs.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -483,8 +526,12 @@ Defaults to executable specified in metadata.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
 <li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
@@ -494,17 +541,17 @@ Defaults to executable specified in metadata.</p></li>
 <li><p><strong>lst</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program lst. Program lst is only written if specified.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><ul class="simple">
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p></li>
 <li><p><strong>pdf_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Directory to write PDFs.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -518,8 +565,12 @@ Defaults to executable specified in metadata.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
 <li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
@@ -528,14 +579,14 @@ Defaults to executable specified in metadata.</p></li>
 <li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -549,8 +600,12 @@ Defaults to executable specified in metadata.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of script to run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Other Parameters</dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>osname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Name of OS. Defaults to <code class="xref py py-func docutils literal notranslate"><span class="pre">os.name()</span></code>.</p></li>
-<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See: <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">https://docs.python.org/2/library/subprocess.html#frequently-used-arguments</a>.
+<li><p><strong>shell</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 <li><p><strong>log</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Path of program log. Program log is only written if specified.</p></li>
 <li><p><strong>executable</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Executable to use for system command.
@@ -559,14 +614,14 @@ Defaults to executable specified in metadata.</p></li>
 <li><p><strong>args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keys</dt>
-<dd class="field-even"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
+<dt class="field-odd">Path Keys</dt>
+<dd class="field-odd"><p><strong>makelog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
