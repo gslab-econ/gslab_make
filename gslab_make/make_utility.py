@@ -24,8 +24,8 @@ def check_os(osname = os.name):
     
     Parameters
     ----------
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
 
     Returns
     -------
@@ -41,13 +41,15 @@ def update_executables(paths, osname = os.name):
     
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'config_user' : str
-                Path of user config file.
-        }
-    osname : str, optional
-        Name of OS. Defaults to `os.name`.
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    osname : :obj:`str`, optional
+        Name of OS. Defaults to :func:`os.name`.
+
+    Path Keys
+    ---------
+    config_user : :obj:`str`
+        Path of user config file.   
 
     Returns
     -------
@@ -73,18 +75,20 @@ def update_mappings(paths, mapping_dict = {}):
     
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'config_user' : str
-                Path of user config file.
-        }
-    mapping_dict : dict, optional
-        Dictionary of path mappings used to parse paths. 
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    mapping_dict : :obj:`dict`, optional
+        Dictionary of path mappings used to parse paths to update. 
         Defaults to no mappings.
+
+    Path Keys
+    ---------
+    config_user : :obj:`str`
+        Path of user config file.  
 
     Returns
     -------
-    mapping_dict : dict
+    mapping_dict : :obj:`dict`
         Dictionary of path mappings used to parse paths. 
     """
 
@@ -107,9 +111,9 @@ def copy_output(file, copy_dir):
     
     Parameters
     ----------
-    file : str 
+    file : :obj:`str`
         Path of file to copy.
-    copy_dir : str
+    copy_dir : :obj:`str`
         Directory to copy file.
 
     Returns

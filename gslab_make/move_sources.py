@@ -18,25 +18,27 @@ from gslab_make.private.utility import get_path, format_message
 from gslab_make.write_logs import write_to_makelog
 
 
-def create_links(paths,
+def _create_links(paths,
                  file_list,
                  mapping_dict = {}):
     """Create symlinks from list of files containing linking instructions.
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'move_dir' : str
-                Directory to write symlinks.
-            'makelog' : str
-                Path of makelog.
-        }
-    file_list : list
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    file_list : :obj:`list`
         List of files containing linking instructions.
-    mapping_dict : dict, optional
+    mapping_dict : :obj:`dict`, optional
         Dictionary of path mappings used to parse linking instructions. 
         Defaults to no mappings.
+
+    Path Keys
+    ---------
+    move_dir : :obj:`str`
+        Directory to write links.
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -56,7 +58,7 @@ def create_links(paths,
     return(move_map)
         
 
-def create_copies(paths,
+def _create_copies(paths,
                   file_list,
                   mapping_dict = {}):
     """Create copies from list of files containing copying instructions.
@@ -70,11 +72,18 @@ def create_copies(paths,
             'makelog' : str
                 Path of makelog.
         }
-    file_list : list
+    file_list : :obj:`list`
         List of files containing copying instructions.
-    mapping_dict : dict, optional
+    mapping_dict : :obj:`dict`, optional
         Dictionary of path mappings used to parse copying instructions. 
         Defaults to no mappings.
+
+    Path Keys
+    ---------
+    move_dir : :obj:`str`
+        Directory to write copies.
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -87,7 +96,7 @@ def create_copies(paths,
     move_list = MoveList(file_list, move_dir, mapping_dict)
     if move_list.move_directive_list:
         os.makedirs(move_dir)
-        move_map = move_list.create_copies()       
+        move_map = move_list._create_copies()       
     else:
         move_map = []
 
@@ -97,23 +106,24 @@ def create_copies(paths,
 def link_inputs(paths,
                 file_list,
                 mapping_dict = {}):
-    """
-    Create symlinks to inputs from list of files containing linking instructions. 
+    """Create symlinks to inputs from list of files containing linking instructions. 
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'input_dir' : str
-                Directory to write symlinks.
-            'makelog' : str
-                Path of makelog.
-        }
-    file_list : list
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    file_list : :obj:`list`
         List of files containing linking instructions.
-    mapping_dict : dict, optional
+    mapping_dict : :obj:`dict`, optional
         Dictionary of path mappings used to parse linking instructions. 
         Defaults to no mappings.
+
+    Path Keys
+    ---------
+    input_dir : :obj:`str`
+       Directory to write symlinks.
+    makelog : :obj:`str`
+       Path of makelog.
 
     Returns
     -------
@@ -123,7 +133,7 @@ def link_inputs(paths,
     
     try:
         paths['move_dir'] = get_path(paths, 'input_dir')
-        move_map = create_links(paths, file_list, mapping_dict)
+        move_map = _create_links(paths, file_list, mapping_dict)
 
         message = 'Input links successfully created!'
         write_to_makelog(paths, message)    
@@ -139,23 +149,24 @@ def link_inputs(paths,
 def link_externals(paths,
                    file_list,
                    mapping_dict = {}):
-    """
-    Create symlinks to externals from list of files containing linking instructions. 
+    """Create symlinks to externals from list of files containing linking instructions. 
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'external_dir' : str
-                Directory to write symlinks.
-            'makelog' : str
-                Path of makelog.
-        }
-    file_list : list
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    file_list : :obj:`list`
         List of files containing linking instructions.
-    mapping_dict : dict, optional
+    mapping_dict : :obj:`dict`, optional
         Dictionary of path mappings used to parse linking instructions. 
         Defaults to no mappings.
+
+    Path Keys
+    ---------
+    external_dir : :obj:`str`
+       Directory to write symlinks.
+    makelog : :obj:`str`
+       Path of makelog.
 
     Returns
     -------
@@ -165,7 +176,7 @@ def link_externals(paths,
     
     try:
         paths['move_dir'] = get_path(paths, 'external_dir')
-        move_map = create_links(paths, file_list, mapping_dict)
+        move_map = _create_links(paths, file_list, mapping_dict)
 
         message = 'External links successfully created!'
         write_to_makelog(paths, message)    
@@ -185,18 +196,20 @@ def copy_inputs(paths,
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'input_dir' : str
-                Directory to write copies.
-            'makelog' : str
-                Path of makelog.
-        }
-    file_list : list
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    file_list : :obj:`list`
         List of files containing copying instructions.
-    mapping_dict : dict, optional
+    mapping_dict : :obj:`dict`, optional
         Dictionary of path mappings used to parse copying instructions. 
         Defaults to no mappings.
+
+    Path Keys
+    ---------
+    input_dir : :obj:`str`
+       Directory to write copies.
+    makelog : :obj:`str`
+       Path of makelog.
 
     Returns
     -------
@@ -206,7 +219,7 @@ def copy_inputs(paths,
         
     try:
         paths['move_dir'] = get_path(paths, 'input_dir')
-        move_map = create_copies(paths, file_list, mapping_dict)
+        move_map = _create_copies(paths, file_list, mapping_dict)
 
         message = 'Input copies successfully created!'
         write_to_makelog(paths, message)    
@@ -226,18 +239,20 @@ def copy_externals(paths,
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'external_dir' : str
-                Directory to write copies.
-            'makelog' : str
-                Path of makelog.
-        }
-    file_list : list
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    file_list : :obj:`list`
         List of files containing copying instructions.
-    mapping_dict : dict, optional
+    mapping_dict : :obj:`dict`, optional
         Dictionary of path mappings used to parse copying instructions. 
         Defaults to no mappings.
+
+    Path Keys
+    ---------
+    external_dir : :obj:`str`
+       Directory to write copies.
+    makelog : :obj:`str`
+       Path of makelog.
 
     Returns
     -------
@@ -247,7 +262,7 @@ def copy_externals(paths,
         
     try:
         paths['move_dir'] = get_path(paths, 'external_dir')
-        move_map = create_copies(paths, file_list, mapping_dict)
+        move_map = _create_copies(paths, file_list, mapping_dict)
 
         message = 'External copies successfully created!'
         write_to_makelog(paths, message)    

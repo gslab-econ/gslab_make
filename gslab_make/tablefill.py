@@ -16,7 +16,7 @@ import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError, ColoredError
 from gslab_make.private.utility import norm_path, format_message
 
-def parse_tag(tag):
+def _parse_tag(tag):
     """Parse tag from input."""
     
     if not re.match('<Tab:(.*)>\n', tag, flags = re.IGNORECASE):
@@ -28,19 +28,19 @@ def parse_tag(tag):
     return(tag)
     
     
-def parse_data(data, null):
+def _parse_data(data, null):
     """Parse data from input.
     
     Parameters
     ----------
-    data : list
+    data : :obj:`list`
         Input data to parse.
-    null : str
+    null : :obj:`str`
         String to replace null characters.
 
     Returns
     -------
-    data : list
+    data : :obj:`list`
         List of data values from input.
     """
     null_strings = ['', '.', 'NA']
@@ -56,37 +56,37 @@ def parse_data(data, null):
     return(data)
         
     
-def parse_content(file, null):
+def _parse_content(file, null):
     """Parse content from input."""
         
     with open(file, 'r') as f:
         content = f.readlines()
         
     try:
-        tag = parse_tag(content[0])
+        tag = _parse_tag(content[0])
     except:
         raise_from(CritError(messages.crit_error_no_tag % file), None)   
     
-    data = parse_data(content[1:], null)
+    data = _parse_data(content[1:], null)
     
     return(tag, data)
     
     
-def insert_value(line, value, type):
+def _insert_value(line, value, type):
     """Insert value into line.
     
     Parameters
     ----------
-    line : str
+    line : :obj:`str`
         Line of document to insert value.
-    value : str
+    value : :obj:`str`
         Value to insert.
-    type : str
+    type : :obj:`str`
         Formatting for value.
 
     Returns
     -------
-    line : str
+    line : :obj:`str`
         Line of document with inserted value.
     """
     
@@ -114,19 +114,19 @@ def insert_value(line, value, type):
     return(line)
 
 
-def insert_tables_lyx(template, tables):
+def _insert_tables_lyx(template, tables):
     """Fill tables for LyX template.
     
     Parameters
     ----------
-    template : str
+    template : :obj:`str`
         Path of LyX template to fill.
-    tables : dict
-        Dictionary {tag: values} of tables.
+    tables : :obj:`dict`
+        Dictionary :obj:`{tag: values}` of tables.
 
     Returns
     -------
-    template : str
+    template : :obj:`str`
         Filled LyX template.
     """
 
@@ -149,15 +149,15 @@ def insert_tables_lyx(template, tables):
         while is_table:
             try:
                 if re.match('.*###', doc[i]):
-                    doc[i] = insert_value(doc[i], values[entry_count], 'no change')
+                    doc[i] = _insert_value(doc[i], values[entry_count], 'no change')
                     entry_count += 1
                     break
                 elif re.match('.*#[0-9]+#', doc[i]):
-                    doc[i] = insert_value(doc[i], values[entry_count], 'round')
+                    doc[i] = _insert_value(doc[i], values[entry_count], 'round')
                     entry_count += 1
                     break
                 elif re.match('.*#[0-9]+,#', doc[i]):
-                    doc[i] = insert_value(doc[i], values[entry_count], 'comma + round')
+                    doc[i] = _insert_value(doc[i], values[entry_count], 'comma + round')
                     entry_count += 1
                     break
                 elif re.match('</lyxtabular>', doc[i]):
@@ -174,19 +174,19 @@ def insert_tables_lyx(template, tables):
     return(doc)
 
 
-def insert_tables_latex(template, tables):
+def _insert_tables_latex(template, tables):
     """Fill tables for LaTeX template.
     
     Parameters
     ----------
-    template : str
+    template : :obj:`str`
         Path of LaTeX template to fill.
-    tables : dict
-        Dictionary {tag: values} of tables.
+    tables : :obj:`dict`
+        Dictionary :obj:`{tag: values}` of tables.
 
     Returns
     -------
-    template : str
+    template : :obj:`str`
         Filled LaTeX template.
     """
 
@@ -211,13 +211,13 @@ def insert_tables_latex(template, tables):
 
             for j in range(len(line_col)):
                 if re.search('.*\\\\#\\\\#\\\\#', line_col[j]):
-                    line_col[j] = insert_value(line_col[j], values[entry_count], 'no change')
+                    line_col[j] = _insert_value(line_col[j], values[entry_count], 'no change')
                     entry_count += 1
                 elif re.search('.*\\\\#[0-9]+\\\\#', line_col[j]):
-                    line_col[j] = insert_value(line_col[j], values[entry_count], 'round')                   
+                    line_col[j] = _insert_value(line_col[j], values[entry_count], 'round')                   
                     entry_count += 1
                 elif re.search('.*\\\\#[0-9]+,\\\\#', line_col[j]):
-                    line_col[j] = insert_value(line_col[j], values[entry_count], 'comma + round')
+                    line_col[j] = _insert_value(line_col[j], values[entry_count], 'comma + round')
                     entry_count += 1
                
             doc[i] = "&".join(line_col)
@@ -234,26 +234,26 @@ def insert_tables_latex(template, tables):
     return(doc)
 
 
-def insert_tables(template, tables):
+def _insert_tables(template, tables):
     """Fill tables for template.
     
     Parameters
     ----------
-    template : str
+    template : :obj:`str`
         Path of template to fill.
-    tables : dict
-        Dictionary {tag: values} of tables.
+    tables : :obj:`dict`
+        Dictionary :obj:`{tag: values}` of tables.
 
     Returns
     -------
-    template : str
+    template : :obj:`str`
         Filled template.
     """
     
     if re.search('\.lyx', template):
-        doc = insert_tables_lyx(template, tables)
+        doc = _insert_tables_lyx(template, tables)
     elif re.search('\.tex', template):
-        doc = insert_tables_latex(template, tables)
+        doc = _insert_tables_latex(template, tables)
 
     return(doc)
 
@@ -263,14 +263,14 @@ def tablefill(inputs, template, output, null = None):
     
     Parameters
     ----------
-    inputs : list
+    inputs : :obj:`list`
         List of inputs to fill into template.
-    template : str
+    template : :obj:`str`
         Path of template to fill.
-    output : str
+    output : :obj:`str`
         Path of output.
-    null : str
-        Value to replace null characters (`''`, `'.'`, `'NA'`). Defaults to None.
+    null : :obj:`str`
+        Value to replace null characters (:obj:``''`, :obj:``'.'`, :obj:``'NA'`). Defaults to :obj:`None`.
 
     Returns
     -------
@@ -281,13 +281,13 @@ def tablefill(inputs, template, output, null = None):
         if type(inputs) is not list:
             raise_from(TypeError(messages.type_error_dir_list % inputs), None)
         inputs = [norm_path(file) for file in inputs]
-        content = [parse_content(file, null) for file in inputs]
+        content = [_parse_content(file, null) for file in inputs]
         tables = {tag:data for (tag, data) in content}
 
         if (len(content) != len(tables)):
             raise_from(CritError(messages.crit_error_duplicate_tables), None)
 
-        doc = insert_tables(template, tables) 
+        doc = _insert_tables(template, tables) 
         
         with open(output, 'w') as f:
             f.write(doc)

@@ -25,12 +25,12 @@ def remove_path(path, option = '', quiet = False):
     
     Parameters
     ----------
-    path : str
+    path : :obj:`str`
         Path to remove.
-    option : str, optional
+    option : :obj:`str`, optional
         Options for shell command. Defaults to options specified in metadata.
-    quiet : bool, optional
-        Suppress printing of paths removed. Defaults to False. 
+    quiet : :obj:`bool`, optional
+        Suppress printing of paths removed. Defaults to :obj:`False`. 
 
     Returns
     -------
@@ -55,10 +55,10 @@ def remove_dir(dir_list, quiet = False):
     
     Parameters
     ----------
-    dir_list : list
+    dir_list : :obj:`list`
         List of directories to remove.
-    quiet : bool, optional
-        Suppress printing of directories removed. Defaults to False. 
+    quiet : :obj:`bool`, optional
+        Suppress printing of directories removed. Defaults to :obj:`False`. 
         
     Returns
     -------
@@ -86,7 +86,7 @@ def clear_dir(dir_list):
     
     Parameters
     ----------
-    dir_list : list
+    dir_list : :obj:`list`
         List of directories to clear.
 
     Returns
@@ -114,9 +114,9 @@ def unzip(zip_path, output_dir):
     
     Parameters
     ----------
-    zip_path : str
+    zip_path : :obj:`str`
         Path of file to unzip.
-    output_dir : str
+    output_dir : :obj:`str`
         Directory to write outputs of unzipped file.
 
     Returns
@@ -138,9 +138,9 @@ def zip_dir(source_dir, zip_dest):
     
     Parameters
     ----------
-    source_dir : str
+    source_dir : :obj:`str`
         Path of directory to zip.
-    zip_dest : str
+    zip_dest : :obj:`str`
         Destination of zip file.
 
     Returns

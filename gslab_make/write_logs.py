@@ -28,11 +28,13 @@ def start_makelog(paths):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+
+    Path Keys
+    ---------
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -66,11 +68,13 @@ def end_makelog(paths):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+
+    Path Keys
+    ---------
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -106,13 +110,15 @@ def write_to_makelog(paths, message):
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'makelog' : str
-                Path of makelog.
-        }
-    message : str
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    message : :obj:`str`
         Message to append.
+
+    Path Keys
+    ---------
+    makelog : :obj:`str`
+        Path of makelog.
 
     Returns
     -------
@@ -138,29 +144,31 @@ def log_files_in_output(paths,
     Notes
     -----
     The following information is logged of all files contained in output directory:
-        * File name (output statistics log)
-        * Last modified (output statistics log)
-        * File size (output statistics log)
-        * File head (output headers log)
+    * File name (output statistics log)
+    * Last modified (output statistics log)
+    * File size (output statistics log)
+    * File head (output headers log)
     * When walking through output directory, depth determines depth.
 
     Parameters
     ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'output_dir' : str
-                Path of output directory.
-            'output_local_dir' : list, optional
-                List of paths of local output directories. Defaults to `[]`.
-            'output_statslog' : str
-                Path to write output statistics log.
-            'output_headslog' : str
-                Path to write output headers log.
-            'makelog' : str
-                Path of makelog.
-        }
-    depth : float, optional
-        Level of depth when walking through output directory.
+    paths : :obj:`dict` 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    depth : :obj:`float`, optional
+        Level of depth when walking through output directory. Defaults to infinite.
+
+    Path Keys
+    ---------
+    output_dir : :obj:`str`
+       Path of output directory.
+    output_local_dir : :obj:`list`, optional
+       List of paths of local output directories. Defaults to `[]`.
+    output_statslog : :obj:`str`
+       Path to write output statistics log.
+    output_headslog : :obj:`str`
+       Path to write output headers log.
+    makelog : :obj:`str`
+       Path of makelog.
 
     Returns
     -------
@@ -184,11 +192,11 @@ def log_files_in_output(paths,
 
         if output_statslog:
             output_statslog = norm_path(output_statslog)
-            write_stats_log(output_statslog, output_files)
+            _write_stats_log(output_statslog, output_files)
         
         if output_headslog:
             output_headslog = norm_path(output_headslog)
-            write_heads_log(output_headslog, output_files)
+            _write_heads_log(output_headslog, output_files)
         
         message = 'Output logs successfully written!'
         write_to_makelog(paths, message)
@@ -200,7 +208,7 @@ def log_files_in_output(paths,
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
     
-def write_stats_log(statslog_file, output_files):
+def _write_stats_log(statslog_file, output_files):
     """Write statistics log.
    
     Notes
@@ -212,9 +220,9 @@ def write_stats_log(statslog_file, output_files):
 
     Parameters
     ----------
-    statslog_file : str
+    statslog_file : :obj:`str`
         Path to write statistics log. 
-    output_files : list
+    output_files : :obj:`list`
         List of output files to log statistics.
 
     Returns
@@ -235,17 +243,17 @@ def write_stats_log(statslog_file, output_files):
             print("%s | %s | %s" % (file_name, last_mod, file_size), file = STATSLOG)
 
 
-def write_heads_log(headslog_file, output_files, num_lines = 10):
+def _write_heads_log(headslog_file, output_files, num_lines = 10):
     """Write headers log.
 
     Parameters
     ----------
-    headslog_file : str
+    headslog_file : :obj:`str`
         Path to write headers log. 
-    output_files : list
+    output_files : :obj:`list`
         List of output files to log headers.
-    num_lines: int, optional
-        Number of lines for headers. Default is 10.
+    num_lines: :obj:`int`, optional
+        Number of lines for headers. Default is :obj:`10`.
 
     Returns
     -------

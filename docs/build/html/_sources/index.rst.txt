@@ -15,4 +15,40 @@ Program functions
 .. automodule:: gslab_make.run_program
     :members:
 
+Utility functions
+=================
+
+.. automodule:: gslab_make.make_utility
+    :members:
+
+Directory functions
+===================
+
+.. automodule:: gslab_make.modify_dir
+    :members:
+
+Linking/copying functions
+=========================
+
+.. automodule:: gslab_make.move_sources
+    :members:
+
+Tablefill
+=========
+
+.. automodule:: gslab_make.tablefill
+    :members:
+
+Logging functions
+=================
+
+.. automodule:: gslab_make.write_logs
+    :members:
+
+Source logging functions
+========================
+
+
+.. automodule:: gslab_make.write_source_logs
+    :members:
 
