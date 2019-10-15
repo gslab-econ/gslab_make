@@ -19,12 +19,13 @@ from gslab_make.private.utility import norm_path, get_path, glob_recursive, form
 
 
 def start_makelog(paths):
-    """Start make log. Record start time.
+    """.. Start make log.
 
-    Notes
-    -----
-    The make log start condition is needed by other functions to confirm a 
-    make log exists.
+    Write to file ``makelog``, recording start time. Sets status metadata to boolean ``True``, which is used by other functions to confirm make log exists.
+
+    Note
+    ----
+    The make log start condition is used by other functions to confirm a make log exists. Therefore, 
 
     Parameters
     ----------
@@ -64,7 +65,10 @@ def start_makelog(paths):
 
 
 def end_makelog(paths):
-    """End make log. Record end time.
+    """.. End make log.
+
+    Append to file ``makelog``, recording end time. Sets status metadata to boolean ``False``.
+
 
     Parameters
     ----------
