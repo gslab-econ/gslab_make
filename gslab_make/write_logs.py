@@ -21,20 +21,20 @@ from gslab_make.private.utility import norm_path, get_path, glob_recursive, form
 def start_makelog(paths):
     """.. Start make log.
 
-    Write to file ``makelog``, recording start time. Sets status metadata to boolean ``True``, which is used by other functions to confirm make log exists.
+    Writes file ``makelog``, recording start time. Sets make log status to boolean ``True``, which is used by other functions to confirm make log exists.
 
     Note
     ----
-    The make log start condition is used by other functions to confirm a make log exists. Therefore, 
+    The make log start condition is used by other functions to confirm a make log exists.
 
     Parameters
     ----------
-    paths : :obj:`dict` 
+    paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
 
     Path Keys
     ---------
-    makelog : :obj:`str`
+    makelog : str
         Path of makelog.
 
     Returns
@@ -67,17 +67,20 @@ def start_makelog(paths):
 def end_makelog(paths):
     """.. End make log.
 
-    Append to file ``makelog``, recording end time. Sets status metadata to boolean ``False``.
+    Appends to file ``makelog``, recording end time.
 
+    Note
+    ----
+    We allow for writing to a make log even after the make log has ended. We do not recommend this for best practice.
 
     Parameters
     ----------
-    paths : :obj:`dict` 
+    paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
 
     Path Keys
     ---------
-    makelog : :obj:`str`
+    makelog : str
         Path of makelog.
 
     Returns
@@ -110,18 +113,20 @@ def end_makelog(paths):
     
 
 def write_to_makelog(paths, message):
-    """Append message to make log.
+    """.. Write to make log.
+
+    Appends text ``message`` to file ``makelog``.
 
     Parameters
     ----------
-    paths : :obj:`dict` 
+    paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
-    message : :obj:`str`
+    message : str
         Message to append.
 
     Path Keys
     ---------
-    makelog : :obj:`str`
+    makelog : str
         Path of makelog.
 
     Returns
@@ -143,35 +148,51 @@ def write_to_makelog(paths, message):
     
 def log_files_in_output(paths,
                         depth = float('inf')):
-    """Log files in output directory.
+    """.. Log files in output directory.
 
-    Notes
-    -----
-    The following information is logged of all files contained in output directory:
-    * File name (output statistics log)
-    * Last modified (output statistics log)
-    * File size (output statistics log)
-    * File head (output headers log)
-    * When walking through output directory, depth determines depth.
+    Logs the following information for all files contained in directory ``output_dir``:
+
+    - File name (in file ``output_statslog``)
+    - Last modified (in file ``output_statslog``)
+    - File size (in file ``output_statslog``)
+    - File head (in file ``output_headslog``)
+
+    When walking through directory ``output_dir``, float ``depth`` determines level of depth to walk. Status messages are appended to make log ``makelog``. 
+
+    Include additional output directories to walk through (typically directories that you wish to keep local) in directory list ``output_local_dir``. 
+
+    Example
+    -------
+    The following code will log information for all files contained in only the first level of ``paths['output_dir']``. Therefore, files contained in subdirectories will be ignored.
+    
+    .. code-block:: python
+
+        log_files_in_outputs(paths, depth = 1)
+
+    The following code will log information for any file in ``paths['output_dir']``, regardless of level of subdirectory.
+    
+    .. code-block :: python
+
+        log_files_in_outputs(paths, depth = float('inf'))
 
     Parameters
     ----------
-    paths : :obj:`dict` 
+    paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
-    depth : :obj:`float`, optional
+    depth : flost, optional
         Level of depth when walking through output directory. Defaults to infinite.
 
     Path Keys
     ---------
-    output_dir : :obj:`str`
+    output_dir : str
        Path of output directory.
-    output_local_dir : :obj:`list`, optional
-       List of paths of local output directories. Defaults to `[]`.
-    output_statslog : :obj:`str`
+    output_local_dir : str or list, optional
+       List of paths of local output directories. Defaults to `[]` (i.e., none).
+    output_statslog : str
        Path to write output statistics log.
-    output_headslog : :obj:`str`
+    output_headslog : str
        Path to write output headers log.
-    makelog : :obj:`str`
+    makelog : str
        Path of makelog.
 
     Returns
@@ -184,7 +205,7 @@ def log_files_in_output(paths,
         output_statslog = get_path(paths, 'output_statslog')
         output_headslog = get_path(paths, 'output_headslog')
         try:
-            output_local_dir = get_path(paths, 'output_local_dir') # MAKE REQUIRED?
+            output_local_dir = get_path(paths, 'output_local_dir') 
             if type(output_local_dir) is not list:
                 raise_from(TypeError(messages.type_error_dir_list % output_local_dir), None)
         except KeyError:
@@ -213,20 +234,21 @@ def log_files_in_output(paths,
 
     
 def _write_stats_log(statslog_file, output_files):
-    """Write statistics log.
+    """.. Write statistics log.
    
     Notes
     -----
-    The following information is logged of all output files:
-        * File name 
-        * Last modified 
-        * File size
+    The following information is logged of all output files in list ``output_files``:
+    
+    - File name 
+    - Last modified 
+    - File size
 
     Parameters
     ----------
-    statslog_file : :obj:`str`
+    statslog_file : str
         Path to write statistics log. 
-    output_files : :obj:`list`
+    output_files : list
         List of output files to log statistics.
 
     Returns
@@ -248,16 +270,16 @@ def _write_stats_log(statslog_file, output_files):
 
 
 def _write_heads_log(headslog_file, output_files, num_lines = 10):
-    """Write headers log.
+    """.. Write headers log.
 
     Parameters
     ----------
-    headslog_file : :obj:`str`
+    headslog_file : str
         Path to write headers log. 
-    output_files : :obj:`list`
+    output_files list
         List of output files to log headers.
     num_lines: :obj:`int`, optional
-        Number of lines for headers. Default is :obj:`10`.
+        Number of lines for headers. Default is ``10``.
 
     Returns
     -------

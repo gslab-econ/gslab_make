@@ -17,7 +17,7 @@ from gslab_make.private.exceptionclasses import CritError, ColoredError
 from gslab_make.private.utility import norm_path, format_message
 
 def _parse_tag(tag):
-    """Parse tag from input."""
+    """.. Parse tag from input."""
     
     if not re.match('<Tab:(.*)>\n', tag, flags = re.IGNORECASE):
         raise Exception
@@ -29,18 +29,18 @@ def _parse_tag(tag):
     
     
 def _parse_data(data, null):
-    """Parse data from input.
+    """.. Parse data from input.
     
     Parameters
     ----------
-    data : :obj:`list`
+    data : list
         Input data to parse.
-    null : :obj:`str`
+    null : str
         String to replace null characters.
 
     Returns
     -------
-    data : :obj:`list`
+    data : list
         List of data values from input.
     """
     null_strings = ['', '.', 'NA']
@@ -77,16 +77,16 @@ def _insert_value(line, value, type):
     
     Parameters
     ----------
-    line : :obj:`str`
+    line : str
         Line of document to insert value.
-    value : :obj:`str`
+    value : str
         Value to insert.
-    type : :obj:`str`
+    type : str
         Formatting for value.
 
     Returns
     -------
-    line : :obj:`str`
+    line : str
         Line of document with inserted value.
     """
     
@@ -119,14 +119,14 @@ def _insert_tables_lyx(template, tables):
     
     Parameters
     ----------
-    template : :obj:`str`
+    template : str
         Path of LyX template to fill.
-    tables : :obj:`dict`
-        Dictionary :obj:`{tag: values}` of tables.
+    tables : dict
+        Dictionary ``{tag: values}`` of tables.
 
     Returns
     -------
-    template : :obj:`str`
+    template : str
         Filled LyX template.
     """
 
@@ -179,14 +179,14 @@ def _insert_tables_latex(template, tables):
     
     Parameters
     ----------
-    template : :obj:`str`
+    template : str
         Path of LaTeX template to fill.
-    tables : :obj:`dict`
-        Dictionary :obj:`{tag: values}` of tables.
+    tables : dict
+        Dictionary ``{tag: values}`` of tables.
 
     Returns
     -------
-    template : :obj:`str`
+    template : str
         Filled LaTeX template.
     """
 
@@ -239,14 +239,14 @@ def _insert_tables(template, tables):
     
     Parameters
     ----------
-    template : :obj:`str`
+    template : str
         Path of template to fill.
-    tables : :obj:`dict`
-        Dictionary :obj:`{tag: values}` of tables.
+    tables : dict
+        Dictionary ``{tag: values}`` of tables.
 
     Returns
     -------
-    template : :obj:`str`
+    template : str
         Filled template.
     """
     
@@ -259,18 +259,20 @@ def _insert_tables(template, tables):
 
 
 def tablefill(inputs, template, output, null = None):
-    """Fill tables for template using inputs.
+    """.. Fill tables for template using inputs.
     
+    Fills tables in document ``template`` using files list ``inputs``. Writes filled document to file ``output``. Null characters (i.e., ``''``, ``'.'``, ``'NA'``) in ``inputs`` are replaced with value ``null``.
+
     Parameters
     ----------
-    inputs : :obj:`list`
+    inputs : list
         List of inputs to fill into template.
-    template : :obj:`str`
+    template : str
         Path of template to fill.
-    output : :obj:`str`
+    output : str
         Path of output.
-    null : :obj:`str`
-        Value to replace null characters (:obj:``''`, :obj:``'.'`, :obj:``'NA'`). Defaults to :obj:`None`.
+    null : str
+        Value to replace null characters (i.e., ``''``, ``'.'``, ``'NA'``). Defaults to ``None``.
 
     Returns
     -------

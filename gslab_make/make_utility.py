@@ -24,8 +24,8 @@ def check_os(osname = os.name):
     
     Parameters
     ----------
-    osname : :obj:`str`, optional
-        Name of OS. Defaults to :func:`os.name`.
+    osname : str, optional
+        Name of OS. Defaults to ``os.name``.
 
     Returns
     -------
@@ -37,19 +37,25 @@ def check_os(osname = os.name):
 
 
 def update_executables(paths, osname = os.name):
-    """Update executable names using user config file. 
+    """.. Update executable names using user configuration file. 
+    
+    Updates executable names with executables listed in user configuration file ``config_user``.
+    
+    Note
+    ----
+    Executable names are used by `program functions`_.
     
     Parameters
     ----------
-    paths : :obj:`dict` 
+    paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
-    osname : :obj:`str`, optional
-        Name of OS. Defaults to :func:`os.name`.
+    osname : str, optional
+        Name of OS. Defaults to ``os.name``.
 
     Path Keys
     ---------
-    config_user : :obj:`str`
-        Path of user config file.   
+    config_user : str
+        Path of user configuration file.   
 
     Returns
     -------
@@ -65,30 +71,36 @@ def update_executables(paths, osname = os.name):
         if config_user['local']['executables']:
             metadata.default_executables[osname].update(config_user['local']['executables'])
     except:
-        error_message = 'Error with `update_executables`. Traceback can be found below.' 
+        error_message = 'Error with update_executables. Traceback can be found below.' 
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
 def update_mappings(paths, mapping_dict = {}):
-    """Update path mappings using user config file. 
+    """.. Update path mappings using user configuration file. 
+    
+    Updates dictionary ``path_mappings`` with externals listed in user configuration file ``config_user``.
+    
+    Note
+    ----
+    Path mappings are used by `sourcing functions`_.
     
     Parameters
     ----------
-    paths : :obj:`dict` 
+    paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
-    mapping_dict : :obj:`dict`, optional
+    mapping_dict : dict, optional
         Dictionary of path mappings used to parse paths to update. 
         Defaults to no mappings.
 
     Path Keys
     ---------
-    config_user : :obj:`str`
+    config_user : str
         Path of user config file.  
 
     Returns
     -------
-    mapping_dict : :obj:`dict`
+    mapping_dict : dict
         Dictionary of path mappings used to parse paths. 
     """
 
@@ -101,19 +113,21 @@ def update_mappings(paths, mapping_dict = {}):
 
         return(mapping_dict)
     except:
-        error_message = 'Error with `update_mappings`. Traceback can be found below.' 
+        error_message = 'Error with update_mappings. Traceback can be found below.' 
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
 def copy_output(file, copy_dir):
-    """Copy output file.
+    """.. Copy output file.
+    
+    Copies output `file` to directory `copy_dir` with user prompt to confirm copy.
     
     Parameters
     ----------
-    file : :obj:`str`
+    file : str
         Path of file to copy.
-    copy_dir : :obj:`str`
+    copy_dir : str
         Directory to copy file.
 
     Returns

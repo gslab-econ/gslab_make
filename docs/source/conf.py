@@ -40,6 +40,7 @@ GoogleDocstring._parse = patched_parse
 html_theme = 'sphinx_rtd_theme'
 html_static_path = []
 
+add_module_names = False
 autodoc_default_options = {
     'member-order': 'bysource'
 }
