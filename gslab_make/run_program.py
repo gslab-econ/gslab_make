@@ -30,12 +30,6 @@ def run_jupyter(paths, program, timeout = None, kernel_name = ''):
 
     Runs notebook ``program`` using Python API, with notebook specified in the form of ``notebook.ipynb``. Status messages are appended to make log ``makelog``.
 
-    Example
-    -------
-    .. code-block:: python
-
-        run_jupyter(paths, program = 'notebook.ipynb')
-
     Parameters
     ----------
     paths : dict
@@ -62,6 +56,12 @@ def run_jupyter(paths, program, timeout = None, kernel_name = ''):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_jupyter(paths, program = 'notebook.ipynb')
     """
 
     try:
@@ -93,12 +93,6 @@ def run_lyx(paths, program, doctype = '', **kwargs):
     """.. Run LyX script using system command.
 
     Compiles document ``program`` using system command, with document specified in the form of ``script.lyx``. Status messages are appended to make log ``makelog``. PDF outputs are written in directory ``pdf_dir``.
-
-    Example
-    -------
-    .. code-block:: python
-
-        run_lyx(paths, program = 'script.lyx')
 
     Parameters
     ----------
@@ -138,6 +132,12 @@ def run_lyx(paths, program, doctype = '', **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_lyx(paths, program = 'script.lyx')
     """
 
     try:
@@ -200,12 +200,6 @@ def run_mathematica(paths, program, **kwargs):
 
     Runs script ``program`` using system command, with script specified in the form of ``script.m``. Status messages are appended to make log ``makelog``.
 
-    Example
-    -------
-    .. code-block:: python
-
-        run_mathematica(paths, program = 'script.m')
-
     Parameters
     ----------
     paths : dict
@@ -240,6 +234,12 @@ def run_mathematica(paths, program, **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_mathematica(paths, program = 'script.m')
     """
     
     try:
@@ -268,12 +268,6 @@ def run_matlab(paths, program, **kwargs):
 
     Runs script ``program`` using system command, with script specified in the form of ``script.m``. Status messages are appended to make log ``makelog``.
 
-    Example
-    -------
-    .. code-block:: python
-
-        run_matlab(paths, program = 'script.m')
-
     Parameters
     ----------
     paths : dict
@@ -308,6 +302,12 @@ def run_matlab(paths, program, **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_matlab(paths, program = 'script.m')
     """
 
     try:
@@ -339,12 +339,6 @@ def run_perl(paths, program, **kwargs):
 
     Runs script ``program`` using system command, with script specified in the form of ``script.pl``. Status messages are appended to make log ``makelog``.
 
-    Example
-    -------
-    .. code-block:: python
-
-        run_perl(paths, program = 'script.pl')
-
     Parameters
     ----------
     paths : dict
@@ -379,6 +373,12 @@ def run_perl(paths, program, **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_perl(paths, program = 'script.pl')
     """
 
     try:
@@ -407,12 +407,6 @@ def run_python(paths, program, **kwargs):
 
     Runs script ``program`` using system command, with script specified in the form of ``script.py``. Status messages are appended to make log ``makelog``.
 
-    Example
-    -------
-    .. code-block:: python
-
-        run_python(paths, program = 'script.py')
-
     Parameters
     ----------
     paths : dict
@@ -447,6 +441,12 @@ def run_python(paths, program, **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_python(paths, program = 'script.py')
     """
 
     try:
@@ -474,12 +474,6 @@ def run_r(paths, program, **kwargs):
     """.. Run R script using system command.
 
     Runs script ``program`` using system command, with script specified in the form of ``script.R``. Status messages are appended to make log ``makelog``.
-
-    Example
-    -------
-    .. code-block:: python
-
-        run_r(paths, program = 'script.R')
 
     Parameters
     ----------
@@ -515,6 +509,12 @@ def run_r(paths, program, **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_r(paths, program = 'script.R')
     """
     
     try:
@@ -542,12 +542,6 @@ def run_sas(paths, program, lst = '', **kwargs):
     """.. Run SAS script using system command.
 
     Runs script ``program`` using system command, with script specified in the form of ``script.sas``. Status messages are appended to make log ``makelog``.
-
-    Example
-    -------
-    .. code-block:: python
-
-        run_sas(paths, program = 'script.sas')
 
     Parameters
     ----------
@@ -585,6 +579,12 @@ def run_sas(paths, program, lst = '', **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_sas(paths, program = 'script.sas')
     """
 
     try:
@@ -618,12 +618,6 @@ def run_stat_transfer(paths, program, **kwargs):
 
     Runs script ``program`` using system command, with script specified in the form of ``script.stc`` or ``script.stcmd``. Status messages are appended to make log ``makelog``.
 
-    Example
-    -------
-    .. code-block:: python
-
-        run_stat_transfer(paths, program = 'script.stc')
-
     Parameters
     ----------
     paths : dict
@@ -658,6 +652,12 @@ def run_stat_transfer(paths, program, **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_stat_transfer(paths, program = 'script.stc')
     """
 
     try:
@@ -686,12 +686,6 @@ def run_stata(paths, program, **kwargs):
 
     Runs script ``program`` using system command, with script specified in the form of ``script.do``. Status messages are appended to make log ``makelog``.
 
-    Example
-    -------
-    .. code-block:: python
-
-        run_stata(paths, program = 'script.do')
-
     Parameters
     ----------
     paths : dict
@@ -726,6 +720,12 @@ def run_stata(paths, program, **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_stata(paths, program = 'script.do')
     """
 
     try:
@@ -775,14 +775,6 @@ def execute_command(paths, command, **kwargs):
 
     Runs system command `command` with shell execution boolean ``shell``. Outputs are appended to make log file ``makelog`` and written to system command log file ``log``. Status messages are appended to make log ``makelog``.
 
-    Example
-    -------
-    The following code executes the ``ls`` command, writes outputs to system command log file ``'file'``, and appends outputs and/or status messages to ``paths['makelog']``.
-
-    .. code-block:: python
-
-        execute_command(paths, 'ls', log = 'file')
-
     Parameters
     ----------
     paths : dict
@@ -812,6 +804,14 @@ def execute_command(paths, command, **kwargs):
     Returns
     -------
     None
+
+    Example
+    -------
+    The following code executes the ``ls`` command, writes outputs to system command log file ``'file'``, and appends outputs and/or status messages to ``paths['makelog']``.
+
+    .. code-block:: python
+
+        execute_command(paths, 'ls', log = 'file')
     """
     
     try:
@@ -839,14 +839,6 @@ def run_module(root, module, build_script = 'make.py'):
     
     Runs script `build_script` in module directory `module` relative to root of repository `root`.
 
-    Example
-    -------
-    The following code runs the script ``root/module/make.py``.
-
-    .. code-block:: python
-
-        run_module(root = 'root', module = 'module')
-
     Parameters
     ----------
     root : str 
@@ -859,6 +851,14 @@ def run_module(root, module, build_script = 'make.py'):
     Returns
     -------
     None
+    
+    Example
+    -------
+    The following code runs the script ``root/module/make.py``.
+
+    .. code-block:: python
+
+        run_module(root = 'root', module = 'module')
     """
 
     try:

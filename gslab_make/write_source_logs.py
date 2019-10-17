@@ -22,20 +22,17 @@ def write_source_logs(paths,
                       depth = float('inf')):        
     """.. Write source logs.
 
-    Logs the following information for files contained in all mappings of list `source_map` (returned by `sourcing functions`_).
-
-    Notes
-    -----
-    The following information is logged:
+    Logs the following information for sources contained in all mappings of list ``source_map`` (returned by `sourcing functions`_).
     
-    * Mapping of symlinks/copies to sources (source map log)
-    * Details on files contained in sources: 
-        * File name (source statistics log)
-        * Last modified (source statistics log)
-        * File size (source statistics log)
-        * File head (source headers log)
+    - Mapping of symlinks/copies to sources (in file ``source_maplog``)
+    - Details on files contained in sources: 
 
-    When walking through sources, float `depth` determines level of depth to walk. Status messages are appended to make log `makelog`.
+        - File name (in file ``source_statslog``)
+        - Last modified (in file ``source_statslog``)
+        - File size (in file ``source_statslog``)
+        - File head (in file ``source_headlog``)
+
+    When walking through sources, float ``depth`` determines level of depth to walk. Status messages are appended to make log ``makelog``. 
 
     Parameters
     ----------
@@ -60,6 +57,20 @@ def write_source_logs(paths,
     Returns
     -------
     None
+
+    Example
+    -------
+    The following code will log information for all files listed in ``source_map``. Therefore, files contained in directories listed in ``source_map`` will be ignored.
+    
+    .. code-block:: python
+
+        write_source_logs(paths, depth = 1)
+
+    The following code will log information for all files listed in ``source_map`` and any file in all directories listed in ``source_map``, regardless of level of subdirectory.
+    
+    .. code-block :: python
+
+        write_source_logs(paths, depth = float('inf'))
     """
 
     try:

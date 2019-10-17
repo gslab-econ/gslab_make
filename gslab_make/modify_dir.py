@@ -25,20 +25,6 @@ def remove_path(path, option = '', quiet = False):
     
     Remove paths ``path`` using system command. Safely removes symbolic links. Paths can be specified with the * shell pattern (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__).
 
-    Example
-    -------
-    The following code removes path ``path``.
-
-    .. code-block: python
-
-        remove_path('path')
-
-    The following code removes beginning with ``path``.
-
-    .. code-block: python
-    
-        remove_path('path*')
-
     Parameters
     ----------
     path : str
@@ -51,6 +37,20 @@ def remove_path(path, option = '', quiet = False):
     Returns
     -------
     None
+
+    Example
+    -------
+    The following code removes path ``path``.
+
+    .. code-block:: python
+
+        remove_path('path')
+
+    The following code removes all paths beginning with ``path``.
+
+    .. code-block:: python
+    
+        remove_path('path*')
     """
 
     try:
@@ -75,20 +75,6 @@ def remove_dir(dir_list, quiet = False):
     """.. Remove directory using system command.
     
     Remove directories in list ``dir_list`` using system command. Safely removes symbolic links. Directories can be specified with the * shell pattern (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__).
-    
-    Example
-    -------
-    The following code removes directories ``dir1`` and ``dir2``.
-
-    .. code-block: python
-
-        remove_dir(['dir1', 'dir2'])
-
-    The following code removes directories beginning with ``dir``.
-
-    .. code-block: python
-
-        remove_dir(['dir1*'])
 
     Parameters
     ----------
@@ -100,6 +86,20 @@ def remove_dir(dir_list, quiet = False):
     Returns
     -------
     None
+
+    Example
+    -------
+    The following code removes directories ``dir1`` and ``dir2``.
+
+    .. code-block:: python
+
+        remove_dir(['dir1', 'dir2'])
+
+    The following code removes directories beginning with ``dir``.
+
+    .. code-block:: python
+
+        remove_dir(['dir1*'])
     """
     try:
         if type(dir_list) is list:
@@ -127,20 +127,6 @@ def clear_dir(dir_list):
     ----
     To clear a directory means to remove all contents of a directory. If the directory is nonexistent, the directory is created.
 
-    Example
-    -------
-    The following code clears directories ``dir1`` and ``dir2``.
-
-    .. code-block: python
-
-        clear_dir(['dir1', 'dir2'])
-
-    The following code clears directories beginning with ``dir``.
-
-    .. code-block: python
-
-        clear_dir(['dir1*'])
-
     Parameters
     ----------
     dir_list : list
@@ -149,6 +135,20 @@ def clear_dir(dir_list):
     Returns
     -------
     None
+
+    Example
+    -------
+    The following code clears directories ``dir1`` and ``dir2``.
+
+    .. code-block:: python
+
+        clear_dir(['dir1', 'dir2'])
+
+    The following code clears directories beginning with ``dir``.
+
+    .. code-block:: python
+
+        clear_dir(['dir1*'])
     """
 
     try:

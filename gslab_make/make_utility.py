@@ -76,10 +76,10 @@ def update_executables(paths, osname = os.name):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
-def update_mappings(paths, mapping_dict = {}):
+def update_mappings(paths, formatting_dict = {}):
     """.. Update path mappings using user configuration file. 
     
-    Updates dictionary ``path_mappings`` with externals listed in user configuration file ``config_user``.
+    Updates dictionary ``formatting_dict`` with externals listed in user configuration file ``config_user``.
     
     Note
     ----
@@ -89,7 +89,7 @@ def update_mappings(paths, mapping_dict = {}):
     ----------
     paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
-    mapping_dict : dict, optional
+    formatting_dict : dict, optional
         Dictionary of path mappings used to parse paths to update. 
         Defaults to no mappings.
 
@@ -100,7 +100,7 @@ def update_mappings(paths, mapping_dict = {}):
 
     Returns
     -------
-    mapping_dict : dict
+    formatting_dict : dict
         Dictionary of path mappings used to parse paths. 
     """
 
@@ -109,9 +109,9 @@ def update_mappings(paths, mapping_dict = {}):
         config_user = yaml.load(open(config_user, 'rb'))
 
         if config_user['external']:
-            mapping_dict.update(config_user['external'])
+            formatting_dict.update(config_user['external'])
 
-        return(mapping_dict)
+        return(formatting_dict)
     except:
         error_message = 'Error with update_mappings. Traceback can be found below.' 
         error_message = format_message(error_message) 
@@ -121,7 +121,7 @@ def update_mappings(paths, mapping_dict = {}):
 def copy_output(file, copy_dir):
     """.. Copy output file.
     
-    Copies output `file` to directory `copy_dir` with user prompt to confirm copy.
+    Copies output ``file`` to directory ``copy_dir`` with user prompt to confirm copy.
     
     Parameters
     ----------

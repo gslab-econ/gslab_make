@@ -23,19 +23,21 @@ from gslab_make.write_logs import write_to_makelog
 
 
 def _get_file_sizes(dir_path, exclude):
-    """Walk through directory and get file sizes.
+    """.. Walk through directory and get file sizes.
     
+    Get file sizes for files in directory ``dir_path``, ignoring subdirectories in list ``exclude``.
+
     Parameters
     ----------
-    dir_path : :obj:`str`
+    dir_path : str
        Path of directory to walk through.
-    exclude : :obj:`list`
+    exclude : list
        List of subdirectories to exclude when walking.
 
     Returns
     -------
-    file_size : :obj:`dict`
-        Dictionary of :obj:`{file : size}` for each file in :obj:`dir_path`. 
+    file_size : dict
+        Dictionary of ``{file : size}`` for each file in ``dir_path``. 
     """
 
     file_sizes = []
@@ -54,8 +56,10 @@ def _get_file_sizes(dir_path, exclude):
 
      
 def _get_git_ignore(repo):
-    """Get files ignored by git.
+    """.. Get files ignored by git.
     
+    Get files ignored by git for repository ``repo``.
+
     Parameters
     ----------
     repo : :class:`git.Repo`
@@ -63,7 +67,7 @@ def _get_git_ignore(repo):
 
     Returns
     -------
-    ignore_files : :obj:`list`
+    ignore_files : list
         List of files in repository ignored by git. 
     """
 
@@ -91,16 +95,18 @@ def _get_git_ignore(repo):
 
 
 def _parse_git_attributes(attributes):
-    """Get git lfs patterns from git attributes.
-    
+    """.. Get git lfs patterns from git attributes.
+
+    Get git lfs patterns from git attributes file ``attributes``.
+
     Parameters
     ----------
-    attributes : :obj:`str`
+    attributes : str
         Path to git attributes file.
 
     Returns
     -------
-    lfs_list: :obj:`list`
+    lfs_list: list
         List of patterns to determine files tracked by git lfs. 
     """
 
@@ -118,7 +124,7 @@ def _parse_git_attributes(attributes):
     
 
 def _check_path_lfs(path, lfs_list):
-    """Check if file matches git lfs patterns."""
+    """.. Check if file matches git lfs patterns."""
 
     for l in lfs_list:
         if fnmatch.fnmatch(path, l):
@@ -128,19 +134,21 @@ def _check_path_lfs(path, lfs_list):
 
 
 def _get_dir_sizes(dir_path):
-    """Get file sizes for directory.
+    """.. Get file sizes for directory.
     
+    Get file sizes for files in directory ``dir_path``.
+
     Parameters
     ----------
-    dir_path : :obj:`str`
+    dir_path : str
         Path of directory to get file sizes.
 
     Returns
     -------
-    git_files : :obj:`dict`
-        Dictionary of :obj:`{file : size}` for each file tracked by git. 
-    git_lfs_files : :obj:`dict`
-        Dictionary of :obj:`{file : size}` for each file tracked by git lfs. 
+    git_files : dict
+        Dictionary of ``{file : size}`` for each file tracked by git. 
+    git_lfs_files : dict
+        Dictionary of ``{file : size}`` for each file tracked by git lfs. 
     """
 
     try:
@@ -169,14 +177,16 @@ def _get_dir_sizes(dir_path):
 
 
 def _get_size_values(git_files, git_lfs_files):
-    """Get file sizes for repository.
+    """.. Get file sizes for repository.
+
+    Get file sizes for files in file list ``git_files`` and file list ``git_lfs_files``.
 
     Parameters
     ----------
-    git_files : :obj:`dict`
-        Dictionary of :obj:`{file : size}` for each file tracked by git. 
-    git_lfs_files : :obj:`dict`
-        Dictionary of :obj:`{file : size}` for each file tracked by git lfs. 
+    git_files : dict
+        Dictionary of ``{file : size}`` for each file tracked by git. 
+    git_lfs_files : dict
+        Dictionary of ``{file : size}`` for each file tracked by git lfs. 
 
     Returns
     -------
@@ -202,32 +212,32 @@ def _get_size_values(git_files, git_lfs_files):
 
 
 def check_module_size(paths):
-    """Check file sizes for module.
+    """.. Check file sizes for module.
+
+    Checks file sizes for files to be committed in the current working directory. Compares file sizes to size limits in project configuration file ``config`` and produces warnings if any of the following limits are exceeded.
+
+    - Individual size of a file tracked by git lfs (``file_MB_limit_lfs``)
+    - Total size of all files tracked by git lfs (``total_MB_limit_lfs``)
+    - Individual size of a file tracked by git (``file_MB_limit``)
+    - Total size of all files tracked by git (``total_MB_limit``)
+   
+    Warning messages are appended to make log ``makelog``.
 
     Parameters
     ----------
-    paths : :obj:`dict` 
+    paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
 
     Path Keys
     ---------
-    config : :obj:`str`
+    config : str
         Path of config file.   
-    makelog : :obj:`str`
+    makelog : str
         Path of makelog.
 
     Returns
     -------
-    :obj:`None`
-
-    Notes
-    -----
-    Checks file sizes in the current directory. Produces warning if any of the following size statistics are larger than limits set in config file :obj:`config`. Warning messages are appended to make log :obj:`makelog`.
-    
-    * Individual size of a file tracked by git lfs (`file_MB_limit_lfs`)
-    * Total size of all files tracked by git lfs (`total_MB_limit_lfs`)
-    * Individual size of a file tracked by git (`file_MB_limit`)
-    * Total size of all files tracked by git (`total_MB_limit`)
+    None
     """
     
     try:
@@ -278,8 +288,10 @@ def check_module_size(paths):
 
 
 def _get_git_status(repo): 
-    """Get git status.
+    """.. Get git status.
     
+    Get git status for repository ``repo``.
+
     Parameters
     ----------
     repo : :class:`git.Repo `
@@ -287,7 +299,7 @@ def _get_git_status(repo):
 
     Returns
     -------
-    file_list : :obj:`list`
+    file_list : list
         List of changed files in git repository according to git status.
     """
     
@@ -305,30 +317,32 @@ def _get_git_status(repo):
 def get_modified_sources(paths, 
                          source_map, 
                          depth = float('inf')):
-    """Get source files considered changed by git.
+    """.. Get source files considered changed by git.
+
+    Checks the modification status for sources contained in all mappings of list ``source_map`` (returned by `sourcing functions`_). Produces warning if sources have been modified according to git. When walking through sources, float ``depth`` determines level of depth to walk. Warning messages are appended to make log ``makelog``.
 
     Parameters
     ----------
-    paths : :obj:`dict`
+    paths : dict
         Dictionary of paths. Dictionary should contain values for all keys listed below.
-    source_map : :obj:`list`
-        Mapping of sources (returned from :mod:`move_sources` functions).
-    depth : :obj:`float`, optional
+    source_map : list
+        Mapping of sources (returned from `sourcing functions`_).
+    depth : float, optional
         Level of depth when walking through source directories. Defaults to infinite.
 
     Path Keys
     ---------
-    makelog : :obj:`str`
+    makelog : str
         Path of makelog.
 
     Returns
     -------
-    overlap : :obj:`list`
+    overlap : list
         List of source files considered changed by git.
 
     Notes
     -----
-    Checks the modification status for sources contained in all mappings of list :obj:`source_map` (returned from :mod:`move_sources` functions). Produces warning if sources have been modified according to git. When walking through sources, float :obj:`depth` determines level of depth to walk. Warnings are appended to make log :obj:`makelog`.
+
     """
     
     try:

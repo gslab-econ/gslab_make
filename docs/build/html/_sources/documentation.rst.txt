@@ -4,8 +4,8 @@ The majority of the functions in :mod:`gslab_make` contain a ``paths`` argument 
 
 :config: Default path for ``config.yaml``, a *project configuration file* containing global variables for all users.
 :config_user: Default path for ``config_user.yaml``, a *user configuration file* containing local user-specific variables.
-:input_dir: Default path to *source* (i.e., copy or make symbolic links to) files located internally to the project directory.
-:external_dir: Default path to *source* (i.e., copy or make symbolic links to) files located externally to the project directory.
+:input_dir: Default path for sourcing (i.e., copying or making symbolic links to) *input files* located internal to the project directory.
+:external_dir: Default path to sourcing (i.e., copying or making symbolic links to) *external files* located external to the project directory.
 :output_dir: Default path to write and look for code outputs.
 :makelog: Default path to write *make log*, a master log of activity.
 :output_statslog: Default path to write *output statistics log*, a log containing file statistics for ``output_dir``.
@@ -18,7 +18,8 @@ The majority of the functions in :mod:`gslab_make` contain a ``paths`` argument 
 .. Warning::
    Many of the functions in :mod:`gslab_make` will write status messages to the make log. If you have specified a make log in your ``paths``, you must initialize the makelog via :py:func:`.start_makelog`. Otherwise, attempting to call a function that writes to the make log will raise an exception.
 
-**Example**
+Example paths
+-------------
 
 The following default paths are recommended:
 
@@ -43,10 +44,10 @@ The following default paths are recommended:
 Functions in :mod:`gslab_make` that require a ``paths`` argument will specify the exact default paths required in their documentation.
 
 
-Logging functions
-=================
+Master logging functions
+========================
 
-The logging functions are used to create a master log of activity (i.e., a *make log*) and to log information about output files. The logs are intended to facilitate the reproducibility of research.
+The :mod:`gslab_make` library provides functions to create a master log of activity (i.e., a *make log*) and to log information about output files. The logs are intended to facilitate the reproducibility of research.
 
 .. Warning::
    You must initialize make logs via :py:func:`.start_makelog` as opposed to alternative methods (e.g., manually creating a make log file). Otherwise, any attempt to call a :mod:`gslab_make` function that writes to make log will raise an exception.
@@ -58,7 +59,7 @@ The logging functions are used to create a master log of activity (i.e., a *make
 Sourcing functions
 ==================
 
-The following functions are used to create symbolic links to source files. Doing so avoids potential duplication of source files and any associated confusion. In the case of modules dedicated to LyX documents, there is a optional function to copy source files instead of creating symbolic links so that users without :mod:`gslab_make` can still manually compile.
+The :mod:`gslab_make` library provides functions to create symbolic links to source files. Doing so avoids potential duplication of source files and any associated confusion. In the case of modules dedicated to LyX/LaTeX documents, there are optional functions to copy source files instead of creating symbolic links so that users without :mod:`gslab_make` can still manually compile.
 
 .. automodule:: gslab_make.move_sources
     :members:
@@ -67,7 +68,7 @@ The following functions are used to create symbolic links to source files. Doing
 Source logging functions
 ========================
 
-The following function is used to log linking/copying activity and information about source files. The logs are intended to facilitate the reproducibility of research.
+The :mod:`gslab_make` library provides functions to log symbolic linking/copying activity and information about source files. The logs are intended to facilitate the reproducibility of research.
 
 .. automodule:: gslab_make.write_source_logs
     :members:
@@ -148,7 +149,7 @@ Supported applications
 Utility functions
 =================
 
-The following functions are general utility functions for build scripts. Functions to update executable names/path mappings and copy outputs are included.
+The :mod:`gslab_make` library provides general utility functions for build scripts. Functions to update executable names/path mappings and copy outputs are included.
 
 .. automodule:: gslab_make.make_utility
     :members:
@@ -156,7 +157,7 @@ The following functions are general utility functions for build scripts. Functio
 Directory functions
 ===================
 
-The following functions are used to make modifications to a directory. Functions to check remove files, clear directories, and zip/unzip files are included.
+The :mod:`gslab_make` library provides functions to make modifications to a directory. Functions to check remove files, clear directories, and zip/unzip files are included.
 
 .. automodule:: gslab_make.modify_dir
     :members:
@@ -164,13 +165,15 @@ The following functions are used to make modifications to a directory. Functions
 Repository functions
 ====================
 
-The following functions are used to check file size and modification status of files tracked by git. The logs are intended to facilitate proper committing activity.
+The :mod:`gslab_make` library provides functions to check file sizes in a repository and modification status of files tracked by git. The checks are intended to facilitate proper committing activity.
 
 .. automodule:: gslab_make.check_repo
     :members:
 
-Tablefill
-=========
+Filling functions
+=================
+
+The :mod:`gslab_make` library provides functions fill in tables and text in LyX/LaTeX documents.
 
 .. automodule:: gslab_make.tablefill
     :members:

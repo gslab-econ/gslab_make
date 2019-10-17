@@ -115,7 +115,7 @@ def end_makelog(paths):
 def write_to_makelog(paths, message):
     """.. Write to make log.
 
-    Appends text ``message`` to file ``makelog``.
+    Appends string ``message`` to file ``makelog``.
 
     Parameters
     ----------
@@ -150,7 +150,7 @@ def log_files_in_output(paths,
                         depth = float('inf')):
     """.. Log files in output directory.
 
-    Logs the following information for all files contained in directory ``output_dir``:
+    Logs the following information for all files contained in directory ``output_dir``.
 
     - File name (in file ``output_statslog``)
     - Last modified (in file ``output_statslog``)
@@ -160,6 +160,30 @@ def log_files_in_output(paths,
     When walking through directory ``output_dir``, float ``depth`` determines level of depth to walk. Status messages are appended to make log ``makelog``. 
 
     Include additional output directories to walk through (typically directories that you wish to keep local) in directory list ``output_local_dir``. 
+
+    Parameters
+    ----------
+    paths : dict 
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    depth : flost, optional
+        Level of depth when walking through output directory. Defaults to infinite.
+
+    Path Keys
+    ---------
+    output_dir : str
+       Path of output directory.
+    output_local_dir : str or list, optional
+       List of paths of local output directories. Defaults to ``[]`` (i.e., none).
+    output_statslog : str
+       Path to write output statistics log.
+    output_headslog : str
+       Path to write output headers log.
+    makelog : str
+       Path of makelog.
+
+    Returns
+    -------
+    None
 
     Example
     -------
@@ -174,30 +198,6 @@ def log_files_in_output(paths,
     .. code-block :: python
 
         log_files_in_outputs(paths, depth = float('inf'))
-
-    Parameters
-    ----------
-    paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below.
-    depth : flost, optional
-        Level of depth when walking through output directory. Defaults to infinite.
-
-    Path Keys
-    ---------
-    output_dir : str
-       Path of output directory.
-    output_local_dir : str or list, optional
-       List of paths of local output directories. Defaults to `[]` (i.e., none).
-    output_statslog : str
-       Path to write output statistics log.
-    output_headslog : str
-       Path to write output headers log.
-    makelog : str
-       Path of makelog.
-
-    Returns
-    -------
-    None
     """
     
     try:
@@ -235,10 +235,8 @@ def log_files_in_output(paths,
     
 def _write_stats_log(statslog_file, output_files):
     """.. Write statistics log.
-   
-    Notes
-    -----
-    The following information is logged of all output files in list ``output_files``:
+
+    Logs the following information to ``statslog_file`` for all files contained in file list ``output_files``:
     
     - File name 
     - Last modified 
@@ -269,16 +267,22 @@ def _write_stats_log(statslog_file, output_files):
             print("%s | %s | %s" % (file_name, last_mod, file_size), file = STATSLOG)
 
 
+##############
+# DEPRECATED #
+##############
+
 def _write_heads_log(headslog_file, output_files, num_lines = 10):
     """.. Write headers log.
 
+    Logs the following information to ``headslog_file`` for all files contained in file list ``output_files``:
+    
     Parameters
     ----------
     headslog_file : str
         Path to write headers log. 
     output_files list
         List of output files to log headers.
-    num_lines: :obj:`int`, optional
+    num_lines: ``int``, optional
         Number of lines for headers. Default is ``10``.
 
     Returns
