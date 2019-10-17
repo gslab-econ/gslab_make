@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from
+from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -176,7 +176,7 @@ def log_files_in_output(paths,
        List of paths of local output directories. Defaults to ``[]`` (i.e., none).
     output_statslog : str
        Path to write output statistics log.
-    output_headslog : str
+    output_headslog : str, optional
        Path to write output headers log.
     makelog : str
        Path of makelog.
@@ -203,9 +203,12 @@ def log_files_in_output(paths,
     try:
         output_dir      = get_path(paths, 'output_dir')
         output_statslog = get_path(paths, 'output_statslog')
-        output_headslog = get_path(paths, 'output_headslog')
+        output_headslog = get_path(paths, 'output_headslog', throw_error = False)
+
         try:
             output_local_dir = get_path(paths, 'output_local_dir') 
+            if isinstance(output_local_dir, string_types):
+                output_local_dir = [output_local_dir]
             if type(output_local_dir) is not list:
                 raise_from(TypeError(messages.type_error_dir_list % output_local_dir), None)
         except KeyError:
@@ -267,9 +270,9 @@ def _write_stats_log(statslog_file, output_files):
             print("%s | %s | %s" % (file_name, last_mod, file_size), file = STATSLOG)
 
 
-##############
+# ~~~~~~~~~~ #
 # DEPRECATED #
-##############
+# ~~~~~~~~~~ #
 
 def _write_heads_log(headslog_file, output_files, num_lines = 10):
     """.. Write headers log.

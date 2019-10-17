@@ -18,22 +18,19 @@ from gslab_make.private.utility import get_path, format_message
 from gslab_make.write_logs import write_to_makelog
 
 
+<<<<<<< HEAD
 def _create_links(paths,
-                  file_list,
-                  formatting_dict = {}):
+                  file_list):
     """.. Create symlinks from list of files containing linking instructions.
 
-    Create symbolic links using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using dictionary ``formatting_dict``. Defaults to no string formatting. Symbolic links are written in directory ``move_dir``. Status messages are appended to make log ``makelog``.
+    Create symbolic links using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Symbolic links are written in directory ``move_dir``. Status messages are appended to make log ``makelog``.
 
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format linking instructions.
     file_list : list
         List of files containing linking instructions.
-    formatting_dict : dict, optional
-        Dictionary of formatting mappings used to parse linking instructions. 
-        Defaults to no mappings.
 
     Path Keys
     ---------
@@ -50,7 +47,7 @@ def _create_links(paths,
              
     move_dir = get_path(paths, 'move_dir')
 
-    move_list = MoveList(file_list, move_dir, formatting_dict)
+    move_list = MoveList(file_list, move_dir, paths)
     if move_list.move_directive_list:
         os.makedirs(move_dir)
         source_map = move_list.create_symlinks()       
@@ -60,26 +57,19 @@ def _create_links(paths,
     return(source_map)
         
 
+<<<<<<< HEAD
 def _create_copies(paths,
-                  file_list,
-                  formatting_dict = {}):
+                   file_list):
     """.. Create copies from list of files containing copying instructions.
 
-    Create copies using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using dictionary ``formatting_dict``. Defaults to no string formatting. Copies are written in directory ``move_dir``. Status messages are appended to make log ``makelog``.
+    Create copies using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Copies are written in directory ``move_dir``. Status messages are appended to make log ``makelog``.
 
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain {
-            'move_dir' : str
-                Directory to write copies.
-            'makelog' : str
-                Path of makelog.
-        }
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format copying instructions.
     file_list : list
         List of files containing copying instructions.
-    formatting_dict : dict, optional
-        Dictionary of formatting mappings used to parse copying instructions. Defaults to no mappings.
 
     Path Keys
     ---------
@@ -96,7 +86,7 @@ def _create_copies(paths,
              
     move_dir = get_path(paths, 'move_dir')
 
-    move_list = MoveList(file_list, move_dir, formatting_dict)
+    move_list = MoveList(file_list, move_dir, paths)
     if move_list.move_directive_list:
         os.makedirs(move_dir)
         source_map = move_list._create_copies()       
@@ -107,11 +97,10 @@ def _create_copies(paths,
 
 
 def link_inputs(paths,
-                file_list,
-                formatting_dict = {}):
+                file_list):
     """.. Create symlinks to inputs from list of files containing linking instructions. 
 
-    Create symbolic links using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using dictionary ``formatting_dict``. Defaults to no string formatting. Symbolic links are written in directory ``input_dir``. Status messages are appended to make log ``makelog``.
+    Create symbolic links using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Symbolic links are written in directory ``input_dir``. Status messages are appended to make log ``makelog``.
 
     Instruction files on how to create symbolic links (destinations) from targets (sources) should be formatted in the following way.
 
@@ -130,12 +119,9 @@ def link_inputs(paths,
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format linking instructions.
     file_list : list
         List of files containing linking instructions.
-    formatting_dict : dict, optional
-        Dictionary of formatting mappings used to parse linking instructions. 
-        Defaults to no mappings.
 
     Path Keys
     ---------
@@ -155,19 +141,27 @@ def link_inputs(paths,
 
     .. code-block:: python
 
-        link_inputs(paths, ['file1'], formatting_dict = {'root': '/User/name/'})
+        link_inputs(paths, ['file1'], formatting_dict)
 
-    Suppose instruction file ``file1`` contained the following text.
+    Suppose ``paths`` contained the following values.
+
+    .. code-block:: md
+
+        paths = {'root': '/User/root/',
+                 'makelog': 'make.log',
+                 'input_dir': 'input'}
+
+    Now suppose instruction file ``file1`` contained the following text.
 
     .. code-block:: md
 
         destination1 | {root}/source1
 
-    The ``{root}`` in the instruction file would be string formatted using ``formatting_dict``. Therefore, the function would parse the instruction as:
+    The ``{root}`` in the instruction file would be string formatted using ``paths``. Therefore, the function would parse the instruction as:
 
     .. code-block:: md
 
-        destination1 | /User/name/source1
+        destination1 | /User/root/source1
 
     Example
     -------
@@ -207,7 +201,7 @@ def link_inputs(paths,
     
     try:
         paths['move_dir'] = get_path(paths, 'input_dir')
-        source_map = _create_links(paths, file_list, formatting_dict)
+        source_map = _create_links(paths, file_list)
 
         message = 'Input links successfully created!'
         write_to_makelog(paths, message)    
@@ -221,11 +215,10 @@ def link_inputs(paths,
         
 
 def link_externals(paths,
-                   file_list,
-                   formatting_dict = {}):
-    """.. Create symlinks to externals from list of files containing linking instructions. 
+                   file_list):
+   """.. Create symlinks to externals from list of files containing linking instructions. 
 
-    Create symbolic links using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using dictionary ``formatting_dict``. Defaults to no string formatting. Symbolic links are written in directory ``external_dir``. Status messages are appended to make log ``makelog``.
+    Create symbolic links using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Symbolic links are written in directory ``external_dir``. Status messages are appended to make log ``makelog``.
 
     Instruction files on how to create symbolic links (destinations) from targets (sources) should be formatted in the following way.
 
@@ -244,12 +237,9 @@ def link_externals(paths,
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format linking instructions.
     file_list : list
         List of files containing linking instructions.
-    formatting_dict : dict, optional
-        Dictionary of formatting mappings used to parse linking instructions. 
-        Defaults to no mappings.
 
     Path Keys
     ---------
@@ -269,19 +259,27 @@ def link_externals(paths,
 
     .. code-block:: python
 
-        link_externals(paths, ['file1'], formatting_dict = {'root': '/User/name/'})
+        link_externals(paths, ['file1'], formatting_dict)
 
-    Suppose instruction file ``file1`` contained the following text.
+    Suppose ``paths`` contained the following values.
+
+    .. code-block:: md
+
+        paths = {'root': '/User/root/',
+                 'makelog': 'make.log',
+                 'input_dir': 'input'}
+
+    Now suppose instruction file ``file1`` contained the following text.
 
     .. code-block:: md
 
         destination1 | {root}/source1
 
-    The ``{root}`` in the instruction file would be string formatted using ``formatting_dict``. Therefore, the function would parse the instruction as:
+    The ``{root}`` in the instruction file would be string formatted using ``paths``. Therefore, the function would parse the instruction as:
 
     .. code-block:: md
 
-        destination1 | /User/name/source1
+        destination1 | /User/root/source1
 
     Example
     -------
@@ -321,7 +319,7 @@ def link_externals(paths,
     
     try:
         paths['move_dir'] = get_path(paths, 'external_dir')
-        source_map = _create_links(paths, file_list, formatting_dict)
+        source_map = _create_links(paths, file_list)
 
         message = 'External links successfully created!'
         write_to_makelog(paths, message)    
@@ -335,11 +333,10 @@ def link_externals(paths,
 
 
 def copy_inputs(paths,
-                file_list,
-                formatting_dict = {}):
-    """.. Create copies to inputs from list of files containing copying instructions.
+                file_list):
+   """.. Create copies to inputs from list of files containing copying instructions. 
 
-    Create copies using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using dictionary ``formatting_dict``. Defaults to no string formatting. Copies are written in directory ``input_dir``. Status messages are appended to make log ``makelog``.
+    Create copies using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Copies are written in directory ``input_dir``. Status messages are appended to make log ``makelog``.
 
     Instruction files on how to create copies (destinations) from targets (sources) should be formatted in the following way.
 
@@ -355,11 +352,9 @@ def copy_inputs(paths,
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format copying instructions.
     file_list : list
         List of files containing copying instructions.
-    formatting_dict : dict, optional
-        Dictionary of formatting mappings used to parse copying instructions. Defaults to no mappings.
 
     Path Keys
     ---------
@@ -367,31 +362,39 @@ def copy_inputs(paths,
        Directory to write copies.
     makelog : str
        Path of makelog.
-    
+
     Returns
     -------
     source_map : list
         List of (source, destination) for each copy created.
-    
+
     Example
     -------
     Suppose you call the following function. 
 
     .. code-block:: python
 
-        copy_inputs(paths, ['file1'], formatting_dict = {'root': '/User/name/'})
+        copy_inputs(paths, ['file1'], formatting_dict)
 
-    Suppose instruction file ``file1`` contained the following text.
+    Suppose ``paths`` contained the following values.
+
+    .. code-block:: md
+
+        paths = {'root': '/User/root/',
+                 'makelog': 'make.log',
+                 'input_dir': 'input'}
+
+    Now suppose instruction file ``file1`` contained the following text.
 
     .. code-block:: md
 
         destination1 | {root}/source1
 
-    The ``{root}`` in the instruction file would be string formatted using ``formatting_dict``. Therefore, the function would parse the instruction as:
+    The ``{root}`` in the instruction file would be string formatted using ``paths``. Therefore, the function would parse the instruction as:
 
     .. code-block:: md
 
-        destination1 | /User/name/source1
+        destination1 | /User/root/source1
 
     Example
     -------
@@ -399,7 +402,7 @@ def copy_inputs(paths,
 
     .. code-block:: python
 
-        link_inputs(paths, ['file1', 'file2'])
+        copy_inputs(paths, ['file1', 'file2'])
 
     Suppose instruction file ``file1`` contained the following text.
 
@@ -431,7 +434,7 @@ def copy_inputs(paths,
         
     try:
         paths['move_dir'] = get_path(paths, 'input_dir')
-        source_map = _create_copies(paths, file_list, formatting_dict)
+        source_map = _create_copies(paths, file_list)
 
         message = 'Input copies successfully created!'
         write_to_makelog(paths, message)    
@@ -445,11 +448,12 @@ def copy_inputs(paths,
 
 
 def copy_externals(paths,
-                   file_list,
-                   formatting_dict = {}):
-    """.. Create copies to externals from list of files containing copying instructions.
+                   file_list):
+   """.. Create copies to externals from list of files containing copying instructions. 
 
-    Create copies using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using dictionary ``formatting_dict``. Defaults to no string formatting. Copies are written in directory ``external_dir``. Status messages are appended to make log ``makelog``.
+    Create copies using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Copies are written in directory ``external_dir``. Status messages are appended to make log ``makelog``.
+
+    Instruction files on how to create copies (destinations) from targets (sources) should be formatted in the following way.
 
     .. code-block:: md
 
@@ -463,11 +467,9 @@ def copy_externals(paths,
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format copying instructions.
     file_list : list
         List of files containing copying instructions.
-    formatting_dict : dict, optional
-        Dictionary of formatting mappings used to parse copying instructions. Defaults to no mappings.
 
     Path Keys
     ---------
@@ -475,8 +477,6 @@ def copy_externals(paths,
        Directory to write copies.
     makelog : str
        Path of makelog.
-
-    Instruction files on how to create copies (destinations) from targets (sources) should be formatted in the following way.
 
     Returns
     -------
@@ -489,19 +489,27 @@ def copy_externals(paths,
 
     .. code-block:: python
 
-        copy_externals(paths, ['file1'], formatting_dict = {'root': '/User/name/'})
+        copy_externals(paths, ['file1'], formatting_dict)
 
-    Suppose instruction file ``file1`` contained the following text.
+    Suppose ``paths`` contained the following values.
+
+    .. code-block:: md
+
+        paths = {'root': '/User/root/',
+                 'makelog': 'make.log',
+                 'input_dir': 'input'}
+
+    Now suppose instruction file ``file1`` contained the following text.
 
     .. code-block:: md
 
         destination1 | {root}/source1
 
-    The ``{root}`` in the instruction file would be string formatted using ``formatting_dict``. Therefore, the function would parse the instruction as:
+    The ``{root}`` in the instruction file would be string formatted using ``paths``. Therefore, the function would parse the instruction as:
 
     .. code-block:: md
 
-        destination1 | /User/name/source1
+        destination1 | /User/root/source1
 
     Example
     -------
@@ -509,7 +517,7 @@ def copy_externals(paths,
 
     .. code-block:: python
 
-        link_externals(paths, ['file1', 'file2'])
+        copy_externals(paths, ['file1', 'file2'])
 
     Suppose instruction file ``file1`` contained the following text.
 
@@ -541,7 +549,7 @@ def copy_externals(paths,
         
     try:
         paths['move_dir'] = get_path(paths, 'external_dir')
-        source_map = _create_copies(paths, file_list, formatting_dict)
+        source_map = _create_copies(paths, file_list)
 
         message = 'External copies successfully created!'
         write_to_makelog(paths, message)    

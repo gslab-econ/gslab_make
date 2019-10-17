@@ -47,7 +47,7 @@ def write_source_logs(paths,
     ---------
     source_statslog : str
        Path to write source statistics log.
-    source_headslog : str
+    source_headslog : str, optional
        Path to write source headers log.
     source_maplog : str
        Path to write source map log.
@@ -75,7 +75,7 @@ def write_source_logs(paths,
 
     try:
         source_statslog = get_path(paths, 'source_statslog')
-        source_headslog = get_path(paths, 'source_headslog')
+        source_headslog = get_path(paths, 'source_headslog', throw_error = False)
         source_maplog   = get_path(paths, 'source_maplog')
 
         source_list = [source for source, destination in source_map]
@@ -83,11 +83,10 @@ def write_source_logs(paths,
         source_files = [f for source in source_list for f in source]
         source_files = set(source_files)
 
-        """IF WE DECIDE TO ALLOW FOR RAW SUBDIRECTORIES WITHOUT LINKING
-        raw_dir = get_path(paths, 'raw_dir')
+        # TODO: DECIDE WHETHER TO KEEP
+        raw_dir = get_path(paths, 'raw_dir', throw_error = False)
         raw_files = glob_recursive(raw_dir)
         source_files = set(source_files + raw_files)
-        """
 
         if source_statslog:
             source_statslog = norm_path(source_statslog)

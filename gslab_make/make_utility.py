@@ -6,8 +6,8 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import yaml
-import shutil
 import traceback
+import shutil
 
 from termcolor import colored
 import colorama
@@ -32,7 +32,7 @@ def check_os(osname = os.name):
     None
     """
 
-    if osname not in ['posix', 'nt']:
+    if (osname != 'posix') & (osname != 'nt'):
         raise CritError(messages.crit_error_unknown_system % osname)
 
 
@@ -64,7 +64,7 @@ def update_executables(paths, osname = os.name):
 
     try:
         config_user = get_path(paths, 'config_user')
-        config_user = yaml.load(open(config_user, 'rb'))
+        config_user = yaml.load(open(config_user, 'rb'), Loader = yaml.Loader)
     
         check_os(osname)
     
@@ -76,44 +76,41 @@ def update_executables(paths, osname = os.name):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
-def update_mappings(paths, formatting_dict = {}):
-    """.. Update path mappings using user configuration file. 
+def update_paths(paths):
+    """.. Update paths using user configuration file. 
     
-    Updates dictionary ``formatting_dict`` with externals listed in user configuration file ``config_user``.
+    Updates paths dictionary ``path`` with externals listed in user configuration file ``config_user``.
     
     Note
     ----
-    Path mappings are used by `sourcing functions`_.
+    The ``paths`` argument for `sourcing functions`_ is used not only to get default paths for writing/logging, but also to `string format <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ sourcing instructions.
     
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below.
-    formatting_dict : dict, optional
-        Dictionary of path mappings used to parse paths to update. 
-        Defaults to no mappings.
+        Dictionary of paths to update. Dictionary should ex-ante contain values for all keys listed below.
 
     Path Keys
     ---------
     config_user : str
-        Path of user config file.  
+        Path of user configuration file.  
 
     Returns
     -------
-    formatting_dict : dict
-        Dictionary of path mappings used to parse paths. 
+    paths : dict
+        Dictionary of updated paths. 
     """
 
     try:
         config_user = get_path(paths, 'config_user')
-        config_user = yaml.load(open(config_user, 'rb'))
+        config_user = yaml.load(open(config_user, 'rb'), Loader = yaml.Loader)
 
         if config_user['external']:
-            formatting_dict.update(config_user['external'])
+            paths.update(config_user['external'])
 
-        return(formatting_dict)
+        return(paths)
     except:
-        error_message = 'Error with update_mappings. Traceback can be found below.' 
+        error_message = 'Error with update_paths. Traceback can be found below.' 
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 

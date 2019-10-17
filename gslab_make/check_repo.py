@@ -51,7 +51,6 @@ def _get_file_sizes(dir_path, exclude):
         file_sizes.extend(zip(files, sizes))
         
     file_sizes = dict(file_sizes)
-
     return(file_sizes)
 
      
@@ -79,18 +78,22 @@ def _get_git_ignore(repo):
     ignore = [i.lstrip('!!').strip() for i in ignore]
     ignore = [os.path.join(root, i) for i in ignore]
 
+    ignore_dirs = []
     ignore_files = []
 
     for i in ignore:
-        if os.path.isfile(i):
+        if os.path.isdir(i):
+            ignore_dirs.append(i)
+        elif os.path.isfile(i):
             ignore_files.append(i)
-        elif os.path.isdir(i):
-            for root, dirs, files in os.walk(i):
-                files = [os.path.join(root, f) for f in files]
-                ignore_files.extend(files)
+
+    for i in ignore_dirs:
+        for root, dirs, files in os.walk(i):
+            files = [os.path.join(root, f) for f in files]
+            ignore_files.extend(files)
 
     ignore_files = [norm_path(i) for i in ignore_files]
-    
+
     return(ignore_files)
 
 
@@ -157,8 +160,8 @@ def _get_dir_sizes(dir_path):
     except:
         raise_from(CritError(messages.crit_error_no_repo), None)
 
-    git_files = _get_file_sizes(dir_path, exclude = ['.git'])
-    git_ignore_files = _get_git_ignore(repo)
+    git_files = get_file_sizes(dir_path, exclude = ['.git'])
+    git_ignore_files = get_git_ignore(repo)
 
     for ignore in git_ignore_files: 
         try:
@@ -166,11 +169,11 @@ def _get_dir_sizes(dir_path):
         except KeyError:
             pass
     
-    lfs_list = _parse_git_attributes(os.path.join(root, '.gitattributes'))
+    lfs_list = parse_git_attributes(os.path.join(root, '.gitattributes'))
     git_lfs_files = dict()
     
     for key in list(git_files.keys()):
-        if _check_path_lfs(key, lfs_list):         
+        if check_path_lfs(key, lfs_list):         
             git_lfs_files[key] = git_files.pop(key)
         
     return(git_files, git_lfs_files)
@@ -241,11 +244,11 @@ def check_module_size(paths):
     """
     
     try:
-        git_files, git_lfs_files = _get_dir_sizes('.')
-        file_MB, total_MB, file_MB_lfs, total_MB_lfs = _get_size_values(git_files, git_lfs_files)
+        git_files, git_lfs_files = get_dir_sizes('.')
+        file_MB, total_MB, file_MB_lfs, total_MB_lfs = get_size_values(git_files, git_lfs_files)
     
         config = get_path(paths, 'config')
-        config = yaml.load(open(config, 'rb'))
+        config = yaml.load(open(config, 'rb'), Loader = yaml.Loader)
         max_file_sizes = config['max_file_sizes']
         
         print_message = ''
@@ -355,7 +358,7 @@ def get_modified_sources(paths,
             repo = git.Repo('.', search_parent_directories = True)    
         except:
             raise_from(CritError(messages.crit_error_no_repo), None)
-        modified = _get_git_status(repo)
+        modified = get_git_status(repo)
 
         overlap = [l for l in source_files if l in modified] 
             

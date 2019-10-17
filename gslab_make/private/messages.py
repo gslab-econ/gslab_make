@@ -61,17 +61,7 @@ crit_error_path_mapping = \
     'For further detail, refer to the traceback below.'
 crit_error_no_repo = \
     '\nERROR! Current working directory is not part of a git repository.'
-crit_error_no_tag = \
-    '\nERROR! Input file `%s` is missing tag.'
-crit_error_not_float = \
-    '\nERROR! Value `%s` cannot be rounded as it is not numeric.'
-crit_error_not_enough_values = \
-    '\nERROR! Table `%s` contains more requested entries than inputs provided.'
-crit_error_too_many_values = \
-    '\nERROR! More inputs were provided than requested by table `%s`.'
-crit_error_duplicate_tables = \
-    '\nERROR! Inputs contain tables with duplicate tags.'
-    
+
 # Syntax errors
 syn_error_wildcard = \
     '\nERROR! Destination and source must have same number of wildcards (`*`). ' + \
