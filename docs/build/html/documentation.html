@@ -326,7 +326,7 @@
 <li><p><strong>output_dir</strong> (<em>str</em>) – Path of output directory.</p></li>
 <li><p><strong>output_local_dir</strong> (<em>str or list, optional</em>) – List of paths of local output directories. Defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (i.e., none).</p></li>
 <li><p><strong>output_statslog</strong> (<em>str</em>) – Path to write output statistics log.</p></li>
-<li><p><strong>output_headslog</strong> (<em>str</em>) – Path to write output headers log.</p></li>
+<li><p><strong>output_headslog</strong> (<em>str, optional</em>) – Path to write output headers log.</p></li>
 <li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
 </ul>
 </dd>
@@ -354,8 +354,8 @@
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to create symbolic links to source files. Doing so avoids potential duplication of source files and any associated confusion. In the case of modules dedicated to LyX/LaTeX documents, there are optional functions to copy source files instead of creating symbolic links so that users without <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> can still manually compile.</p>
 <span class="target" id="module-gslab_make.move_sources"></span><dl class="function">
 <dt id="gslab_make.move_sources.link_inputs">
-<code class="sig-name descname">link_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">formatting_dict={}</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.link_inputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>. Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a> using dictionary <code class="docutils literal notranslate"><span class="pre">formatting_dict</span></code>. Defaults to no string formatting. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>. Status messages are appended to make log <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<code class="sig-name descname">link_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.link_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>. Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a> using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>. Status messages are appended to make log <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <p>Instruction files on how to create symbolic links (destinations) from targets (sources) should be formatted in the following way.</p>
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="gh">#</span> Each line of instruction should contain a destination and source delimited by a `|`
 <span class="gh">#</span> Lines beginning with # are ignored
@@ -373,10 +373,8 @@ destination | source
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format linking instructions.</p></li>
 <li><p><strong>file_list</strong> (<em>list</em>) – List of files containing linking instructions.</p></li>
-<li><p><strong>formatting_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of formatting mappings used to parse linking instructions.
-Defaults to no mappings.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Path Keys</dt>
@@ -394,15 +392,21 @@ Defaults to no mappings.</p></li>
 </dl>
 <p class="rubric">Example</p>
 <p>Suppose you call the following function.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;root&#39;</span><span class="p">:</span> <span class="s1">&#39;/User/name/&#39;</span><span class="p">})</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">paths</span></code> contained the following values.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>paths = {&#39;root&#39;: &#39;/User/root/&#39;,
+         &#39;makelog&#39;: &#39;make.log&#39;,
+         &#39;input_dir&#39;: &#39;input&#39;}
+</pre></div>
+</div>
+<p>Now suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | {root}/source1
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">formatting_dict</span></code>. Therefore, the function would parse the instruction as:</p>
-<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/name/source1
+<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Therefore, the function would parse the instruction as:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/root/source1
 </pre></div>
 </div>
 <p class="rubric">Example</p>
@@ -433,8 +437,8 @@ destination3
 
 <dl class="function">
 <dt id="gslab_make.move_sources.link_externals">
-<code class="sig-name descname">link_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">formatting_dict={}</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.link_externals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>. Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a> using dictionary <code class="docutils literal notranslate"><span class="pre">formatting_dict</span></code>. Defaults to no string formatting. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>. Status messages are appended to make log <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<code class="sig-name descname">link_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.link_externals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>. Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a> using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>. Status messages are appended to make log <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <p>Instruction files on how to create symbolic links (destinations) from targets (sources) should be formatted in the following way.</p>
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="gh">#</span> Each line of instruction should contain a destination and source delimited by a `|`
 <span class="gh">#</span> Lines beginning with # are ignored
@@ -452,10 +456,8 @@ destination | source
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format linking instructions.</p></li>
 <li><p><strong>file_list</strong> (<em>list</em>) – List of files containing linking instructions.</p></li>
-<li><p><strong>formatting_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of formatting mappings used to parse linking instructions.
-Defaults to no mappings.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Path Keys</dt>
@@ -473,15 +475,21 @@ Defaults to no mappings.</p></li>
 </dl>
 <p class="rubric">Example</p>
 <p>Suppose you call the following function.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;root&#39;</span><span class="p">:</span> <span class="s1">&#39;/User/name/&#39;</span><span class="p">})</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">paths</span></code> contained the following values.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>paths = {&#39;root&#39;: &#39;/User/root/&#39;,
+         &#39;makelog&#39;: &#39;make.log&#39;,
+         &#39;input_dir&#39;: &#39;input&#39;}
+</pre></div>
+</div>
+<p>Now suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | {root}/source1
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">formatting_dict</span></code>. Therefore, the function would parse the instruction as:</p>
-<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/name/source1
+<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Therefore, the function would parse the instruction as:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/root/source1
 </pre></div>
 </div>
 <p class="rubric">Example</p>
@@ -512,8 +520,8 @@ destination3
 
 <dl class="function">
 <dt id="gslab_make.move_sources.copy_inputs">
-<code class="sig-name descname">copy_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">formatting_dict={}</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.copy_inputs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>. Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a> using dictionary <code class="docutils literal notranslate"><span class="pre">formatting_dict</span></code>. Defaults to no string formatting. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>. Status messages are appended to make log <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<code class="sig-name descname">copy_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.copy_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>. Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a> using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>. Status messages are appended to make log <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <p>Instruction files on how to create copies (destinations) from targets (sources) should be formatted in the following way.</p>
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="gh">#</span> Each line of instruction should contain a destination and source delimited by a `|`
 <span class="gh">#</span> Lines beginning with # are ignored
@@ -527,9 +535,8 @@ destination | source
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format copying instructions.</p></li>
 <li><p><strong>file_list</strong> (<em>list</em>) – List of files containing copying instructions.</p></li>
-<li><p><strong>formatting_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of formatting mappings used to parse copying instructions. Defaults to no mappings.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Path Keys</dt>
@@ -547,20 +554,26 @@ destination | source
 </dl>
 <p class="rubric">Example</p>
 <p>Suppose you call the following function.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;root&#39;</span><span class="p">:</span> <span class="s1">&#39;/User/name/&#39;</span><span class="p">})</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">paths</span></code> contained the following values.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>paths = {&#39;root&#39;: &#39;/User/root/&#39;,
+         &#39;makelog&#39;: &#39;make.log&#39;,
+         &#39;input_dir&#39;: &#39;input&#39;}
+</pre></div>
+</div>
+<p>Now suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | {root}/source1
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">formatting_dict</span></code>. Therefore, the function would parse the instruction as:</p>
-<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/name/source1
+<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Therefore, the function would parse the instruction as:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/root/source1
 </pre></div>
 </div>
 <p class="rubric">Example</p>
 <p>The following code would use instruction files <code class="docutils literal notranslate"><span class="pre">file1</span></code> and <code class="docutils literal notranslate"><span class="pre">file2</span></code> to create copies.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">,</span> <span class="s1">&#39;file2&#39;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">,</span> <span class="s1">&#39;file2&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
@@ -586,8 +599,9 @@ destination3
 
 <dl class="function">
 <dt id="gslab_make.move_sources.copy_externals">
-<code class="sig-name descname">copy_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">formatting_dict={}</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.copy_externals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>. Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a> using dictionary <code class="docutils literal notranslate"><span class="pre">formatting_dict</span></code>. Defaults to no string formatting. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>. Status messages are appended to make log <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<code class="sig-name descname">copy_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.copy_externals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>. Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a> using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>. Status messages are appended to make log <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<p>Instruction files on how to create copies (destinations) from targets (sources) should be formatted in the following way.</p>
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="gh">#</span> Each line of instruction should contain a destination and source delimited by a `|`
 <span class="gh">#</span> Lines beginning with # are ignored
 destination | source
@@ -600,16 +614,14 @@ destination | source
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format copying instructions.</p></li>
 <li><p><strong>file_list</strong> (<em>list</em>) – List of files containing copying instructions.</p></li>
-<li><p><strong>formatting_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of formatting mappings used to parse copying instructions. Defaults to no mappings.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Path Keys</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>external_dir</strong> (<em>str</em>) – Directory to write copies.</p></li>
 <li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
-<li><p><strong>Instruction files on how to create copies (destinations) from targets (sources) should be formatted in the following way.</strong></p></li>
 </ul>
 </dd>
 <dt class="field-odd">Returns</dt>
@@ -621,20 +633,26 @@ destination | source
 </dl>
 <p class="rubric">Example</p>
 <p>Suppose you call the following function.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;root&#39;</span><span class="p">:</span> <span class="s1">&#39;/User/name/&#39;</span><span class="p">})</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">paths</span></code> contained the following values.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>paths = {&#39;root&#39;: &#39;/User/root/&#39;,
+         &#39;makelog&#39;: &#39;make.log&#39;,
+         &#39;input_dir&#39;: &#39;input&#39;}
+</pre></div>
+</div>
+<p>Now suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | {root}/source1
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">formatting_dict</span></code>. Therefore, the function would parse the instruction as:</p>
-<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/name/source1
+<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Therefore, the function would parse the instruction as:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/root/source1
 </pre></div>
 </div>
 <p class="rubric">Example</p>
 <p>The following code would use instruction files <code class="docutils literal notranslate"><span class="pre">file1</span></code> and <code class="docutils literal notranslate"><span class="pre">file2</span></code> to create copies.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">,</span> <span class="s1">&#39;file2&#39;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">,</span> <span class="s1">&#39;file2&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
@@ -691,7 +709,7 @@ destination3
 <dt class="field-even">Path Keys</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>source_statslog</strong> (<em>str</em>) – Path to write source statistics log.</p></li>
-<li><p><strong>source_headslog</strong> (<em>str</em>) – Path to write source headers log.</p></li>
+<li><p><strong>source_headslog</strong> (<em>str, optional</em>) – Path to write source headers log.</p></li>
 <li><p><strong>source_maplog</strong> (<em>str</em>) – Path to write source map log.</p></li>
 <li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
 </ul>
@@ -1326,26 +1344,22 @@ destination3
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.make_utility.update_mappings">
-<code class="sig-name descname">update_mappings</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">formatting_dict={}</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.make_utility.update_mappings" title="Permalink to this definition">¶</a></dt>
-<dd><p>Updates dictionary <code class="docutils literal notranslate"><span class="pre">formatting_dict</span></code> with externals listed in user configuration file <code class="docutils literal notranslate"><span class="pre">config_user</span></code>.</p>
+<dt id="gslab_make.make_utility.update_paths">
+<code class="sig-name descname">update_paths</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.make_utility.update_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates paths dictionary <code class="docutils literal notranslate"><span class="pre">path</span></code> with externals listed in user configuration file <code class="docutils literal notranslate"><span class="pre">config_user</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Path mappings are used by <a class="reference internal" href="#sourcing-functions">sourcing functions</a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">paths</span></code> argument for <a class="reference internal" href="#sourcing-functions">sourcing functions</a> is used not only to get default paths for writing/logging, but also to <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string format</a> sourcing instructions.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
-<li><p><strong>formatting_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of path mappings used to parse paths to update.
-Defaults to no mappings.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths to update. Dictionary should ex-ante contain values for all keys listed below.</p>
 </dd>
 <dt class="field-even">Path Keys</dt>
-<dd class="field-even"><p><strong>config_user</strong> (<em>str</em>) – Path of user config file.</p>
+<dd class="field-even"><p><strong>config_user</strong> (<em>str</em>) – Path of user configuration file.</p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><strong>formatting_dict</strong> – Dictionary of path mappings used to parse paths.</p>
+<dd class="field-odd"><p><strong>paths</strong> – Dictionary of updated paths.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>dict</p>
