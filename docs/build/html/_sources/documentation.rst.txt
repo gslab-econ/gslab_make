@@ -58,12 +58,16 @@ The logging functions are used to create a master log of activity (i.e., a *make
 Sourcing functions
 ==================
 
+The following functions are used to create symbolic links to source files. Doing so avoids potential duplication of source files and any associated confusion. In the case of modules dedicated to LyX documents, there is a optional function to copy source files instead of creating symbolic links so that users without :mod:`gslab_make` can still manually compile.
+
 .. automodule:: gslab_make.move_sources
     :members:
 
 
 Source logging functions
 ========================
+
+The following function is used to log linking/copying activity and information about source files. The logs are intended to facilitate the reproducibility of research.
 
 .. automodule:: gslab_make.write_source_logs
     :members:

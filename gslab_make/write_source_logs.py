@@ -20,37 +20,41 @@ from gslab_make.write_logs import write_to_makelog, _write_stats_log, _write_hea
 def write_source_logs(paths, 
                       source_map,
                       depth = float('inf')):        
-    """Write source logs.
+    """.. Write source logs.
+
+    Logs the following information for files contained in all mappings of list `source_map` (returned by `sourcing functions`_).
 
     Notes
     -----
     The following information is logged:
+    
     * Mapping of symlinks/copies to sources (source map log)
     * Details on files contained in sources: 
-    * File name (source statistics log)
-    * Last modified (source statistics log)
-    * File size (source statistics log)
-    * File head (source headers log)
-    * When walking through source directories, depth determines depth.
+        * File name (source statistics log)
+        * Last modified (source statistics log)
+        * File size (source statistics log)
+        * File head (source headers log)
+
+    When walking through sources, float `depth` determines level of depth to walk. Status messages are appended to make log `makelog`.
 
     Parameters
     ----------
-    paths : :obj:`dict` 
+    paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
-    source_map : :obj:`list `
-        Mapping of symlinks/copies (destination) to sources (returned from :mod:`MoveList.create_symlinks` or :mod:`MoveList.create_copies`).
-    depth : :obj:`float`, optional
+    source_map : list
+        Mapping of symlinks/copies (destination) to sources (returned by `sourcing functions`_).
+    depth : float, optional
         Level of depth when walking through source directories. Defaults to infinite.
 
     Path Keys
     ---------
-    source_statslog : :obj:`str`
+    source_statslog : str
        Path to write source statistics log.
-    source_headslog : :obj:`str`
+    source_headslog : str
        Path to write source headers log.
-    source_maplog : :obj:`str`
+    source_maplog : str
        Path to write source map log.
-    makelog : :obj:`str`
+    makelog : str
        Path of makelog.
 
     Returns
@@ -97,14 +101,14 @@ def write_source_logs(paths,
 
 
 def _write_source_maplog(source_maplog, source_map):
-    """Write link map log.
+    """.. Write link map log.
 
     Parameters
     ----------
-    source_maplog : :obj:`str`
+    source_maplog : str
         Path to write link map log.
-    source_map : :obj:`list` 
-        Mapping of symlinks to sources (returned by :mod:`LinksList`).
+    source_map : list 
+        Mapping of symlinks to sources (returned by `sourcing functions`_).
 
     Returns
     -------
