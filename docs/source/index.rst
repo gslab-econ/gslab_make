@@ -17,8 +17,9 @@ The :mod:`gslab_make` Python library contains tools to facilitate workflow autom
 
 The library is currently under active development. If you wish to contribute, please visit the `Github repository <https://github.com/gentzkow/gslab_make>`__.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Documentation
 
-   documentation
+.. toctree::
+  :maxdepth: 2
+  :caption: Documentation
+
+  documentation
