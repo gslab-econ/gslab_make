@@ -324,7 +324,7 @@ class LyXDirective(ProgramDirective):
     ----------
     See `ProgramDirective`.
     
-    pdf_dir : str
+    output_dir : str
         Directory to write PDFs.
     doctype : str, optional
         Type of LyX document. Takes either `handout` or `comments`. 
@@ -332,11 +332,11 @@ class LyXDirective(ProgramDirective):
     """
     
     def __init__(self, 
-                 pdf_dir,
+                 output_dir,
                  doctype = '',
                  **kwargs):
 
-        self.pdf_dir = pdf_dir
+        self.output_dir = output_dir
         self.doctype = doctype
         super(LyXDirective, self).__init__(**kwargs)
         self.check_doctype()

@@ -44,8 +44,8 @@ The following default paths are recommended:
 Functions in :mod:`gslab_make` that require a ``paths`` argument will specify the exact default paths required in their documentation.
 
 
-Master logging functions
-========================
+General logging functions
+=========================
 
 The :mod:`gslab_make` library provides functions to create a master log of activity (i.e., a *make log*) and to log information about output files. The logs are intended to facilitate the reproducibility of research.
 

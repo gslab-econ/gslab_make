@@ -22,7 +22,7 @@ def write_source_logs(paths,
                       depth = float('inf')):        
     """.. Write source logs.
 
-    Logs the following information for sources contained in all mappings of list ``source_map`` (returned by `sourcing functions`_).
+    Logs the following information for sources contained in list ``source_map`` (returned by `sourcing functions`_).
     
     - Mapping of symlinks/copies to sources (in file ``source_maplog``)
     - Details on files contained in sources: 
@@ -30,9 +30,9 @@ def write_source_logs(paths,
         - File name (in file ``source_statslog``)
         - Last modified (in file ``source_statslog``)
         - File size (in file ``source_statslog``)
-        - File head (in file ``source_headlog``)
+        - File head (in file ``source_headlog``, optional)
 
-    When walking through sources, float ``depth`` determines level of depth to walk. Status messages are appended to make log ``makelog``. 
+    When walking through sources, float ``depth`` determines level of depth to walk. Status messages are appended to file ``makelog``. 
 
     Parameters
     ----------
@@ -85,16 +85,17 @@ def write_source_logs(paths,
 
         # TODO: DECIDE WHETHER TO KEEP
         raw_dir = get_path(paths, 'raw_dir', throw_error = False)
-        raw_files = glob_recursive(raw_dir)
-        source_files = set(source_files + raw_files)
+        if raw_dir:
+            raw_files = glob_recursive(raw_dir)
+            source_files = set(source_files + raw_files)
 
         if source_statslog:
             source_statslog = norm_path(source_statslog)
-            write_stats_log(source_statslog, source_files)
+            _write_stats_log(source_statslog, source_files)
 
         if source_headslog:
             source_headslog = norm_path(source_headslog)
-            write_heads_log(source_headslog, source_files)   
+            _write_heads_log(source_headslog, source_files)   
 
         if source_maplog:
             source_maplog = norm_path(source_maplog)

@@ -51,6 +51,7 @@ def _get_file_sizes(dir_path, exclude):
         file_sizes.extend(zip(files, sizes))
         
     file_sizes = dict(file_sizes)
+    
     return(file_sizes)
 
      
@@ -100,12 +101,12 @@ def _get_git_ignore(repo):
 def _parse_git_attributes(attributes):
     """.. Get git lfs patterns from git attributes.
 
-    Get git lfs patterns from git attributes file ``attributes``.
+    Get git lfs patterns from file ``attributes``.
 
     Parameters
     ----------
     attributes : str
-        Path to git attributes file.
+        Path of git attributes file.
 
     Returns
     -------
@@ -160,8 +161,8 @@ def _get_dir_sizes(dir_path):
     except:
         raise_from(CritError(messages.crit_error_no_repo), None)
 
-    git_files = get_file_sizes(dir_path, exclude = ['.git'])
-    git_ignore_files = get_git_ignore(repo)
+    git_files = _get_file_sizes(dir_path, exclude = ['.git'])
+    git_ignore_files = _get_git_ignore(repo)
 
     for ignore in git_ignore_files: 
         try:
@@ -169,11 +170,11 @@ def _get_dir_sizes(dir_path):
         except KeyError:
             pass
     
-    lfs_list = parse_git_attributes(os.path.join(root, '.gitattributes'))
+    lfs_list = _parse_git_attributes(os.path.join(root, '.gitattributes'))
     git_lfs_files = dict()
     
     for key in list(git_files.keys()):
-        if check_path_lfs(key, lfs_list):         
+        if _check_path_lfs(key, lfs_list):         
             git_lfs_files[key] = git_files.pop(key)
         
     return(git_files, git_lfs_files)
@@ -182,7 +183,7 @@ def _get_dir_sizes(dir_path):
 def _get_size_values(git_files, git_lfs_files):
     """.. Get file sizes for repository.
 
-    Get file sizes for files in file list ``git_files`` and file list ``git_lfs_files``.
+    Get file sizes for files in dictionary ``git_files`` and dictionary ``git_lfs_files``.
 
     Parameters
     ----------
@@ -193,14 +194,14 @@ def _get_size_values(git_files, git_lfs_files):
 
     Returns
     -------
-    file_MB : :obj:`float`
+    file_MB : float
         Size of largest file tracked by git in megabytes.
-    total_MB : :obj:`float`
-        Total size of files tracked by git.
-    file_MB : :obj:`float`
-        Size of largest file tracked by git lfs.
-    total_MB : :obj:`float`
-        Total size of files tracked by git lfs.
+    total_MB : float
+        Total size of files tracked by git in megabytes.
+    file_MB : float
+        Size of largest file tracked by git lfs in megabytes.
+    total_MB : float
+        Total size of files tracked by git lfs in megabytes.
     """
 
     file_MB = max(git_files.values() or [0])
@@ -217,14 +218,14 @@ def _get_size_values(git_files, git_lfs_files):
 def check_module_size(paths):
     """.. Check file sizes for module.
 
-    Checks file sizes for files to be committed in the current working directory. Compares file sizes to size limits in project configuration file ``config`` and produces warnings if any of the following limits are exceeded.
+    Checks file sizes for files to be committed in the current working directory. Compares file sizes to size limits in file ``config`` and produces warnings if any of the following limits are exceeded.
 
     - Individual size of a file tracked by git lfs (``file_MB_limit_lfs``)
     - Total size of all files tracked by git lfs (``total_MB_limit_lfs``)
     - Individual size of a file tracked by git (``file_MB_limit``)
     - Total size of all files tracked by git (``total_MB_limit``)
    
-    Warning messages are appended to make log ``makelog``.
+    Warning messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -234,7 +235,7 @@ def check_module_size(paths):
     Path Keys
     ---------
     config : str
-        Path of config file.   
+        Path of project configuration file.   
     makelog : str
         Path of makelog.
 
@@ -244,8 +245,8 @@ def check_module_size(paths):
     """
     
     try:
-        git_files, git_lfs_files = get_dir_sizes('.')
-        file_MB, total_MB, file_MB_lfs, total_MB_lfs = get_size_values(git_files, git_lfs_files)
+        git_files, git_lfs_files = _get_dir_sizes('.')
+        file_MB, total_MB, file_MB_lfs, total_MB_lfs = _get_size_values(git_files, git_lfs_files)
     
         config = get_path(paths, 'config')
         config = yaml.load(open(config, 'rb'), Loader = yaml.Loader)
@@ -322,7 +323,7 @@ def get_modified_sources(paths,
                          depth = float('inf')):
     """.. Get source files considered changed by git.
 
-    Checks the modification status for sources contained in all mappings of list ``source_map`` (returned by `sourcing functions`_). Produces warning if sources have been modified according to git. When walking through sources, float ``depth`` determines level of depth to walk. Warning messages are appended to make log ``makelog``.
+    Checks the modification status for all sources contained in list ``source_map`` (returned by `sourcing functions`_). Produces warning if sources have been modified according to git. When walking through sources, float ``depth`` determines level of depth to walk. Warning messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -349,7 +350,7 @@ def get_modified_sources(paths,
     """
     
     try:
-        source_list = [source for source, destination in move_map]
+        source_list = [source for source, destination in source_map]
         source_list = [glob_recursive(source, depth) for source in source_list]
         source_files = [f for source in source_list for f in source]
         source_files = set(source_files)
@@ -358,7 +359,7 @@ def get_modified_sources(paths,
             repo = git.Repo('.', search_parent_directories = True)    
         except:
             raise_from(CritError(messages.crit_error_no_repo), None)
-        modified = get_git_status(repo)
+        modified = _get_git_status(repo)
 
         overlap = [l for l in source_files if l in modified] 
             

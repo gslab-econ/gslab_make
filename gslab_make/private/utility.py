@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from
+from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -14,8 +14,19 @@ import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError
 
 
+def convert_to_list(obj, type):
+    """Convert object to list."""
+    if isinstance(obj, string_types):
+        obj = [obj]
+    if type(obj) is not list:
+        if (type == 'dir'):
+            raise_from(TypeError(messages.type_error_dir_list % obj), None)
+        if (type == 'file'):
+            raise_from(TypeError(messages.type_error_file_list % obj), None)
+
+
 def norm_path(path):
-    """Normalizes path to be OS-compatible."""
+    """Normalize path to be OS-compatible."""
 
     if path:
         path = re.split('[/\\\\]+', path)

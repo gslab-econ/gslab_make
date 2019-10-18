@@ -19,7 +19,7 @@ from gslab_make.private.exceptionclasses import CritError, ColoredError
 from gslab_make.private.utility import get_path, format_message, norm_path
 
 
-def check_os(osname = os.name):
+def _check_os(osname = os.name):
     """Check OS is either POSIX or NT. 
     
     Parameters
@@ -39,7 +39,7 @@ def check_os(osname = os.name):
 def update_executables(paths, osname = os.name):
     """.. Update executable names using user configuration file. 
     
-    Updates executable names with executables listed in user configuration file ``config_user``.
+    Updates executable names with executables listed in file ``config_user``.
     
     Note
     ----
@@ -66,7 +66,7 @@ def update_executables(paths, osname = os.name):
         config_user = get_path(paths, 'config_user')
         config_user = yaml.load(open(config_user, 'rb'), Loader = yaml.Loader)
     
-        check_os(osname)
+        _check_os(osname)
     
         if config_user['local']['executables']:
             metadata.default_executables[osname].update(config_user['local']['executables'])
@@ -79,7 +79,7 @@ def update_executables(paths, osname = os.name):
 def update_paths(paths):
     """.. Update paths using user configuration file. 
     
-    Updates paths dictionary ``path`` with externals listed in user configuration file ``config_user``.
+    Updates dictionary ``paths`` with externals listed in file ``config_user``.
     
     Note
     ----
@@ -135,11 +135,7 @@ def copy_output(file, copy_dir):
     file = norm_path(file)
     copy_dir = norm_path(copy_dir)
     message = colored(messages.warning_copy, color = 'cyan')
-    
-    try:
-        upload = raw_input(message % (file, copy_dir))
-    except:
-        upload = input(message % (file, copy_dir))
+    upload = input(message % (file, copy_dir))
 
     if upload.lower().strip() == "yes":
         shutil.copy(file, copy_dir)

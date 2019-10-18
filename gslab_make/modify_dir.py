@@ -17,20 +17,20 @@ colorama.init()
 import gslab_make.private.metadata as metadata
 import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import ColoredError
-from gslab_make.private.utility import norm_path, format_message
+from gslab_make.private.utility import convert_to_list, norm_path, format_message
 
 
 def remove_path(path, option = '', quiet = False):
     """.. Remove path using system command.
     
-    Remove paths ``path`` using system command. Safely removes symbolic links. Paths can be specified with the * shell pattern (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__).
+    Remove path ``path`` using system command. Safely removes symbolic links. Path can be specified with the * shell pattern (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__).
 
     Parameters
     ----------
     path : str
         Path to remove.
     option : str, optional
-        Options for system command. Defaults to options specified in metadata.
+        Options for system command. Defaults to ``-rf`` for POSIX and ``/s /q`` for NT.
     quiet : bool, optional
         Suppress printing of path removed. Defaults to ``False``. 
 
@@ -78,8 +78,8 @@ def remove_dir(dir_list, quiet = False):
 
     Parameters
     ----------
-    dir_list : list
-        List of directories to remove.
+    dir_list : str, list
+        Directory or list of directories to remove.
     quiet : bool, optional
         Suppress printing of directories removed. Defaults to ``False``. 
 
@@ -102,10 +102,8 @@ def remove_dir(dir_list, quiet = False):
         remove_dir(['dir1*'])
     """
     try:
-        if type(dir_list) is list:
-            dir_list = [norm_path(dir_path) for dir_path in dir_list]
-        else:
-            raise_from(TypeError(messages.type_error_dir_list % dir_list), None)
+        dir_list = convert_to_list(dir_list, 'dir')
+        dir_list = [norm_path(dir_path) for dir_path in dir_list]
         
         for dir_path in dir_list:
             if os.path.isdir(dir_path):
@@ -129,8 +127,8 @@ def clear_dir(dir_list):
 
     Parameters
     ----------
-    dir_list : list
-        List of directories to clear.
+    dir_list : str, list
+        Directory or list of directories to clear.
 
     Returns
     -------
@@ -168,7 +166,7 @@ def clear_dir(dir_list):
 def unzip(zip_path, output_dir):
     """.. Unzip file to directory.
 
-    Unzips zip file ``zip_path`` to directory ``output_dir``.
+    Unzips file ``zip_path`` to directory ``output_dir``.
 
     Parameters
     ----------
@@ -194,7 +192,7 @@ def unzip(zip_path, output_dir):
 def zip_dir(source_dir, zip_dest):
     """.. Zip directory to file.
 
-    Zips directory ``source_dir`` to zip file ``zip_dest``.
+    Zips directory ``source_dir`` to file ``zip_dest``.
 
     Parameters
     ----------

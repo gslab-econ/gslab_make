@@ -5,7 +5,7 @@ The majority of the functions in :mod:`gslab_make` contain a ``paths`` argument 
 :config: Default path for ``config.yaml``, a *project configuration file* containing global variables for all users.
 :config_user: Default path for ``config_user.yaml``, a *user configuration file* containing local user-specific variables.
 :input_dir: Default path for sourcing (i.e., copying or making symbolic links to) *input files* located internal to the project directory.
-:external_dir: Default path to sourcing (i.e., copying or making symbolic links to) *external files* located external to the project directory.
+:external_dir: Default path for sourcing (i.e., copying or making symbolic links to) *external files* located external to the project directory.
 :output_dir: Default path to write and look for code outputs.
 :makelog: Default path to write *make log*, a master log of activity.
 :output_statslog: Default path to write *output statistics log*, a log containing file statistics for ``output_dir``.
@@ -44,8 +44,8 @@ The following default paths are recommended:
 Functions in :mod:`gslab_make` that require a ``paths`` argument will specify the exact default paths required in their documentation.
 
 
-Master logging functions
-========================
+General logging functions
+=========================
 
 The :mod:`gslab_make` library provides functions to create a master log of activity (i.e., a *make log*) and to log information about output files. The logs are intended to facilitate the reproducibility of research.
 

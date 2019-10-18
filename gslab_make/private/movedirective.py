@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from
+from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -13,7 +13,7 @@ from itertools import chain
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError
-from gslab_make.private.utility import norm_path, file_to_array, format_traceback
+from gslab_make.private.utility import convert_to_list, norm_path, file_to_array, format_traceback
 
 
 class MoveDirective(object):
@@ -150,10 +150,10 @@ class MoveDirective(object):
         regex = '(.*)'.join(regex) 
 
         wildcards = re.findall(regex, f) # Returns list if single match, list of set if multiple matches
-        wildcards = [(w, ) if isinstance(w, str) else w for w in wildcards]
+        wildcards = [(w, ) if isinstance(w, string_types) else w for w in wildcards]
         wildcards = chain(*wildcards)
 
-        return wildcards
+        return(wildcards)
 
     def fill_in_wildcards(self, wildcards):
         """Fill in wildcards for destination path.
@@ -178,7 +178,7 @@ class MoveDirective(object):
         for w in wildcards:
             f = re.sub('\*', w, f, 1)
 
-        return f
+        return(f)
 
     def create_symlinks(self):
         """Create symlinks. 
@@ -331,9 +331,8 @@ class MoveList(object):
         -------
         None
         """
-        
-        if type(self.file_list) is not list:
-            raise TypeError(messages.type_error_file_list % self.file_list)
+
+        self.file_list = convert_to_list(file_list, 'file')
 
         file_list_parsed = [f for file in self.file_list for f in glob.glob(file)]   
         if file_list_parsed:
@@ -387,7 +386,7 @@ class MoveList(object):
         for move in self.move_directive_list:
             move_map.extend(move.create_symlinks())
             
-        return move_map
+        return(move_map)
 
     def create_copies(self):       
         """Create copies according to directives. 
@@ -402,4 +401,4 @@ class MoveList(object):
         for move in self.move_directive_list:
             move_map.extend(move.create_copies())
             
-        return move_map
+        return(move_map)

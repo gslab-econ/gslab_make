@@ -14,7 +14,7 @@ colorama.init()
 
 import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import norm_path, format_message
+from gslab_make.private.utility import convert_to_list, norm_path, format_message
 
 def _parse_tag(tag):
     """.. Parse tag from input."""
@@ -261,18 +261,18 @@ def _insert_tables(template, tables):
 def tablefill(inputs, template, output, null = None):
     """.. Fill tables for template using inputs.
     
-    Fills tables in document ``template`` using files list ``inputs``. Writes filled document to file ``output``. Null characters (i.e., ``''``, ``'.'``, ``'NA'``) in ``inputs`` are replaced with value ``null``.
+    Fills tables in document ``template`` using files in list ``inputs``. Writes filled document to file ``output``. Null characters in ``inputs`` are replaced with value ``null``.
 
     Parameters
     ----------
     inputs : list
-        List of inputs to fill into template.
+        Input or list of inputs to fill into template.
     template : str
         Path of template to fill.
     output : str
         Path of output.
     null : str
-        Value to replace null characters (i.e., ``''``, ``'.'``, ``'NA'``). Defaults to ``None``.
+        Value to replace null characters (i.e., ``''``, ``'.'``, ``'NA'``). Defaults to no replacement.
 
     Returns
     -------
@@ -618,8 +618,7 @@ def tablefill(inputs, template, output, null = None):
     """
 
     try:
-        if type(inputs) is not list:
-            raise_from(TypeError(messages.type_error_dir_list % inputs), None)
+        inputs = convert_to_list(inputs, 'file')
         inputs = [norm_path(file) for file in inputs]
         content = [_parse_content(file, null) for file in inputs]
         tables = {tag:data for (tag, data) in content}

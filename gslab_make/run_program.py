@@ -28,7 +28,7 @@ from gslab_make.write_logs import write_to_makelog
 def run_jupyter(paths, program, timeout = None, kernel_name = ''):
     """Run Jupyter notebook using system command.
 
-    Runs notebook ``program`` using Python API, with notebook specified in the form of ``notebook.ipynb``. Status messages are appended to make log ``makelog``.
+    Runs notebook ``program`` using Python API, with notebook specified in the form of ``notebook.ipynb``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -92,7 +92,7 @@ def run_jupyter(paths, program, timeout = None, kernel_name = ''):
 def run_lyx(paths, program, doctype = '', **kwargs): 
     """.. Run LyX script using system command.
 
-    Compiles document ``program`` using system command, with document specified in the form of ``script.lyx``. Status messages are appended to make log ``makelog``. PDF outputs are written in directory ``pdf_dir``.
+    Compiles document ``program`` using system command, with document specified in the form of ``script.lyx``. Status messages are appended to file ``makelog``. PDF outputs are written in directory ``output_dir``.
 
     Parameters
     ----------
@@ -107,7 +107,7 @@ def run_lyx(paths, program, doctype = '', **kwargs):
     ---------
     makelog : str
         Path of makelog.
-    pdf_dir : str
+    output_dir : str
         Directory to write PDFs.
 
     Note
@@ -142,8 +142,8 @@ def run_lyx(paths, program, doctype = '', **kwargs):
 
     try:
         makelog = get_path(paths, 'makelog')
-        pdf_dir = get_path(paths, 'pdf_dir')
-        direct = LyXDirective(pdf_dir = pdf_dir, application = 'lyx', program = program, makelog = makelog, **kwargs)
+        output_dir = get_path(paths, 'output_dir')
+        direct = LyXDirective(output_dir = output_dir, application = 'lyx', program = program, makelog = makelog, **kwargs)
             
         # Make handout/commented LyX file        
         if direct.doctype:
@@ -177,7 +177,7 @@ def run_lyx(paths, program, doctype = '', **kwargs):
 
         # Move PDF output
         temp_pdf = os.path.join(direct.program_dir, temp_name + '.pdf')
-        output_pdf = os.path.join(direct.pdf_dir, direct.program_name + '.pdf')
+        output_pdf = os.path.join(direct.output_dir, direct.program_name + '.pdf')
 
         if temp_pdf != output_pdf:
             shutil.copy2(temp_pdf, output_pdf)
@@ -198,7 +198,7 @@ def run_lyx(paths, program, doctype = '', **kwargs):
 def run_mathematica(paths, program, **kwargs):
     """.. Run Mathematica script using system command.
 
-    Runs script ``program`` using system command, with script specified in the form of ``script.m``. Status messages are appended to make log ``makelog``.
+    Runs script ``program`` using system command, with script specified in the form of ``script.m``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -266,7 +266,7 @@ def run_mathematica(paths, program, **kwargs):
 def run_matlab(paths, program, **kwargs):
     """.. Run Matlab script using system command.
 
-    Runs script ``program`` using system command, with script specified in the form of ``script.m``. Status messages are appended to make log ``makelog``.
+    Runs script ``program`` using system command, with script specified in the form of ``script.m``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -337,7 +337,7 @@ def run_matlab(paths, program, **kwargs):
 def run_perl(paths, program, **kwargs):
     """.. Run Perl script using system command.
 
-    Runs script ``program`` using system command, with script specified in the form of ``script.pl``. Status messages are appended to make log ``makelog``.
+    Runs script ``program`` using system command, with script specified in the form of ``script.pl``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -405,7 +405,7 @@ def run_perl(paths, program, **kwargs):
 def run_python(paths, program, **kwargs):
     """.. Run Python script using system command.
 
-    Runs script ``program`` using system command, with script specified in the form of ``script.py``. Status messages are appended to make log ``makelog``.
+    Runs script ``program`` using system command, with script specified in the form of ``script.py``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -473,7 +473,7 @@ def run_python(paths, program, **kwargs):
 def run_r(paths, program, **kwargs):
     """.. Run R script using system command.
 
-    Runs script ``program`` using system command, with script specified in the form of ``script.R``. Status messages are appended to make log ``makelog``.
+    Runs script ``program`` using system command, with script specified in the form of ``script.R``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -541,7 +541,7 @@ def run_r(paths, program, **kwargs):
 def run_sas(paths, program, lst = '', **kwargs):
     """.. Run SAS script using system command.
 
-    Runs script ``program`` using system command, with script specified in the form of ``script.sas``. Status messages are appended to make log ``makelog``.
+    Runs script ``program`` using system command, with script specified in the form of ``script.sas``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -616,7 +616,7 @@ def run_sas(paths, program, lst = '', **kwargs):
 def run_stat_transfer(paths, program, **kwargs):
     """.. Run StatTransfer script using system command.
 
-    Runs script ``program`` using system command, with script specified in the form of ``script.stc`` or ``script.stcmd``. Status messages are appended to make log ``makelog``.
+    Runs script ``program`` using system command, with script specified in the form of ``script.stc`` or ``script.stcmd``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -684,7 +684,7 @@ def run_stat_transfer(paths, program, **kwargs):
 def run_stata(paths, program, **kwargs):
     """.. Run Stata script using system command.
 
-    Runs script ``program`` using system command, with script specified in the form of ``script.do``. Status messages are appended to make log ``makelog``.
+    Runs script ``program`` using system command, with script specified in the form of ``script.do``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------
@@ -773,7 +773,7 @@ def _check_stata_output(output):
 def execute_command(paths, command, **kwargs):
     """.. Run system command.
 
-    Runs system command `command` with shell execution boolean ``shell``. Outputs are appended to make log file ``makelog`` and written to system command log file ``log``. Status messages are appended to make log ``makelog``.
+    Runs system command `command` with shell execution boolean ``shell``. Outputs are appended to file ``makelog`` and written to system command log file ``log``. Status messages are appended to file ``makelog``.
 
     Parameters
     ----------

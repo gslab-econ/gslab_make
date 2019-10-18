@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
+from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -15,7 +15,7 @@ colorama.init()
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import norm_path, get_path, glob_recursive, format_message
+from gslab_make.private.utility import convert_to_list, norm_path, get_path, glob_recursive, format_message
 
 
 def start_makelog(paths):
@@ -155,9 +155,9 @@ def log_files_in_output(paths,
     - File name (in file ``output_statslog``)
     - Last modified (in file ``output_statslog``)
     - File size (in file ``output_statslog``)
-    - File head (in file ``output_headslog``)
+    - File head (in file ``output_headslog``, optional)
 
-    When walking through directory ``output_dir``, float ``depth`` determines level of depth to walk. Status messages are appended to make log ``makelog``. 
+    When walking through directory ``output_dir``, float ``depth`` determines level of depth to walk. Status messages are appended to file ``makelog``. 
 
     Include additional output directories to walk through (typically directories that you wish to keep local) in directory list ``output_local_dir``. 
 
@@ -165,15 +165,15 @@ def log_files_in_output(paths,
     ----------
     paths : dict 
         Dictionary of paths. Dictionary should contain values for all keys listed below.
-    depth : flost, optional
+    depth : float, optional
         Level of depth when walking through output directory. Defaults to infinite.
 
     Path Keys
     ---------
     output_dir : str
        Path of output directory.
-    output_local_dir : str or list, optional
-       List of paths of local output directories. Defaults to ``[]`` (i.e., none).
+    output_local_dir : str, list, optional
+       Path or list of paths of local output directories. Defaults to ``[]`` (i.e., none).
     output_statslog : str
        Path to write output statistics log.
     output_headslog : str, optional
@@ -201,17 +201,14 @@ def log_files_in_output(paths,
     """
     
     try:
-        output_dir      = get_path(paths, 'output_dir')
-        output_statslog = get_path(paths, 'output_statslog')
-        output_headslog = get_path(paths, 'output_headslog', throw_error = False)
-
-        try:
-            output_local_dir = get_path(paths, 'output_local_dir') 
-            if isinstance(output_local_dir, string_types):
-                output_local_dir = [output_local_dir]
-            if type(output_local_dir) is not list:
-                raise_from(TypeError(messages.type_error_dir_list % output_local_dir), None)
-        except KeyError:
+        output_dir      =  get_path(paths, 'output_dir')
+        output_local_dir = get_path(paths, 'output_local_dir', throw_error = False) 
+        output_statslog  = get_path(paths, 'output_statslog')
+        output_headslog  = get_path(paths, 'output_headslog', throw_error = False)
+        
+        if output_local_dir:
+            output_local_dir = convert_to_list(output_local_dir, 'dir') 
+        else:
             output_local_dir = []
 
         output_files = glob_recursive(output_dir, depth)
@@ -239,7 +236,7 @@ def log_files_in_output(paths,
 def _write_stats_log(statslog_file, output_files):
     """.. Write statistics log.
 
-    Logs the following information to ``statslog_file`` for all files contained in file list ``output_files``:
+    Logs the following information to ``statslog_file`` for all files contained in list ``output_files``.
     
     - File name 
     - Last modified 
