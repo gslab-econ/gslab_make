@@ -13,17 +13,16 @@ class CritError(Exception):
     pass
 
 class ColoredError(Exception):
-    """Colorized error messages."""
+    """ Colorized error messages. """
     
     def __init__(self, message = '', trace = ''):
-        if message:
-            message = '\n\n' + colored(message, color = metadata.color_failure)  
+        message = '\n\n' + colored(message, color = metadata.color_failure)
         if trace:
-            message += '\n\n' + colored(trace, color = metadata.color_failure)
-        
-        super(ColoredError, self).__init__(message)
+            trace = '\n\n' + colored(trace, color = metadata.color_failure)
+            super(ColoredError, self).__init__(message + trace)
+        else:
+            super(ColoredError, self).__init__(message)
             
 class ProgramError(ColoredError):
-    """Program execution exception."""
-    
+    """ Program execution exception. """
     pass

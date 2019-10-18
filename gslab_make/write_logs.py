@@ -21,8 +21,7 @@ from gslab_make.private.utility import convert_to_list, norm_path, get_path, glo
 def start_makelog(paths):
     """.. Start make log.
 
-    Writes file ``makelog``, recording start time. 
-    Sets make log status to boolean ``True``, which is used by other functions to confirm make log exists.
+    Writes file ``makelog``, recording start time. Sets make log status to boolean ``True``, which is used by other functions to confirm make log exists.
 
     Note
     ----
@@ -72,8 +71,7 @@ def end_makelog(paths):
 
     Note
     ----
-    We technically allow for writing to a make log even after the make log has ended. 
-    We do not recommend this for best practice.
+    We allow for writing to a make log even after the make log has ended. We do not recommend this for best practice.
 
     Parameters
     ----------
@@ -159,11 +157,9 @@ def log_files_in_output(paths,
     - File size (in file ``output_statslog``)
     - File head (in file ``output_headslog``, optional)
 
-    When walking through directory ``output_dir``, float ``depth`` determines level of depth to walk. 
-    Status messages are appended to file ``makelog``. 
+    When walking through directory ``output_dir``, float ``depth`` determines level of depth to walk. Status messages are appended to file ``makelog``. 
 
-    Include additional output directories to walk through 
-    (typically directories that you wish to keep local) in directory list ``output_local_dir``. 
+    Include additional output directories to walk through (typically directories that you wish to keep local) in directory list ``output_local_dir``. 
 
     Parameters
     ----------
@@ -191,16 +187,13 @@ def log_files_in_output(paths,
 
     Example
     -------
-    The following code will log information for all files contained in 
-    only the first level of ``paths['output_dir']``. 
-    Therefore, files contained in subdirectories will be ignored.
+    The following code will log information for all files contained in only the first level of ``paths['output_dir']``. Therefore, files contained in subdirectories will be ignored.
     
     .. code-block:: python
 
         log_files_in_outputs(paths, depth = 1)
 
-    The following code will log information for any file in ``paths['output_dir']``, 
-    regardless of level of subdirectory.
+    The following code will log information for any file in ``paths['output_dir']``, regardless of level of subdirectory.
     
     .. code-block :: python
 

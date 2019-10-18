@@ -16,9 +16,6 @@ crit_error_no_makelog = \
     '- Makelog was not started (via `start_makelog`)\n' + \
     '- Makelog ended (via `end_makelog`) prematurely\n' + \
     '- Makelog deleted or moved after started'
-    
-# ACTION ITEM: `end_makelog` CURRENTLY DOESN'T  ACTUALLY TURN MAKE LOG STATUS OFF
-    
 crit_error_no_program_output = \
     '\nERROR! Program output `%s` is expected from `%s` but cannot be found. ' + \
     'Certain applications (`matlab`, `sas`, `stata`) automatically create program outputs when run using system command. ' + \
@@ -57,10 +54,10 @@ crit_error_extension = \
     '\nERROR! Program `%s` does not have correct extension. ' + \
     'Program should have one of the following extensions: %s.' 
 crit_error_path_mapping = \
-    '\nERROR! Argument `paths` is missing a value for key `%s`. ' + \
+    '\nERROR! Argument `path_mappings` is missing a value for key `%s`. ' + \
     '`{%s}` found in the following instruction in file `%s`.\n' + \
     '  > %s\n' + \
-    'Confirm that your config user file contains an external dependency for {%s} and that it has been properly loaded (via `update_paths`). ' + \
+    'Confirm that your config user file contains an external dependency for {%s} and that it has been properly loaded (via `update_mappings`). ' + \
     'For further detail, refer to the traceback below.'
 crit_error_no_repo = \
     '\nERROR! Current working directory is not part of a git repository.'
@@ -105,7 +102,7 @@ warning_git_lfs_file_log = \
 warning_git_lfs_repo = \
     '\nWARNING! Total size of files tracked by git-lfs exceed the repository config limit  (%s MB).'
 warning_copy = \
-    'To copy the following file, enter "Yes". Otherwise, enter "No". ' + \
+    'To copy the following file, enter "yes". Otherwise, enter "no". ' + \
     'Update any archives and documentation accordingly.\n' + \
     '> %s\n' + \
     'will be uploaded to\n' + \

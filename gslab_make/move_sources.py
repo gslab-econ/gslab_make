@@ -22,16 +22,12 @@ def _create_links(paths,
                   file_list):
     """.. Create symlinks from list of files containing linking instructions.
 
-    Create symbolic links using instructions contained in files of list ``file_list``. 
-    Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ 
-    using paths dictionary ``paths``. Symbolic links are written in directory ``move_dir``. 
-    Status messages are appended to file ``makelog``.
+    Create symbolic links using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Symbolic links are written in directory ``move_dir``. Status messages are appended to file ``make log``.
 
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below. 
-        Dictionary additionally used to string format linking instructions.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format linking instructions.
     file_list : str, list
         File or list of files containing linking instructions.
 
@@ -64,16 +60,12 @@ def _create_copies(paths,
                    file_list):
     """.. Create copies from list of files containing copying instructions.
 
-    Create copies using instructions contained in files of list ``file_list``. 
-    Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ 
-    using paths dictionary ``paths``. Copies are written in directory ``move_dir``. 
-    Status messages are appended to file ``makelog``.
+    Create copies using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Copies are written in directory ``move_dir``. Status messages are appended to file ``make log``.
 
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below. 
-        Dictionary additionally used to string format copying instructions.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format copying instructions.
     file_list : str, list
         File or list of files containing copying instructions.
 
@@ -106,13 +98,9 @@ def link_inputs(paths,
                 file_list):
     """.. Create symlinks to inputs from list of files containing linking instructions. 
 
-    Create symbolic links using instructions contained in files of list ``file_list``. 
-    Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ 
-    using paths dictionary ``paths``. Symbolic links are written in directory ``input_dir``. 
-    Status messages are appended to file ``makelog``.
+    Create symbolic links using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Symbolic links are written in directory ``input_dir``. Status messages are appended to file ``make log``.
 
-    Instruction files on how to create symbolic links (destinations) from targets (sources) 
-    should be formatted in the following way.
+    Instruction files on how to create symbolic links (destinations) from targets (sources) should be formatted in the following way.
 
     .. code-block:: md
 
@@ -124,16 +112,12 @@ def link_inputs(paths,
         Symbolic links can be created to both files and directories.
 
     .. Note::
-        Instruction files can be specified with the * shell pattern 
-        (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__). 
-        Destinations and their sources can also be specified with the * shell pattern. 
-        The number of wildcards must be the same for both destinations and sources.
+        Instruction files can be specified with the * shell pattern (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__). Destinations and their sources can also be specified with the * shell pattern. The number of wildcards must be the same for both destinations and sources.
 
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below. 
-        Dictionary additionally used to string format linking instructions.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format linking instructions.
     file_list : str, list
         File or list of files containing linking instructions.
 
@@ -171,8 +155,7 @@ def link_inputs(paths,
 
         destination1 | {root}/source1
 
-    The ``{root}`` in the instruction file would be string formatted using ``paths``. 
-    Therefore, the function would parse the instruction as:
+    The ``{root}`` in the instruction file would be string formatted using ``paths``. Therefore, the function would parse the instruction as:
 
     .. code-block:: md
 
@@ -193,8 +176,7 @@ def link_inputs(paths,
         destination1 | source1
         destination2 | source2
 
-    Symbolic links ``destination1`` and ``destination1`` would be created in directory ``paths['input_dir']``. 
-    Their targets would be ``source1`` and ``source2``, respectively. 
+    Symbolic links ``destination1`` and ``destination1`` would be created in directory ``paths['input_dir']``. Their targets would be ``source1`` and ``source2``, respectively. 
 
     Example
     -------
@@ -206,8 +188,7 @@ def link_inputs(paths,
         source2
         source3
 
-    Specifying ``destination* | source*`` in one of your instruction files would 
-    create the following symbolic links in ``paths['input_dir']``.
+    Specifying ``destination* | source*`` in one of your instruction files would create the following symbolic links in ``paths['input_dir']``.
 
     .. code-block:: md
 
@@ -236,13 +217,9 @@ def link_externals(paths,
                    file_list):
     """.. Create symlinks to externals from list of files containing linking instructions. 
 
-    Create symbolic links using instructions contained in files of list ``file_list``. 
-    Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ 
-    using paths dictionary ``paths``. Symbolic links are written in directory ``external_dir``. 
-    Status messages are appended to file ``makelog``.
+    Create symbolic links using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Symbolic links are written in directory ``external_dir``. Status messages are appended to file ``make log``.
 
-    Instruction files on how to create symbolic links (destinations) from targets (sources) 
-    should be formatted in the following way.
+    Instruction files on how to create symbolic links (destinations) from targets (sources) should be formatted in the following way.
 
     .. code-block:: md
 
@@ -254,16 +231,12 @@ def link_externals(paths,
         Symbolic links can be created to both files and directories.
 
     .. Note::
-        Instruction files can be specified with the * shell pattern 
-        (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__). 
-        Destinations and their sources can also be specified with the * shell pattern. 
-        The number of wildcards must be the same for both destinations and sources.
+        Instruction files can be specified with the * shell pattern (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__). Destinations and their sources can also be specified with the * shell pattern. The number of wildcards must be the same for both destinations and sources.
 
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below. 
-        Dictionary additionally used to string format linking instructions.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format linking instructions.
     file_list : str, list
         File or list of files containing linking instructions.
 
@@ -301,8 +274,7 @@ def link_externals(paths,
 
         destination1 | {root}/source1
 
-    The ``{root}`` in the instruction file would be string formatted using ``paths``. 
-    Therefore, the function would parse the instruction as:
+    The ``{root}`` in the instruction file would be string formatted using ``paths``. Therefore, the function would parse the instruction as:
 
     .. code-block:: md
 
@@ -323,8 +295,7 @@ def link_externals(paths,
         destination1 | source1
         destination2 | source2
 
-    Symbolic links ``destination1`` and ``destination1`` would be created in directory ``paths['external_dir']``. 
-    Their targets would be ``source1`` and ``source2``, respectively. 
+    Symbolic links ``destination1`` and ``destination1`` would be created in directory ``paths['external_dir']``. Their targets would be ``source1`` and ``source2``, respectively. 
 
     Example
     -------
@@ -336,8 +307,7 @@ def link_externals(paths,
         source2
         source3
 
-    Specifying ``destination* | source*`` in one of your instruction files would 
-    create the following symbolic links in ``paths['external_dir']``.
+    Specifying ``destination* | source*`` in one of your instruction files would create the following symbolic links in ``paths['external_dir']``.
 
     .. code-block:: md
 
@@ -366,13 +336,9 @@ def copy_inputs(paths,
                 file_list):
     """.. Create copies to inputs from list of files containing copying instructions. 
 
-    Create copies using instructions contained in files of list ``file_list``. 
-    Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ 
-    using paths dictionary ``paths``. Copies are written in directory ``input_dir``. 
-    Status messages are appended to file ``makelog``.
+    Create copies using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Copies are written in directory ``input_dir``. Status messages are appended to file ``make log``.
 
-    Instruction files on how to create copies (destinations) from targets (sources) 
-    should be formatted in the following way.
+    Instruction files on how to create copies (destinations) from targets (sources) should be formatted in the following way.
 
     .. code-block:: md
 
@@ -381,16 +347,12 @@ def copy_inputs(paths,
         destination | source
 
     .. Note::
-        Instruction files can be specified with the * shell pattern 
-        (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__). 
-        Destinations and their sources can also be specified with the * shell pattern. 
-        The number of wildcards must be the same for both destinations and sources.
+        Instruction files can be specified with the * shell pattern (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__). Destinations and their sources can also be specified with the * shell pattern. The number of wildcards must be the same for both destinations and sources.
 
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below. 
-        Dictionary additionally used to string format copying instructions.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format copying instructions.
     file_list : str, list
         File or list of files containing copying instructions.
 
@@ -428,8 +390,7 @@ def copy_inputs(paths,
 
         destination1 | {root}/source1
 
-    The ``{root}`` in the instruction file would be string formatted using ``paths``. 
-    Therefore, the function would parse the instruction as:
+    The ``{root}`` in the instruction file would be string formatted using ``paths``. Therefore, the function would parse the instruction as:
 
     .. code-block:: md
 
@@ -450,8 +411,7 @@ def copy_inputs(paths,
         destination1 | source1
         destination2 | source2
 
-    Copies ``destination1`` and ``destination1`` would be created in directory ``paths['input_dir']``. 
-    Their targets would be ``source1`` and ``source2``, respectively. 
+    Copies ``destination1`` and ``destination1`` would be created in directory ``paths['input_dir']``. Their targets would be ``source1`` and ``source2``, respectively. 
 
     Example
     -------
@@ -463,8 +423,7 @@ def copy_inputs(paths,
         source2
         source3
 
-    Specifying ``destination* | source*`` in one of your instruction files would 
-    create the following copies in ``paths['input_dir']``.
+    Specifying ``destination* | source*`` in one of your instruction files would create the following copies in ``paths['input_dir']``.
 
     .. code-block:: md
 
@@ -493,13 +452,9 @@ def copy_externals(paths,
                    file_list):
     """.. Create copies to externals from list of files containing copying instructions. 
 
-    Create copies using instructions contained in files of list ``file_list``. 
-    Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ 
-    using paths dictionary ``paths``. Copies are written in directory ``external_dir``. 
-    Status messages are appended to file ``makelog``.
+    Create copies using instructions contained in files of list ``file_list``. Instructions are `string formatted <https://docs.python.org/3.4/library/string.html#format-string-syntax>`__ using paths dictionary ``paths``. Copies are written in directory ``external_dir``. Status messages are appended to file ``make log``.
 
-    Instruction files on how to create copies (destinations) from targets (sources) 
-    should be formatted in the following way.
+    Instruction files on how to create copies (destinations) from targets (sources) should be formatted in the following way.
 
     .. code-block:: md
 
@@ -508,16 +463,12 @@ def copy_externals(paths,
         destination | source
 
     .. Note::
-        Instruction files can be specified with the * shell pattern 
-        (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__). 
-        Destinations and their sources can also be specified with the * shell pattern. 
-        The number of wildcards must be the same for both destinations and sources.
+        Instruction files can be specified with the * shell pattern (see `here <https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html>`__). Destinations and their sources can also be specified with the * shell pattern. The number of wildcards must be the same for both destinations and sources.
 
     Parameters
     ----------
     paths : dict 
-        Dictionary of paths. Dictionary should contain values for all keys listed below. 
-        Dictionary additionally used to string format copying instructions.
+        Dictionary of paths. Dictionary should contain values for all keys listed below. Dictionary additionally used to string format copying instructions.
     file_list : str, list
         File or list of files containing copying instructions.
 
@@ -555,8 +506,7 @@ def copy_externals(paths,
 
         destination1 | {root}/source1
 
-    The ``{root}`` in the instruction file would be string formatted using ``paths``. 
-    Therefore, the function would parse the instruction as:
+    The ``{root}`` in the instruction file would be string formatted using ``paths``. Therefore, the function would parse the instruction as:
 
     .. code-block:: md
 
@@ -577,8 +527,7 @@ def copy_externals(paths,
         destination1 | source1
         destination2 | source2
 
-    Copies ``destination1`` and ``destination1`` would be created in directory ``paths['external_dir']``. 
-    Their targets would be ``source1`` and ``source2``, respectively. 
+    Copies ``destination1`` and ``destination1`` would be created in directory ``paths['external_dir']``. Their targets would be ``source1`` and ``source2``, respectively. 
 
     Example
     -------
@@ -590,8 +539,7 @@ def copy_externals(paths,
         source2
         source3
 
-    Specifying ``destination* | source*`` in one of your instruction files would 
-    create the following copies in ``paths['external_dir']``.
+    Specifying ``destination* | source*`` in one of your instruction files would create the following copies in ``paths['external_dir']``.
 
     .. code-block:: md
 

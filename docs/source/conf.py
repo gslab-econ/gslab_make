@@ -17,8 +17,7 @@ release = '2.0.0'
 
 # -- General configuration ---------------------------------------------------
 
-extensions = ['sphinx_automodapi.automodapi',
-              'sphinx.ext.autodoc', 
+extensions = ['sphinx.ext.autodoc', 
               'sphinx.ext.napoleon', 
               'sphinx_rtd_theme']
 
