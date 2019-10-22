@@ -52,8 +52,13 @@ The :mod:`gslab_make` library provides functions to create a master log of activ
 .. Warning::
    You must initialize make logs via :py:func:`.start_makelog` as opposed to alternative methods (e.g., manually creating a make log file). Otherwise, any attempt to call a :mod:`gslab_make` function that writes to make log will raise an exception.
 
+.. automodapi:: gslab_make
+	:no-inheritance-diagram:
+	:no-heading:
+
 .. automodule:: gslab_make.write_logs
     :members:
+    :noindex:
 
 
 Sourcing functions
@@ -108,7 +113,7 @@ Unless specified otherwise, the program functions will assume the following defa
              'r'         : 'Rscript',
              'sas'       : 'sas', 
              'st'        : 'st',
-             'stata'     : '%STATAEXE%'}
+             'stata'     : 'StataMP-64'}
  
 To change the default executables, we recommend importing in a user configuration file using the :py:func:`.update_executables`. We do not recommend passing in an executable name into the ``executable`` argument of your program function as this will be global for any user.
 

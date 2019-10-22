@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>check_module_size &mdash; GSLab Make 2.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="clear_dir" href="gslab_make.clear_dir.html" />
+    <link rel="prev" title="Specifying paths" href="../documentation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSLab Make
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">Specifying paths</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../documentation.html#general-logging-functions">General logging functions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">check_module_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.clear_dir.html">clear_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.copy_externals.html">copy_externals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.copy_inputs.html">copy_inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.copy_output.html">copy_output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.end_makelog.html">end_makelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.execute_command.html">execute_command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.get_modified_sources.html">get_modified_sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.link_externals.html">link_externals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.link_inputs.html">link_inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.log_files_in_output.html">log_files_in_output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.remove_dir.html">remove_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_jupyter.html">run_jupyter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_lyx.html">run_lyx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_mathematica.html">run_mathematica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_matlab.html">run_matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_module.html">run_module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_perl.html">run_perl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_python.html">run_python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_r.html">run_r</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_sas.html">run_sas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_stat_transfer.html">run_stat_transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.run_stata.html">run_stata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.start_makelog.html">start_makelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.tablefill.html">tablefill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.textfill.html">textfill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.unzip.html">unzip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.update_executables.html">update_executables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.update_paths.html">update_paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.write_source_logs.html">write_source_logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.write_to_makelog.html">write_to_makelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.zip_dir.html">zip_dir</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html#sourcing-functions">Sourcing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html#source-logging-functions">Source logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html#program-functions">Program functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html#directory-functions">Directory functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html#repository-functions">Repository functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html#filling-functions">Filling functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSLab Make</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../documentation.html">Specifying paths</a> &raquo;</li>
+        
+      <li>check_module_size</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/gslab_make.check_module_size.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="check-module-size">
+<h1>check_module_size<a class="headerlink" href="#check-module-size" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="gslab_make.check_module_size">
+<code class="sig-name descname">check_module_size</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_module_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks file sizes for files to be committed in the current working directory.
+Compares file sizes to size limits in file <code class="docutils literal notranslate"><span class="pre">config</span></code> and
+produces warnings if any of the following limits are exceeded.</p>
+<ul class="simple">
+<li><p>Individual size of a file tracked by git lfs (<code class="docutils literal notranslate"><span class="pre">file_MB_limit_lfs</span></code>)</p></li>
+<li><p>Total size of all files tracked by git lfs (<code class="docutils literal notranslate"><span class="pre">total_MB_limit_lfs</span></code>)</p></li>
+<li><p>Individual size of a file tracked by git (<code class="docutils literal notranslate"><span class="pre">file_MB_limit</span></code>)</p></li>
+<li><p>Total size of all files tracked by git (<code class="docutils literal notranslate"><span class="pre">total_MB_limit</span></code>)</p></li>
+</ul>
+<p>Warning messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p>
+</dd>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>config</strong> (<em>str</em>) – Path of project configuration file.</p></li>
+<li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gslab_make.clear_dir.html" class="btn btn-neutral float-right" title="clear_dir" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../documentation.html" class="btn btn-neutral float-left" title="Specifying paths" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Matthew Gentzkow
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
