@@ -884,7 +884,7 @@ def execute_command(paths, command, **kwargs):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
-def run_module(root, module, build_script = 'make.py'):
+def run_module(root, module, build_script = 'make.py', osname = None):
     """.. Run module. 
     
     Runs script `build_script` in module directory `module` relative to root of repository `root`.
@@ -897,6 +897,8 @@ def run_module(root, module, build_script = 'make.py'):
         Name of module.
     build_script : str
         Name of build script. Defaults to ``make.py``.
+    osname : str, optional
+        Name of OS. Used to determine syntax of system command. Defaults to ``os.name``.
 
     Returns
     -------
@@ -911,6 +913,8 @@ def run_module(root, module, build_script = 'make.py'):
         run_module(root = 'root', module = 'module')
     """
 
+    osname = osname if osname else os.name # https://github.com/sphinx-doc/sphinx/issues/759
+
     try:
         module_dir = os.path.join(root, module)
         os.chdir(module_dir)
@@ -924,7 +928,7 @@ def run_module(root, module, build_script = 'make.py'):
         message = colored(message, attrs = ['bold'])
         print('\n' + message)  
 
-        status = os.system('%s %s' % (metadata.executable['python'], build_script))
+        status = os.system('%s %s' % (metadata.default_executables[osname]['python'], build_script))
         if status != 0:
             raise ProgramError()
     except ProgramError:

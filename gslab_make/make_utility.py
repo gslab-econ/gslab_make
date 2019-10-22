@@ -62,11 +62,13 @@ def update_executables(paths, osname = None):
     None
     """
 
+    osname = osname if osname else os.name # https://github.com/sphinx-doc/sphinx/issues/759
+
     try:
         config_user = get_path(paths, 'config_user')
         config_user = yaml.load(open(config_user, 'rb'), Loader = yaml.Loader)
     
-        _check_os(osname or os.name) # https://github.com/sphinx-doc/sphinx/issues/759
+        _check_os(osname)
     
         if config_user['local']['executables']:
             metadata.default_executables[osname].update(config_user['local']['executables'])
