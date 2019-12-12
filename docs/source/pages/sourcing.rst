@@ -5,3 +5,10 @@ The :mod:`gslab_make` library provides functions to create symbolic links to sou
 
 .. automodule:: gslab_make.move_sources
     :members:
+    :noindex:
+
+.. toctree::
+  :glob:
+  :hidden:
+
+  api/move_sources/*

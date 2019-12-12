@@ -145,3 +145,6 @@ def copy_output(file, copy_dir):
 
     if upload.lower().strip() == "Yes":
         shutil.copy(file, copy_dir)
+
+
+__all__ = ['update_executables', 'update_paths', 'copy_output']

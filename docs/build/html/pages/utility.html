@@ -33,10 +33,11 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Repository functions" href="repository.html" />
-    <link rel="prev" title="Program functions" href="program.html" /> 
+    <link rel="next" title="copy_output" href="api/make_utility/gslab_make.make_utility.copy_output.html" />
+    <link rel="prev" title="run_stata" href="api/run_program/gslab_make.run_program.run_stata.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,7 +88,12 @@
 <li class="toctree-l1"><a class="reference internal" href="sourcing.html">Sourcing functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source_logging.html">Source logging functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Utility functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utility functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.copy_output.html">copy_output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_executables.html">update_executables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_paths.html">update_paths</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="repository.html">Repository functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="directory.html">Directory functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filling.html">Filling functions</a></li>
@@ -158,9 +164,9 @@
   <div class="section" id="utility-functions">
 <h1>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides general utility functions for build scripts. Functions to update executable names/path mappings and copy outputs are included.</p>
-<span class="target" id="module-gslab_make.make_utility"></span><dl class="function">
-<dt id="gslab_make.make_utility.update_executables">
-<code class="sig-name descname">update_executables</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">osname=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.make_utility.update_executables" title="Permalink to this definition">¶</a></dt>
+<dl class="function">
+<dt>
+<code class="sig-name descname">update_executables</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">osname=None</em><span class="sig-paren">)</span></dt>
 <dd><p>Updates executable names with executables listed in file <code class="docutils literal notranslate"><span class="pre">config_user</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -186,8 +192,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.make_utility.update_paths">
-<code class="sig-name descname">update_paths</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.make_utility.update_paths" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">update_paths</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span></dt>
 <dd><p>Updates dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code> with externals listed in file <code class="docutils literal notranslate"><span class="pre">config_user</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -214,8 +220,8 @@ Dictionary should ex-ante contain values for all keys listed below.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.make_utility.copy_output">
-<code class="sig-name descname">copy_output</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">copy_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.make_utility.copy_output" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">copy_output</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">copy_dir</em><span class="sig-paren">)</span></dt>
 <dd><p>Copies output <code class="docutils literal notranslate"><span class="pre">file</span></code> to directory <code class="docutils literal notranslate"><span class="pre">copy_dir</span></code> with user prompt to confirm copy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -233,6 +239,8 @@ Dictionary should ex-ante contain values for all keys listed below.</p>
 </dl>
 </dd></dl>
 
+<div class="toctree-wrapper compound">
+</div>
 </div>
 
 
@@ -243,10 +251,10 @@ Dictionary should ex-ante contain values for all keys listed below.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="repository.html" class="btn btn-neutral float-right" title="Repository functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/make_utility/gslab_make.make_utility.copy_output.html" class="btn btn-neutral float-right" title="copy_output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="program.html" class="btn btn-neutral float-left" title="Program functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api/run_program/gslab_make.run_program.run_stata.html" class="btn btn-neutral float-left" title="run_stata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

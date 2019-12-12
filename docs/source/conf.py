@@ -7,7 +7,6 @@ import sphinx_rtd_theme
 from sphinx.ext.napoleon.docstring import GoogleDocstring
 
 sys.path.insert(0, os.path.abspath('../..'))
-sys.path.insert(0, os.path.abspath('../'))
 
 # -- Project information -----------------------------------------------------
 
@@ -20,7 +19,7 @@ release = '2.0.0'
 
 extensions = ['sphinx.ext.autosectionlabel', 
               'sphinx.ext.autodoc',
-              'autogen',
+              'sphinx_automodapi.automodapi',
               'sphinx.ext.napoleon', 
               'sphinx_rtd_theme']
 

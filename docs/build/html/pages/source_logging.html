@@ -33,10 +33,11 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Program functions" href="program.html" />
-    <link rel="prev" title="Sourcing functions" href="sourcing.html" /> 
+    <link rel="next" title="write_source_logs" href="api/write_source_logs/gslab_make.write_source_logs.write_source_logs.html" />
+    <link rel="prev" title="link_inputs" href="api/move_sources/gslab_make.move_sources.link_inputs.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,7 +86,10 @@
 <li class="toctree-l1"><a class="reference internal" href="specifying_paths.html">Specifying paths</a></li>
 <li class="toctree-l1"><a class="reference internal" href="general_logging.html">General logging functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sourcing.html">Sourcing functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Source logging functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Source logging functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/write_source_logs/gslab_make.write_source_logs.write_source_logs.html">write_source_logs</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utility.html">Utility functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="repository.html">Repository functions</a></li>
@@ -158,9 +162,9 @@
   <div class="section" id="source-logging-functions">
 <h1>Source logging functions<a class="headerlink" href="#source-logging-functions" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to log symbolic linking/copying activity and information about source files. The logs are intended to facilitate the reproducibility of research.</p>
-<span class="target" id="module-gslab_make.write_source_logs"></span><dl class="function">
-<dt id="gslab_make.write_source_logs.write_source_logs">
-<code class="sig-name descname">write_source_logs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">source_map</em>, <em class="sig-param">depth=inf</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.write_source_logs.write_source_logs" title="Permalink to this definition">¶</a></dt>
+<dl class="function">
+<dt>
+<code class="sig-name descname">write_source_logs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">source_map</em>, <em class="sig-param">depth=inf</em><span class="sig-paren">)</span></dt>
 <dd><p>Logs the following information for sources contained in list <code class="docutils literal notranslate"><span class="pre">source_map</span></code>
 (returned by <a class="reference internal" href="sourcing.html#sourcing-functions"><span class="std std-ref">sourcing functions</span></a>).</p>
 <ul>
@@ -214,6 +218,8 @@ and any file in all directories listed in <code class="docutils literal notransl
 </div>
 </dd></dl>
 
+<div class="toctree-wrapper compound">
+</div>
 </div>
 
 
@@ -224,10 +230,10 @@ and any file in all directories listed in <code class="docutils literal notransl
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="program.html" class="btn btn-neutral float-right" title="Program functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/write_source_logs/gslab_make.write_source_logs.write_source_logs.html" class="btn btn-neutral float-right" title="write_source_logs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sourcing.html" class="btn btn-neutral float-left" title="Sourcing functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api/move_sources/gslab_make.move_sources.link_inputs.html" class="btn btn-neutral float-left" title="link_inputs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

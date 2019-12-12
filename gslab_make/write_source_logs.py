@@ -138,3 +138,6 @@ def _write_source_maplog(source_maplog, source_map):
         for source, destination in source_map:
             destination = os.path.relpath(destination)
             print("%s | %s" % (destination, source), file = MAPLOG)
+
+
+__all__ = ['write_source_logs']

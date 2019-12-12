@@ -5,3 +5,10 @@ The :mod:`gslab_make` library provides functions to make modifications to a dire
 
 .. automodule:: gslab_make.modify_dir
     :members:
+    :noindex:
+
+.. toctree::
+  :glob:
+  :hidden:
+
+  api/modify_dir/*

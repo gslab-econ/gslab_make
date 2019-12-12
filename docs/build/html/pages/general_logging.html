@@ -33,9 +33,10 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="write_to_makelog" href="api/write_logs/write_to_makelog.html" />
+    <link rel="next" title="end_makelog" href="api/write_logs/gslab_make.write_logs.end_makelog.html" />
     <link rel="prev" title="Specifying paths" href="specifying_paths.html" /> 
 </head>
 
@@ -84,7 +85,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="specifying_paths.html">Specifying paths</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">General logging functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/write_logs/write_to_makelog.html">write_to_makelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/write_logs/gslab_make.write_logs.end_makelog.html">end_makelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/write_logs/gslab_make.write_logs.log_files_in_output.html">log_files_in_output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/write_logs/gslab_make.write_logs.start_makelog.html">start_makelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/write_logs/gslab_make.write_logs.write_to_makelog.html">write_to_makelog</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sourcing.html">Sourcing functions</a></li>
@@ -163,7 +167,7 @@
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to create a master log of activity (i.e., a <em>make log</em>) and to log information about output files. The logs are intended to facilitate the reproducibility of research.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You must initialize make logs via <code class="xref py py-func docutils literal notranslate"><span class="pre">start_makelog()</span></code> as opposed to alternative methods (e.g., manually creating a make log file). Otherwise, any attempt to call a <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> function that writes to make log will raise an exception.</p>
+<p>You must initialize make logs via <a class="reference internal" href="api/write_logs/gslab_make.write_logs.start_makelog.html#gslab_make.write_logs.start_makelog" title="gslab_make.write_logs.start_makelog"><code class="xref py py-func docutils literal notranslate"><span class="pre">start_makelog()</span></code></a> as opposed to alternative methods (e.g., manually creating a make log file). Otherwise, any attempt to call a <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> function that writes to make log will raise an exception.</p>
 </div>
 <dl class="function">
 <dt>
@@ -301,7 +305,7 @@ regardless of level of subdirectory.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api/write_logs/write_to_makelog.html" class="btn btn-neutral float-right" title="write_to_makelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/write_logs/gslab_make.write_logs.end_makelog.html" class="btn btn-neutral float-right" title="end_makelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="specifying_paths.html" class="btn btn-neutral float-left" title="Specifying paths" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

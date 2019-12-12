@@ -33,10 +33,11 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Source logging functions" href="source_logging.html" />
-    <link rel="prev" title="write_to_makelog" href="api/write_logs/write_to_makelog.html" /> 
+    <link rel="next" title="copy_externals" href="api/move_sources/gslab_make.move_sources.copy_externals.html" />
+    <link rel="prev" title="write_to_makelog" href="api/write_logs/gslab_make.write_logs.write_to_makelog.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,7 +85,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="specifying_paths.html">Specifying paths</a></li>
 <li class="toctree-l1"><a class="reference internal" href="general_logging.html">General logging functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Sourcing functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sourcing functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.copy_externals.html">copy_externals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.copy_inputs.html">copy_inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.link_externals.html">link_externals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.link_inputs.html">link_inputs</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="source_logging.html">Source logging functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utility.html">Utility functions</a></li>
@@ -158,9 +165,9 @@
   <div class="section" id="sourcing-functions">
 <h1>Sourcing functions<a class="headerlink" href="#sourcing-functions" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to create symbolic links to source files. Doing so avoids potential duplication of source files and any associated confusion. In the case of modules dedicated to LyX/LaTeX documents, there are optional functions to copy source files instead of creating symbolic links so that users without <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> can still manually compile.</p>
-<span class="target" id="module-gslab_make.move_sources"></span><dl class="function">
-<dt id="gslab_make.move_sources.link_inputs">
-<code class="sig-name descname">link_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.link_inputs" title="Permalink to this definition">¶</a></dt>
+<dl class="function">
+<dt>
+<code class="sig-name descname">link_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span></dt>
 <dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
 Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
 using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>.
@@ -253,8 +260,8 @@ destination3
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.move_sources.link_externals">
-<code class="sig-name descname">link_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.link_externals" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">link_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span></dt>
 <dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
 Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
 using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>.
@@ -347,8 +354,8 @@ destination3
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.move_sources.copy_inputs">
-<code class="sig-name descname">copy_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.copy_inputs" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">copy_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span></dt>
 <dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
 Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
 using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>.
@@ -437,8 +444,8 @@ destination3
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.move_sources.copy_externals">
-<code class="sig-name descname">copy_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.copy_externals" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">copy_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span></dt>
 <dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
 Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
 using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>.
@@ -526,6 +533,8 @@ destination3
 </div>
 </dd></dl>
 
+<div class="toctree-wrapper compound">
+</div>
 </div>
 
 
@@ -536,10 +545,10 @@ destination3
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="source_logging.html" class="btn btn-neutral float-right" title="Source logging functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/move_sources/gslab_make.move_sources.copy_externals.html" class="btn btn-neutral float-right" title="copy_externals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="api/write_logs/write_to_makelog.html" class="btn btn-neutral float-left" title="write_to_makelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api/write_logs/gslab_make.write_logs.write_to_makelog.html" class="btn btn-neutral float-left" title="write_to_makelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

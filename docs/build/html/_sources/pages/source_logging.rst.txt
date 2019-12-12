@@ -5,3 +5,10 @@ The :mod:`gslab_make` library provides functions to log symbolic linking/copying
 
 .. automodule:: gslab_make.write_source_logs
     :members:
+    :noindex:
+
+.. toctree::
+  :glob:
+  :hidden:
+
+  api/write_source_logs/*

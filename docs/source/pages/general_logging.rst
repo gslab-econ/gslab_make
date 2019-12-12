@@ -16,7 +16,3 @@ The :mod:`gslab_make` library provides functions to create a master log of activ
 
   api/write_logs/*
 
-.. automodsumm:: gslab_make.write_logs
-    :functions-only:
-    :toctree: api
-

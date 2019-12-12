@@ -69,3 +69,10 @@ Supported applications
 ----------------------
 .. automodule:: gslab_make.run_program
     :members:
+    :noindex:
+
+.. toctree::
+  :glob:
+  :hidden:
+
+  api/run_program/*

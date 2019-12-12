@@ -33,10 +33,11 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Filling functions" href="filling.html" />
-    <link rel="prev" title="Repository functions" href="repository.html" /> 
+    <link rel="next" title="clear_dir" href="api/modify_dir/gslab_make.modify_dir.clear_dir.html" />
+    <link rel="prev" title="get_modified_sources" href="api/check_repo/gslab_make.check_repo.get_modified_sources.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,7 +90,14 @@
 <li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utility.html">Utility functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="repository.html">Repository functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Directory functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Directory functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.clear_dir.html">clear_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.remove_dir.html">remove_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.remove_path.html">remove_path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.unzip.html">unzip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.zip_dir.html">zip_dir</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="filling.html">Filling functions</a></li>
 </ul>
 
@@ -158,41 +166,9 @@
   <div class="section" id="directory-functions">
 <h1>Directory functions<a class="headerlink" href="#directory-functions" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to make modifications to a directory. Functions to remove files and directories, clear directories, and zip/unzip files are included.</p>
-<span class="target" id="module-gslab_make.modify_dir"></span><dl class="function">
-<dt id="gslab_make.modify_dir.remove_path">
-<code class="sig-name descname">remove_path</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">option=''</em>, <em class="sig-param">quiet=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.modify_dir.remove_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove path <code class="docutils literal notranslate"><span class="pre">path</span></code> using system command. Safely removes symbolic links.
-Path can be specified with the * shell pattern
-(see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<em>str</em>) – Path to remove.</p></li>
-<li><p><strong>option</strong> (<em>str</em><em>, </em><em>optional</em>) – Options for system command. Defaults to <code class="docutils literal notranslate"><span class="pre">-rf</span></code> for POSIX and <code class="docutils literal notranslate"><span class="pre">/s</span> <span class="pre">/q</span></code> for NT.</p></li>
-<li><p><strong>quiet</strong> (<em>bool</em><em>, </em><em>optional</em>) – Suppress printing of path removed. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p>The following code removes path <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">remove_path</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The following code removes all paths beginning with <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">remove_path</span><span class="p">(</span><span class="s1">&#39;path*&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
 <dl class="function">
-<dt id="gslab_make.modify_dir.remove_dir">
-<code class="sig-name descname">remove_dir</code><span class="sig-paren">(</span><em class="sig-param">dir_list</em>, <em class="sig-param">quiet=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.modify_dir.remove_dir" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">remove_dir</code><span class="sig-paren">(</span><em class="sig-param">dir_list</em>, <em class="sig-param">quiet=False</em><span class="sig-paren">)</span></dt>
 <dd><p>Remove directories in list <code class="docutils literal notranslate"><span class="pre">dir_list</span></code> using system command.
 Safely removes symbolic links. Directories can be specified with the * shell pattern
 (see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
@@ -222,8 +198,8 @@ Safely removes symbolic links. Directories can be specified with the * shell pat
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.modify_dir.clear_dir">
-<code class="sig-name descname">clear_dir</code><span class="sig-paren">(</span><em class="sig-param">dir_list</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.modify_dir.clear_dir" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">clear_dir</code><span class="sig-paren">(</span><em class="sig-param">dir_list</em><span class="sig-paren">)</span></dt>
 <dd><p>Clears all directories in list <code class="docutils literal notranslate"><span class="pre">dir_list</span></code> using system command.
 Safely clears symbolic links. Directories can be specified with the * shell pattern
 (see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
@@ -255,8 +231,8 @@ If the directory is nonexistent, the directory is created.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.modify_dir.unzip">
-<code class="sig-name descname">unzip</code><span class="sig-paren">(</span><em class="sig-param">zip_path</em>, <em class="sig-param">output_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.modify_dir.unzip" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">unzip</code><span class="sig-paren">(</span><em class="sig-param">zip_path</em>, <em class="sig-param">output_dir</em><span class="sig-paren">)</span></dt>
 <dd><p>Unzips file <code class="docutils literal notranslate"><span class="pre">zip_path</span></code> to directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -275,8 +251,8 @@ If the directory is nonexistent, the directory is created.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.modify_dir.zip_dir">
-<code class="sig-name descname">zip_dir</code><span class="sig-paren">(</span><em class="sig-param">source_dir</em>, <em class="sig-param">zip_dest</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.modify_dir.zip_dir" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">zip_dir</code><span class="sig-paren">(</span><em class="sig-param">source_dir</em>, <em class="sig-param">zip_dest</em><span class="sig-paren">)</span></dt>
 <dd><p>Zips directory <code class="docutils literal notranslate"><span class="pre">source_dir</span></code> to file <code class="docutils literal notranslate"><span class="pre">zip_dest</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -294,6 +270,8 @@ If the directory is nonexistent, the directory is created.</p>
 </dl>
 </dd></dl>
 
+<div class="toctree-wrapper compound">
+</div>
 </div>
 
 
@@ -304,10 +282,10 @@ If the directory is nonexistent, the directory is created.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="filling.html" class="btn btn-neutral float-right" title="Filling functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/modify_dir/gslab_make.modify_dir.clear_dir.html" class="btn btn-neutral float-right" title="clear_dir" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="repository.html" class="btn btn-neutral float-left" title="Repository functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api/check_repo/gslab_make.check_repo.get_modified_sources.html" class="btn btn-neutral float-left" title="get_modified_sources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

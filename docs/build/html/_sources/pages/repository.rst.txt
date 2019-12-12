@@ -5,3 +5,10 @@ The :mod:`gslab_make` library provides functions to check file sizes in a reposi
 
 .. automodule:: gslab_make.check_repo
     :members:
+    :noindex:
+
+.. toctree::
+  :glob:
+  :hidden:
+
+  api/check_repo/*

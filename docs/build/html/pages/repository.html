@@ -33,10 +33,11 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Directory functions" href="directory.html" />
-    <link rel="prev" title="Utility functions" href="utility.html" /> 
+    <link rel="next" title="check_module_size" href="api/check_repo/gslab_make.check_repo.check_module_size.html" />
+    <link rel="prev" title="update_paths" href="api/make_utility/gslab_make.make_utility.update_paths.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,7 +89,11 @@
 <li class="toctree-l1"><a class="reference internal" href="source_logging.html">Source logging functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utility.html">Utility functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Repository functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Repository functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/check_repo/gslab_make.check_repo.check_module_size.html">check_module_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/check_repo/gslab_make.check_repo.get_modified_sources.html">get_modified_sources</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="directory.html">Directory functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filling.html">Filling functions</a></li>
 </ul>
@@ -158,9 +163,9 @@
   <div class="section" id="repository-functions">
 <h1>Repository functions<a class="headerlink" href="#repository-functions" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to check file sizes in a repository and modification status of files tracked by git. The checks are intended to facilitate proper committing activity.</p>
-<span class="target" id="module-gslab_make.check_repo"></span><dl class="function">
-<dt id="gslab_make.check_repo.check_module_size">
-<code class="sig-name descname">check_module_size</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.check_module_size" title="Permalink to this definition">¶</a></dt>
+<dl class="function">
+<dt>
+<code class="sig-name descname">check_module_size</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span></dt>
 <dd><p>Checks file sizes for files to be committed in the current working directory.
 Compares file sizes to size limits in file <code class="docutils literal notranslate"><span class="pre">config</span></code> and
 produces warnings if any of the following limits are exceeded.</p>
@@ -191,8 +196,8 @@ produces warnings if any of the following limits are exceeded.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="gslab_make.check_repo.get_modified_sources">
-<code class="sig-name descname">get_modified_sources</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">source_map</em>, <em class="sig-param">depth=inf</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.get_modified_sources" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">get_modified_sources</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">source_map</em>, <em class="sig-param">depth=inf</em><span class="sig-paren">)</span></dt>
 <dd><p>Checks the modification status for all sources contained in list
 <code class="docutils literal notranslate"><span class="pre">source_map</span></code> (returned by <a class="reference internal" href="sourcing.html#sourcing-functions"><span class="std std-ref">sourcing functions</span></a>).
 Produces warning if sources have been modified according to git.
@@ -219,6 +224,8 @@ Warning messages are appended to file <code class="docutils literal notranslate"
 <p class="rubric">Notes</p>
 </dd></dl>
 
+<div class="toctree-wrapper compound">
+</div>
 </div>
 
 
@@ -229,10 +236,10 @@ Warning messages are appended to file <code class="docutils literal notranslate"
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="directory.html" class="btn btn-neutral float-right" title="Directory functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/check_repo/gslab_make.check_repo.check_module_size.html" class="btn btn-neutral float-right" title="check_module_size" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="utility.html" class="btn btn-neutral float-left" title="Utility functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api/make_utility/gslab_make.make_utility.update_paths.html" class="btn btn-neutral float-left" title="update_paths" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
