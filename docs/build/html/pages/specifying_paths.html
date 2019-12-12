@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Specifying paths &mdash; GSLab Make 2.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="General logging functions" href="general_logging.html" />
+    <link rel="prev" title="Introduction" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSLab Make
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Specifying paths</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-paths">Example paths</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="general_logging.html">General logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourcing.html">Sourcing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source_logging.html">Source logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repository.html">Repository functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directory.html">Directory functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filling.html">Filling functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSLab Make</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Specifying paths</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/specifying_paths.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="specifying-paths">
+<h1>Specifying paths<a class="headerlink" href="#specifying-paths" title="Permalink to this headline">¶</a></h1>
+<p>The majority of the functions in <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> contain a <code class="docutils literal notranslate"><span class="pre">paths</span></code> argument that requires passing in a dictionary specifying default paths used for a variety of purposes. To fully use any function in the library, the dictionary <em>must</em> contain values for the following keys (i.e., default paths):</p>
+<dl class="field-list simple">
+<dt class="field-odd">config</dt>
+<dd class="field-odd"><p>Default path for <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, a <em>project configuration file</em> containing global variables for all users.</p>
+</dd>
+<dt class="field-even">config_user</dt>
+<dd class="field-even"><p>Default path for <code class="docutils literal notranslate"><span class="pre">config_user.yaml</span></code>, a <em>user configuration file</em> containing local user-specific variables.</p>
+</dd>
+<dt class="field-odd">input_dir</dt>
+<dd class="field-odd"><p>Default path for sourcing (i.e., copying or making symbolic links to) <em>input files</em> located internal to the project directory.</p>
+</dd>
+<dt class="field-even">external_dir</dt>
+<dd class="field-even"><p>Default path for sourcing (i.e., copying or making symbolic links to) <em>external files</em> located external to the project directory.</p>
+</dd>
+<dt class="field-odd">output_dir</dt>
+<dd class="field-odd"><p>Default path to write and look for code outputs.</p>
+</dd>
+<dt class="field-even">makelog</dt>
+<dd class="field-even"><p>Default path to write <em>make log</em>, a master log of activity.</p>
+</dd>
+<dt class="field-odd">output_statslog</dt>
+<dd class="field-odd"><p>Default path to write <em>output statistics log</em>, a log containing file statistics for <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
+</dd>
+<dt class="field-even">source_maplog</dt>
+<dd class="field-even"><p>Default path to write <em>source mapping log</em>, a log that maps the original location for all sources in <code class="docutils literal notranslate"><span class="pre">input_dir</span></code> and <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>.</p>
+</dd>
+<dt class="field-odd">source_statslog</dt>
+<dd class="field-odd"><p>Default path to write <em>source statistics log</em>, a log containing file statistics for all sources in <code class="docutils literal notranslate"><span class="pre">input_dir</span></code> and <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To suppress writing any specific log, set the value for that log to <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Many of the functions in <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> will write status messages to the make log. If you have specified a make log in your <code class="docutils literal notranslate"><span class="pre">paths</span></code>, you must initialize the makelog via <code class="xref py py-func docutils literal notranslate"><span class="pre">start_makelog()</span></code>. Otherwise, attempting to call a function that writes to the make log will raise an exception.</p>
+</div>
+<div class="section" id="example-paths">
+<h2>Example paths<a class="headerlink" href="#example-paths" title="Permalink to this headline">¶</a></h2>
+<p>The following default paths are recommended:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">CONFIG_DIR</span> <span class="o">=</span> <span class="s1">&#39;..&#39;</span> <span class="c1"># Adjust accordingly</span>
+
+<span class="n">PATHS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;config&#39;</span>           <span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CONFIG_DIR</span><span class="p">,</span> <span class="s1">&#39;config.yaml&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;config_user&#39;</span>      <span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CONFIG_DIR</span><span class="p">,</span> <span class="s1">&#39;config_user.yaml&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;input_dir&#39;</span>        <span class="p">:</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;external_dir&#39;</span>     <span class="p">:</span> <span class="s1">&#39;external&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;output_dir&#39;</span>       <span class="p">:</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;makelog&#39;</span>          <span class="p">:</span> <span class="s1">&#39;log/make.log&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;output_statslog&#39;</span>  <span class="p">:</span> <span class="s1">&#39;log/output_stats.log&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;source_maplog&#39;</span>    <span class="p">:</span> <span class="s1">&#39;log/source_map.log&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;source_statslog&#39;</span>  <span class="p">:</span> <span class="s1">&#39;log/source_stats.log&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Functions in <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> that require a <code class="docutils literal notranslate"><span class="pre">paths</span></code> argument will specify the exact default paths required in their documentation.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="general_logging.html" class="btn btn-neutral float-right" title="General logging functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Matthew Gentzkow
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

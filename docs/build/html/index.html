@@ -33,10 +33,9 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Specifying paths" href="documentation.html" /> 
+    <link rel="next" title="Specifying paths" href="pages/specifying_paths.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,15 +81,15 @@
             
               <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html">Specifying paths</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#general-logging-functions">General logging functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#sourcing-functions">Sourcing functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#source-logging-functions">Source logging functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#program-functions">Program functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#utility-functions">Utility functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#directory-functions">Directory functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#repository-functions">Repository functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#filling-functions">Filling functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/specifying_paths.html">Specifying paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/general_logging.html">General logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/sourcing.html">Sourcing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/source_logging.html">Source logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/program.html">Program functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/utility.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/repository.html">Repository functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/directory.html">Directory functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/filling.html">Filling functions</a></li>
 </ul>
 
             
@@ -157,7 +156,7 @@
             
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference internal" href="documentation.html#module-gslab_make" title="gslab_make"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code></a> Python library contains tools to facilitate workflow automation for research projects. It is designed to help researchers implement the following rules of <a class="reference external" href="https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf">Code and Data for the Social Sciences: A Practioner’s Guide</a>.</p>
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> Python library contains tools to facilitate workflow automation for research projects. It is designed to help researchers implement the following rules of <a class="reference external" href="https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf">Code and Data for the Social Sciences: A Practioner’s Guide</a>.</p>
 <div class="highlight-md notranslate"><div class="highlight"><pre><span></span>Automation
 (A) Automate everything that can be automated.
 (B) Write a single script that executes all code from beginning to end.
@@ -172,56 +171,22 @@ Directories
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html">Specifying paths</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#example-paths">Example paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/specifying_paths.html">Specifying paths</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/specifying_paths.html#example-paths">Example paths</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#general-logging-functions">General logging functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.check_module_size.html">check_module_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.clear_dir.html">clear_dir</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.copy_externals.html">copy_externals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.copy_inputs.html">copy_inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.copy_output.html">copy_output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.end_makelog.html">end_makelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.execute_command.html">execute_command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.get_modified_sources.html">get_modified_sources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.link_externals.html">link_externals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.link_inputs.html">link_inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.log_files_in_output.html">log_files_in_output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.remove_dir.html">remove_dir</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_jupyter.html">run_jupyter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_lyx.html">run_lyx</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_mathematica.html">run_mathematica</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_matlab.html">run_matlab</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_module.html">run_module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_perl.html">run_perl</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_python.html">run_python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_r.html">run_r</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_sas.html">run_sas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_stat_transfer.html">run_stat_transfer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.run_stata.html">run_stata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.start_makelog.html">start_makelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.tablefill.html">tablefill</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.textfill.html">textfill</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.unzip.html">unzip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.update_executables.html">update_executables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.update_paths.html">update_paths</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.write_source_logs.html">write_source_logs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.write_to_makelog.html">write_to_makelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/gslab_make.zip_dir.html">zip_dir</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/general_logging.html">General logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/sourcing.html">Sourcing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/source_logging.html">Source logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/program.html">Program functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/program.html#default-settings">Default settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/program.html#module-gslab_make.run_program">Supported applications</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#sourcing-functions">Sourcing functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#source-logging-functions">Source logging functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#program-functions">Program functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#default-settings">Default settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#module-gslab_make.run_program">Supported applications</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#utility-functions">Utility functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#directory-functions">Directory functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#repository-functions">Repository functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html#filling-functions">Filling functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/utility.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/repository.html">Repository functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/directory.html">Directory functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/filling.html">Filling functions</a></li>
 </ul>
 </div>
 </div>
@@ -234,7 +199,7 @@ Directories
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="documentation.html" class="btn btn-neutral float-right" title="Specifying paths" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="pages/specifying_paths.html" class="btn btn-neutral float-right" title="Specifying paths" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

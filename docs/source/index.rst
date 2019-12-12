@@ -22,4 +22,12 @@ The library is currently under active development. If you wish to contribute, pl
   :maxdepth: 2
   :caption: Documentation
 
-  documentation
+  pages/specifying_paths
+  pages/general_logging
+  pages/sourcing
+  pages/source_logging
+  pages/program
+  pages/utility
+  pages/repository
+  pages/directory
+  pages/filling

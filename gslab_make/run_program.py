@@ -26,7 +26,7 @@ from gslab_make.write_logs import write_to_makelog
 
 
 def run_jupyter(paths, program, timeout = None, kernel_name = ''):
-    """Run Jupyter notebook using system command.
+    """.. Run Jupyter notebook using system command.
 
     Runs notebook ``program`` using Python API, with notebook specified 
     in the form of ``notebook.ipynb``. 
