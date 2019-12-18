@@ -1,2 +1,2 @@
 # Destination | Source
-file_β.txt | raw/file_β.txt
+file_β.txt | test/raw/move_source/file_β.txt

@@ -58,7 +58,7 @@ class TestRunPython(unittest.TestCase):
             paths = self.make_paths(makelog_path = '')
             run_function(paths, program = 'test/raw/run_program/%s_script.%s' % (app, ext))
             
-        self.assertIn('Test script complete', open(paths['makelog']).read())
+        self.assertFalse(os.path.isfile(paths['makelog']))
         self.assertTrue(os.path.isfile('test/output/output.csv'))
 
     def test_log(self):      
@@ -160,6 +160,15 @@ class TestRunPython(unittest.TestCase):
             with no_stderrout():
                 paths = self.make_paths()
                 run_function(paths, program = 'test/raw/run_program/program/')
+                
+        except Exception as e:
+            self.assertRaises(Exception, e)
+
+    def test_error_bad_program(self):      
+        try:
+            with no_stderrout():
+                paths = self.make_paths()
+                run_function(paths, program = 'test/raw/run_program/%s_script_error.%s' % (app, ext))
                 
         except Exception as e:
             self.assertRaises(Exception, e)
