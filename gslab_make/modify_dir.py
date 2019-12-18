@@ -6,7 +6,7 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import subprocess
-import time
+import glob
 import zipfile
 import traceback
 
@@ -59,9 +59,10 @@ def remove_path(path, option = '', quiet = False):
         path = norm_path(path)
         if not option:
             option = metadata.default_options[os.name]['rmdir']
-            
+
         command = metadata.commands[os.name]['rmdir'] % (option, path)
-        subprocess.Popen(command, shell = True)
+        process = subprocess.Popen(command, shell = True)
+        process.wait()
         # ACTION ITEM: ADD DEBUGGING TO SUBPROCESS CALL
 
         if not quiet:
@@ -109,7 +110,8 @@ def remove_dir(dir_list, quiet = False):
     try:
         dir_list = convert_to_list(dir_list, 'dir')
         dir_list = [norm_path(dir_path) for dir_path in dir_list]
-        
+        dir_list = [d for directory in dir_list for d in glob.glob(directory)]
+
         for dir_path in dir_list:
             if os.path.isdir(dir_path):
                 remove_path(dir_path, quiet = quiet)
@@ -131,7 +133,8 @@ def clear_dir(dir_list):
     Note
     ----
     To clear a directory means to remove all contents of a directory. 
-    If the directory is nonexistent, the directory is created.
+    If the directory is nonexistent, the directory is created, 
+    unless the directory is specified via shell pattern.
 
     Parameters
     ----------
@@ -154,15 +157,20 @@ def clear_dir(dir_list):
 
     .. code-block:: python
 
-        clear_dir(['dir1*'])
+        clear_dir(['dir*'])
     """
 
     try:
-        remove_dir(dir_list, quiet = True)
-        time.sleep(0.5) # Allow file manager to recognize files no longer exist
-        # ACTION ITEM: FIGURE OUT BETTER WORKAROUND THAN DELAY
-        
+        dir_list = convert_to_list(dir_list, 'dir')
+        dir_glob = []
         for dir_path in dir_list:
+            expand = glob.glob(dir_path)
+            expand = expand if expand else [dir_path]
+            dir_glob.extend(expand)
+
+        remove_dir(dir_glob, quiet = True)
+
+        for dir_path in dir_glob:
             os.makedirs(dir_path)
             message = 'Cleared: `%s`' % dir_path
             print(colored(message, metadata.color_success))

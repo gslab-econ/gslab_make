@@ -1,0 +1,2 @@
+# Destination | Source
+file.txt | {key}/file.txt
