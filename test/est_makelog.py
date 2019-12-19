@@ -2,7 +2,7 @@ import unittest
 import sys
 import os
 import shutil
-from test.utility import no_stderrout, redirect_stdout, create_file
+from test.utility import no_stderrout, redirect_stdout, create_file, read_file
 from gslab_make import clear_dir
 
 from gslab_make.write_logs import start_makelog, end_makelog, write_to_makelog
@@ -19,9 +19,9 @@ class TestMakeLog(unittest.TestCase):
         return(paths)
 
     def check_makelog(self, paths):
-        self.assertIn('Makelog started: ', open(paths['makelog']).read())
-        self.assertIn('Hello, World!', open(paths['makelog']).read())
-        self.assertIn('Makelog ended: ', open(paths['makelog']).read())
+        self.assertIn('Makelog started: ', read_file(paths['makelog']))
+        self.assertIn('Hello, World!', read_file(paths['makelog']))
+        self.assertIn('Makelog ended: ', read_file(paths['makelog']))
 
     def test_makelog(self):     
         with no_stderrout():

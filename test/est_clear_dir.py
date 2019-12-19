@@ -2,7 +2,7 @@ import unittest
 import sys
 import os
 import shutil
-from test.utility import no_stderrout, redirect_stdout, create_file
+from test.utility import no_stderrout, redirect_stdout, create_file, read_file
 
 from gslab_make.modify_dir import clear_dir
 
@@ -11,7 +11,7 @@ class TestClearDir(unittest.TestCase):
     def make_output(self, contain_file = False):
         # Create output directory
         self.assertFalse(os.path.exists('test/output/'))
-        os.makedirs('test/output')
+        os.makedirs('test/output/')
 
         # Create test file
         if contain_file:
@@ -26,8 +26,7 @@ class TestClearDir(unittest.TestCase):
         self.assertEqual(len(file_list), 0)
           
         # Check status message printed
-        with open('test/stdout.txt', 'r') as f:
-            self.assertIn('Cleared:', f.read())
+        self.assertIn('Cleared:', read_file('test/stdout.txt'))
 
     def clear_output(self, output_list):
         with open('test/stdout.txt', 'w') as f:

@@ -1,0 +1,2 @@
+# Destination | Source
+dir | test/raw/log_sources/dir

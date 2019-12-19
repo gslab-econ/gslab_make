@@ -1,2 +1,0 @@
-# Destination | Source
-program | test/raw/move_source/program

@@ -1,0 +1,2 @@
+# Destination | Source
+file space.txt | test/raw/move_sources/file space.txt

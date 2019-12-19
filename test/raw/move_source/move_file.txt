@@ -1,2 +1,0 @@
-# Destination | Source
-file.txt | test/raw/move_source/file.txt

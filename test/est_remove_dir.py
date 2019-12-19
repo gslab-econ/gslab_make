@@ -2,7 +2,7 @@ import unittest
 import sys
 import os
 import shutil
-from test.utility import no_stderrout, redirect_stdout, create_file
+from test.utility import no_stderrout, redirect_stdout, create_file, read_file
 
 from gslab_make.modify_dir import remove_dir
 
@@ -11,7 +11,7 @@ class TestRemoveDir(unittest.TestCase):
     def make_output(self, contain_file = False):
         # Create output directory
         self.assertFalse(os.path.exists('test/output/'))
-        os.makedirs('test/output')
+        os.makedirs('test/output/')
 
         # Create test file
         if contain_file:
@@ -23,22 +23,24 @@ class TestRemoveDir(unittest.TestCase):
     def test_quiet(self):
         self.make_output()
         
+        # Redirect stdout
         with open('test/stdout.txt', 'w') as f:
             with redirect_stdout(f):
                 remove_dir(['test/output/'], quiet = True)
                 
-        with open('test/stdout.txt', 'r') as f:
-            self.assertNotIn('Removed:', f.read())
+        # Check stdout
+        self.assertNotIn('Removed:', read_file('test/stdout.txt'))
         
     def test_not_quiet(self):
         self.make_output()
-                
+             
+        # Redirect stdout 
         with open('test/stdout.txt', 'w') as f:
             with redirect_stdout(f):
                 remove_dir(['test/output/'], quiet = False)
-                
-        with open('test/stdout.txt', 'r') as f:
-            self.assertIn('Removed:', f.read())
+        
+        # Check stdout      
+        self.assertIn('Removed:', read_file('test/stdout.txt'))
             
     def test_dir_not_exist(self):
         """
@@ -50,12 +52,13 @@ class TestRemoveDir(unittest.TestCase):
 
         self.assertFalse(os.path.exists('test/output/'))
                 
+        # Redirect stdout
         with open('test/stdout.txt', 'w') as f:
             with redirect_stdout(f):
                 remove_dir(['test/output/'], quiet = False)
-                
-        with open('test/stdout.txt', 'r') as f:
-            self.assertNotIn('Removed:', f.read()) 
+         
+        # Check stdout      
+        self.assertNotIn('Removed:', read_file('test/stdout.txt'))
             
         self.check_output()
         

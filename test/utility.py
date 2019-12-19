@@ -27,4 +27,10 @@ def redirect_stdout(file):
 
 def create_file(path):
     with open(path, 'w') as f:
-            f.write('')
+        f.write('')
+
+def read_file(path):
+    with open(path, 'r') as f:
+        content = f.read()
+
+    return(content)
