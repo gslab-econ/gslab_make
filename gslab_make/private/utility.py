@@ -9,6 +9,7 @@ import re
 import glob
 import traceback
 import filecmp
+import codecs
 
 import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError
@@ -26,6 +27,7 @@ def convert_to_list(obj, warning_type):
             raise_from(TypeError(messages.type_error_file_list % obj), None)
 
     return(obj)
+
 
 def norm_path(path):
     """Normalize path to be OS-compatible."""
@@ -124,7 +126,7 @@ def file_to_array(file_name):
         List of lines contained in file.
     """
        
-    with open(file_name, 'r') as f:
+    with codecs.open(file_name, encoding = 'utf-8') as f:
         array = [line.strip() for line in f]
         array = [line for line in array if line]
         array = [line for line in array if not re.match('\#',line)]

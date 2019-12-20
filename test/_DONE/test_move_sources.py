@@ -12,13 +12,17 @@ from gslab_make import link_inputs, copy_inputs, link_externals, copy_externals
 
 class TestLinkInputs(unittest.TestCase):
 
-    def setUp(self):
+    def setup_directories(self):
         with no_stderrout():
             remove_dir(['test/external/', 'test/input/'])
             clear_dir(['test/output/', 'test/log/'])
 
         if not os.path.isdir('test/raw/move_sources/dir/'):
-            os.makedirs('test/raw/move_sources/dir/')         
+            os.makedirs('test/raw/move_sources/dir/')     
+
+    def setUp(self):
+        self.setup_directories()
+        self.move_type = 'input'
 
     def move_function(self, *args):
         link_inputs(*args)
@@ -38,11 +42,12 @@ class TestLinkInputs(unittest.TestCase):
         return(paths)
         
     def check_makelog(self, paths):
-        self.assertIn('Input links successfully created!', read_file(paths['makelog']))
+        message = 'Input links successfully created!'
+        self.assertIn(message, read_file(paths['makelog']))
 
     def check_move(self, paths):
         self.check_makelog(paths)
-        self.assertTrue(os.path.isfile('test/input/file.txt'))
+        self.assertTrue(os.path.isfile('test/%s/file.txt' % self.move_type))
 
     def test_move_file(self):        
         with no_stderrout():
@@ -61,7 +66,7 @@ class TestLinkInputs(unittest.TestCase):
             paths = self.make_paths()
             self.move_function(paths, ['test/raw/move_sources/move_dir.txt'])
             self.check_makelog(paths)
-            self.assertTrue(os.path.isdir('test/input/dir/'))
+            self.assertTrue(os.path.isdir('test/%s/dir/' % self.move_type))
 
     def test_move_wildcard(self):        
         with no_stderrout():
@@ -74,14 +79,14 @@ class TestLinkInputs(unittest.TestCase):
             paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
             self.move_function(paths, ['test/raw/move_sources/move_╬▓.txt'])
             self.check_makelog(paths)
-            self.assertTrue(os.path.isfile('test/input/file_╬▓.txt'))
-
+            self.assertTrue(os.path.isfile('test/%s/file_╬▓.txt' % self.move_type))
+            
     def test_move_space(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make space.log')
             self.move_function(paths, ['test/raw/move_sources/move space.txt'])
             self.check_makelog(paths)
-            self.assertTrue(os.path.isfile('test/input/file space.txt'))
+            self.assertTrue(os.path.isfile('test/%s/file space.txt' % self.move_type))
 
     def test_move_no_move(self):        
         with no_stderrout():
@@ -186,11 +191,42 @@ class TestLinkInputs(unittest.TestCase):
 
 class TestLinkExternals(TestLinkInputs):      
 
+    def setUp(self):
+        self.setup_directories()
+        self.move_type = 'external'
+
     def move_function(self, *args):
         link_externals(*args)
-        
+
     def check_makelog(self, paths):
-        self.assertIn('External links successfully created!', read_file(paths['makelog']))
+        message = 'External links successfully created!'
+        self.assertIn(message, read_file(paths['makelog']))
+
+class TestCopyInputs(TestLinkInputs):      
+
+    def setUp(self):
+        self.setup_directories()
+        self.move_type = 'input'
+
+    def move_function(self, *args):
+        copy_inputs(*args)
+
+    def check_makelog(self, paths):
+        message = 'Input copies successfully created!'
+        self.assertIn(message, read_file(paths['makelog']))
+
+class TestCopyExternals(TestLinkInputs):      
+
+    def setUp(self):
+        self.setup_directories()
+        self.move_type = 'external'
+
+    def move_function(self, *args):
+        copy_externals(*args)
+
+    def check_makelog(self, paths):
+        message = 'External copies successfully created!'
+        self.assertIn(message, read_file(paths['makelog']))
 
 if __name__ == '__main__':
     unittest.main()

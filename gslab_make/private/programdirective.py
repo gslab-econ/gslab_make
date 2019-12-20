@@ -7,7 +7,8 @@ from builtins import (bytes, str, open, super, range,
 import os
 import subprocess
 import shutil
-
+import codecs
+''
 from termcolor import colored
 import colorama
 colorama.init()
@@ -131,11 +132,11 @@ class Directive(object):
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
-            with open(self.makelog, 'a') as f:
+            with codecs.open(self.makelog, 'a', encoding = 'utf-8') as f:
                 print(self.output, file = f)
 
         if self.log:
-            with open(self.log, 'w') as f:
+            with codecs.open(self.log, 'w', encoding = 'utf-8') as f:
                 f.write(self.output)
 
 

@@ -327,14 +327,15 @@ class MoveList(object):
         None
         """
 
-        self.file_list = convert_to_list(self.file_list, 'file')
+        if self.file_list:
+            self.file_list = convert_to_list(self.file_list, 'file')
 
-        file_list_parsed = [f for file in self.file_list for f in glob.glob(file)]   
-        if file_list_parsed:
-            self.file_list = file_list_parsed
-        else:
-            error_list = [str(f) for f in self.file_list]
-            raise CritError(messages.crit_error_no_files % error_list) 
+            file_list_parsed = [f for file in self.file_list for f in glob.glob(file)]   
+            if file_list_parsed:
+                self.file_list = file_list_parsed
+            else:
+                error_list = [str(f) for f in self.file_list]
+                raise CritError(messages.crit_error_no_files % error_list) 
 
     def get_paths(self):    
         """Normalize paths. 
