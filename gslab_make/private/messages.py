@@ -64,6 +64,10 @@ crit_error_path_mapping = \
     'For further detail, refer to the traceback below.'
 crit_error_no_repo = \
     '\nERROR! Current working directory is not part of a git repository.'
+crit_error_not_float = \
+    '\nERROR! You are attempting to round or format a value (`%s`) that is not a number.'
+crit_error_no_input_table = \
+    '\nERROR! None of the inputs match the tab name for table `%s`.'
 
 # Syntax errors
 syn_error_wildcard = \

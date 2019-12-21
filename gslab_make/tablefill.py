@@ -1,3 +1,4 @@
+
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from
@@ -6,6 +7,7 @@ from builtins import (bytes, str, open, super, range,
 
 import re
 import traceback
+import codecs
 from itertools import chain
 
 from termcolor import colored
@@ -50,16 +52,15 @@ def _parse_data(data, null):
     data = [row.split('\t') for row in data]
     data = chain(*data)
     data = list(data)
-    if (null != None):
-        data = [null if value in null_strings else value for value in data]
-    
+    data = [null if value in null_strings else value for value in data]
+        
     return(data)
         
     
 def _parse_content(file, null):
     """.. Parse content from input."""
         
-    with open(file, 'r') as f:
+    with codecs.open(file, 'r', encoding = 'utf-8') as f:
         content = f.readlines()
     try:
         tag = _parse_tag(content[0])
@@ -70,7 +71,7 @@ def _parse_content(file, null):
     return(tag, data)
     
     
-def _insert_value(line, value, type):
+def _insert_value(line, value, type, null):
     """.. Insert value into line.
     
     Parameters
@@ -89,30 +90,36 @@ def _insert_value(line, value, type):
     """
     
     if (type == 'no change'):
-        line = re.replace('\\\\?#\\\\?#\\\\?#', value, line)
+        line = re.sub('\\\\?#\\\\?#\\\\?#', value, line)
                           
     elif (type == 'round'):
-        try:
-            value = float(value)
-        except:
-            raise_from(CritError(messages.crit_error_not_float % value), None)
-        digits = re.findall('\\\\?#([0-9]+)\\\\?#', line)[0]
-        rounded_value = format(value, '.%sf' % digits)
-        line = re.sub('(.*?)\\\\?#[0-9]+\\\\?#', r'\g<1>' + rounded_value, line)
+        if value == null:
+            line = re.sub('(.*?)\\\\?#[0-9]+\\\\?#', r'\g<1>' + value, line)
+        else:
+            try:
+                value = float(value)
+            except:
+                raise_from(CritError(messages.crit_error_not_float % value), None)
+            digits = re.findall('\\\\?#([0-9]+)\\\\?#', line)[0]
+            rounded_value = format(value, '.%sf' % digits)
+            line = re.sub('(.*?)\\\\?#[0-9]+\\\\?#', r'\g<1>' + rounded_value, line)
                       
     elif (type == 'comma + round'):
-        try:
-            value = float(value)
-        except:
-            raise_from(CritError(messages.crit_error_not_float % value), None)
-        digits = re.findall('\\\\?#([0-9]+),\\\\?#', line)[0]
-        rounded_value = format(value, ',.%sf' % digits)
-        line = re.sub('(.*?)\\\\?#[0-9]+,\\\\?#', r'\g<1>' + rounded_value, line)
+        if value == null:
+            line = re.sub('(.*?)\\\\?#[0-9]+,\\\\?#', r'\g<1>' + value, line)
+        else:
+            try:
+                value = float(value)
+            except:
+                raise_from(CritError(messages.crit_error_not_float % value), None)
+            digits = re.findall('\\\\?#([0-9]+),\\\\?#', line)[0]
+            rounded_value = format(value, ',.%sf' % digits)
+            line = re.sub('(.*?)\\\\?#[0-9]+,\\\\?#', r'\g<1>' + rounded_value, line)
 
     return(line)
 
 
-def _insert_tables_lyx(template, tables):
+def _insert_tables_lyx(template, tables, null):
     """.. Fill tables for LyX template.
     
     Parameters
@@ -128,7 +135,7 @@ def _insert_tables_lyx(template, tables):
         Filled LyX template.
     """
 
-    with open(template, 'r') as f:
+    with codecs.open(template, 'r', encoding = 'utf-8') as f:
         doc = f.readlines()
       
     is_table = False
@@ -142,23 +149,20 @@ def _insert_tables_lyx(template, tables):
                 entry_count = 0
                 is_table = True
             except KeyError:
-                pass
+                raise_from(CritError(messages.crit_error_no_input_table % tag), None)
 
         # Fill in values if table
         if is_table:
             try:
                 if re.match('.*###', doc[i]):
-                    doc[i] = _insert_value(doc[i], values[entry_count], 'no change')
+                    doc[i] = _insert_value(doc[i], values[entry_count], 'no change', null)
                     entry_count += 1
-                    break
                 elif re.match('.*#[0-9]+#', doc[i]):
-                    doc[i] = _insert_value(doc[i], values[entry_count], 'round')
+                    doc[i] = _insert_value(doc[i], values[entry_count], 'round', null)
                     entry_count += 1
-                    break
                 elif re.match('.*#[0-9]+,#', doc[i]):
-                    doc[i] = _insert_value(doc[i], values[entry_count], 'comma + round')
+                    doc[i] = _insert_value(doc[i], values[entry_count], 'comma + round', null)
                     entry_count += 1
-                    break
                 elif re.match('</lyxtabular>', doc[i]):
                     is_table = False
                     if entry_count != len(values):
@@ -171,7 +175,7 @@ def _insert_tables_lyx(template, tables):
     return(doc)
 
 
-def _insert_tables_latex(template, tables):
+def _insert_tables_latex(template, tables, null):
     """.. Fill tables for LaTeX template.
     
     Parameters
@@ -201,7 +205,7 @@ def _insert_tables_latex(template, tables):
                 entry_count = 0
                 is_table = True
             except KeyError:
-                pass
+                raise_from(CritError(messages.crit_error_no_input_table % tag), None)
 
         # Fill in values if table
         if is_table:
@@ -210,13 +214,13 @@ def _insert_tables_latex(template, tables):
     
                 for j in range(len(line)):
                     if re.search('.*\\\\#\\\\#\\\\#', line[j]):
-                        line[j] = _insert_value(line[j], values[entry_count], 'no change')
+                        line[j] = _insert_value(line[j], values[entry_count], 'no change', null)
                         entry_count += 1
                     elif re.search('.*\\\\#[0-9]+\\\\#', line[j]):
-                        line[j] = _insert_value(line[j], values[entry_count], 'round')                   
+                        line[j] = _insert_value(line[j], values[entry_count], 'round', null)                  
                         entry_count += 1
                     elif re.search('.*\\\\#[0-9]+,\\\\#', line[j]):
-                        line[j] = _insert_value(line[j], values[entry_count], 'comma + round')
+                        line[j] = _insert_value(line[j], values[entry_count], 'comma + round', null)
                         entry_count += 1
                    
                 doc[i] = "&".join(line)
@@ -233,7 +237,7 @@ def _insert_tables_latex(template, tables):
     return(doc)
 
 
-def _insert_tables(template, tables):
+def _insert_tables(template, tables, null):
     """.. Fill tables for template.
     
     Parameters
@@ -250,14 +254,14 @@ def _insert_tables(template, tables):
     """
     
     if re.search('\.lyx', template):
-        doc = _insert_tables_lyx(template, tables)
+        doc = _insert_tables_lyx(template, tables, null)
     elif re.search('\.tex', template):
-        doc = _insert_tables_latex(template, tables)
+        doc = _insert_tables_latex(template, tables, null)
 
     return(doc)
 
 
-def tablefill(inputs, template, output, null = None):
+def tablefill(inputs, template, output, null = '.'):
     """.. Fill tables for template using inputs.
     
     Fills tables in document ``template`` using files in list ``inputs``. 
@@ -273,7 +277,7 @@ def tablefill(inputs, template, output, null = None):
     output : str
         Path of output.
     null : str
-        Value to replace null characters (i.e., ``''``, ``'.'``, ``'NA'``). Defaults to no replacement.
+        Value to replace null characters (i.e., ``''``, ``'.'``, ``'NA'``). Defaults to ``'.'``.
 
     Returns
     -------
@@ -626,7 +630,7 @@ def tablefill(inputs, template, output, null = None):
         if (len(content) != len(tables)):
             raise_from(CritError(messages.crit_error_duplicate_tables), None)
 
-        doc = _insert_tables(template, tables)  
+        doc = _insert_tables(template, tables, null)  
         
         with open(output, 'w') as f:
             f.write(doc)

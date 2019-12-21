@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import sys
 
 with open('test/output/output.csv', 'w') as f:
