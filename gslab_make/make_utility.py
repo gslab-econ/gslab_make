@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from
+
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -143,7 +144,7 @@ def copy_output(file, copy_dir):
     message = colored(messages.warning_copy, color = 'cyan')
     upload = input(message % (file, copy_dir))
 
-    if upload.lower().strip() == "Yes":
+    if upload.lower().strip() == "yes":
         shutil.copy(file, copy_dir)
 
 

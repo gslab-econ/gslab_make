@@ -92,6 +92,8 @@ def glob_recursive(path, depth, quiet = True):
         List of files contained in path.
     """
 
+    depth = 100 if depth > 100 else depth
+
     path_walk = norm_path(path)
     path_files = glob.glob(path_walk)
 

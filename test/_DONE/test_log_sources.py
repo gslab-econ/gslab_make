@@ -6,6 +6,7 @@ from test.utility import no_stderrout, redirect_stdout, read_file
 from gslab_make import clear_dir, remove_dir, start_makelog
 
 from gslab_make import write_source_logs, link_inputs
+from func_timeout import func_set_timeout
 
 class TestMakeLog(unittest.TestCase):
             
@@ -88,6 +89,13 @@ class TestMakeLog(unittest.TestCase):
             write_source_logs(paths, inputs, depth = 1)
             self.assertIn('depth_1.txt', read_file(paths['source_statslog']))
             self.assertIn('depth_2.txt', read_file(paths['source_statslog']))
+
+    @func_set_timeout(60)
+    def test_log_output_depth_recursive(self):     
+        with no_stderrout():
+            paths = self.make_paths()
+            inputs = link_inputs(paths, ['test/raw/log_sources/move_recursion.txt'])
+            write_source_logs(paths, inputs)
 
     def test_error_bad_path(self):     
         with no_stderrout():
