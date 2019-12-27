@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import unittest
 import sys
 import os
@@ -132,7 +133,7 @@ class TestCopyOutput(unittest.TestCase):
     @mock.patch('gslab_make.make_utility.input', return_value = 'Yes')
     def test_error_no_dir(self, mocked_input):  
         try:
-            copy_output('test/output/file.txt', 'test/dir_missing/')
+            copy_output('test/output/file.txt', 'test/output/dir_missing/')
         except Exception as e:
             self.assertRaises(Exception, e)
 

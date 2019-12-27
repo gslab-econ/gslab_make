@@ -8,15 +8,16 @@ import unittest
 import sys
 import os
 import shutil
+import re
 from test.utility import no_stderrout, redirect_stdout, read_file
 
 from gslab_make import start_makelog, clear_dir
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ProgramError
     
-from gslab_make import run_python as run_function
+from gslab_make import run_perl as run_function
 
-class TestRunPython(unittest.TestCase):
+class TestRunPerl(unittest.TestCase):
 
     def setup_directories(self):
         with no_stderrout():
@@ -28,14 +29,15 @@ class TestRunPython(unittest.TestCase):
     def setUp(self):
         self.setup_directories()
 
-        self.app = 'python'
-        self.ext = 'py'
+        self.app = 'perl'
+        self.ext = 'pl'
         self.executable = metadata.default_executables[os.name][self.app]
         self.option = metadata.default_options[os.name][self.app]
         self.arg = ''
 
     def check_output(self, paths):
-        self.assertIn('Test script complete', read_file(paths['makelog']))
+        makelog = read_file(paths['makelog'])
+        self.assertTrue(re.search('Test script complete', makelog))
         self.assertTrue(os.path.isfile('test/output/output.csv'))
 
     def make_paths(self, makelog_path = 'test/log/make.log'):
@@ -217,6 +219,6 @@ class TestRunPython(unittest.TestCase):
             shutil.rmtree('test/output/')
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
-                
+
 if __name__ == '__main__':
     unittest.main()

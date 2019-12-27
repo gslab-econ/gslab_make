@@ -1,5 +1,5 @@
 df <- data.frame(var = 1:10)
 
-write.csv('output/output.csv')
+write.csv(df, 'test/output/output.csv')
 
 print('Test script complete')

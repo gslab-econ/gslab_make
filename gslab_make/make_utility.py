@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+# -*- coding: UTF-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from
 
@@ -6,7 +6,6 @@ from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import os
-import yaml
 import traceback
 import shutil
 
@@ -17,7 +16,7 @@ colorama.init()
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import get_path, format_message, norm_path
+from gslab_make.private.utility import get_path, format_message, norm_path, open_yaml
 
 
 def _check_os(osname = os.name):
@@ -67,7 +66,7 @@ def update_executables(paths, osname = None):
 
     try:
         config_user = get_path(paths, 'config_user')
-        config_user = yaml.load(open(config_user, 'rb'), Loader = yaml.Loader)
+        config_user = open_yaml(config_user)
     
         _check_os(osname)
     
@@ -110,7 +109,7 @@ def update_paths(paths):
 
     try:
         config_user = get_path(paths, 'config_user')
-        config_user = yaml.load(open(config_user, 'rb'), Loader = yaml.Loader)
+        config_user = open_yaml(config_user)
 
         if config_user['external']:
             paths.update(config_user['external'])

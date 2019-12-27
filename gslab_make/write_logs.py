@@ -7,6 +7,7 @@ from builtins import (bytes, str, open, super, range,
 import os
 import datetime
 import traceback
+import codecs
 
 from termcolor import colored
 import colorama

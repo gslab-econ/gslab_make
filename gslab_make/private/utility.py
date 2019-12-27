@@ -10,6 +10,7 @@ import glob
 import traceback
 import filecmp
 import codecs
+import yaml
 
 import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError
@@ -37,6 +38,11 @@ def norm_path(path):
         path = os.path.sep.join(path)
         path = os.path.expanduser(path)
         path = os.path.abspath(path)
+
+    try:
+        path = codecs.decode(path, 'utf8')
+    except:
+        return(path)
 
     return(path)
 
@@ -196,6 +202,18 @@ def format_list(list):
     formatted = ", ".join(formatted)
     
     return(formatted)
+
+
+def open_yaml(path):
+    """Safely loads YAML file."""
+
+    path = norm_path(path)
+
+    with open(path, 'r') as f:
+        stream = yaml.safe_load(f)
+
+    return(stream)
+
 
 # ~~~~~~~~~~ #
 # DEPRECATED #
