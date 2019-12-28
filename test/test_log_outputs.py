@@ -127,8 +127,11 @@ class TestOutputLog(unittest.TestCase):
     def tearDown(self):
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
-        if os.path.isdir('test/input/'):
-            shutil.rmtree('test/input/')
+        try:
+            if os.path.isdir('test/input/'):
+                shutil.rmtree('test/input/')
+        except:
+            pass
 
 if __name__ == '__main__':
     unittest.main()

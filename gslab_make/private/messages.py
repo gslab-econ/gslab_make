@@ -68,6 +68,12 @@ crit_error_not_float = \
     '\nERROR! You are attempting to round or format a value (`%s`) that is not a number.'
 crit_error_no_input_table = \
     '\nERROR! None of the inputs match the tab name for table `%s`.'
+crit_error_not_enough_values = \
+    '\nERROR! Not enough values in input for table `%s`.'
+crit_error_too_many_values = \
+    '\nERROR! Too many values in input for table `%s`.'
+crit_error_no_tag = \
+    '\nERROR! Input `%s` is missing a tab name.'
 
 # Syntax errors
 syn_error_wildcard = \

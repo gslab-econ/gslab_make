@@ -1,5 +1,4 @@
-
-#! /usr/bin/env python
+# -*- coding: UTF-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
@@ -7,7 +6,7 @@ from builtins import (bytes, str, open, super, range,
 
 import re
 import traceback
-import codecs
+import io
 from itertools import chain
 
 from termcolor import colored
@@ -20,7 +19,7 @@ from gslab_make.private.utility import convert_to_list, norm_path, format_messag
 
 def _parse_tag(tag):
     """.. Parse tag from input."""
-    
+
     if not re.match('<Tab:(.*)>\n', tag, flags = re.IGNORECASE):
         raise Exception
     else:
@@ -60,7 +59,7 @@ def _parse_data(data, null):
 def _parse_content(file, null):
     """.. Parse content from input."""
         
-    with codecs.open(file, 'r', encoding = 'utf-8') as f:
+    with io.open(file, 'r') as f:
         content = f.readlines()
     try:
         tag = _parse_tag(content[0])
@@ -135,7 +134,7 @@ def _insert_tables_lyx(template, tables, null):
         Filled LyX template.
     """
 
-    with codecs.open(template, 'r', encoding = 'utf-8') as f:
+    with io.open(template, 'r') as f:
         doc = f.readlines()
       
     is_table = False
@@ -191,7 +190,7 @@ def _insert_tables_latex(template, tables, null):
         Filled LaTeX template.
     """
 
-    with open(template, 'r') as f:
+    with io.open(template, 'r') as f:
         doc = f.readlines()
 
     is_table = False
@@ -253,6 +252,8 @@ def _insert_tables(template, tables, null):
         Filled template.
     """
     
+    template = norm_path(template)
+
     if re.search('\.lyx', template):
         doc = _insert_tables_lyx(template, tables, null)
     elif re.search('\.tex', template):
@@ -631,8 +632,8 @@ def tablefill(inputs, template, output, null = '.'):
             raise_from(CritError(messages.crit_error_duplicate_tables), None)
 
         doc = _insert_tables(template, tables, null)  
-        
-        with open(output, 'w') as f:
+
+        with io.open(output, 'w') as f:
             f.write(doc)
     except:
         error_message = 'Error with `tablefill`. Traceback can be found below.' 

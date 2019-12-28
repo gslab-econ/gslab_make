@@ -13,7 +13,7 @@ from itertools import chain
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError
-from gslab_make.private.utility import convert_to_list, norm_path, file_to_array, format_traceback
+from gslab_make.private.utility import convert_to_list, norm_path, file_to_array, format_traceback, encode, decode
 
 
 class MoveDirective(object):
@@ -232,7 +232,7 @@ class MoveDirective(object):
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (source, destination)
 
-            process = subprocess.Popen(command,
+            process = subprocess.Popen(encode(command),
                                        shell = True,
                                        stdout = subprocess.PIPE,
                                        stderr = subprocess.PIPE, 
@@ -270,7 +270,7 @@ class MoveDirective(object):
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (directory, destination, source)
 
-            process = subprocess.Popen(command,
+            process = subprocess.Popen(encode(command),
                                        shell = True,
                                        stdout = subprocess.PIPE,
                                        stderr = subprocess.PIPE, 
@@ -329,12 +329,13 @@ class MoveList(object):
 
         if self.file_list:
             self.file_list = convert_to_list(self.file_list, 'file')
-
+            self.file_list = [norm_path(file) for file in self.file_list]
+            
             file_list_parsed = [f for file in self.file_list for f in glob.glob(file)]   
             if file_list_parsed:
                 self.file_list = file_list_parsed
             else:
-                error_list = [str(f) for f in self.file_list]
+                error_list = [decode(f) for f in self.file_list]
                 raise CritError(messages.crit_error_no_files % error_list) 
 
     def get_paths(self):    
@@ -359,10 +360,10 @@ class MoveList(object):
         for file in self.file_list:
             for raw_line in file_to_array(file):
                 try:
-                    line = str(raw_line).format(**self.mapping_dict)
+                    line = decode(raw_line).format(**self.mapping_dict)
                     lines.append((file, raw_line, line))
                 except KeyError as e:
-                    key = str(e).lstrip("u'").rstrip("'")
+                    key = decode(e).lstrip("u'").rstrip("'")
                     error_message = messages.crit_error_path_mapping % (key, key, file, raw_line, key)
                     error_message = error_message + format_traceback()
                     raise_from(CritError(error_message), None)
