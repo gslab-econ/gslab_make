@@ -5,10 +5,9 @@ from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import os
+import io
 import subprocess
 import shutil
-import codecs
-''
 from termcolor import colored
 import colorama
 colorama.init()
@@ -95,12 +94,11 @@ class Directive(object):
         """
         
         self.output = 'Executing command: `%s`' % command
-        print(colored(self.output, metadata.color_in_process))
 
         try:
             if not self.shell:
                 command = command.split()
-
+                
             process = subprocess.Popen(encode(command), 
                                        stdout = subprocess.PIPE, 
                                        stderr = subprocess.PIPE, 
@@ -108,7 +106,7 @@ class Directive(object):
                                        universal_newlines = True)
             stdout, stderr = process.communicate()
             exit = (process.returncode, stderr)             
-             
+
             if stdout:
                self.output += '\n' + decode(stdout)
             if stderr:
@@ -132,11 +130,11 @@ class Directive(object):
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
-            with codecs.open(self.makelog, 'a', encoding = 'utf-8') as f:
+            with io.open(self.makelog, 'a', encoding = 'utf-8', errors = 'ignore') as f:
                 print(self.output, file = f)
 
         if self.log:
-            with codecs.open(self.log, 'w', encoding = 'utf-8') as f:
+            with io.open(self.log, 'w', encoding = 'utf-8', errors = 'ignore') as f:
                 f.write(self.output)
 
 
@@ -269,7 +267,7 @@ class ProgramDirective(Directive):
         program_output = norm_path(program_output)
 
         try:
-            with open(program_output, 'r', encoding = 'utf8') as f:
+            with io.open(program_output, 'r', encoding = 'utf-8', errors = 'ignore') as f:
                 out = f.read()
         except:
             error_message = messages.crit_error_no_program_output % (program_output, self.program)
@@ -279,7 +277,7 @@ class ProgramDirective(Directive):
         if self.makelog: 
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
-            with open(self.makelog, 'a', encoding = 'utf8') as f:
+            with io.open(self.makelog, 'a', encoding = 'utf-8', errors = 'ignore') as f:
                 print(out, file = f)
 
         if log_file: 

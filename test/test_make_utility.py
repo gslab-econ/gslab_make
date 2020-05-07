@@ -1,15 +1,20 @@
 # -*- coding: UTF-8 -*-
-import unittest
-import sys
 import os
-import shutil
+import sys
 import mock
+import copy
+import shutil
+import unittest
 from test.utility import no_stderrout, redirect_stdout, create_file
 
+import gslab_make.private.metadata as metadata
 from gslab_make import clear_dir
 from gslab_make import update_executables, update_paths, copy_output
 
 class TestUpdateExecutables(unittest.TestCase):
+
+    def setUp(self):
+        self.default = copy.deepcopy(metadata.default_executables)
 
     def test_config(self):     
         PATHS = {'config_user': 'test/raw/config/config_user.yaml'}
@@ -58,8 +63,12 @@ class TestUpdateExecutables(unittest.TestCase):
             self.assertRaises(Exception, e)
 
     def tearDown(self):
+        # Delete log directory
         if os.path.isdir('log/'):
             shutil.rmtree('log/')
+
+        # Reset executables to default
+        metadata.default_executables = copy.deepcopy(self.default)
 
 class TestUpdateMappings(unittest.TestCase):
 

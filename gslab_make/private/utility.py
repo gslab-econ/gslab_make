@@ -22,7 +22,7 @@ def decode(string):
     """Decode string."""
 
     if (sys.version_info < (3, 0)):
-        string = codecs.decode(string, 'utf-8') 
+        string = codecs.decode(string, 'utf-8')
 
     return(string)
 
@@ -59,7 +59,7 @@ def norm_path(path):
         path = os.path.expanduser(path)
         path = os.path.abspath(path)
 
-    path = decode(path)
+    path = encode(path)
 
     return(path)
 
@@ -84,7 +84,10 @@ def get_path(paths_dict, key, throw_error = True):
     
     try:
         path = paths_dict[key]
-        path = norm_path(path)
+        if isinstance(path, string_types): 
+            path = norm_path(path) 
+        elif isinstance(path, list): 
+            path = [norm_path(p) for p in path]
     except KeyError:
         if throw_error:
             raise_from(CritError(messages.crit_error_no_key % (key, key)), None)
