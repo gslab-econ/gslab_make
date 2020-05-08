@@ -12,6 +12,7 @@ import glob
 import yaml
 import codecs
 import filecmp
+import win32api
 import traceback
 
 import gslab_make.private.messages as messages
@@ -20,18 +21,18 @@ from gslab_make.private.exceptionclasses import CritError
 
 def decode(string):
     """Decode string."""
-    """ string -> unicode """
+
     if (sys.version_info < (3, 0)):
-        string = codecs.decode(string, sys.getfilesystemencoding())
+        string = codecs.decode(string, 'utf-8')
 
     return(string)
 
 
 def encode(string):
     """Clean string for encoding."""
-    """ unicode -> string """
+
     if (sys.version_info < (3, 0)):
-        string = codecs.encode(string, sys.getfilesystemencoding()) 
+        string = codecs.encode(string, 'utf-8') 
 
     return(string)
 
@@ -58,17 +59,6 @@ def norm_path(path):
         path = os.path.sep.join(path)
         path = os.path.expanduser(path)
         path = os.path.abspath(path)
-
-    """
-    print(type(path))
-    print(path)
-    path = encode(path)
-    print(type(path))
-    print(path)
-    path = decode(path)
-    """
-    print(type(path))
-    print(path)
 
     return(path)
 
