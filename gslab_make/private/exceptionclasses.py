@@ -25,7 +25,7 @@ def encode(string):
     """Clean string for encoding."""
 
     if (sys.version_info < (3, 0)):
-        string = codecs.encode(string, 'utf-8')  
+        string = codecs.encode(string, 'utf-8') 
 
     return(string)
 

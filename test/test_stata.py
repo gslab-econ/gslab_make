@@ -15,9 +15,9 @@ from gslab_make import start_makelog, clear_dir
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ProgramError
     
-from gslab_make import run_python as run_function
+from gslab_make import run_stata as run_function
 
-class TestRunPython(unittest.TestCase):
+class TestRunStata(unittest.TestCase):
 
     def setup_directories(self):
         with no_stderrout():
@@ -29,8 +29,8 @@ class TestRunPython(unittest.TestCase):
     def setUp(self):
         self.setup_directories()
 
-        self.app = 'python'
-        self.ext = 'py'
+        self.app = 'stata'
+        self.ext = 'do'
         self.executable = metadata.default_executables[os.name][self.app]
         self.option = metadata.default_options[os.name][self.app]
         self.arg = ''
@@ -214,11 +214,13 @@ class TestRunPython(unittest.TestCase):
         except Exception as e:
             self.assertRaises(Exception, e)
 
+    """
     def tearDown(self):
         if os.path.isdir('test/output/'):
             shutil.rmtree('test/output/')
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
-                
+    """
+
 if __name__ == '__main__':
     unittest.main()

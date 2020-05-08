@@ -164,7 +164,7 @@ def run_lyx(paths, program, doctype = '', **kwargs):
             beamer = False
             shutil.copy2(direct.program, temp_program) 
 
-            # ACTION ITEM: DEBUG AND REFACTOR
+            # ACTION ITEM: DEBUG ANDREFACTOR
             for line in fileinput.input(temp_program, inplace = True):
                 if r'\textclass beamer' in line:
                     beamer = True          

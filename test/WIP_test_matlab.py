@@ -15,9 +15,9 @@ from gslab_make import start_makelog, clear_dir
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ProgramError
     
-from gslab_make import run_python as run_function
+from gslab_make import run_matlab as run_function
 
-class TestRunPython(unittest.TestCase):
+class TestRunMatlab(unittest.TestCase):
 
     def setup_directories(self):
         with no_stderrout():
@@ -29,8 +29,8 @@ class TestRunPython(unittest.TestCase):
     def setUp(self):
         self.setup_directories()
 
-        self.app = 'python'
-        self.ext = 'py'
+        self.app = 'matlab'
+        self.ext = 'm'
         self.executable = metadata.default_executables[os.name][self.app]
         self.option = metadata.default_options[os.name][self.app]
         self.arg = ''
@@ -219,6 +219,6 @@ class TestRunPython(unittest.TestCase):
             shutil.rmtree('test/output/')
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
-                
+
 if __name__ == '__main__':
     unittest.main()

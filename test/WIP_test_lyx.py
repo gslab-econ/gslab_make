@@ -15,9 +15,9 @@ from gslab_make import start_makelog, clear_dir
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ProgramError
     
-from gslab_make import run_python as run_function
+from gslab_make import run_lyx as run_function
 
-class TestRunPython(unittest.TestCase):
+class TestRunStata(unittest.TestCase):
 
     def setup_directories(self):
         with no_stderrout():
@@ -29,15 +29,14 @@ class TestRunPython(unittest.TestCase):
     def setUp(self):
         self.setup_directories()
 
-        self.app = 'python'
-        self.ext = 'py'
+        self.app = 'lyx'
+        self.ext = 'lyx'
         self.executable = metadata.default_executables[os.name][self.app]
         self.option = metadata.default_options[os.name][self.app]
         self.arg = ''
 
     def check_output(self, paths):
         makelog = read_file(paths['makelog'])
-        self.assertTrue(re.search('Test script complete', makelog))
         self.assertTrue(os.path.isfile('test/output/output.csv'))
 
     def make_paths(self, makelog_path = 'test/log/make.log'):
@@ -51,7 +50,7 @@ class TestRunPython(unittest.TestCase):
     def test_program(self):        
         with no_stderrout():
             paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
             run_function(paths, program = program_name)
             
         self.check_output(paths)
@@ -59,7 +58,7 @@ class TestRunPython(unittest.TestCase):
     def test_program_character(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
-            program_name = 'test/raw/run_program/%s_script_╬▓.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file_╬▓.%s' % (self.app, self.ext)
             run_function(paths, program = program_name)
             
         self.check_output(paths)
@@ -67,7 +66,7 @@ class TestRunPython(unittest.TestCase):
     def test_program_space(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make space.log')
-            program_name = 'test/raw/run_program/%s_script space.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file space.%s' % (self.app, self.ext)
             run_function(paths, program = program_name)
             
         self.check_output(paths)
@@ -75,34 +74,34 @@ class TestRunPython(unittest.TestCase):
     def test_log(self):      
         with no_stderrout():
             paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
             run_function(paths, program = program_name, log = 'test/output/log.log')
             
         self.check_output(paths)
-        self.assertIn('Test script complete', read_file('test/output/log.log'))
+        self.assertIn('Test file complete', read_file('test/output/log.log'))
 
     def test_log_character(self):      
         with no_stderrout():
             paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
             run_function(paths, program = program_name, log = 'test/output/log_╬▓.log')
             
         self.check_output(paths)
-        self.assertIn('Test script complete', read_file('test/output/log_╬▓.log'))
+        self.assertIn('Test file complete', read_file('test/output/log_╬▓.log'))
 
     def test_log_space(self):      
         with no_stderrout():
             paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
             run_function(paths, program = program_name, log = 'test/output/log space.log')
             
         self.check_output(paths)
-        self.assertIn('Test script complete', read_file('test/output/log space.log'))
+        self.assertIn('Test file complete', read_file('test/output/log space.log'))
 
     def test_no_log(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = '')
-            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
             run_function(paths, program = program_name, log = '')
 
         self.assertFalse(os.path.isfile(paths['makelog']))
@@ -112,7 +111,7 @@ class TestRunPython(unittest.TestCase):
     def test_program_executable(self):      
         with no_stderrout():
             paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
             run_function(paths, program = program_name, executable = self.executable)
             
         self.check_output(paths)
@@ -120,7 +119,7 @@ class TestRunPython(unittest.TestCase):
     def test_program_option(self):      
         with no_stderrout():
             paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
             run_function(paths, program = program_name, option = self.option)
             
         self.check_output(paths)
@@ -128,7 +127,7 @@ class TestRunPython(unittest.TestCase):
     def test_program_arg(self):      
         with no_stderrout():
             paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
             run_function(paths, program = program_name, args = self.arg)
         
         self.check_output(paths)
@@ -137,7 +136,7 @@ class TestRunPython(unittest.TestCase):
         try:
             with no_stderrout():
                 paths = {}
-                program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+                program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name)    
         except Exception as e:
             self.assertRaises(Exception, e)
@@ -146,7 +145,7 @@ class TestRunPython(unittest.TestCase):
         try:
             with no_stderrout():
                 paths = self.make_paths()
-                program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+                program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name, osname = 'bad_os')              
         except Exception as e:
             self.assertRaises(Exception, e)
@@ -164,7 +163,7 @@ class TestRunPython(unittest.TestCase):
         try:
             with no_stderrout():
                 paths = self.make_paths()
-                program_name = 'test/raw/run_program/%s_script_error.%s' % (self.app, self.ext)
+                program_name = 'test/raw/run_program/%s_file_error.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name)          
         except Exception as e:
             self.assertRaises(Exception, e)
@@ -173,7 +172,7 @@ class TestRunPython(unittest.TestCase):
         try:
             with no_stderrout():
                 paths = self.make_paths()
-                program_name = 'test/raw/run_program/%s_script_missing.%s' % (self.app, self.ext)
+                program_name = 'test/raw/run_program/%s_file_missing.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name)           
         except Exception as e:
             self.assertRaises(Exception, e)
@@ -191,7 +190,7 @@ class TestRunPython(unittest.TestCase):
         try:
             with no_stderrout():
                 paths = self.make_paths()
-                program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+                program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name, executable = []) 
         except Exception as e:
             self.assertRaises(Exception, e)
@@ -200,7 +199,7 @@ class TestRunPython(unittest.TestCase):
         try:
             with no_stderrout():
                 paths = self.make_paths()
-                program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+                program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name, option = [])   
         except Exception as e:
             self.assertRaises(Exception, e)
@@ -209,7 +208,7 @@ class TestRunPython(unittest.TestCase):
         try:
             with no_stderrout():
                 paths = self.make_paths()
-                program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
+                program_name = 'test/raw/run_program/%s_file.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name, arg = [])    
         except Exception as e:
             self.assertRaises(Exception, e)
@@ -219,6 +218,6 @@ class TestRunPython(unittest.TestCase):
             shutil.rmtree('test/output/')
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
-                
+
 if __name__ == '__main__':
     unittest.main()

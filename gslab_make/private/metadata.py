@@ -87,7 +87,7 @@ default_executables = {
     'nt': 
         {'git-lfs'  : 'git-lfs',
          'jupyter'  : 'python -m jupyter',
-         'lyx'      : 'LyX2.3',
+         'lyx'      : 'lyx',
          'math'     : 'math',
          'matlab'   : 'matlab',
          'perl'     : 'perl',
