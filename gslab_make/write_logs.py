@@ -16,7 +16,7 @@ colorama.init()
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import convert_to_list, get_path, glob_recursive, format_message
+from gslab_make.private.utility import convert_to_list, norm_path, get_path, glob_recursive, format_message
 
 
 def start_makelog(paths):
@@ -49,6 +49,7 @@ def start_makelog(paths):
         metadata.makelog_started = True
         
         if makelog:
+            makelog = norm_path(makelog)
             message = 'Starting makelog file at: `%s`' % makelog
             print(colored(message, metadata.color_success))
             
@@ -94,6 +95,7 @@ def end_makelog(paths):
         makelog = get_path(paths, 'makelog')
 
         if makelog:
+            makelog = norm_path(makelog)
             message = 'Ending makelog file at: `%s`' % makelog
             print(colored(message, metadata.color_success))
 
@@ -138,6 +140,8 @@ def write_to_makelog(paths, message):
     makelog = get_path(paths, 'makelog')
 
     if makelog:
+        makelog = norm_path(makelog)
+
         if not (metadata.makelog_started and os.path.isfile(makelog)):
             raise_from(CritError(messages.crit_error_no_makelog % makelog), None)
 
@@ -220,9 +224,11 @@ def log_files_in_output(paths,
         output_files = set(output_files + output_local_files)
 
         if output_statslog:
+            output_statslog = norm_path(output_statslog)
             _write_stats_log(output_statslog, output_files)
         
         if output_headslog:
+            output_headslog = norm_path(output_headslog)
             _write_heads_log(output_headslog, output_files)
         
         message = 'Output logs successfully written!'
