@@ -8,7 +8,7 @@ import os
 import io
 import sys
 import shutil
-# import subprocess
+import subprocess
 from termcolor import colored
 import colorama
 colorama.init()
@@ -17,10 +17,6 @@ import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError
 from gslab_make.private.utility import norm_path, format_list, format_traceback, encode, decode
-
-if (sys.version_info < (3, 0)):
-    from gslab_make.private.win_subprocess import Popen
-    from subprocess import PIPE
 
 class Directive(object):
     """
@@ -103,9 +99,9 @@ class Directive(object):
             if not self.shell:
                 command = command.split()
             
-            process = Popen(command, 
-                                       stdout = PIPE, 
-                                       stderr = PIPE, 
+            process = subprocess.Popen(encode(command), 
+                                       stdout = subprocess.PIPE, 
+                                       stderr = subprocess.PIPE, 
                                        shell = self.shell, 
                                        universal_newlines = True)
             stdout, stderr = process.communicate()

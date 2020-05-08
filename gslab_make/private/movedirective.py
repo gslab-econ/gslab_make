@@ -16,10 +16,6 @@ import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError
 from gslab_make.private.utility import convert_to_list, norm_path, file_to_array, format_traceback, encode, decode
 
-if (sys.version_info < (3, 0)):
-    from gslab_make.private.win_subprocess import Popen
-    from subprocess import PIPE
-
 class MoveDirective(object):
     """
     Directive for creating symbolic link or copy of data.
@@ -236,10 +232,10 @@ class MoveDirective(object):
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (source, destination)
 
-            process = Popen(command,
+            process = subprocess.Popen(encode(command),
                                        shell = True,
-                                       stdout = PIPE,
-                                       stderr = PIPE, 
+                                       stdout = subprocess.PIPE,
+                                       stderr = subprocess.PIPE, 
                                        universal_newlines = True)
             stdout, stderr = process.communicate()
            
@@ -274,10 +270,10 @@ class MoveDirective(object):
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (directory, destination, source)
 
-            process = Popen(command,
+            process = subprocess.Popen(encode(command),
                                        shell = True,
-                                       stdout = PIPE,
-                                       stderr = PIPE, 
+                                       stdout = subprocess.PIPE,
+                                       stderr = subprocess.PIPE, 
                                        universal_newlines = True)
             stdout, stderr = process.communicate()
            

@@ -23,8 +23,7 @@ def decode(string):
     """Decode string."""
 
     if (sys.version_info < (3, 0)):
-        # string = codecs.decode(string, 'utf-8')
-        string = string.decode(encoding = 'utf-8', errors = 'ignore')
+        string = codecs.decode(string, 'utf-8')
 
     return(string)
 
@@ -61,6 +60,11 @@ def norm_path(path):
         path = os.path.expanduser(path)
         path = os.path.abspath(path)
 
+    try:
+        path = win32api.GetShortPathName(path)
+    except:
+        path = path
+        
     return(path)
 
 
