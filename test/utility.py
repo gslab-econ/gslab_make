@@ -1,6 +1,12 @@
-import re
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from future.utils import raise_from
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
+
 import os
 import io
+import re
 import sys
 import codecs
 import contextlib
@@ -29,14 +35,6 @@ def redirect_stdout(file):
     finally:
         sys.stdout = save_stdout
 
-def encode(string):
-    """Clean string for encoding."""
-
-    if (sys.version_info < (3, 0)):
-        string = codecs.encode(string, 'utf-8') 
-
-    return(string)
-
 def norm_path(path):
     """Normalize path to be OS-compatible."""
 
@@ -45,8 +43,6 @@ def norm_path(path):
         path = os.path.sep.join(path)
         path = os.path.expanduser(path)
         path = os.path.abspath(path)
-
-    path = encode(path)
 
     return(path)
 

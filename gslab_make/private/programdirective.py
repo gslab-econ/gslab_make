@@ -98,7 +98,7 @@ class Directive(object):
         try:
             if not self.shell:
                 command = command.split()
-                
+            
             process = subprocess.Popen(encode(command), 
                                        stdout = subprocess.PIPE, 
                                        stderr = subprocess.PIPE, 
