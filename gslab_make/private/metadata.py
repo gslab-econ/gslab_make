@@ -87,7 +87,7 @@ default_executables = {
     'nt': 
         {'git-lfs'  : 'git-lfs',
          'jupyter'  : 'python -m jupyter',
-         'lyx'      : 'lyx',
+         'lyx'      : 'LyX2.3',
          'math'     : 'math',
          'matlab'   : 'matlab',
          'perl'     : 'perl',
@@ -99,14 +99,14 @@ default_executables = {
 }
 
 extensions = {
-    'jupyter' : ['.ipynb'],
-    'lyx'     : ['.lyx'],
-    'math'    : ['.m'],
-    'matlab'  : ['.m'],
-    'perl'    : ['.pl'],
-    'python'  : ['.py'],
+    'jupyter' : ['.ipynb', '.IPYNB'],
+    'lyx'     : ['.lyx', '.LYX'],
+    'math'    : ['.m', '.M'],
+    'matlab'  : ['.m', '.M'],
+    'perl'    : ['.pl', '.PL'],
+    'python'  : ['.py', '.PY'],
     'r'       : ['.r', '.R'],
-    'sas'     : ['.sas'],
-    'st'      : ['.stc', '.stcmd'],
-    'stata'   : ['.do']
+    'sas'     : ['.sas', '.SAS'],
+    'st'      : ['.stc', '.STC', '.stcmd', '.STCMD'],
+    'stata'   : ['.do', '.DO']
 }
