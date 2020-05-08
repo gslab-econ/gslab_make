@@ -185,7 +185,7 @@ C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\log_sources\move space.txt | 2019-12-19 19:18:37 | 66
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\lyx_file_comments.lyx | 2019-12-16 01:06:18 | 1785
 C:\Users\Zong\gslab_make\test\__pycache__\test_remove_dir.cpython-36.pyc | 2019-12-28 20:43:50 | 3464
-C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\raw\run_program\lyx_file_error.lyx | 2019-12-16 01:06:18 | 5
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\__pycache__\test_python.cpython-36.pyc | 2020-05-08 01:57:21 | 9203
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\config\config_user_bad_executables.yaml | 2019-12-16 01:28:41 | 249
@@ -261,7 +261,7 @@ C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\__pycache__\test_zip.cpython-36.pyc | 2019-12-28 20:43:50 | 3284
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\__pycache__\test_log_sources.cpython-36.pyc | 2020-05-08 07:06:14 | 5291
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\move_sources\move space.txt | 2019-12-19 19:18:37 | 77
-C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\raw\run_program\lyx_file_comments.lyx | 2019-12-16 01:06:18 | 1785
 C:\Users\Zong\gslab_make\test\__pycache__\test_tablefill.cpython-36.pyc | 2020-05-06 22:34:08 | 5173
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\lyx_file_comments.lyx | 2019-12-16 01:06:18 | 1785
@@ -392,7 +392,7 @@ C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\r_script_error.R | 2020-05-06 22:33:20 | 5
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\log_outputs\dir_local\file_local.txt | 2019-12-28 01:58:35 | 29
 C:\Users\Zong\gslab_make\test\input\test\raw\log_outputs\dir_depth\depth_1.txt | 2019-12-28 01:58:35 | 29
-C:\Users\Zong\gslab_make\test\input\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\input\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\move_sources\move_dir.txt | 2019-12-19 19:18:37 | 55
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\raw\run_program\python_script.py | 2019-12-28 01:58:35 | 175
 C:\Users\Zong\gslab_make\test\input\test\input\test\__pycache__\test_check_repo.cpython-36.pyc | 2020-05-06 22:32:51 | 1499
@@ -425,7 +425,7 @@ C:\Users\Zong\gslab_make\test\input\test\raw\tablefill\tablefill_template_╬▓
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\log_outputs\dir space\file space.txt | 2019-12-19 19:18:37 | 29
 C:\Users\Zong\gslab_make\test\raw\log_sources\dir_depth\dir_depth\depth_2.txt | 2019-12-28 01:58:35 | 29
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\raw\move_sources\move_bad_wildcard.txt | 2019-12-19 19:18:37 | 114
-C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\move_sources\file space.txt | 2019-12-19 19:18:37 | 0
 C:\Users\Zong\gslab_make\test\input\test\raw\move_sources\move_╬▓.txt | 2019-12-19 20:37:27 | 79
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\stata_script_╬▓.do | 2020-05-07 06:23:05 | 121
@@ -758,14 +758,14 @@ C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\matlab_script_╬▓.m | 2020-05-07 06:23:20 | 93
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\stata_script.do | 2020-05-07 06:22:57 | 114
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\log_sources\move_depth.txt | 2019-12-28 01:58:35 | 66
-C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\raw\run_program\matlab_script.m | 2020-05-07 06:23:17 | 86
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\__pycache__\test_zip.cpython-36.pyc | 2019-12-28 20:43:50 | 3284
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\utility.pyc | 2020-05-08 08:14:04 | 2542
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\raw\config\config_user_╬▓.yaml | 2019-12-16 01:06:17 | 236
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\log_outputs\dir\file.txt | 2019-12-19 19:18:37 | 29
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\wrong_extension.txt | 2019-12-16 01:06:19 | 0
-C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\python_script.py | 2019-12-28 01:58:35 | 175
 C:\Users\Zong\gslab_make\test\__pycache__\test_makelog.cpython-36.pyc | 2020-05-08 02:05:02 | 3679
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\test_python.pyc | 2020-05-08 07:22:49 | 11003
@@ -859,7 +859,7 @@ C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\perl_script space.pl | 2020-05-06 22:33:20 | 215
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\config\config_user_bad.yaml | 2019-12-16 01:06:17 | 131
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\__pycache__\test_check_repo.cpython-36.pyc | 2020-05-06 22:32:51 | 1499
-C:\Users\Zong\gslab_make\test\input\test\input\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\input\test\input\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\__pycache__\test_R.cpython-36.pyc | 2020-05-08 01:55:48 | 9129
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\raw\config\config.yaml | 2020-05-06 22:33:20 | 475
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\__pycache__\test_remove_dir.cpython-36.pyc | 2019-12-28 20:43:50 | 3464
@@ -882,7 +882,7 @@ C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\raw\tablefill\tab
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\config\config_user_empty.yaml | 2019-12-16 01:06:17 | 96
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\raw\move_sources\file space.txt | 2019-12-19 19:18:37 | 0
 C:\Users\Zong\gslab_make\test\raw\run_program\python_script_arg.py | 2019-12-28 01:58:35 | 188
-C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\raw\move_sources\file_╬▓.txt | 2019-12-19 19:18:37 | 0
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\raw\log_sources\move_depth.txt | 2019-12-28 01:58:35 | 66
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\raw\run_program\r_script_error.R | 2020-05-06 22:33:20 | 5
@@ -971,7 +971,7 @@ C:\Users\Zong\gslab_make\test\input\test\input\test\raw\config\config_user_bad_e
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\__pycache__\__init__.cpython-36.pyc | 2019-12-18 01:23:47 | 124
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\python_script_error.py | 2019-12-16 01:06:18 | 5
 C:\Users\Zong\gslab_make\test\input\test\raw\log_sources\dir_depth\depth_1.txt | 2019-12-28 01:58:35 | 29
-C:\Users\Zong\gslab_make\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\raw\tablefill\tablefill space.txt | 2019-12-28 02:06:39 | 69
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\test_python.py | 2020-05-08 07:22:47 | 9626
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\stata_script_error.do | 2019-12-16 01:06:19 | 5
@@ -981,7 +981,7 @@ C:\Users\Zong\gslab_make\test\__pycache__\test_check_repo.cpython-36.pyc | 2020-
 C:\Users\Zong\gslab_make\test\input\test\raw\tablefill\tablefill_template_too_many_values.lyx | 2019-12-28 01:58:35 | 4974
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\__pycache__\test_zip.cpython-36.pyc | 2019-12-28 20:43:50 | 3284
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\input\test\raw\move_sources\move_dir.txt | 2019-12-19 19:18:37 | 55
-C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 08:18:37 | 282
+C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\log\make.log | 2020-05-08 09:15:43 | 282
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\raw\run_program\perl_script_╬▓.pl | 2020-05-06 22:33:20 | 222
 C:\Users\Zong\gslab_make\test\raw\move_sources\file_╬▓.txt | 2019-12-19 19:18:37 | 0
 C:\Users\Zong\gslab_make\test\input\test\input\test\input\test\input\test\input\test\input\test\__pycache__\test_tablefill.cpython-36.pyc | 2020-05-06 22:34:08 | 5173
