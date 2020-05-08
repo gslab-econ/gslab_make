@@ -99,14 +99,14 @@ default_executables = {
 }
 
 extensions = {
-    'jupyter' : ['.ipynb', '.IPYNB'],
-    'lyx'     : ['.lyx', '.LYX'],
-    'math'    : ['.m', '.M'],
-    'matlab'  : ['.m', '.M'],
-    'perl'    : ['.pl', '.PL'],
-    'python'  : ['.py', '.PY'],
+    'jupyter' : ['.ipynb'],
+    'lyx'     : ['.lyx'],
+    'math'    : ['.m'],
+    'matlab'  : ['.m'],
+    'perl'    : ['.pl'],
+    'python'  : ['.py'],
     'r'       : ['.r', '.R'],
-    'sas'     : ['.sas', '.SAS'],
-    'st'      : ['.stc', '.stcmd', '.STC', '.STCMD'],
-    'stata'   : ['.do', '.DO']
+    'sas'     : ['.sas'],
+    'st'      : ['.stc', '.stcmd'],
+    'stata'   : ['.do']
 }

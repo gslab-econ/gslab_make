@@ -48,6 +48,13 @@ class TestRunPython(unittest.TestCase):
             
         return(paths)
 
+    def make_paths(self, makelog_path = 'test/log/make.log'):
+        paths = {'makelog': makelog_path}
+        
+        start_makelog(paths)
+            
+        return(paths)
+
     def test_program(self):        
         with no_stderrout():
             paths = self.make_paths()
@@ -61,6 +68,13 @@ class TestRunPython(unittest.TestCase):
             paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
             program_name = 'test/raw/run_program/%s_script_╬▓.%s' % (self.app, self.ext)
             run_function(paths, program = program_name)
+            
+        self.check_output(paths)
+
+    def test_program_character(self):        
+        paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
+        program_name = 'test/raw/run_program/%s_script_╬▓.%s' % (self.app, self.ext)
+        run_function(paths, program = program_name)
             
         self.check_output(paths)
 
