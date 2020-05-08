@@ -1,15 +1,16 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
                       
-import unittest
-import sys
 import os
-import shutil
 import re
+import sys
+import shutil
+import unittest
 from test.utility import no_stderrout, redirect_stdout, create_file, read_file
+
 from gslab_make import clear_dir
 
 from gslab_make import start_makelog, end_makelog, write_to_makelog
@@ -34,6 +35,14 @@ class TestMakeLog(unittest.TestCase):
     def test_makelog(self):     
         with no_stderrout():
             paths = self.make_paths()
+            start_makelog(paths)
+            write_to_makelog(paths, 'Hello, World!')
+            end_makelog(paths)
+            self.check_makelog(paths)
+
+    def test_makelog_space(self):     
+        with no_stderrout():
+            paths = self.make_paths(makelog_path = 'test/log/make space.log')
             start_makelog(paths)
             write_to_makelog(paths, 'Hello, World!')
             end_makelog(paths)

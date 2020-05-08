@@ -1,9 +1,14 @@
-# -*- coding: UTF-8 -*-
-import unittest
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from future.utils import raise_from
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
+
 import sys
 import os
 import shutil
 import zipfile
+import unittest
 from test.utility import no_stderrout, redirect_stdout, create_file, read_file
 
 from gslab_make import clear_dir, remove_dir, zip_dir, unzip

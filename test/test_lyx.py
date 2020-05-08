@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
@@ -17,7 +17,7 @@ from gslab_make.private.exceptionclasses import CritError, ProgramError
     
 from gslab_make import run_lyx as run_function
 
-class TestRunStata(unittest.TestCase):
+class TestRunLyX(unittest.TestCase):
 
     def setup_directories(self):
         with no_stderrout():
@@ -35,12 +35,19 @@ class TestRunStata(unittest.TestCase):
         self.option = metadata.default_options[os.name][self.app]
         self.arg = ''
 
-    def check_output(self, paths):
-        makelog = read_file(paths['makelog'])
-        self.assertTrue(os.path.isfile('test/output/output.csv'))
+    def check_output(self, 
+                     paths, 
+                     pdf_name = ''):
 
-    def make_paths(self, makelog_path = 'test/log/make.log'):
-        paths = {'makelog': makelog_path}
+        pdf_name = pdf_name if pdf_name else ('%s_file.pdf' % self.app)
+        makelog = read_file(paths['makelog'])
+        self.assertTrue(os.path.isfile('test/output/%s' % pdf_name))
+
+    def make_paths(self, 
+    	           makelog_path = 'test/log/make.log', 
+    	           output_dir = 'test/output'):
+        paths = {'makelog': makelog_path, 
+                 'output_dir': output_dir}
         
         with no_stderrout():
             start_makelog(paths)
@@ -55,13 +62,37 @@ class TestRunStata(unittest.TestCase):
             
         self.check_output(paths)
 
+    def test_program_beamer(self):        
+        with no_stderrout():
+            paths = self.make_paths()
+            program_name = 'test/raw/run_program/%s_file_beamer.%s' % (self.app, self.ext)
+            run_function(paths, program = program_name, doctype = 'beamer')
+            
+        self.check_output(paths, '%s_file_beamer.pdf' % self.app)
+
+    def test_program_comments(self):        
+        with no_stderrout():
+            paths = self.make_paths()
+            program_name = 'test/raw/run_program/%s_file_comments.%s' % (self.app, self.ext)
+            run_function(paths, program = program_name, doctype = 'comments')
+            
+        self.check_output(paths, '%s_file_comments.pdf' % self.app)
+
+    def test_program_handout(self):        
+        with no_stderrout():
+            paths = self.make_paths()
+            program_name = 'test/raw/run_program/%s_file_handout.%s' % (self.app, self.ext)
+            run_function(paths, program = program_name, doctype = 'handout')
+            
+        self.check_output(paths, '%s_file_handout.pdf' % self.app)
+
     def test_program_character(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
             program_name = 'test/raw/run_program/%s_file_╬▓.%s' % (self.app, self.ext)
             run_function(paths, program = program_name)
             
-        self.check_output(paths)
+        self.check_output(paths, '%s_file_╬▓.pdf' % self.app)
 
     def test_program_space(self):        
         with no_stderrout():
@@ -69,7 +100,7 @@ class TestRunStata(unittest.TestCase):
             program_name = 'test/raw/run_program/%s_file space.%s' % (self.app, self.ext)
             run_function(paths, program = program_name)
             
-        self.check_output(paths)
+        self.check_output(paths, '%s_file space.pdf' % self.app)
 
     def test_log(self):      
         with no_stderrout():
@@ -78,7 +109,7 @@ class TestRunStata(unittest.TestCase):
             run_function(paths, program = program_name, log = 'test/output/log.log')
             
         self.check_output(paths)
-        self.assertIn('Test file complete', read_file('test/output/log.log'))
+        self.assertIn('Executing command', read_file('test/output/log.log'))
 
     def test_log_character(self):      
         with no_stderrout():
@@ -87,7 +118,7 @@ class TestRunStata(unittest.TestCase):
             run_function(paths, program = program_name, log = 'test/output/log_╬▓.log')
             
         self.check_output(paths)
-        self.assertIn('Test file complete', read_file('test/output/log_╬▓.log'))
+        self.assertIn('Executing command', read_file('test/output/log_╬▓.log'))
 
     def test_log_space(self):      
         with no_stderrout():
@@ -96,7 +127,7 @@ class TestRunStata(unittest.TestCase):
             run_function(paths, program = program_name, log = 'test/output/log space.log')
             
         self.check_output(paths)
-        self.assertIn('Test file complete', read_file('test/output/log space.log'))
+        self.assertIn('Executing command', read_file('test/output/log space.log'))
 
     def test_no_log(self):        
         with no_stderrout():
@@ -106,8 +137,8 @@ class TestRunStata(unittest.TestCase):
 
         self.assertFalse(os.path.isfile(paths['makelog']))
         self.assertFalse(os.path.isfile('test/output/log.log'))
-        self.assertTrue(os.path.isfile('test/output/output.csv'))
-
+        self.assertTrue(os.path.isfile('test/output/%s_file.pdf' % self.app))
+        
     def test_program_executable(self):      
         with no_stderrout():
             paths = self.make_paths()

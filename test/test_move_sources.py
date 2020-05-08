@@ -1,12 +1,17 @@
-# -*- coding: UTF-8 -*-
-import unittest
-import sys
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from future.utils import raise_from
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
+
 import os
+import sys
 import shutil
+import unittest
 from test.utility import no_stderrout, redirect_stdout, read_file
 
-from gslab_make import start_makelog, remove_dir, clear_dir
 import gslab_make.private.metadata as metadata
+from gslab_make import start_makelog, remove_dir, clear_dir
 from gslab_make.private.exceptionclasses import CritError, ProgramError
     
 from gslab_make import link_inputs, copy_inputs, link_externals, copy_externals

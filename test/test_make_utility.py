@@ -1,4 +1,9 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from future.utils import raise_from
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
+
 import os
 import sys
 import mock
@@ -9,6 +14,7 @@ from test.utility import no_stderrout, redirect_stdout, create_file
 
 import gslab_make.private.metadata as metadata
 from gslab_make import clear_dir
+
 from gslab_make import update_executables, update_paths, copy_output
 
 class TestUpdateExecutables(unittest.TestCase):

@@ -1,18 +1,18 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
-import unittest
-import sys
 import os
-import shutil
 import re
+import sys
+import shutil
+import unittest
 from test.utility import no_stderrout, redirect_stdout, read_file
 
-from gslab_make import start_makelog, clear_dir
 import gslab_make.private.metadata as metadata
+from gslab_make import start_makelog, clear_dir
 from gslab_make.private.exceptionclasses import CritError, ProgramError
     
 from gslab_make import run_r as run_function
@@ -60,24 +60,15 @@ class TestRunR(unittest.TestCase):
         """
         Note
         ----
-        Rscript cannot handle file names with non-ASCII characters
-        """      
-        try:
-            with no_stderrout():
-                paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
-                program_name = 'test/raw/run_program/%s_script_╬▓.%s' % (self.app, self.ext)
-                run_function(paths, program = program_name)
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
-#    def test_program_character(self):        
-#        with no_stderrout():
-#            paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
-#            program_name = 'test/raw/run_program/%s_script_╬▓.%s' % (self.app, self.ext)
-#            run_function(paths, program = program_name)
-#            
-#        self.check_output(paths)
-
+        Rscript can have difficulties finding file names with non-ASCII characters.
+        """          
+        with no_stderrout():
+            paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
+            program_name = 'test/raw/run_program/%s_script_╬▓.%s' % (self.app, self.ext)
+            run_function(paths, program = program_name)
+            
+        self.check_output(paths)
+    
     def test_program_space(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make space.log')

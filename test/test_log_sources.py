@@ -1,13 +1,19 @@
-# -*- coding: UTF-8 -*-
-import unittest
-import sys
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from future.utils import raise_from
+from builtins import (bytes, str, open, super, range,
+                      zip, round, input, int, pow, object)
+
 import os
+import sys
 import shutil
+import unittest
+from func_timeout import func_set_timeout
 from test.utility import no_stderrout, redirect_stdout, read_file
+
 from gslab_make import clear_dir, remove_dir, start_makelog
 
 from gslab_make import write_source_logs, link_inputs
-from func_timeout import func_set_timeout
 
 class TestMakeLog(unittest.TestCase):
             
@@ -92,7 +98,13 @@ class TestMakeLog(unittest.TestCase):
             self.assertIn('depth_2.txt', read_file(paths['source_statslog']))
 
     @func_set_timeout(60)
-    def test_log_output_depth_recursive(self):     
+    def test_log_output_depth_recursive(self):    
+        """
+        Note
+        ----
+        For some reason, recursive symlinks don't actually break as expected.
+        Python just stops walking the recursive directory at a certain point.
+        """ 
         with no_stderrout():
             paths = self.make_paths()
             inputs = link_inputs(paths, ['test/raw/log_sources/move_recursion.txt'])
