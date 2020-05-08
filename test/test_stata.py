@@ -214,13 +214,11 @@ class TestRunStata(unittest.TestCase):
         except Exception as e:
             self.assertRaises(Exception, e)
 
-    """
     def tearDown(self):
         if os.path.isdir('test/output/'):
             shutil.rmtree('test/output/')
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
-    """
 
 if __name__ == '__main__':
     unittest.main()
