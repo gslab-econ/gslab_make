@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from __future__ import absolute_import, division, print_function
+from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
@@ -16,7 +16,7 @@ colorama.init()
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import convert_to_list, norm_path, get_path, glob_recursive, format_message, print_to_file
+from gslab_make.private.utility import convert_to_list, norm_path, get_path, glob_recursive, format_message
 
 
 def start_makelog(paths):
@@ -56,10 +56,10 @@ def start_makelog(paths):
             with io.open(makelog, 'w', encoding = 'utf8', errors = 'ignore') as MAKELOG:
                 time_start = str(datetime.datetime.now().replace(microsecond = 0))
                 working_dir = os.getcwd()
-                print_to_file(messages.note_dash_line, file = MAKELOG)
-                print_to_file(messages.note_makelog_start + time_start, file = MAKELOG)
-                print_to_file(messages.note_working_directory + working_dir, file = MAKELOG)
-                print_to_file(messages.note_dash_line, file = MAKELOG)
+                print(messages.note_dash_line, file = MAKELOG)
+                print(messages.note_makelog_start + time_start, file = MAKELOG)
+                print(messages.note_working_directory + working_dir, file = MAKELOG)
+                print(messages.note_dash_line, file = MAKELOG)
     except:
         error_message = 'Error with `start_makelog`. Traceback can be found below.' 
         error_message = format_message(error_message) 
@@ -105,10 +105,10 @@ def end_makelog(paths):
             with io.open(makelog, 'a', encoding = 'utf8', errors = 'ignore') as MAKELOG:
                 time_end = str(datetime.datetime.now().replace(microsecond = 0))
                 working_dir = os.getcwd()
-                print_to_file(messages.note_dash_line, file = MAKELOG)
-                print_to_file(messages.note_makelog_end + time_end, file = MAKELOG)
-                print_to_file(messages.note_working_directory + working_dir, file = MAKELOG)
-                print_to_file(messages.note_dash_line, file = MAKELOG)
+                print(messages.note_dash_line, file = MAKELOG)
+                print(messages.note_makelog_end + time_end, file = MAKELOG)
+                print(messages.note_working_directory + working_dir, file = MAKELOG)
+                print(messages.note_dash_line, file = MAKELOG)
     except:
         error_message = 'Error with `end_makelog`. Traceback can be found below.' 
         error_message = format_message(error_message) 
@@ -146,7 +146,7 @@ def write_to_makelog(paths, message):
             raise_from(CritError(messages.crit_error_no_makelog % makelog), None)
 
         with io.open(makelog, 'a', encoding = 'utf8', errors = 'ignore') as MAKELOG:
-            print_to_file(message, file = MAKELOG)
+            print(message, file = MAKELOG)
     
     
 def log_files_in_output(paths,
@@ -265,14 +265,14 @@ def _write_stats_log(statslog_file, output_files):
     header = "file name | last modified | file size"
     
     with io.open(statslog_file, 'w', encoding = 'utf8', errors = 'ignore') as STATSLOG:
-        print_to_file(header, file = STATSLOG)      
+        print(header, file = STATSLOG)      
 
         for file_name in output_files:
             stats = os.stat(file_name)
             last_mod = datetime.datetime.utcfromtimestamp(round(stats.st_mtime))
             file_size = stats.st_size
 
-            print_to_file("%s | %s | %s" % (file_name, last_mod, file_size), file = STATSLOG)
+            print("%s | %s | %s" % (file_name, last_mod, file_size), file = STATSLOG)
 
 
 # ~~~~~~~~~~ #
@@ -301,21 +301,21 @@ def _write_heads_log(headslog_file, output_files, num_lines = 10):
     header = "File headers"
 
     with io.open(headslog_file, 'w', encoding = 'utf8', errors = 'ignore') as HEADSLOG:      
-        print_to_file(header, file = HEADSLOG)
-        print_to_file(messages.note_dash_line, file = HEADSLOG)
+        print(header, file = HEADSLOG)
+        print(messages.note_dash_line, file = HEADSLOG)
         
         for file_name in output_files:
-            print_to_file("%s" % file_name, file = HEADSLOG)
-            print_to_file(messages.note_dash_line, file = HEADSLOG)
+            print("%s" % file_name, file = HEADSLOG)
+            print(messages.note_dash_line, file = HEADSLOG)
             
             try:
                 with io.open(file_name, 'r', encoding = 'utf8', errors = 'ignore') as f:
                     for i in range(num_lines):
                         line = f.readline().rstrip('\n')
-                        print_to_file(line, file = HEADSLOG)
+                        print(line, file = HEADSLOG)
             except:
-                print_to_file("Head not readable or less than %s lines" % num_lines, file = HEADSLOG)
-            print_to_file(messages.note_dash_line, file = HEADSLOG)
+                print("Head not readable or less than %s lines" % num_lines, file = HEADSLOG)
+            print(messages.note_dash_line, file = HEADSLOG)
 
 
 __all__ = ['start_makelog', 'end_makelog', 'write_to_makelog', 'log_files_in_output']

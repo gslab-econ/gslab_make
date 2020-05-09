@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from __future__ import absolute_import, division, print_function
+from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
@@ -34,11 +34,6 @@ def encode(string):
         string = codecs.encode(string, 'utf-8') 
 
     return(string)
-
-
-def print_to_file(message, file):
-    message = decode(message)
-    print(message, file = file)
 
 
 def convert_to_list(obj, warning_type):
