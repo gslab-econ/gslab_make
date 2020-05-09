@@ -21,7 +21,7 @@ from gslab_make.private.exceptionclasses import CritError
 def decode(string):
     """Decode string."""
 
-    if (sys.version_info < (3, 0)):
+    if (sys.version_info < (3, 0)) and isinstance(string, string_types):
         string = codecs.decode(string, 'utf-8')
 
     return(string)
@@ -30,7 +30,7 @@ def decode(string):
 def encode(string):
     """Clean string for encoding."""
 
-    if (sys.version_info < (3, 0)):
+    if (sys.version_info < (3, 0)) and isinstance(string, unicode):
         string = codecs.encode(string, 'utf-8') 
 
     return(string)
@@ -59,7 +59,7 @@ def norm_path(path):
         path = os.path.expanduser(path)
         path = os.path.abspath(path)
 
-    path = encode(path)
+    # path = encode(path)
 
     return(path)
 

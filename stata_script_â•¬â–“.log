@@ -1,7 +1,3 @@
---------------------------------------------------------------------------------
-Makelog started: 2020-05-07 00:24:45
-Working directory: C:\Users\Zong\gslab_make
---------------------------------------------------------------------------------
 
   ___  ____  ____  ____  ____ (R)
  /__    /   ____/   /   ____/
@@ -24,22 +20,7 @@ Notes:
       3.  More than 2 billion observations are allowed; see help obs_advice.
       4.  Maximum number of variables is set to 5000; see help set_maxvar.
 
-. do "C:\Users\Zong\gslab_make\test\raw\run_program\stata_script space.do" 
-
-. set obs 10
-number of observations (_N) was 0, now 10
-
-. gen var = _n
-
-. 
-. export delimited "test/output/output.csv", replace
-(note: file test/output/output.csv not found)
-file test/output/output.csv saved
-
-. 
-. display "Test script complete"
-Test script complete
-
-. 
-end of do-file
-
+. do "C:\Users\Zong\gslab_make\test\raw\run_program\stata_script_â•¬â–“.do" 
+file C:\Users\Zong\gslab_make\test\raw\run_program\stata_script_â•¬â–“.do not
+    found
+r(601);

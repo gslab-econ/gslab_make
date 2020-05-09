@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
+from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -15,8 +16,8 @@ import gslab_make.private.metadata as metadata
 def decode(string):
     """Decode string."""
 
-    if (sys.version_info < (3, 0)):
-        string = codecs.decode(string, 'utf-8') 
+    if (sys.version_info < (3, 0)) and isinstance(string, string_types):
+        string = codecs.decode(string, 'utf-8')
 
     return(string)
 
@@ -24,7 +25,7 @@ def decode(string):
 def encode(string):
     """Clean string for encoding."""
 
-    if (sys.version_info < (3, 0)):
+    if (sys.version_info < (3, 0)) and isinstance(string, unicode):
         string = codecs.encode(string, 'utf-8') 
 
     return(string)

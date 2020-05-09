@@ -360,7 +360,7 @@ class MoveList(object):
         for file in self.file_list:
             for raw_line in file_to_array(file):
                 try:
-                    line = decode(raw_line).format(**self.mapping_dict)
+                    line = raw_line.format(**self.mapping_dict)
                     lines.append((file, raw_line, line))
                 except KeyError as e:
                     key = decode(e).lstrip("u'").rstrip("'")
