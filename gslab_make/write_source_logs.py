@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import absolute_import, division, print_function
 from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
@@ -15,7 +15,7 @@ colorama.init()
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import ColoredError
 from gslab_make.private.utility import norm_path, get_path, glob_recursive, format_message
-from gslab_make.write_logs import write_to_makelog, _write_stats_log, _write_heads_log
+from gslab_make.write_logs import write_to_makelog, _write_stats_log, _write_heads_log, print_to_file
 
 
 def write_source_logs(paths, 
@@ -134,11 +134,11 @@ def _write_source_maplog(source_maplog, source_map):
     header = 'destination | source'
 
     with io.open(source_maplog, 'w', encoding = 'utf-8', errors = 'ignore') as MAPLOG:
-        print(header, file = MAPLOG)
+        print_to_file(header, file = MAPLOG)
 
         for source, destination in source_map:
             destination = os.path.relpath(destination)
-            print("%s | %s" % (destination, source), file = MAPLOG)
+            print_to_file("%s | %s" % (destination, source), file = MAPLOG)
 
 
 __all__ = ['write_source_logs']

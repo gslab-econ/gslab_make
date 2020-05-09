@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import absolute_import, division, print_function
 from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
@@ -15,7 +15,7 @@ colorama.init()
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError
-from gslab_make.private.utility import norm_path, format_list, format_traceback, encode, decode
+from gslab_make.private.utility import norm_path, format_list, format_traceback, encode, decode, print_to_file
 
 
 class Directive(object):
@@ -131,11 +131,11 @@ class Directive(object):
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
             with io.open(self.makelog, 'a', encoding = 'utf-8', errors = 'ignore') as f:
-                print(self.output, file = f)
+                print_to_file(self.output, file = f)
 
         if self.log:
             with io.open(self.log, 'w', encoding = 'utf-8', errors = 'ignore') as f:
-                f.write(self.output)
+                print_to_file(self.output, file = f)
 
 
 class ProgramDirective(Directive):
@@ -278,7 +278,7 @@ class ProgramDirective(Directive):
             if not (metadata.makelog_started and os.path.isfile(self.makelog)):
                 raise CritError(messages.crit_error_no_makelog % self.makelog)           
             with io.open(self.makelog, 'a', encoding = 'utf-8', errors = 'ignore') as f:
-                print(out, file = f)
+                print_to_file(self.output, file = f)(out, file = f)
 
         if log_file: 
             if program_output != log_file:
