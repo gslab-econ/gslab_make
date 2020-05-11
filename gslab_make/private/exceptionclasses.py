@@ -17,7 +17,7 @@ def decode(string):
     """Decode string."""
 
     if (sys.version_info < (3, 0)) and isinstance(string, string_types):
-        string = codecs.decode(string, 'utf-8')
+        string = codecs.decode(string, 'latin1')
 
     return(string)
 

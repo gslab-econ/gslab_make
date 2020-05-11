@@ -6,7 +6,8 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import io
-import subprocess
+import subprocessww
+import gslab_make.private.subprocess_fix as subprocess
 import shutil
 from termcolor import colored
 import colorama
@@ -99,7 +100,12 @@ class Directive(object):
             if not self.shell:
                 command = command.split()
                 
-            process = subprocess.Popen(encode(command), 
+            # import sys
+            # import codecs
+            # command = codecs.encode(command, sys.getfilesystemencoding())
+            # print(command)
+
+            process = subprocess.Popen(command, 
                                        stdout = subprocess.PIPE, 
                                        stderr = subprocess.PIPE, 
                                        shell = self.shell, 
@@ -110,8 +116,10 @@ class Directive(object):
             if stdout:
                self.output += '\n' + decode(stdout)
             if stderr:
+               print(type(stderr))
                self.output += '\n' + decode(stderr)
-                            
+               pass
+
             return(exit)
         except:
             error_message = messages.crit_error_bad_command % command
