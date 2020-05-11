@@ -6,7 +6,7 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import io
-import gslab_make.private.subprocess_fix as subprocess
+import subprocess
 import shutil
 from termcolor import colored
 import colorama
@@ -99,18 +99,18 @@ class Directive(object):
             if not self.shell:
                 command = command.split()
                 
-            process = subprocess.Popen(command, 
-                                       stdout = subprocess.sub.PIPE, 
-                                       stderr = subprocess.sub.PIPE, 
+            process = subprocess.Popen(encode(command), 
+                                       stdout = subprocess.PIPE, 
+                                       stderr = subprocess.PIPE, 
                                        shell = self.shell, 
                                        universal_newlines = True)
             stdout, stderr = process.communicate()
             exit = (process.returncode, stderr)             
 
             if stdout:
-                self.output += '\n' + decode(stdout)
+               self.output += '\n' + decode(stdout)
             if stderr:
-                self.output += '\n' + decode(stderr)
+               self.output += '\n' + decode(stderr)
                             
             return(exit)
         except:

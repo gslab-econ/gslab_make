@@ -15,9 +15,9 @@ import gslab_make.private.metadata as metadata
 from gslab_make import start_makelog, clear_dir
 from gslab_make.private.exceptionclasses import CritError, ProgramError
     
-from gslab_make import run_python as run_function
+from gslab_make import run_perl as run_function
 
-class TestRunPython(unittest.TestCase):
+class TestRunPerl(unittest.TestCase):
 
     def setup_directories(self):
         with no_stderrout():
@@ -29,8 +29,8 @@ class TestRunPython(unittest.TestCase):
     def setUp(self):
         self.setup_directories()
 
-        self.app = 'python'
-        self.ext = 'py'
+        self.app = 'perl'
+        self.ext = 'pl'
         self.executable = metadata.default_executables[os.name][self.app]
         self.option = metadata.default_options[os.name][self.app]
         self.arg = 'arg'
@@ -47,7 +47,7 @@ class TestRunPython(unittest.TestCase):
             start_makelog(paths)
             
         return(paths)
-
+        
     def test_program(self):        
         with no_stderrout():
             paths = self.make_paths()
@@ -56,14 +56,19 @@ class TestRunPython(unittest.TestCase):
             
         self.check_output(paths)
 
-    def test_program_character(self):        
+    def test_program_character(self):    
+        """
+        Note
+        ----
+        Perl can have difficulties finding file names with non-ASCII characters.
+        """       
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
             program_name = 'test/raw/run_program/%s_script_╬▓.%s' % (self.app, self.ext)
             run_function(paths, program = program_name)
             
         self.check_output(paths)
-
+    
     def test_program_space(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make space.log')
@@ -221,6 +226,6 @@ class TestRunPython(unittest.TestCase):
             shutil.rmtree('test/output/')
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
-                
+
 if __name__ == '__main__':
     unittest.main()
