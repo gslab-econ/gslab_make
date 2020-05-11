@@ -7,6 +7,7 @@ from builtins import (bytes, str, open, super, range,
 import os
 import re
 import glob
+import gslab_make.private.subprocess_fix as subprocess_fix
 import subprocess
 from itertools import chain
 
@@ -232,7 +233,7 @@ class MoveDirective(object):
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (source, destination)
 
-            process = subprocess.Popen(encode(command),
+            process = subprocess_fix.Popen(command,
                                        shell = True,
                                        stdout = subprocess.PIPE,
                                        stderr = subprocess.PIPE, 
@@ -270,7 +271,7 @@ class MoveDirective(object):
             elif movetype == 'symlink':
                 command = metadata.commands[self.osname]['makelink'] % (directory, destination, source)
 
-            process = subprocess.Popen(encode(command),
+            process = subprocess_fix.Popen(command,
                                        shell = True,
                                        stdout = subprocess.PIPE,
                                        stderr = subprocess.PIPE, 

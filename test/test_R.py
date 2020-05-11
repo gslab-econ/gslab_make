@@ -15,9 +15,9 @@ import gslab_make.private.metadata as metadata
 from gslab_make import start_makelog, clear_dir
 from gslab_make.private.exceptionclasses import CritError, ProgramError
     
-from gslab_make import run_python as run_function
+from gslab_make import run_r as run_function
 
-class TestRunPython(unittest.TestCase):
+class TestRunR(unittest.TestCase):
 
     def setup_directories(self):
         with no_stderrout():
@@ -29,11 +29,11 @@ class TestRunPython(unittest.TestCase):
     def setUp(self):
         self.setup_directories()
 
-        self.app = 'python'
-        self.ext = 'py'
+        self.app = 'r'
+        self.ext = 'r'
         self.executable = metadata.default_executables[os.name][self.app]
         self.option = metadata.default_options[os.name][self.app]
-        self.arg = 'arg'
+        self.arg = ''
 
     def check_output(self, paths):
         makelog = read_file(paths['makelog'])
@@ -47,7 +47,7 @@ class TestRunPython(unittest.TestCase):
             start_makelog(paths)
             
         return(paths)
-
+        
     def test_program(self):        
         with no_stderrout():
             paths = self.make_paths()
@@ -56,14 +56,19 @@ class TestRunPython(unittest.TestCase):
             
         self.check_output(paths)
 
-    def test_program_character(self):        
+    def test_program_character(self):  
+        """
+        Note
+        ----
+        Rscript can have difficulties finding file names with non-ASCII characters.
+        """          
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
             program_name = 'test/raw/run_program/%s_script_╬▓.%s' % (self.app, self.ext)
             run_function(paths, program = program_name)
             
         self.check_output(paths)
-
+    
     def test_program_space(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make space.log')
@@ -128,12 +133,10 @@ class TestRunPython(unittest.TestCase):
     def test_program_arg(self):      
         with no_stderrout():
             paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script_arg.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
             run_function(paths, program = program_name, args = self.arg)
         
         self.check_output(paths)
-        output = read_file('test/output/output.csv')
-        self.assertTrue(re.search('arg', output))
 
     def test_error_bad_paths(self):      
         try:
@@ -221,6 +224,6 @@ class TestRunPython(unittest.TestCase):
             shutil.rmtree('test/output/')
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
-                
+
 if __name__ == '__main__':
     unittest.main()

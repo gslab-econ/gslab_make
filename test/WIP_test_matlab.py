@@ -1,23 +1,23 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
-import os
-import re
-import sys
-import shutil
 import unittest
+import sys
+import os
+import shutil
+import re
 from test.utility import no_stderrout, redirect_stdout, read_file
 
-import gslab_make.private.metadata as metadata
 from gslab_make import start_makelog, clear_dir
+import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ProgramError
     
-from gslab_make import run_python as run_function
+from gslab_make import run_matlab as run_function
 
-class TestRunPython(unittest.TestCase):
+class TestRunMatlab(unittest.TestCase):
 
     def setup_directories(self):
         with no_stderrout():
@@ -29,11 +29,11 @@ class TestRunPython(unittest.TestCase):
     def setUp(self):
         self.setup_directories()
 
-        self.app = 'python'
-        self.ext = 'py'
+        self.app = 'matlab'
+        self.ext = 'm'
         self.executable = metadata.default_executables[os.name][self.app]
         self.option = metadata.default_options[os.name][self.app]
-        self.arg = 'arg'
+        self.arg = ''
 
     def check_output(self, paths):
         makelog = read_file(paths['makelog'])
@@ -47,7 +47,7 @@ class TestRunPython(unittest.TestCase):
             start_makelog(paths)
             
         return(paths)
-
+        
     def test_program(self):        
         with no_stderrout():
             paths = self.make_paths()
@@ -128,12 +128,10 @@ class TestRunPython(unittest.TestCase):
     def test_program_arg(self):      
         with no_stderrout():
             paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script_arg.%s' % (self.app, self.ext)
+            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
             run_function(paths, program = program_name, args = self.arg)
         
         self.check_output(paths)
-        output = read_file('test/output/output.csv')
-        self.assertTrue(re.search('arg', output))
 
     def test_error_bad_paths(self):      
         try:
@@ -221,6 +219,6 @@ class TestRunPython(unittest.TestCase):
             shutil.rmtree('test/output/')
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
-                
+
 if __name__ == '__main__':
     unittest.main()
