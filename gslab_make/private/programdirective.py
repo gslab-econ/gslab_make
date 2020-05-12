@@ -6,7 +6,11 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import io
-import gslab_make.private.subprocess_fix as subprocess_fix
+import sys
+if (sys.version_info < (3, 0)):
+    import gslab_make.private.subprocess_fix as subprocess_fix
+else:
+    import subprocess as subprocess_fix
 import subprocess
 import shutil
 from termcolor import colored
@@ -99,14 +103,13 @@ class Directive(object):
         try:
             if not self.shell:
                 command = command.split()
-
-            print(command)
             
             process = subprocess_fix.Popen(command, 
                                        stdout = subprocess.PIPE, 
                                        stderr = subprocess.PIPE, 
                                        shell = self.shell, 
                                        universal_newlines = True)
+            process.wait()
             stdout, stderr = process.communicate()
             exit = (process.returncode, stderr)             
 

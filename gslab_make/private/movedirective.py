@@ -6,8 +6,12 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import re
+import sys
 import glob
-import gslab_make.private.subprocess_fix as subprocess_fix
+if (sys.version_info < (3, 0)):
+    import gslab_make.private.subprocess_fix as subprocess_fix
+else:
+    import subprocess as subprocess_fix
 import subprocess
 from itertools import chain
 
@@ -238,6 +242,7 @@ class MoveDirective(object):
                                        stdout = subprocess.PIPE,
                                        stderr = subprocess.PIPE, 
                                        universal_newlines = True)
+            process.wait()
             stdout, stderr = process.communicate()
            
             if process.returncode != 0:
@@ -276,6 +281,7 @@ class MoveDirective(object):
                                        stdout = subprocess.PIPE,
                                        stderr = subprocess.PIPE, 
                                        universal_newlines = True)
+            process.wait()
             stdout, stderr = process.communicate()
            
             if process.returncode != 0:

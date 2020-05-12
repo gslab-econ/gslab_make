@@ -15,7 +15,7 @@ colorama.init()
 
 import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import convert_to_list, norm_path, format_message
+from gslab_make.private.utility import convert_to_list, norm_path, format_message, decode, encode
 
 def _parse_tag(tag):
     """.. Parse tag from input."""
@@ -59,7 +59,7 @@ def _parse_data(data, null):
 def _parse_content(file, null):
     """.. Parse content from input."""
         
-    with io.open(file, 'r') as f:
+    with io.open(file, 'r', encoding = 'utf-8') as f:
         content = f.readlines()
     try:
         tag = _parse_tag(content[0])
@@ -134,7 +134,7 @@ def _insert_tables_lyx(template, tables, null):
         Filled LyX template.
     """
 
-    with io.open(template, 'r') as f:
+    with io.open(template, 'r', encoding = 'utf-8') as f:
         doc = f.readlines()
       
     is_table = False
@@ -190,7 +190,7 @@ def _insert_tables_latex(template, tables, null):
         Filled LaTeX template.
     """
 
-    with io.open(template, 'r') as f:
+    with io.open(template, 'r', encoding = 'utf-8') as f:
         doc = f.readlines()
 
     is_table = False
@@ -633,7 +633,7 @@ def tablefill(inputs, template, output, null = '.'):
 
         doc = _insert_tables(template, tables, null)  
 
-        with io.open(output, 'w') as f:
+        with io.open(output, 'w', encoding = 'utf-8') as f:
             f.write(doc)
     except:
         error_message = 'Error with `tablefill`. Traceback can be found below.' 

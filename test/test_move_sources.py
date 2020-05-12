@@ -191,7 +191,7 @@ class TestLinkInputs(unittest.TestCase):
         if os.path.isdir('test/log/'):
             shutil.rmtree('test/log/')
         if os.path.isdir('test/input/'):
-            shutil.rmtree('test/input/')
+            remove_dir(['test/input/'], quiet = True)
         if os.path.isdir('test/external/'):
             shutil.rmtree('test/external/')
 

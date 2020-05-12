@@ -5,7 +5,12 @@ from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import os
+import sys
 import subprocess
+if (sys.version_info < (3, 0)):
+    import gslab_make.private.subprocess_fix as subprocess_fix
+else:
+    import subprocess as subprocess_fix
 import glob
 import zipfile
 import traceback
@@ -61,7 +66,11 @@ def remove_path(path, option = '', quiet = False):
             option = metadata.default_options[os.name]['rmdir']
 
         command = metadata.commands[os.name]['rmdir'] % (option, path)
-        process = subprocess.Popen(command, shell = True)
+        process = subprocess_fix.Popen(command, 
+                                       stdout = subprocess.PIPE, 
+                                       stderr = subprocess.PIPE, 
+                                       shell = True, 
+                                       universal_newlines = True)   
         process.wait()
         # ACTION ITEM: ADD DEBUGGING TO SUBPROCESS CALL
 
@@ -178,7 +187,6 @@ def clear_dir(dir_list):
         error_message = 'Error with `clear_dir`. Traceback can be found below.' 
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
-
 
 def unzip(zip_path, output_dir):
     """.. Unzip file to directory.

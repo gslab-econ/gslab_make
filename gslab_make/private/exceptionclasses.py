@@ -13,6 +13,14 @@ colorama.init()
 
 import gslab_make.private.metadata as metadata
 
+"""
+For some bizarre reason, fixes Exception printing and I have no idea why...
+"""
+
+import subprocess
+process = subprocess.Popen('', shell = True)
+process.wait()
+
 def decode(string):
     """Decode string."""
 
