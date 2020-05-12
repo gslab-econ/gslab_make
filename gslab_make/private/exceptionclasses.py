@@ -3,11 +3,21 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
+import sys
+
 from termcolor import colored
 import colorama
 colorama.init()
 
 import gslab_make.private.metadata as metadata
+
+
+def string_encode(string, encoding = ''):
+    if (sys.version_info < (3, 0)):
+        string = string.encode('utf-8')  
+
+    return(string)
+
 
 class CritError(Exception):
     pass

@@ -6,6 +6,7 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import re
+import sys
 import glob
 import traceback
 import filecmp
