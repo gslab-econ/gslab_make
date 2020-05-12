@@ -113,8 +113,6 @@ class Directive(object):
                                        universal_newlines = True)
             process.wait()
             stdout, stderr = process.communicate()
-            stdout = string_decode(stdout)    
-            stderr = string_decode(stderr)
             exit = (process.returncode, stderr)             
 
             if stdout:
