@@ -1,76 +1,25 @@
-import os
-import re
-import sys
-import shutil
-import site
 from setuptools import setup, find_packages
 from setuptools.command.build_py import build_py
-from setuptools.command.install import install
-from glob import glob
- 
-# Determine if the user has specified which paths to report coverage for
-is_include_arg = map(lambda x: bool(re.search('^--include=', x)), 
-                     sys.argv)
 
-if True in is_include_arg:
-    include_arg = sys.argv[is_include_arg.index(True)]
-    include_arg = sys.argv[is_include_arg.index(True)]
-    del sys.argv[is_include_arg.index(True)]
-else:
-    include_arg = None
-
-# Additional build commands
-class TestRepo(build_py):
-    '''Build command for running tests in repo'''
-    def run(self):
-        if include_arg:
-            coverage_command = 'coverage report -m %s' % include_arg
-        else:
-            coverage_command = 'coverage report -m --omit=setup.py,*/__init__.py,.eggs/*'
-
-
-        if sys.platform != 'win32':
-            os.system("coverage run --branch --source ./ setup.py test1 2>&1 "
-                      "| tee test.log")
-            # http://unix.stackexchange.com/questions/80707/
-            #   how-to-output-text-to-both-screen-and-file-inside-a-shell-script
-            os.system("%s  2>&1 | tee -a test.log" % coverage_command) 
-        else:
-            os.system("coverage run --branch --source ./ setup.py "
-                      "> test.log")
-            os.system("%s >> test.log" % coverage_command)
-
-        sys.exit()
+import os
+import glob
+import shutil
 
 
 class CleanRepo(build_py):
-    '''Build command for clearing setup directories after installation'''
+    """ Build command for cleaning setup directories after installation. """
+    
     def run(self):
-        # i) Remove the .egg-info or .dist-info folders
-        egg_directories = glob('./*.egg-info')
-        map(shutil.rmtree, egg_directories)
-        dist_directories = glob('./*.dist-info')
-        map(shutil.rmtree, dist_directories)
-        # ii) Remove the ./build and ./dist directories
-        if os.path.isdir('./build'):
-            shutil.rmtree('./build')
-        if os.path.isdir('./dist'):
-            shutil.rmtree('./dist')
-
-# Requirements
-requirements = ['requests', 'scandir', 'mmh3', 'future']
-
-setup(name         = 'GSLab_Make',
-      version      = '1.1.1',
-      description  = 'Python make and fill tools for GSLab',
-      url          = 'https://github.com/gentzkow/gslab_make',
-      author       = 'Matthew Gentzkow, Jesse Shapiro',
-      author_email = 'gentzkow@stanford.edu, jesse_shapiro_1@brown.edu',
-      license      = 'MIT',
-      packages     = find_packages(),
-      install_requires = requirements,
-      zip_safe     = False,
-      cmdclass     = {'test': TestRepo, 'clean': CleanRepo},
-      setup_requires = ['pytest-runner', 'coverage', 'future'],
-      tests_require = ['pytest', 'coverage'])
-
+        # Remove build and dist directories
+        if os.path.isdir('build'):
+            shutil.rmtree('build')
+        if os.path.isdir('dist'):
+            shutil.rmtree('dist')
+            
+        # Remove egg-info and dist-info directories
+        egg_info = glob.glob('*.egg-info')
+        dist_info = glob.glob('*.dist-info')
+        for directory in egg_info + dist_info:
+            shutil.rmtree(directory)
+                    
+setup(cmdclass = {'clean': CleanRepo})

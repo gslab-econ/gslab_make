@@ -16,6 +16,9 @@ crit_error_no_makelog = \
     '- Makelog was not started (via `start_makelog`)\n' + \
     '- Makelog ended (via `end_makelog`) prematurely\n' + \
     '- Makelog deleted or moved after started'
+    
+# ACTION ITEM: `end_makelog` CURRENTLY DOESN'T ACTUALLY TURN MAKE LOG STATUS OFF
+    
 crit_error_no_program_output = \
     '\nERROR! Program output `%s` is expected from `%s` but cannot be found. ' + \
     'Certain applications (`matlab`, `sas`, `stata`) automatically create program outputs when run using system command. ' + \
@@ -32,6 +35,8 @@ crit_error_no_path = \
     '\nERROR! Path `%s` cannot be found.' 
 crit_error_no_path_wildcard = \
     '\nERROR! Paths matching pattern `%s` cannot be found.' 
+crit_error_no_attributes = \
+    '\nERROR! Cannot open git attributes file for repository. Confirm that repository has git attributes file.'
 crit_error_bad_command = \
     '\nERROR! The following command cannot be executed by operating system.\n' + \
     '  > %s\n' + \
@@ -52,24 +57,14 @@ crit_error_extension = \
     '\nERROR! Program `%s` does not have correct extension. ' + \
     'Program should have one of the following extensions: %s.' 
 crit_error_path_mapping = \
-    '\nERROR! Argument `path_mappings` is missing a value for key `%s`. ' + \
+    '\nERROR! Argument `paths` is missing a value for key `%s`. ' + \
     '`{%s}` found in the following instruction in file `%s`.\n' + \
     '  > %s\n' + \
-    'Confirm that your config user file contains an external dependency for {%s} and that it has been properly loaded (via `update_mappings`). ' + \
+    'Confirm that your config user file contains an external dependency for {%s} and that it has been properly loaded (via `update_paths`). ' + \
     'For further detail, refer to the traceback below.'
 crit_error_no_repo = \
     '\nERROR! Current working directory is not part of a git repository.'
-crit_error_no_tag = \
-    '\nERROR! Input file `%s` is missing tag.'
-crit_error_not_float = \
-    '\nERROR! Value `%s` cannot be rounded as it is not numeric.'
-crit_error_not_enough_values = \
-    '\nERROR! Table `%s` contains more requested entries than inputs provided.'
-crit_error_too_many_values = \
-    '\nERROR! More inputs were provided than requested by table `%s`.'
-crit_error_duplicate_tables = \
-    '\nERROR! Inputs contain tables with duplicate tags.'
-    
+
 # Syntax errors
 syn_error_wildcard = \
     '\nERROR! Destination and source must have same number of wildcards (`*`). ' + \
@@ -110,7 +105,7 @@ warning_git_lfs_file_log = \
 warning_git_lfs_repo = \
     '\nWARNING! Total size of files tracked by git-lfs exceed the repository config limit  (%s MB).'
 warning_copy = \
-    'To copy the following file, enter "yes". Otherwise, enter "no". ' + \
+    'To copy the following file, enter "Yes". Otherwise, enter "No". ' + \
     'Update any archives and documentation accordingly.\n' + \
     '> %s\n' + \
     'will be uploaded to\n' + \
