@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; GSLab Make 2.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSLab Make
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="specifying_paths.html">Specifying paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general_logging.html">General logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourcing.html">Sourcing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source_logging.html">Source logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repository.html">Repository functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directory.html">Directory functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filling.html">Filling functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSLab Make</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>&lt;no title&gt;</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/dummy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">colored</span></code>(text[, color, on_color, attrs])</p></td>
+<td><p>Colorize text.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/write_logs/gslab_make.write_logs.end_makelog.html#gslab_make.write_logs.end_makelog" title="gslab_make.write_logs.end_makelog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_makelog</span></code></a>(paths)</p></td>
+<td><p>End make log.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_message</span></code>(message)</p></td>
+<td><p>Format message.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code>(paths_dict, key)</p></td>
+<td><p>Get path for key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">glob_recursive</span></code>(path, depth[, quiet])</p></td>
+<td><p>Walks through path.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></p></td>
+<td><p>Read a string from standard input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/write_logs/gslab_make.write_logs.log_files_in_output.html#gslab_make.write_logs.log_files_in_output" title="gslab_make.write_logs.log_files_in_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log_files_in_output</span></code></a>(paths[, depth])</p></td>
+<td><p>Log files in output directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_path</span></code>(path)</p></td>
+<td><p>Normalizes path to be OS-compatible.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code></p></td>
+<td><p>Open file and return a stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow</span></code></p></td>
+<td><p>Equivalent to x**y (with two arguments) or x**y % z (with three arguments)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_from</span></code>(exc, cause)</p></td>
+<td><p>Equivalent to:</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code>(number[, ndigits])</p></td>
+<td><p>Round a number to a given precision in decimal digits (default 0 digits).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/write_logs/gslab_make.write_logs.start_makelog.html#gslab_make.write_logs.start_makelog" title="gslab_make.write_logs.start_makelog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_makelog</span></code></a>(paths)</p></td>
+<td><p>Start make log.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/write_logs/gslab_make.write_logs.write_heads_log.html#gslab_make.write_logs.write_heads_log" title="gslab_make.write_logs.write_heads_log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_heads_log</span></code></a>(headslog_file, output_files)</p></td>
+<td><p>Write headers log.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/write_logs/gslab_make.write_logs.write_stats_log.html#gslab_make.write_logs.write_stats_log" title="gslab_make.write_logs.write_stats_log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_stats_log</span></code></a>(statslog_file, output_files)</p></td>
+<td><p>Write statistics log.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/write_logs/gslab_make.write_logs.write_to_makelog.html#gslab_make.write_logs.write_to_makelog" title="gslab_make.write_logs.write_to_makelog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_to_makelog</span></code></a>(paths, message)</p></td>
+<td><p>Append message to make log.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.clear_dir.html#gslab_make.modify_dir.clear_dir" title="gslab_make.modify_dir.clear_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_dir</span></code></a>(dir_list)</p></td>
+<td><p>Remove everything in directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">colored</span></code>(text[, color, on_color, attrs])</p></td>
+<td><p>Colorize text.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_message</span></code>(message)</p></td>
+<td><p>Format message.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></p></td>
+<td><p>Read a string from standard input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_path</span></code>(path)</p></td>
+<td><p>Normalizes path to be OS-compatible.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code></p></td>
+<td><p>Open file and return a stream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow</span></code></p></td>
+<td><p>Equivalent to x**y (with two arguments) or x**y % z (with three arguments)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_from</span></code>(exc, cause)</p></td>
+<td><p>Equivalent to:</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.remove_dir.html#gslab_make.modify_dir.remove_dir" title="gslab_make.modify_dir.remove_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_dir</span></code></a>(dir_list[, quiet])</p></td>
+<td><p>Remove everything in directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.remove_path.html#gslab_make.modify_dir.remove_path" title="gslab_make.modify_dir.remove_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_path</span></code></a>(path[, option, quiet])</p></td>
+<td><p>Remove path using shell command specified in metadata.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code>(number[, ndigits])</p></td>
+<td><p>Round a number to a given precision in decimal digits (default 0 digits).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.unzip.html#gslab_make.modify_dir.unzip" title="gslab_make.modify_dir.unzip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unzip</span></code></a>(zip_path, output_dir)</p></td>
+<td><p>Unzip file to directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.zip_dir.html#gslab_make.modify_dir.zip_dir" title="gslab_make.modify_dir.zip_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zip_dir</span></code></a>(source_dir, zip_dest)</p></td>
+<td><p>Zip directory to file.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">colored</span></code>(text[, color, on_color, attrs])</p></td>
+<td><p>Colorize text.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_message</span></code>(message)</p></td>
+<td><p>Format message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></p></td>
+<td><p>Read a string from standard input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/tablefill/gslab_make.tablefill.insert_tables.html#gslab_make.tablefill.insert_tables" title="gslab_make.tablefill.insert_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_tables</span></code></a>(template, tables)</p></td>
+<td><p>Fill tables for template.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/tablefill/gslab_make.tablefill.insert_tables_latex.html#gslab_make.tablefill.insert_tables_latex" title="gslab_make.tablefill.insert_tables_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_tables_latex</span></code></a>(template, tables)</p></td>
+<td><p>Fill tables for LaTeX template.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/tablefill/gslab_make.tablefill.insert_tables_lyx.html#gslab_make.tablefill.insert_tables_lyx" title="gslab_make.tablefill.insert_tables_lyx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_tables_lyx</span></code></a>(template, tables)</p></td>
+<td><p>Fill tables for LyX template.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/tablefill/gslab_make.tablefill.insert_value.html#gslab_make.tablefill.insert_value" title="gslab_make.tablefill.insert_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_value</span></code></a>(line, value, type)</p></td>
+<td><p>Insert value into line.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_path</span></code>(path)</p></td>
+<td><p>Normalizes path to be OS-compatible.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code></p></td>
+<td><p>Open file and return a stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/tablefill/gslab_make.tablefill.parse_content.html#gslab_make.tablefill.parse_content" title="gslab_make.tablefill.parse_content"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_content</span></code></a>(file, null)</p></td>
+<td><p>Parse content from input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/tablefill/gslab_make.tablefill.parse_data.html#gslab_make.tablefill.parse_data" title="gslab_make.tablefill.parse_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_data</span></code></a>(data, null)</p></td>
+<td><p>Parse data from input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/tablefill/gslab_make.tablefill.parse_tag.html#gslab_make.tablefill.parse_tag" title="gslab_make.tablefill.parse_tag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_tag</span></code></a>(tag)</p></td>
+<td><p>Parse tag from input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow</span></code></p></td>
+<td><p>Equivalent to x**y (with two arguments) or x**y % z (with three arguments)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_from</span></code>(exc, cause)</p></td>
+<td><p>Equivalent to:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code>(number[, ndigits])</p></td>
+<td><p>Round a number to a given precision in decimal digits (default 0 digits).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/tablefill/gslab_make.tablefill.tablefill.html#gslab_make.tablefill.tablefill" title="gslab_make.tablefill.tablefill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tablefill</span></code></a>(inputs, template, output[, null])</p></td>
+<td><p>Fill tables for template using inputs.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/check_repo/gslab_make.check_repo.check_module_size.html#gslab_make.check_repo.check_module_size" title="gslab_make.check_repo.check_module_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_module_size</span></code></a>(paths)</p></td>
+<td><p>Check file sizes for module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/check_repo/gslab_make.check_repo.check_path_lfs.html#gslab_make.check_repo.check_path_lfs" title="gslab_make.check_repo.check_path_lfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_path_lfs</span></code></a>(path, lfs_list)</p></td>
+<td><p>Check if file matches git lfs patterns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">colored</span></code>(text[, color, on_color, attrs])</p></td>
+<td><p>Colorize text.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_message</span></code>(message)</p></td>
+<td><p>Format message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/check_repo/gslab_make.check_repo.get_dir_sizes.html#gslab_make.check_repo.get_dir_sizes" title="gslab_make.check_repo.get_dir_sizes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dir_sizes</span></code></a>(dir_path)</p></td>
+<td><p>Get file sizes for directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/check_repo/gslab_make.check_repo.get_file_sizes.html#gslab_make.check_repo.get_file_sizes" title="gslab_make.check_repo.get_file_sizes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_file_sizes</span></code></a>(dir_path, exclude)</p></td>
+<td><p>Walk through directory and get file sizes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/check_repo/gslab_make.check_repo.get_git_ignore.html#gslab_make.check_repo.get_git_ignore" title="gslab_make.check_repo.get_git_ignore"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_git_ignore</span></code></a>(repo)</p></td>
+<td><p>Get files ignored by git.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/check_repo/gslab_make.check_repo.get_git_status.html#gslab_make.check_repo.get_git_status" title="gslab_make.check_repo.get_git_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_git_status</span></code></a>(repo)</p></td>
+<td><p>Get git status.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/check_repo/gslab_make.check_repo.get_modified_sources.html#gslab_make.check_repo.get_modified_sources" title="gslab_make.check_repo.get_modified_sources"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_modified_sources</span></code></a>(paths, move_map[, depth])</p></td>
+<td><p>Get source files considered changed by git status.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code>(paths_dict, key)</p></td>
+<td><p>Get path for key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/check_repo/gslab_make.check_repo.get_size_values.html#gslab_make.check_repo.get_size_values" title="gslab_make.check_repo.get_size_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_size_values</span></code></a>(git_files, git_lfs_files)</p></td>
+<td><p>Get file sizes for repository.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">glob_recursive</span></code>(path, depth[, quiet])</p></td>
+<td><p>Walks through path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></p></td>
+<td><p>Read a string from standard input.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_path</span></code>(path)</p></td>
+<td><p>Normalizes path to be OS-compatible.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code></p></td>
+<td><p>Open file and return a stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/check_repo/gslab_make.check_repo.parse_git_attributes.html#gslab_make.check_repo.parse_git_attributes" title="gslab_make.check_repo.parse_git_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_git_attributes</span></code></a>(attributes)</p></td>
+<td><p>Get git lfs patterns from .gitattributes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow</span></code></p></td>
+<td><p>Equivalent to x**y (with two arguments) or x**y % z (with three arguments)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_from</span></code>(exc, cause)</p></td>
+<td><p>Equivalent to:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code>(number[, ndigits])</p></td>
+<td><p>Round a number to a given precision in decimal digits (default 0 digits).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_to_makelog</span></code>(paths, message)</p></td>
+<td><p>Append message to make log.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">colored</span></code>(text[, color, on_color, attrs])</p></td>
+<td><p>Colorize text.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_message</span></code>(message)</p></td>
+<td><p>Format message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code>(paths_dict, key)</p></td>
+<td><p>Get path for key.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">glob_recursive</span></code>(path, depth[, quiet])</p></td>
+<td><p>Walks through path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></p></td>
+<td><p>Read a string from standard input.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_path</span></code>(path)</p></td>
+<td><p>Normalizes path to be OS-compatible.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code></p></td>
+<td><p>Open file and return a stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow</span></code></p></td>
+<td><p>Equivalent to x**y (with two arguments) or x**y % z (with three arguments)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_from</span></code>(exc, cause)</p></td>
+<td><p>Equivalent to:</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code>(number[, ndigits])</p></td>
+<td><p>Round a number to a given precision in decimal digits (default 0 digits).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_heads_log</span></code>(headslog_file, output_files)</p></td>
+<td><p>Write headers log.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/write_source_logs/gslab_make.write_source_logs.write_source_logs.html#gslab_make.write_source_logs.write_source_logs" title="gslab_make.write_source_logs.write_source_logs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_source_logs</span></code></a>(paths, source_map[, depth])</p></td>
+<td><p>Write source logs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/write_source_logs/gslab_make.write_source_logs.write_source_maplog.html#gslab_make.write_source_logs.write_source_maplog" title="gslab_make.write_source_logs.write_source_maplog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_source_maplog</span></code></a>(source_maplog, source_map)</p></td>
+<td><p>Write link map log.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_stats_log</span></code>(statslog_file, output_files)</p></td>
+<td><p>Write statistics log.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_to_makelog</span></code>(paths, message)</p></td>
+<td><p>Append message to make log.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">colored</span></code>(text[, color, on_color, attrs])</p></td>
+<td><p>Colorize text.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/move_sources/gslab_make.move_sources.copy_externals.html#gslab_make.move_sources.copy_externals" title="gslab_make.move_sources.copy_externals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_externals</span></code></a>(paths, file_list[, mapping_dict])</p></td>
+<td><p>Create copies to externals from list of files containing copying instructions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/move_sources/gslab_make.move_sources.copy_inputs.html#gslab_make.move_sources.copy_inputs" title="gslab_make.move_sources.copy_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_inputs</span></code></a>(paths, file_list[, mapping_dict])</p></td>
+<td><p>Create copies to inputs from list of files containing copying instructions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/move_sources/gslab_make.move_sources.create_copies.html#gslab_make.move_sources.create_copies" title="gslab_make.move_sources.create_copies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_copies</span></code></a>(paths, file_list[, mapping_dict])</p></td>
+<td><p>Create copies from list of files containing copying instructions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/move_sources/gslab_make.move_sources.create_links.html#gslab_make.move_sources.create_links" title="gslab_make.move_sources.create_links"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_links</span></code></a>(paths, file_list[, mapping_dict])</p></td>
+<td><p>Create symlinks from list of files containing linking instructions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_message</span></code>(message)</p></td>
+<td><p>Format message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code>(paths_dict, key)</p></td>
+<td><p>Get path for key.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></p></td>
+<td><p>Read a string from standard input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/move_sources/gslab_make.move_sources.link_externals.html#gslab_make.move_sources.link_externals" title="gslab_make.move_sources.link_externals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">link_externals</span></code></a>(paths, file_list[, mapping_dict])</p></td>
+<td><p>Create symlinks to externals from list of files containing linking instructions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/move_sources/gslab_make.move_sources.link_inputs.html#gslab_make.move_sources.link_inputs" title="gslab_make.move_sources.link_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">link_inputs</span></code></a>(paths, file_list[, mapping_dict])</p></td>
+<td><p>Create symlinks to inputs from list of files containing linking instructions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code></p></td>
+<td><p>Open file and return a stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow</span></code></p></td>
+<td><p>Equivalent to x**y (with two arguments) or x**y % z (with three arguments)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_from</span></code>(exc, cause)</p></td>
+<td><p>Equivalent to:</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code>(number[, ndigits])</p></td>
+<td><p>Round a number to a given precision in decimal digits (default 0 digits).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_to_makelog</span></code>(paths, message)</p></td>
+<td><p>Append message to make log.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.check_stata_output.html#gslab_make.run_program.check_stata_output" title="gslab_make.run_program.check_stata_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_stata_output</span></code></a>(output)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">colored</span></code>(text[, color, on_color, attrs])</p></td>
+<td><p>Colorize text.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.execute_command.html#gslab_make.run_program.execute_command" title="gslab_make.run_program.execute_command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">execute_command</span></code></a>(paths, command, **kwargs)</p></td>
+<td><p>Run system command.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_message</span></code>(message)</p></td>
+<td><p>Format message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code>(paths_dict, key)</p></td>
+<td><p>Get path for key.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></p></td>
+<td><p>Read a string from standard input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_path</span></code>(path)</p></td>
+<td><p>Normalizes path to be OS-compatible.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code></p></td>
+<td><p>Open file and return a stream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow</span></code></p></td>
+<td><p>Equivalent to x**y (with two arguments) or x**y % z (with three arguments)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_from</span></code>(exc, cause)</p></td>
+<td><p>Equivalent to:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code>(number[, ndigits])</p></td>
+<td><p>Round a number to a given precision in decimal digits (default 0 digits).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_jupyter.html#gslab_make.run_program.run_jupyter" title="gslab_make.run_program.run_jupyter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_jupyter</span></code></a>(paths, program[, timeout, …])</p></td>
+<td><p>Run Jupyter notebook using system command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_lyx.html#gslab_make.run_program.run_lyx" title="gslab_make.run_program.run_lyx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_lyx</span></code></a>(paths, program, **kwargs)</p></td>
+<td><p>Run LyX script using system command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_mathematica.html#gslab_make.run_program.run_mathematica" title="gslab_make.run_program.run_mathematica"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_mathematica</span></code></a>(paths, program, **kwargs)</p></td>
+<td><p>Run Mathematica script using system command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_matlab.html#gslab_make.run_program.run_matlab" title="gslab_make.run_program.run_matlab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_matlab</span></code></a>(paths, program, **kwargs)</p></td>
+<td><p>Run Matlab script using system command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_module.html#gslab_make.run_program.run_module" title="gslab_make.run_program.run_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_module</span></code></a>(root, module[, build_script])</p></td>
+<td><p>Run module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_perl.html#gslab_make.run_program.run_perl" title="gslab_make.run_program.run_perl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_perl</span></code></a>(paths, program, **kwargs)</p></td>
+<td><p>Run Perl script using system command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_python.html#gslab_make.run_program.run_python" title="gslab_make.run_program.run_python"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_python</span></code></a>(paths, program, **kwargs)</p></td>
+<td><p>Run Python script using system command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_r.html#gslab_make.run_program.run_r" title="gslab_make.run_program.run_r"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_r</span></code></a>(paths, program, **kwargs)</p></td>
+<td><p>Run R script using system command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_sas.html#gslab_make.run_program.run_sas" title="gslab_make.run_program.run_sas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_sas</span></code></a>(paths, program, **kwargs)</p></td>
+<td><p>Run SAS script using system command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_stat_transfer.html#gslab_make.run_program.run_stat_transfer" title="gslab_make.run_program.run_stat_transfer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_stat_transfer</span></code></a>(paths, program, **kwargs)</p></td>
+<td><p>Run StatTransfer script using system command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/run_program/gslab_make.run_program.run_stata.html#gslab_make.run_program.run_stata" title="gslab_make.run_program.run_stata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_stata</span></code></a>(paths, program, **kwargs)</p></td>
+<td><p>Run Stata script using system command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_to_makelog</span></code>(paths, message)</p></td>
+<td><p>Append message to make log.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/make_utility/gslab_make.make_utility.check_os.html#gslab_make.make_utility.check_os" title="gslab_make.make_utility.check_os"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_os</span></code></a>([osname])</p></td>
+<td><p>Check OS is either POSIX or NT.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">colored</span></code>(text[, color, on_color, attrs])</p></td>
+<td><p>Colorize text.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/make_utility/gslab_make.make_utility.copy_output.html#gslab_make.make_utility.copy_output" title="gslab_make.make_utility.copy_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_output</span></code></a>(file, copy_dir)</p></td>
+<td><p>Copy output file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_message</span></code>(message)</p></td>
+<td><p>Format message.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code>(paths_dict, key)</p></td>
+<td><p>Get path for key.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code></p></td>
+<td><p>Read a string from standard input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_path</span></code>(path)</p></td>
+<td><p>Normalizes path to be OS-compatible.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">open</span></code></p></td>
+<td><p>Open file and return a stream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pow</span></code></p></td>
+<td><p>Equivalent to x**y (with two arguments) or x**y % z (with three arguments)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_from</span></code>(exc, cause)</p></td>
+<td><p>Equivalent to:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code>(number[, ndigits])</p></td>
+<td><p>Round a number to a given precision in decimal digits (default 0 digits).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_executables.html#gslab_make.make_utility.update_executables" title="gslab_make.make_utility.update_executables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_executables</span></code></a>(paths[, osname])</p></td>
+<td><p>Update executable names using user config file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_mappings.html#gslab_make.make_utility.update_mappings" title="gslab_make.make_utility.update_mappings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_mappings</span></code></a>(paths[, mapping_dict])</p></td>
+<td><p>Update path mappings using user config file.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matthew Gentzkow
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

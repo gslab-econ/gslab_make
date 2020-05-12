@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Directory functions &mdash; GSLab Make 2.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="clear_dir" href="api/modify_dir/gslab_make.modify_dir.clear_dir.html" />
+    <link rel="prev" title="parse_git_attributes" href="api/check_repo/gslab_make.check_repo.parse_git_attributes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> GSLab Make
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="specifying_paths.html">Specifying paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general_logging.html">General logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourcing.html">Sourcing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source_logging.html">Source logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repository.html">Repository functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Directory functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.clear_dir.html">clear_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.remove_dir.html">remove_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.remove_path.html">remove_path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.unzip.html">unzip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.zip_dir.html">zip_dir</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filling.html">Filling functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSLab Make</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Directory functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/directory.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="directory-functions">
+<h1>Directory functions<a class="headerlink" href="#directory-functions" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to make modifications to a directory. Functions to remove files and directories, clear directories, and zip/unzip files are included.</p>
+<dl class="function">
+<dt>
+<code class="sig-name descname">remove_path</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">option=''</em>, <em class="sig-param">quiet=False</em><span class="sig-paren">)</span></dt>
+<dd><p>Remove path using shell command specified in metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Path to remove.</p></li>
+<li><p><strong>option</strong> (<em>str</em><em>, </em><em>optional</em>) – Options for shell command. Defaults to options specified in metadata.</p></li>
+<li><p><strong>quiet</strong> (<em>bool</em><em>, </em><em>optional</em>) – Suppress printing of paths removed. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="sig-name descname">remove_dir</code><span class="sig-paren">(</span><em class="sig-param">dir_list</em>, <em class="sig-param">quiet=False</em><span class="sig-paren">)</span></dt>
+<dd><p>Remove everything in directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_list</strong> (<em>list</em>) – List of directories to remove.</p></li>
+<li><p><strong>quiet</strong> (<em>bool</em><em>, </em><em>optional</em>) – Suppress printing of directories removed. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="sig-name descname">clear_dir</code><span class="sig-paren">(</span><em class="sig-param">dir_list</em><span class="sig-paren">)</span></dt>
+<dd><p>Remove everything in directory. Create directory if nonexistent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dir_list</strong> (<em>list</em>) – List of directories to clear.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="sig-name descname">unzip</code><span class="sig-paren">(</span><em class="sig-param">zip_path</em>, <em class="sig-param">output_dir</em><span class="sig-paren">)</span></dt>
+<dd><p>Unzip file to directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zip_path</strong> (<em>str</em>) – Path of file to unzip.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em>) – Directory to write outputs of unzipped file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="sig-name descname">zip_dir</code><span class="sig-paren">(</span><em class="sig-param">source_dir</em>, <em class="sig-param">zip_dest</em><span class="sig-paren">)</span></dt>
+<dd><p>Zip directory to file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_dir</strong> (<em>str</em>) – Path of directory to zip.</p></li>
+<li><p><strong>zip_dest</strong> (<em>str</em>) – Destination of zip file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api/modify_dir/gslab_make.modify_dir.clear_dir.html" class="btn btn-neutral float-right" title="clear_dir" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="api/check_repo/gslab_make.check_repo.parse_git_attributes.html" class="btn btn-neutral float-left" title="parse_git_attributes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Matthew Gentzkow
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

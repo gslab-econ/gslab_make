@@ -14,8 +14,10 @@ pip install sphinx-automodapi
 
 Compiling instructions
 ----------------------
-From the `docs` directory, use the following shell command:
+From the `docs/sphinx` directory, use the following shell command:
 
 ```
 make html
 ```
+
+Copy over the files in `docs/sphinx/build/html` to `docs`.
