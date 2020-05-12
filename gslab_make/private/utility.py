@@ -59,8 +59,6 @@ def norm_path(path):
         path = os.path.expanduser(path)
         path = os.path.abspath(path)
 
-    # path = encode(path)
-
     return(path)
 
 
@@ -111,7 +109,7 @@ def glob_recursive(path, depth, max_depth = 20, quiet = True):
     depth : int
         Level of depth when walking through path.
     max_depth : int
-        Maximum level of depth allowed.
+        Maximum level of depth allowed. Defaults to 20.
     quiet : bool, optional
         Suppress warning if no files globbed. Defaults to ``True``. 
 

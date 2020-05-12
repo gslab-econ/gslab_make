@@ -169,6 +169,7 @@ def clear_dir(dir_list):
     try:
         dir_list = convert_to_list(dir_list, 'dir')
         dir_glob = []
+        
         for dir_path in dir_list:
             expand = glob.glob(dir_path)
             expand = expand if expand else [dir_path]
