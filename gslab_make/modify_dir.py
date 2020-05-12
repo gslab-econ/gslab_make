@@ -66,11 +66,7 @@ def remove_path(path, option = '', quiet = False):
             option = metadata.default_options[os.name]['rmdir']
 
         command = metadata.commands[os.name]['rmdir'] % (option, path)
-        process = subprocess_fix.Popen(command, 
-                                       stdout = subprocess.PIPE, 
-                                       stderr = subprocess.PIPE, 
-                                       shell = True, 
-                                       universal_newlines = True)   
+        process = subprocess_fix.Popen(command, shell = True)   
         process.wait()
         # ACTION ITEM: ADD DEBUGGING TO SUBPROCESS CALL
 

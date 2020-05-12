@@ -102,10 +102,6 @@ class TestOutputLog(unittest.TestCase):
             self.assertIn('depth_1.txt', read_file(paths['output_statslog']))
             self.assertIn('depth_2.txt', read_file(paths['output_statslog']))
 
-    """
-    Figure out why :|
-    """
-
     @func_set_timeout(60)
     def test_log_output_depth_recursive(self):  
         """
@@ -122,7 +118,7 @@ class TestOutputLog(unittest.TestCase):
 
             start_makelog(paths)
             link_inputs(paths, ['test/raw/log_outputs/recursion.txt'])
-            #log_files_in_output(paths)
+            log_files_in_output(paths)
 
     def test_error_bad_path(self):     
         with no_stderrout():
