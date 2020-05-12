@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
@@ -8,13 +8,14 @@ import os
 import re
 import sys
 import glob
-if (sys.version_info < (3, 0)):
-    import gslab_make.private.subprocess_fix as subprocess_fix
-else:
-    import subprocess as subprocess_fix
 import subprocess
 from itertools import chain
 
+if (sys.version_info < (3, 0)) and (os.name == 'nt'):
+    import gslab_make.private.subprocess_fix as subprocess_fix
+else:
+    import subprocess as subprocess_fix
+    
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError

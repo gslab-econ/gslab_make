@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
@@ -7,12 +7,14 @@ from builtins import (bytes, str, open, super, range,
 import os
 import io
 import sys
-if (sys.version_info < (3, 0)):
+import shutil
+import subprocess
+
+if (sys.version_info < (3, 0)) and (os.name == 'nt'):
     import gslab_make.private.subprocess_fix as subprocess_fix
 else:
     import subprocess as subprocess_fix
-import subprocess
-import shutil
+
 from termcolor import colored
 import colorama
 colorama.init()

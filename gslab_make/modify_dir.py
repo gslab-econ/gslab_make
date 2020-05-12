@@ -1,19 +1,20 @@
-#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from
+from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import os
 import sys
-import subprocess
-if (sys.version_info < (3, 0)):
-    import gslab_make.private.subprocess_fix as subprocess_fix
-else:
-    import subprocess as subprocess_fix
 import glob
 import zipfile
 import traceback
+import subprocess
+
+if (sys.version_info < (3, 0)) and (os.name == 'nt'):
+    import gslab_make.private.subprocess_fix as subprocess_fix
+else:
+    import subprocess as subprocess_fix
 
 from termcolor import colored
 import colorama

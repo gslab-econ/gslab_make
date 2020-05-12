@@ -1,15 +1,16 @@
-#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from
+from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
 import os
 import re
-import traceback
-import shutil
-import fileinput
 import sys
+import shutil
+import traceback
+import fileinput
+
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
 

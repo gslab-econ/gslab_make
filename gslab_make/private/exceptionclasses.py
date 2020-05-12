@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
@@ -14,7 +14,7 @@ colorama.init()
 import gslab_make.private.metadata as metadata
 
 """
-For some bizarre reason, fixes Exception printing and I have no idea why...
+For some fixes Exception printing and I have no idea why...
 """
 
 import subprocess
