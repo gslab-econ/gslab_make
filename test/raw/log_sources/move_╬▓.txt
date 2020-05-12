@@ -1,0 +1,2 @@
+# Destination | Source
+dir_╬▓ | test/raw/log_sources/dir_╬▓

@@ -1,0 +1,2 @@
+# Destination | Source
+dir | test/raw/move_sources/dir

@@ -1,0 +1,11 @@
+# External dependencies
+external:
+  bad_path:
+
+# Local settings
+local:
+
+  # Executable names
+  executables:
+  
+    bad_executable:

@@ -1,0 +1,2 @@
+# Destination | Source
+file_╬▓.txt | test/raw/move_sources/file_╬▓.txt
