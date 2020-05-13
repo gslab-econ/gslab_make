@@ -88,8 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.end_makelog.html">end_makelog</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">log_files_in_output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.start_makelog.html">start_makelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.write_heads_log.html">write_heads_log</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.write_stats_log.html">write_stats_log</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.write_to_makelog.html">write_to_makelog</a></li>
 </ul>
 </li>
@@ -171,50 +169,52 @@
 <dl class="function">
 <dt id="gslab_make.write_logs.log_files_in_output">
 <code class="sig-name descname">log_files_in_output</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">depth=inf</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.write_logs.log_files_in_output" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log files in output directory.</p>
-<p class="rubric">Notes</p>
-<dl class="simple">
-<dt>The following information is logged of all files contained in output directory:</dt><dd><ul class="simple">
-<li><p>File name (output statistics log)</p></li>
-<li><p>Last modified (output statistics log)</p></li>
-<li><p>File size (output statistics log)</p></li>
-<li><p>File head (output headers log)</p></li>
-</ul>
-</dd>
-</dl>
+<dd><p>Logs the following information for all files contained in directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
 <ul class="simple">
-<li><p>When walking through output directory, depth determines depth.</p></li>
+<li><p>File name (in file <code class="docutils literal notranslate"><span class="pre">output_statslog</span></code>)</p></li>
+<li><p>Last modified (in file <code class="docutils literal notranslate"><span class="pre">output_statslog</span></code>)</p></li>
+<li><p>File size (in file <code class="docutils literal notranslate"><span class="pre">output_statslog</span></code>)</p></li>
+<li><p>File head (in file <code class="docutils literal notranslate"><span class="pre">output_headslog</span></code>, optional)</p></li>
 </ul>
+<p>When walking through directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>, float <code class="docutils literal notranslate"><span class="pre">depth</span></code> determines level of depth to walk.
+Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<p>Include additional output directories to walk through
+(typically directories that you wish to keep local) in directory list <code class="docutils literal notranslate"><span class="pre">output_local_dir</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘output_dir’<span class="classifier">str</span></dt><dd><p>Path of output directory.</p>
-</dd>
-<dt>’output_local_dir’<span class="classifier">list, optional</span></dt><dd><p>List of paths of local output directories. Defaults to <cite>[]</cite>.</p>
-</dd>
-<dt>’output_statslog’<span class="classifier">str</span></dt><dd><p>Path to write output statistics log.</p>
-</dd>
-<dt>’output_headslog’<span class="classifier">str</span></dt><dd><p>Path to write output headers log.</p>
-</dd>
-<dt>’makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>depth</strong> (<em>float</em><em>, </em><em>optional</em>) – Level of depth when walking through output directory.</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>depth</strong> (<em>float</em><em>, </em><em>optional</em>) – Level of depth when walking through output directory. Defaults to infinite.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>output_dir</strong> (<em>str</em>) – Path of output directory.</p></li>
+<li><p><strong>output_local_dir</strong> (<em>str, list, optional</em>) – Path or list of paths of local output directories. Defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code> (i.e., none).</p></li>
+<li><p><strong>output_statslog</strong> (<em>str</em>) – Path to write output statistics log.</p></li>
+<li><p><strong>output_headslog</strong> (<em>str, optional</em>) – Path to write output headers log.</p></li>
+<li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<p>The following code will log information for all files contained in
+only the first level of <code class="docutils literal notranslate"><span class="pre">paths['output_dir']</span></code>.
+Therefore, files contained in subdirectories will be ignored.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log_files_in_outputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following code will log information for any file in <code class="docutils literal notranslate"><span class="pre">paths['output_dir']</span></code>,
+regardless of level of subdirectory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log_files_in_outputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">depth</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>

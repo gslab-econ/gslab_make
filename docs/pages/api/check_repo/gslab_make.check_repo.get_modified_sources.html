@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="get_size_values" href="gslab_make.check_repo.get_size_values.html" />
-    <link rel="prev" title="get_git_status" href="gslab_make.check_repo.get_git_status.html" /> 
+    <link rel="next" title="Directory functions" href="../../directory.html" />
+    <link rel="prev" title="check_module_size" href="gslab_make.check_repo.check_module_size.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,14 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../utility.html">Utility functions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../repository.html">Repository functions</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.check_module_size.html">check_module_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.check_path_lfs.html">check_path_lfs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.get_dir_sizes.html">get_dir_sizes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.get_file_sizes.html">get_file_sizes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.get_git_ignore.html">get_git_ignore</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.get_git_status.html">get_git_status</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">get_modified_sources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.get_size_values.html">get_size_values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.parse_git_attributes.html">parse_git_attributes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../directory.html">Directory functions</a></li>
@@ -173,31 +166,31 @@
 <h1>get_modified_sources<a class="headerlink" href="#get-modified-sources" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="gslab_make.check_repo.get_modified_sources">
-<code class="sig-name descname">get_modified_sources</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">move_map</em>, <em class="sig-param">depth=inf</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.get_modified_sources" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get source files considered changed by git status.</p>
+<code class="sig-name descname">get_modified_sources</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">source_map</em>, <em class="sig-param">depth=inf</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.get_modified_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the modification status for all sources contained in list
+<code class="docutils literal notranslate"><span class="pre">source_map</span></code> (returned by <a class="reference internal" href="../../sourcing.html#sourcing-functions"><span class="std std-ref">sourcing functions</span></a>).
+Produces warning if sources have been modified according to git.
+When walking through sources, float <code class="docutils literal notranslate"><span class="pre">depth</span></code> determines level of depth to walk.
+Warning messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>move_map</strong> (<em>list</em>) – Mapping of symlinks/copies (destination) to sources (returned from <cite>MoveList.create_symlinks</cite> or <cite>MoveList.create_copies</cite>).</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>source_map</strong> (<em>list</em>) – Mapping of sources (returned from <a class="reference internal" href="../../sourcing.html#sourcing-functions"><span class="std std-ref">sourcing functions</span></a>).</p></li>
 <li><p><strong>depth</strong> (<em>float</em><em>, </em><em>optional</em>) – Level of depth when walking through source directories. Defaults to infinite.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>overlap</strong> – List of source files considered changed by git status.</p>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>overlap</strong> – List of source files considered changed by git.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
 </dd></dl>
 
 </div>
@@ -210,10 +203,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="gslab_make.check_repo.get_size_values.html" class="btn btn-neutral float-right" title="get_size_values" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../directory.html" class="btn btn-neutral float-right" title="Directory functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="gslab_make.check_repo.get_git_status.html" class="btn btn-neutral float-left" title="get_git_status" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="gslab_make.check_repo.check_module_size.html" class="btn btn-neutral float-left" title="check_module_size" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -88,8 +88,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Sourcing functions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.copy_externals.html">copy_externals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.copy_inputs.html">copy_inputs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.create_copies.html">create_copies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.create_links.html">create_links</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.link_externals.html">link_externals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/move_sources/gslab_make.move_sources.link_inputs.html">link_inputs</a></li>
 </ul>
@@ -169,194 +167,370 @@
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to create symbolic links to source files. Doing so avoids potential duplication of source files and any associated confusion. In the case of modules dedicated to LyX/LaTeX documents, there are optional functions to copy source files instead of creating symbolic links so that users without <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> can still manually compile.</p>
 <dl class="function">
 <dt>
-<code class="sig-name descname">create_links</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">mapping_dict={}</em><span class="sig-paren">)</span></dt>
-<dd><p>Create symlinks from list of files containing linking instructions.</p>
+<code class="sig-name descname">link_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span></dt>
+<dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
+Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
+using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>.
+Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<p>Instruction files on how to create symbolic links (destinations) from targets (sources)
+should be formatted in the following way.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="gh">#</span> Each line of instruction should contain a destination and source delimited by a `|`
+<span class="gh">#</span> Lines beginning with # are ignored
+destination | source
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Symbolic links can be created to both files and directories.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Instruction files can be specified with the * shell pattern
+(see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).
+Destinations and their sources can also be specified with the * shell pattern.
+The number of wildcards must be the same for both destinations and sources.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘move_dir’<span class="classifier">str</span></dt><dd><p>Directory to write symlinks.</p>
-</dd>
-<dt>’makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>file_list</strong> (<em>list</em>) – List of files containing linking instructions.</p></li>
-<li><p><strong>mapping_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of path mappings used to parse linking instructions.
-Defaults to no mappings.</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.
+Dictionary additionally used to string format linking instructions.</p></li>
+<li><p><strong>file_list</strong> (<em>str</em><em>, </em><em>list</em>) – File or list of files containing linking instructions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>move_map</strong> – List of (source, destination) for each symlink created.</p>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>str</em>) – Directory to write symlinks.</p></li>
+<li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>source_map</strong> – List of (source, destination) for each symlink created.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<p>Suppose you call the following function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">paths</span></code> contained the following values.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>paths = {&#39;root&#39;: &#39;/User/root/&#39;,
+         &#39;makelog&#39;: &#39;make.log&#39;,
+         &#39;input_dir&#39;: &#39;input&#39;}
+</pre></div>
+</div>
+<p>Now suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | {root}/source1
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">paths</span></code>.
+Therefore, the function would parse the instruction as:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/root/source1
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<p>The following code would use instruction files <code class="docutils literal notranslate"><span class="pre">file1</span></code> and <code class="docutils literal notranslate"><span class="pre">file2</span></code> to create symbolic links.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">,</span> <span class="s1">&#39;file2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | source1
+destination2 | source2
+</pre></div>
+</div>
+<p>Symbolic links <code class="docutils literal notranslate"><span class="pre">destination1</span></code> and <code class="docutils literal notranslate"><span class="pre">destination1</span></code> would be created in directory <code class="docutils literal notranslate"><span class="pre">paths['input_dir']</span></code>.
+Their targets would be <code class="docutils literal notranslate"><span class="pre">source1</span></code> and <code class="docutils literal notranslate"><span class="pre">source2</span></code>, respectively.</p>
+<p class="rubric">Example</p>
+<p>Suppose you have the following targets.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>source1
+source2
+source3
+</pre></div>
+</div>
+<p>Specifying <code class="docutils literal notranslate"><span class="pre">destination*</span> <span class="pre">|</span> <span class="pre">source*</span></code> in one of your instruction files would
+create the following symbolic links in <code class="docutils literal notranslate"><span class="pre">paths['input_dir']</span></code>.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1
+destination2
+destination3
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="sig-name descname">create_copies</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">mapping_dict={}</em><span class="sig-paren">)</span></dt>
-<dd><p>Create copies from list of files containing copying instructions.</p>
+<code class="sig-name descname">link_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span></dt>
+<dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
+Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
+using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>.
+Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<p>Instruction files on how to create symbolic links (destinations) from targets (sources)
+should be formatted in the following way.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="gh">#</span> Each line of instruction should contain a destination and source delimited by a `|`
+<span class="gh">#</span> Lines beginning with # are ignored
+destination | source
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Symbolic links can be created to both files and directories.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Instruction files can be specified with the * shell pattern
+(see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).
+Destinations and their sources can also be specified with the * shell pattern.
+The number of wildcards must be the same for both destinations and sources.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘move_dir’<span class="classifier">str</span></dt><dd><p>Directory to write copies.</p>
-</dd>
-<dt>’makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>file_list</strong> (<em>list</em>) – List of files containing copying instructions.</p></li>
-<li><p><strong>mapping_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of path mappings used to parse copying instructions.
-Defaults to no mappings.</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.
+Dictionary additionally used to string format linking instructions.</p></li>
+<li><p><strong>file_list</strong> (<em>str</em><em>, </em><em>list</em>) – File or list of files containing linking instructions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>move_map</strong> – List of (source, destination) for each copy created.</p>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>external_dir</strong> (<em>str</em>) – Directory to write symlinks.</p></li>
+<li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>source_map</strong> – List of (source, destination) for each symlink created.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<p>Suppose you call the following function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">paths</span></code> contained the following values.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>paths = {&#39;root&#39;: &#39;/User/root/&#39;,
+         &#39;makelog&#39;: &#39;make.log&#39;,
+         &#39;input_dir&#39;: &#39;input&#39;}
+</pre></div>
+</div>
+<p>Now suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | {root}/source1
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">paths</span></code>.
+Therefore, the function would parse the instruction as:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/root/source1
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<p>The following code would use instruction files <code class="docutils literal notranslate"><span class="pre">file1</span></code> and <code class="docutils literal notranslate"><span class="pre">file2</span></code> to create symbolic links.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">link_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">,</span> <span class="s1">&#39;file2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | source1
+destination2 | source2
+</pre></div>
+</div>
+<p>Symbolic links <code class="docutils literal notranslate"><span class="pre">destination1</span></code> and <code class="docutils literal notranslate"><span class="pre">destination1</span></code> would be created in directory <code class="docutils literal notranslate"><span class="pre">paths['external_dir']</span></code>.
+Their targets would be <code class="docutils literal notranslate"><span class="pre">source1</span></code> and <code class="docutils literal notranslate"><span class="pre">source2</span></code>, respectively.</p>
+<p class="rubric">Example</p>
+<p>Suppose you have the following targets.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>source1
+source2
+source3
+</pre></div>
+</div>
+<p>Specifying <code class="docutils literal notranslate"><span class="pre">destination*</span> <span class="pre">|</span> <span class="pre">source*</span></code> in one of your instruction files would
+create the following symbolic links in <code class="docutils literal notranslate"><span class="pre">paths['external_dir']</span></code>.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1
+destination2
+destination3
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="sig-name descname">link_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">mapping_dict={}</em><span class="sig-paren">)</span></dt>
-<dd><p>Create symlinks to inputs from list of files containing linking instructions.</p>
+<code class="sig-name descname">copy_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span></dt>
+<dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
+Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
+using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>.
+Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<p>Instruction files on how to create copies (destinations) from targets (sources)
+should be formatted in the following way.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="gh">#</span> Each line of instruction should contain a destination and source delimited by a `|`
+<span class="gh">#</span> Lines beginning with # are ignored
+destination | source
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Instruction files can be specified with the * shell pattern
+(see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).
+Destinations and their sources can also be specified with the * shell pattern.
+The number of wildcards must be the same for both destinations and sources.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘input_dir’<span class="classifier">str</span></dt><dd><p>Directory to write symlinks.</p>
-</dd>
-<dt>’makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>file_list</strong> (<em>list</em>) – List of files containing linking instructions.</p></li>
-<li><p><strong>mapping_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of path mappings used to parse linking instructions.
-Defaults to no mappings.</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.
+Dictionary additionally used to string format copying instructions.</p></li>
+<li><p><strong>file_list</strong> (<em>str</em><em>, </em><em>list</em>) – File or list of files containing copying instructions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>move_map</strong> – List of (source, destination) for each symlink created.</p>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>str</em>) – Directory to write copies.</p></li>
+<li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>source_map</strong> – List of (source, destination) for each copy created.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<p>Suppose you call the following function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">paths</span></code> contained the following values.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>paths = {&#39;root&#39;: &#39;/User/root/&#39;,
+         &#39;makelog&#39;: &#39;make.log&#39;,
+         &#39;input_dir&#39;: &#39;input&#39;}
+</pre></div>
+</div>
+<p>Now suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | {root}/source1
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">paths</span></code>.
+Therefore, the function would parse the instruction as:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/root/source1
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<p>The following code would use instruction files <code class="docutils literal notranslate"><span class="pre">file1</span></code> and <code class="docutils literal notranslate"><span class="pre">file2</span></code> to create copies.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_inputs</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">,</span> <span class="s1">&#39;file2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | source1
+destination2 | source2
+</pre></div>
+</div>
+<p>Copies <code class="docutils literal notranslate"><span class="pre">destination1</span></code> and <code class="docutils literal notranslate"><span class="pre">destination1</span></code> would be created in directory <code class="docutils literal notranslate"><span class="pre">paths['input_dir']</span></code>.
+Their targets would be <code class="docutils literal notranslate"><span class="pre">source1</span></code> and <code class="docutils literal notranslate"><span class="pre">source2</span></code>, respectively.</p>
+<p class="rubric">Example</p>
+<p>Suppose you have the following targets.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>source1
+source2
+source3
+</pre></div>
+</div>
+<p>Specifying <code class="docutils literal notranslate"><span class="pre">destination*</span> <span class="pre">|</span> <span class="pre">source*</span></code> in one of your instruction files would
+create the following copies in <code class="docutils literal notranslate"><span class="pre">paths['input_dir']</span></code>.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1
+destination2
+destination3
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="sig-name descname">link_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">mapping_dict={}</em><span class="sig-paren">)</span></dt>
-<dd><p>Create symlinks to externals from list of files containing linking instructions.</p>
+<code class="sig-name descname">copy_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em><span class="sig-paren">)</span></dt>
+<dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
+Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
+using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>.
+Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
+<p>Instruction files on how to create copies (destinations) from targets (sources)
+should be formatted in the following way.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span><span class="gh">#</span> Each line of instruction should contain a destination and source delimited by a `|`
+<span class="gh">#</span> Lines beginning with # are ignored
+destination | source
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Instruction files can be specified with the * shell pattern
+(see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).
+Destinations and their sources can also be specified with the * shell pattern.
+The number of wildcards must be the same for both destinations and sources.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘external_dir’<span class="classifier">str</span></dt><dd><p>Directory to write symlinks.</p>
-</dd>
-<dt>’makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>file_list</strong> (<em>list</em>) – List of files containing linking instructions.</p></li>
-<li><p><strong>mapping_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of path mappings used to parse linking instructions.
-Defaults to no mappings.</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.
+Dictionary additionally used to string format copying instructions.</p></li>
+<li><p><strong>file_list</strong> (<em>str</em><em>, </em><em>list</em>) – File or list of files containing copying instructions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>move_map</strong> – List of (source, destination) for each symlink created.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<code class="sig-name descname">copy_inputs</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">mapping_dict={}</em><span class="sig-paren">)</span></dt>
-<dd><p>Create copies to inputs from list of files containing copying instructions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘input_dir’<span class="classifier">str</span></dt><dd><p>Directory to write copies.</p>
-</dd>
-<dt>’makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>file_list</strong> (<em>list</em>) – List of files containing copying instructions.</p></li>
-<li><p><strong>mapping_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of path mappings used to parse copying instructions.
-Defaults to no mappings.</p></li>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>external_dir</strong> (<em>str</em>) – Directory to write copies.</p></li>
+<li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>move_map</strong> – List of (source, destination) for each copy created.</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>source_map</strong> – List of (source, destination) for each copy created.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<code class="sig-name descname">copy_externals</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">file_list</em>, <em class="sig-param">mapping_dict={}</em><span class="sig-paren">)</span></dt>
-<dd><p>Create copies to externals from list of files containing copying instructions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘external_dir’<span class="classifier">str</span></dt><dd><p>Directory to write copies.</p>
-</dd>
-<dt>’makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
 </dd>
 </dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>file_list</strong> (<em>list</em>) – List of files containing copying instructions.</p></li>
-<li><p><strong>mapping_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of path mappings used to parse copying instructions.
-Defaults to no mappings.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>move_map</strong> – List of (source, destination) for each copy created.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list</p>
-</dd>
-</dl>
+<p class="rubric">Example</p>
+<p>Suppose you call the following function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">],</span> <span class="n">formatting_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">paths</span></code> contained the following values.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>paths = {&#39;root&#39;: &#39;/User/root/&#39;,
+         &#39;makelog&#39;: &#39;make.log&#39;,
+         &#39;input_dir&#39;: &#39;input&#39;}
+</pre></div>
+</div>
+<p>Now suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | {root}/source1
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">{root}</span></code> in the instruction file would be string formatted using <code class="docutils literal notranslate"><span class="pre">paths</span></code>.
+Therefore, the function would parse the instruction as:</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | /User/root/source1
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<p>The following code would use instruction files <code class="docutils literal notranslate"><span class="pre">file1</span></code> and <code class="docutils literal notranslate"><span class="pre">file2</span></code> to create copies.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copy_externals</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file1&#39;</span><span class="p">,</span> <span class="s1">&#39;file2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Suppose instruction file <code class="docutils literal notranslate"><span class="pre">file1</span></code> contained the following text.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1 | source1
+destination2 | source2
+</pre></div>
+</div>
+<p>Copies <code class="docutils literal notranslate"><span class="pre">destination1</span></code> and <code class="docutils literal notranslate"><span class="pre">destination1</span></code> would be created in directory <code class="docutils literal notranslate"><span class="pre">paths['external_dir']</span></code>.
+Their targets would be <code class="docutils literal notranslate"><span class="pre">source1</span></code> and <code class="docutils literal notranslate"><span class="pre">source2</span></code>, respectively.</p>
+<p class="rubric">Example</p>
+<p>Suppose you have the following targets.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>source1
+source2
+source3
+</pre></div>
+</div>
+<p>Specifying <code class="docutils literal notranslate"><span class="pre">destination*</span> <span class="pre">|</span> <span class="pre">source*</span></code> in one of your instruction files would
+create the following copies in <code class="docutils literal notranslate"><span class="pre">paths['external_dir']</span></code>.</p>
+<div class="highlight-md notranslate"><div class="highlight"><pre><span></span>destination1
+destination2
+destination3
+</pre></div>
+</div>
 </dd></dl>
 
 <div class="toctree-wrapper compound">

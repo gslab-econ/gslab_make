@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="check_os" href="api/make_utility/gslab_make.make_utility.check_os.html" />
+    <link rel="next" title="copy_output" href="api/make_utility/gslab_make.make_utility.copy_output.html" />
     <link rel="prev" title="run_stata" href="api/run_program/gslab_make.run_program.run_stata.html" /> 
 </head>
 
@@ -89,10 +89,8 @@
 <li class="toctree-l1"><a class="reference internal" href="source_logging.html">Source logging functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Utility functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.check_os.html">check_os</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.copy_output.html">copy_output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_executables.html">update_executables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_mappings.html">update_mappings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_paths.html">update_paths</a></li>
 </ul>
 </li>
@@ -168,74 +166,55 @@
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides general utility functions for build scripts. Functions to update executable names/path mappings and copy outputs are included.</p>
 <dl class="function">
 <dt>
-<code class="sig-name descname">check_os</code><span class="sig-paren">(</span><em class="sig-param">osname='nt'</em><span class="sig-paren">)</span></dt>
-<dd><p>Check OS is either POSIX or NT.</p>
+<code class="sig-name descname">update_executables</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">osname=None</em><span class="sig-paren">)</span></dt>
+<dd><p>Updates executable names with executables listed in file <code class="docutils literal notranslate"><span class="pre">config_user</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Executable names are used by <a class="reference internal" href="program.html#program-functions"><span class="std std-ref">program functions</span></a>.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Defaults to <cite>os.name</cite>.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
+<li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><p><strong>config_user</strong> (<em>str</em>) – Path of user configuration file.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="sig-name descname">update_executables</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">osname='nt'</em><span class="sig-paren">)</span></dt>
-<dd><p>Update executable names using user config file.</p>
+<code class="sig-name descname">update_paths</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span></dt>
+<dd><p>Updates dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code> with externals listed in file <code class="docutils literal notranslate"><span class="pre">config_user</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">paths</span></code> argument for <a class="reference internal" href="sourcing.html#sourcing-functions"><span class="std std-ref">sourcing functions</span></a> is used not only to get
+default paths for writing/logging, but also to
+<a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string format</a>
+sourcing instructions.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘config_user’<span class="classifier">str</span></dt><dd><p>Path of user config file.</p>
+<dd class="field-odd"><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths to update.
+Dictionary should ex-ante contain values for all keys listed below.</p>
 </dd>
-</dl>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><p><strong>config_user</strong> (<em>str</em>) – Path of user configuration file.</p>
 </dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Defaults to <cite>os.name</cite>.</p></li>
-</ul>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>paths</strong> – Dictionary of updated paths.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<code class="sig-name descname">update_mappings</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">mapping_dict={}</em><span class="sig-paren">)</span></dt>
-<dd><p>Update path mappings using user config file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘config_user’<span class="classifier">str</span></dt><dd><p>Path of user config file.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
-<li><p><strong>mapping_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of path mappings used to parse paths.
-Defaults to no mappings.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>mapping_dict</strong> – Dictionary of path mappings used to parse paths.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -243,7 +222,7 @@ Defaults to no mappings.</p></li>
 <dl class="function">
 <dt>
 <code class="sig-name descname">copy_output</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">copy_dir</em><span class="sig-paren">)</span></dt>
-<dd><p>Copy output file.</p>
+<dd><p>Copies output <code class="docutils literal notranslate"><span class="pre">file</span></code> to directory <code class="docutils literal notranslate"><span class="pre">copy_dir</span></code> with user prompt to confirm copy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -272,7 +251,7 @@ Defaults to no mappings.</p></li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api/make_utility/gslab_make.make_utility.check_os.html" class="btn btn-neutral float-right" title="check_os" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/make_utility/gslab_make.make_utility.copy_output.html" class="btn btn-neutral float-right" title="copy_output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="api/run_program/gslab_make.run_program.run_stata.html" class="btn btn-neutral float-left" title="run_stata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

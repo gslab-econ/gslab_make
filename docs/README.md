@@ -14,10 +14,19 @@ pip install sphinx-automodapi
 
 Compiling instructions
 ----------------------
-From the `docs/sphinx` directory, use the following shell command:
+1. Delete all files/directories in `docs` except `README.md` and `docs/sphinx`.
+
+2. From the `docs/sphinx` directory, use the following shell command:
 
 ```
 make html
 ```
 
-Copy over the files in `docs/sphinx/build/html` to `docs`.
+3. Copy over the files in `docs/sphinx/build/html` to `docs`.
+
+Notes
+-----
+- `audodoc` only documents functions in the package that are public. See [here](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html) for more detail.
+- `docs/sphinx/source/pages/dummy.rst` is just a dummy page so that `sphinx_automodapi.automodapi` can automatically generate individual pages for each function in the package.
+- These individual pages can be found in `docs/sphinx/source/pages/api`. This allows us to add links for each function to the sidebar table of contents.
+- `sphinx.ext.autosectionlabel` allows us to properly reference the page for a function.

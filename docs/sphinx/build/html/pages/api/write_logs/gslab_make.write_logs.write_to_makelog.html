@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Sourcing functions" href="../../sourcing.html" />
-    <link rel="prev" title="write_stats_log" href="gslab_make.write_logs.write_stats_log.html" /> 
+    <link rel="prev" title="start_makelog" href="gslab_make.write_logs.start_makelog.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,8 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.end_makelog.html">end_makelog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.log_files_in_output.html">log_files_in_output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.start_makelog.html">start_makelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.write_heads_log.html">write_heads_log</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.write_stats_log.html">write_stats_log</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">write_to_makelog</a></li>
 </ul>
 </li>
@@ -171,27 +169,22 @@
 <dl class="function">
 <dt id="gslab_make.write_logs.write_to_makelog">
 <code class="sig-name descname">write_to_makelog</code><span class="sig-paren">(</span><em class="sig-param">paths</em>, <em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.write_logs.write_to_makelog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Append message to make log.</p>
+<dd><p>Appends string <code class="docutils literal notranslate"><span class="pre">message</span></code> to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>message</strong> (<em>str</em>) – Message to append.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -209,7 +202,7 @@
         <a href="../../sourcing.html" class="btn btn-neutral float-right" title="Sourcing functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="gslab_make.write_logs.write_stats_log.html" class="btn btn-neutral float-left" title="write_stats_log" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="gslab_make.write_logs.start_makelog.html" class="btn btn-neutral float-left" title="start_makelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

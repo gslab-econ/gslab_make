@@ -26,6 +26,13 @@ extensions = ['sphinx.ext.autosectionlabel',
 
 # -- Extensions to Napoleon --------------------------------------------------
 
+"""
+The code below adds the following key for Napoleon to parse:
+
+Path Keys
+---------
+"""
+
 def parse_keys_section(self, section):
     return self._format_fields('Path Keys', self._consume_fields())
 

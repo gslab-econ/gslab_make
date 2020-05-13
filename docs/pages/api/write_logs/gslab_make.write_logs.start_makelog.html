@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="write_heads_log" href="gslab_make.write_logs.write_heads_log.html" />
+    <link rel="next" title="write_to_makelog" href="gslab_make.write_logs.write_to_makelog.html" />
     <link rel="prev" title="log_files_in_output" href="gslab_make.write_logs.log_files_in_output.html" /> 
 </head>
 
@@ -88,8 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.end_makelog.html">end_makelog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.log_files_in_output.html">log_files_in_output</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">start_makelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.write_heads_log.html">write_heads_log</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.write_stats_log.html">write_stats_log</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.write_logs.write_to_makelog.html">write_to_makelog</a></li>
 </ul>
 </li>
@@ -171,27 +169,24 @@
 <dl class="function">
 <dt id="gslab_make.write_logs.start_makelog">
 <code class="sig-name descname">start_makelog</code><span class="sig-paren">(</span><em class="sig-param">paths</em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.write_logs.start_makelog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start make log. Record start time.</p>
-<p class="rubric">Notes</p>
-<p>The make log start condition is needed by other functions to confirm a
-make log exists.</p>
+<dd><p>Writes file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>, recording start time.
+Sets make log status to boolean <code class="docutils literal notranslate"><span class="pre">True</span></code>, which is used by other functions to confirm make log exists.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The make log start condition is used by other functions to confirm a make log exists.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>paths</strong> (<em>dict</em>) – <dl class="simple">
-<dt>Dictionary of paths. Dictionary should contain {</dt><dd><dl class="simple">
-<dt>‘makelog’<span class="classifier">str</span></dt><dd><p>Path of makelog.</p>
+<dd class="field-odd"><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p>
 </dd>
-</dl>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
-</dl>
-<p>}</p>
-</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -206,7 +201,7 @@ make log exists.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="gslab_make.write_logs.write_heads_log.html" class="btn btn-neutral float-right" title="write_heads_log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="gslab_make.write_logs.write_to_makelog.html" class="btn btn-neutral float-right" title="write_to_makelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="gslab_make.write_logs.log_files_in_output.html" class="btn btn-neutral float-left" title="log_files_in_output" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
