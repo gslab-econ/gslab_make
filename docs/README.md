@@ -13,9 +13,10 @@ pip install sphinx_rtd_theme
 pip install sphinx-automodapi
 ```
 
-Compiling instructions
-----------------------
-1. Delete all files/directories in `docs` except `README.md` and `docs/sphinx`.
+Building instructions
+---------------------
+1. (OPTIONAL) Delete all files/directories in `docs` except `README.md`, `.nojekyll` and `sphinx`. 
+    2. Step (3) should technically overwrite all the relevant files making this step redundant, but follow this step if builds aren't working.
 
 2. From the `docs/sphinx` directory, use the following shell command:
 
