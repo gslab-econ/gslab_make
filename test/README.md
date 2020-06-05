@@ -1,12 +1,6 @@
 Testing instructions
 --------------------
-From the root directory of the repository, use the following shell command for Python 3:
-
-```
-python -m unittest
-```
-
-Use the following shell command for Python 2:
+From the root directory of the repository, use the following shell command:
 ```
 python -m unittest discover
 ```
