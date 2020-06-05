@@ -1,6 +1,6 @@
-# This workflow will update documentation for the package using Sphinx and push a commit to upload changes to the Github page.
+# This workflow will update documentation using Sphinx and push changes to the Github page.
 
-name: Python package
+name: Update docs
 
 on:
   push:
@@ -25,13 +25,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install .
         pip install sphinx sphinx_rtd_theme sphinx-automodapi
     - name: Build documentation
       run: |
-        cd docs/sphinx
+        cd sphinx
         make html
-        cp build/html/* ../*
-        cd ../../
+        cd ../
+        cp -a ./sphinx/build/html/. ./docs/
     - name: Commit changes
       uses: EndBug/add-and-commit@v4
       with:

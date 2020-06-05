@@ -1083,4 +1083,5 @@ def run_module(root, module, build_script = 'make.py', osname = None):
 
 __all__ = ['run_stata', 'run_matlab', 'run_perl', 'run_python', 
            'run_jupyter', 'run_mathematica', 'run_stat_transfer', 
-           'run_lyx', 'run_r', 'run_sas', 'execute_command', 'run_module']
+           'run_lyx', 'run_latex', 'run_r', 'run_sas', 
+           'execute_command', 'run_module']
