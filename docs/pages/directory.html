@@ -1,39 +1,42 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Directory functions &mdash; GSLab Make 2.0.0 documentation</title>
   
 
   
-  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="clear_dir" href="api/modify_dir/gslab_make.modify_dir.clear_dir.html" />
@@ -74,6 +77,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -103,6 +107,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -137,18 +142,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Directory functions</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/pages/directory.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -167,7 +174,7 @@
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to make modifications to a directory. Functions to remove files and directories, clear directories, and zip/unzip files are included.</p>
 <dl class="py function">
 <dt>
-<code class="sig-name descname">remove_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dir_list</span></em>, <em class="sig-param"><span class="n">quiet</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span></dt>
+<code class="sig-name descname"><span class="pre">remove_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Remove directories in list <code class="docutils literal notranslate"><span class="pre">dir_list</span></code> using system command.
 Safely removes symbolic links. Directories can be specified with the * shell pattern
 (see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
@@ -198,7 +205,7 @@ Safely removes symbolic links. Directories can be specified with the * shell pat
 
 <dl class="py function">
 <dt>
-<code class="sig-name descname">clear_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dir_list</span></em><span class="sig-paren">)</span></dt>
+<code class="sig-name descname"><span class="pre">clear_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Clears all directories in list <code class="docutils literal notranslate"><span class="pre">dir_list</span></code> using system command.
 Safely clears symbolic links. Directories can be specified with the * shell pattern
 (see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
@@ -232,7 +239,7 @@ unless the directory is specified via shell pattern.</p>
 
 <dl class="py function">
 <dt>
-<code class="sig-name descname">unzip</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zip_path</span></em>, <em class="sig-param"><span class="n">output_dir</span></em><span class="sig-paren">)</span></dt>
+<code class="sig-name descname"><span class="pre">unzip</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zip_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Unzips file <code class="docutils literal notranslate"><span class="pre">zip_path</span></code> to directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -252,7 +259,7 @@ unless the directory is specified via shell pattern.</p>
 
 <dl class="py function">
 <dt>
-<code class="sig-name descname">zip_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source_dir</span></em>, <em class="sig-param"><span class="n">zip_dest</span></em><span class="sig-paren">)</span></dt>
+<code class="sig-name descname"><span class="pre">zip_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zip_dest</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Zips directory <code class="docutils literal notranslate"><span class="pre">source_dir</span></code> to file <code class="docutils literal notranslate"><span class="pre">zip_dest</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -279,29 +286,29 @@ unless the directory is specified via shell pattern.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="api/modify_dir/gslab_make.modify_dir.clear_dir.html" class="btn btn-neutral float-right" title="clear_dir" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="api/check_repo/gslab_make.check_repo.get_modified_sources.html" class="btn btn-neutral float-left" title="get_modified_sources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="api/modify_dir/gslab_make.modify_dir.clear_dir.html" class="btn btn-neutral float-right" title="clear_dir" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="api/check_repo/gslab_make.check_repo.get_modified_sources.html" class="btn btn-neutral float-left" title="get_modified_sources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Matthew Gentzkow
+        &#169; Copyright 2021, Matthew Gentzkow.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -309,7 +316,6 @@ unless the directory is specified via shell pattern.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
