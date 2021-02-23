@@ -112,7 +112,7 @@ class Directive(object):
                                        stderr = subprocess.PIPE, 
                                        shell = self.shell, 
                                        universal_newlines = True)
-            process.wait()
+            process.wait(timeout=5)
             stdout, stderr = process.communicate()
             exit = (process.returncode, stderr)             
 
