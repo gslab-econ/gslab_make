@@ -67,7 +67,7 @@ To change the default options, you may pass your desired options into the ``opti
 
 Supported applications
 ----------------------
-.. automodule:: gslab_make.run_program
+.. automodule:: source.run_program
     :members:
     :noindex:
 
