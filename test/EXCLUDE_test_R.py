@@ -11,11 +11,11 @@ import shutil
 import unittest
 from test.utility import no_stderrout, redirect_stdout, read_file
 
-import gslab_make.private.metadata as metadata
-from gslab_make import start_makelog, clear_dir
-from gslab_make.private.exceptionclasses import CritError, ProgramError
+import source.private.metadata as metadata
+from source import start_makelog, clear_dir
+from source.private.exceptionclasses import CritError, ProgramError
     
-from gslab_make import run_r as run_function
+from source import run_r as run_function
 
 class TestRunR(unittest.TestCase):
 

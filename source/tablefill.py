@@ -9,9 +9,9 @@ import re
 import traceback
 from itertools import chain
 
-import gslab_make.private.messages as messages
-from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import convert_to_list, norm_path, format_message
+import source.private.messages as messages
+from source.private.exceptionclasses import CritError, ColoredError
+from source.private.utility import convert_to_list, norm_path, format_message
 
 
 def _parse_tag(tag):

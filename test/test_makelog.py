@@ -11,9 +11,9 @@ import shutil
 import unittest
 from test.utility import no_stderrout, redirect_stdout, create_file, read_file
 
-from gslab_make import clear_dir
+from source import clear_dir
 
-from gslab_make import start_makelog, end_makelog, write_to_makelog
+from source import start_makelog, end_makelog, write_to_makelog
 
 class TestMakeLog(unittest.TestCase):
             

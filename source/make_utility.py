@@ -12,10 +12,10 @@ from termcolor import colored
 import colorama
 colorama.init()
 
-import gslab_make.private.messages as messages
-import gslab_make.private.metadata as metadata
-from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import get_path, format_message, norm_path, open_yaml
+import source.private.messages as messages
+import source.private.metadata as metadata
+from source.private.exceptionclasses import CritError, ColoredError
+from source.private.utility import get_path, format_message, norm_path, open_yaml
 
 
 def _check_os(osname = os.name):

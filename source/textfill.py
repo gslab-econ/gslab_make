@@ -8,14 +8,14 @@ import os
 import types
 import argparse
 import traceback
-from gslab_make.private.exceptionclasses import CritError
+from source.private.exceptionclasses import CritError
 
 try:
     from html.parser import HTMLParser
 except:
     from HTMLParser import HTMLParser
 
-import gslab_make.textfill_info as textfill_info
+import source.textfill_info as textfill_info
 
 def textfill(**kwargs):
     try:

@@ -11,7 +11,7 @@ import shutil
 import subprocess
 
 if (sys.version_info < (3, 0)) and (os.name == 'nt'):
-    import gslab_make.private.subprocess_fix as subprocess_fix
+    import source.private.subprocess_fix as subprocess_fix
 else:
     import subprocess as subprocess_fix
 
@@ -19,10 +19,10 @@ from termcolor import colored
 import colorama
 colorama.init()
 
-import gslab_make.private.messages as messages
-import gslab_make.private.metadata as metadata
-from gslab_make.private.exceptionclasses import CritError
-from gslab_make.private.utility import norm_path, format_list, format_traceback, decode
+import source.private.messages as messages
+import source.private.metadata as metadata
+from source.private.exceptionclasses import CritError
+from source.private.utility import norm_path, format_list, format_traceback, decode
 
 
 class Directive(object):

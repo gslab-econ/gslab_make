@@ -12,10 +12,10 @@ import shutil
 import unittest
 from test.utility import no_stderrout, redirect_stdout, create_file
 
-import gslab_make.private.metadata as metadata
-from gslab_make import clear_dir
+import source.private.metadata as metadata
+from source import clear_dir
 
-from gslab_make import update_executables, update_paths, copy_output
+from source import update_executables, update_paths, copy_output
 
 class TestUpdateExecutables(unittest.TestCase):
 
@@ -128,24 +128,24 @@ class TestCopyOutput(unittest.TestCase):
         # Create test file
         create_file('test/output/file.txt')
 
-    @mock.patch('gslab_make.make_utility.input', return_value = 'Yes')
+    @mock.patch('source.make_utility.input', return_value = 'Yes')
     def test_copy(self, mocked_input):  
         copy_output('test/output/file.txt', 'test/copy/')
         self.assertTrue(os.path.isfile('test/copy/file.txt'))
 
-    @mock.patch('gslab_make.make_utility.input', return_value = 'No')
+    @mock.patch('source.make_utility.input', return_value = 'No')
     def test_not_copy(self, mocked_input):  
         copy_output('test/output/file.txt', 'test/copy/')
         self.assertFalse(os.path.isfile('test/copy/file.txt'))
 
-    @mock.patch('gslab_make.make_utility.input', return_value = 'Yes')
+    @mock.patch('source.make_utility.input', return_value = 'Yes')
     def test_error_no_file(self, mocked_input):  
         try:
             copy_output('test/output/file_missing.txt', 'test/copy/')
         except Exception as e:
             self.assertRaises(Exception, e)
 
-    @mock.patch('gslab_make.make_utility.input', return_value = 'Yes')
+    @mock.patch('source.make_utility.input', return_value = 'Yes')
     def test_error_no_dir(self, mocked_input):  
         try:
             copy_output('test/output/file.txt', 'test/output/dir_missing/')

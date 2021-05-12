@@ -11,7 +11,7 @@ from termcolor import colored
 import colorama
 colorama.init()
 
-import gslab_make.private.metadata as metadata
+import source.private.metadata as metadata
 
 """
 For some fixes Exception printing and I have no idea why...

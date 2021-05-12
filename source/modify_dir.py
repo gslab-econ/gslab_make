@@ -12,7 +12,7 @@ import traceback
 import subprocess
 
 if (sys.version_info < (3, 0)) and (os.name == 'nt'):
-    import gslab_make.private.subprocess_fix as subprocess_fix
+    import source.private.subprocess_fix as subprocess_fix
 else:
     import subprocess as subprocess_fix
 
@@ -20,10 +20,10 @@ from termcolor import colored
 import colorama
 colorama.init()
 
-import gslab_make.private.metadata as metadata
-import gslab_make.private.messages as messages
-from gslab_make.private.exceptionclasses import ColoredError
-from gslab_make.private.utility import convert_to_list, norm_path, format_message
+import source.private.metadata as metadata
+import source.private.messages as messages
+from source.private.exceptionclasses import ColoredError
+from source.private.utility import convert_to_list, norm_path, format_message
 
 
 def remove_path(path, option = '', quiet = False):

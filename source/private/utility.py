@@ -14,8 +14,8 @@ import codecs
 import filecmp
 import traceback
 
-import gslab_make.private.messages as messages
-from gslab_make.private.exceptionclasses import CritError
+import source.private.messages as messages
+from source.private.exceptionclasses import CritError
 
 
 def decode(string):

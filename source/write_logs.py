@@ -13,10 +13,10 @@ from termcolor import colored
 import colorama
 colorama.init()
 
-import gslab_make.private.messages as messages
-import gslab_make.private.metadata as metadata
-from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import convert_to_list, norm_path, get_path, glob_recursive, format_message
+import source.private.messages as messages
+import source.private.metadata as metadata
+from source.private.exceptionclasses import CritError, ColoredError
+from source.private.utility import convert_to_list, norm_path, get_path, glob_recursive, format_message
 
 
 def start_makelog(paths):

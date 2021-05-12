@@ -11,7 +11,7 @@ import zipfile
 import unittest
 from test.utility import no_stderrout, redirect_stdout, create_file, read_file
 
-from gslab_make import clear_dir, remove_dir, zip_dir, unzip
+from source import clear_dir, remove_dir, zip_dir, unzip
 
 class TestClearDir(unittest.TestCase):
             

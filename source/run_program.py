@@ -18,12 +18,12 @@ from termcolor import colored
 import colorama
 colorama.init()
 
-import gslab_make.private.messages as messages
-import gslab_make.private.metadata as metadata
-from gslab_make.private.exceptionclasses import CritError, ColoredError, ProgramError
-from gslab_make.private.programdirective import Directive, ProgramDirective, SASDirective, LyXDirective
-from gslab_make.private.utility import get_path, format_message, norm_path
-from gslab_make.write_logs import write_to_makelog
+import source.private.messages as messages
+import source.private.metadata as metadata
+from source.private.exceptionclasses import CritError, ColoredError, ProgramError
+from source.private.programdirective import Directive, ProgramDirective, SASDirective, LyXDirective
+from source.private.utility import get_path, format_message, norm_path
+from source.write_logs import write_to_makelog
 
 
 def run_jupyter(paths, program, timeout = None, kernel_name = ''):

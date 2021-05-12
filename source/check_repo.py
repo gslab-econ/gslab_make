@@ -14,11 +14,11 @@ from termcolor import colored
 import colorama
 colorama.init()
 
-import gslab_make.private.metadata as metadata
-import gslab_make.private.messages as messages
-from gslab_make.private.exceptionclasses import CritError, ColoredError
-from gslab_make.private.utility import norm_path, get_path, format_message, glob_recursive, open_yaml
-from gslab_make.write_logs import write_to_makelog
+import source.private.metadata as metadata
+import source.private.messages as messages
+from source.private.exceptionclasses import CritError, ColoredError
+from source.private.utility import norm_path, get_path, format_message, glob_recursive, open_yaml
+from source.write_logs import write_to_makelog
 
 
 def _get_file_sizes(dir_path, exclude):

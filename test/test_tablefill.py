@@ -11,7 +11,7 @@ import shutil
 import zipfile
 from test.utility import no_stderrout
 
-from gslab_make import tablefill
+from source import tablefill
 
 class TestTablefill(unittest.TestCase):
 

@@ -11,9 +11,9 @@ import unittest
 from func_timeout import func_set_timeout
 from test.utility import no_stderrout, redirect_stdout, read_file
 
-from gslab_make import clear_dir, start_makelog, remove_dir
+from source import clear_dir, start_makelog, remove_dir
 
-from gslab_make import log_files_in_output, link_inputs
+from source import log_files_in_output, link_inputs
 
 class TestOutputLog(unittest.TestCase):
             

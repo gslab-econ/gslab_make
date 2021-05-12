@@ -37,21 +37,21 @@ Notes:
 """
 
 # Import make tools
-from gslab_make.check_repo import check_module_size, get_modified_sources
-from gslab_make.modify_dir import remove_dir, clear_dir, unzip, zip_dir
-from gslab_make.move_sources import (link_inputs, link_externals, 
+from source.check_repo import check_module_size, get_modified_sources
+from source.modify_dir import remove_dir, clear_dir, unzip, zip_dir
+from source.move_sources import (link_inputs, link_externals, 
                                      copy_inputs, copy_externals)
-from gslab_make.run_program import (run_stata, run_matlab, run_perl, run_python, 
+from source.run_program import (run_stata, run_matlab, run_perl, run_python, 
                                     run_jupyter, run_mathematica, run_stat_transfer, 
                                     run_lyx, run_latex, run_r, run_sas, 
                                     execute_command, run_module)
 
-from gslab_make.make_utility import (update_executables, update_paths, copy_output)
-from gslab_make.write_logs import (start_makelog, end_makelog, write_to_makelog,
+from source.make_utility import (update_executables, update_paths, copy_output)
+from source.write_logs import (start_makelog, end_makelog, write_to_makelog,
                                    log_files_in_output)
-from gslab_make.write_source_logs import write_source_logs
+from source.write_source_logs import write_source_logs
 
 
 # Import fill tools
-from gslab_make.tablefill import tablefill
-from gslab_make.textfill import textfill
+from source.tablefill import tablefill
+from source.textfill import textfill
