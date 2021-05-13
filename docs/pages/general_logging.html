@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -93,6 +96,10 @@
 <li class="toctree-l2"><a class="reference internal" href="api/write_logs/gslab_make.write_logs.log_files_in_output.html">log_files_in_output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/write_logs/gslab_make.write_logs.start_makelog.html">start_makelog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/write_logs/gslab_make.write_logs.write_to_makelog.html">write_to_makelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/write_logs/source.write_logs.end_makelog.html">end_makelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/write_logs/source.write_logs.log_files_in_output.html">log_files_in_output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/write_logs/source.write_logs.start_makelog.html">start_makelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/write_logs/source.write_logs.write_to_makelog.html">write_to_makelog</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sourcing.html">Sourcing functions</a></li>
@@ -174,11 +181,11 @@
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to create a master log of activity (i.e., a <em>make log</em>) and to log information about output files. The logs are intended to facilitate the reproducibility of research.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You must initialize make logs via <a class="reference internal" href="api/write_logs/gslab_make.write_logs.start_makelog.html#gslab_make.write_logs.start_makelog" title="gslab_make.write_logs.start_makelog"><code class="xref py py-func docutils literal notranslate"><span class="pre">start_makelog()</span></code></a> as opposed to alternative methods (e.g., manually creating a make log file). Otherwise, any attempt to call a <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> function that writes to make log will raise an exception.</p>
+<p>You must initialize make logs via <a class="reference internal" href="api/write_logs/source.write_logs.start_makelog.html#source.write_logs.start_makelog" title="source.write_logs.start_makelog"><code class="xref py py-func docutils literal notranslate"><span class="pre">start_makelog()</span></code></a> as opposed to alternative methods (e.g., manually creating a make log file). Otherwise, any attempt to call a <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> function that writes to make log will raise an exception.</p>
 </div>
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">start_makelog</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">start_makelog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Writes file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>, recording start time.
 Sets make log status to boolean <code class="docutils literal notranslate"><span class="pre">True</span></code>, which is used by other functions to confirm make log exists.</p>
 <div class="admonition note">
@@ -202,8 +209,8 @@ Sets make log status to boolean <code class="docutils literal notranslate"><span
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">end_makelog</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">end_makelog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Appends to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>, recording end time.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -227,8 +234,8 @@ We do not recommend this for best practice.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">write_to_makelog</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">write_to_makelog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Appends string <code class="docutils literal notranslate"><span class="pre">message</span></code> to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -250,8 +257,8 @@ We do not recommend this for best practice.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">log_files_in_output</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">log_files_in_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Logs the following information for all files contained in directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
 <ul class="simple">
 <li><p>File name (in file <code class="docutils literal notranslate"><span class="pre">output_statslog</span></code>)</p></li>

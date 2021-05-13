@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -86,7 +89,7 @@
             
             
               <p class="caption"><span class="caption-text">Documentation</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../specifying_paths.html">Specifying paths</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../general_logging.html">General logging functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sourcing.html">Sourcing functions</a></li>
@@ -94,7 +97,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../program.html">Program functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../utility.html">Utility functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../repository.html">Repository functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../directory.html">Directory functions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../directory.html">Directory functions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">clear_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.modify_dir.remove_dir.html">remove_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.modify_dir.unzip.html">unzip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.modify_dir.zip_dir.html">zip_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source.modify_dir.clear_dir.html">clear_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source.modify_dir.remove_dir.html">remove_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source.modify_dir.unzip.html">unzip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source.modify_dir.zip_dir.html">zip_dir</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../filling.html">Filling functions</a></li>
 </ul>
 
@@ -168,8 +181,8 @@
   <div class="section" id="clear-dir">
 <h1>clear_dir<a class="headerlink" href="#clear-dir" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="gslab_make.modify_dir.clear_dir">
-<code class="sig-name descname"><span class="pre">clear_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.modify_dir.clear_dir" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="source.modify_dir.clear_dir">
+<span class="sig-name descname"><span class="pre">clear_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#source.modify_dir.clear_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clears all directories in list <code class="docutils literal notranslate"><span class="pre">dir_list</span></code> using system command.
 Safely clears symbolic links. Directories can be specified with the * shell pattern
 (see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>

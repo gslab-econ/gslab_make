@@ -1,6 +1,6 @@
 update_executables
 ==================
 
-.. currentmodule:: gslab_make.make_utility
+.. currentmodule:: source.make_utility
 
 .. autofunction:: update_executables

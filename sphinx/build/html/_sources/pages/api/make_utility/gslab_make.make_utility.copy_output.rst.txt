@@ -1,6 +1,6 @@
 copy_output
 ===========
 
-.. currentmodule:: gslab_make.make_utility
+.. currentmodule:: source.make_utility
 
 .. autofunction:: copy_output

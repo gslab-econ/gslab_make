@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -40,7 +43,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="clear_dir" href="api/modify_dir/gslab_make.modify_dir.clear_dir.html" />
-    <link rel="prev" title="get_modified_sources" href="api/check_repo/gslab_make.check_repo.get_modified_sources.html" /> 
+    <link rel="prev" title="get_modified_sources" href="api/check_repo/source.check_repo.get_modified_sources.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -99,6 +102,10 @@
 <li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.remove_dir.html">remove_dir</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.unzip.html">unzip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/modify_dir/gslab_make.modify_dir.zip_dir.html">zip_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/source.modify_dir.clear_dir.html">clear_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/source.modify_dir.remove_dir.html">remove_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/source.modify_dir.unzip.html">unzip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/modify_dir/source.modify_dir.zip_dir.html">zip_dir</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="filling.html">Filling functions</a></li>
@@ -173,8 +180,8 @@
 <h1>Directory functions<a class="headerlink" href="#directory-functions" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to make modifications to a directory. Functions to remove files and directories, clear directories, and zip/unzip files are included.</p>
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">remove_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">remove_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Remove directories in list <code class="docutils literal notranslate"><span class="pre">dir_list</span></code> using system command.
 Safely removes symbolic links. Directories can be specified with the * shell pattern
 (see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
@@ -204,8 +211,8 @@ Safely removes symbolic links. Directories can be specified with the * shell pat
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">clear_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">clear_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Clears all directories in list <code class="docutils literal notranslate"><span class="pre">dir_list</span></code> using system command.
 Safely clears symbolic links. Directories can be specified with the * shell pattern
 (see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
@@ -238,8 +245,8 @@ unless the directory is specified via shell pattern.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">unzip</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zip_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">unzip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zip_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Unzips file <code class="docutils literal notranslate"><span class="pre">zip_path</span></code> to directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -258,8 +265,8 @@ unless the directory is specified via shell pattern.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">zip_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zip_dest</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">zip_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zip_dest</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Zips directory <code class="docutils literal notranslate"><span class="pre">source_dir</span></code> to file <code class="docutils literal notranslate"><span class="pre">zip_dest</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -288,7 +295,7 @@ unless the directory is specified via shell pattern.</p>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="api/modify_dir/gslab_make.modify_dir.clear_dir.html" class="btn btn-neutral float-right" title="clear_dir" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="api/check_repo/gslab_make.check_repo.get_modified_sources.html" class="btn btn-neutral float-left" title="get_modified_sources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/check_repo/source.check_repo.get_modified_sources.html" class="btn btn-neutral float-left" title="get_modified_sources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

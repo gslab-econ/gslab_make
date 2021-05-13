@@ -1,6 +1,6 @@
 update_paths
 ============
 
-.. currentmodule:: gslab_make.make_utility
+.. currentmodule:: source.make_utility
 
 .. autofunction:: update_paths

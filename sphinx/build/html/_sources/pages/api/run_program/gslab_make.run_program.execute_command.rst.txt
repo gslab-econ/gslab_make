@@ -1,6 +1,6 @@
 execute_command
 ===============
 
-.. currentmodule:: gslab_make.run_program
+.. currentmodule:: source.run_program
 
 .. autofunction:: execute_command

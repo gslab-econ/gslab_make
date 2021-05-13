@@ -1,6 +1,6 @@
 clear_dir
 =========
 
-.. currentmodule:: gslab_make.modify_dir
+.. currentmodule:: source.modify_dir
 
 .. autofunction:: clear_dir

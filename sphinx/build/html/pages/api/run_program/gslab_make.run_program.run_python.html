@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -107,6 +110,19 @@
 <li class="toctree-l3"><a class="reference internal" href="gslab_make.run_program.run_sas.html">run_sas</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gslab_make.run_program.run_stat_transfer.html">run_stat_transfer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gslab_make.run_program.run_stata.html">run_stata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.execute_command.html">execute_command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_jupyter.html">run_jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_latex.html">run_latex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_lyx.html">run_lyx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_mathematica.html">run_mathematica</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_matlab.html">run_matlab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_module.html">run_module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_perl.html">run_perl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_python.html">run_python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_r.html">run_r</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_sas.html">run_sas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_stat_transfer.html">run_stat_transfer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source.run_program.run_stata.html">run_stata</a></li>
 </ul>
 </li>
 </ul>
@@ -187,8 +203,8 @@
   <div class="section" id="run-python">
 <h1>run_python<a class="headerlink" href="#run-python" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="gslab_make.run_program.run_python">
-<code class="sig-name descname"><span class="pre">run_python</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.run_program.run_python" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="source.run_program.run_python">
+<span class="sig-name descname"><span class="pre">run_python</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#source.run_program.run_python" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs script <code class="docutils literal notranslate"><span class="pre">program</span></code> using system command, with script specified
 in the form of <code class="docutils literal notranslate"><span class="pre">script.py</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
@@ -207,17 +223,17 @@ in the form of <code class="docutils literal notranslate"><span class="pre">scri
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Other Parameters</dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>osname</strong> (<em>str, optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
+<li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
 Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
-<li><p><strong>log</strong> (<em>str, optional</em>) – Path of program log. Program log is only written if specified.
+<li><p><strong>log</strong> (<em>str</em><em>, </em><em>optional</em>) – Path of program log. Program log is only written if specified.
 Defaults to <code class="docutils literal notranslate"><span class="pre">''</span></code> (i.e., not written).</p></li>
-<li><p><strong>executable</strong> (<em>str, optional</em>) – Executable to use for system command.
+<li><p><strong>executable</strong> (<em>str</em><em>, </em><em>optional</em>) – Executable to use for system command.
 Defaults to executable specified in <a class="reference internal" href="../../program.html#default-settings"><span class="std std-ref">default settings</span></a>.</p></li>
-<li><p><strong>option</strong> (<em>str, optional</em>) – Options for system command. Defaults to options specified in <a class="reference internal" href="../../program.html#default-settings"><span class="std std-ref">default settings</span></a>.</p></li>
-<li><p><strong>args</strong> (<em>str, optional</em>) – Arguments for system command. Defaults to no arguments.</p></li>
+<li><p><strong>option</strong> (<em>str</em><em>, </em><em>optional</em>) – Options for system command. Defaults to options specified in <a class="reference internal" href="../../program.html#default-settings"><span class="std std-ref">default settings</span></a>.</p></li>
+<li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Arguments for system command. Defaults to no arguments.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

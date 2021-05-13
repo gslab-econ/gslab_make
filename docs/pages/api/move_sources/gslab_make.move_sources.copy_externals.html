@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -94,6 +97,10 @@
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.move_sources.copy_inputs.html">copy_inputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.move_sources.link_externals.html">link_externals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.move_sources.link_inputs.html">link_inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source.move_sources.copy_externals.html">copy_externals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source.move_sources.copy_inputs.html">copy_inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source.move_sources.link_externals.html">link_externals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source.move_sources.link_inputs.html">link_inputs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../source_logging.html">Source logging functions</a></li>
@@ -174,8 +181,8 @@
   <div class="section" id="copy-externals">
 <h1>copy_externals<a class="headerlink" href="#copy-externals" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="gslab_make.move_sources.copy_externals">
-<code class="sig-name descname"><span class="pre">copy_externals</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.move_sources.copy_externals" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="source.move_sources.copy_externals">
+<span class="sig-name descname"><span class="pre">copy_externals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#source.move_sources.copy_externals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
 Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
 using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>.
