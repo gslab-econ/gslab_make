@@ -1,6 +1,6 @@
 end_makelog
 ===========
 
-.. currentmodule:: gslab_make.write_logs
+.. currentmodule:: source.write_logs
 
 .. autofunction:: end_makelog

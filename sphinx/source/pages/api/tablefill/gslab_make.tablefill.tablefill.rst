@@ -1,6 +1,6 @@
 tablefill
 =========
 
-.. currentmodule:: gslab_make.tablefill
+.. currentmodule:: source.tablefill
 
 .. autofunction:: tablefill

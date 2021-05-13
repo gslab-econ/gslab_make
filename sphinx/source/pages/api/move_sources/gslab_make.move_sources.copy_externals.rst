@@ -1,6 +1,6 @@
 copy_externals
 ==============
 
-.. currentmodule:: gslab_make.move_sources
+.. currentmodule:: source.move_sources
 
 .. autofunction:: copy_externals

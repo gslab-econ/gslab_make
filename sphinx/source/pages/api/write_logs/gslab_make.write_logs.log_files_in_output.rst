@@ -1,6 +1,6 @@
 log_files_in_output
 ===================
 
-.. currentmodule:: gslab_make.write_logs
+.. currentmodule:: source.write_logs
 
 .. autofunction:: log_files_in_output

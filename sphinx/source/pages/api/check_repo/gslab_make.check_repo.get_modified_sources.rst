@@ -1,6 +1,6 @@
 get_modified_sources
 ====================
 
-.. currentmodule:: gslab_make.check_repo
+.. currentmodule:: source.check_repo
 
 .. autofunction:: get_modified_sources
