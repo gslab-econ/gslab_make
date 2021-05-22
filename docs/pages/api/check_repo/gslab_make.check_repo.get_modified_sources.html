@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -94,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../program.html">Program functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../utility.html">Utility functions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../repository.html">Repository functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.check_conda_status.html">check_conda_status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gslab_make.check_repo.check_module_size.html">check_module_size</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">get_modified_sources</a></li>
 </ul>
@@ -172,8 +176,8 @@
   <div class="section" id="get-modified-sources">
 <h1>get_modified_sources<a class="headerlink" href="#get-modified-sources" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="gslab_make.check_repo.get_modified_sources">
-<code class="sig-name descname"><span class="pre">get_modified_sources</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.get_modified_sources" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="gslab_make.check_repo.get_modified_sources">
+<span class="sig-name descname"><span class="pre">get_modified_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gslab_make.check_repo.get_modified_sources" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks the modification status for all sources contained in list
 <code class="docutils literal notranslate"><span class="pre">source_map</span></code> (returned by <a class="reference internal" href="../../sourcing.html#sourcing-functions"><span class="std std-ref">sourcing functions</span></a>).
 Produces warning if sources have been modified according to git.
