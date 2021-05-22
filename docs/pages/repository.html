@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -39,7 +42,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="check_module_size" href="api/check_repo/gslab_make.check_repo.check_module_size.html" />
+    <link rel="next" title="check_conda_status" href="api/check_repo/gslab_make.check_repo.check_conda_status.html" />
     <link rel="prev" title="update_paths" href="api/make_utility/gslab_make.make_utility.update_paths.html" /> 
 </head>
 
@@ -94,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utility.html">Utility functions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Repository functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/check_repo/gslab_make.check_repo.check_conda_status.html">check_conda_status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/check_repo/gslab_make.check_repo.check_module_size.html">check_module_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/check_repo/gslab_make.check_repo.get_modified_sources.html">get_modified_sources</a></li>
 </ul>
@@ -171,8 +175,8 @@
 <h1>Repository functions<a class="headerlink" href="#repository-functions" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to check file sizes in a repository and modification status of files tracked by git. The checks are intended to facilitate proper committing activity.</p>
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">check_module_size</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">check_module_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Checks file sizes for files to be committed in the current working directory.
 Compares file sizes to size limits in file <code class="docutils literal notranslate"><span class="pre">config</span></code> and
 produces warnings if any of the following limits are exceeded.</p>
@@ -203,8 +207,8 @@ produces warnings if any of the following limits are exceeded.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">get_modified_sources</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">get_modified_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Checks the modification status for all sources contained in list
 <code class="docutils literal notranslate"><span class="pre">source_map</span></code> (returned by <a class="reference internal" href="sourcing.html#sourcing-functions"><span class="std std-ref">sourcing functions</span></a>).
 Produces warning if sources have been modified according to git.
@@ -231,6 +235,26 @@ Warning messages are appended to file <code class="docutils literal notranslate"
 <p class="rubric">Notes</p>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">check_conda_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Checks that conda is activated.
+Produces warning if it is not.
+Produces warning if setup/conda_env.yaml has been altered more recently than the .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>root</strong> (<em>str</em>) – Directory of root.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+</dd></dl>
+
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -241,7 +265,7 @@ Warning messages are appended to file <code class="docutils literal notranslate"
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="api/check_repo/gslab_make.check_repo.check_module_size.html" class="btn btn-neutral float-right" title="check_module_size" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="api/check_repo/gslab_make.check_repo.check_conda_status.html" class="btn btn-neutral float-right" title="check_conda_status" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="api/make_utility/gslab_make.make_utility.update_paths.html" class="btn btn-neutral float-left" title="update_paths" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

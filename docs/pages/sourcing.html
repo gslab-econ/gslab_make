@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -173,8 +176,8 @@
 <h1>Sourcing functions<a class="headerlink" href="#sourcing-functions" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to create symbolic links to source files. Doing so avoids potential duplication of source files and any associated confusion. In the case of modules dedicated to LyX/LaTeX documents, there are optional functions to copy source files instead of creating symbolic links so that users without <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> can still manually compile.</p>
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">link_inputs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">link_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
 Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
 using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>.
@@ -267,8 +270,8 @@ destination3
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">link_externals</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">link_externals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Create symbolic links using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
 Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
 using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Symbolic links are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>.
@@ -361,8 +364,8 @@ destination3
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">copy_inputs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">copy_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
 Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
 using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>.
@@ -451,8 +454,8 @@ destination3
 </dd></dl>
 
 <dl class="py function">
-<dt>
-<code class="sig-name descname"><span class="pre">copy_externals</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">copy_externals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Create copies using instructions contained in files of list <code class="docutils literal notranslate"><span class="pre">file_list</span></code>.
 Instructions are <a class="reference external" href="https://docs.python.org/3.4/library/string.html#format-string-syntax">string formatted</a>
 using paths dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code>. Copies are written in directory <code class="docutils literal notranslate"><span class="pre">external_dir</span></code>.
