@@ -77,7 +77,7 @@ def update_executables(paths, osname = None):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
     try:
-        config_user = get_path(paths, 'config')
+        config_user = get_path(paths, 'config_user')
         config_user = open_yaml(config_user)
     
         _check_os(osname)
