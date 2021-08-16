@@ -64,13 +64,30 @@ def update_executables(paths, osname = None):
     osname = osname if osname else os.name # https://github.com/sphinx-doc/sphinx/issues/759
 
     try:
-        config_user = get_path(paths, 'config_user')
+        config_default = get_path(paths, 'config')
+        config_default = open_yaml(config_default)
+    
+        _check_os(osname)
+    
+        if config_default['local']['executables']:
+            metadata.default_executables[osname].update(config_default['local']['executables'])
+    except:
+        error_message = 'Error with update_executables. Traceback can be found below.' 
+        error_message = format_message(error_message) 
+        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+
+    try:
+        config_user = get_path(paths, 'config')
         config_user = open_yaml(config_user)
     
         _check_os(osname)
     
         if config_user['local']['executables']:
             metadata.default_executables[osname].update(config_user['local']['executables'])
+
+    except (FileNotFoundError, KeyError):
+        pass
+
     except:
         error_message = 'Error with update_executables. Traceback can be found below.' 
         error_message = format_message(error_message) 
@@ -113,12 +130,15 @@ def update_paths(paths):
         if config_user['external']:
             paths.update(config_user['external'])
 
-        return(paths)
+    except (FileNotFoundError, KeyError):
+        pass
+
     except:
         error_message = 'Error with update_paths. Traceback can be found below.' 
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
+    return(paths)
 
 def copy_output(file, copy_dir):
     """.. Copy output file.
