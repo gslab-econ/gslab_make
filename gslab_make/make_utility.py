@@ -63,6 +63,7 @@ def update_executables(paths, osname = None):
 
     osname = osname if osname else os.name # https://github.com/sphinx-doc/sphinx/issues/759
 
+    no_default = False
     try:
         config_default = get_path(paths, 'config')
         config_default = open_yaml(config_default)
@@ -72,9 +73,7 @@ def update_executables(paths, osname = None):
         if config_default['local']['executables']:
             metadata.default_executables[osname].update(config_default['local']['executables'])
     except:
-        error_message = 'Error with update_executables. Traceback can be found below.' 
-        error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        no_default = True
 
     try:
         config_user = get_path(paths, 'config_user')
@@ -86,7 +85,12 @@ def update_executables(paths, osname = None):
             metadata.default_executables[osname].update(config_user['local']['executables'])
 
     except (FileNotFoundError, KeyError):
-        pass
+        if no_default:
+            error_message = 'Error with update_executables. Traceback can be found below.' 
+            error_message = format_message(error_message) 
+            raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        else:
+            pass
 
     except:
         error_message = 'Error with update_executables. Traceback can be found below.' 
