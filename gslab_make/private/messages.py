@@ -127,6 +127,8 @@ warning_not_conda = \
     'WARNING! You are not in an active conda environment'
 warning_old_conda = \
     'WARNING! setup/conda_env.yaml has been updated since you last updated your environment.'
+warning_no_default_config = \
+    'WARNING! config.yaml does not include default executable names.'
 # Notes
 note_makelog_start = 'Makelog started: '
 note_makelog_end = 'Makelog ended: '
