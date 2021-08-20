@@ -17,6 +17,10 @@ import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError, ColoredError
 from gslab_make.private.utility import get_path, format_message, norm_path, open_yaml
 
+import gslab_make.private.metadata as metadata
+import gslab_make.private.messages as messages
+from gslab_make.write_logs import write_to_makelog
+
 
 def _check_os(osname = os.name):
     """Check OS is either POSIX or NT. 
@@ -78,6 +82,10 @@ def update_executables(paths, osname = None):
     except:
         no_default = True
 
+        message = messages.warning_no_default_config
+        print(colored(message, metadata.color_failure))
+        write_to_makelog(paths, message)
+
     try:
         config_user = get_path(paths, 'config_user')
         config_user = open_yaml(config_user)
@@ -89,7 +97,7 @@ def update_executables(paths, osname = None):
 
     except (FileNotFoundError, KeyError):
         if no_default:
-            error_message = 'Error with update_executables. Traceback can be found below.' 
+            error_message = 'Error with update_executables. No executable names specified.' 
             error_message = format_message(error_message) 
             raise_from(ColoredError(error_message, traceback.format_exc()), None)
         else:
