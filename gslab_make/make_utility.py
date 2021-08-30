@@ -95,7 +95,7 @@ def update_executables(paths, osname = None):
         if config_user['local']['executables']:
             metadata.default_executables[osname].update(config_user['local']['executables'])
 
-    except (FileNotFoundError, KeyError):
+    except (IOError, KeyError):
         if no_default:
             error_message = 'Error with update_executables. No executable names specified.' 
             error_message = format_message(error_message) 
@@ -145,7 +145,7 @@ def update_paths(paths):
         if config_user['external']:
             paths.update(config_user['external'])
 
-    except (FileNotFoundError, KeyError):
+    except (IOError, KeyError):
         pass
 
     except:
