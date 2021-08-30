@@ -7,4 +7,16 @@ max_file_sizes:
   file_MB_limit: 0.5             # Soft limit on file size (w/o LFS)
   total_MB_limit: 100            # Soft limit on total size (w/o LFS)
 
+# Local settings
+local:
+
+  # Executable names
+  executables:
   
+    git-lfs: git-lfs
+    python: python
+    r: Rscript
+    stata: stata-mp
+    matlab: matlab
+    lyx: lyx
+    latex: latex

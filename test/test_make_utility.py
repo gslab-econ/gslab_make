@@ -23,20 +23,32 @@ class TestUpdateExecutables(unittest.TestCase):
         self.default = copy.deepcopy(metadata.default_executables)
 
     def test_config(self):     
-        PATHS = {'config_user': 'test/raw/config/config_user.yaml'}
+        PATHS = {
+            'config': 'test/raw/config/config.yaml',
+            'config_user': 'test/raw/config/config_user.yaml'
+            }
         update_executables(PATHS)
 
     def test_config_character(self):     
-        PATHS = {'config_user': 'test/raw/config/config_user_╬▓.yaml'}
+        PATHS = {
+            'config': 'test/raw/config/config.yaml',
+            'config_user': 'test/raw/config/config_user_╬▓.yaml'
+            }
         update_executables(PATHS)
 
     def test_config_empty(self):     
-        PATHS = {'config_user': 'test/raw/config/config_user_empty.yaml'}
+        PATHS = {
+            'config': 'test/raw/config/config.yaml',
+            'config_user': 'test/raw/config/config_user_empty.yaml'
+            }
         update_executables(PATHS)
 
     def test_error_config_bad(self):     
         try:
-            PATHS = {'config_user': 'test/raw/config/config_user_bad.yaml'}
+            PATHS = {
+                'config': 'test/raw/config/config.yaml',
+                'config_user': 'test/raw/config/config_user_bad.yaml'
+                }
             update_executables(PATHS)
         except Exception as e:
             self.assertRaises(Exception, e)

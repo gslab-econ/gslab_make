@@ -1,18 +1,3 @@
 # External dependencies
 external:
   key: path
-
-# Local settings
-local:
-
-  # Executable names
-  executables:
-  
-    git-lfs: git-lfs
-    python: python
-    r: Rscript
-    stata: stata-mp
-    matlab: matlab
-    lyx: lyx
-    latex: latex
-
