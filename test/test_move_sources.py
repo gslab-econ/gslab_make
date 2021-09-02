@@ -106,74 +106,50 @@ class TestLinkInputs(unittest.TestCase):
             self.move_function(paths, ['test/raw/move_sources/move_empty.txt'])
             self.check_makelog(paths)
 
-    def test_error_bad_os(self):        
-        try:
-            with no_stderrout():
-                os_func = os.name
-                os.name = 'bad_os'
-                paths = self.make_paths()
-                self.move_function(paths, ['test/raw/move_sources/move_file.txt'])
-                self.check_move(paths)
-                os.name = os_func
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
     def test_error_bad_move(self):        
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 self.move_function(paths, ['test/raw/move_sources/move_bad.txt'])
                 self.check_move(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_missing_target(self):        
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 self.move_function(paths, ['test/raw/move_sources/move_missing.txt'])
                 self.check_move(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_missing_move(self):        
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 self.move_function(paths, ['test/raw/move_sources/move_nonexistent.txt'])
                 self.check_move(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_wildcard(self):        
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 self.move_function(paths, ['test/raw/move_sources/move_bad_wildcard.txt'])
                 self.check_move(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_key(self):        
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 self.move_function(paths, ['test/raw/move_sources/move_bad_key.txt'])
                 self.check_move(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_paths(self):        
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = {}
                 self.move_function(paths, ['test/raw/move_sources/move_file.txt'])
                 self.check_move(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_corrupt_paths(self):        
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = {'makelog': 'test/log/make.log', 
                          'input_dir': 'test/input/', 
@@ -182,8 +158,6 @@ class TestLinkInputs(unittest.TestCase):
 
                 self.move_function(paths, ['test/raw/move_sources/move_file.txt'])
                 self.check_move(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def tearDown(self):
         if os.path.isdir('test/output/'):
