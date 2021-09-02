@@ -34,33 +34,20 @@ class TestUpdateExecutables(unittest.TestCase):
         PATHS = {'config_user': 'test/raw/config/config_user_empty.yaml'}
         update_executables(PATHS)
 
-    def test_error_config_bad(self):     
-        try:
-            PATHS = {'config_user': 'test/raw/config/config_user_bad.yaml'}
-            update_executables(PATHS)
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
     def test_error_config_missing(self):     
-        try:
-            PATHS = {'config_user': 'test/raw/config/config_missing.yaml'}
+        PATHS = {'config_user': 'test/raw/config/config_missing.yaml'}
+        with self.assertRaises(Exception):
             update_executables(PATHS)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_paths(self):     
-        try:
-            PATHS = {}
+        PATHS = {}
+        with self.assertRaises(Exception):
             update_executables(PATHS)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_os(self):     
-        try:
-            PATHS = {'config_user': 'test/raw/config/config_user.yaml'}
+        PATHS = {'config_user': 'test/raw/config/config_user.yaml'}
+        with self.assertRaises(Exception):
             update_executables(PATHS, osname = 'bad_os')
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_executables(self):     
         try:
@@ -90,26 +77,15 @@ class TestUpdateMappings(unittest.TestCase):
         PATHS = {'config_user': 'test/raw/config/config_user_empty.yaml'}
         PATH_MAPPINGS = update_paths(PATHS)
 
-    def test_error_config_bad(self):     
-        try:
-            PATHS = {'config_user': 'test/raw/config/config_user_bad.yaml'}
-            PATH_MAPPINGS = update_paths(PATHS)
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
     def test_error_config_missing(self):     
-        try:
-            PATHS = {'config_user': 'test/raw/config/config_missing.yaml'}
+        PATHS = {'config_user': 'test/raw/config/config_missing.yaml'}
+        with self.assertRaises(Exception):
             PATH_MAPPINGS = update_paths(PATHS)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_paths(self):     
-        try:
-            PATHS = {}
+        PATHS = {}
+        with self.assertRaises(Exception):
             PATH_MAPPINGS = update_paths(PATHS)
-        except Exception as e:
-            self.assertRaises(Exception, e)
             
     def tearDown(self):
         if os.path.isdir('log/'):
@@ -140,17 +116,8 @@ class TestCopyOutput(unittest.TestCase):
 
     @mock.patch('gslab_make.make_utility.input', return_value = 'Yes')
     def test_error_no_file(self, mocked_input):  
-        try:
+        with self.assertRaises(Exception):
             copy_output('test/output/file_missing.txt', 'test/copy/')
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
-    @mock.patch('gslab_make.make_utility.input', return_value = 'Yes')
-    def test_error_no_dir(self, mocked_input):  
-        try:
-            copy_output('test/output/file.txt', 'test/output/dir_missing/')
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def tearDown(self):
         if os.path.isdir('test/output/'):
