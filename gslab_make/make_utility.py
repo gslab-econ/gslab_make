@@ -89,24 +89,24 @@ def update_executables(paths, osname = None):
     try:
         config_user = get_path(paths, 'config_user')
         config_user = open_yaml(config_user)
-    
-        _check_os(osname)
-    
-        if config_user['local']['executables']:
-            metadata.default_executables[osname].update(config_user['local']['executables'])
-
-    except (IOError, KeyError):
+    except:
         if no_default:
             error_message = 'Error with update_executables. No executable names specified.' 
             error_message = format_message(error_message) 
             raise_from(ColoredError(error_message, traceback.format_exc()), None)
         else:
-            pass
-
-    except:
-        error_message = 'Error with update_executables. Traceback can be found below.' 
-        error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+            return
+    
+    _check_os(osname)
+    
+    try:
+        if config_user['local']['executables']:
+            metadata.default_executables[osname].update(config_user['local']['executables'])
+    except KeyError:
+        if no_default:
+            error_message = 'Error with update_executables. No executable names specified.' 
+            error_message = format_message(error_message) 
+            raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
 def update_paths(paths):
@@ -144,14 +144,8 @@ def update_paths(paths):
 
         if config_user['external']:
             paths.update(config_user['external'])
-
-    except (IOError, KeyError):
-        pass
-
     except:
-        error_message = 'Error with update_paths. Traceback can be found below.' 
-        error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        pass
 
     return(paths)
 

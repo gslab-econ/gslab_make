@@ -23,38 +23,19 @@ class TestUpdateExecutables(unittest.TestCase):
         self.default = copy.deepcopy(metadata.default_executables)
 
     def test_config(self):     
-        PATHS = {
-            'config': 'test/raw/config/config.yaml',
-            'config_user': 'test/raw/config/config_user.yaml'
-            }
+        PATHS = {'config': 'test/raw/config/config.yaml'}
         update_executables(PATHS)
 
     def test_config_character(self):     
-        PATHS = {
-            'config': 'test/raw/config/config.yaml',
-            'config_user': 'test/raw/config/config_user_╬▓.yaml'
-            }
+        PATHS = {'config': 'test/raw/config/config_╬▓.yaml'}
         update_executables(PATHS)
 
     def test_config_empty(self):     
-        PATHS = {
-            'config': 'test/raw/config/config.yaml',
-            'config_user': 'test/raw/config/config_user_empty.yaml'
-            }
+        PATHS = {'config': 'test/raw/config/config_user_empty.yaml'}
         update_executables(PATHS)
 
-    def test_error_config_bad(self):     
-        try:
-            PATHS = {
-                'config': 'test/raw/config/config.yaml',
-                'config_user': 'test/raw/config/config_user_bad.yaml'
-                }
-            update_executables(PATHS)
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
     def test_error_config_missing(self):     
-        PATHS = {'config_user': 'test/raw/config/config_missing.yaml'}
+        PATHS = {'config': 'test/raw/config/config_missing.yaml'}
         with self.assertRaises(Exception):
             update_executables(PATHS)
 
@@ -63,16 +44,10 @@ class TestUpdateExecutables(unittest.TestCase):
         with self.assertRaises(Exception):
             update_executables(PATHS)
 
-    def test_error_bad_os(self):     
-        PATHS = {'config_user': 'test/raw/config/config_user.yaml'}
-        with self.assertRaises(Exception):
-            update_executables(PATHS, osname = 'bad_os')
-
     def test_error_bad_executables(self):     
-        try:
+        with self.assertRaises(Exception):
             PATHS = {'config_user': 'test/raw/config/config_bad_executables.yaml'}
-        except Exception as e:
-            self.assertRaises(Exception, e)
+            update_executables(PATHS)
 
     def tearDown(self):
         # Delete log directory
@@ -95,16 +70,6 @@ class TestUpdateMappings(unittest.TestCase):
     def test_config_empty(self):     
         PATHS = {'config_user': 'test/raw/config/config_user_empty.yaml'}
         PATH_MAPPINGS = update_paths(PATHS)
-
-    def test_error_config_missing(self):     
-        PATHS = {'config_user': 'test/raw/config/config_missing.yaml'}
-        with self.assertRaises(Exception):
-            PATH_MAPPINGS = update_paths(PATHS)
-
-    def test_error_bad_paths(self):     
-        PATHS = {}
-        with self.assertRaises(Exception):
-            PATH_MAPPINGS = update_paths(PATHS)
             
     def tearDown(self):
         if os.path.isdir('log/'):
