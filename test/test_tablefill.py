@@ -71,45 +71,35 @@ class TestTablefill(unittest.TestCase):
         self.assertTrue(os.path.isfile('test/output/tablefill.tex'))
 
     def test_error_missing_input(self):
-        try:
+        with self.assertRaises(Exception):
             tablefill(template = 'test/raw/tablefill/tablefill_template_missing_input.lyx', 
                       inputs   = ['test/raw/tablefill/tablefill.txt'], 
                       output   = 'test/output/tablefill.lyx')
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_duplicate(self):
-        try:
+        with self.assertRaises(Exception):
             tablefill(template = 'test/raw/tablefill/tablefill_template.lyx', 
                       inputs   = ['test/raw/tablefill/tablefill.txt', 
                                   'test/raw/tablefill/tablefill_duplicate.txt'], 
                       output   = 'test/output/tablefill.lyx')
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_no_tag(self):
-        try:
+        with self.assertRaises(Exception):
             tablefill(template = 'test/raw/tablefill/tablefill_template.lyx', 
                       inputs   = ['test/raw/tablefill/tablefill_no_tag.txt'], 
                       output   = 'test/output/tablefill.lyx')
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_too_many_values(self):
-        try:
+        with self.assertRaises(Exception):
             tablefill(template = 'test/raw/tablefill/tablefill_template_too_many_values.lyx', 
                       inputs   = ['test/raw/tablefill/tablefill.txt'], 
                       output   = 'test/output/tablefill.lyx')
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_not_enough_values(self):
-        try:
+        with self.assertRaises(Exception):
             tablefill(template = 'test/raw/tablefill/tablefill_template_not_enough_values.lyx', 
                       inputs   = ['test/raw/tablefill/tablefill.txt'], 
                       output   = 'test/output/tablefill.lyx')
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def tearDown(self):
         if os.path.isdir('test/output/'):
