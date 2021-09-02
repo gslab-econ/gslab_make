@@ -136,85 +136,53 @@ class TestRunPython(unittest.TestCase):
         self.assertTrue(re.search('arg', output))
 
     def test_error_bad_paths(self):      
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = {}
                 program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name)    
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_os(self):      
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name, osname = 'bad_os')              
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_program_dir(self):      
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 program_name = 'test/raw/run_program/program/'
                 run_function(paths, program = program_name)           
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_program(self):      
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 program_name = 'test/raw/run_program/%s_script_error.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name)          
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_program_missing(self):      
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 program_name = 'test/raw/run_program/%s_script_missing.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name)           
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_program_wrong_extension(self):      
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 program_name = 'test/raw/run_program/wrong_extension.txt'
                 run_function(paths, program = program_name)           
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
-    def test_error_bad_executable(self):      
-        try:
-            with no_stderrout():
-                paths = self.make_paths()
-                program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
-                run_function(paths, program = program_name, executable = []) 
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
-    def test_error_bad_option(self):      
-        try:
-            with no_stderrout():
-                paths = self.make_paths()
-                program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
-                run_function(paths, program = program_name, option = [])   
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_bad_arg(self):      
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
                 run_function(paths, program = program_name, arg = [])    
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def tearDown(self):
         if os.path.isdir('test/output/'):

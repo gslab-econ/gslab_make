@@ -57,33 +57,19 @@ class TestMakeLog(unittest.TestCase):
             self.check_makelog(paths)
 
     def test_error_bad_paths(self):     
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = {}
                 start_makelog(paths)
                 write_to_makelog(paths, 'Hello, World!')
                 end_makelog(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def test_error_no_makelog(self):     
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout():
                 paths = self.make_paths()
                 write_to_makelog(paths, 'Hello, World!')
                 end_makelog(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
-    def test_error_makelog_not_started(self):     
-        try:
-            with no_stderrout():
-                paths = self.make_paths()
-                create_file('test/log/make.log')
-                write_to_makelog(paths, 'Hello, World!')
-                end_makelog(paths)
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def tearDown(self):
         if os.path.isdir('test/log/'):
