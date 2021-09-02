@@ -38,7 +38,8 @@ def _check_os(osname = os.name):
 def update_executables(paths, osname = None):
     """.. Update executable names using user configuration file. 
     
-    Updates executable names with executables listed in file ``config_user``.
+    Updates executable names with default executables listed in file ``config``.
+    Executable names listed in ``config_user`` can override defaults.
     
     Note
     ----
@@ -53,6 +54,8 @@ def update_executables(paths, osname = None):
 
     Path Keys
     ---------
+    config : str
+        Path of default configuration file
     config_user : str
         Path of user configuration file.   
 

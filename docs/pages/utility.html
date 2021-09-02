@@ -177,7 +177,8 @@
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">update_executables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">osname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span></dt>
-<dd><p>Updates executable names with executables listed in file <code class="docutils literal notranslate"><span class="pre">config_user</span></code>.</p>
+<dd><p>Updates executable names with default executables listed in file <code class="docutils literal notranslate"><span class="pre">config</span></code>.
+Executable names listed in <code class="docutils literal notranslate"><span class="pre">config_user</span></code> can override defaults.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Executable names are used by <a class="reference internal" href="program.html#program-functions"><span class="std std-ref">program functions</span></a>.</p>
@@ -190,7 +191,10 @@
 </ul>
 </dd>
 <dt class="field-even">Path Keys</dt>
-<dd class="field-even"><p><strong>config_user</strong> (<em>str</em>) – Path of user configuration file.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>config</strong> (<em>str</em>) – Path of default configuration file</p></li>
+<li><p><strong>config_user</strong> (<em>str</em>) – Path of user configuration file.</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p></p>
