@@ -67,11 +67,9 @@ class TestClearDir(unittest.TestCase):
 
     def test_error_file(self):                   
         self.make_output(contain_file = True)
-        try:
+        with self.assertRaises(Exception):
             with no_stderrout:
             	clear_dir(['test/output/text.txt'])
-        except Exception as e:
-            self.assertRaises(Exception, e)
 
     def tearDown(self):
         if os.path.isdir('test/output/'):
@@ -157,10 +155,8 @@ class TestRemoveDir(unittest.TestCase):
 
     def test_error_file(self):    
         self.make_output(contain_file = True)      
-        try:   
-            remove_dir(['test/output/text.txt'], quiet = True)       
-        except Exception as e:
-            self.assertRaises(Exception, e)
+        with self.assertRaises(Exception):
+            remove_dir(['test/output/file.txt'], quiet = True)       
 
     def tearDown(self):
         if os.path.isdir('test/output/'):
@@ -209,13 +205,9 @@ class TestZip(unittest.TestCase):
   
     def test_error_unzip_to_exist_file(self):
         create_file('test/output/unzipped.txt') 
-
-        try:
-            # Unzip zip
+        
+        with self.assertRaises(Exception):
             unzip('test/output/unzip.zip', 'test/output/unzipped.txt')
-        except Exception as e:
-            # Check unzip
-            self.assertRaises(Exception, e)
         
     def test_zip_to_not_exist_file(self):        
         # Zip directory
@@ -228,7 +220,6 @@ class TestZip(unittest.TestCase):
     def test_zip_to_exist_file(self):        
         create_file('test/output/zipped.zip')    
         
-        # Zip directory
         with no_stderrout():
             zip_dir('test/output/', 'test/output/zipped.zip')
         
@@ -238,13 +229,9 @@ class TestZip(unittest.TestCase):
         self.assertTrue(os.path.isfile('test/output/unzipped/file.txt'))
 
     def test_error_zip_to_dir(self):
-        try:
-            # Zip directory
+        with self.assertRaises(Exception):
             with no_stderrout():
                 zip_dir('test/output/', 'test/output/')
-        except Exception as e:
-            # Check zip
-            self.assertRaises(Exception, e)
         
     def tearDown(self):
         if os.path.isdir('test/output/'):
