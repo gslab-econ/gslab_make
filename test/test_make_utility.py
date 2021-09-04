@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
+from gslab_make.make_utility import update_make_paths
 from future.utils import raise_from
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
@@ -114,6 +115,23 @@ class TestUpdateMappings(unittest.TestCase):
     def tearDown(self):
         if os.path.isdir('log/'):
             shutil.rmtree('log/')
+
+class TestUpdateMakePaths(unittest.TestCase):
+
+    def test_config(self):
+        paths = {
+            'root': 'test/raw/config', 
+            'config': 'test/raw/config/config.yaml'
+        }
+        paths = update_make_paths(paths)
+    
+    def test_bad_config(self):
+        with self.assertRaises(Exception):
+            paths = {
+                'root': 'test/raw/config', 
+                'config': 'test/raw/config/config_bad.yaml'
+                }
+            paths = update_make_paths(paths)
 
 class TestCopyOutput(unittest.TestCase):
 
