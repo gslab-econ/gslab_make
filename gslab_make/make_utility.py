@@ -120,6 +120,50 @@ def update_paths(paths):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
+def update_make_paths(paths):
+    """.. Update make file paths using default configuration file.
+    
+    Returns dictionary ``paths`` with directory locations listed in file ``config``.
+    
+    Parameters
+    ----------
+    paths : dict 
+        Dictionary of paths to update. 
+        Dictionary should ex-ante contain values for all keys listed below.
+
+    Path Keys
+    ---------
+    root : str
+        Path of project repo root
+    config : str
+        Path of user configuration file.  
+
+    Returns
+    -------
+    paths : dict
+        Dictionary of paths. 
+    """
+
+    try:
+        config_default = get_path(paths, 'config')
+        config_default = open_yaml(config_default)
+        
+        root = get_path(paths, 'config')
+        relative_paths = {path_label: os.path.join(root, path) for \
+            path_label, path in config_default['make_paths']['root_relative'].items()}
+        absolute_paths = config_default['make_paths']['absolute']
+
+        paths.update(relative_paths)
+        paths.update(absolute_paths)
+
+        return(paths)
+        
+    except:
+        error_message = 'Error with update_paths. Traceback can be found below.' 
+        error_message = format_message(error_message) 
+        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+
+
 def copy_output(file, copy_dir):
     """.. Copy output file.
     

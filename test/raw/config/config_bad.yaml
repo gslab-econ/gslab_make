@@ -12,11 +12,10 @@ max_file_sizes:
 # Maximum allowed file sizes
 #####################################################################
 make_paths:
-  root_relative:
+  relative:
     lib: lib
     config: config.yaml
     config_user: config_user.yaml
-  absolute:
     input_dir: input
     external_dir: external
     output_dir: output
