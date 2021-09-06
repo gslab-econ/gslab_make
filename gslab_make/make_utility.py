@@ -115,7 +115,7 @@ def update_external_paths(paths):
 
         return(paths)
     except:
-        error_message = 'Error with update_paths. Traceback can be found below.' 
+        error_message = 'Error with update_external_paths. Traceback can be found below.' 
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
@@ -159,7 +159,7 @@ def update_internal_paths(paths):
         return(paths)
         
     except:
-        error_message = 'Error with update_paths. Traceback can be found below.' 
+        error_message = 'Error with update_external_paths. Traceback can be found below.' 
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
@@ -190,4 +190,4 @@ def copy_output(file, copy_dir):
         shutil.copy(file, copy_dir)
 
 
-__all__ = ['update_executables', 'update_paths', 'copy_output']
+__all__ = ['update_executables', 'update_external_paths', 'update_internal_paths', 'copy_output']
