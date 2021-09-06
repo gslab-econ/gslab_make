@@ -77,7 +77,7 @@ def update_executables(paths, osname = None):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
-def update_paths(paths):
+def update_external_paths(paths):
     """.. Update paths using user configuration file. 
     
     Updates dictionary ``paths`` with externals listed in file ``config_user``.
@@ -120,8 +120,8 @@ def update_paths(paths):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
-def update_make_paths(paths):
-    """.. Update make file paths using default configuration file.
+def update_internal_paths(paths):
+    """.. Update within-directory paths using default configuration file.
     
     Returns dictionary ``paths`` with directory locations listed in file ``config``.
     
