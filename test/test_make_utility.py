@@ -49,12 +49,6 @@ class TestUpdateExecutables(unittest.TestCase):
         with self.assertRaises(Exception):
             update_executables(PATHS, osname = 'bad_os')
 
-    def test_error_bad_executables(self):     
-        try:
-            PATHS = {'config_user': 'test/raw/config/config_bad_executables.yaml'}
-        except Exception as e:
-            self.assertRaises(Exception, e)
-
     def tearDown(self):
         # Delete log directory
         if os.path.isdir('log/'):
