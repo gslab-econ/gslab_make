@@ -61,25 +61,25 @@ class TestUpdateMappings(unittest.TestCase):
 
     def test_config(self):     
         PATHS = {'config_user': 'test/raw/config/config_user.yaml'}
-        PATH_MAPPINGS = update_external_paths(PATHS)
+        PATHS = update_external_paths(PATHS)
 
     def test_config_character(self):     
         PATHS = {'config_user': 'test/raw/config/config_user_╬▓.yaml'}
-        PATH_MAPPINGS = update_external_paths(PATHS)
+        PATHS = update_external_paths(PATHS)
 
     def test_config_empty(self):     
         PATHS = {'config_user': 'test/raw/config/config_user_empty.yaml'}
-        PATH_MAPPINGS = update_external_paths(PATHS)
+        PATHS = update_external_paths(PATHS)
 
     def test_error_config_missing(self):     
         PATHS = {'config_user': 'test/raw/config/config_missing.yaml'}
         with self.assertRaises(Exception):
-            PATH_MAPPINGS = update_external_paths(PATHS)
+            PATHS = update_external_paths(PATHS)
 
     def test_error_bad_paths(self):     
         PATHS = {}
         with self.assertRaises(Exception):
-            PATH_MAPPINGS = update_external_paths(PATHS)
+            PATHS = update_external_paths(PATHS)
             
     def tearDown(self):
         if os.path.isdir('log/'):
