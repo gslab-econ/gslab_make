@@ -98,6 +98,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Utility functions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.copy_output.html">copy_output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_executables.html">update_executables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_external_paths.html">update_external_paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_internal_paths.html">update_internal_paths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/make_utility/gslab_make.make_utility.update_paths.html">update_paths</a></li>
 </ul>
 </li>
@@ -203,7 +205,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">update_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span></dt>
+<span class="sig-name descname"><span class="pre">update_external_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Updates dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code> with externals listed in file <code class="docutils literal notranslate"><span class="pre">config_user</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -222,6 +224,30 @@ Dictionary should ex-ante contain values for all keys listed below.</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><strong>paths</strong> – Dictionary of updated paths.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">update_internal_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Returns dictionary <code class="docutils literal notranslate"><span class="pre">paths</span></code> with directory locations listed in file <code class="docutils literal notranslate"><span class="pre">config</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths to update.
+Dictionary should ex-ante contain values for all keys listed below.</p>
+</dd>
+<dt class="field-even">Path Keys</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>root</strong> (<em>str</em>) – Path of project repo root</p></li>
+<li><p><strong>config</strong> (<em>str</em>) – Path of user configuration file.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>paths</strong> – Dictionary of paths.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>dict</p>
