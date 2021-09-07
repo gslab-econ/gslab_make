@@ -119,6 +119,27 @@ def update_external_paths(paths):
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
+def update_paths(paths):
+    """.. Alias for ``update_external_paths()``
+
+    Parameters
+    ----------
+    paths : dict 
+        Dictionary of paths to update. 
+        Dictionary should ex-ante contain values for all keys listed below.
+
+    Path Keys
+    ---------
+    config_user : str
+        Path of user configuration file.  
+
+    Returns
+    -------
+    paths : dict
+        Dictionary of updated paths. 
+    """
+    
+    return update_external_paths(paths)
 
 def update_internal_paths(paths):
     """.. Update within-directory paths using default configuration file.

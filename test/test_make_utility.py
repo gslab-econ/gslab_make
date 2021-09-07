@@ -15,7 +15,7 @@ from test.utility import no_stderrout, redirect_stdout, create_file
 import gslab_make.private.metadata as metadata
 from gslab_make import clear_dir
 
-from gslab_make import update_executables, update_external_paths, update_internal_paths, copy_output
+from gslab_make import update_executables, update_external_paths, update_paths, update_internal_paths, copy_output
 
 class TestUpdateExecutables(unittest.TestCase):
 
@@ -62,6 +62,10 @@ class TestUpdateMappings(unittest.TestCase):
     def test_config(self):     
         PATHS = {'config_user': 'test/raw/config/config_user.yaml'}
         PATHS = update_external_paths(PATHS)
+
+    def test_alias(self):
+        PATHS = {'config_user' : 'test/raw/config/config_user.yaml'}
+        PATHS = update_paths(PATHS)
 
     def test_config_character(self):     
         PATHS = {'config_user': 'test/raw/config/config_user_╬▓.yaml'}
