@@ -46,7 +46,7 @@ from gslab_make.run_program import (run_stata, run_matlab, run_perl, run_python,
                                     run_lyx, run_latex, run_r, run_sas, 
                                     execute_command, run_module)
 
-from gslab_make.make_utility import (update_executables, update_paths, copy_output)
+from gslab_make.make_utility import (update_executables, update_external_paths, update_paths, update_internal_paths, copy_output)
 from gslab_make.write_logs import (start_makelog, end_makelog, write_to_makelog,
                                    log_files_in_output)
 from gslab_make.write_source_logs import write_source_logs

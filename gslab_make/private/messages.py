@@ -62,7 +62,7 @@ crit_error_path_mapping = \
     '\nERROR! Argument `paths` is missing a value for key `%s`. ' + \
     '`{%s}` found in the following instruction in file `%s`.\n' + \
     '  > %s\n' + \
-    'Confirm that your config user file contains an external dependency for {%s} and that it has been properly loaded (via `update_paths`). ' + \
+    'Confirm that your config user file contains an external dependency for {%s} and that it has been properly loaded (via `update_external_paths`). ' + \
     'For further detail, refer to the traceback below.'
 crit_error_no_repo = \
     '\nERROR! Current working directory is not part of a git repository.'

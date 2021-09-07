@@ -77,7 +77,7 @@ def update_executables(paths, osname = None):
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
 
-def update_paths(paths):
+def update_external_paths(paths):
     """.. Update paths using user configuration file. 
     
     Updates dictionary ``paths`` with externals listed in file ``config_user``.
@@ -115,13 +115,34 @@ def update_paths(paths):
 
         return(paths)
     except:
-        error_message = 'Error with update_paths. Traceback can be found below.' 
+        error_message = 'Error with update_external_paths. Traceback can be found below.' 
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
+def update_paths(paths):
+    """.. Alias for ``update_external_paths()``
 
-def update_make_paths(paths):
-    """.. Update make file paths using default configuration file.
+    Parameters
+    ----------
+    paths : dict 
+        Dictionary of paths to update. 
+        Dictionary should ex-ante contain values for all keys listed below.
+
+    Path Keys
+    ---------
+    config_user : str
+        Path of user configuration file.  
+
+    Returns
+    -------
+    paths : dict
+        Dictionary of updated paths. 
+    """
+    
+    return update_external_paths(paths)
+
+def update_internal_paths(paths):
+    """.. Update within-directory paths using default configuration file.
     
     Returns dictionary ``paths`` with directory locations listed in file ``config``.
     
@@ -159,7 +180,7 @@ def update_make_paths(paths):
         return(paths)
         
     except:
-        error_message = 'Error with update_paths. Traceback can be found below.' 
+        error_message = 'Error with update_external_paths. Traceback can be found below.' 
         error_message = format_message(error_message) 
         raise_from(ColoredError(error_message, traceback.format_exc()), None)
 
@@ -190,4 +211,4 @@ def copy_output(file, copy_dir):
         shutil.copy(file, copy_dir)
 
 
-__all__ = ['update_executables', 'update_paths', 'copy_output']
+__all__ = ['update_executables', 'update_external_paths', 'update_internal_paths', 'copy_output']
