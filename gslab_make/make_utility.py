@@ -169,7 +169,7 @@ def update_internal_paths(paths):
         config_default = get_path(paths, 'config')
         config_default = open_yaml(config_default)
         
-        root = get_path(paths, 'config')
+        root = get_path(paths, 'root')
         relative_paths = {path_label: os.path.join(root, path) for \
             path_label, path in config_default['make_paths']['root_relative'].items()}
         absolute_paths = config_default['make_paths']['absolute']
