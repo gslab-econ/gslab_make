@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -229,7 +227,7 @@ def link_inputs(paths,
         error_message = 'An error was encountered with `link_inputs`. Traceback can be found below.' 
         error_message = format_message(error_message) 
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
         
 
 def link_externals(paths,
@@ -359,7 +357,7 @@ def link_externals(paths,
         error_message = 'An error was encountered with `link_externals`. Traceback can be found below.' 
         error_message = format_message(error_message) 
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def copy_inputs(paths,
@@ -486,7 +484,7 @@ def copy_inputs(paths,
         error_message = 'An error was encountered with `copy_inputs`. Traceback can be found below.' 
         error_message = format_message(error_message) 
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def copy_externals(paths,
@@ -613,6 +611,6 @@ def copy_externals(paths,
         error_message = 'An error was encountered with `copy_externals`. Traceback can be found below.' 
         error_message = format_message(error_message) 
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 __all__ = ['link_inputs', 'link_externals', 'copy_inputs', 'copy_externals']

@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -74,7 +72,7 @@ def update_executables(paths, osname = None):
     except:
         error_message = 'Error with update_executables. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def update_external_paths(paths):
@@ -117,7 +115,7 @@ def update_external_paths(paths):
     except:
         error_message = 'Error with update_external_paths. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 def update_paths(paths):
     """.. Alias for ``update_external_paths()``
@@ -182,7 +180,7 @@ def update_internal_paths(paths):
     except:
         error_message = 'Error with update_external_paths. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def copy_output(file, copy_dir):

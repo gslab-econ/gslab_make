@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -70,7 +68,7 @@ def parse_text(args):
 
 def read_text(input, prefix):
     data = ''
-    if isinstance(input, types.StringTypes):
+    if isinstance(input, str):
         input = [input]
     for file in input:
         data += open(file, 'rU').read()

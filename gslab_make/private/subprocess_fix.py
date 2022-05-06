@@ -132,7 +132,7 @@ class Popen(subprocess.Popen):
         sending it as-is to ``CreateProcess``.
 
         """
-        if not isinstance(args, subprocess.types.StringTypes):
+        if not isinstance(args, str):
             args = subprocess.list2cmdline(args)
 
         if startupinfo is None:

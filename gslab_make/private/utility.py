@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -18,34 +16,16 @@ import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError
 
 
-def decode(string):
-    """Decode string."""
-
-    if (sys.version_info < (3, 0)) and isinstance(string, string_types):
-        string = codecs.decode(string, 'latin1')
-
-    return(string)
-
-
-def encode(string):
-    """Clean string for encoding."""
-
-    if (sys.version_info < (3, 0)) and isinstance(string, unicode):
-        string = codecs.encode(string, 'utf-8') 
-
-    return(string)
-
-
 def convert_to_list(obj, warning_type):
     """Convert object to list."""
     
-    obj = [obj] if isinstance(obj, string_types) else obj
+    obj = [obj] if isinstance(obj, str) else obj
     
     if type(obj) is not list:
         if (warning_type == 'dir'):
-            raise_from(TypeError(messages.type_error_dir_list % obj), None)
+            raise TypeError(messages.type_error_dir_list % obj)
         elif (warning_type == 'file'):
-            raise_from(TypeError(messages.type_error_file_list % obj), None)
+            raise TypeError(messages.type_error_file_list % obj)
 
     return(obj)
 
@@ -82,13 +62,13 @@ def get_path(paths_dict, key, throw_error = True):
     
     try:
         path = paths_dict[key]
-        if isinstance(path, string_types): 
+        if isinstance(path, str): 
             path = norm_path(path) 
         elif isinstance(path, list): 
             path = [norm_path(p) for p in path]
     except KeyError:
         if throw_error:
-            raise_from(CritError(messages.crit_error_no_key % (key, key)), None)
+            raise CritError(messages.crit_error_no_key % (key, key))
         else:
             path = None
 
@@ -184,7 +164,7 @@ def format_traceback(trace = ''):
         trace = traceback.format_exc()
 
     trace = trace.strip()
-    trace = '\n' + decode(trace)
+    trace = '\n' + trace
     formatted = re.sub('\n', '\n  > ', trace)
 
     return(formatted)

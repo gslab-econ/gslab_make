@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -61,7 +59,7 @@ def _parse_content(file, null):
     try:
         tag = _parse_tag(content[0])
     except:
-        raise_from(CritError(messages.crit_error_no_tag % file), None)   
+        raise CritError(messages.crit_error_no_tag % file)
     data = _parse_data(content[1:], null)
     
     return(tag, data)
@@ -95,7 +93,7 @@ def _insert_value(line, value, type, null):
             try:
                 value = float(value)
             except:
-                raise_from(CritError(messages.crit_error_not_float % value), None)
+                raise CritError(messages.crit_error_not_float % value)
             digits = re.findall('\\\\?#([0-9]+)\\\\?#', line)[0]
             rounded_value = format(value, '.%sf' % digits)
             line = re.sub('(.*?)\\\\?#[0-9]+\\\\?#', r'\g<1>' + rounded_value, line)
@@ -107,7 +105,7 @@ def _insert_value(line, value, type, null):
             try:
                 value = float(value)
             except:
-                raise_from(CritError(messages.crit_error_not_float % value), None)
+                raise CritError(messages.crit_error_not_float % value)
             digits = re.findall('\\\\?#([0-9]+),\\\\?#', line)[0]
             rounded_value = format(value, ',.%sf' % digits)
             line = re.sub('(.*?)\\\\?#[0-9]+,\\\\?#', r'\g<1>' + rounded_value, line)
@@ -145,7 +143,7 @@ def _insert_tables_lyx(template, tables, null):
                 entry_count = 0
                 is_table = True
             except KeyError:
-                raise_from(CritError(messages.crit_error_no_input_table % tag), None)
+                raise CritError(messages.crit_error_no_input_table % tag)
 
         # Fill in values if table
         if is_table:
@@ -162,9 +160,9 @@ def _insert_tables_lyx(template, tables, null):
                 elif re.match('</lyxtabular>', doc[i]):
                     is_table = False
                     if entry_count != len(values):
-                        raise_from(CritError(messages.crit_error_too_many_values % tag), None)
+                        raise CritError(messages.crit_error_too_many_values % tag)
             except IndexError:
-                raise_from(CritError(messages.crit_error_not_enough_values % tag), None)
+                raise CritError(messages.crit_error_not_enough_values % tag)
                 
     doc = '\n'.join(doc)
     
@@ -201,7 +199,7 @@ def _insert_tables_latex(template, tables, null):
                 entry_count = 0
                 is_table = True
             except KeyError:
-                raise_from(CritError(messages.crit_error_no_input_table % tag), None)
+                raise CritError(messages.crit_error_no_input_table % tag)
 
         # Fill in values if table
         if is_table:
@@ -224,9 +222,9 @@ def _insert_tables_latex(template, tables, null):
                 if re.search('end\{tabular\}', doc[i], flags = re.IGNORECASE):
                     is_table = False
                     if entry_count != len(values):
-                        raise_from(CritError(messages.crit_error_too_many_values % tag), None)
+                        raise CritError(messages.crit_error_too_many_values % tag)
             except IndexError:
-                raise_from(CritError(messages.crit_error_not_enough_values % tag), None)
+                raise CritError(messages.crit_error_not_enough_values % tag)
 
     doc = '\n'.join(doc)
 
@@ -626,7 +624,7 @@ def tablefill(inputs, template, output, null = '.'):
         content = [_parse_content(file, null) for file in inputs]
         tables = {tag:data for (tag, data) in content}
         if (len(content) != len(tables)):
-            raise_from(CritError(messages.crit_error_duplicate_tables), None)
+            raise CritError(messages.crit_error_duplicate_tables)
 
         doc = _insert_tables(template, tables, null)  
 
@@ -635,7 +633,7 @@ def tablefill(inputs, template, output, null = '.'):
     except:
         error_message = 'Error with `tablefill`. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 __all__ = ['tablefill']

@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -77,7 +75,7 @@ def remove_path(path, option = '', quiet = False):
     except:
         error_message = 'Error with `remove_path`. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def remove_dir(dir_list, quiet = False):
@@ -122,11 +120,11 @@ def remove_dir(dir_list, quiet = False):
             if os.path.isdir(dir_path):
                 remove_path(dir_path, quiet = quiet)
             elif os.path.isfile(dir_path): 
-                raise_from(TypeError(messages.type_error_not_dir % dir_path), None)
+                raise TypeError(messages.type_error_not_dir % dir_path)
     except:
         error_message = 'Error with `remove_dir`. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def clear_dir(dir_list):
@@ -184,7 +182,7 @@ def clear_dir(dir_list):
     except:
         error_message = 'Error with `clear_dir`. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def unzip(zip_path, output_dir):
@@ -210,7 +208,7 @@ def unzip(zip_path, output_dir):
     except:
         error_message = 'Error with `zip_path`. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def zip_dir(source_dir, zip_dest):
@@ -245,7 +243,7 @@ def zip_dir(source_dir, zip_dest):
     except:
         error_message = 'Error with `zip_dir`. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 __all__ = ['remove_dir', 'clear_dir', 'unzip', 'zip_dir']

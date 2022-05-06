@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -63,7 +61,7 @@ def start_makelog(paths):
     except:
         error_message = 'Error with `start_makelog`. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def end_makelog(paths):
@@ -100,7 +98,7 @@ def end_makelog(paths):
             print(colored(message, metadata.color_success))
 
             if not (metadata.makelog_started and os.path.isfile(makelog)):
-                raise_from(CritError(messages.crit_error_no_makelog % makelog), None)
+                raise CritError(messages.crit_error_no_makelog % makelog)
 
             with io.open(makelog, 'a', encoding = 'utf8', errors = 'ignore') as MAKELOG:
                 time_end = str(datetime.datetime.now().replace(microsecond = 0))
@@ -112,7 +110,7 @@ def end_makelog(paths):
     except:
         error_message = 'Error with `end_makelog`. Traceback can be found below.' 
         error_message = format_message(error_message) 
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
     
 
 def write_to_makelog(paths, message):
@@ -143,7 +141,7 @@ def write_to_makelog(paths, message):
         makelog = norm_path(makelog)
 
         if not (metadata.makelog_started and os.path.isfile(makelog)):
-            raise_from(CritError(messages.crit_error_no_makelog % makelog), None)
+            raise CritError(messages.crit_error_no_makelog % makelog)
 
         with io.open(makelog, 'a', encoding = 'utf8', errors = 'ignore') as MAKELOG:
             print(message, file = MAKELOG)
@@ -238,7 +236,7 @@ def log_files_in_output(paths,
         error_message = 'Error with `log_files_in_output`. Traceback can be found below.' 
         error_message = format_message(error_message)
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
     
 def _write_stats_log(statslog_file, output_files):

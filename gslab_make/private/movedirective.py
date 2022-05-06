@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -95,7 +93,7 @@ class MoveDirective(object):
         except Exception:
             error_message = messages.crit_error_bad_move % (self.raw_line, self.file)
             error_message = error_message + format_traceback()
-            raise_from(CritError(error_message), None)
+            raise CritError(error_message)
 
         self.source = norm_path(self.source)
         self.destination = norm_path(os.path.join(self.move_dir, self.destination))
@@ -159,7 +157,7 @@ class MoveDirective(object):
         regex = '(.*)'.join(regex) 
 
         wildcards = re.findall(regex, f) # Returns list if single match, list of set if multiple matches
-        wildcards = [(w, ) if isinstance(w, string_types) else w for w in wildcards]
+        wildcards = [(w, ) if isinstance(w, str) else w for w in wildcards]
         wildcards = chain(*wildcards)
 
         return(wildcards)
@@ -374,7 +372,7 @@ class MoveList(object):
                     key = decode(e).lstrip("u'").rstrip("'")
                     error_message = messages.crit_error_path_mapping % (key, key, file, raw_line, key)
                     error_message = error_message + format_traceback()
-                    raise_from(CritError(error_message), None)
+                    raise CritError(error_message)
 
         self.move_directive_list = [MoveDirective(file, raw_line, line, self.move_dir) for (file, raw_line, line) in lines]
 

@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from future.utils import raise_from, string_types
 from builtins import (bytes, str, open, super, range,
                       zip, round, input, int, pow, object)
 
@@ -122,7 +120,7 @@ def _parse_git_attributes(attributes):
 
             return(lfs_list)
     except IOError:
-        raise_from(CritError(messages.crit_error_no_attributes), None)
+        raise CritError(messages.crit_error_no_attributes)
     
 
 def _check_path_lfs(path, lfs_list):
@@ -157,7 +155,7 @@ def _get_dir_sizes(dir_path):
         repo = git.Repo(dir_path, search_parent_directories = True)   
         root = repo.working_tree_dir
     except:
-        raise_from(CritError(messages.crit_error_no_repo), None)
+        raise CritError(messages.crit_error_no_repo)
 
     git_files = _get_file_sizes(dir_path, exclude = ['.git'])
     git_ignore_files = _get_git_ignore(repo)
@@ -288,7 +286,7 @@ def check_module_size(paths):
         error_message = 'Error with `check_repo_size`. Traceback can be found below.' 
         error_message = format_message(error_message) 
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 
 def _get_git_status(repo): 
@@ -362,7 +360,7 @@ def get_modified_sources(paths,
         try:
             repo = git.Repo('.', search_parent_directories = True)    
         except:
-            raise_from(CritError(messages.crit_error_no_repo), None)
+            raise CritError(messages.crit_error_no_repo)
         modified = _get_git_status(repo)
 
         overlap = [l for l in source_files if l in modified] 
@@ -378,7 +376,7 @@ def get_modified_sources(paths,
         error_message = 'Error with `get_modified_sources`. Traceback can be found below.' 
         error_message = format_message(error_message) 
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
-        raise_from(ColoredError(error_message, traceback.format_exc()), None)
+        raise ColoredError(error_message, traceback.format_exc())
 
 def check_conda_status(root):
     """.. Makes sure that the repository is being run with conda and is up to date.
@@ -430,7 +428,7 @@ def check_conda_status(root):
         except:
             error_message = 'Error with `check_conda_status`. Traceback can be found below.' 
             error_message = format_message(error_message) 
-            raise_from(ColoredError(error_message, traceback.format_exc()), None)
+            raise ColoredError(error_message, traceback.format_exc())
     else:
         print(colored(messages.warning_not_conda, 'red'))
 
