@@ -1,74 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Program functions &mdash; GSLab Make 2.0.0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="execute_command" href="api/run_program/gslab_make.run_program.execute_command.html" />
     <link rel="prev" title="write_source_logs" href="api/write_source_logs/gslab_make.write_source_logs.write_source_logs.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> GSLab Make
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -76,18 +37,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="specifying_paths.html">Specifying paths</a></li>
@@ -120,80 +70,39 @@
 <li class="toctree-l1"><a class="reference internal" href="filling.html">Filling functions</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">GSLab Make</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program functions</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/pages/program.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-functions">
-<h1>Program functions<a class="headerlink" href="#program-functions" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="program-functions">
+<h1>Program functions<a class="headerlink" href="#program-functions" title="Permalink to this headline"></a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to run code scripts (i.e., <em>programs</em>) for certain applications. These program functions are implemented as Python wrappers around system commands.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To use the program function for a specific application, please make sure that you have set up command line usage for the application.</p>
 </div>
-<div class="section" id="default-settings">
-<h2>Default settings<a class="headerlink" href="#default-settings" title="Permalink to this headline">¶</a></h2>
+<section id="default-settings">
+<h2>Default settings<a class="headerlink" href="#default-settings" title="Permalink to this headline"></a></h2>
 <p>Unless specified otherwise, the program functions will assume the following default executables when executing your program.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">default_executables</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;posix&#39;</span><span class="p">:</span>
@@ -245,9 +154,9 @@
 </pre></div>
 </div>
 <p>To change the default options, you may pass your desired options into the <code class="docutils literal notranslate"><span class="pre">options</span></code> argument of your program function.</p>
-</div>
-<div class="section" id="supported-applications">
-<h2>Supported applications<a class="headerlink" href="#supported-applications" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="supported-applications">
+<h2>Supported applications<a class="headerlink" href="#supported-applications" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">run_stata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span></dt>
@@ -288,11 +197,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -336,11 +242,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -384,11 +287,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Arguments for system command. Defaults to no arguments.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -432,11 +332,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Arguments for system command. Defaults to no arguments.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -476,11 +373,8 @@ Defaults to no timeout.</p></li>
 Defaults to <code class="docutils literal notranslate"><span class="pre">''</span></code> (i.e., kernel specified in notebook).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -524,11 +418,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -573,11 +464,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -628,11 +516,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -684,11 +569,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -732,11 +614,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -782,11 +661,8 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -825,11 +701,8 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">''</spa
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to check if OS is supported. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -855,11 +728,8 @@ and appends outputs and/or status messages to <code class="docutils literal notr
 <li><p><strong>run_all</strong> (<em>bool</em>) – If being run from the root. Will make it so doesn’t recheck conda status.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -871,55 +741,38 @@ and appends outputs and/or status messages to <code class="docutils literal notr
 
 <div class="toctree-wrapper compound">
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="api/run_program/gslab_make.run_program.execute_command.html" class="btn btn-neutral float-right" title="execute_command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="api/write_source_logs/gslab_make.write_source_logs.write_source_logs.html" class="btn btn-neutral float-left" title="write_source_logs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/run_program/gslab_make.run_program.execute_command.html" class="btn btn-neutral float-right" title="execute_command" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Matthew Gentzkow.
-
-    </p>
+    <p>&#169; Copyright 2022, Matthew Gentzkow.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
