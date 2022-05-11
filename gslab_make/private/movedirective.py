@@ -17,7 +17,7 @@ else:
 import gslab_make.private.messages as messages
 import gslab_make.private.metadata as metadata
 from gslab_make.private.exceptionclasses import CritError
-from gslab_make.private.utility import convert_to_list, norm_path, file_to_array, format_traceback, decode
+from gslab_make.private.utility import convert_to_list, norm_path, file_to_array, format_traceback
 
 
 class MoveDirective(object):
@@ -341,7 +341,7 @@ class MoveList(object):
             if file_list_parsed:
                 self.file_list = file_list_parsed
             else:
-                error_list = [decode(f) for f in self.file_list]
+                error_list = [f for f in self.file_list]
                 raise CritError(messages.crit_error_no_files % error_list) 
 
     def get_paths(self):    
@@ -369,7 +369,7 @@ class MoveList(object):
                     line = raw_line.format(**self.mapping_dict)
                     lines.append((file, raw_line, line))
                 except KeyError as e:
-                    key = decode(e).lstrip("u'").rstrip("'")
+                    key = e.lstrip("u'").rstrip("'")
                     error_message = messages.crit_error_path_mapping % (key, key, file, raw_line, key)
                     error_message = error_message + format_traceback()
                     raise CritError(error_message)
