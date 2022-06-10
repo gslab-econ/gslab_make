@@ -4,7 +4,6 @@ from builtins import (bytes, str, open, super, range,
 
 import os
 import re
-import git
 import fnmatch
 import traceback
 from datetime import datetime
@@ -20,6 +19,11 @@ import gslab_make.private.messages as messages
 from gslab_make.private.exceptionclasses import CritError, ColoredError
 from gslab_make.private.utility import norm_path, get_path, format_message, glob_recursive, open_yaml
 from gslab_make.write_logs import write_to_makelog
+
+try:
+    import git
+except ImportError:
+    print(colored(messages.warning_not_git_repo, metadata.color_failure))
 
 
 def _get_file_sizes(dir_path, exclude):
@@ -71,8 +75,11 @@ def _get_git_ignore(repo):
         List of files in repository ignored by git. 
     """
 
-    g = git.Git(repo)
-    root = repo.working_tree_dir
+    if repo is None: # if note being run in git repo
+        root = '.'
+    else:
+        g = git.Git(repo)
+        root = repo.working_tree_dir
 
     ignore = g.execute('git status --porcelain --ignored', shell = True).split('\n')
     ignore = [i for i in ignore if re.match('!!', i)]
@@ -155,7 +162,10 @@ def _get_dir_sizes(dir_path):
         repo = git.Repo(dir_path, search_parent_directories = True)   
         root = repo.working_tree_dir
     except:
-        raise CritError(messages.crit_error_no_repo)
+        root = None
+
+        message = messages.warning_not_git_repo
+        print(colored(message, metadata.color_failure))
 
     git_files = _get_file_sizes(dir_path, exclude = ['.git'])
     git_ignore_files = _get_git_ignore(repo)
