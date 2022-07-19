@@ -1072,6 +1072,8 @@ def run_module(root, module, build_script = 'make.py', osname = None, run_all=Tr
 
         if run_all:
             status = os.system('%s %s run_all' % (metadata.default_executables[osname]['python'], build_script))
+            os.chdir(os.path.normpath(os.getcwd() + os.sep + os.pardir))
+
         else: 
             status = os.system('%s %s' % (metadata.default_executables[osname]['python'], build_script))
 
