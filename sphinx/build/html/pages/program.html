@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -95,14 +96,14 @@
            <div itemprop="articleBody">
              
   <section id="program-functions">
-<h1>Program functions<a class="headerlink" href="#program-functions" title="Permalink to this headline"></a></h1>
+<h1>Program functions<a class="headerlink" href="#program-functions" title="Permalink to this heading"></a></h1>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to run code scripts (i.e., <em>programs</em>) for certain applications. These program functions are implemented as Python wrappers around system commands.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To use the program function for a specific application, please make sure that you have set up command line usage for the application.</p>
 </div>
 <section id="default-settings">
-<h2>Default settings<a class="headerlink" href="#default-settings" title="Permalink to this headline"></a></h2>
+<h2>Default settings<a class="headerlink" href="#default-settings" title="Permalink to this heading"></a></h2>
 <p>Unless specified otherwise, the program functions will assume the following default executables when executing your program.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">default_executables</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;posix&#39;</span><span class="p">:</span>
@@ -156,7 +157,7 @@
 <p>To change the default options, you may pass your desired options into the <code class="docutils literal notranslate"><span class="pre">options</span></code> argument of your program function.</p>
 </section>
 <section id="supported-applications">
-<h2>Supported applications<a class="headerlink" href="#supported-applications" title="Permalink to this headline"></a></h2>
+<h2>Supported applications<a class="headerlink" href="#supported-applications" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">run_stata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span></dt>
