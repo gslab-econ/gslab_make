@@ -80,13 +80,6 @@ class TestLinkInputs(unittest.TestCase):
             self.move_function(paths, ['test/raw/move_sources/move_wildcar*.txt'])
             self.check_move(paths)
 
-    def test_move_character(self):        
-        with no_stderrout():
-            paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
-            self.move_function(paths, ['test/raw/move_sources/move_╬▓.txt'])
-            self.check_makelog(paths)
-            self.assertTrue(os.path.isfile('test/%s/file_╬▓.txt' % self.move_type))
-            
     def test_move_space(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make space.log')

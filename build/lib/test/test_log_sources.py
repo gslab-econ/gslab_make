@@ -53,15 +53,6 @@ class TestMakeLog(unittest.TestCase):
             write_source_logs(paths, inputs)
             self.check_logs(paths)
 
-    def test_log_output_character(self):     
-        with no_stderrout():
-            paths = self.make_paths()
-            inputs = link_inputs(paths, ['test/raw/log_sources/move_╬▓.txt'])
-            write_source_logs(paths, inputs)
-            self.check_makelog(paths)
-            self.assertIn('dir_╬▓', read_file(paths['source_maplog']))
-            self.assertIn('file_╬▓.txt', read_file(paths['source_statslog']))
-
     def test_log_output_space(self):     
         with no_stderrout():
             paths = self.make_paths()

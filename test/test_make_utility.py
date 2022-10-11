@@ -26,10 +26,6 @@ class TestUpdateExecutables(unittest.TestCase):
         PATHS = {'config_user': 'test/raw/config/config_user.yaml'}
         update_executables(PATHS)
 
-    def test_config_character(self):     
-        PATHS = {'config_user': 'test/raw/config/config_user_╬▓.yaml'}
-        update_executables(PATHS)
-
     def test_config_empty(self):     
         PATHS = {'config_user': 'test/raw/config/config_user_empty.yaml'}
         update_executables(PATHS)
@@ -66,10 +62,6 @@ class TestUpdateMappings(unittest.TestCase):
     def test_alias(self):
         PATHS = {'config_user' : 'test/raw/config/config_user.yaml'}
         PATHS = update_paths(PATHS)
-
-    def test_config_character(self):     
-        PATHS = {'config_user': 'test/raw/config/config_user_╬▓.yaml'}
-        PATHS = update_external_paths(PATHS)
 
     def test_config_empty(self):     
         PATHS = {'config_user': 'test/raw/config/config_user_empty.yaml'}

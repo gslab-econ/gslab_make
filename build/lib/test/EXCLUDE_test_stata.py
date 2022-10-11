@@ -56,14 +56,6 @@ class TestRunStata(unittest.TestCase):
             
         self.check_output(paths)
 
-    def test_program_character(self):        
-        with no_stderrout():
-            paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
-            program_name = 'test/raw/run_program/%s_script_╬▓.%s' % (self.app, self.ext)
-            run_function(paths, program = program_name)
-            
-        self.check_output(paths)
-
     def test_program_space(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make space.log')
@@ -80,15 +72,6 @@ class TestRunStata(unittest.TestCase):
             
         self.check_output(paths)
         self.assertIn('Test script complete', read_file('test/output/log.log'))
-
-    def test_log_character(self):      
-        with no_stderrout():
-            paths = self.make_paths()
-            program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
-            run_function(paths, program = program_name, log = 'test/output/log_╬▓.log')
-            
-        self.check_output(paths)
-        self.assertIn('Test script complete', read_file('test/output/log_╬▓.log'))
 
     def test_log_space(self):      
         with no_stderrout():
