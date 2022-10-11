@@ -24,6 +24,7 @@ commands = {
          'matlab'   : '%s %s -r \"try run(\'%s\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)\" -logfile \"%s\"',
          'perl'     : '%s %s \"%s\" %s',
          'python'   : '%s %s \"%s\" %s',
+         'julia'    : '%s %s \"%s\"',
          'r'        : '%s %s \"%s\"',
          'sas'      : '%s %s -log -print %s',
          'st'       : '%s \"%s\"',
@@ -39,6 +40,7 @@ commands = {
          'matlab'   : '%s %s -r \"try run(\'%s\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)\" -logfile \"%s\"',
          'perl'     : '%s %s \"%s\" %s',
          'python'   : '%s %s \"%s\" %s',
+         'julia'    : '%s %s \"%s\"',
          'r'        : '%s %s \"%s\"',
          'sas'      : '%s %s -log -print %s',
          'st'       : '%s \"%s\"',
@@ -55,6 +57,7 @@ default_options = {
          'matlab'   : '-nosplash -nodesktop',
          'perl'     : '',
          'python'   : '',
+         'julia'    : '',
          'r'        : '--no-save',
          'sas'      : '',
          'st'       : '',
@@ -87,7 +90,8 @@ default_executables = {
          'r'        : 'Rscript',
          'sas'      : 'sas',
          'st'       : 'st',
-         'stata'    : 'stata-mp'},
+         'stata'    : 'stata-mp',
+         'julia'    : 'julia'},
     'nt': 
         {'git-lfs'  : 'git-lfs',
          'jupyter'  : 'python -m jupyter',
@@ -100,7 +104,8 @@ default_executables = {
          'r'        : 'Rscript',
          'sas'      : 'sas',
          'st'       : 'st',
-         'stata'    : 'StataMP-64'},
+         'stata'    : 'StataMP-64',
+         'julia'    : 'julia'},
 }
 
 extensions = {
@@ -114,5 +119,6 @@ extensions = {
     'r'       : ['.r', '.R'],
     'sas'     : ['.sas', '.SAS'],
     'st'      : ['.stc', '.STC', '.stcmd', '.STCMD'],
-    'stata'   : ['.do', '.DO']
+    'stata'   : ['.do', '.DO'],
+    'julia'   : ['.jl', '.JL']
 }
