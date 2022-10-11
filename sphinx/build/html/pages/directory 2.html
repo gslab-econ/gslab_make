@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Directory functions &mdash; GSLab Make 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> GSLab Make
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="specifying_paths.html">Specifying paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general_logging.html">General logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourcing.html">Sourcing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source_logging.html">Source logging functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="program.html">Program functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">Utility functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repository.html">Repository functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directory.html">Directory functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filling.html">Filling functions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSLab Make</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Directory functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pages/directory 2.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="directory-functions">
+<h1>Directory functions<a class="headerlink" href="#directory-functions" title="Permalink to this heading"></a></h1>
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">gslab_make</span></code> library provides functions to make modifications to a directory. Functions to remove files and directories, clear directories, and zip/unzip files are included.</p>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">remove_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Remove directories in list <code class="docutils literal notranslate"><span class="pre">dir_list</span></code> using system command.
+Safely removes symbolic links. Directories can be specified with the * shell pattern
+(see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_list</strong> (<em>str</em><em>, </em><em>list</em>) – Directory or list of directories to remove.</p></li>
+<li><p><strong>quiet</strong> (<em>bool</em><em>, </em><em>optional</em>) – Suppress printing of directories removed. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>The following code removes directories <code class="docutils literal notranslate"><span class="pre">dir1</span></code> and <code class="docutils literal notranslate"><span class="pre">dir2</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">remove_dir</span><span class="p">([</span><span class="s1">&#39;dir1&#39;</span><span class="p">,</span> <span class="s1">&#39;dir2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The following code removes directories beginning with <code class="docutils literal notranslate"><span class="pre">dir</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">remove_dir</span><span class="p">([</span><span class="s1">&#39;dir1*&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">clear_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_list</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Clears all directories in list <code class="docutils literal notranslate"><span class="pre">dir_list</span></code> using system command.
+Safely clears symbolic links. Directories can be specified with the * shell pattern
+(see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To clear a directory means to remove all contents of a directory.
+If the directory is nonexistent, the directory is created,
+unless the directory is specified via shell pattern.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dir_list</strong> (<em>str</em><em>, </em><em>list</em>) – Directory or list of directories to clear.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>The following code clears directories <code class="docutils literal notranslate"><span class="pre">dir1</span></code> and <code class="docutils literal notranslate"><span class="pre">dir2</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clear_dir</span><span class="p">([</span><span class="s1">&#39;dir1&#39;</span><span class="p">,</span> <span class="s1">&#39;dir2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The following code clears directories beginning with <code class="docutils literal notranslate"><span class="pre">dir</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clear_dir</span><span class="p">([</span><span class="s1">&#39;dir*&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">unzip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zip_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Unzips file <code class="docutils literal notranslate"><span class="pre">zip_path</span></code> to directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zip_path</strong> (<em>str</em>) – Path of file to unzip.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em>) – Directory to write outputs of unzipped file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">zip_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zip_dest</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Zips directory <code class="docutils literal notranslate"><span class="pre">source_dir</span></code> to file <code class="docutils literal notranslate"><span class="pre">zip_dest</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_dir</strong> (<em>str</em>) – Path of directory to zip.</p></li>
+<li><p><strong>zip_dest</strong> (<em>str</em>) – Destination of zip file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Matthew Gentzkow.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

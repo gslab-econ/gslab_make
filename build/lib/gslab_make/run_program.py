@@ -685,7 +685,7 @@ def run_r(paths, program, **kwargs):
         error_message = format_message(error_message) 
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
         raise ColoredError(error_message, traceback.format_exc())
-        
+
 def run_julia(paths, program, **kwargs):
     """.. Run Julia script using system command.
 
@@ -745,8 +745,6 @@ def run_julia(paths, program, **kwargs):
                                   **kwargs)
 
         # Execute
-        command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program, direct.args)
-
         command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)
         exit_code, stderr = direct.execute_command(command)
         direct.write_log()      
@@ -761,7 +759,6 @@ def run_julia(paths, program, **kwargs):
         error_message = format_message(error_message) 
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
         raise ColoredError(error_message, traceback.format_exc())
-
 
 
 def run_sas(paths, program, lst = '', **kwargs):
@@ -1149,6 +1146,8 @@ def run_module(root, module, build_script = 'make.py', osname = None, run_all=Tr
 
         if run_all:
             status = os.system('%s %s run_all' % (metadata.default_executables[osname]['python'], build_script))
+            os.chdir(os.path.normpath(os.getcwd() + os.sep + os.pardir))
+
         else: 
             status = os.system('%s %s' % (metadata.default_executables[osname]['python'], build_script))
 
