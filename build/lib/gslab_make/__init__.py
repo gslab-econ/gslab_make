@@ -43,7 +43,7 @@ from gslab_make.move_sources import (link_inputs, link_externals,
                                      copy_inputs, copy_externals)
 from gslab_make.run_program import (run_stata, run_matlab, run_perl, run_python, 
                                     run_jupyter, run_mathematica, run_stat_transfer, 
-                                    run_lyx, run_latex, run_r, run_sas, 
+                                    run_lyx, run_latex, run_r, run_julia, run_sas, 
                                     execute_command, run_module)
 
 from gslab_make.make_utility import (update_executables, update_external_paths, update_paths, update_internal_paths, copy_output)
