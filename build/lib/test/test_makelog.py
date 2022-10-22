@@ -48,14 +48,6 @@ class TestMakeLog(unittest.TestCase):
             end_makelog(paths)
             self.check_makelog(paths)
 
-    def test_makelog_character(self):     
-        with no_stderrout():
-            paths = self.make_paths(makelog_path = 'test/log/make_╬▓.log')
-            start_makelog(paths)
-            write_to_makelog(paths, 'Hello, World! ╬▓')
-            end_makelog(paths)
-            self.check_makelog(paths)
-
     def test_error_bad_paths(self):     
         with self.assertRaises(Exception):
             with no_stderrout():

@@ -685,7 +685,81 @@ def run_r(paths, program, **kwargs):
         error_message = format_message(error_message) 
         write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
         raise ColoredError(error_message, traceback.format_exc())
-        
+
+def run_julia(paths, program, **kwargs):
+    """.. Run Julia script using system command.
+
+    Runs script ``program`` using system command, with script specified 
+    in the form of ``script.jl``. Status messages are appended to file ``makelog``.
+
+    Parameters
+    ----------
+    paths : dict
+        Dictionary of paths. Dictionary should contain values for all keys listed below.
+    program : str
+        Path of script to run.
+
+    Path Keys
+    ---------
+    makelog : str
+        Path of makelog.
+
+    Note
+    ----
+    We recommend leaving all other parameters to their defaults.
+
+    Other Parameters
+    ----------------
+    osname : str, optional
+        Name of OS. Used to determine syntax of system command. Defaults to ``os.name``.
+    shell : `bool`, optional
+        See `here <https://docs.python.org/3/library/subprocess.html#frequently-used-arguments>`_. 
+        Defaults to ``True``.
+    log : str, optional
+        Path of program log. Program log is only written if specified. 
+        Defaults to ``''`` (i.e., not written). 
+    executable : str, optional
+        Executable to use for system command. 
+        Defaults to executable specified in :ref:`default settings<default settings>`.
+    option : str, optional
+        Options for system command. Defaults to options specified in :ref:`default settings<default settings>`.
+    args : str, optional
+        Not applicable.
+
+    Returns
+    -------
+    None
+
+    Example
+    -------
+    .. code-block:: python
+
+        run_julia(paths, program = 'script.jl')
+    """
+    
+    try:
+        makelog = get_path(paths, 'makelog')
+        direct = ProgramDirective(application = 'julia', 
+                                  program = program, 
+                                  makelog = makelog, 
+                                  **kwargs)
+
+        # Execute
+        command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, direct.program)
+        exit_code, stderr = direct.execute_command(command)
+        direct.write_log()      
+        if exit_code != 0:
+            error_message = 'Julia program executed with errors. Traceback can be found below.'
+            error_message = format_message(error_message, command)
+            raise ProgramError(error_message, stderr)
+    except ProgramError:
+        raise
+    except:
+        error_message = 'Error with `run_julia`. Traceback can be found below.' 
+        error_message = format_message(error_message) 
+        write_to_makelog(paths, error_message + '\n\n' + traceback.format_exc())
+        raise ColoredError(error_message, traceback.format_exc())
+
 
 def run_sas(paths, program, lst = '', **kwargs):
     """.. Run SAS script using system command.
@@ -1072,6 +1146,8 @@ def run_module(root, module, build_script = 'make.py', osname = None, run_all=Tr
 
         if run_all:
             status = os.system('%s %s run_all' % (metadata.default_executables[osname]['python'], build_script))
+            os.chdir(os.path.normpath(os.getcwd() + os.sep + os.pardir))
+
         else: 
             status = os.system('%s %s' % (metadata.default_executables[osname]['python'], build_script))
 

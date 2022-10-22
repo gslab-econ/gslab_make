@@ -50,13 +50,6 @@ class TestOutputLog(unittest.TestCase):
             log_files_in_output(paths)
             self.check_logs(paths)
 
-    def test_log_output_character(self):     
-        with no_stderrout():
-            paths = self.make_paths(output_path = 'test/raw/log_outputs/dir_╬▓')
-            log_files_in_output(paths)
-            self.check_makelog(paths)
-            self.assertIn('file_╬▓.txt', read_file(paths['output_statslog']))
-
     def test_log_output_space(self):     
         with no_stderrout():
             paths = self.make_paths(output_path = 'test/raw/log_outputs/dir space')

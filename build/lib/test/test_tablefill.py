@@ -27,13 +27,6 @@ class TestTablefill(unittest.TestCase):
 
         self.assertTrue(os.path.isfile('test/output/tablefill.lyx'))
     
-    def test_tablefill_character(self):
-        tablefill(template = 'test/raw/tablefill/tablefill_template_╬▓.lyx', 
-                  inputs   = ['test/raw/tablefill/tablefill_╬▓.txt'], 
-                  output   = 'test/output/tablefill_╬▓.lyx')
-
-        self.assertTrue(os.path.isfile('test/output/tablefill_╬▓.lyx'))
-
     def test_tablefill_space(self):
         tablefill(template = 'test/raw/tablefill/tablefill_template space.lyx', 
                   inputs   = ['test/raw/tablefill/tablefill space.txt'], 
