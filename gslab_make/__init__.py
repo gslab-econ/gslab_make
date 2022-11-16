@@ -50,7 +50,7 @@ from gslab_make.make_utility import (update_executables, update_external_paths, 
 from gslab_make.write_logs import (start_makelog, end_makelog, write_to_makelog,
                                    log_files_in_output)
 from gslab_make.write_source_logs import write_source_logs
-
+from gslab_make.write_version_logs import write_version_logs
 
 # Import fill tools
 from gslab_make.tablefill import tablefill
