@@ -48,6 +48,23 @@ This method of installation uses egg files rather than wheels, which can cause c
 python setup.py clean
 ```
 
+Remote Updates
+------------
+Our lab continually updates the `master` branch of `gslab_make` with additional features. Users who have installed a local version of `gslab_make` and are working with this library on their own independent packages will need to track and pull updates to the [`master`](https://github.com/gslab-econ/gslab_make) branch. Using older versions of this library without updating from `master` may lead to errors. 
+
+To update this library from its `master` branch, execute the following commands from the root of the project:
+
+```
+git submodule init
+git submodule update
+cd ~\lib\gslab_make
+git switch master
+git pull
+```
+
+One may then push these updates as a new commit to their own project repository.
+
+
 License
 -------
 See [here](https://github.com/gentzkow/gslab_make/blob/master/LICENSE.txt).
