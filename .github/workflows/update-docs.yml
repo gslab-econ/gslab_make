@@ -4,9 +4,9 @@ name: Update docs
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, issue59_jquery ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, issue59_jquery ]
 
 jobs:
   build:
