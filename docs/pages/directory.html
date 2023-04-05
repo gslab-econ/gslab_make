@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Directory functions &mdash; GSLab Make 2.0.0 documentation</title>
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> GSLab Make
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            GSLab Make
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,7 +76,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Directory functions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/pages/directory.rst.txt" rel="nofollow"> View page source</a>
@@ -93,13 +97,13 @@
 Safely removes symbolic links. Directories can be specified with the * shell pattern
 (see <a class="reference external" href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Shell-Pattern-Matching.html">here</a>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dir_list</strong> (<em>str</em><em>, </em><em>list</em>) – Directory or list of directories to remove.</p></li>
 <li><p><strong>quiet</strong> (<em>bool</em><em>, </em><em>optional</em>) – Suppress printing of directories removed. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -127,10 +131,10 @@ If the directory is nonexistent, the directory is created,
 unless the directory is specified via shell pattern.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>dir_list</strong> (<em>str</em><em>, </em><em>list</em>) – Directory or list of directories to clear.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -150,13 +154,13 @@ unless the directory is specified via shell pattern.</p>
 <span class="sig-name descname"><span class="pre">unzip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zip_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Unzips file <code class="docutils literal notranslate"><span class="pre">zip_path</span></code> to directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>zip_path</strong> (<em>str</em>) – Path of file to unzip.</p></li>
 <li><p><strong>output_dir</strong> (<em>str</em>) – Directory to write outputs of unzipped file.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -167,13 +171,13 @@ unless the directory is specified via shell pattern.</p>
 <span class="sig-name descname"><span class="pre">zip_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zip_dest</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Zips directory <code class="docutils literal notranslate"><span class="pre">source_dir</span></code> to file <code class="docutils literal notranslate"><span class="pre">zip_dest</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_dir</strong> (<em>str</em>) – Path of directory to zip.</p></li>
 <li><p><strong>zip_dest</strong> (<em>str</em>) – Destination of zip file.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>

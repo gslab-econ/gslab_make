@@ -55,7 +55,7 @@ class TestRunR(unittest.TestCase):
             run_function(paths, program = program_name)
             
         self.check_output(paths)
-
+    
     def test_program_space(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make space.log')

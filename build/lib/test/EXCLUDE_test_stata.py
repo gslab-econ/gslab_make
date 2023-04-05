@@ -53,7 +53,7 @@ class TestRunStata(unittest.TestCase):
             paths = self.make_paths()
             program_name = 'test/raw/run_program/%s_script.%s' % (self.app, self.ext)
             run_function(paths, program = program_name)
-            
+                        
         self.check_output(paths)
 
     def test_program_space(self):        

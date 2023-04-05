@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tablefill &mdash; GSLab Make 2.0.0 documentation</title>
@@ -29,18 +29,22 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> GSLab Make
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            GSLab Make
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../specifying_paths.html">Specifying paths</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../general_logging.html">General logging functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sourcing.html">Sourcing functions</a></li>
@@ -49,7 +53,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../utility.html">Utility functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../repository.html">Repository functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../directory.html">Directory functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../filling.html">Filling functions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../filling.html">Filling functions</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tablefill</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gslab_make.tablefill.tablefill"><code class="docutils literal notranslate"><span class="pre">tablefill()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -65,7 +75,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../filling.html">Filling functions</a></li>
       <li class="breadcrumb-item active">tablefill</li>
       <li class="wy-breadcrumbs-aside">
@@ -86,7 +96,7 @@
 Writes filled document to file <code class="docutils literal notranslate"><span class="pre">output</span></code>.
 Null characters in <code class="docutils literal notranslate"><span class="pre">inputs</span></code> are replaced with value <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inputs</strong> (<em>list</em>) – Input or list of inputs to fill into template.</p></li>
 <li><p><strong>template</strong> (<em>str</em>) – Path of template to fill.</p></li>
@@ -94,7 +104,7 @@ Null characters in <code class="docutils literal notranslate"><span class="pre">
 <li><p><strong>null</strong> (<em>str</em>) – Value to replace null characters (i.e., <code class="docutils literal notranslate"><span class="pre">''</span></code>, <code class="docutils literal notranslate"><span class="pre">'.'</span></code>, <code class="docutils literal notranslate"><span class="pre">'NA'</span></code>). Defaults to <code class="docutils literal notranslate"><span class="pre">'.'</span></code>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
