@@ -24,7 +24,7 @@ commands = {
          'matlab'   : '%s %s -r \"try run(\'%s\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)\" -logfile \"%s\"',
          'perl'     : '%s %s \"%s\" %s',
          'python'   : '%s %s \"%s\" %s',
-         'julia '    : '%s %s \"%s\"',
+         'julia'    : '%s %s \"%s\"',
          'r'        : '%s %s \"%s\"',
          'sas'      : '%s %s -log -print %s',
          'st'       : '%s \"%s\"',
@@ -40,7 +40,7 @@ commands = {
          'matlab'   : '%s %s -r \"try run(\'%s\'); catch e, fprintf(getReport(e)), exit(1); end; exit(0)\" -logfile \"%s\"',
          'perl'     : '%s %s \"%s\" %s',
          'python'   : '%s %s \"%s\" %s',
-         'julia'    : '%s %s \"%s\"'
+         'julia'    : '%s %s \"%s\"',
          'r'        : '%s %s \"%s\"',
          'sas'      : '%s %s -log -print %s',
          'st'       : '%s \"%s\"',

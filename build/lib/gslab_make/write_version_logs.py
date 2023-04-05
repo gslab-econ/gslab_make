@@ -37,10 +37,8 @@ def write_version_logs(paths):
         python_executable = sys.executable
      # Check if currently in a conda env
         if 'conda' in python_executable:
-            if "active environment : None" not in str(subprocess.run(['conda', 'info'], 
-            capture_output=True)):  
-                conda_list= subprocess.run(['conda', 'list'], 
-                            capture_output=True, text=True).stdout
+            if "active environment : None" not in str(subprocess.run(['conda', 'info'], capture_output=True)):  
+                conda_list= subprocess.run(['conda', 'list'], capture_output=True, text=True).stdout
                 versions_log = norm_path(versions_log)
 
                 with io.open(versions_log, 'w', encoding = 'utf8', errors = 'ignore') as CONDALOG:

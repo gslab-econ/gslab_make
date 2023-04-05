@@ -750,7 +750,7 @@ def run_julia(paths, program, **kwargs):
         direct.write_log()      
         if exit_code != 0:
             error_message = 'Julia program executed with errors. Traceback can be found below.'
-            error_message = format_message(error_message, command)
+            error_message = format_message(error_message)
             raise ProgramError(error_message, stderr)
     except ProgramError:
         raise
