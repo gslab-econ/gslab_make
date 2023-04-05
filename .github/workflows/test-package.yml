@@ -4,9 +4,9 @@ name: Test package
 
 on:
   push:
-    branches: [ master, issue59_jquery ]
+    branches: [ master ]
   pull_request:
-    branches: [ master, issue59_jquery ]
+    branches: [ master ]
 
 jobs:
   build:
