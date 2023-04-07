@@ -79,7 +79,7 @@ class TestLinkInputs(unittest.TestCase):
             paths = self.make_paths()
             self.move_function(paths, ['test/raw/move_sources/move_wildcar*.txt'])
             self.check_move(paths)
-            
+
     def test_move_space(self):        
         with no_stderrout():
             paths = self.make_paths(makelog_path = 'test/log/make space.log')

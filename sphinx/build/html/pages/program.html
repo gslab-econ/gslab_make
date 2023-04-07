@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Program functions &mdash; GSLab Make 2.0.0 documentation</title>
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> GSLab Make
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            GSLab Make
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,7 +89,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Program functions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/pages/program.rst.txt" rel="nofollow"> View page source</a>
@@ -165,13 +169,13 @@
 <dd><p>Runs script <code class="docutils literal notranslate"><span class="pre">program</span></code> using system command, with script specified
 in the form of <code class="docutils literal notranslate"><span class="pre">script.do</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -186,7 +190,7 @@ corresponding log file with different names. Some versions of Stata truncate the
 name to everything before the first space of the do-file name.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -199,7 +203,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -215,13 +219,13 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <dd><p>Runs script <code class="docutils literal notranslate"><span class="pre">program</span></code> using system command, with script specified
 in the form of <code class="docutils literal notranslate"><span class="pre">script.m</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -230,7 +234,7 @@ in the form of <code class="docutils literal notranslate"><span class="pre">scri
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – <p>See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -244,7 +248,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -260,13 +264,13 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <dd><p>Runs script <code class="docutils literal notranslate"><span class="pre">program</span></code> using system command, with script specified
 in the form of <code class="docutils literal notranslate"><span class="pre">script.pl</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -275,7 +279,7 @@ in the form of <code class="docutils literal notranslate"><span class="pre">scri
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – <p>See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -289,7 +293,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Arguments for system command. Defaults to no arguments.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -305,13 +309,13 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <dd><p>Runs script <code class="docutils literal notranslate"><span class="pre">program</span></code> using system command, with script specified
 in the form of <code class="docutils literal notranslate"><span class="pre">script.py</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -320,7 +324,7 @@ in the form of <code class="docutils literal notranslate"><span class="pre">scri
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – <p>See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -334,7 +338,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Arguments for system command. Defaults to no arguments.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -351,13 +355,13 @@ Defaults to executable specified in <a class="reference internal" href="#default
 in the form of <code class="docutils literal notranslate"><span class="pre">notebook.ipynb</span></code>.
 Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -366,7 +370,7 @@ Status messages are appended to file <code class="docutils literal notranslate">
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>timeout</strong> (<em>int</em><em>, </em><em>optional</em>) – Time to wait (in seconds) to finish executing a cell before raising exception.
 Defaults to no timeout.</p></li>
@@ -375,7 +379,7 @@ Defaults to no timeout.</p></li>
 Defaults to <code class="docutils literal notranslate"><span class="pre">''</span></code> (i.e., kernel specified in notebook).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -391,13 +395,13 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">''</spa
 <dd><p>Runs script <code class="docutils literal notranslate"><span class="pre">program</span></code> using system command, with script specified
 in the form of <code class="docutils literal notranslate"><span class="pre">script.m</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -406,7 +410,7 @@ in the form of <code class="docutils literal notranslate"><span class="pre">scri
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – <p>See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -420,7 +424,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -437,13 +441,13 @@ Defaults to executable specified in <a class="reference internal" href="#default
 in the form of <code class="docutils literal notranslate"><span class="pre">script.stc</span></code> or <code class="docutils literal notranslate"><span class="pre">script.stcmd</span></code>.
 Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -452,7 +456,7 @@ Status messages are appended to file <code class="docutils literal notranslate">
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – <p>See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -466,7 +470,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -483,7 +487,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 in the form of <code class="docutils literal notranslate"><span class="pre">script.lyx</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.
 PDF outputs are written in directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
@@ -492,7 +496,7 @@ All other strings will default to standard document type.
 Defaults to <code class="docutils literal notranslate"><span class="pre">''</span></code> (i.e., standard document type).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
 <li><p><strong>output_dir</strong> (<em>str</em>) – Directory to write PDFs.</p></li>
@@ -504,7 +508,7 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">''</spa
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – <p>See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -518,7 +522,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -535,13 +539,13 @@ Defaults to executable specified in <a class="reference internal" href="#default
 in the form of <code class="docutils literal notranslate"><span class="pre">script.tex</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.
 PDF outputs are written in directory <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
 <li><p><strong>output_dir</strong> (<em>str</em>) – Directory to write PDFs.</p></li>
@@ -557,7 +561,7 @@ PDF outputs are written in directory <code class="docutils literal notranslate">
 <p>This function creates and removes a directory named <code class="docutils literal notranslate"><span class="pre">latex_auxiliary_dir</span></code>.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – <p>See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -571,7 +575,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -587,13 +591,13 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <dd><p>Runs script <code class="docutils literal notranslate"><span class="pre">program</span></code> using system command, with script specified
 in the form of <code class="docutils literal notranslate"><span class="pre">script.R</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -602,7 +606,7 @@ in the form of <code class="docutils literal notranslate"><span class="pre">scri
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – <p>See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -616,7 +620,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -632,7 +636,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <dd><p>Runs script <code class="docutils literal notranslate"><span class="pre">program</span></code> using system command, with script specified
 in the form of <code class="docutils literal notranslate"><span class="pre">script.sas</span></code>. Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>program</strong> (<em>str</em>) – Path of script to run.</p></li>
@@ -640,7 +644,7 @@ in the form of <code class="docutils literal notranslate"><span class="pre">scri
 Defaults to <code class="docutils literal notranslate"><span class="pre">''</span></code> (i.e., not written).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -649,7 +653,7 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">''</spa
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to determine syntax of system command. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p></li>
 <li><p><strong>shell</strong> (<cite>bool</cite>, optional) – <p>See <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#frequently-used-arguments">here</a>.
@@ -663,7 +667,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 <li><p><strong>args</strong> (<em>str</em><em>, </em><em>optional</em>) – Not applicable.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -680,7 +684,7 @@ Defaults to executable specified in <a class="reference internal" href="#default
 Outputs are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code> and written to system command log file <code class="docutils literal notranslate"><span class="pre">log</span></code>.
 Status messages are appended to file <code class="docutils literal notranslate"><span class="pre">makelog</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.</p></li>
 <li><p><strong>command</strong> (<em>str</em>) – System command to run.</p></li>
@@ -691,7 +695,7 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">True</s
 Defaults to <code class="docutils literal notranslate"><span class="pre">''</span></code> (i.e., not written).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p>
 </dd>
 </dl>
@@ -700,10 +704,10 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">''</spa
 <p>We recommend leaving all other parameters to their defaults.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>osname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of OS. Used to check if OS is supported. Defaults to <code class="docutils literal notranslate"><span class="pre">os.name</span></code>.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -721,7 +725,7 @@ and appends outputs and/or status messages to <code class="docutils literal notr
 <span class="sig-name descname"><span class="pre">run_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build_script</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'make.py'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">osname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Runs script <cite>build_script</cite> in module directory <cite>module</cite> relative to root of repository <cite>root</cite>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>root</strong> (<em>str</em>) – Directory of root.</p></li>
 <li><p><strong>module</strong> (<em>str</em>) – Name of module.</p></li>
@@ -730,7 +734,7 @@ and appends outputs and/or status messages to <code class="docutils literal notr
 <li><p><strong>run_all</strong> (<em>bool</em>) – If being run from the root. Will make it so doesn’t recheck conda status.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>

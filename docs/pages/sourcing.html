@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sourcing functions &mdash; GSLab Make 2.0.0 documentation</title>
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> GSLab Make
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            GSLab Make
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,7 +76,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Sourcing functions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/pages/sourcing.rst.txt" rel="nofollow"> View page source</a>
@@ -112,23 +116,23 @@ Destinations and their sources can also be specified with the * shell pattern.
 The number of wildcards must be the same for both destinations and sources.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.
 Dictionary additionally used to string format linking instructions.</p></li>
 <li><p><strong>file_list</strong> (<em>str</em><em>, </em><em>list</em>) – File or list of files containing linking instructions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>input_dir</strong> (<em>str</em>) – Directory to write symlinks.</p></li>
 <li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>source_map</strong> – List of (source, destination) for each symlink created.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list</p>
 </dd>
 </dl>
@@ -206,23 +210,23 @@ Destinations and their sources can also be specified with the * shell pattern.
 The number of wildcards must be the same for both destinations and sources.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.
 Dictionary additionally used to string format linking instructions.</p></li>
 <li><p><strong>file_list</strong> (<em>str</em><em>, </em><em>list</em>) – File or list of files containing linking instructions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>external_dir</strong> (<em>str</em>) – Directory to write symlinks.</p></li>
 <li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>source_map</strong> – List of (source, destination) for each symlink created.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list</p>
 </dd>
 </dl>
@@ -296,23 +300,23 @@ Destinations and their sources can also be specified with the * shell pattern.
 The number of wildcards must be the same for both destinations and sources.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.
 Dictionary additionally used to string format copying instructions.</p></li>
 <li><p><strong>file_list</strong> (<em>str</em><em>, </em><em>list</em>) – File or list of files containing copying instructions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>input_dir</strong> (<em>str</em>) – Directory to write copies.</p></li>
 <li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>source_map</strong> – List of (source, destination) for each copy created.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list</p>
 </dd>
 </dl>
@@ -386,23 +390,23 @@ Destinations and their sources can also be specified with the * shell pattern.
 The number of wildcards must be the same for both destinations and sources.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of paths. Dictionary should contain values for all keys listed below.
 Dictionary additionally used to string format copying instructions.</p></li>
 <li><p><strong>file_list</strong> (<em>str</em><em>, </em><em>list</em>) – File or list of files containing copying instructions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Path Keys</dt>
+<dt class="field-even">Path Keys<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>external_dir</strong> (<em>str</em>) – Directory to write copies.</p></li>
 <li><p><strong>makelog</strong> (<em>str</em>) – Path of makelog.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>source_map</strong> – List of (source, destination) for each copy created.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list</p>
 </dd>
 </dl>
