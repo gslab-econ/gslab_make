@@ -24,7 +24,7 @@ pip install git+https://git@github.com/gentzkow/gslab_make.git@master
 ```
 which are the SSH and HTTPS protocol versions, respectively.
 
-The package at any tagged release, branch, or commit can be installed with the same commands, just changing `master` to the desired target; e.g., 
+The package at any tagged release, branch, or commit can be installed with the same commands, just changing `master` to the desired target; e.g.,
 ```
 pip install git+ssh://git@github.com/gentzkow/gslab_make.git@<tag, branch name, or commit hash>
 ```
