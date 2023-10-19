@@ -282,9 +282,18 @@ def run_latex(paths, program, **kwargs):
         # Generate folder for auxiliary files
         os.mkdir('latex_auxiliary_dir')
         
+        # Shift path if necessary
+        original_dir = os.getcwd()
+        program_dir = os.path.dirname(program)
+        if program_dir:
+            os.chdir(program_dir)
+        temp_depth = len([p for p in program_dir.split(os.path.sep) if p])
+        back_original_dir = os.path.sep.join(['..'] * temp_depth) + os.path.sep if temp_depth else ''
+
         # Execute
-        command = metadata.commands[direct.osname][direct.application] % (direct.executable, direct.option, temp_program)
+        command = metadata.commands[direct.osname][direct.application] % (direct.executable, back_original_dir, direct.option, temp_program)
         exit_code, stderr = direct.execute_command(command)
+        os.chdir(original_dir)
         direct.write_log()
         if exit_code != 0:
             error_message = 'LaTeX program executed with errors. Traceback can be found below.'
