@@ -280,6 +280,9 @@ def run_latex(paths, program, **kwargs):
         temp_program = direct.program
 
         # Generate folder for auxiliary files
+        if os.path.exists('latex_auxiliary_dir'):
+            # If it exists, remove the directory and its contents
+            shutil.rmtree('latex_auxiliary_dir')
         os.mkdir('latex_auxiliary_dir')
         
         # Shift path if necessary
