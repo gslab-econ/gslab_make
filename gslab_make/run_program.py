@@ -8,6 +8,11 @@ import sys
 import shutil
 import traceback
 import fileinput
+import subprocess
+import platform
+
+if platform.system() == 'Windows':
+    import win32com.client
 
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
@@ -1038,7 +1043,137 @@ def _check_stata_output(output):
         error_message = 'Stata program executed with errors.'
         error_message = format_message(error_message)
         raise ProgramError(error_message, 'See makelog for more detail.')
+    
+def install_pdf_crop_margins():
+    """.. Check if pdf-crop-margins is installed and install it if it's not."""
+    try:
+        subprocess.run(["pdf-crop-margins", "--version"], check=True)
+        print("pdf-crop-margins is installed.")
+    except subprocess.CalledProcessError as e:
+        print("pdf-crop-margins is not installed. Please install it.")
+    except FileNotFoundError:
+        print("pdf-crop-margins not found. Installing it now...")
+        try:
+            subprocess.run(["pip", "install", "pdfCropMargins"], check=True)
+            print("pdf-crop-margins has been successfully installed.")
+        except subprocess.CalledProcessError as e:
+            print("An error occurred while trying to install pdf-crop-margins. Please install it manually.")
+    
+def run_excel(paths, template, **kwargs):
+
+    """
+    Convert Excel template file to PDF using Microsoft Excel's native functionality.
+    
+    Converts Excel document specified by `template` to a PDF file. The resulting PDF
+    will be saved in the `output_dir` specified within the `paths` dictionary.
+    
+    Parameters
+    ----------
+    paths : dict
+        Dictionary of paths. Should contain 'makelog' and 'output_dir' keys with
+        corresponding values.
+    template : str
+        Name of the Excel file to convert, expected to be in the `output_dir`.
+    
+    Other Parameters
+    ----------------
+    osname : str, optional
+        Name of the operating system. Used to determine the method of conversion.
+        Defaults to the system's actual OS name.
+    shell : bool, optional
+        If using subprocess, determines whether to use the shell.
+        Defaults to False.
+    log : str, optional
+        Path to a log file where the function should append status messages.
+    
+    Returns
+    -------
+    None
+    
+    Example
+    -------
+    .. code-block:: python
+    
+        paths = {
+            'makelog': 'path/to/makelog.txt',
+            'output_dir': 'path/to/output'
+        }
         
+        run_excel(paths, template='example.xlsx')
+    
+    """
+
+    try:
+
+        # Install PDF crop margins if not available.
+        install_pdf_crop_margins()
+
+        # Extract the relevant paths
+        makelog = paths.get('makelog', '')
+        output_dir = paths['output_dir']
+
+        # Ensure template is an Excel file
+        if not template.endswith(('.xlsx', '.xls')):
+            raise ValueError("Input must be an Excel file ending with .xls or .xlsx")
+
+        # Full path to the Excel template file and the output PDF
+        excel_file_path = os.path.join(output_dir, template)
+        pdf_output_path = excel_file_path.rsplit('.', 1)[0] + '.pdf'
+
+        # Determine the operating system
+        osname = kwargs.get('osname', platform.system())
+        shell = kwargs.get('shell', False)
+
+        # Excel to PDF conversion
+        if osname == 'Darwin':  # macOS
+            # Prepare the AppleScript command
+            applescript_command = '''
+            tell application "Microsoft Excel"
+                set theWorkbook to open "{0}"
+                set theSheet to item 2 of the sheets of theWorkbook
+                tell theSheet
+                    save as this format PDF file format in "{1}"
+                end tell
+                close theWorkbook saving no
+            end tell
+            '''.format(excel_file_path, pdf_output_path)
+            # Execute the AppleScript command
+            subprocess.run(["osascript", "-e", applescript_command], shell=shell)
+
+        elif osname == 'Windows':
+            # Start an instance of Excel
+            excel_app = win32com.client.DispatchEx("Excel.Application")
+            # Open the Excel file
+            workbook = excel_app.Workbooks.Open(excel_file_path)
+            # Select the second sheet
+            worksheet = workbook.Worksheets[2]
+            # Set the active sheet
+            excel_app.ActiveSheet = worksheet
+            # Save the active sheet to a PDF
+            worksheet.ExportAsFixedFormat(0, pdf_output_path)
+            # Close the workbook without saving changes
+            workbook.Close(SaveChanges=False)
+            # Quit Excel
+            excel_app.Quit()
+
+        else:
+            raise ValueError("Unsupported OS type. Function supports 'Darwin' (macOS) and 'Windows' OS names.")
+
+        # Optionally write to a log file
+        if 'log' in kwargs:
+            with open(kwargs['log'], 'a') as log_file:
+                log_file.write(f"Successfully converted {template} to PDF.\n")
+
+        # Trim the PDF intelligently to focus on content (likely the table)
+        subprocess.run(["pdf-crop-margins", "-p", "0", "-a", "-6", pdf_output_path, "-o", pdf_output_path])
+
+    except Exception as e:
+        error_message = f"Error in `run_excel` for {template}: {e}\n"
+        if makelog:
+            with open(makelog, 'a') as makelog_file:
+                makelog_file.write(error_message)
+        print(error_message)
+        raise RuntimeError(error_message) 
 
 def execute_command(paths, command, **kwargs):
     """.. Run system command.
