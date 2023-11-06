@@ -1059,10 +1059,9 @@ def install_pdf_crop_margins():
         except subprocess.CalledProcessError as e:
             print("An error occurred while trying to install pdf-crop-margins. Please install it manually.")
     
-def run_excel(paths, template, **kwargs):
+def run_excel(template, **kwargs):
 
-    """
-    Convert Excel template file to PDF using Microsoft Excel's native functionality.
+    """.. Convert Excel template file to PDF using Microsoft Excel's native functionality.
     
     Converts Excel document specified by `template` to a PDF file. The resulting PDF
     will be saved in the `output_dir` specified within the `paths` dictionary.
@@ -1099,46 +1098,57 @@ def run_excel(paths, template, **kwargs):
             'output_dir': 'path/to/output'
         }
         
-        run_excel(paths, template='example.xlsx')
+        run_excel(template='example.xlsx')
     
     """
-
+    
     try:
-
-        # Install PDF crop margins if not available.
-        install_pdf_crop_margins()
-
-        # Extract the relevant paths
-        makelog = paths.get('makelog', '')
-        output_dir = paths['output_dir']
-
         # Ensure template is an Excel file
         if not template.endswith(('.xlsx', '.xls')):
             raise ValueError("Input must be an Excel file ending with .xls or .xlsx")
 
-        # Full path to the Excel template file and the output PDF
-        excel_file_path = os.path.join(output_dir, template)
-        pdf_output_path = excel_file_path.rsplit('.', 1)[0] + '.pdf'
+                # Get the directory of the calling script
+        script_caller_dir = os.getcwd()  # This gets the current working directory
+
+        # Calculate the paths relative to the script location
+        output_dir = os.path.join(script_caller_dir, 'output')
+
+        # Construct the full paths to the files
+        excel_file_path = os.path.join(script_caller_dir, 'code', template)
+        pdf_file_name = os.path.splitext(template)[0] + '.pdf'
+        pdf_output_path = os.path.join(output_dir, pdf_file_name)
 
         # Determine the operating system
-        osname = kwargs.get('osname', platform.system())
+        osname = platform.system()
         shell = kwargs.get('shell', False)
 
         # Excel to PDF conversion
         if osname == 'Darwin':  # macOS
+            # Convert to POSIX path format
+            posix_excel_file_path = excel_file_path.replace(os.sep, '/')
+            posix_pdf_output_path = pdf_output_path.replace(os.sep, '/')
+
             # Prepare the AppleScript command
-            applescript_command = '''
+            applescript_command = f'''
             tell application "Microsoft Excel"
-                set theWorkbook to open "{0}"
+                try
+                    set theWorkbook to open POSIX file "{posix_excel_file_path}"
+                on error errMsg number errorNumber
+                    return "Error " & errorNumber & ": " & errMsg
+                end try
                 set theSheet to item 2 of the sheets of theWorkbook
                 tell theSheet
-                    save as this format PDF file format in "{1}"
+                    save as PDF in POSIX file "{posix_pdf_output_path}"
                 end tell
                 close theWorkbook saving no
             end tell
-            '''.format(excel_file_path, pdf_output_path)
+            '''
             # Execute the AppleScript command
-            subprocess.run(["osascript", "-e", applescript_command], shell=shell)
+            process = subprocess.run(["osascript", "-e", applescript_command], capture_output=True, text=True, shell=shell)
+            
+            if process.returncode != 0:
+                print(f"AppleScript Error: {process.stderr}")
+                raise Exception(f"AppleScript Error: {process.stderr}")
 
         elif osname == 'Windows':
             # Start an instance of Excel
@@ -1147,8 +1157,6 @@ def run_excel(paths, template, **kwargs):
             workbook = excel_app.Workbooks.Open(excel_file_path)
             # Select the second sheet
             worksheet = workbook.Worksheets[2]
-            # Set the active sheet
-            excel_app.ActiveSheet = worksheet
             # Save the active sheet to a PDF
             worksheet.ExportAsFixedFormat(0, pdf_output_path)
             # Close the workbook without saving changes
@@ -1169,11 +1177,8 @@ def run_excel(paths, template, **kwargs):
 
     except Exception as e:
         error_message = f"Error in `run_excel` for {template}: {e}\n"
-        if makelog:
-            with open(makelog, 'a') as makelog_file:
-                makelog_file.write(error_message)
         print(error_message)
-        raise RuntimeError(error_message) 
+        raise RuntimeError(error_message)
 
 def execute_command(paths, command, **kwargs):
     """.. Run system command.
