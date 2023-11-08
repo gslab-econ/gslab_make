@@ -1059,7 +1059,7 @@ def install_pdf_crop_margins():
         except subprocess.CalledProcessError as e:
             print("An error occurred while trying to install pdf-crop-margins. Please install it manually.")
     
-def run_excel(template, **kwargs):
+def run_excel(paths, template, **kwargs):
 
     """.. Convert Excel template file to PDF using Microsoft Excel's native functionality.
     
@@ -1098,16 +1098,23 @@ def run_excel(template, **kwargs):
             'output_dir': 'path/to/output'
         }
         
-        run_excel(template='example.xlsx')
+        run_excel(PATHS, template='example.xlsx')
     
     """
     
     try:
+
+       # Install PDF crop margins if not available.
+        install_pdf_crop_margins()
+
+        # Extract the relevant paths
+        makelog = paths.get('makelog', '')
+
         # Ensure template is an Excel file
         if not template.endswith(('.xlsx', '.xls')):
             raise ValueError("Input must be an Excel file ending with .xls or .xlsx")
 
-                # Get the directory of the calling script
+        # Get the directory of the calling script
         script_caller_dir = os.getcwd()  # This gets the current working directory
 
         # Calculate the paths relative to the script location
@@ -1124,28 +1131,55 @@ def run_excel(template, **kwargs):
 
         # Excel to PDF conversion
         if osname == 'Darwin':  # macOS
+
             # Convert to POSIX path format
             posix_excel_file_path = excel_file_path.replace(os.sep, '/')
             posix_pdf_output_path = pdf_output_path.replace(os.sep, '/')
 
+            write_to_makelog(paths, posix_excel_file_path)
+            write_to_makelog(paths, posix_pdf_output_path)
+
             # Prepare the AppleScript command
             applescript_command = f'''
+
+            set excel_file_path to "{posix_excel_file_path}"
+            set pdf_output_path to "{posix_pdf_output_path}"
+
             tell application "Microsoft Excel"
-                try
-                    set theWorkbook to open POSIX file "{posix_excel_file_path}"
-                on error errMsg number errorNumber
-                    return "Error " & errorNumber & ": " & errMsg
-                end try
-                set theSheet to item 2 of the sheets of theWorkbook
-                tell theSheet
-                    save as PDF in POSIX file "{posix_pdf_output_path}"
+                
+                activate
+
+                -- Suppress alerts to avoid confirmation dialogs
+                set display alerts to false
+                
+                -- Open the workbook
+                open excel_file_path
+                
+                -- Delete the raw input sheet
+                delete sheet 1 of active workbook
+                set theSheet to sheet 1 of active workbook
+                
+                -- Set margins of the second sheet
+                tell page setup object of theSheet
+                    set page orientation to landscape
+                    set zoom to false
+                    set fit to pages wide to 1
+                    set fit to pages tall to 9999
                 end tell
-                close theWorkbook saving no
+                
+                -- Export the second sheet as a PDF
+                save as theSheet filename pdf_output_path file format PDF file format
+                
+                -- Close the workbook without saving
+                close active workbook saving no
+                
             end tell
+
             '''
+
             # Execute the AppleScript command
             process = subprocess.run(["osascript", "-e", applescript_command], capture_output=True, text=True, shell=shell)
-            
+
             if process.returncode != 0:
                 print(f"AppleScript Error: {process.stderr}")
                 raise Exception(f"AppleScript Error: {process.stderr}")
@@ -1172,11 +1206,15 @@ def run_excel(template, **kwargs):
             with open(kwargs['log'], 'a') as log_file:
                 log_file.write(f"Successfully converted {template} to PDF.\n")
 
-        # Trim the PDF intelligently to focus on content (likely the table)
-        subprocess.run(["pdf-crop-margins", "-p", "0", "-a", "-6", pdf_output_path, "-o", pdf_output_path])
+        temp_pdf_output_path = pdf_output_path.replace('.pdf', '_temp.pdf')
+        subprocess.run(["pdf-crop-margins", "-p", "0", "-a", "-6", pdf_output_path, "-o", temp_pdf_output_path])
+        os.replace(temp_pdf_output_path, pdf_output_path)
 
     except Exception as e:
         error_message = f"Error in `run_excel` for {template}: {e}\n"
+        if makelog:
+            with open(makelog, 'a') as makelog_file:
+                makelog_file.write(error_message)
         print(error_message)
         raise RuntimeError(error_message)
 
