@@ -10,6 +10,8 @@ import traceback
 import fileinput
 import subprocess
 import platform
+import pandas as pd
+import openpyxl
 
 if platform.system() == 'Windows':
     import win32com.client
@@ -1047,20 +1049,58 @@ def _check_stata_output(output):
 def install_pdf_crop_margins():
     """.. Check if pdf-crop-margins is installed and install it if it's not."""
     try:
-        subprocess.run(["pdf-crop-margins", "--version"], check=True)
-        print("pdf-crop-margins is installed.")
+        subprocess.run(["pdf-crop-margins", "--version"], stdout = subprocess.DEVNULL, stderr = subprocess.DEVNULL)
     except subprocess.CalledProcessError as e:
         print("pdf-crop-margins is not installed. Please install it.")
     except FileNotFoundError:
         print("pdf-crop-margins not found. Installing it now...")
         try:
-            subprocess.run(["pip", "install", "pdfCropMargins"], check=True)
+            subprocess.run(["pip", "install", "pdfCropMargins"], stdout = subprocess.DEVNULL, stderr = subprocess.DEVNULL)
             print("pdf-crop-margins has been successfully installed.")
         except subprocess.CalledProcessError as e:
             print("An error occurred while trying to install pdf-crop-margins. Please install it manually.")
-    
-def run_excel(paths, template, **kwargs):
 
+def write_excel_scalars(template, scalar = False):
+
+    if scalar:
+        pass
+
+    elif not scalar:
+
+        if not os.path.exists(template) or not template.endswith('.xlsx'):
+            raise FileNotFoundError(f"Template file '{template}' not found or is not an xlsx file.")
+
+        if not os.path.exists(scalar) or not scalar.endswith('.xlsx'):
+            raise FileNotFoundError(f"Scalar file '{scalar}' not found or is not an xlsx file.")
+
+        try:
+            # Load the scalar data into a DataFrame without treating the first row as headers
+            scalar_df = pd.read_excel(scalar, sheet_name = 0, header = None)
+
+            # Load the template workbook
+            book = openpyxl.load_workbook(template)
+
+            # Remove the first sheet if it exists
+            first_sheet_name = book.sheetnames[0]
+            if first_sheet_name in book.sheetnames:
+                del book[first_sheet_name]
+
+            # Create a new sheet at the first position
+            sheet = book.create_sheet(first_sheet_name, 0)
+
+            # Write DataFrame to the new sheet, starting from the first row
+            for r_idx, row in enumerate(scalar_df.values, start = 1):
+                for c_idx, value in enumerate(row, start = 1):
+                    sheet.cell(row = r_idx, column = c_idx, value = value)
+
+            # Save and close the workbook
+            book.save(template)
+            book.close()
+
+        except Exception as e:
+            raise RuntimeError(f"Error in `write_excel_scalars`: {e}")
+
+def run_excel(paths, template, scalar, **kwargs):
     """.. Convert Excel template file to PDF using Microsoft Excel's native functionality.
     
     Converts Excel document specified by `template` to a PDF file. The resulting PDF
@@ -1073,6 +1113,8 @@ def run_excel(paths, template, **kwargs):
         corresponding values.
     template : str
         Name of the Excel file to convert, expected to be in the `output_dir`.
+    scalar : str
+        Name of the scalar sheet to fill with the populated values from ~/analysis/output.
     
     Other Parameters
     ----------------
@@ -1098,110 +1140,113 @@ def run_excel(paths, template, **kwargs):
             'output_dir': 'path/to/output'
         }
         
-        run_excel(PATHS, template='example.xlsx')
+        run_excel(PATHS, template = 'tables/skeletons/example_table.xlsx', scalar = 'tables/scalars/example_scalar.xlsx')
     
     """
     
     try:
 
-       # Install PDF crop margins if not available.
+       # Install PDF crop margins if not available on local machine.
         install_pdf_crop_margins()
 
-        # Extract the relevant paths
+        # Extract the relevant paths.
         makelog = paths.get('makelog', '')
 
-        # Ensure template is an Excel file
+        # Ensure template skeleton is an Excel file.
         if not template.endswith(('.xlsx', '.xls')):
             raise ValueError("Input must be an Excel file ending with .xls or .xlsx")
 
-        # Get the directory of the calling script
-        script_caller_dir = os.getcwd()  # This gets the current working directory
+        # Get the directory of the calling script.
+        script_caller_dir = os.getcwd()
 
-        # Calculate the paths relative to the script location
+        # Construct file paths.
         output_dir = os.path.join(script_caller_dir, 'output')
-
-        # Construct the full paths to the files
-        excel_file_path = os.path.join(script_caller_dir, 'code', template)
+        skeleton_file_path = os.path.join(script_caller_dir, template)
         pdf_file_name = os.path.splitext(template)[0] + '.pdf'
         pdf_output_path = os.path.join(output_dir, pdf_file_name)
 
-        # Determine the operating system
+        # Populates template skeleton with scalar values.
+        if scalar != False:
+            scalar_file_path = os.path.join(script_caller_dir, scalar)
+            write_excel_scalars(skeleton_file_path, scalar_file_path)
+
+        # Determine the operating system of local machine.
         osname = platform.system()
         shell = kwargs.get('shell', False)
 
-        # Excel to PDF conversion
-        if osname == 'Darwin':  # macOS
+        # Compiles OS-specific (native) Excel to PDF conversion.
+        if osname == 'Darwin': # for macOS
 
-            # Convert to POSIX path format
-            posix_excel_file_path = excel_file_path.replace(os.sep, '/')
+            # Execute the AppleScript command to call Excel.
+            posix_skeleton_file_path = skeleton_file_path.replace(os.sep, '/')
             posix_pdf_output_path = pdf_output_path.replace(os.sep, '/')
-
-            write_to_makelog(paths, posix_excel_file_path)
+            write_to_makelog(paths, posix_skeleton_file_path)
             write_to_makelog(paths, posix_pdf_output_path)
 
-            # Prepare the AppleScript command
             applescript_command = f'''
 
-            set excel_file_path to "{posix_excel_file_path}"
+            set skeleton_file_path to "{posix_skeleton_file_path}"
             set pdf_output_path to "{posix_pdf_output_path}"
 
             tell application "Microsoft Excel"
                 
                 activate
 
-                -- Suppress alerts to avoid confirmation dialogs
+                -- Suppress alerts to avoid confirmation dialogs.
                 set display alerts to false
                 
-                -- Open the workbook
-                open excel_file_path
+                -- Open the workbook.
+                open skeleton_file_path
+
+                -- (Trying) to set the second sheet to be the active sheet of the Workbook.
+                -- tell skeleton_file_path
+                    -- set active sheet to sheet 2
+                -- end tell
                 
-                -- Delete the raw input sheet
-                delete sheet 1 of active workbook
-                set theSheet to sheet 1 of active workbook
-                
-                -- Set margins of the second sheet
-                tell page setup object of theSheet
+                -- Set margins of the active sheet.
+                tell page setup object of active sheet
                     set page orientation to landscape
                     set zoom to false
                     set fit to pages wide to 1
                     set fit to pages tall to 9999
                 end tell
                 
-                -- Export the second sheet as a PDF
-                save as theSheet filename pdf_output_path file format PDF file format
+                -- (Trying) to export the second sheet as a PDF.
+                save as active sheet filename pdf_output_path file format PDF file format -- as pdfs
+                -- alias pdf_output_path
+                -- save theSheet as filename pdf_output_path file format PDF file format with overwrite
+
+                -- Other attempts...
+                -- save as theSheet filename pdf_output_path file format PDF file format
+                -- save as theSheet filename pdf_output_path file format PDF file format --  as pdfs
                 
-                -- Close the workbook without saving
+                -- Close the workbook without saving.
                 close active workbook saving no
                 
             end tell
 
             '''
 
-            # Execute the AppleScript command
             process = subprocess.run(["osascript", "-e", applescript_command], capture_output=True, text=True, shell=shell)
 
             if process.returncode != 0:
                 print(f"AppleScript Error: {process.stderr}")
                 raise Exception(f"AppleScript Error: {process.stderr}")
 
-        elif osname == 'Windows':
-            # Start an instance of Excel
+        elif osname == 'Windows':  # for Windows
+
+            # Execute the Windows command to call Excel.
             excel_app = win32com.client.DispatchEx("Excel.Application")
-            # Open the Excel file
-            workbook = excel_app.Workbooks.Open(excel_file_path)
-            # Select the second sheet
+            workbook = excel_app.Workbooks.Open(skeleton_file_path)
             worksheet = workbook.Worksheets[2]
-            # Save the active sheet to a PDF
             worksheet.ExportAsFixedFormat(0, pdf_output_path)
-            # Close the workbook without saving changes
-            workbook.Close(SaveChanges=False)
-            # Quit Excel
+            workbook.Close(SaveChanges = False)
             excel_app.Quit()
 
         else:
             raise ValueError("Unsupported OS type. Function supports 'Darwin' (macOS) and 'Windows' OS names.")
 
-        # Optionally write to a log file
+        # Write to a log file (optional).
         if 'log' in kwargs:
             with open(kwargs['log'], 'a') as log_file:
                 log_file.write(f"Successfully converted {template} to PDF.\n")
@@ -1353,5 +1398,5 @@ def run_module(root, module, build_script = 'make.py', osname = None, run_all=Tr
 
 __all__ = ['run_stata', 'run_matlab', 'run_perl', 'run_python', 
            'run_jupyter', 'run_mathematica', 'run_stat_transfer', 
-           'run_lyx', 'run_latex', 'run_r', 'run_sas', 
+           'run_lyx', 'run_latex', 'run_r', 'run_excel' 'run_sas', 
            'execute_command', 'run_module']
