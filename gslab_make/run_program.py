@@ -1098,32 +1098,6 @@ def write_excel_scalars(template, scalar):
 
     except Exception as e:
         raise RuntimeError(f"Error in `write_excel_scalars`: {e}")
-        
-def paste_values(template):
-
-    # Load the template workbook.
-    book = openpyxl.load_workbook(template)
-    
-    # Get the second sheet.
-    second_sheet_name = book.sheetnames[1]
-    second_sheet = book[second_sheet_name]
-
-    # Paste the formula/linked values directly into the table.
-    book_data_only = openpyxl.load_workbook(template, data_only = True)
-    second_sheet_data_only = book_data_only[second_sheet_name]
-
-    # Iterate over the cells in the second sheet and set their values to the cached values.
-    for row in second_sheet.iter_rows():
-        for cell in row:
-            if cell.value and isinstance(cell.value, str) and cell.value.startswith('='):
-                # Get the cached value from the data_only version of the sheet.
-                corresponding_cell = second_sheet_data_only[cell.coordinate]
-                cell.value = corresponding_cell.value
-
-    # Save the workbook.
-    book.save(template)
-    book.close()
-
     
 def run_excel(paths, template, scalar, **kwargs):
     """.. Convert Excel template file to PDF using Microsoft Excel's native functionality.
@@ -1194,7 +1168,6 @@ def run_excel(paths, template, scalar, **kwargs):
             scalar_file_path = os.path.join(script_caller_dir, 'tables/scalars', scalar)
             write_to_makelog(paths, scalar_file_path)
             write_excel_scalars(skeleton_file_path, scalar_file_path)
-            # paste_values(skeleton_file_path)
 
         # Determine the operating system
         osname = platform.system()
@@ -1284,10 +1257,76 @@ def run_excel(paths, template, scalar, **kwargs):
         subprocess.run(["pdf-crop-margins", "-p", "0", "-a", "-6", pdf_output_path, "-o", temp_pdf_output_path])
         os.replace(temp_pdf_output_path, pdf_output_path)
 
-        applescript_command = f'''
+    except Exception as e:
+        error_message = f"Error in `run_excel` for {template}: {e}\n"
+        if makelog:
+            with open(makelog, 'a') as makelog_file:
+                makelog_file.write(error_message)
+        print(error_message)
+        raise RuntimeError(error_message)
+    
+def quit_excel(paths, **kwargs):
+    """.. Quits Excel using native application following PDF exports.
+    
+    Parameters
+    ----------
+    paths : dict
+        Dictionary of paths. Should contain 'makelog' and 'output_dir' keys with
+        corresponding values.
+    
+    Other Parameters
+    ----------------
+    osname : str, optional
+        Name of the operating system. Used to determine the method of conversion.
+        Defaults to the system's actual OS name.
+    shell : bool, optional
+        If using subprocess, determines whether to use the shell.
+        Defaults to False.
+    log : str, optional
+        Path to a log file where the function should append status messages.
+    
+    Returns
+    -------
+    None
+    
+    Example
+    -------
+    .. code-block:: python
+    
+        paths = {
+            'makelog': 'path/to/makelog.txt',
+            'output_dir': 'path/to/output'
+        }
+        
+        quit_excel(PATHS)
+    
+    """
 
-        '''
+    try:
 
+        # Extract the relevant paths
+        makelog = paths.get('makelog', '')
+
+        # Determine the operating system
+        osname = platform.system()
+        shell = kwargs.get('shell', False)
+
+        if osname == 'Darwin':  # macOS
+
+            # Prepare the AppleScript command
+            applescript_command = f'''
+            tell application "Microsoft Excel"
+                quit
+            end tell
+            '''
+
+            # Execute the AppleScript command
+            process = subprocess.run(["osascript", "-e", applescript_command], capture_output = True, text = True, shell = shell)
+
+            if process.returncode != 0:
+                print(f"AppleScript Error: {process.stderr}")
+                raise Exception(f"AppleScript Error: {process.stderr}")
+            
     except Exception as e:
         error_message = f"Error in `run_excel` for {template}: {e}\n"
         if makelog:
@@ -1432,4 +1471,4 @@ def run_module(root, module, build_script = 'make.py', osname = None, run_all=Tr
 __all__ = ['run_stata', 'run_matlab', 'run_perl', 'run_python', 
            'run_jupyter', 'run_mathematica', 'run_stat_transfer', 
            'run_lyx', 'run_latex', 'run_r', 'run_sas', 'run_excel',
-           'execute_command', 'run_module']
+           'quit_excel', 'execute_command', 'run_module']
