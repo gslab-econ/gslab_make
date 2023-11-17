@@ -1105,6 +1105,24 @@ def run_excel(paths, template, scalar, **kwargs):
     Converts Excel document specified by `template` to a PDF file. The resulting PDF
     will be saved in the `output_dir` specified within the `paths` dictionary.
     
+    ------------------------------
+    Instructions for first-time usage on macOS:
+    ------------------------------
+
+    For Mac Users: When first running this script, you must grant Microsoft Excel access to the folder
+    where the Excel files are located and where the PDFs will be saved (i.e. your local
+    repository). This is a one-time setup to allow the script to run without interruptions. You will
+    be notified by a pop-up window whether to grant these permissions. If you select "Yes", you can
+    check the status of permissions with the following steps:
+    
+    1. Open 'System Settings' from the Apple menu or search for it using Spotlight.
+    
+    2. Go to the 'Privacy & Security' tab.
+    
+    3. From the list on the right, choose 'Files and Folders', then navigate to the Microsoft Excel icon.
+    
+    4. In the associated dropdown, you should see the folders that you have granted Microsoft Excel access to.
+
     Parameters
     ----------
     paths : dict
@@ -1230,6 +1248,11 @@ def run_excel(paths, template, scalar, **kwargs):
             if process.returncode != 0:
                 print(f"AppleScript Error: {process.stderr}")
                 raise Exception(f"AppleScript Error: {process.stderr}")
+            
+            temp_files_path = os.path.join(script_caller_dir, 'tables/skeletons')
+            for filename in os.listdir(temp_files_path):
+                if filename.startswith('~$') and filename.endswith('.xlsx'):
+                    os.remove(os.path.join(temp_files_path, filename))
 
         elif osname == 'Windows':
             # Start an instance of Excel
