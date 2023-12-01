@@ -1099,7 +1099,7 @@ def write_excel_scalars(template, scalar):
     except Exception as e:
         raise RuntimeError(f"Error in `write_excel_scalars`: {e}")
     
-def run_excel(paths, template, scalar, **kwargs):
+def export_excel_tables(paths, template, scalar, **kwargs):
     """.. Convert Excel template file to PDF using Microsoft Excel's native functionality.
     
     Converts Excel document specified by `template` to a PDF file. The resulting PDF
@@ -1157,7 +1157,7 @@ def run_excel(paths, template, scalar, **kwargs):
             'output_dir': 'path/to/output'
         }
         
-        run_excel(PATHS, template = 'tables/skeletons/example_table.xlsx', scalar = 'tables/scalars/example_scalar.xlsx')
+        export_excel_tables(PATHS, template = 'tables/skeletons/example_table.xlsx', scalar = 'tables/scalars/example_scalar.xlsx')
     
     """
     
@@ -1281,7 +1281,7 @@ def run_excel(paths, template, scalar, **kwargs):
         os.replace(temp_pdf_output_path, pdf_output_path)
 
     except Exception as e:
-        error_message = f"Error in `run_excel` for {template}: {e}\n"
+        error_message = f"Error in `export_excel_tables` for {template}: {e}\n"
         if makelog:
             with open(makelog, 'a') as makelog_file:
                 makelog_file.write(error_message)
@@ -1351,7 +1351,7 @@ def quit_excel(paths, **kwargs):
                 raise Exception(f"AppleScript Error: {process.stderr}")
             
     except Exception as e:
-        error_message = f"Error in `run_excel` for {template}: {e}\n"
+        error_message = f"Error in `export_excel_tables` for {template}: {e}\n"
         if makelog:
             with open(makelog, 'a') as makelog_file:
                 makelog_file.write(error_message)
@@ -1493,5 +1493,5 @@ def run_module(root, module, build_script = 'make.py', osname = None, run_all=Tr
 
 __all__ = ['run_stata', 'run_matlab', 'run_perl', 'run_python', 
            'run_jupyter', 'run_mathematica', 'run_stat_transfer', 
-           'run_lyx', 'run_latex', 'run_r', 'run_sas', 'run_excel',
+           'run_lyx', 'run_latex', 'run_r', 'run_sas', 'export_excel_tables',
            'quit_excel', 'execute_command', 'run_module']
