@@ -1183,7 +1183,7 @@ def export_excel_tables(paths, template, scalar, **kwargs):
 
         # Populates template skeleton with scalar values.
         if scalar != False:
-            scalar_file_path = os.path.join(script_caller_dir, 'tables/scalars', scalar)
+            scalar_file_path = os.path.join(script_caller_dir, 'input/tables', scalar)
             write_to_makelog(paths, scalar_file_path)
             write_excel_scalars(skeleton_file_path, scalar_file_path)
 
