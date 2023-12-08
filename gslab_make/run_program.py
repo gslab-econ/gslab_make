@@ -1062,7 +1062,8 @@ def install_pdf_crop_margins():
             print("An error occurred while trying to install pdf-crop-margins. Please install it manually.")
 
 def write_excel_scalars(template, scalar):
-
+    """.. Populates scalars linked from `~/analysis/output` to `~/paper_slides/input` into the
+    relevant skeleton table (sheet 1)."""
     if not scalar:
         return
 
@@ -1099,7 +1100,7 @@ def write_excel_scalars(template, scalar):
     except Exception as e:
         raise RuntimeError(f"Error in `write_excel_scalars`: {e}")
     
-def export_excel_tables(paths, template, scalar, **kwargs):
+def export_excel_tables(paths, template, scalar, export = True, **kwargs):
     """.. Convert Excel template file to PDF using Microsoft Excel's native functionality.
     
     Converts Excel document specified by `template` to a PDF file. The resulting PDF
@@ -1132,6 +1133,8 @@ def export_excel_tables(paths, template, scalar, **kwargs):
         Name of the Excel file to convert, expected to be in the `output_dir`.
     scalar : str
         Name of the scalar sheet to fill with the populated values from ~/analysis/output.
+    export : bool
+        Whether to export the Excel file to PDF. Defaults to True.
     
     Other Parameters
     ----------------
@@ -1161,133 +1164,168 @@ def export_excel_tables(paths, template, scalar, **kwargs):
     
     """
     
-    try:
+    if export:
 
-       # Install PDF crop margins if not available.
-        install_pdf_crop_margins()
+        try:
 
-        # Extract the relevant paths
-        makelog = paths.get('makelog', '')
+            # Install PDF crop margins if not available.
+            install_pdf_crop_margins()
 
-        # Get the directory of the calling script
-        script_caller_dir = os.getcwd()  # This gets the current working directory
+            # Extract the relevant paths
+            makelog = paths.get('makelog', '')
 
-        # Calculate the paths relative to the script location
-        output_dir = os.path.join(script_caller_dir, 'output')
+            # Get the directory of the calling script
+            script_caller_dir = os.getcwd()  # This gets the current working directory
 
-        # Construct the full paths to the files
-        skeleton_file_path = os.path.join(script_caller_dir, 'tables/skeletons', template + '.xlsx')
-        skeleton_file_path_modified = os.path.join(script_caller_dir, 'tables/skeletons', template + '_modified.xlsx')
-        pdf_file_name = os.path.splitext(template)[0] + '.pdf'
-        pdf_output_path = os.path.join(output_dir, pdf_file_name)
+            # Calculate the paths relative to the script location
+            output_dir = os.path.join(script_caller_dir, 'output')
 
-        # Populates template skeleton with scalar values.
-        if scalar != False:
-            scalar_file_path = os.path.join(script_caller_dir, 'input/tables', scalar)
-            write_to_makelog(paths, scalar_file_path)
-            write_excel_scalars(skeleton_file_path, scalar_file_path)
+            # Construct the full paths to the files
+            skeleton_file_path = os.path.join(script_caller_dir, 'tables/skeletons', template + '.xlsx')
+            skeleton_file_path_modified = os.path.join(script_caller_dir, 'tables/skeletons', template + '_modified.xlsx')
+            pdf_file_name = os.path.splitext(template)[0] + '.pdf'
+            pdf_output_path = os.path.join(output_dir, pdf_file_name)
 
-        # Determine the operating system
-        osname = platform.system()
-        shell = kwargs.get('shell', False)
+            # Populates template skeleton with scalar values.
+            if scalar != False:
+                scalar_file_path = os.path.join(script_caller_dir, 'input/tables', scalar)
+                write_to_makelog(paths, scalar_file_path)
+                write_excel_scalars(skeleton_file_path, scalar_file_path)
 
-        # Excel to PDF conversion
-        if osname == 'Darwin':  # macOS
+            # Determine the operating system
+            osname = platform.system()
+            shell = kwargs.get('shell', False)
 
-            # Convert to POSIX path format
-            posix_skeleton_file_path = skeleton_file_path.replace(os.sep, '/')
-            posix_pdf_output_path = pdf_output_path.replace(os.sep, '/')
-            posix_skeleton_file_path_modified = skeleton_file_path_modified.replace(os.sep, '/')
+            # Excel to PDF conversion
+            if osname == 'Darwin':  # macOS
 
-            write_to_makelog(paths, posix_pdf_output_path)
-            write_to_makelog(paths, posix_skeleton_file_path)
-            write_to_makelog(paths, posix_skeleton_file_path_modified)
+                # Convert to POSIX path format
+                posix_skeleton_file_path = skeleton_file_path.replace(os.sep, '/')
+                posix_pdf_output_path = pdf_output_path.replace(os.sep, '/')
+                posix_skeleton_file_path_modified = skeleton_file_path_modified.replace(os.sep, '/')
 
-            # Prepare the AppleScript command
-            applescript_command = f'''
+                write_to_makelog(paths, posix_pdf_output_path)
+                write_to_makelog(paths, posix_skeleton_file_path)
+                write_to_makelog(paths, posix_skeleton_file_path_modified)
 
-            set skeleton_file_path to "{posix_skeleton_file_path}"
-            set pdf_output_path to "{posix_pdf_output_path}"
-            set skeleton_file_path_modified to "{posix_skeleton_file_path_modified}"
+                # Prepare the AppleScript command
+                applescript_command = f'''
 
-            tell application "Microsoft Excel"
-                
-                activate
+                set skeleton_file_path to "{posix_skeleton_file_path}"
+                set pdf_output_path to "{posix_pdf_output_path}"
+                set skeleton_file_path_modified to "{posix_skeleton_file_path_modified}"
 
-                -- Suppress alerts to avoid confirmation dialogs
-                set display alerts to false
-                
-                -- Open the initial workbook
-                open skeleton_file_path
+                tell application "Microsoft Excel"
+                    
+                    activate
 
-                copy worksheet worksheet "Table"
-                activate object
-                set theSheet to sheet 1 of active workbook
-                
-                -- Set margins.
-                tell page setup object of theSheet
-                    set page orientation to landscape
-                    set zoom to false
-                    set fit to pages wide to 1
-                    set fit to pages tall to 9999
+                    -- Suppress alerts to avoid confirmation dialogs
+                    set display alerts to false
+                    
+                    -- Open the initial workbook
+                    open skeleton_file_path
+
+                    copy worksheet worksheet "Table"
+                    activate object
+                    set theSheet to sheet 1 of active workbook
+                    
+                    -- Set margins.
+                    tell page setup object of theSheet
+                        set page orientation to landscape
+                        set zoom to false
+                        set fit to pages wide to 1
+                        set fit to pages tall to 9999
+                    end tell
+                    
+                    -- Export as a PDF.
+                    save as theSheet filename pdf_output_path file format PDF file format
+
+                    -- Close the workbooks without saving.
+                    close active workbook saving no
+
                 end tell
+
+                '''
+
+                # Execute the AppleScript command
+                process = subprocess.run(["osascript", "-e", applescript_command], capture_output = True, text = True, shell = shell)
+
+                if process.returncode != 0:
+                    print(f"AppleScript Error: {process.stderr}")
+                    raise Exception(f"AppleScript Error: {process.stderr}")
                 
-                -- Export as a PDF.
-                save as theSheet filename pdf_output_path file format PDF file format
+                temp_files_path = os.path.join(script_caller_dir, 'tables/skeletons')
+                for filename in os.listdir(temp_files_path):
+                    if filename.startswith('~$') and filename.endswith('.xlsx'):
+                        os.remove(os.path.join(temp_files_path, filename))
 
-                -- Close the workbooks without saving.
-                close active workbook saving no
+            elif osname == 'Windows':
+                # Start an instance of Excel
+                excel_app = win32com.client.DispatchEx("Excel.Application")
+                # Open the Excel file
+                workbook = excel_app.Workbooks.Open(skeleton_file_path)
+                # Select the second sheet
+                worksheet = workbook.Worksheets[2]
+                # Save the active sheet to a PDF
+                worksheet.ExportAsFixedFormat(0, pdf_output_path)
+                # Close the workbook without saving changes
+                workbook.Close(SaveChanges = False)
+                # Quit Excel
+                excel_app.Quit()
 
-            end tell
+            else:
+                raise ValueError("Unsupported OS type. Function supports 'Darwin' (macOS) and 'Windows' OS names.")
 
-            '''
+            # Optionally write to a log file
+            if 'log' in kwargs:
+                with open(kwargs['log'], 'a') as log_file:
+                    log_file.write(f"Successfully converted {template} to PDF.\n")
 
-            # Execute the AppleScript command
-            process = subprocess.run(["osascript", "-e", applescript_command], capture_output = True, text = True, shell = shell)
+            temp_pdf_output_path = pdf_output_path.replace('.pdf', '_temp.pdf')
+            subprocess.run(["pdf-crop-margins", "-p", "0", "-a", "-6", pdf_output_path, "-o", temp_pdf_output_path])
+            os.replace(temp_pdf_output_path, pdf_output_path)
 
-            if process.returncode != 0:
-                print(f"AppleScript Error: {process.stderr}")
-                raise Exception(f"AppleScript Error: {process.stderr}")
-            
-            temp_files_path = os.path.join(script_caller_dir, 'tables/skeletons')
-            for filename in os.listdir(temp_files_path):
-                if filename.startswith('~$') and filename.endswith('.xlsx'):
-                    os.remove(os.path.join(temp_files_path, filename))
+        except Exception as e:
+            error_message = f"Error in `export_excel_tables()` for {template}: {e}\n"
+            if makelog:
+                with open(makelog, 'a') as makelog_file:
+                    makelog_file.write(error_message)
+            print(error_message)
+            raise RuntimeError(error_message)
+        
+    else:
 
-        elif osname == 'Windows':
-            # Start an instance of Excel
-            excel_app = win32com.client.DispatchEx("Excel.Application")
-            # Open the Excel file
-            workbook = excel_app.Workbooks.Open(skeleton_file_path)
-            # Select the second sheet
-            worksheet = workbook.Worksheets[2]
-            # Save the active sheet to a PDF
-            worksheet.ExportAsFixedFormat(0, pdf_output_path)
-            # Close the workbook without saving changes
-            workbook.Close(SaveChanges = False)
-            # Quit Excel
-            excel_app.Quit()
+        try:
 
-        else:
-            raise ValueError("Unsupported OS type. Function supports 'Darwin' (macOS) and 'Windows' OS names.")
+            # Extract the relevant paths
+            makelog = paths.get('makelog', '')
 
-        # Optionally write to a log file
-        if 'log' in kwargs:
-            with open(kwargs['log'], 'a') as log_file:
-                log_file.write(f"Successfully converted {template} to PDF.\n")
+            # Get the directory of the calling script
+            script_caller_dir = os.getcwd()  # This gets the current working directory
 
-        temp_pdf_output_path = pdf_output_path.replace('.pdf', '_temp.pdf')
-        subprocess.run(["pdf-crop-margins", "-p", "0", "-a", "-6", pdf_output_path, "-o", temp_pdf_output_path])
-        os.replace(temp_pdf_output_path, pdf_output_path)
+            # Calculate the paths relative to the script location
+            output_dir = os.path.join(script_caller_dir, 'output')
 
-    except Exception as e:
-        error_message = f"Error in `export_excel_tables` for {template}: {e}\n"
-        if makelog:
-            with open(makelog, 'a') as makelog_file:
-                makelog_file.write(error_message)
-        print(error_message)
-        raise RuntimeError(error_message)
-    
+            # Construct the full paths to the files
+            skeleton_file_path = os.path.join(script_caller_dir, 'tables/skeletons', template + '.xlsx')
+            skeleton_file_path_modified = os.path.join(script_caller_dir, 'tables/skeletons', template + '_modified.xlsx')
+            pdf_file_name = os.path.splitext(template)[0] + '.pdf'
+            pdf_output_path = os.path.join(output_dir, pdf_file_name)
+
+            # Populates template skeleton with scalar values.
+            if scalar != False:
+                scalar_file_path = os.path.join(script_caller_dir, 'input/tables', scalar)
+                write_to_makelog(paths, scalar_file_path)
+                write_excel_scalars(skeleton_file_path, scalar_file_path)
+        
+        except Exception as e:
+            error_message = f"Error in `write_excel_scalars()` for {template}: {e}\n"
+            if makelog:
+                with open(makelog, 'a') as makelog_file:
+                    makelog_file.write(error_message)
+            print(error_message)
+            raise RuntimeError(error_message)
+
 def quit_excel(paths, **kwargs):
     """.. Quits Excel using native application following PDF exports.
     
